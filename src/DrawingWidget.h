@@ -7,6 +7,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QApplication>
+#include <QScreen>
 #include <QDesktopWidget>
 
 class DrawingWidget : public QWidget {

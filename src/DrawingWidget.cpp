@@ -1,15 +1,14 @@
 #include "DrawingWidget.h"
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
-    setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
-           | Qt::X11BypassWindowManagerHint);
-    setAttribute(Qt::WA_StaticContents);
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    setAttribute(Qt::WA_NoSystemBackground);
     initializeImage(size());
-    QRect screenGeometry = QApplication::desktop()->screenGeometry();
-    int screenWidth = screenGeometry.width();
-    int screenHeight = screenGeometry.height();
+    QList<QScreen*> screens = QGuiApplication::screens();
+    int screenWidth = 0;
+    int screenHeight = 0;
+    for (QScreen *screen : screens) {
+        screenWidth  += screen->geometry().width();
+        screenHeight += screen->geometry().height();
+    }
     setFixedSize(screenWidth, screenHeight);
 }
 
