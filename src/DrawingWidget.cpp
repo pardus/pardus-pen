@@ -18,6 +18,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         lastPoint = event->pos();
         drawing = true;
+        lastPoint = event->pos();
     }
 }
 
@@ -55,7 +56,11 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawLine(lastPoint, endPoint);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
+    int rad = (penWidth / 2) + 2;
+    update(QRect(lastPoint, endPoint).normalized()
+           .adjusted(-rad, -rad, +rad, +rad));
+
     lastPoint = endPoint;
-    update();
 }
 
