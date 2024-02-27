@@ -9,6 +9,8 @@
 #include <QApplication>
 #include <QScreen>
 #include <QDesktopWidget>
+#include <iostream>
+
 
 class DrawingWidget : public QWidget {
 public:
@@ -29,6 +31,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    bool event(QEvent * ev);
 };
 
 #endif // DRAWINGWIDGET_H

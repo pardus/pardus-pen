@@ -1,4 +1,5 @@
 #include "DrawingWidget.h"
+#include <stdio.h>
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
@@ -64,3 +65,20 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     lastPoint = endPoint;
 }
 
+bool DrawingWidget::event(QEvent *ev) {
+  switch (ev->type()) {
+    case QEvent::TouchBegin:
+        std::cout << "Event began." << std::endl;
+        break;
+    case QEvent::TouchEnd:
+        std::cout << "Event end." << std::endl;
+        break;
+    case QEvent::TouchUpdate:
+        std::cout << "Event update." << std::endl;
+        break;
+    default:
+        std::cout << "Misc event." << std::endl;
+        break;
+    }
+    return QWidget::event(ev);
+}
