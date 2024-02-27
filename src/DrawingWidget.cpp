@@ -53,6 +53,7 @@ void DrawingWidget::paintEvent(QPaintEvent *event) {
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     QPainter painter(&image);
     painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap));
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawLine(lastPoint, endPoint);
     lastPoint = endPoint;
     update();
