@@ -22,12 +22,13 @@ public:
     bool drawing;
     int penWidth;
     int eraserWidth;
-    bool eraser;
     QColor penColor;
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
+    void setEraser(bool enabled);
 
 protected:
+    bool eraser;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;

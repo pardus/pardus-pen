@@ -6,6 +6,7 @@
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
 #include "WhiteBoard.h"
+#include "Button.h"
 
 
 int main(int argc, char *argv[]) {
@@ -20,21 +21,24 @@ int main(int argc, char *argv[]) {
     DrawingWidget *window = new DrawingWidget();
     window->penWidth = 3;
     window->eraserWidth = 100;
-    window->eraser = false;
+    window->setEraser(false);
     window->penColor = QColor("blue");
 
     mainWindow.setCentralWidget(window);
 
-
-    // TODO: this is shitty way. replace with real function
-    #include "tools/pagemode.h"
-    #include "tools/eraser.h"
-
     floatingWidget = new FloatingWidget(&mainWindow);
     floatingWidget->show();
-    floatingWidget->setWidget(&button);
-    floatingWidget->setWidget(&eraser);
     floatingWidget->setFixedSize(100,100);
+
+    QPushButton *eraser = create_button([=](){
+        window->setEraser(true);
+    });
+    floatingWidget->setWidget(eraser);
+
+    QPushButton *pen = create_button([=](){
+        window->setEraser(false);
+    });
+    floatingWidget->setWidget(pen);
 
     mainWindow.setAttribute(Qt::WA_StaticContents);
     mainWindow.setAttribute(Qt::WA_TranslucentBackground, true);

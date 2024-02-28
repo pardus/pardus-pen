@@ -52,19 +52,26 @@ void DrawingWidget::paintEvent(QPaintEvent *event) {
     painter.drawImage(0, 0, image);
 }
 
+void DrawingWidget::setEraser(bool enabled) {
+    eraser = enabled;
+}
+
+int rad = 0;
+
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     QPainter painter(&image);
     if(eraser){
         painter.setCompositionMode(QPainter::CompositionMode_Clear);
         painter.setPen(QPen(penColor, eraserWidth, Qt::SolidLine, Qt::RoundCap));
+        rad = eraserWidth;
     }else{
         painter.setCompositionMode(QPainter::CompositionMode_Source);
         painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap));
+        rad = eraserWidth;
     }
     
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawLine(lastPoint, endPoint);
-    int rad = (penWidth + eraserWidth  / 2) + 2;
     update(QRect(lastPoint, endPoint).normalized()
            .adjusted(-rad, -rad, +rad, +rad));
 
