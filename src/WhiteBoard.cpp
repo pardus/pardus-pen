@@ -9,6 +9,7 @@ WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
         screenHeight += screen->geometry().height();
     }
     setFixedSize(screenWidth, screenHeight);
+    setStyleSheet("background: white");
     show();
 }
 

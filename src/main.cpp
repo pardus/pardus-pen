@@ -39,6 +39,17 @@ int main(int argc, char *argv[]) {
         window->setEraser(false);
     });
     floatingWidget->setWidget(pen);
+    
+    QPushButton *pagemode = create_button([=](){
+        static bool pagemode = true;
+        if (pagemode) {
+            board->disable();
+        } else {
+            board->enable();
+        }
+        pagemode = !pagemode;
+    });
+    floatingWidget->setWidget(pagemode);
 
     mainWindow.setAttribute(Qt::WA_StaticContents);
     mainWindow.setAttribute(Qt::WA_TranslucentBackground, true);
