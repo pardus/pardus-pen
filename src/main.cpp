@@ -23,17 +23,9 @@ int main(int argc, char *argv[]) {
 
     mainWindow.setCentralWidget(window);
 
-    QPushButton button ("Page Mode");
-    button.setFixedSize(100,100);
-    QObject::connect(&button, &QPushButton::clicked, [&](){
-        static bool pagemode = true;
-        if (pagemode) {
-            board->enable();
-        } else {
-            board->disable();
-        }
-        pagemode = !pagemode;
-    });
+
+    // TODO: this is shitty way. replace with real function
+    #include "tools/pagemode.h"
 
     floatingWidget = new FloatingWidget(&mainWindow);
     floatingWidget->show();
