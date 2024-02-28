@@ -9,17 +9,26 @@
 #include "WhiteBoard.h"
 #include "Button.h"
 
+QPushButton *colorpicker;
+DrawingWidget *window;
+FloatingWidget *floatingWidget;
+WhiteBoard *board;
+QMainWindow* mainWindow;
+QPushButton *eraser;
+QPushButton *pen;
+QPushButton *pagemode;
+QPushButton *minify;
+QString style;
+
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    QMainWindow* mainWindow = new QMainWindow();
-    FloatingWidget *floatingWidget;
-    WhiteBoard *board;
+    mainWindow = new QMainWindow();
     
     board = new WhiteBoard(mainWindow);
 
-    DrawingWidget *window = new DrawingWidget();
+    window = new DrawingWidget();
     window->penWidth = 3;
     window->eraserWidth = 100;
     window->setEraser(false);
@@ -31,17 +40,17 @@ int main(int argc, char *argv[]) {
     floatingWidget->show();
     //floatingWidget->setFixedSize(100,100);
 
-    QPushButton *eraser = create_button("process-stop", [=](){
+    eraser = create_button("process-stop", [=](){
         window->setEraser(true);
     });
     floatingWidget->setWidget(eraser);
 
-    QPushButton *pen = create_button("process-working-symbolic", [=](){
+    pen = create_button("process-working-symbolic", [=](){
         window->setEraser(false);
     });
     floatingWidget->setWidget(pen);
     
-    QPushButton *pagemode = create_button("process-stop-symbolic", [=](){
+    pagemode = create_button("process-stop-symbolic", [=](){
         static bool pagemode = true;
         if (pagemode) {
             board->disable();
@@ -52,15 +61,21 @@ int main(int argc, char *argv[]) {
     });
     floatingWidget->setWidget(pagemode);
 
-    QPushButton *minify = create_button("printer-symbolic", [=](){
+    minify = create_button("printer-symbolic", [=](){
         mainWindow->showMinimized();
     });
     floatingWidget->setWidget(minify);
 
-    QPushButton *colorpicker = create_button("printer", [=](){
-        QColor currentColor;
+    colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        style = QString("background-color: %1").arg(window->penColor.name());
+        colorpicker->setStyleSheet(style);
     });
+
+    style = QString("background-color: %1").arg(window->penColor.name());
+    colorpicker->setStyleSheet(style);
+    colorpicker->setFlat(false);
+
     floatingWidget->setWidget(colorpicker);
 
     mainWindow->setAttribute(Qt::WA_StaticContents);

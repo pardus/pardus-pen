@@ -9,6 +9,7 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(48, 48)));
     button->setIcon(icon);
     button->setIconSize(pixmap.rect().size());
-    button->setFixedSize(pixmap.rect().size().height()+padding, pixmap.rect().size().width()+padding);
+    button->setFixedSize(48+padding, 48+padding);
+    button->setFlat(true);
     return button;
 }
