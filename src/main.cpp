@@ -7,6 +7,7 @@
 #include "FloatingWidget.h"
 #include "WhiteBoard.h"
 
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
@@ -22,12 +23,22 @@ int main(int argc, char *argv[]) {
 
     mainWindow.setCentralWidget(window);
 
-    QPushButton button ("Hello!");
+    QPushButton button ("Page Mode");
     button.setFixedSize(100,100);
+    QObject::connect(&button, &QPushButton::clicked, [&](){
+        static bool pagemode = true;
+        if (pagemode) {
+            board->enable();
+        } else {
+            board->disable();
+        }
+        pagemode = !pagemode;
+    });
 
     floatingWidget = new FloatingWidget(&mainWindow);
     floatingWidget->show();
     floatingWidget->setWidget(&button);
+    floatingWidget->setFixedSize(100,100);
 
     mainWindow.setAttribute(Qt::WA_StaticContents);
     mainWindow.setAttribute(Qt::WA_TranslucentBackground, true);

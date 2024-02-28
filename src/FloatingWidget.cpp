@@ -6,7 +6,7 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
 }
 
 void FloatingWidget::setWidget(QWidget *widget) {
-    setFixedSize(widget->size());
+    setFixedSize(size());
     layout->addWidget(widget);
 }
 
