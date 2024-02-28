@@ -2,6 +2,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QMainWindow>
+#include <QColorDialog>
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
@@ -55,6 +56,12 @@ int main(int argc, char *argv[]) {
         mainWindow->showMinimized();
     });
     floatingWidget->setWidget(minify);
+
+    QPushButton *colorpicker = create_button("printer", [=](){
+        QColor currentColor;
+        window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+    });
+    floatingWidget->setWidget(colorpicker);
 
     mainWindow->setAttribute(Qt::WA_StaticContents);
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
