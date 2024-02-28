@@ -9,6 +9,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     for (QScreen *screen : screens) {
         screenWidth  += screen->geometry().width();
         screenHeight += screen->geometry().height();
+        break;
     }
     setFixedSize(screenWidth, screenHeight);
 }

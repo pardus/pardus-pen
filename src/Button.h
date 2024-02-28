@@ -6,6 +6,6 @@
 
 typedef std::function<void()> ButtonEvent;
 
-QPushButton* create_button(ButtonEvent event);
+QPushButton* create_button(const char* icon, ButtonEvent event);
 
 #endif // BUTTON_H

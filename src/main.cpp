@@ -12,11 +12,11 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    QMainWindow mainWindow;
+    QMainWindow* mainWindow = new QMainWindow();
     FloatingWidget *floatingWidget;
     WhiteBoard *board;
     
-    board = new WhiteBoard(&mainWindow);
+    board = new WhiteBoard(mainWindow);
 
     DrawingWidget *window = new DrawingWidget();
     window->penWidth = 3;
@@ -24,23 +24,23 @@ int main(int argc, char *argv[]) {
     window->setEraser(false);
     window->penColor = QColor("blue");
 
-    mainWindow.setCentralWidget(window);
+    mainWindow->setCentralWidget(window);
 
-    floatingWidget = new FloatingWidget(&mainWindow);
+    floatingWidget = new FloatingWidget(mainWindow);
     floatingWidget->show();
-    floatingWidget->setFixedSize(100,100);
+    //floatingWidget->setFixedSize(100,100);
 
-    QPushButton *eraser = create_button([=](){
+    QPushButton *eraser = create_button("process-stop", [=](){
         window->setEraser(true);
     });
     floatingWidget->setWidget(eraser);
 
-    QPushButton *pen = create_button([=](){
+    QPushButton *pen = create_button("process-working-symbolic", [=](){
         window->setEraser(false);
     });
     floatingWidget->setWidget(pen);
     
-    QPushButton *pagemode = create_button([=](){
+    QPushButton *pagemode = create_button("process-stop-symbolic", [=](){
         static bool pagemode = true;
         if (pagemode) {
             board->disable();
@@ -51,12 +51,17 @@ int main(int argc, char *argv[]) {
     });
     floatingWidget->setWidget(pagemode);
 
-    mainWindow.setAttribute(Qt::WA_StaticContents);
-    mainWindow.setAttribute(Qt::WA_TranslucentBackground, true);
-    mainWindow.setAttribute(Qt::WA_NoSystemBackground);
-    mainWindow.setAttribute(Qt::WA_AcceptTouchEvents, true);
-    mainWindow.setStyleSheet("background: none");
-    mainWindow.showFullScreen();
+    QPushButton *minify = create_button("printer-symbolic", [=](){
+        mainWindow->showMinimized();
+    });
+    floatingWidget->setWidget(minify);
+
+    mainWindow->setAttribute(Qt::WA_StaticContents);
+    mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
+    mainWindow->setAttribute(Qt::WA_NoSystemBackground);
+    mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
+    mainWindow->setStyleSheet("background: none");
+    mainWindow->showFullScreen();
 
     return app.exec();
 }

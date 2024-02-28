@@ -1,12 +1,15 @@
 #include "FloatingWidget.h"
-
+int cur_height = 0;
+int cur_width = 0;
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     setLayout(layout);
 }
 
 void FloatingWidget::setWidget(QWidget *widget) {
-    setFixedSize(size());
+    cur_height += widget->size().height();
+    cur_width += widget->size().width();
+    setFixedSize(cur_height, cur_width);
     layout->addWidget(widget);
 }
 
