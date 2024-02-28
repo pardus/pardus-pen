@@ -15,7 +15,7 @@ void FloatingWidget::setWidget(QWidget *widget) {
 
 void FloatingWidget::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
-        dragPosition = event->globalPos() - frameGeometry().topLeft();
+        dragPosition = geometry().center();
         event->accept();
     }
 }
