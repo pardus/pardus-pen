@@ -3,7 +3,8 @@ project('example', 'cpp')
 src = [
     'src/main.cpp',
     'src/DrawingWidget.cpp',
-    'src/FloatingWidget.cpp'
+    'src/FloatingWidget.cpp',
+    'src/WhiteBoard.cpp'
 ]
 
 # Qt5 dependencies

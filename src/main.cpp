@@ -5,12 +5,16 @@
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
+#include "WhiteBoard.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     QMainWindow mainWindow;
     FloatingWidget *floatingWidget;
+    WhiteBoard *board;
+    
+    board = new WhiteBoard(&mainWindow);
 
     DrawingWidget *window = new DrawingWidget();
     window->penWidth = 3;
