@@ -2,13 +2,15 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QMainWindow>
-#include <QDockWidget>
+
 #include "DrawingWidget.h"
+#include "FloatingWidget.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     QMainWindow mainWindow;
+    FloatingWidget *floatingWidget;
 
     DrawingWidget *window = new DrawingWidget();
     window->penWidth = 3;
@@ -16,12 +18,12 @@ int main(int argc, char *argv[]) {
 
     mainWindow.setCentralWidget(window);
 
-    QPushButton button ("Hello world !");
+    QPushButton button ("Hello!");
+    button.setFixedSize(100,100);
 
-    QDockWidget dock;
-    dock.setFeatures(dock.features() & ~QDockWidget::DockWidgetClosable);
-    dock.setWidget(&button);
-    mainWindow.addDockWidget(Qt::TopDockWidgetArea, &dock);
+    floatingWidget = new FloatingWidget(&mainWindow);
+    floatingWidget->show();
+    floatingWidget->setWidget(&button);
 
     mainWindow.setAttribute(Qt::WA_StaticContents);
     mainWindow.setAttribute(Qt::WA_TranslucentBackground, true);

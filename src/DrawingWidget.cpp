@@ -77,7 +77,7 @@ bool DrawingWidget::event(QEvent *ev) {
         std::cout << "Event update." << std::endl;
         break;
     default:
-        std::cout << "Misc event." << std::endl;
+        //std::cout << "Misc event." << std::endl;
         break;
     }
     return QWidget::event(ev);

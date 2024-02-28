@@ -2,7 +2,8 @@ project('example', 'cpp')
 # Source files
 src = [
     'src/main.cpp',
-    'src/DrawingWidget.cpp'
+    'src/DrawingWidget.cpp',
+    'src/FloatingWidget.cpp'
 ]
 
 # Qt5 dependencies
