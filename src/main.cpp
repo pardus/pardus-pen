@@ -19,6 +19,8 @@ int main(int argc, char *argv[]) {
 
     DrawingWidget *window = new DrawingWidget();
     window->penWidth = 3;
+    window->eraserWidth = 100;
+    window->eraser = false;
     window->penColor = QColor("blue");
 
     mainWindow.setCentralWidget(window);
@@ -26,10 +28,12 @@ int main(int argc, char *argv[]) {
 
     // TODO: this is shitty way. replace with real function
     #include "tools/pagemode.h"
+    #include "tools/eraser.h"
 
     floatingWidget = new FloatingWidget(&mainWindow);
     floatingWidget->show();
     floatingWidget->setWidget(&button);
+    floatingWidget->setWidget(&eraser);
     floatingWidget->setFixedSize(100,100);
 
     mainWindow.setAttribute(Qt::WA_StaticContents);

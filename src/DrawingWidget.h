@@ -21,6 +21,8 @@ public:
     QPoint lastPoint;
     bool drawing;
     int penWidth;
+    int eraserWidth;
+    bool eraser;
     QColor penColor;
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
