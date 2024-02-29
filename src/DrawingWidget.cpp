@@ -4,7 +4,6 @@
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     QList<QScreen*> screens = QGuiApplication::screens();
-    moved = false;
     int screenWidth = 0;
     int screenHeight = 0;
     for (QScreen *screen : screens) {
