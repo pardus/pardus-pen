@@ -4,6 +4,7 @@
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     QList<QScreen*> screens = QGuiApplication::screens();
+    moved = false;
     int screenWidth = 0;
     int screenHeight = 0;
     for (QScreen *screen : screens) {
@@ -18,7 +19,6 @@ DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
-        lastPoint = event->pos();
         drawing = true;
         lastPoint = event->pos();
     }
@@ -32,8 +32,8 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton && drawing) {
-        drawLineTo(event->pos());
-        drawing = false;
+       drawLineTo(event->pos()+QPoint(0,1));
+       drawing = false;
     }
 }
 
@@ -70,7 +70,7 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
         painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap));
         rad = eraserWidth;
     }
-    
+ 
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawLine(lastPoint, endPoint);
     update(QRect(lastPoint, endPoint).normalized()

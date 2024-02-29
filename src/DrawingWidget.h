@@ -19,7 +19,6 @@ public:
 
     QImage image;
     QPoint lastPoint;
-    bool drawing;
     int penWidth;
     int eraserWidth;
     QColor penColor;
@@ -28,6 +27,7 @@ public:
     void setEraser(bool enabled);
 
 protected:
+    bool drawing;
     bool eraser;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
