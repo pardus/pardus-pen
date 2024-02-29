@@ -20,12 +20,13 @@ QPushButton *pagemode;
 QPushButton *minify;
 QString style;
 
+int pagestatus;
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     mainWindow = new QMainWindow();
-    
+
     board = new WhiteBoard(mainWindow);
 
     window = new DrawingWidget();
@@ -49,16 +50,21 @@ int main(int argc, char *argv[]) {
         window->setEraser(false);
     });
     floatingWidget->setWidget(pen);
-    
+
     pagemode = create_button("process-stop-symbolic", [=](){
-        static bool pagemode = true;
-        if (pagemode) {
+        if (pagestatus == 2) {
             board->disable();
+            pagestatus = 0;
+        } else if (pagestatus == 1) {
+            board->enableDark();
+            pagestatus = 2;
         } else {
             board->enable();
+            pagestatus = 1;
         }
-        pagemode = !pagemode;
     });
+    board->disable();
+    pagestatus = 0;
     floatingWidget->setWidget(pagemode);
 
     minify = create_button("printer-symbolic", [=](){

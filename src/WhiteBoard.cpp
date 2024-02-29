@@ -17,6 +17,10 @@ void WhiteBoard::enable() {
     setStyleSheet("background: white");
 }
 
+void WhiteBoard::enableDark() {
+    setStyleSheet("background: black");
+}
+
 void WhiteBoard::disable() {
     setStyleSheet("background: none");
 }

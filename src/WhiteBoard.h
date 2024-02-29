@@ -11,6 +11,7 @@ class WhiteBoard : public QWidget {
 public:
     WhiteBoard(QWidget *parent = nullptr);
     void enable();
+    void enableDark();
     void disable();
 };
 
