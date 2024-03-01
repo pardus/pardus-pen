@@ -17,6 +17,8 @@ QMainWindow* mainWindow;
 QPushButton *eraser;
 QPushButton *pagemode;
 QPushButton *minify;
+QPushButton *increase;
+QPushButton *decrease;
 QString style;
 
 int pagestatus;
@@ -78,17 +80,38 @@ int main(int argc, char *argv[]) {
     });
     floatingWidget->setWidget(minify);
 
+    increase = create_button("printer-symbolic", [=](){
+        if(window->penWidth < 31) {
+            window->penWidth++;
+            window->eraserWidth+= 10;
+        }
+        colorpicker->setText(QString::number(window->penWidth));
+
+    });
+    floatingWidget->setWidget(increase);
+
+
     colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
         style = QString("border-radius:0px; background-color: " + window->penColor.name());
         colorpicker->setStyleSheet(style);
     });
-
     style = QString("border-radius:0px; background-color: " + window->penColor.name());
     colorpicker->setStyleSheet(style);
     colorpicker->setFlat(false);
-
+    colorpicker->setText(QString::number(window->penWidth));
     floatingWidget->setWidget(colorpicker);
+
+
+    decrease = create_button("printer-symbolic", [=](){
+         if(window->penWidth > 1) {
+             window->penWidth--;
+             window->eraserWidth-= 10;
+         }
+         colorpicker->setText(QString::number(window->penWidth));
+    });
+    floatingWidget->setWidget(decrease);
+
 
     mainWindow->setAttribute(Qt::WA_StaticContents);
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
