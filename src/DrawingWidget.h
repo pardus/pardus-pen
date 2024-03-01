@@ -8,7 +8,6 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include <QScreen>
-#include <QDesktopWidget>
 #include <iostream>
 
 

@@ -6,7 +6,6 @@
 #include <QVBoxLayout>
 #include <QMouseEvent>
 #include <QScreen>
-#include <QDesktopWidget>
 #include <QApplication>
 
 class QLabel;

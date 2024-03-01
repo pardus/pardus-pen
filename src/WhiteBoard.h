@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QResizeEvent>
 #include <QScreen>
-#include <QDesktopWidget>
 #include <QApplication>
 
 class WhiteBoard : public QWidget {
