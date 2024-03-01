@@ -15,12 +15,13 @@ FloatingWidget *floatingWidget;
 WhiteBoard *board;
 QMainWindow* mainWindow;
 QPushButton *eraser;
-QPushButton *pen;
 QPushButton *pagemode;
 QPushButton *minify;
 QString style;
 
 int pagestatus;
+
+bool eraser_status;
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -41,26 +42,31 @@ int main(int argc, char *argv[]) {
     floatingWidget->show();
     //floatingWidget->setFixedSize(100,100);
 
+    eraser_status = false;
     eraser = create_button("process-stop", [=](){
-        window->setEraser(true);
+        eraser_status = !eraser_status;
+        window->setEraser(eraser_status);
+        if(eraser_status){
+            set_icon("printer", eraser);
+        } else{
+            set_icon("process-stop", eraser);
+        }
     });
     floatingWidget->setWidget(eraser);
-
-    pen = create_button("process-working-symbolic", [=](){
-        window->setEraser(false);
-    });
-    floatingWidget->setWidget(pen);
 
     pagemode = create_button("process-stop-symbolic", [=](){
         if (pagestatus == 2) {
             board->disable();
+            set_icon("gtk-yes", pagemode);
             pagestatus = 0;
         } else if (pagestatus == 1) {
             board->enableDark();
             pagestatus = 2;
+            set_icon("gtk-no", pagemode);
         } else {
             board->enable();
             pagestatus = 1;
+            set_icon("process-stop-symbolic", pagemode);
         }
     });
     board->disable();
@@ -74,11 +80,11 @@ int main(int argc, char *argv[]) {
 
     colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
-        style = QString("background-color: %1").arg(window->penColor.name());
+        style = QString("border-radius:0px; background-color: " + window->penColor.name());
         colorpicker->setStyleSheet(style);
     });
 
-    style = QString("background-color: %1").arg(window->penColor.name());
+    style = QString("border-radius:0px; background-color: " + window->penColor.name());
     colorpicker->setStyleSheet(style);
     colorpicker->setFlat(false);
 

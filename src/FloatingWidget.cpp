@@ -3,7 +3,7 @@ int cur_height = 0;
 int cur_width = 0;
 int screenWidth = 0;
 int screenHeight = 0;
-
+#define padding 8
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     QList<QScreen*> screens = QGuiApplication::screens();
@@ -13,14 +13,22 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
         break;
     }
     setLayout(layout);
+    QString style = QString(
+    "border-radius:3px;"
+    "background-color: #88333333;");
+    layout->setSpacing(padding);
+    layout->setContentsMargins(padding, padding, padding, padding);
+    setStyleSheet(style);
+    cur_height = padding;
 }
-
+int num_of_item = 0;
 void FloatingWidget::setWidget(QWidget *widget) {
-    cur_height += widget->size().height();
+    cur_height += widget->size().height() + padding;
     if (cur_width < widget->size().width()) {
-        cur_width = widget->size().width();
+        cur_width = widget->size().width() + padding*2;
     }
-    setFixedSize(cur_width+5, cur_height+5);
+    num_of_item++;
+    setFixedSize(cur_width, cur_height);
     layout->addWidget(widget);
 }
 
