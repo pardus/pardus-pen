@@ -5,6 +5,9 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QMouseEvent>
+#include <QScreen>
+#include <QDesktopWidget>
+#include <QApplication>
 
 class QLabel;
 
@@ -14,7 +17,6 @@ public:
     void setWidget(QWidget *widget);
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
