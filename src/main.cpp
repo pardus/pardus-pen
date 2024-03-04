@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
         if (eraser_status == 2) {
             window->penColor.setAlpha(128);
         } else if (eraser_status == 1) {
-            window->penColor.setAlpha(256);
+            window->penColor.setAlpha(255);
         }
     });
     style = QString(
