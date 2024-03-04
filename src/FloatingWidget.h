@@ -19,6 +19,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
 
 private:
+    void moveAction(int new_x, int new_y);
     QPoint dragPosition;
     QLabel *label;
     QVBoxLayout *layout;

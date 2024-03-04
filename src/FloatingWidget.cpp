@@ -3,7 +3,14 @@ int cur_height = 0;
 int cur_width = 0;
 int screenWidth = 0;
 int screenHeight = 0;
+
 #define padding 8
+
+extern "C" {
+#include "settings.h"
+}
+
+
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     QList<QScreen*> screens = QGuiApplication::screens();
@@ -30,12 +37,12 @@ void FloatingWidget::setWidget(QWidget *widget) {
     num_of_item++;
     setFixedSize(cur_width, cur_height);
     layout->addWidget(widget);
+    int new_x = get_int((char*)"cur_x");
+    int new_y = get_int((char*)"cur_y");
+    moveAction(new_x, new_y);
 }
 
-void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {
-    if (event->buttons() & Qt::LeftButton) {
-        int new_x = event->globalPos().x() - (cur_width / 2);
-        int new_y = event->globalPos().y() - (cur_height / 2);
+void FloatingWidget::moveAction(int new_x, int new_y){
         if (new_x < 0) {
             new_x = 0;
         }if (new_y < 0) {
@@ -46,6 +53,15 @@ void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {
             new_y = screenHeight - cur_height;
         }
         move(new_x, new_y);
+}
+
+void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {
+    if (event->buttons() & Qt::LeftButton) {
+        int new_x = event->globalPos().x() - (cur_width / 2);
+        int new_y = event->globalPos().y() - (cur_height / 2);
+        set_int((char*)"cur_x", new_x);
+        set_int((char*)"cur_y", new_y);
+        moveAction(new_x, new_y);
         event->accept();
     }
 }

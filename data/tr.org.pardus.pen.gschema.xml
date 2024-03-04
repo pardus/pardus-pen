@@ -4,5 +4,13 @@
       <default>"#3498DB"</default>
       <summary>Pen color</summary>
     </key>
+    <key type="i" name="cur_x">
+      <default>0</default>
+      <summary>Current X of toolbar</summary>
+    </key>
+    <key type="i" name="cur_y">
+      <default>0</default>
+      <summary>Current Y of toolbar</summary>
+    </key>
   </schema>
 </schemalist>

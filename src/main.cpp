@@ -33,8 +33,6 @@ int main(int argc, char *argv[]) {
 
     settings_init();
 
-    setenv("QT_SCALE_FACTOR","2",1);
-
     QApplication app(argc, argv);
 
     mainWindow = new QMainWindow();
@@ -45,7 +43,7 @@ int main(int argc, char *argv[]) {
     window->penWidth = 3;
     window->eraserWidth = 100;
     window->setEraser(false);
-    window->penColor = QColor("blue");
+    window->penColor = QColor(get_string("color"));
 
     mainWindow->setCentralWidget(window);
 
