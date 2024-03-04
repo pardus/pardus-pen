@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Pardus Pen
+Name[pt]=Caneta Pardus
+Name[tr]=Pardus Kalem
+Type=Application
+Comment=Screen Drawing Tool
+Comment[pt]=Ferramenta de desenho de ecrã
+Comment[tr]=Ekran Çizim Aracı
+Terminal=false
+Exec=/usr/bin/pardus-pen
+Icon=tr.org.pardus.pen
+Categories=Qt;Education;X-Pardus-Apps;
+GenericName=Screen Drawing Tool
+GenericName[pt]=Ferramenta de desenho de ecrã
+GenericName[tr]=Ekran Çizim Aracı

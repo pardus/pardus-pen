@@ -34,8 +34,12 @@ add_project_arguments('-fpermissive', language: 'cpp')
 add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cpp')
 
 glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
+icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
+desktopdir = get_option('prefix')/'share/applications'
 
 # executable file
 executable('pardus-pen', src, dependencies: qt_dep, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
+install_data('data/tr.org.pardus.pen.gschema.svg', install_dir : icondir)
+install_data('data/tr.org.pardus.pen.gschema.desktop', install_dir : desktopdir)
 

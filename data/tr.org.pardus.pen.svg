@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933333"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="pardus-pen.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="6.592312"
+     inkscape:cx="74.784082"
+     inkscape:cy="12.666269"
+     inkscape:window-width="1920"
+     inkscape:window-height="1127"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="SVGID_00000129901450951144020920000007753056098303935627_"
+       gradientUnits="userSpaceOnUse"
+       x1="-434.02811"
+       y1="-74.135002"
+       x2="-434.02811"
+       y2="-49.8008"
+       gradientTransform="matrix(1,0,0,-1,0,-121.5918)">
+      <stop
+         offset="0"
+         style="stop-color:#27AFD9"
+         id="stop80" />
+      <stop
+         offset="1"
+         style="stop-color:#42BDD9"
+         id="stop81" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g12"
+       transform="matrix(0.23697964,0,0,0.23697964,0.88628039,0.8803559)">
+      <path
+         class="st0"
+         d="M 62.7,1.3 C 61,-0.4 58.2,-0.4 56.5,1.3 L 53,4.8 59.2,11 62.7,7.5 c 1.7,-1.8 1.7,-4.5 0,-6.2 z"
+         id="path1"
+         style="fill:#525763" />
+      <path
+         class="st1"
+         d="M 56.1,7.9 59.2,11 62.7,7.5 C 64.4,5.8 64.4,3 62.7,1.3 Z"
+         id="path2"
+         style="fill:#30333a" />
+      <path
+         class="st0"
+         d="m 49.2,23.2 -2.4,-6 -6,-2.4 L 18.6,37 13,44.4 5.6,50 3.2,58.1 0,64 v 0 L 5.9,60.8 14,58.4 19.6,51 27,45.4 Z"
+         id="path3"
+         style="fill:#525763" />
+      <path
+         class="st1"
+         d="m 49.2,23.2 -2.4,-6 -41.7,41.7 -3,3 L 0,64 v 0 L 5.9,60.8 14,58.4 19.6,51 27,45.4 Z"
+         id="path4"
+         style="fill:#30333a" />
+      <path
+         class="st2"
+         d="m 18.6,37 8.4,8.4 -5.2,5.2 -2.5,1.2 -0.2,1.5 -5.1,5.1 -8.4,-8.4 5.2,-5.2 2.3,-1 0.4,-1.7 z"
+         id="path5"
+         style="fill:#2592f4" />
+      <path
+         class="st3"
+         d="m 22.8,41.2 4.2,4.2 -5.2,5.2 -2.4,1.2 -0.3,1.5 -5.1,5.1 -4.2,-4.2 z"
+         id="path6"
+         style="fill:#1379e6" />
+      <g
+         id="g7">
+        <path
+           class="st4"
+           d="m 10.7,44.8 2.7,-2.7 8.4,8.4 -2.7,2.7 z"
+           id="path7"
+           style="fill:#1565a0" />
+      </g>
+      <g
+         id="g10">
+        <g
+           id="g9">
+          <g
+             id="g8">
+            <path
+               class="st5"
+               d="m 14.9,49 2.7,-2.7 4.2,4.2 -2.7,2.7 z"
+               id="path8"
+               style="fill:#0b4d89" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g11">
+        <path
+           class="st1"
+           d="M 46.7,37.4 44,34.7 53.8,24.9 C 56,22.7 56,19 53.8,16.8 l 2.7,-2.7 c 3.7,3.7 3.7,9.8 0,13.5 z"
+           id="path10"
+           style="fill:#30333a" />
+      </g>
+      <path
+         class="st6"
+         d="m 52.8,2.7 8.4,8.4 -12,12.1 -8.4,-8.4 z"
+         id="path11"
+         style="fill:#beebfa" />
+      <path
+         class="st7"
+         d="m 57,7 4.2,4.2 -12,12 L 45,19 Z"
+         id="path12"
+         style="fill:#b3d8f4" />
+    </g>
+  </g>
+</svg>
