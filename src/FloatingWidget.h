@@ -17,7 +17,7 @@ public:
 
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
-
+    void mouseReleaseEvent(QMouseEvent *event) override;
 private:
     void moveAction(int new_x, int new_y);
     QPoint dragPosition;

@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     window->penWidth = 3;
     window->eraserWidth = 100;
     window->setEraser(false);
-    window->penColor = QColor(get_string("color"));
+    window->penColor = QColor(get_string((char*)"color"));
 
     mainWindow->setCentralWidget(window);
 
@@ -111,7 +111,7 @@ int main(int argc, char *argv[]) {
 
     colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
-        set_string("color", window->penColor.name().toStdString().c_str());
+        set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
         style = QString(
             "color: " + convertColor(window->penColor).name() + "; "
             "border-radius:0px;"
