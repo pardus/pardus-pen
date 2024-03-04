@@ -36,5 +36,7 @@ protected:
     bool event(QEvent * ev);
 };
 
+QColor convertColor(QColor color);
+
 #endif // DRAWINGWIDGET_H
 

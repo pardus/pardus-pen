@@ -93,10 +93,16 @@ int main(int argc, char *argv[]) {
 
     colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
-        style = QString("border-radius:0px; background-color: " + window->penColor.name());
+        style = QString(
+            "color: " + convertColor(window->penColor).name() + "; "
+            "border-radius:0px;"
+            "background-color: " + window->penColor.name());
         colorpicker->setStyleSheet(style);
     });
-    style = QString("border-radius:0px; background-color: " + window->penColor.name());
+    style = QString(
+        "color: " + convertColor(window->penColor).name() + "; "
+        "border-radius:0px;"
+        "background-color: " + window->penColor.name());
     colorpicker->setStyleSheet(style);
     colorpicker->setFlat(false);
     colorpicker->setText(QString::number(window->penWidth));

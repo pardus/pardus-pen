@@ -15,7 +15,7 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     setLayout(layout);
     QString style = QString(
     "border-radius:3px;"
-    "background-color: #88333333;");
+    "background-color: #80808080;");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
     setStyleSheet(style);

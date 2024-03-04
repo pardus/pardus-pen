@@ -95,3 +95,12 @@ bool DrawingWidget::event(QEvent *ev) {
     }
     return QWidget::event(ev);
 }
+
+
+QColor convertColor(QColor color) {
+    int red = color.red();
+    int green = color.green();
+    int blue = color.blue();
+    int alpha = color.alpha();
+    return QColor(255-blue, 255-red, 255-green, alpha);
+}
