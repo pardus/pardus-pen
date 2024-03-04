@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
             window->penWidth++;
             window->eraserWidth+= 10;
              set_int((char*)"pen-size",window->penWidth);
-             set_int((char*)"eraser-sze",window->eraserWidth);
+             set_int((char*)"eraser-size",window->eraserWidth);
         }
         colorpicker->setText(QString::number(window->penWidth));
 
@@ -140,7 +140,7 @@ int main(int argc, char *argv[]) {
              window->penWidth--;
              window->eraserWidth-= 10;
              set_int((char*)"pen-size",window->penWidth);
-             set_int((char*)"eraser-sze",window->eraserWidth);
+             set_int((char*)"eraser-size",window->eraserWidth);
          }
          colorpicker->setText(QString::number(window->penWidth));
     });
