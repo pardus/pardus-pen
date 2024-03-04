@@ -9,6 +9,10 @@
 #include "WhiteBoard.h"
 #include "Button.h"
 
+extern "C" {
+#include "settings.h"
+}
+
 QPushButton *colorpicker;
 DrawingWidget *window;
 FloatingWidget *floatingWidget;
@@ -26,6 +30,11 @@ int pagestatus;
 int eraser_status;
 
 int main(int argc, char *argv[]) {
+
+    settings_init();
+
+    setenv("QT_SCALE_FACTOR","2",1);
+
     QApplication app(argc, argv);
 
     mainWindow = new QMainWindow();
@@ -104,6 +113,7 @@ int main(int argc, char *argv[]) {
 
     colorpicker = create_button("", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        set_string("color", window->penColor.name().toStdString().c_str());
         style = QString(
             "color: " + convertColor(window->penColor).name() + "; "
             "border-radius:0px;"

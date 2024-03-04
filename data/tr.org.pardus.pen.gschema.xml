@@ -1,0 +1,8 @@
+<schemalist>
+  <schema id="tr.org.pardus.pen" path="/tr/org/pardus/pen/">
+    <key type="s" name="color">
+      <default>"#3498DB"</default>
+      <summary>Pen color</summary>
+    </key>
+  </schema>
+</schemalist>
