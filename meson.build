@@ -36,6 +36,6 @@ add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cp
 glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
 
 # executable file
-executable('main', src, dependencies: qt_dep, install: true, rename: 'pardus-pen')
+executable('pardus-pen', src, dependencies: qt_dep, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 
