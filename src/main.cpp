@@ -40,8 +40,8 @@ int main(int argc, char *argv[]) {
     board = new WhiteBoard(mainWindow);
 
     window = new DrawingWidget();
-    window->penWidth = 3;
-    window->eraserWidth = 100;
+    window->penWidth = get_int((char*)"pen-size");
+    window->eraserWidth = get_int((char*)"eraser-size");
     window->setEraser(false);
     window->penColor = QColor(get_string((char*)"color"));
 
@@ -102,6 +102,8 @@ int main(int argc, char *argv[]) {
         if(window->penWidth < 31) {
             window->penWidth++;
             window->eraserWidth+= 10;
+             set_int((char*)"pen-size",window->penWidth);
+             set_int((char*)"eraser-sze",window->eraserWidth);
         }
         colorpicker->setText(QString::number(window->penWidth));
 
@@ -137,6 +139,8 @@ int main(int argc, char *argv[]) {
          if(window->penWidth > 1) {
              window->penWidth--;
              window->eraserWidth-= 10;
+             set_int((char*)"pen-size",window->penWidth);
+             set_int((char*)"eraser-sze",window->eraserWidth);
          }
          colorpicker->setText(QString::number(window->penWidth));
     });

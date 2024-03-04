@@ -4,6 +4,14 @@
       <default>"#3498DB"</default>
       <summary>Pen color</summary>
     </key>
+    <key type="i" name="pen-size">
+      <default>3</default>
+      <summary>Pen size</summary>
+    </key>
+    <key type="i" name="eraser-size">
+      <default>100</default>
+      <summary>Pen size</summary>
+    </key>
     <key type="i" name="cur-x">
       <default>0</default>
       <summary>Current X of toolbar</summary>
