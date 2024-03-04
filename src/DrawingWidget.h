@@ -24,6 +24,7 @@ public:
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
     void setEraser(bool enabled);
+    void clear();
 
 protected:
     bool drawing;

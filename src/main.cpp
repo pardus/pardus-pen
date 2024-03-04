@@ -21,6 +21,7 @@ QMainWindow* mainWindow;
 QPushButton *eraser;
 QPushButton *pagemode;
 QPushButton *minify;
+QPushButton *clear;
 QPushButton *increase;
 QPushButton *decrease;
 QString style;
@@ -97,6 +98,11 @@ int main(int argc, char *argv[]) {
         mainWindow->showMinimized();
     });
     floatingWidget->setWidget(minify);
+
+    clear = create_button(":images/clear.svg", [=](){
+        window->clear();
+    });
+    floatingWidget->setWidget(clear);
 
     increase = create_button("printer-symbolic", [=](){
         if(window->penWidth < 31) {

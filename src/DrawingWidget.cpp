@@ -56,6 +56,12 @@ void DrawingWidget::setEraser(bool enabled) {
     eraser = enabled;
 }
 
+void DrawingWidget::clear() {
+    image.fill(QColor("transparent"));
+    update();
+}
+
+
 int rad = 0;
 
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
