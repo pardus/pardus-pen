@@ -23,7 +23,7 @@ QString style;
 
 int pagestatus;
 
-bool eraser_status;
+int eraser_status;
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -44,15 +44,26 @@ int main(int argc, char *argv[]) {
     floatingWidget->show();
     //floatingWidget->setFixedSize(100,100);
 
-    eraser_status = false;
+    /*
+      0: eraser
+      1: pen
+      2: marker
+    */
+    eraser_status = 1;
     eraser = create_button("process-stop", [=](){
-        eraser_status = !eraser_status;
-        window->setEraser(eraser_status);
-        if(eraser_status){
-            set_icon("printer", eraser);
-        } else{
-            set_icon("process-stop", eraser);
-        }
+       if (eraser_status == 2) {
+           set_icon("printer", eraser);
+           eraser_status = 0;
+       } else if (eraser_status == 1) {
+          set_icon("printer-symbolic", eraser);
+          eraser_status = 2;
+          window->penColor.setAlpha(128);
+       } else{
+          set_icon("process-stop", eraser);
+          eraser_status = 1;
+          window->penColor.setAlpha(255);
+       }
+       window->setEraser(eraser_status == 0);
     });
     floatingWidget->setWidget(eraser);
 
@@ -98,6 +109,11 @@ int main(int argc, char *argv[]) {
             "border-radius:0px;"
             "background-color: " + window->penColor.name());
         colorpicker->setStyleSheet(style);
+        if (eraser_status == 2) {
+            window->penColor.setAlpha(128);
+        } else if (eraser_status == 1) {
+            window->penColor.setAlpha(256);
+        }
     });
     style = QString(
         "color: " + convertColor(window->penColor).name() + "; "
