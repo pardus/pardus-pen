@@ -9,6 +9,11 @@ src = [
     'src/settings.c'
 ]
 
+# Build qrc
+run_command('rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
+
+src += [meson.current_build_dir()/'resources.cpp']
+
 # Qt dependencies
 qt_dep = [
     dependency('gio-2.0')
@@ -40,6 +45,6 @@ desktopdir = get_option('prefix')/'share/applications'
 # executable file
 executable('pardus-pen', src, dependencies: qt_dep, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
-install_data('data/tr.org.pardus.pen.gschema.svg', install_dir : icondir)
-install_data('data/tr.org.pardus.pen.gschema.desktop', install_dir : desktopdir)
+install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
+install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
 

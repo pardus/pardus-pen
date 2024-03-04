@@ -11,7 +11,7 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
 }
 
 void set_icon(const char* name, QPushButton * button) {
-    QIcon icon = QIcon::fromTheme(name);
+    QIcon icon = QIcon(name);
     QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(48, 48)));
     button->setIcon(icon);
     button->setIconSize(pixmap.rect().size());

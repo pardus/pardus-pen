@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/eraser.svg</file>
+        <file>images/pen.svg</file>
+        <file>images/screen.svg</file>
+        <file>images/clear.svg</file>
+    </qresource>
+</RCC>

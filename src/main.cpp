@@ -57,16 +57,16 @@ int main(int argc, char *argv[]) {
       2: marker
     */
     eraser_status = 1;
-    eraser = create_button("process-stop", [=](){
+    eraser = create_button(":images/pen.svg", [=](){
        if (eraser_status == 2) {
-           set_icon("printer", eraser);
+           set_icon(":images/eraser.svg", eraser);
            eraser_status = 0;
        } else if (eraser_status == 1) {
-          set_icon("printer-symbolic", eraser);
+          set_icon(":images/marker.svg", eraser);
           eraser_status = 2;
           window->penColor.setAlpha(128);
        } else{
-          set_icon("process-stop", eraser);
+          set_icon(":images/pen.svg", eraser);
           eraser_status = 1;
           window->penColor.setAlpha(255);
        }
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
     pagestatus = 0;
     floatingWidget->setWidget(pagemode);
 
-    minify = create_button("printer-symbolic", [=](){
+    minify = create_button(":images/screen.svg", [=](){
         mainWindow->showMinimized();
     });
     floatingWidget->setWidget(minify);
