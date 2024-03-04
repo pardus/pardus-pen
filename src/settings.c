@@ -12,6 +12,7 @@ char* get_string(char* name){
 
 void set_string(char* name, char* value) {
     g_settings_set_string(settings, name, value);
+    g_settings_sync();
 }
 
 int get_int(char* name){
@@ -20,5 +21,6 @@ int get_int(char* name){
 
 void set_int(char* name, int value) {
     g_settings_set_int(settings, name, value);
+    g_settings_sync();
 }
 
