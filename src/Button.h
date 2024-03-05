@@ -3,6 +3,8 @@
 
 #include <QPushButton>
 #include <QWindow>
+#include <functional>
+
 
 typedef std::function<void()> ButtonEvent;
 
