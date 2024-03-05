@@ -7,6 +7,8 @@
 #include <QDateTime>
 #include <QMessageBox>
 
+#include <iostream>
+
 #include "ScreenShot.h"
 
 extern "C" {
@@ -19,14 +21,14 @@ void takeScreenshot(){
 
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
-    if(strcmp("",which((char*)"spectacle")) != 0){
-        std::string spectacle = which((char*)"spectacle");
+    std::string spectacle(which((char*)"spectacle"));
+    std::string gnome_screenshot(which((char*)"gnome-screenshot"));
+    std::string scrot(which((char*)"scrot"));
+    if(strlen(spectacle.c_str()) != 0){
         status = system(("QT_QPA_BACKEND='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
-    } else if(strcmp("",which((char*)"gnome-screenshot")) != 0){
-        std::string gnome_screenshot = which((char*)"gnome-screenshot");
+    } else if(strlen(gnome_screenshot.c_str()) > 0){
         status = system((gnome_screenshot+" -f "+imgname.toStdString()).c_str());
-    } else if(strcmp("",which((char*)"scrot")) != 0){
-        std::string scrot = which((char*)"scrot");
+    } else if(strlen(scrot.c_str()) > 0){
         status = system((scrot+" "+imgname.toStdString()).c_str());
     }
     QMessageBox messageBox;

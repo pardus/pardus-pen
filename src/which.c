@@ -25,14 +25,12 @@ char* which(char* cmd){
     /* walk through other tokens */
     while( token != NULL ){
         sprintf(fullfilename, "%s/%s", token, fileOrDirectory);
-        exists = stat( fullfilename, &buffer );
-        if ( exists == 0 && ( S_IFREG & buffer.st_mode ) ) {
-            char ret[strlen(fullfilename)];
-            strcpy(ret,fullfilename);
-            return (char*)fullfilename;
+        exists = stat( fullfilename, &buffer);
+        if ( exists == 0 ) {
+            return fullfilename;
         }
 
         token = strtok(NULL, ":"); /* next token */
     }
-    return (char*)cmd;
+    return "";
 }
