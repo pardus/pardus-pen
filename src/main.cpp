@@ -89,19 +89,19 @@ int main(int argc, char *argv[]) {
    });
     floatingWidget->setWidget(eraser);
 
-    pagemode = create_button("process-stop-symbolic", [=](){
+    pagemode = create_button(":images/paper-transparent.svg", [=](){
         if (pagestatus == 2) {
             board->disable();
-            set_icon("gtk-yes", pagemode);
+            set_icon(":images/paper-transparent.svg", pagemode);
             pagestatus = 0;
         } else if (pagestatus == 1) {
             board->enableDark();
             pagestatus = 2;
-            set_icon("gtk-no", pagemode);
+            set_icon(":images/paper-black.svg", pagemode);
         } else {
             board->enable();
             pagestatus = 1;
-            set_icon("process-stop-symbolic", pagemode);
+            set_icon(":images/paper-white.svg", pagemode);
         }
     });
     board->disable();
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
     });
     floatingWidget->setWidget(clear);
 
-    increase = create_button("printer-symbolic", [=](){
+    increase = create_button(":images/increase.svg", [=](){
         window->penSize[window->penType]++;
         set_int((char*)"pen-size",window->penSize[PEN]);
         set_int((char*)"eraser-size",window->penSize[ERASER]);
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]) {
     floatingWidget->setWidget(colorpicker);
 
 
-    decrease = create_button("printer-symbolic", [=](){
+    decrease = create_button(":images/decrease.svg", [=](){
         if(window->penSize[window->penType] > 1) {
             window->penSize[window->penType]--;
             set_int((char*)"pen-size",window->penSize[PEN]);
@@ -166,7 +166,7 @@ int main(int argc, char *argv[]) {
 
     #ifdef screenshot
 
-    ssButton = create_button(":images/record.svg", [=](){
+    ssButton = create_button(":images/screenshot.svg", [=](){
         takeScreenshot();
     });
     floatingWidget->setWidget(ssButton);

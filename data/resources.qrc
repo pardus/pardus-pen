@@ -1,8 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>images/eraser.svg</file>
+        <file>images/marker.svg</file>
         <file>images/pen.svg</file>
         <file>images/screen.svg</file>
         <file>images/clear.svg</file>
+        <file>images/paper-transparent.svg</file>
+        <file>images/paper-black.svg</file>
+        <file>images/paper-white.svg</file>
+        <file>images/screenshot.svg</file>
+        <file>images/increase.svg</file>
+        <file>images/decrease.svg</file>
     </qresource>
 </RCC>
