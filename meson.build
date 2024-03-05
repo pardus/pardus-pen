@@ -6,7 +6,8 @@ src = [
     'src/FloatingWidget.cpp',
     'src/WhiteBoard.cpp',
     'src/Button.cpp',
-    'src/settings.c'
+    'src/settings.c',
+    'src/which.c'
 ]
 
 if get_option('resources')
@@ -16,7 +17,10 @@ if get_option('resources')
     src += [meson.current_build_dir()/'resources.cpp']
 
 endif
-
+if get_option('screenshot')
+    add_project_arguments('-Dscreenshot', language: 'cpp')
+    src += ['src/screenshot.cpp']
+endif
 # Qt dependencies
 qt_dep = [
     dependency('gio-2.0')

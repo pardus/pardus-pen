@@ -29,6 +29,11 @@ QPushButton *increase;
 QPushButton *decrease;
 QString style;
 
+#ifdef ffmpeg
+QPushButton *record;
+#endif
+
+
 int pagestatus;
 
 int eraser_status;
@@ -157,6 +162,23 @@ int main(int argc, char *argv[]) {
          colorpicker->setText(QString::number(window->penSize[window->penType]));
     });
     floatingWidget->setWidget(decrease);
+    #ifdef ffmpeg
+
+    record = create_button(":images/record.svg", [=](){
+        QString pics = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        QDateTime time = QDateTime::currentDateTime();
+        QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
+        char *cmd = (char*)malloc(1024*sizeof(char));
+        strcpy(cmd,"scrot '");
+        strcat(cmd,imgname.toStdString().c_str());
+        strcat(cmd,"'");
+        system(cmd);
+
+    });
+    floatingWidget->setWidget(record);
+
+    #endif
+
 
 
     mainWindow->setAttribute(Qt::WA_StaticContents);

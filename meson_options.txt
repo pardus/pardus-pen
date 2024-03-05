@@ -1,2 +1,3 @@
 option('qt', type: 'string', value: '5')
 option('resources', type : 'boolean', value : true)
+option('screenshot', type : 'boolean', value : true)
