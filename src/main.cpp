@@ -29,8 +29,9 @@ QPushButton *increase;
 QPushButton *decrease;
 QString style;
 
-#ifdef ffmpeg
-QPushButton *record;
+#ifdef screenshot
+#include "ScreenShot.h"
+QPushButton *ssButton;
 #endif
 
 
@@ -162,20 +163,13 @@ int main(int argc, char *argv[]) {
          colorpicker->setText(QString::number(window->penSize[window->penType]));
     });
     floatingWidget->setWidget(decrease);
-    #ifdef ffmpeg
 
-    record = create_button(":images/record.svg", [=](){
-        QString pics = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        QDateTime time = QDateTime::currentDateTime();
-        QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
-        char *cmd = (char*)malloc(1024*sizeof(char));
-        strcpy(cmd,"scrot '");
-        strcat(cmd,imgname.toStdString().c_str());
-        strcat(cmd,"'");
-        system(cmd);
+    #ifdef screenshot
 
+    ssButton = create_button(":images/record.svg", [=](){
+        takeScreenshot();
     });
-    floatingWidget->setWidget(record);
+    floatingWidget->setWidget(ssButton);
 
     #endif
 

@@ -19,7 +19,7 @@ if get_option('resources')
 endif
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
-    src += ['src/screenshot.cpp']
+    src += ['src/ScreenShot.cpp']
 endif
 # Qt dependencies
 qt_dep = [
