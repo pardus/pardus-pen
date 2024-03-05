@@ -19,11 +19,15 @@ void takeScreenshot(){
 
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
-    if(strcmp("",which((char*)"spectatle")) != 0){
-        std::string spectacle = which((char*)"spectatle");
+    if(strcmp("",which((char*)"spectacle")) != 0){
+        std::string spectacle = which((char*)"spectacle");
         status = system(("QT_QPA_BACKEND='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+    } else if(strcmp("",which((char*)"gnome-screenshot")) != 0){
+        std::string gnome_screenshot = which((char*)"gnome-screenshot");
+        status = system((gnome_screenshot+" -f "+imgname.toStdString()).c_str());
     } else if(strcmp("",which((char*)"scrot")) != 0){
-        status = system(("scrot "+imgname.toStdString()).c_str());
+        std::string scrot = which((char*)"scrot");
+        status = system((scrot+" "+imgname.toStdString()).c_str());
     }
     QMessageBox messageBox;
     Qt::WindowFlags flags =  Qt::Dialog | Qt::X11BypassWindowManagerHint;
