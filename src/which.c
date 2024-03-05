@@ -13,7 +13,7 @@
 #include "which.h"
 
 char* which(char* cmd){
-    char* fullPath = getenv("PATH");
+    char* fullPath = strdup(getenv("PATH")); // Duplicate the PATH string
 
     struct stat buffer;
     int exists;
@@ -27,10 +27,13 @@ char* which(char* cmd){
         sprintf(fullfilename, "%s/%s", token, fileOrDirectory);
         exists = stat( fullfilename, &buffer);
         if ( exists == 0 ) {
+            free(fullPath); // Free the duplicated string
             return fullfilename;
         }
 
-        token = strtok(NULL, ":"); /* next token */
+	    token = strtok(NULL, ":"); /* next token */
     }
+    free(fullPath); // Free the duplicated string
+    free(fullfilename);
     return "";
 }

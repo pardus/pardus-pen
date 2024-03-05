@@ -22,10 +22,13 @@ void takeScreenshot(){
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
     std::string spectacle(which((char*)"spectacle"));
+    std::string grim(which((char*)"grim"));
     std::string gnome_screenshot(which((char*)"gnome-screenshot"));
     std::string scrot(which((char*)"scrot"));
     if(strlen(spectacle.c_str()) != 0){
         status = system(("QT_QPA_PLATFORM='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+    } else if(strlen(grim.c_str()) != 0){
+        status = system((grim+" -t png "+imgname.toStdString()).c_str());
     } else if(strlen(gnome_screenshot.c_str()) > 0){
         status = system((gnome_screenshot+" -f "+imgname.toStdString()).c_str());
     } else if(strlen(scrot.c_str()) > 0){
