@@ -143,7 +143,7 @@ int main(int argc, char *argv[]) {
 
     decrease = create_button("printer-symbolic", [=](){
         if(window->penSize[window->penType] > 1) {
-            window->penSize[window->penType]++;
+            window->penSize[window->penType]--;
             set_int((char*)"pen-size",window->penSize[PEN]);
             set_int((char*)"eraser-size",window->penSize[ERASER]);
             set_int((char*)"marker-size",window->penSize[MARKER]);
