@@ -41,38 +41,40 @@ int main(int argc, char *argv[]) {
     board = new WhiteBoard(mainWindow);
 
     window = new DrawingWidget();
-    window->penWidth = get_int((char*)"pen-size");
-    window->eraserWidth = get_int((char*)"eraser-size");
-    window->setEraser(false);
+    window->penSize[PEN] = get_int((char*)"pen-size");
+    window->penSize[ERASER] = get_int((char*)"eraser-size");
+    window->penSize[MARKER] = get_int((char*)"marker-size");
+    window->penType=PEN;
     window->penColor = QColor(get_string((char*)"color"));
 
     mainWindow->setCentralWidget(window);
 
     floatingWidget = new FloatingWidget(mainWindow);
     floatingWidget->show();
-    //floatingWidget->setFixedSize(100,100);
 
-    /*
-      0: eraser
-      1: pen
-      2: marker
-    */
     eraser_status = 1;
     eraser = create_button(":images/pen.svg", [=](){
-       if (eraser_status == 2) {
-           set_icon(":images/eraser.svg", eraser);
-           eraser_status = 0;
-       } else if (eraser_status == 1) {
-          set_icon(":images/marker.svg", eraser);
-          eraser_status = 2;
-          window->penColor.setAlpha(128);
-       } else{
-          set_icon(":images/pen.svg", eraser);
-          eraser_status = 1;
-          window->penColor.setAlpha(255);
+        switch(eraser_status) {
+            case MARKER:
+                set_icon(":images/eraser.svg", eraser);
+                eraser_status = 0;
+                window->penType = ERASER;
+                break;
+            case PEN:
+                set_icon(":images/marker.svg", eraser);
+                eraser_status = 2;
+                window->penColor.setAlpha(128);
+                window->penType = MARKER;
+                break;
+            case ERASER:
+                set_icon(":images/pen.svg", eraser);
+                eraser_status = 1;
+                window->penColor.setAlpha(255);
+                window->penType = PEN;
+                break;
        }
-       window->setEraser(eraser_status == 0);
-    });
+      colorpicker->setText(QString::number(window->penSize[window->penType]));
+   });
     floatingWidget->setWidget(eraser);
 
     pagemode = create_button("process-stop-symbolic", [=](){
@@ -105,13 +107,11 @@ int main(int argc, char *argv[]) {
     floatingWidget->setWidget(clear);
 
     increase = create_button("printer-symbolic", [=](){
-        if(window->penWidth < 31) {
-            window->penWidth++;
-            window->eraserWidth+= 10;
-             set_int((char*)"pen-size",window->penWidth);
-             set_int((char*)"eraser-size",window->eraserWidth);
-        }
-        colorpicker->setText(QString::number(window->penWidth));
+        window->penSize[window->penType]++;
+        set_int((char*)"pen-size",window->penSize[PEN]);
+        set_int((char*)"eraser-size",window->penSize[ERASER]);
+        set_int((char*)"marker-size",window->penSize[MARKER]);
+        colorpicker->setText(QString::number(window->penSize[window->penType]));
 
     });
     floatingWidget->setWidget(increase);
@@ -137,18 +137,18 @@ int main(int argc, char *argv[]) {
         "background-color: " + window->penColor.name());
     colorpicker->setStyleSheet(style);
     colorpicker->setFlat(false);
-    colorpicker->setText(QString::number(window->penWidth));
+    colorpicker->setText(QString::number(window->penSize[window->penType]));
     floatingWidget->setWidget(colorpicker);
 
 
     decrease = create_button("printer-symbolic", [=](){
-         if(window->penWidth > 1) {
-             window->penWidth--;
-             window->eraserWidth-= 10;
-             set_int((char*)"pen-size",window->penWidth);
-             set_int((char*)"eraser-size",window->eraserWidth);
+        if(window->penSize[window->penType] > 1) {
+            window->penSize[window->penType]++;
+            set_int((char*)"pen-size",window->penSize[PEN]);
+            set_int((char*)"eraser-size",window->penSize[ERASER]);
+            set_int((char*)"marker-size",window->penSize[MARKER]);
          }
-         colorpicker->setText(QString::number(window->penWidth));
+         colorpicker->setText(QString::number(window->penSize[window->penType]));
     });
     floatingWidget->setWidget(decrease);
 

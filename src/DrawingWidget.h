@@ -11,6 +11,10 @@
 #include <iostream>
 
 
+#define ERASER 0
+#define PEN 1
+#define MARKER 2
+
 class DrawingWidget : public QWidget {
 public:
     explicit DrawingWidget(QWidget *parent = nullptr);
@@ -18,13 +22,12 @@ public:
 
     QImage image;
     QPoint lastPoint;
-    int penWidth;
-    int eraserWidth;
     QColor penColor;
+    int* penSize;
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
-    void setEraser(bool enabled);
     void clear();
+    int penType;
 
 protected:
     bool drawing;

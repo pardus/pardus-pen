@@ -9,10 +9,13 @@ src = [
     'src/settings.c'
 ]
 
-# Build qrc
-run_command('rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
+if get_option('resources')
+    # Build qrc
+    run_command('rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
 
-src += [meson.current_build_dir()/'resources.cpp']
+    src += [meson.current_build_dir()/'resources.cpp']
+
+endif
 
 # Qt dependencies
 qt_dep = [

@@ -1,8 +1,18 @@
 #include "DrawingWidget.h"
 #include <stdio.h>
 
+/*
+penType:
+ - 0 eraser
+ - 1 pen
+ - 2 marker
+*/
+
+int penSize[3];
+
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
+    penType = 1;
     QList<QScreen*> screens = QGuiApplication::screens();
     int screenWidth = 0;
     int screenHeight = 0;
@@ -52,9 +62,6 @@ void DrawingWidget::paintEvent(QPaintEvent *event) {
     painter.drawImage(0, 0, image);
 }
 
-void DrawingWidget::setEraser(bool enabled) {
-    eraser = enabled;
-}
 
 void DrawingWidget::clear() {
     image.fill(QColor("transparent"));
@@ -66,16 +73,17 @@ int rad = 0;
 
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     QPainter painter(&image);
-    if(eraser){
-        painter.setCompositionMode(QPainter::CompositionMode_Clear);
-        painter.setPen(QPen(penColor, eraserWidth, Qt::SolidLine, Qt::RoundCap));
-        rad = eraserWidth;
-    }else{
-        painter.setCompositionMode(QPainter::CompositionMode_Source);
-        painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap));
-        rad = eraserWidth;
+    switch(penType){
+        case ERASER:
+            painter.setCompositionMode(QPainter::CompositionMode_Clear);
+            break;
+        case PEN:
+        case MARKER:
+            painter.setCompositionMode(QPainter::CompositionMode_Source);
+            break;
     }
- 
+    painter.setPen(QPen(penColor, penSize[penType], Qt::SolidLine, Qt::RoundCap));
+    rad = penSize[penType];
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawLine(lastPoint, endPoint);
     update(QRect(lastPoint, endPoint).normalized()

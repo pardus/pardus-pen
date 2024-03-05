@@ -12,6 +12,10 @@
       <default>100</default>
       <summary>Pen size</summary>
     </key>
+    <key type="i" name="marker-size">
+      <default>31</default>
+      <summary>Marker size</summary>
+    </key>
     <key type="i" name="cur-x">
       <default>0</default>
       <summary>Current X of toolbar</summary>
