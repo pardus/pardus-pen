@@ -24,6 +24,7 @@ void takeScreenshot(){
     std::string spectacle(which((char*)"spectacle"));
     std::string grim(which((char*)"grim"));
     std::string gnome_screenshot(which((char*)"gnome-screenshot"));
+    std::string xfce_screenshot(which((char*)"xfce4-screenshooter"));
     std::string scrot(which((char*)"scrot"));
     if(strlen(spectacle.c_str()) != 0){
         status = system(("QT_QPA_PLATFORM='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
@@ -31,6 +32,8 @@ void takeScreenshot(){
         status = system((grim+" -t png "+imgname.toStdString()).c_str());
     } else if(strlen(gnome_screenshot.c_str()) > 0){
         status = system((gnome_screenshot+" -f "+imgname.toStdString()).c_str());
+    } else if(strlen(xfce_screenshot.c_str()) > 0){
+        status = system((xfce_screenshot+" -f -s "+imgname.toStdString()).c_str());
     } else if(strlen(scrot.c_str()) > 0){
         status = system((scrot+" "+imgname.toStdString()).c_str());
     }
