@@ -25,7 +25,7 @@ void takeScreenshot(){
     std::string gnome_screenshot(which((char*)"gnome-screenshot"));
     std::string scrot(which((char*)"scrot"));
     if(strlen(spectacle.c_str()) != 0){
-        status = system(("QT_QPA_BACKEND='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+        status = system(("QT_QPA_PLATFORM='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
     } else if(strlen(gnome_screenshot.c_str()) > 0){
         status = system((gnome_screenshot+" -f "+imgname.toStdString()).c_str());
     } else if(strlen(scrot.c_str()) > 0){
