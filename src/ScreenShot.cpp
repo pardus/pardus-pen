@@ -20,7 +20,8 @@ void takeScreenshot(){
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
     if(strcmp("",which((char*)"spectatle")) != 0){
-        status = system(("spectacle -fbnmo "+imgname.toStdString()).c_str());
+        std::string spectacle = which((char*)"spectatle");
+        status = system(("QT_QPA_BACKEND='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
     } else if(strcmp("",which((char*)"scrot")) != 0){
         status = system(("scrot "+imgname.toStdString()).c_str());
     }
