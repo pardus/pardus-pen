@@ -110,9 +110,11 @@ bool DrawingWidget::event(QEvent *ev) {
 
 
 QColor convertColor(QColor color) {
-    int red = color.red();
-    int green = color.green();
-    int blue = color.blue();
-    int alpha = color.alpha();
-    return QColor(255-blue, 255-red, 255-green, alpha);
+    int tot =  color.red() + color.blue() + color.green();
+    if (tot > 382) {
+        return QColor(0,0,0, color.alpha());
+    } else {
+        return QColor(255, 255, 255, color.alpha());
+
+    }
 }
