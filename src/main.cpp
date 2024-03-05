@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QColorDialog>
 
+#include <stdlib.h>
+
+
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
 #include "WhiteBoard.h"
@@ -31,6 +34,9 @@ int pagestatus;
 int eraser_status;
 
 int main(int argc, char *argv[]) {
+
+    // Force use X11 or Xwayland
+    setenv("QT_QPA_PLATFORM", "xcb",1);
 
     settings_init();
 
