@@ -8,8 +8,6 @@ penType:
  - 2 marker
 */
 
-int penSize[3];
-
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
