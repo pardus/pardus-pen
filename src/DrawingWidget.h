@@ -38,6 +38,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     bool event(QEvent * ev);
+    QPainter painter;
 };
 
 QColor convertColor(QColor color);

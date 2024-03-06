@@ -55,9 +55,10 @@ void DrawingWidget::resizeEvent(QResizeEvent *event) {
 }
 
 void DrawingWidget::paintEvent(QPaintEvent *event) {
-    QPainter painter(this);
+    painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawImage(0, 0, image);
+    painter.end();
 }
 
 
@@ -70,7 +71,7 @@ void DrawingWidget::clear() {
 int rad = 0;
 
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
-    QPainter painter(&image);
+    painter.begin(&image);
     switch(penType){
         case ERASER:
             painter.setCompositionMode(QPainter::CompositionMode_Clear);
@@ -88,6 +89,7 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
            .adjusted(-rad, -rad, +rad, +rad));
 
     lastPoint = endPoint;
+    painter.end();
 }
 
 bool DrawingWidget::event(QEvent *ev) {
