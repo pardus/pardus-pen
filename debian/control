@@ -10,8 +10,12 @@ Standards-Version: 4.3.0
 Homepage: https://pardus.org.tr
 
 Package: pardus-pen
-Architecture: all
+Architecture: any
 Depends: ${shlibs:Depends},
-         ${misc:Depends}
+         ${misc:Depends},
+         libqt5Gui5,
+         libqt5widgets5,
+         libqt5core5a,
+         libglib2.0-0
 Description: Pen for pardus.
  Fast, usefull tool for drawing on screen.
