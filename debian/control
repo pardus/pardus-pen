@@ -1,0 +1,17 @@
+Source: pardus-pen
+Section: utils
+Priority: optional
+Maintainer: Ali Rıza KESKİN <ali.riza.keskin@pardus.org.tr>
+Build-Depends: meson, ninja-build,
+         qtbase5-dev,
+         qtchooser,
+         libglib2.0-dev
+Standards-Version: 4.3.0
+Homepage: https://pardus.org.tr
+
+Package: pardus-pen
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: Pen for pardus.
+ Fast, usefull tool for drawing on screen.
