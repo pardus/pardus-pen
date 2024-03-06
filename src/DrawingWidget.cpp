@@ -21,7 +21,7 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            printf("%d %s\n", id, "not found in storage");
+            // -1 -1 means disable drawing
             return QPointF(-1,-1);
         }
     }
@@ -127,40 +127,28 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
 
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
-        case QEvent::TouchBegin: {
-            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
-            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
-                QPointF pos = touchPoint.pos(); // Retrieve touch position
-                storage.saveValue(touchPoint.id(), pos);
-                printf("%ld begin\n",touchPoint.id());
-            }
-            break;
-        }
-        case QEvent::TouchEnd: {
-            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
-            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
-                QPointF pos = touchPoint.pos(); // Retrieve touch position
-                storage.saveValue(touchPoint.id(), QPointF(-1,-1));
-                printf("%ld end\n",touchPoint.id());
-            }
-            break;
-        }
+        case QEvent::TouchBegin:
+        case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
-                QPointF oldPos = storage.loadValue(touchPoint.id());
-                QPointF pos = touchPoint.pos(); // Retrieve touch position
-                drawLineToFunc(oldPos.toPoint(), pos.toPoint());
+            foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
+            QPointF pos = touchPoint.pos();
+            if (touchPoint.state() == Qt::TouchPointPressed) {
+                
                 storage.saveValue(touchPoint.id(), pos);
             }
+            else if (touchPoint.state() == Qt::TouchPointReleased) {
+                storage.saveValue(touchPoint.id(), QPointF(-1,-1));
+                continue;
+            }
+            QPointF oldPos = storage.loadValue(touchPoint.id());
+            drawLineToFunc(oldPos.toPoint(), pos.toPoint());
+            storage.saveValue(touchPoint.id(), pos);
+        }
             break;
         }
         default:
-            printf("%d hmm\n", ev->type());
-            // Handle other events if needed
             break;
     }
     return QWidget::event(ev);
