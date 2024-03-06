@@ -95,22 +95,43 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
 }
 
 bool DrawingWidget::event(QEvent *ev) {
-  switch (ev->type()) {
-    case QEvent::TouchBegin:
-        std::cout << "Event began." << std::endl;
-        break;
-    case QEvent::TouchEnd:
-        std::cout << "Event end." << std::endl;
-        break;
-    case QEvent::TouchUpdate:
-        std::cout << "Event update." << std::endl;
-        break;
-    default:
-        //std::cout << "Misc event." << std::endl;
-        break;
+    switch (ev->type()) {
+        case QEvent::TouchBegin: {
+            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
+            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
+                QPointF pos = touchPoint.pos(); // Retrieve touch position
+                std::cout << "Touch begin. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+            }
+            break;
+        }
+        case QEvent::TouchEnd: {
+            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
+            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
+                QPointF pos = touchPoint.pos(); // Retrieve touch position
+                std::cout << "Touch end. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+            }
+            break;
+        }
+        case QEvent::TouchUpdate: {
+            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
+            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+            for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
+                QPointF pos = touchPoint.pos(); // Retrieve touch position
+                std::cout << "Touch update. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+            }
+            break;
+        }
+        default:
+            // Handle other events if needed
+            break;
     }
     return QWidget::event(ev);
 }
+
+
+
 
 
 QColor convertColor(QColor color) {
