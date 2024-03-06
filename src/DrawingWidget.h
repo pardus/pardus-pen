@@ -37,6 +37,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    void drawLineToFunc(const QPoint startPoint, const QPoint endPoint);
     bool event(QEvent * ev);
     QPainter painter;
 };

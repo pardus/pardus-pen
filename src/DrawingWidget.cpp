@@ -8,6 +8,31 @@ penType:
  - 2 marker
 */
 
+#include <QDebug>
+#include <QMap>
+
+class ValueStorage {
+public:
+    void saveValue(qint64 id, QPointF data) {
+        values[id] = data;
+    }
+
+    QPointF loadValue(qint64 id) {
+        if (values.contains(id)) {
+            return values[id];
+        } else {
+            printf("%d %s\n", id, "not found in storage");
+            return QPointF(-1,-1);
+        }
+    }
+
+private:
+    QMap<qint64, QPointF> values;
+};
+
+ValueStorage storage;
+
+
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
@@ -72,6 +97,14 @@ void DrawingWidget::clear() {
 int rad = 0;
 
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
+    drawLineToFunc(lastPoint, endPoint);
+    lastPoint = endPoint;
+}
+
+void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint) {
+    if(startPoint.x() < 0 || startPoint.y() < 0){
+        return;
+    }
     painter.begin(&image);
     switch(penType){
         case ERASER:
@@ -86,11 +119,9 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     rad = penSize[penType];
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    painter.drawLine(lastPoint, endPoint);
-    update(QRect(lastPoint, endPoint).normalized()
+    painter.drawLine(startPoint, endPoint);
+    update(QRect(startPoint, endPoint).normalized()
            .adjusted(-rad, -rad, +rad, +rad));
-
-    lastPoint = endPoint;
     painter.end();
 }
 
@@ -101,7 +132,8 @@ bool DrawingWidget::event(QEvent *ev) {
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
             for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
                 QPointF pos = touchPoint.pos(); // Retrieve touch position
-                std::cout << "Touch begin. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+                storage.saveValue(touchPoint.id(), pos);
+                printf("%ld begin\n",touchPoint.id());
             }
             break;
         }
@@ -110,7 +142,8 @@ bool DrawingWidget::event(QEvent *ev) {
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
             for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
                 QPointF pos = touchPoint.pos(); // Retrieve touch position
-                std::cout << "Touch end. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+                storage.saveValue(touchPoint.id(), QPointF(-1,-1));
+                printf("%ld end\n",touchPoint.id());
             }
             break;
         }
@@ -118,12 +151,15 @@ bool DrawingWidget::event(QEvent *ev) {
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
             for (const QTouchEvent::TouchPoint &touchPoint : touchPoints) {
+                QPointF oldPos = storage.loadValue(touchPoint.id());
                 QPointF pos = touchPoint.pos(); // Retrieve touch position
-                std::cout << "Touch update. ID: " << touchPoint.id() << " Position: (" << pos.x() << ", " << pos.y() << ")" << std::endl;
+                drawLineToFunc(oldPos.toPoint(), pos.toPoint());
+                storage.saveValue(touchPoint.id(), pos);
             }
             break;
         }
         default:
+            printf("%d hmm\n", ev->type());
             // Handle other events if needed
             break;
     }
