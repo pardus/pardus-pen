@@ -13,7 +13,7 @@ Package: pardus-pen
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libqt5Gui5,
+         libqt5gui5,
          libqt5widgets5,
          libqt5core5a,
          libglib2.0-0
