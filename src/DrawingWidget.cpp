@@ -57,6 +57,7 @@ void DrawingWidget::resizeEvent(QResizeEvent *event) {
 void DrawingWidget::paintEvent(QPaintEvent *event) {
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawImage(0, 0, image);
     painter.end();
 }
@@ -81,9 +82,10 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }
-    painter.setPen(QPen(penColor, penSize[penType], Qt::SolidLine, Qt::RoundCap));
+    painter.setPen(QPen(penColor, penSize[penType], Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     rad = penSize[penType];
     painter.setRenderHint(QPainter::Antialiasing, true);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawLine(lastPoint, endPoint);
     update(QRect(lastPoint, endPoint).normalized()
            .adjusted(-rad, -rad, +rad, +rad));
