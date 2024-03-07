@@ -48,10 +48,12 @@ add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cp
 glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
 icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'
+podir = get_option('prefix')/'share/locale/tr/LC_MESSAGES'
 
 # executable file
 executable('pardus-pen', src, dependencies: qt_dep, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
 install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
+install_data('po/tr/LC_MESSAGES/pardus-pen.mo', install_dir : podir)
 

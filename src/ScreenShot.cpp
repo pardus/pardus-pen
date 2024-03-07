@@ -1,9 +1,12 @@
 #include <string.h>
 #include <stdlib.h>
+#include <libintl.h>
 
 #include <iostream>
 
 #include "ScreenShot.h"
+
+#define _(String) gettext(String)
 
 extern "C" {
 #include "which.h"
@@ -35,12 +38,12 @@ void takeScreenshot(){
     QMessageBox messageBox;
     Qt::WindowFlags flags =  Qt::Dialog | Qt::X11BypassWindowManagerHint;
     messageBox.setWindowFlags(flags);
-    messageBox.setText("Info");
+    messageBox.setText(_("Info"));
     std::string msg;
     if (status == 0){
-        msg = "Screenshot saved:" + imgname.toStdString() + "\n";
+        msg = _("Screenshot saved:") + imgname.toStdString() + "\n";
     } else {
-        msg = "Failed To save:" + imgname.toStdString() + "\n";
+        msg = _("Failed To save:") + imgname.toStdString() + "\n";
     }
     messageBox.setInformativeText(msg.c_str());
     messageBox.setIcon(QMessageBox::Information);
