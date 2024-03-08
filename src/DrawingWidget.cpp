@@ -115,8 +115,8 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }
-    painter.setPen(QPen(penColor, penSize[penType], Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    rad = penSize[penType];
+    painter.setPen(QPen(penColor, penSize[penType]*(screenHeight/1080), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    rad = penSize[penType]*(screenHeight/1080);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawLine(startPoint, endPoint);
@@ -135,7 +135,6 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
             QPointF pos = touchPoint.pos();
             if (touchPoint.state() == Qt::TouchPointPressed) {
-                
                 storage.saveValue(touchPoint.id(), pos);
             }
             else if (touchPoint.state() == Qt::TouchPointReleased) {
