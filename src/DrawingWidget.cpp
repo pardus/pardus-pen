@@ -115,8 +115,8 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }
-    painter.setPen(QPen(penColor, penSize[penType]*(screenHeight/1080), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    rad = penSize[penType]*(screenHeight/1080);
+    painter.setPen(QPen(penColor, (penSize[penType]*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    rad = (penSize[penType]*screenHeight)/1080;
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawLine(startPoint, endPoint);
