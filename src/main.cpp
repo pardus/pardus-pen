@@ -30,6 +30,7 @@ QPushButton *minify;
 QPushButton *clear;
 QPushButton *increase;
 QPushButton *decrease;
+QPushButton *close;
 QString style;
 
 #ifdef screenshot
@@ -186,6 +187,15 @@ int main(int argc, char *argv[]) {
 
     #endif
 
+    close = create_button(":images/close.svg", [=](){
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(mainWindow, _("Quit"), _("Are you want to quit pardus pen?"),
+                                QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            QApplication::quit();
+        }
+    });
+    floatingWidget->setWidget(close);
 
 
     mainWindow->setAttribute(Qt::WA_StaticContents);

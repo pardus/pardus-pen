@@ -7,24 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 18:21+0300\n"
+"POT-Creation-Date: 2024-03-08 13:47+0000\n"
 "PO-Revision-Date: 2024-03-07 18:23+0300\n"
 "Last-Translator: busra <pardus@pardus.org.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ScreenShot.cpp:41
+#: src/ScreenShot.cpp:41
 msgid "Info"
 msgstr "Bilgi"
 
-#: ScreenShot.cpp:44
+#: src/ScreenShot.cpp:44
 msgid "Screenshot saved:"
-msgstr "Ekran grnts kaydedildi:"
+msgstr "Ekran görüntüsü kaydedildi:"
 
-#: ScreenShot.cpp:46
+#: src/ScreenShot.cpp:46
 msgid "Failed To save:"
 msgstr "Kaydedilemedi:"
+
+#: src/main.cpp:192
+msgid "Quit"
+msgstr "Çıkış"
+
+#: src/main.cpp:192
+msgid "Are you want to quit pardus pen?"
+msgstr "Çıkış yapmak istiyor musunuz?"

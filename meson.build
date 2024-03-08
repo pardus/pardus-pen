@@ -1,4 +1,4 @@
-project('example', ['cpp', 'c'])
+project('pardus-pen', ['cpp', 'c'])
 # Source files
 src = [
     'src/main.cpp',
