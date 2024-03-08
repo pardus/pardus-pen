@@ -5,12 +5,15 @@
 #include <QColorDialog>
 
 #include <stdlib.h>
-
+#include <locale.h>
+#include <libintl.h>
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
 #include "WhiteBoard.h"
 #include "Button.h"
+
+#define _(String) gettext(String)
 
 extern "C" {
 #include "settings.h"
@@ -43,8 +46,19 @@ int main(int argc, char *argv[]) {
 
     // Force use X11 or Xwayland
     setenv("QT_QPA_PLATFORM", "xcb",1);
-
+    
     settings_init();
+
+    // translation part
+    const char *systemLanguage = std::getenv("LANG");
+    if (systemLanguage != nullptr) {
+        bindtextdomain("pardus-pen", "/usr/share/locale");
+        setlocale(LC_ALL, systemLanguage);
+        textdomain("pardus-pen");
+    } else {
+        std::cerr << "LANG environment variable not set." << std::endl;
+        return 1;
+    }
 
     QApplication app(argc, argv);
 

@@ -1,0 +1,30 @@
+# Turkish translations for PACKAGE package.
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# busra <pardus@pardus.org.tr>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-07 18:21+0300\n"
+"PO-Revision-Date: 2024-03-07 18:23+0300\n"
+"Last-Translator: busra <pardus@pardus.org.tr>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ScreenShot.cpp:41
+msgid "Info"
+msgstr "Bilgi"
+
+#: ScreenShot.cpp:44
+msgid "Screenshot saved:"
+msgstr "Ekran grnts kaydedildi:"
+
+#: ScreenShot.cpp:46
+msgid "Failed To save:"
+msgstr "Kaydedilemedi:"
