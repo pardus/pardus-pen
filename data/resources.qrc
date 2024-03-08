@@ -11,5 +11,6 @@
         <file>images/screenshot.svg</file>
         <file>images/increase.svg</file>
         <file>images/decrease.svg</file>
+        <file>images/close.svg</file>
     </qresource>
 </RCC>
