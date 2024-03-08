@@ -2,6 +2,8 @@
 #include <stdio.h>
 
 #define padding 3
+extern int screenWidth;
+extern int screenHeight;
 
 QPushButton* create_button(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
@@ -15,6 +17,6 @@ void set_icon(const char* name, QPushButton * button) {
     QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(48, 48)));
     button->setIcon(icon);
     button->setIconSize(pixmap.rect().size());
-    button->setFixedSize(48+padding, 48+padding);
+    button->setFixedSize(screenHeight/23+padding, screenHeight/23+padding);
     button->setFlat(true);
 }

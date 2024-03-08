@@ -1,2 +1,6 @@
 build
 data/gschemas.compiled
+debian/.debhelper
+debian/pardus-pen
+debian/files
+debian/debhelper-build-stamp

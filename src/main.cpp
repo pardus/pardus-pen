@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
     // Force use X11 or Xwayland
     setenv("QT_QPA_PLATFORM", "xcb",1);
-    
+
     settings_init();
 
     // translation part
@@ -63,10 +63,9 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     mainWindow = new QMainWindow();
-
+    window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
 
-    window = new DrawingWidget();
     window->penSize[PEN] = get_int((char*)"pen-size");
     window->penSize[ERASER] = get_int((char*)"eraser-size");
     window->penSize[MARKER] = get_int((char*)"marker-size");

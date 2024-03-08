@@ -1,8 +1,8 @@
 #include "FloatingWidget.h"
 int cur_height = 0;
 int cur_width = 0;
-int screenWidth = 0;
-int screenHeight = 0;
+extern int screenWidth;
+extern int screenHeight;
 
 int new_x;
 int new_y;
@@ -15,12 +15,6 @@ extern "C" {
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
-    QList<QScreen*> screens = QGuiApplication::screens();
-    for (QScreen *screen : screens) {
-        screenWidth  += screen->geometry().width();
-        screenHeight += screen->geometry().height();
-        break;
-    }
     setLayout(layout);
     QString style = QString(
     "border-radius:3px;"

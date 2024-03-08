@@ -1,13 +1,8 @@
 #include "WhiteBoard.h"
+extern int screenWidth;
+extern int screenHeight;
 
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
-    QList<QScreen*> screens = QGuiApplication::screens();
-    int screenWidth = 0;
-    int screenHeight = 0;
-    for (QScreen *screen : screens) {
-        screenWidth  += screen->geometry().width();
-        screenHeight += screen->geometry().height();
-    }
     setFixedSize(screenWidth, screenHeight);
     setStyleSheet("background: white");
     show();

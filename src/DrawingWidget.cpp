@@ -32,13 +32,13 @@ private:
 
 ValueStorage storage;
 
+int screenWidth = 0;
+int screenHeight = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
     QList<QScreen*> screens = QGuiApplication::screens();
-    int screenWidth = 0;
-    int screenHeight = 0;
     for (QScreen *screen : screens) {
         screenWidth  += screen->geometry().width();
         screenHeight += screen->geometry().height();
