@@ -9,6 +9,9 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
     QObject::connect(button, &QPushButton::clicked, event);
     set_icon(name, button);
+    QFont font = button->font();
+    font.setPointSize(screenHeight/31);
+    button->setFont(font);
     return button;
 }
 
