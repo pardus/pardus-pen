@@ -16,8 +16,10 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     setLayout(layout);
     QString style = QString(
-    "border-radius:3px;"
-    "background-color: #80808080;");
+    "QWidget {"
+        "border-radius:3px;"
+        "background-color: #80808080;"
+    "}");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
     setStyleSheet(style);
@@ -65,8 +67,13 @@ void FloatingWidget::moveAction(int new_x, int new_y){
                 new_xx = new_x - padding - cur_width;
             }
             int new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
-            floatingSettings->move(new_xx, new_yy);
+            floatingSettings->move(new_xx, new_yy + padding);
         }
+}
+
+void FloatingWidget::setFloatingOffset(int offset){
+    settingsOffset = offset;
+    moveAction(new_x, new_y);
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {

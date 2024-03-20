@@ -2,7 +2,7 @@
 set -ex
 export CFLAGS='-g3'
 export CXXFLAGS='-g3'
-export GSETTINGS_SCHEMAS_DIR=$PWD/data
+export GSETTINGS_SCHEMA_DIR=$PWD/data
 glib-compile-schemas ./data
 rm -rf build || true
 meson setup build --prefix=/usr -Dresources=true

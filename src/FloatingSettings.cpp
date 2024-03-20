@@ -2,8 +2,6 @@
 extern int screenWidth;
 extern int screenHeight;
 
-#define padding 8
-
 extern "C" {
 #include "settings.h"
 }
@@ -35,13 +33,15 @@ FloatingSettings::FloatingSettings(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     setLayout(layout);
     QString style = QString(
-    "border-radius:3px;"
-    "background-color: #80808080;");
-    layout->setSpacing(padding);
-    layout->setContentsMargins(padding, padding, padding, padding);
+    "QWidget {"
+        "border-radius:3px;"
+        "background-color: #80808080;"
+    "}");
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     setStyleSheet(style);
-    cur_height = padding;
-    cur_width = padding;
+    cur_height = 0;
+    cur_width = 0;
 }
 
 void FloatingSettings::addPage(QWidget *widget) {
@@ -52,12 +52,18 @@ void FloatingSettings::addPage(QWidget *widget) {
 }
 
 void FloatingSettings::setPage(int num){
+    if(settingsPages.getPage(num)->isVisible()){
+        settingsPages.getPage(num)->hide();
+        hide();
+        return;
+    }
     for(int i=0;i<num_of_item;i++){
         settingsPages.getPage(i)->hide();
     }
     settingsPages.getPage(num)->show();
     setFixedSize(
-        settingsPages.getPage(num)->size().width() + padding * 2,
-        settingsPages.getPage(num)->size().height() + padding * 2
+        settingsPages.getPage(num)->size().width(),
+        settingsPages.getPage(num)->size().height()
     );
+    show();
 }

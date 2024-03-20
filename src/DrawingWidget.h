@@ -23,6 +23,7 @@ public:
     QImage image;
     QPoint lastPoint;
     QColor penColor;
+    QWidget* floatingSettings;
     int penSize[3];
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
