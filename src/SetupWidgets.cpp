@@ -25,16 +25,23 @@ extern FloatingSettings *floatingSettings;
 extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
 
+QPushButton *penButton;
+QPushButton *markerButton;
+QPushButton *eraserButton;
+
 extern int screenWidth;
 extern int screenHeight;
+
+bool sliderLock = false;
 
 QSlider *thicknessSlider;
 
 static void setupPenSize(){
     QPushButton *thicknessButton = create_button(":images/close.svg",  [=](){
         floatingSettings->setPage(0);
-        floatingWidget->setFloatingOffset(0);
+        floatingWidget->setFloatingOffset(3);
     });
+    thicknessButton->setStyleSheet(QString("background-color: none;"));
 
     QWidget *thickness = new QWidget();
     QVBoxLayout *thicknessLayout = new QVBoxLayout(thickness);
@@ -71,6 +78,7 @@ static void setupPenSize(){
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setRange(1,31);
     thicknessSlider->setSingleStep(1);
+    thicknessSlider->setValue(window->penSize[PEN]);
 
 
     QLabel *thicknessLabel = new QLabel();
@@ -92,20 +100,24 @@ static void setupPenSize(){
         switch(window->penType){
             case PEN:
                 penText = "Pen";
+                set_int((char*)"pen-size",value);
                 break;
             case MARKER:
                 penText = "Marker";
+                set_int((char*)"marker-size",value);
                 break;
             case ERASER:
                 penText = "Eraser";
+                set_int((char*)"eraser-size",value);
                 break;
         }
         thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
-        window->penSize[window->penType] = value;
-        set_int((char*)"pen-size",value);
+        if(!sliderLock){
+            window->penSize[window->penType] = value;
+        }
+        
     });
-    
-    thicknessSlider->setValue(window->penSize[PEN]);
+    thicknessLabel->setText(QString("Pen")+QString(" Size: ")+QString::number(window->penSize[PEN]));
     floatingSettings->addPage(thickness);
     floatingWidget->setWidget(thicknessButton);
 
@@ -117,8 +129,9 @@ static void setupPenColor(){
 
     QPushButton *colorButton = create_button(":images/clear.svg",  [=](){
         floatingSettings->setPage(1);
-        floatingWidget->setFloatingOffset(1);
+        floatingWidget->setFloatingOffset(4);
     });
+    colorButton->setStyleSheet(QString("background-color: none;"));
 
     QWidget *colorDialog = new QWidget();
     colorDialog->setStyleSheet(QString(
@@ -154,7 +167,18 @@ static void setupPenColor(){
         ).arg(colors[i].name()));
         QObject::connect(button, &QPushButton::clicked, [=]() {
             window->penColor = colors[i];
-            colorButton->setStyleSheet(QString("background-color: %1; border: 1px solid blackt;").arg(colors[i].name()));
+            colorButton->setStyleSheet(QString("background-color: %1;").arg(colors[i].name()));
+            if(window->penType == ERASER) {
+                sliderLock = true;
+                window->penColor.setAlpha(255);
+                window->penType = PEN;
+                penButton->setStyleSheet(QString("background-color: green;"));
+                markerButton->setStyleSheet(QString("background-color: none;"));
+                eraserButton->setStyleSheet(QString("background-color: none;"));
+                thicknessSlider->setRange(1,31);
+                thicknessSlider->setValue(window->penSize[PEN]);
+                sliderLock = false;
+            }
         });
         gridLayout->addWidget(button, i / rowsize, i % rowsize, Qt::AlignCenter);
     }
@@ -170,9 +194,57 @@ static void setupPenColor(){
     floatingWidget->setWidget(colorButton);
 }
 
+static void setupPenType(){
+
+
+    penButton = create_button(":images/pen.svg", [=](){
+        sliderLock = true;
+        window->penColor.setAlpha(255);
+        window->penType = PEN;
+        penButton->setStyleSheet(QString("background-color: green;"));
+        markerButton->setStyleSheet(QString("background-color: none;"));
+        eraserButton->setStyleSheet(QString("background-color: none;"));
+        thicknessSlider->setRange(1,31);
+        thicknessSlider->setValue(window->penSize[PEN]);
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(penButton);
+
+    markerButton = create_button(":images/marker.svg", [=](){
+        sliderLock = true;
+        window->penColor.setAlpha(127);
+        window->penType = MARKER;
+        penButton->setStyleSheet(QString("background-color: none;"));
+        markerButton->setStyleSheet(QString("background-color: green;"));
+        eraserButton->setStyleSheet(QString("background-color: none;"));
+        thicknessSlider->setRange(1,100);
+        thicknessSlider->setValue(window->penSize[MARKER]);
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(markerButton);
+
+    eraserButton = create_button(":images/eraser.svg", [=](){
+        sliderLock = true;
+        window->penColor.setAlpha(255);
+        window->penType = ERASER;
+        penButton->setStyleSheet(QString("background-color: none;"));
+        markerButton->setStyleSheet(QString("background-color: none;"));
+        eraserButton->setStyleSheet(QString("background-color: green;"));
+        thicknessSlider->setRange(1,310);
+        thicknessSlider->setValue(window->penSize[ERASER]);
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(eraserButton);
+    penButton->setStyleSheet(QString("background-color: green;"));
+    markerButton->setStyleSheet(QString("background-color: none;"));
+    eraserButton->setStyleSheet(QString("background-color: none;"));
+}
+
 void setupWidgets(){
+    window->floatingSettings = floatingSettings;
+    setupPenType();
     setupPenSize();
     setupPenColor();
-    window->floatingSettings = floatingSettings;
+
     
 }

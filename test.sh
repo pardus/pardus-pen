@@ -7,4 +7,4 @@ glib-compile-schemas ./data
 rm -rf build || true
 meson setup build --prefix=/usr -Dresources=true
 ninja -C build
-echo -e gdb "run\nbacktrace\n" | ./build/pardus-pen
+echo -e "run\nbacktrace\n" | gdb ./build/pardus-pen
