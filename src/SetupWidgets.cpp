@@ -121,6 +121,10 @@ static void setupPenColor(){
     });
 
     QWidget *colorDialog = new QWidget();
+    colorDialog->setStyleSheet(QString(
+        "QWidget {"
+            "background-color: none;"
+         "}"));
     colorDialog->setWindowTitle("Color Picker");
 
     QGridLayout *gridLayout = new QGridLayout(colorDialog);

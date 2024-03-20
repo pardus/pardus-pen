@@ -61,9 +61,8 @@ void FloatingSettings::setPage(int num){
         settingsPages.getPage(i)->hide();
     }
     settingsPages.getPage(num)->show();
-    setFixedSize(
-        settingsPages.getPage(num)->size().width(),
-        settingsPages.getPage(num)->size().height()
-    );
+    cur_width = settingsPages.getPage(num)->size().width();
+    cur_height = settingsPages.getPage(num)->size().height();
+    setFixedSize(cur_width, cur_height);
     show();
 }
