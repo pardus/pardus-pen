@@ -188,14 +188,6 @@ static void setupPenColor(){
         QObject::connect(button, &QPushButton::clicked, [=]() {
             window->penColor = colors[i];
             penStyleEvent();
-            if(window->penType == ERASER) {
-                sliderLock = true;
-                window->penColor.setAlpha(255);
-                window->penType = PEN;
-                thicknessSlider->setRange(1,31);
-                thicknessSlider->setValue(window->penSize[PEN]);
-                sliderLock = false;
-            }
         });
         gridLayout->addWidget(button, i / rowsize, i % rowsize, Qt::AlignCenter);
     }
@@ -275,8 +267,18 @@ static void setupBackground(){
         floatingSettings->setPage(2);
         floatingWidget->setFloatingOffset(5);
     });
+
+    QLabel *backgroundLabel = new QLabel();
+    backgroundLabel->setText(QString("Background:"));
+    
+    QWidget *backgroundDialog = new QWidget();
     QWidget *backgroundWidget = new QWidget();
-    QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundWidget);
+    QVBoxLayout *backgroundMainLayout = new QVBoxLayout(backgroundWidget);
+    QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundDialog);
+    
+    backgroundMainLayout->addWidget(backgroundLabel);
+    backgroundMainLayout->addWidget(backgroundDialog);
+    
     backgroundLayout->setSpacing(padding);
     QPushButton* transparent = create_button(":images/paper-transparent.svg", [=](){
         board->disable();
@@ -291,7 +293,10 @@ static void setupBackground(){
     addToBackgroundWidget(white);
     addToBackgroundWidget(black);
 
-    backgroundWidget->setFixedSize(w + padding*2,h);
+
+    backgroundDialog->setFixedSize(w,h);
+    backgroundLabel->setFixedSize(w - padding*2,h / 4);
+    backgroundWidget->setFixedSize(w + padding*3, h + backgroundLabel->size().height() + padding*2);
 
     backgroundWidget->setStyleSheet(QString("background-color: none;"));
     backgroundButton->setStyleSheet(QString("background-color: none;"));
