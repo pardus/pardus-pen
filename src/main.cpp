@@ -148,7 +148,8 @@ int main(int argc, char *argv[]) {
         colorpicker->setText(QString::number(window->penSize[window->penType]));
 
     });
-    floatingSettings->setWidget(increase);
+    floatingSettings->addPage(increase);
+    floatingSettings->setPage(0);
 
 
     colorpicker = create_button("", [=](){

@@ -15,7 +15,8 @@ public:
     int cur_width = 0;
     int cur_height = 0;
     FloatingSettings(QWidget *parent = nullptr);
-    void setWidget(QWidget *widget);
+    void addPage(QWidget *widget);
+    void setPage(int num);
 private:
     int num_of_item = 0;
     QPoint dragPosition;
