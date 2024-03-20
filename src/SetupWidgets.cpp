@@ -226,7 +226,6 @@ static void setupPenColor(){
 
 static void setupPenType(){
 
-
     penButton = create_button(":images/pen.svg", [=](){
         sliderLock = true;
         window->penColor.setAlpha(255);
@@ -262,8 +261,43 @@ static void setupPenType(){
     penStyleEvent();
 }
 
-static void setupBackground(){
+#define addToBackgroundWidget(A) \
+    if(A->size().height() > h){ \
+        h = A->size().height() + padding*2; \
+    } \
+    w += A->size().width(); \
+    backgroundLayout->addWidget(A);
 
+static void setupBackground(){
+    int w = padding*2;
+    int h = padding*2;
+    QPushButton *backgroundButton = create_button(":images/clear.svg",  [=](){
+        floatingSettings->setPage(2);
+        floatingWidget->setFloatingOffset(5);
+    });
+    QWidget *backgroundWidget = new QWidget();
+    QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundWidget);
+    backgroundLayout->setSpacing(padding);
+    QPushButton* transparent = create_button(":images/paper-transparent.svg", [=](){
+        board->disable();
+    });
+    QPushButton* black = create_button(":images/paper-black.svg", [=](){
+        board->enableDark();
+    });
+    QPushButton* white = create_button(":images/paper-white.svg", [=](){
+        board->enable();
+    });
+    addToBackgroundWidget(transparent);
+    addToBackgroundWidget(white);
+    addToBackgroundWidget(black);
+
+    backgroundWidget->setFixedSize(w + padding*2,h);
+
+    backgroundWidget->setStyleSheet(QString("background-color: none;"));
+    backgroundButton->setStyleSheet(QString("background-color: none;"));
+
+    floatingSettings->addPage(backgroundWidget);
+    floatingWidget->setWidget(backgroundButton);
 }
 
 void setupWidgets(){
