@@ -29,6 +29,10 @@ QPushButton *penButton;
 QPushButton *markerButton;
 QPushButton *eraserButton;
 
+QPushButton* transparentButton;
+QPushButton* blackButton;
+QPushButton* whiteButton;
+
 extern int screenWidth;
 extern int screenHeight;
 
@@ -126,21 +130,31 @@ static void setupPenSize(){
 }
 
 static void penStyleEvent(){
+    penButton->setStyleSheet(QString("background-color: none;"));
+    markerButton->setStyleSheet(QString("background-color: none;"));
+    eraserButton->setStyleSheet(QString("background-color: none;"));
     if(window->penType == PEN){
         penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        markerButton->setStyleSheet(QString("background-color: none;"));
-        eraserButton->setStyleSheet(QString("background-color: none;"));
     } else if(window->penType == MARKER){
-        penButton->setStyleSheet(QString("background-color: none;"));
         markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        eraserButton->setStyleSheet(QString("background-color: none;"));
     } else{
-        penButton->setStyleSheet(QString("background-color: none;"));
-        markerButton->setStyleSheet(QString("background-color: none;"));
         eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
     }
 }
 
+
+static void backgroundStyleEvent(){
+    transparentButton->setStyleSheet(QString("background-color: none;"));
+    blackButton->setStyleSheet(QString("background-color: none;"));
+    whiteButton->setStyleSheet(QString("background-color: none;"));
+    if (board->getType() == BLACK) {
+        blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    } else if (board->getType() == WHITE) {
+        whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    }else {
+        transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    }
+}
 
 static void setupPenColor(){
     QWidget *colorWidget = new QWidget();
@@ -188,6 +202,7 @@ static void setupPenColor(){
         QObject::connect(button, &QPushButton::clicked, [=]() {
             window->penColor = colors[i];
             penStyleEvent();
+            backgroundStyleEvent();
         });
         gridLayout->addWidget(button, i / rowsize, i % rowsize, Qt::AlignCenter);
     }
@@ -260,6 +275,7 @@ static void setupPenType(){
     w += A->size().width(); \
     backgroundLayout->addWidget(A);
 
+
 static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
@@ -270,6 +286,7 @@ static void setupBackground(){
 
     QLabel *backgroundLabel = new QLabel();
     backgroundLabel->setText(QString("Background:"));
+    backgroundLabel->setAlignment(Qt::AlignHCenter); 
     
     QWidget *backgroundDialog = new QWidget();
     QWidget *backgroundWidget = new QWidget();
@@ -280,19 +297,22 @@ static void setupBackground(){
     backgroundMainLayout->addWidget(backgroundDialog);
     
     backgroundLayout->setSpacing(padding);
-    QPushButton* transparent = create_button(":images/paper-transparent.svg", [=](){
+    transparentButton = create_button(":images/paper-transparent.svg", [=](){
         board->disable();
+        backgroundStyleEvent();
     });
-    QPushButton* black = create_button(":images/paper-black.svg", [=](){
+    blackButton = create_button(":images/paper-black.svg", [=](){
         board->enableDark();
+        backgroundStyleEvent();
     });
-    QPushButton* white = create_button(":images/paper-white.svg", [=](){
+    whiteButton = create_button(":images/paper-white.svg", [=](){
         board->enable();
+        backgroundStyleEvent();
     });
-    addToBackgroundWidget(transparent);
-    addToBackgroundWidget(white);
-    addToBackgroundWidget(black);
-
+    addToBackgroundWidget(transparentButton);
+    addToBackgroundWidget(blackButton);
+    addToBackgroundWidget(whiteButton);
+    backgroundStyleEvent();
 
     backgroundDialog->setFixedSize(w,h);
     backgroundLabel->setFixedSize(w - padding*2,h / 4);

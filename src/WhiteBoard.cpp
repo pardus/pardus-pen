@@ -10,12 +10,19 @@ WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
 
 void WhiteBoard::enable() {
     setStyleSheet("background: white");
+    type = WHITE;
 }
 
 void WhiteBoard::enableDark() {
     setStyleSheet("background: black");
+    type = BLACK;
 }
 
 void WhiteBoard::disable() {
     setStyleSheet("background: none");
+    type = TRANSPARENT;
+}
+
+int WhiteBoard::getType(){
+    return type;
 }
