@@ -102,11 +102,11 @@ void DrawingWidget::clear() {
 int rad = 0;
 
 void DrawingWidget::drawLineTo(const QPoint &endPoint) {
-    drawLineToFunc(lastPoint, endPoint);
+    drawLineToFunc(lastPoint, endPoint, 1.0);
     lastPoint = endPoint;
 }
 
-void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint) {
+void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressuse) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
@@ -120,8 +120,8 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }
-    painter.setPen(QPen(penColor, (penSize[penType]*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    rad = (penSize[penType]*screenHeight)/1080;
+    painter.setPen(QPen(penColor, (penSize[penType]*pressuse*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    rad = (penSize[penType]*pressuse*screenHeight)/1080;
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawLine(startPoint, endPoint);
@@ -151,7 +151,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 continue;
             }
             QPointF oldPos = storage.loadValue(touchPoint.id());
-            drawLineToFunc(oldPos.toPoint(), pos.toPoint());
+            drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
             storage.saveValue(touchPoint.id(), pos);
         }
             break;
