@@ -4,6 +4,7 @@ src = [
     'src/main.cpp',
     'src/DrawingWidget.cpp',
     'src/FloatingWidget.cpp',
+    'src/FloatingSettings.cpp',
     'src/WhiteBoard.cpp',
     'src/Button.cpp',
     'src/settings.c',

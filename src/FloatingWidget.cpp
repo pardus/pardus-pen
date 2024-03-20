@@ -1,6 +1,5 @@
 #include "FloatingWidget.h"
-int cur_height = 0;
-int cur_width = 0;
+#include "FloatingSettings.h"
 extern int screenWidth;
 extern int screenHeight;
 
@@ -26,7 +25,10 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
 }
 
 
-int num_of_item = 0;
+void FloatingWidget::setSettings(QWidget *widget) {
+    floatingSettings = (FloatingSettings*)widget;
+}
+
 void FloatingWidget::setWidget(QWidget *widget) {
     cur_height += widget->size().height() + padding;
     if (cur_width < widget->size().width()) {
@@ -57,6 +59,14 @@ void FloatingWidget::moveAction(int new_x, int new_y){
             new_y = screenHeight - cur_height;
         }
         move(new_x, new_y);
+        if(floatingSettings != NULL){
+            int new_xx = new_x+padding+cur_width;
+            if(new_xx  > screenWidth - floatingSettings->cur_width){
+                new_xx = new_x - padding - cur_width;
+            }
+            int new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
+            floatingSettings->move(new_xx, new_yy);
+        }
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {

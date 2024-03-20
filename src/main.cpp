@@ -10,6 +10,7 @@
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
+#include "FloatingSettings.h"
 #include "WhiteBoard.h"
 #include "Button.h"
 
@@ -22,6 +23,7 @@ extern "C" {
 QPushButton *colorpicker;
 DrawingWidget *window;
 FloatingWidget *floatingWidget;
+FloatingSettings *floatingSettings;
 WhiteBoard *board;
 QMainWindow* mainWindow;
 QPushButton *eraser;
@@ -75,8 +77,14 @@ int main(int argc, char *argv[]) {
 
     mainWindow->setCentralWidget(window);
 
+    floatingSettings = new FloatingSettings(mainWindow);
+    //floatingSettings->hide();
+    floatingSettings->show();
+
     floatingWidget = new FloatingWidget(mainWindow);
+    floatingWidget->setSettings(floatingSettings);
     floatingWidget->show();
+    floatingWidget->settingsOffset = 1;
 
     eraser_status = 1;
     eraser = create_button(":images/pen.svg", [=](){
@@ -140,7 +148,7 @@ int main(int argc, char *argv[]) {
         colorpicker->setText(QString::number(window->penSize[window->penType]));
 
     });
-    floatingWidget->setWidget(increase);
+    floatingSettings->setWidget(increase);
 
 
     colorpicker = create_button("", [=](){
