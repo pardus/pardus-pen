@@ -62,6 +62,8 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
     int penTypeBak = penType;
     if(event->buttons() & Qt::RightButton) {
         penType = ERASER;
+    }if(event->buttons() & Qt::MiddleButton) {
+        penType = MARKER;
     }
     if (drawing) {
         drawLineTo(event->pos());
