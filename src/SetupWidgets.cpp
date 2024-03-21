@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QMainWindow>
 #include <QColorDialog>
+#include <QMessageBox>
 #include <QSlider>
 
 #include "DrawingWidget.h"
@@ -10,12 +11,19 @@
 #include "FloatingSettings.h"
 #include "WhiteBoard.h"
 #include "Button.h"
+#include "ScreenShot.h"
 
 
 extern "C" {
 #include "settings.h"
 }
 
+
+#include <stdlib.h>
+#include <locale.h>
+#include <libintl.h>
+
+#define _(String) gettext(String)
 
 #define padding 8
 
@@ -32,6 +40,7 @@ QPushButton *eraserButton;
 QPushButton* transparentButton;
 QPushButton* blackButton;
 QPushButton* whiteButton;
+QPushButton* colorpicker;
 
 extern int screenWidth;
 extern int screenHeight;
@@ -189,13 +198,37 @@ static void setupPenColor(){
 
     // Define colors
     QColor colors[] = {
-        QColor(255, 0, 0),    // Red
-        QColor(0, 255, 0),    // Green
-        QColor(0, 0, 255),    // Blue
-        QColor(255, 255, 0),  // Yellow
-        QColor(255, 0, 255),  // Magenta
-        QColor(0, 255, 255),  // Cyan
-        QColor(255, 255, 255) // White
+        // row 1
+        QColor("#000000"),
+        QColor("#3c4043"),
+        QColor("#5f6368"),
+        QColor("#9aa0a6"),
+        QColor("#dadce0"),
+        QColor("#ffffff"),
+        // row 2
+        QColor("#f28b82"),
+        QColor("#fdd663"),
+        QColor("#81c995"),
+        QColor("#78d9ec"),
+        QColor("#8ab4f8"),
+        QColor("#c58af9"),
+        QColor("#eec9ae"),
+        // row 3
+        QColor("#ea4335"),
+        QColor("#fbbc04"),
+        QColor("#34a853"),
+        QColor("#24c1e0"),
+        QColor("#4285f4"),
+        QColor("#a142f4"),
+        QColor("#e2a185"),
+        // row 4
+        QColor("#c5221f"),
+        QColor("#f29900"),
+        QColor("#188038"),
+        QColor("#12a4af"),
+        QColor("#1967d2"),
+        QColor("#8430ce"),
+        QColor("#885945")
     };
 
 
@@ -204,24 +237,35 @@ static void setupPenColor(){
     colorLayout->setSpacing(0);
     gridLayout->setSpacing(padding);
 
+    colorpicker = create_button(":images/picker.svg", [=](){
+        window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
+        penStyleEvent();
+        backgroundStyleEvent();
+    });
+    colorpicker->setStyleSheet(QString("background: none;"));
+
 
     // Create buttons for each color
     int num_of_color = sizeof(colors) / sizeof(QColor);
-    int rowsize = 4;
+    int rowsize = 7;
     int butsize = screenHeight/23;
+    gridLayout->addWidget(colorpicker, 0, 0, Qt::AlignCenter);
     for (int i = 0; i < num_of_color; i++) {
         QPushButton *button = new QPushButton(colorDialog);
         button->setFixedSize(butsize, butsize);
         button->setStyleSheet(QString(
              "background-color: %1;"
              "border-radius: 12px;"
+             "border: 1px solid "+convertColor(colors[i]).name()+";"
         ).arg(colors[i].name()));
         QObject::connect(button, &QPushButton::clicked, [=]() {
             window->penColor = colors[i];
+            set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
             penStyleEvent();
             backgroundStyleEvent();
         });
-        gridLayout->addWidget(button, i / rowsize, i % rowsize, Qt::AlignCenter);
+        gridLayout->addWidget(button, (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
 
     colorDialog->setLayout(gridLayout);
@@ -351,11 +395,66 @@ static void setupBackground(){
     floatingWidget->setWidget(backgroundButton);
 }
 
+static void setupScreenShot(){
+    QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
+        takeScreenshot();
+    });
+    ssButton->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(ssButton);
+}
+
+static void setupExit(){
+    QPushButton *close = create_button(":images/close.svg", [=](){
+        QMessageBox msgBox;
+        msgBox.setWindowFlags(Qt::Dialog | Qt::X11BypassWindowManagerHint);
+        msgBox.setWindowTitle(_("Quit"));
+        msgBox.setText(_("Are you want to quit pardus pen?"));
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if(msgBox.exec() == QMessageBox::Yes){
+            QApplication::quit();
+        }
+    });
+    close->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(close);
+
+}
+
+static void setupMinify(){
+    QPushButton *minify = create_button(":images/screen.svg", [=](){
+        mainWindow->showMinimized();
+    });
+    minify->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(minify);
+
+}
+
+static void setupClear(){
+    QPushButton *clear = create_button(":images/clear.svg", [=](){
+        QMessageBox msgBox;
+        msgBox.setWindowFlags(Qt::Dialog | Qt::X11BypassWindowManagerHint);
+        msgBox.setWindowTitle(_("Clear"));
+        msgBox.setText(_("Are you want to clear screen?"));
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if(msgBox.exec() == QMessageBox::Yes){
+            window->clear();
+        }
+    });
+    clear->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(clear);
+}
+
 void setupWidgets(){
     window->floatingSettings = floatingSettings;
     setupPenType();
     setupPenSize();
     setupPenColor();
     setupBackground();
-    
+    setupScreenShot();
+    setupClear();
+    setupMinify();
+    setupExit();
 }

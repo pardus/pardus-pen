@@ -62,6 +62,7 @@ int main(int argc, char *argv[]) {
     mainWindow = new QMainWindow();
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
+    board->disable();
 
     window->penSize[PEN] = get_int((char*)"pen-size");
     window->penSize[ERASER] = get_int((char*)"eraser-size");

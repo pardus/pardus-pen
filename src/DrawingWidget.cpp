@@ -56,7 +56,6 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }
     if(floatingSettings->isVisible()){
         floatingSettings->hide();
-        drawing = false;
     }
 
 }
@@ -137,7 +136,6 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TouchUpdate: {
             if(floatingSettings->isVisible()){
                 floatingSettings->hide();
-                break;
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
