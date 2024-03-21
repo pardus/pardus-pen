@@ -270,7 +270,7 @@ static void setupPenType(){
 
 #define addToBackgroundWidget(A) \
     if(A->size().height() > h){ \
-        h = A->size().height() + padding*2; \
+        h = A->size().height() + padding; \
     } \
     w += A->size().width(); \
     backgroundLayout->addWidget(A);
@@ -286,17 +286,19 @@ static void setupBackground(){
 
     QLabel *backgroundLabel = new QLabel();
     backgroundLabel->setText(QString("Background:"));
-    backgroundLabel->setAlignment(Qt::AlignHCenter); 
-    
+    backgroundLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
     QWidget *backgroundDialog = new QWidget();
     QWidget *backgroundWidget = new QWidget();
     QVBoxLayout *backgroundMainLayout = new QVBoxLayout(backgroundWidget);
     QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundDialog);
-    
+
+    backgroundLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     backgroundMainLayout->addWidget(backgroundLabel);
     backgroundMainLayout->addWidget(backgroundDialog);
-    
+
     backgroundLayout->setSpacing(padding);
+    backgroundMainLayout->setSpacing(0);
     transparentButton = create_button(":images/paper-transparent.svg", [=](){
         board->disable();
         backgroundStyleEvent();
@@ -315,8 +317,10 @@ static void setupBackground(){
     backgroundStyleEvent();
 
     backgroundDialog->setFixedSize(w,h);
-    backgroundLabel->setFixedSize(w - padding*2,h / 4);
-    backgroundWidget->setFixedSize(w + padding*3, h + backgroundLabel->size().height() + padding*2);
+    backgroundLayout->setContentsMargins(0, 0, 0, 0);
+    backgroundMainLayout->setContentsMargins(padding, padding, padding, padding);
+    backgroundLabel->setFixedSize(w ,h / 3);
+    backgroundWidget->setFixedSize(w + padding*2, h + backgroundLabel->size().height() + padding*3);
 
     backgroundWidget->setStyleSheet(QString("background-color: none;"));
     backgroundButton->setStyleSheet(QString("background-color: none;"));

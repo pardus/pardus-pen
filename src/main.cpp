@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
-    mainWindow->setStyleSheet("background: none");
+    mainWindow->setStyleSheet("background: none;");
     mainWindow->showFullScreen();
 
     return app.exec();
