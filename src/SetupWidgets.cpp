@@ -400,7 +400,7 @@ static void setupBackground(){
     floatingSettings->addPage(backgroundWidget);
     floatingWidget->setWidget(backgroundButton);
 }
-
+#ifdef screenshot
 static void setupScreenShot(){
     QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
         takeScreenshot();
@@ -408,7 +408,7 @@ static void setupScreenShot(){
     ssButton->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(ssButton);
 }
-
+#endif
 static void setupExit(){
     QPushButton *close = create_button(":images/close.svg", [=](){
         QMessageBox msgBox;
@@ -459,7 +459,9 @@ void setupWidgets(){
     setupPenSize();
     setupPenColor();
     setupBackground();
+#ifdef screenshot
     setupScreenShot();
+#endif
     setupClear();
     setupMinify();
     setupExit();

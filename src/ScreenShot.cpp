@@ -1,3 +1,4 @@
+#if screenshot
 #include <string.h>
 #include <stdlib.h>
 #include <libintl.h>
@@ -50,3 +51,5 @@ void takeScreenshot(){
     messageBox.exec();
 
 }
+
+#endif

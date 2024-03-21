@@ -1,3 +1,4 @@
+#ifdef screenshot
 #ifndef _screenshot_h
 #define _screenshot_h
 
@@ -12,4 +13,5 @@
 #include <QFile>
 
 void takeScreenshot();
+#endif
 #endif
