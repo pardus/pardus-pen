@@ -243,7 +243,11 @@ static void setupPenColor(){
     gridLayout->setSpacing(padding);
 
     colorpicker = create_button(":images/color-picker.svg", [=](){
-        window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        QColor newCol = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        if(! newCol.isValid()){
+            return;
+        }
+        window->penColor = newCol;
         set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
         penStyleEvent();
         backgroundStyleEvent();
