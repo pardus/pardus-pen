@@ -50,10 +50,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        drawing = true;
-        lastPoint = event->pos();
-    }
+    drawing = true;
+    lastPoint = event->pos();
     if(floatingSettings->isVisible()){
         floatingSettings->hide();
     }
@@ -61,14 +59,21 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
-    if ((event->buttons() & Qt::LeftButton) && drawing) {
+    int penTypeBak = penType;
+    if(event->buttons() & Qt::RightButton) {
+        penType = ERASER;
+    }
+    if (drawing) {
         drawLineTo(event->pos());
     }
+    penType = penTypeBak;
 }
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton && drawing) {
-       drawLineTo(event->pos()+QPoint(0,1));
+    if(event->buttons() & Qt::LeftButton) {
+        drawLineTo(event->pos()+QPoint(0,1));
+    }
+    if (drawing) {
        drawing = false;
     }
 }
