@@ -120,9 +120,14 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     switch(penType){
         case ERASER:
             painter.setCompositionMode(QPainter::CompositionMode_Clear);
+            penColor.setAlpha(255);
+            break;
+        case MARKER:
+            penColor.setAlpha(127);
+            painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
         case PEN:
-        case MARKER:
+            penColor.setAlpha(255);
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }

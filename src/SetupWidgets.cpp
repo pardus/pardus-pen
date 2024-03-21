@@ -301,7 +301,6 @@ static void setupPenType(){
 
     penButton = create_button(":images/pen.svg", [=](){
         sliderLock = true;
-        window->penColor.setAlpha(255);
         window->penType = PEN;
         penStyleEvent();
         thicknessSlider->setRange(1,31);
@@ -312,7 +311,6 @@ static void setupPenType(){
 
     markerButton = create_button(":images/marker.svg", [=](){
         sliderLock = true;
-        window->penColor.setAlpha(127);
         window->penType = MARKER;
         penStyleEvent();
         thicknessSlider->setRange(1,100);
@@ -323,7 +321,6 @@ static void setupPenType(){
 
     eraserButton = create_button(":images/eraser.svg", [=](){
         sliderLock = true;
-        window->penColor.setAlpha(255);
         window->penType = ERASER;
         penStyleEvent();
         thicknessSlider->setRange(1,310);
