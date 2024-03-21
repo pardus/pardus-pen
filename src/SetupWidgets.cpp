@@ -161,7 +161,9 @@ static void setupPenColor(){
     QVBoxLayout *colorLayout = new QVBoxLayout(colorWidget);
     QLabel *colorLabel = new QLabel();
     colorLabel->setText(QString(penText)+QString(" Color:"));
-    colorLabel->setAlignment(Qt::AlignHCenter); 
+    colorLabel->setAlignment(Qt::AlignHCenter);
+
+
 
     QPushButton *colorButton = create_button(":images/clear.svg",  [=](){
         floatingSettings->setPage(1);
@@ -171,8 +173,9 @@ static void setupPenColor(){
     colorButton->setStyleSheet(QString("background-color: none;"));
     colorWidget->setStyleSheet(QString("background-color: none;"));
 
-    QWidget *colorDialog = new QWidget();    
+    QWidget *colorDialog = new QWidget();
     colorDialog->setWindowTitle("Color Picker");
+
 
     QGridLayout *gridLayout = new QGridLayout(colorDialog);
 
@@ -186,6 +189,12 @@ static void setupPenColor(){
         QColor(0, 255, 255),  // Cyan
         QColor(255, 255, 255) // White
     };
+
+
+    colorLayout->setContentsMargins(padding, padding, padding, padding);
+    gridLayout->setContentsMargins(0,0,0,0);
+    colorLayout->setSpacing(0);
+    gridLayout->setSpacing(padding);
 
 
     // Create buttons for each color
@@ -210,23 +219,28 @@ static void setupPenColor(){
     colorDialog->setLayout(gridLayout);
     colorDialog->setFixedSize(
         butsize*rowsize + padding*(rowsize),
-        butsize*(1+(num_of_color/rowsize))+ padding*((num_of_color / rowsize)+2)
+        butsize*(1+(num_of_color/rowsize))+ padding*((num_of_color / rowsize))
     );
 
     colorLayout->addWidget(colorLabel);
     colorLayout->addWidget(colorDialog);
-    
-    colorWidget->setFixedSize(
-        colorDialog->size().width(),
-        butsize
+
+
+    colorLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    colorLabel->setFixedSize(
+       colorDialog->size().width(),
+       butsize / 2
     );
-    
+
+
     colorWidget->setFixedSize(
        colorDialog->size().width() + padding*2,
-       colorDialog->size().height() + butsize + padding*2
+       colorDialog->size().height() + colorLabel->size().height() + padding*2
     );
+
+
     colorWidget->show();
-    
+
     floatingSettings->addPage(colorWidget);
     floatingWidget->setWidget(colorButton);
 }
