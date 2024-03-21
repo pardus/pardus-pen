@@ -37,6 +37,8 @@ QPushButton *penButton;
 QPushButton *markerButton;
 QPushButton *eraserButton;
 
+QPushButton *backgroundButton;
+
 QPushButton* transparentButton;
 QPushButton* blackButton;
 QPushButton* whiteButton;
@@ -52,7 +54,7 @@ QSlider *thicknessSlider;
 QString penText = "";
 
 static void setupPenSize(){
-    QPushButton *thicknessButton = create_button(":images/close.svg",  [=](){
+    QPushButton *thicknessButton = create_button(":images/thickness.svg",  [=](){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(3);
     });
@@ -165,11 +167,14 @@ static void backgroundStyleEvent(){
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
     if (board->getType() == BLACK) {
+        set_icon(":images/paper-black.svg",backgroundButton);
         blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
     } else if (board->getType() == WHITE) {
         whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+        set_icon(":images/paper-white.svg",backgroundButton);
     }else {
         transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+        set_icon(":images/paper-transparent.svg",backgroundButton);
     }
 }
 
@@ -182,7 +187,7 @@ static void setupPenColor(){
 
 
 
-    QPushButton *colorButton = create_button(":images/clear.svg",  [=](){
+    QPushButton *colorButton = create_button(":images/color-picker.svg",  [=](){
         floatingSettings->setPage(1);
         floatingWidget->setFloatingOffset(4);
     });
@@ -237,7 +242,7 @@ static void setupPenColor(){
     colorLayout->setSpacing(0);
     gridLayout->setSpacing(padding);
 
-    colorpicker = create_button(":images/picker.svg", [=](){
+    colorpicker = create_button(":images/color-picker.svg", [=](){
         window->penColor = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
         set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
         penStyleEvent();
@@ -342,7 +347,7 @@ static void setupPenType(){
 static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
-    QPushButton *backgroundButton = create_button(":images/clear.svg",  [=](){
+    backgroundButton = create_button(":images/clear.svg",  [=](){
         floatingSettings->setPage(2);
         floatingWidget->setFloatingOffset(5);
     });
@@ -363,15 +368,15 @@ static void setupBackground(){
     backgroundLayout->setSpacing(padding);
     backgroundMainLayout->setSpacing(0);
     transparentButton = create_button(":images/paper-transparent.svg", [=](){
-        board->disable();
+        board->setType(TRANSPARENT);
         backgroundStyleEvent();
     });
     blackButton = create_button(":images/paper-black.svg", [=](){
-        board->enableDark();
+        board->setType(BLACK);
         backgroundStyleEvent();
     });
     whiteButton = create_button(":images/paper-white.svg", [=](){
-        board->enable();
+        board->setType(WHITE);
         backgroundStyleEvent();
     });
     addToBackgroundWidget(transparentButton);

@@ -1,4 +1,9 @@
 #include "WhiteBoard.h"
+
+extern "C" {
+#include "settings.h"
+}
+
 extern int screenWidth;
 extern int screenHeight;
 
@@ -25,4 +30,16 @@ void WhiteBoard::disable() {
 
 int WhiteBoard::getType(){
     return type;
+}
+
+void WhiteBoard::setType(int page){
+    set_int((char*)"page",page);
+    if(page == TRANSPARENT){
+        disable();
+    } else if (page == BLACK) {
+        enableDark();
+    } else {
+        enable();
+    }
+
 }

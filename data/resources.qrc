@@ -9,8 +9,9 @@
         <file>images/paper-black.svg</file>
         <file>images/paper-white.svg</file>
         <file>images/screenshot.svg</file>
-        <file>images/increase.svg</file>
-        <file>images/decrease.svg</file>
+        <file>images/thickness.svg</file>
+        <file>images/color-picker.svg</file>
         <file>images/close.svg</file>
+        <file>tr.org.pardus.pen.svg</file>
     </qresource>
 </RCC>

@@ -13,11 +13,12 @@
 class WhiteBoard : public QWidget {
 public:
     WhiteBoard(QWidget *parent = nullptr);
+    int getType();
+    void setType(int type);
+private:
     void enable();
     void enableDark();
     void disable();
-    int getType();
-private:
     int type = 0;
 };
 

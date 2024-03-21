@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     mainWindow = new QMainWindow();
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
-    board->disable();
+    board->setType(get_int((char*)"page"));
 
     window->penSize[PEN] = get_int((char*)"pen-size");
     window->penSize[ERASER] = get_int((char*)"eraser-size");
@@ -71,6 +71,8 @@ int main(int argc, char *argv[]) {
     window->penColor = QColor(get_string((char*)"color"));
 
     mainWindow->setCentralWidget(window);
+    mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
+    mainWindow->setWindowTitle(QString("Pardus Pen"));
 
     floatingSettings = new FloatingSettings(mainWindow);
     floatingSettings->hide();
