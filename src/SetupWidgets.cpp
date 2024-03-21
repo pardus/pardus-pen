@@ -87,18 +87,26 @@ static void setupPenSize(){
     thicknessSlider->setValue(window->penSize[PEN]);
 
 
+    thicknessLayout->setContentsMargins(padding, padding, padding, padding);
+    thicknessLayout->setSpacing(0);
+
+
     QLabel *thicknessLabel = new QLabel();
-    thicknessLabel->setAlignment(Qt::AlignHCenter); 
-    
+    thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); 
+ 
     thicknessLayout->addWidget(thicknessLabel);
     thicknessLayout->addWidget(thicknessSlider);
 
     int w = screenWidth/5;
-    int h = w / 4;
+    int h = screenHeight / 31;
     
     thickness->setFixedSize(w, h);
-    thicknessSlider->setFixedSize(w - padding*2, h - padding*2 - h /8);
-    thicknessLabel->setFixedSize(w - padding*2, h /8);
+    thicknessSlider->setFixedSize(w, h);
+    thicknessLabel->setFixedSize(w, h/2);
+    thickness->setFixedSize(
+        w+padding*2,
+        thicknessSlider->size().height() + thicknessLabel->size().height() + padding*2
+    );
     thickness->show();
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [thicknessLabel](int value) {
