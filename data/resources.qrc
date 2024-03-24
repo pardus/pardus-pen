@@ -12,6 +12,8 @@
         <file>images/thickness.svg</file>
         <file>images/color-picker.svg</file>
         <file>images/close.svg</file>
+        <file>images/go-back.svg</file>
+        <file>images/go-next.svg</file>
         <file>tr.org.pardus.pen.svg</file>
     </qresource>
 </RCC>

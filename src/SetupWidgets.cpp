@@ -409,6 +409,21 @@ static void setupScreenShot(){
     floatingWidget->setWidget(ssButton);
 }
 #endif
+
+static void setupGoBackNext(){
+    QPushButton *backButton = create_button(":images/go-back.svg", [=](){
+        window->goPrevious();
+    });
+    backButton->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(backButton);
+    QPushButton *nextButton = create_button(":images/go-next.svg", [=](){
+        window->goNext();
+    });
+    nextButton->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(nextButton);
+}
+
+
 static void setupExit(){
     QPushButton *close = create_button(":images/close.svg", [=](){
         QMessageBox msgBox;
@@ -464,5 +479,6 @@ void setupWidgets(){
 #endif
     setupClear();
     setupMinify();
+    setupGoBackNext();
     setupExit();
 }

@@ -30,7 +30,30 @@ private:
     QMap<qint64, QPointF> values;
 };
 
+class ImageStorage {
+public:
+    void saveValue(qint64 id, QImage data) {
+        values[id] = data;
+    }
+
+    QImage loadValue(qint64 id) {
+        if (values.contains(id)) {
+            return values[id];
+        } else {
+            return QImage(0,0, QImage::Format_ARGB32);
+        }
+    }
+
+private:
+    QMap<qint64, QImage> values;
+};
+
+
 ValueStorage storage;
+
+ImageStorage images;
+int last_image_num = -1;
+int image_count = -1;
 
 int screenWidth = 0;
 int screenHeight = 0;
@@ -78,6 +101,9 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if (drawing) {
        drawing = false;
     }
+    last_image_num++;
+    image_count = last_image_num;
+    images.saveValue(last_image_num, image.copy());
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
@@ -139,6 +165,29 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     update(QRect(startPoint, endPoint).normalized()
            .adjusted(-rad, -rad, +rad, +rad));
     painter.end();
+}
+
+void DrawingWidget::loadImage(int num){
+    QImage img = images.loadValue(num);
+    QPainter p(&image);
+    QRectF target(0, 0, screenWidth, screenHeight);
+    QRectF source(0.0, 0.0, screenWidth, screenHeight);
+    image.fill(QColor("transparent"));
+    p.drawImage(QPoint(0,0), img);
+    update();
+}
+
+void DrawingWidget::goPrevious(){
+    last_image_num--;
+    loadImage(last_image_num);
+}
+
+void DrawingWidget::goNext(){
+    if(last_image_num >= image_count){
+        return;
+    }
+    last_image_num++;
+    loadImage(last_image_num);
 }
 
 bool DrawingWidget::event(QEvent *ev) {

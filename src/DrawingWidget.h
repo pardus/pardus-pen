@@ -27,6 +27,8 @@ public:
     int penSize[3];
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
+    void goPrevious();
+    void goNext();
     void clear();
     int penType;
 
@@ -39,6 +41,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressure);
+    void loadImage(int num);
     bool event(QEvent * ev);
     QPainter painter;
 };
