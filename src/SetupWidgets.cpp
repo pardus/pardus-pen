@@ -50,19 +50,75 @@ extern int screenHeight;
 bool sliderLock = false;
 
 QSlider *thicknessSlider;
+QLabel *thicknessLabel;
 
 QString penText = "";
 
+
+
+static void penStyleEvent(){
+    penButton->setStyleSheet(QString("background-color: none;"));
+    markerButton->setStyleSheet(QString("background-color: none;"));
+    eraserButton->setStyleSheet(QString("background-color: none;"));
+    if(window->penType == PEN){
+        penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    } else if(window->penType == MARKER){
+        markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    } else{
+        eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    }
+}
+
+
+static void penSizeEvent(){
+    int value = window->penSize[window->penType];
+    switch(window->penType){
+            case PEN:
+                penText = "Pen";
+                set_int((char*)"pen-size",value);
+                break;
+            case MARKER:
+                penText = "Marker";
+                set_int((char*)"marker-size",value);
+                break;
+            case ERASER:
+                penText = "Eraser";
+                set_int((char*)"eraser-size",value);
+                break;
+        }
+        thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
+}
+
+static void backgroundStyleEvent(){
+    transparentButton->setStyleSheet(QString("background-color: none;"));
+    blackButton->setStyleSheet(QString("background-color: none;"));
+    whiteButton->setStyleSheet(QString("background-color: none;"));
+    if (board->getType() == BLACK) {
+        set_icon(":images/paper-black.svg",backgroundButton);
+        blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    } else if (board->getType() == WHITE) {
+        whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+        set_icon(":images/paper-white.svg",backgroundButton);
+    }else {
+        transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+        set_icon(":images/paper-transparent.svg",backgroundButton);
+    }
+}
+
+
+
 static void setupPenSize(){
-    QPushButton *thicknessButton = create_button(":images/thickness.svg",  [=](){
+    QPushButton *penSettingsButton = create_button(":images/pen-settings.svg",  [=](){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(3);
     });
-    thicknessButton->setStyleSheet(QString("background-color: none;"));
+    penSettingsButton->setStyleSheet(QString("background-color: none;"));
 
-    QWidget *thickness = new QWidget();
-    QVBoxLayout *thicknessLayout = new QVBoxLayout(thickness);
-    thickness->setStyleSheet(
+    // Thickness settings
+
+    QWidget *penSettings = new QWidget();
+    QVBoxLayout *penSettingsLayout = new QVBoxLayout(penSettings);
+    penSettings->setStyleSheet(
         "QWidget {"
             "background-color: none;"
          "}"
@@ -98,102 +154,31 @@ static void setupPenSize(){
     thicknessSlider->setValue(window->penSize[PEN]);
 
 
-    thicknessLayout->setContentsMargins(padding, padding, padding, padding);
-    thicknessLayout->setSpacing(0);
+    penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
+    penSettingsLayout->setSpacing(0);
 
 
-    QLabel *thicknessLabel = new QLabel();
+    thicknessLabel = new QLabel();
     thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter); 
  
-    thicknessLayout->addWidget(thicknessLabel);
-    thicknessLayout->addWidget(thicknessSlider);
+    penSettingsLayout->addWidget(thicknessLabel);
+    penSettingsLayout->addWidget(thicknessSlider);
 
-    int w = screenWidth/5;
-    int h = screenHeight / 31;
-    
-    thickness->setFixedSize(w, h);
-    thicknessSlider->setFixedSize(w, h);
-    thicknessLabel->setFixedSize(w, h/2);
-    thickness->setFixedSize(
-        w+padding*2,
-        thicknessSlider->size().height() + thicknessLabel->size().height() + padding*2
-    );
-    thickness->show();
+    penSettings->show();
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [thicknessLabel](int value) {
-        switch(window->penType){
-            case PEN:
-                penText = "Pen";
-                set_int((char*)"pen-size",value);
-                break;
-            case MARKER:
-                penText = "Marker";
-                set_int((char*)"marker-size",value);
-                break;
-            case ERASER:
-                penText = "Eraser";
-                set_int((char*)"eraser-size",value);
-                break;
-        }
-        thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
+        penSizeEvent();
         if(!sliderLock){
             window->penSize[window->penType] = value;
         }
         
     });
-    thicknessLabel->setText(QString("Pen")+QString(" Size: ")+QString::number(window->penSize[PEN]));
-    floatingSettings->addPage(thickness);
-    floatingWidget->setWidget(thicknessButton);
+    penSizeEvent();
 
-
-}
-
-static void penStyleEvent(){
-    penButton->setStyleSheet(QString("background-color: none;"));
-    markerButton->setStyleSheet(QString("background-color: none;"));
-    eraserButton->setStyleSheet(QString("background-color: none;"));
-    if(window->penType == PEN){
-        penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    } else if(window->penType == MARKER){
-        markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    } else{
-        eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    }
-}
-
-
-static void backgroundStyleEvent(){
-    transparentButton->setStyleSheet(QString("background-color: none;"));
-    blackButton->setStyleSheet(QString("background-color: none;"));
-    whiteButton->setStyleSheet(QString("background-color: none;"));
-    if (board->getType() == BLACK) {
-        set_icon(":images/paper-black.svg",backgroundButton);
-        blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    } else if (board->getType() == WHITE) {
-        whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        set_icon(":images/paper-white.svg",backgroundButton);
-    }else {
-        transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        set_icon(":images/paper-transparent.svg",backgroundButton);
-    }
-}
-
-static void setupPenColor(){
-    QWidget *colorWidget = new QWidget();
-    QVBoxLayout *colorLayout = new QVBoxLayout(colorWidget);
+    // Color Settings    
     QLabel *colorLabel = new QLabel();
     colorLabel->setText(QString(penText)+QString(" Color:"));
     colorLabel->setAlignment(Qt::AlignHCenter);
-
-
-
-    QPushButton *colorButton = create_button(":images/color-picker.svg",  [=](){
-        floatingSettings->setPage(1);
-        floatingWidget->setFloatingOffset(4);
-    });
-
-    colorButton->setStyleSheet(QString("background-color: none;"));
-    colorWidget->setStyleSheet(QString("background-color: none;"));
 
     QWidget *colorDialog = new QWidget();
     colorDialog->setWindowTitle("Color Picker");
@@ -237,9 +222,7 @@ static void setupPenColor(){
     };
 
 
-    colorLayout->setContentsMargins(padding, padding, padding, padding);
     gridLayout->setContentsMargins(0,0,0,0);
-    colorLayout->setSpacing(0);
     gridLayout->setSpacing(padding);
 
     colorpicker = create_button(":images/color-picker.svg", [=](){
@@ -277,15 +260,13 @@ static void setupPenColor(){
         gridLayout->addWidget(button, (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
 
+   
+
     colorDialog->setLayout(gridLayout);
     colorDialog->setFixedSize(
         butsize*rowsize + padding*(rowsize),
         butsize*(1+(num_of_color/rowsize))+ padding*((num_of_color / rowsize))
     );
-
-    colorLayout->addWidget(colorLabel);
-    colorLayout->addWidget(colorDialog);
-
 
     colorLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     colorLabel->setFixedSize(
@@ -293,17 +274,30 @@ static void setupPenColor(){
        butsize / 2
     );
 
-
-    colorWidget->setFixedSize(
-       colorDialog->size().width() + padding*2,
-       colorDialog->size().height() + colorLabel->size().height() + padding*2
+    thicknessSlider->setFixedSize(
+        colorDialog->size().width(),
+        butsize
+    );
+    thicknessLabel->setFixedSize(
+        colorDialog->size().width(),
+        colorLabel->size().height()
     );
 
+    penSettingsLayout->addWidget(colorLabel);
+    penSettingsLayout->addWidget(colorDialog);
 
-    colorWidget->show();
+    floatingSettings->addPage(penSettings);
+    floatingWidget->setWidget(penSettingsButton);
 
-    floatingSettings->addPage(colorWidget);
-    floatingWidget->setWidget(colorButton);
+    penSettings->setFixedSize(
+        colorDialog->size().width() + padding*2,
+        padding*2
+         + thicknessLabel->size().height()
+         + thicknessSlider->size().height()
+         + colorDialog->size().height()
+         + colorLabel->size().height()
+    );
+
 }
 
 static void setupPenType(){
@@ -314,6 +308,7 @@ static void setupPenType(){
         penStyleEvent();
         thicknessSlider->setRange(1,31);
         thicknessSlider->setValue(window->penSize[PEN]);
+        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
@@ -324,6 +319,7 @@ static void setupPenType(){
         penStyleEvent();
         thicknessSlider->setRange(1,100);
         thicknessSlider->setValue(window->penSize[MARKER]);
+        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
@@ -334,6 +330,7 @@ static void setupPenType(){
         penStyleEvent();
         thicknessSlider->setRange(1,310);
         thicknessSlider->setValue(window->penSize[ERASER]);
+        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(eraserButton);
@@ -352,8 +349,8 @@ static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
     backgroundButton = create_button(":images/clear.svg",  [=](){
-        floatingSettings->setPage(2);
-        floatingWidget->setFloatingOffset(5);
+        floatingSettings->setPage(1);
+        floatingWidget->setFloatingOffset(4);
     });
 
     QLabel *backgroundLabel = new QLabel();
@@ -472,7 +469,6 @@ void setupWidgets(){
     window->floatingSettings = floatingSettings;
     setupPenType();
     setupPenSize();
-    setupPenColor();
     setupBackground();
 #ifdef screenshot
     setupScreenShot();
