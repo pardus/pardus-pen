@@ -73,20 +73,20 @@ static void penStyleEvent(){
 static void penSizeEvent(){
     int value = window->penSize[window->penType];
     switch(window->penType){
-            case PEN:
-                penText = "Pen";
-                set_int((char*)"pen-size",value);
-                break;
-            case MARKER:
-                penText = "Marker";
-                set_int((char*)"marker-size",value);
-                break;
-            case ERASER:
-                penText = "Eraser";
-                set_int((char*)"eraser-size",value);
-                break;
-        }
-        thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
+        case PEN:
+            penText = "Pen";
+            set_int((char*)"pen-size",value);
+            break;
+        case MARKER:
+            penText = "Marker";
+            set_int((char*)"marker-size",value);
+            break;
+        case ERASER:
+            penText = "Eraser";
+            set_int((char*)"eraser-size",value);
+            break;
+    }
+    thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
 }
 
 static void backgroundStyleEvent(){
@@ -166,7 +166,7 @@ static void setupPenSize(){
 
     penSettings->show();
 
-    QObject::connect(thicknessSlider, &QSlider::valueChanged, [thicknessLabel](int value) {
+    QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
         penSizeEvent();
         if(!sliderLock){
             window->penSize[window->penType] = value;

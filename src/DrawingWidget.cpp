@@ -36,6 +36,10 @@ public:
         values[id] = data;
     }
 
+    void clear(){
+        values.clear();
+    }
+
     QImage loadValue(qint64 id) {
         if (values.contains(id)) {
             return values[id];
@@ -127,6 +131,7 @@ void DrawingWidget::paintEvent(QPaintEvent *event) {
 
 void DrawingWidget::clear() {
     image.fill(QColor("transparent"));
+    images.clear();
     update();
 }
 
