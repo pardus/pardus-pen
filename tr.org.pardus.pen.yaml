@@ -1,0 +1,19 @@
+app-id: tr.org.pardus.pen
+runtime: org.kde.Platform
+runtime-version: 5.15-23.08
+sdk: org.kde.Sdk
+command: /app/usr/bin/pardus-pen
+finish-args:
+  - --socket=wayland
+  - --device=dri
+modules:
+  - name: pardus-pen
+    buildsystem: simple
+    build-commands:
+      - meson setup build -Dscreenshot=false
+      - ninja -C build
+      - DESTDIR=${FLATPAK_DEST} ninja -C build install
+    sources:
+      - type: archive
+        url: FIXME
+        sha256: FIXME
