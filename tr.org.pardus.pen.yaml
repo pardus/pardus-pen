@@ -9,7 +9,8 @@ finish-args:
 modules:
   - name: pardus-pen
     buildsystem: meson
-    build-options:
+    config-opts:
+      - --prefix=/app
       - -Dscreenshot=false
     sources:
       - type: git
