@@ -1,4 +1,5 @@
 #include "DrawingWidget.h"
+#include "WhiteBoard.h"
 #include <stdio.h>
 
 /*
@@ -10,6 +11,7 @@ penType:
 
 #include <QDebug>
 #include <QMap>
+
 
 class ValueStorage {
 public:
@@ -34,6 +36,7 @@ class ImageStorage {
 public:
     int last_image_num = -1;
     int image_count = -1;
+    int pageType = TRANSPARENT;
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
     }
@@ -84,6 +87,8 @@ ImageStorage images;
 ValueStorage storage;
 
 PageStorage pages;
+
+extern WhiteBoard *board;
 
 
 int screenWidth = 0;
@@ -212,16 +217,16 @@ void DrawingWidget::loadImage(int num){
 void DrawingWidget::goNextPage(){
     pages.saveValue(pages.last_page_num, images);
     pages.last_page_num++;
-    printf("%d\n", pages.last_page_num);
     images = pages.loadValue(pages.last_page_num);
+    board->setType(images.pageType);
     loadImage(images.last_image_num);
 }
 
 void DrawingWidget::goPreviousPage(){
     pages.saveValue(pages.last_page_num, images);
     pages.last_page_num--;
-    printf("%d\n", pages.last_page_num);
     images = pages.loadValue(pages.last_page_num);
+    board->setType(images.pageType);
     loadImage(images.last_image_num);
 }
 
@@ -270,7 +275,9 @@ bool DrawingWidget::event(QEvent *ev) {
     return QWidget::event(ev);
 }
 
-
+void DrawingWidget::syncPageType(int type){
+    images.pageType = type;
+}
 
 
 

@@ -33,6 +33,7 @@ public:
     void goNextPage();
     void clear();
     int penType;
+    void syncPageType(int type);
 
 protected:
     bool drawing;

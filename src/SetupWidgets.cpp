@@ -374,14 +374,17 @@ static void setupBackground(){
     pageLayout->setSpacing(padding);
     backgroundMainLayout->setSpacing(0);
     transparentButton = create_button(":images/paper-transparent.svg", [=](){
+        window->syncPageType(TRANSPARENT);
         board->setType(TRANSPARENT);
         backgroundStyleEvent();
     });
     blackButton = create_button(":images/paper-black.svg", [=](){
+        window->syncPageType(BLACK);
         board->setType(BLACK);
         backgroundStyleEvent();
     });
     whiteButton = create_button(":images/paper-white.svg", [=](){
+        window->syncPageType(WHITE);
         board->setType(WHITE);
         backgroundStyleEvent();
     });
