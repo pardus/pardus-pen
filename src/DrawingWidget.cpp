@@ -1,3 +1,5 @@
+#include <QtWidgets>
+
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
 #include <stdio.h>
@@ -182,7 +184,7 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     lastPoint = endPoint;
 }
 
-void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressuse) {
+void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
@@ -201,8 +203,8 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
             painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
     }
-    painter.setPen(QPen(penColor, (penSize[penType]*pressuse*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    rad = (penSize[penType]*pressuse*screenHeight)/1080;
+    painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    rad = (penSize[penType]*pressure*screenHeight)/1080;
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.drawLine(startPoint, endPoint);
@@ -251,6 +253,8 @@ void DrawingWidget::goNext(){
     loadImage(images.last_image_num);
 }
 
+bool tabletActive = false;
+
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
         case QEvent::TouchBegin:
@@ -262,20 +266,40 @@ bool DrawingWidget::event(QEvent *ev) {
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
-            QPointF pos = touchPoint.pos();
-            if (touchPoint.state() == Qt::TouchPointPressed) {
+                QPointF pos = touchPoint.pos();
+                if (touchPoint.state() == Qt::TouchPointPressed) {
+                    storage.saveValue(touchPoint.id(), pos);
+                }
+                else if (touchPoint.state() == Qt::TouchPointReleased) {
+                    storage.saveValue(touchPoint.id(), QPointF(-1,-1));
+                    continue;
+                }
+                QPointF oldPos = storage.loadValue(touchPoint.id());
+                drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
             }
-            else if (touchPoint.state() == Qt::TouchPointReleased) {
-                storage.saveValue(touchPoint.id(), QPointF(-1,-1));
-                continue;
-            }
-            QPointF oldPos = storage.loadValue(touchPoint.id());
-            drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
-            storage.saveValue(touchPoint.id(), pos);
-        }
             break;
         }
+        case QEvent::TabletPress: {
+            QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
+            lastPoint = tabletEvent->pos();
+            tabletActive = true;
+            break;
+        }
+        case QEvent::TabletRelease: {
+            tabletActive = false;
+            break;
+        }
+        case QEvent::TabletMove: {
+            if(!tabletActive){
+                break;
+            }
+            QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
+            QPointF pos = tabletEvent->pos();
+            drawLineToFunc(lastPoint, pos.toPoint(), tabletEvent->pressure());
+            lastPoint = tabletEvent->pos();
+        }
+
         default:
             break;
     }
