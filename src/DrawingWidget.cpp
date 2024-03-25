@@ -94,6 +94,9 @@ extern WhiteBoard *board;
 int screenWidth = 0;
 int screenHeight = 0;
 
+int curEventButtons = 0;
+bool isMoved = 0;
+
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
@@ -111,6 +114,8 @@ DrawingWidget::~DrawingWidget() {}
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     drawing = true;
     lastPoint = event->pos();
+    curEventButtons = event->buttons();
+    isMoved = false;
     if(floatingSettings->isVisible()){
         floatingSettings->hide();
     }
@@ -121,17 +126,18 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
     int penTypeBak = penType;
     if(event->buttons() & Qt::RightButton) {
         penType = ERASER;
-    }if(event->buttons() & Qt::MiddleButton) {
+    }else if(event->buttons() & Qt::MiddleButton) {
         penType = MARKER;
     }
     if (drawing) {
         drawLineTo(event->pos());
     }
+    isMoved = true;
     penType = penTypeBak;
 }
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
-    if(event->buttons() & Qt::LeftButton) {
+    if(curEventButtons & Qt::LeftButton && !isMoved) {
         drawLineTo(event->pos()+QPoint(0,1));
     }
     if (drawing) {
@@ -140,6 +146,7 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     images.last_image_num++;
     images.image_count = images.last_image_num;
     images.saveValue(images.last_image_num, image.copy());
+    curEventButtons = 0;
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
