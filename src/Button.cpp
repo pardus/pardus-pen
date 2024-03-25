@@ -5,6 +5,14 @@
 extern int screenWidth;
 extern int screenHeight;
 
+QPushButton* create_button_text(const char* name, ButtonEvent event) {
+    QPushButton* button = new QPushButton(name);
+    QObject::connect(button, &QPushButton::clicked, event);
+    QFont font = button->font();
+    font.setPointSize(screenHeight/62);
+    button->setFont(font);
+    return button;
+}
 QPushButton* create_button(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
     QObject::connect(button, &QPushButton::clicked, event);

@@ -450,19 +450,38 @@ static void setupGoBackNext(){
 
 
 static void setupExit(){
+    QWidget *exitDialog = new QWidget();
+    QVBoxLayout *exitLayout = new QVBoxLayout(exitDialog);
+    QWidget *exitButtonDialog = new QWidget();
+    QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
+
+    QLabel *exitLabel = new QLabel();
+    exitLabel->setText(_("Are you want to quit pardus pen?"));
+    exitLabel->setAlignment(Qt::AlignHCenter);
+    exitDialog->setStyleSheet(QString("background-color: none;"));
+
+    exitLayout->addWidget(exitLabel);
+    exitLayout->addWidget(exitButtonDialog);
+
+    QPushButton * noButton = create_button_text("No", [=](){
+        floatingSettings->hide();
+    });
+    QPushButton * yesButton = create_button_text("Yes", [=](){
+        QApplication::quit();
+    });
+    exitButtonLayout->addWidget(noButton);
+    exitButtonLayout->addWidget(yesButton);
+
     QPushButton *close = create_button(":images/close.svg", [=](){
-        QMessageBox msgBox;
-        msgBox.setWindowFlags(Qt::Dialog | Qt::X11BypassWindowManagerHint);
-        msgBox.setWindowTitle(_("Quit"));
-        msgBox.setText(_("Are you want to quit pardus pen?"));
-        msgBox.setStandardButtons(QMessageBox::Yes);
-        msgBox.addButton(QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        if(msgBox.exec() == QMessageBox::Yes){
-            QApplication::quit();
-        }
+        floatingSettings->setPage(2);
+        floatingWidget->setFloatingOffset(8);
     });
     close->setStyleSheet(QString("background-color: none;"));
+    exitDialog->setFixedSize(
+        screenWidth / 6,
+        screenHeight / 12
+    );
+    floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);
 
 }
@@ -481,7 +500,6 @@ static void setupScreenShot(){
         floatingSettings->hide();
         floatingWidget->hide();
         takeScreenshot();
-        floatingSettings->show();
         floatingWidget->show();
     });
     floatingWidget->setWidget(ssButton);
