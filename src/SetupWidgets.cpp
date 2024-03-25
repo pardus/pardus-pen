@@ -348,7 +348,7 @@ static void setupPenType(){
 static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
-    backgroundButton = create_button(":images/clear.svg",  [=](){
+    backgroundButton = create_button("",  [=](){
         floatingSettings->setPage(1);
         floatingWidget->setFloatingOffset(4);
     });
@@ -449,42 +449,6 @@ static void setupGoBackNext(){
 }
 
 
-static void setupExit(){
-    QWidget *exitDialog = new QWidget();
-    QVBoxLayout *exitLayout = new QVBoxLayout(exitDialog);
-    QWidget *exitButtonDialog = new QWidget();
-    QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
-
-    QLabel *exitLabel = new QLabel();
-    exitLabel->setText(_("Are you want to quit pardus pen?"));
-    exitLabel->setAlignment(Qt::AlignHCenter);
-    exitDialog->setStyleSheet(QString("background-color: none;"));
-
-    exitLayout->addWidget(exitLabel);
-    exitLayout->addWidget(exitButtonDialog);
-
-    QPushButton * noButton = create_button_text("No", [=](){
-        floatingSettings->hide();
-    });
-    QPushButton * yesButton = create_button_text("Yes", [=](){
-        QApplication::quit();
-    });
-    exitButtonLayout->addWidget(noButton);
-    exitButtonLayout->addWidget(yesButton);
-
-    QPushButton *close = create_button(":images/close.svg", [=](){
-        floatingSettings->setPage(2);
-        floatingWidget->setFloatingOffset(10);
-    });
-    close->setStyleSheet(QString("background-color: none;"));
-    exitDialog->setFixedSize(
-        screenWidth / 6,
-        screenHeight / 12
-    );
-    floatingSettings->addPage(exitDialog);
-    floatingWidget->setWidget(close);
-
-}
 
 static void setupMinify(){
     QPushButton *minify = create_button(":images/screen.svg", [=](){
@@ -509,20 +473,77 @@ static void setupScreenShot(){
 
 
 static void setupClear(){
+    QWidget *clearDialog = new QWidget();
+    QVBoxLayout *clearLayout = new QVBoxLayout(clearDialog);
+    QWidget *clearButtonDialog = new QWidget();
+    QHBoxLayout *clearButtonLayout = new QHBoxLayout(clearButtonDialog);
+
+    QLabel *clearLabel = new QLabel();
+    clearLabel->setText(_("Are you want to clear screen?"));
+    clearLabel->setAlignment(Qt::AlignHCenter);
+    clearDialog->setStyleSheet(QString("background-color: none;"));
+
+    clearLayout->addWidget(clearLabel);
+    clearLayout->addWidget(clearButtonDialog);
+
+    QPushButton * noButton = create_button_text("No", [=](){
+        floatingSettings->hide();
+    });
+    QPushButton * yesButton = create_button_text("Yes", [=](){
+        window->clear();
+        floatingSettings->hide();
+    });
+    clearButtonLayout->addWidget(noButton);
+    clearButtonLayout->addWidget(yesButton);
+
     QPushButton *clear = create_button(":images/clear.svg", [=](){
-        QMessageBox msgBox;
-        msgBox.setWindowFlags(Qt::Dialog | Qt::X11BypassWindowManagerHint);
-        msgBox.setWindowTitle(_("Clear"));
-        msgBox.setText(_("Are you want to clear screen?"));
-        msgBox.setStandardButtons(QMessageBox::Yes);
-        msgBox.addButton(QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::No);
-        if(msgBox.exec() == QMessageBox::Yes){
-            window->clear();
-        }
+        floatingSettings->setPage(2);
+        floatingWidget->setFloatingOffset(5);
     });
     clear->setStyleSheet(QString("background-color: none;"));
+    clearDialog->setFixedSize(
+        screenWidth / 6,
+        screenHeight / 12
+    );
+    floatingSettings->addPage(clearDialog);
     floatingWidget->setWidget(clear);
+
+}
+static void setupExit(){
+    QWidget *exitDialog = new QWidget();
+    QVBoxLayout *exitLayout = new QVBoxLayout(exitDialog);
+    QWidget *exitButtonDialog = new QWidget();
+    QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
+
+    QLabel *exitLabel = new QLabel();
+    exitLabel->setText(_("Are you want to quit pardus pen?"));
+    exitLabel->setAlignment(Qt::AlignHCenter);
+    exitDialog->setStyleSheet(QString("background-color: none;"));
+
+    exitLayout->addWidget(exitLabel);
+    exitLayout->addWidget(exitButtonDialog);
+
+    QPushButton * noButton = create_button_text("No", [=](){
+        floatingSettings->hide();
+    });
+    QPushButton * yesButton = create_button_text("Yes", [=](){
+        QApplication::quit();
+    });
+    exitButtonLayout->addWidget(noButton);
+    exitButtonLayout->addWidget(yesButton);
+
+    QPushButton *close = create_button(":images/close.svg", [=](){
+        floatingSettings->setPage(3);
+        floatingWidget->setFloatingOffset(10);
+    });
+    close->setStyleSheet(QString("background-color: none;"));
+    exitDialog->setFixedSize(
+        screenWidth / 6,
+        screenHeight / 12
+    );
+    floatingSettings->addPage(exitDialog);
+    floatingWidget->setWidget(close);
+
 }
 
 void setupWidgets(){
