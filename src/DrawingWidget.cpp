@@ -32,6 +32,8 @@ private:
 
 class ImageStorage {
 public:
+    int last_image_num = -1;
+    int image_count = -1;
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
     }
@@ -53,11 +55,36 @@ private:
 };
 
 
-ValueStorage storage;
+class PageStorage {
+public:
+    int last_page_num = -1;
+    int page_count = -1;
+    void saveValue(qint64 id, ImageStorage data) {
+        values[id] = data;
+    }
+
+    void clear(){
+        values.clear();
+    }
+
+    ImageStorage loadValue(qint64 id) {
+        if (values.contains(id)) {
+            return values[id];
+        } else {
+            return ImageStorage();
+        }
+    }
+
+private:
+    QMap<qint64, ImageStorage> values;
+};
 
 ImageStorage images;
-int last_image_num = -1;
-int image_count = -1;
+
+ValueStorage storage;
+
+PageStorage pages;
+
 
 int screenWidth = 0;
 int screenHeight = 0;
@@ -105,9 +132,9 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if (drawing) {
        drawing = false;
     }
-    last_image_num++;
-    image_count = last_image_num;
-    images.saveValue(last_image_num, image.copy());
+    images.last_image_num++;
+    images.image_count = images.last_image_num;
+    images.saveValue(images.last_image_num, image.copy());
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
@@ -182,17 +209,34 @@ void DrawingWidget::loadImage(int num){
     update();
 }
 
-void DrawingWidget::goPrevious(){
-    last_image_num--;
-    loadImage(last_image_num);
+void DrawingWidget::goNextPage(){
+    pages.saveValue(pages.last_page_num, images);
+    pages.last_page_num++;
+    printf("%d\n", pages.last_page_num);
+    images = pages.loadValue(pages.last_page_num);
+    loadImage(images.last_image_num);
 }
 
+void DrawingWidget::goPreviousPage(){
+    pages.saveValue(pages.last_page_num, images);
+    pages.last_page_num--;
+    printf("%d\n", pages.last_page_num);
+    images = pages.loadValue(pages.last_page_num);
+    loadImage(images.last_image_num);
+}
+
+void DrawingWidget::goPrevious(){
+    images.last_image_num--;
+    loadImage(images.last_image_num);
+}
+
+
 void DrawingWidget::goNext(){
-    if(last_image_num >= image_count){
+    if(images.last_image_num >= images.image_count){
         return;
     }
-    last_image_num++;
-    loadImage(last_image_num);
+    images.last_image_num++;
+    loadImage(images.last_image_num);
 }
 
 bool DrawingWidget::event(QEvent *ev) {

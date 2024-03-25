@@ -358,15 +358,20 @@ static void setupBackground(){
     backgroundLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     QWidget *backgroundDialog = new QWidget();
+    QWidget *pageDialog = new QWidget();
     QWidget *backgroundWidget = new QWidget();
     QVBoxLayout *backgroundMainLayout = new QVBoxLayout(backgroundWidget);
+    QHBoxLayout *pageLayout = new QHBoxLayout(pageDialog);
     QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundDialog);
 
     backgroundLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     backgroundMainLayout->addWidget(backgroundLabel);
     backgroundMainLayout->addWidget(backgroundDialog);
+    backgroundMainLayout->addWidget(pageDialog);
+    pageLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     backgroundLayout->setSpacing(padding);
+    pageLayout->setSpacing(padding);
     backgroundMainLayout->setSpacing(0);
     transparentButton = create_button(":images/paper-transparent.svg", [=](){
         board->setType(TRANSPARENT);
@@ -380,16 +385,47 @@ static void setupBackground(){
         board->setType(WHITE);
         backgroundStyleEvent();
     });
+    
+    QPushButton *previousPage = create_button(":images/go-back.svg", [=](){
+        window->goPreviousPage();
+    });
+    previousPage->setStyleSheet(QString("background-color: none;"));
+
+    #ifdef screenshot
+    QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
+        floatingSettings->hide();
+        floatingWidget->hide();
+        takeScreenshot();
+        floatingSettings->show();
+        floatingWidget->show();
+    });
+    ssButton->setStyleSheet(QString("background-color: none;"));
+    #endif
+
+    QPushButton *nextPage = create_button(":images/go-next.svg", [=](){
+        window->goNextPage();
+    });
+    nextPage->setStyleSheet(QString("background-color: none;"));
+
+    
     addToBackgroundWidget(transparentButton);
     addToBackgroundWidget(blackButton);
     addToBackgroundWidget(whiteButton);
+    
+    
+    pageLayout->addWidget(previousPage);
+    pageLayout->addWidget(ssButton);
+    pageLayout->addWidget(nextPage);
+    
     backgroundStyleEvent();
 
     backgroundDialog->setFixedSize(w,h);
+    pageDialog->setFixedSize(w,h);
     backgroundLayout->setContentsMargins(0, 0, 0, 0);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
     backgroundMainLayout->setContentsMargins(padding, padding, padding, padding);
     backgroundLabel->setFixedSize(w ,h / 3);
-    backgroundWidget->setFixedSize(w + padding*2, h + backgroundLabel->size().height() + padding*3);
+    backgroundWidget->setFixedSize(w + padding*2, h + backgroundLabel->size().height() +pageDialog->size().height()  + padding*3);
 
     backgroundWidget->setStyleSheet(QString("background-color: none;"));
     backgroundButton->setStyleSheet(QString("background-color: none;"));
@@ -397,15 +433,6 @@ static void setupBackground(){
     floatingSettings->addPage(backgroundWidget);
     floatingWidget->setWidget(backgroundButton);
 }
-#ifdef screenshot
-static void setupScreenShot(){
-    QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
-        takeScreenshot();
-    });
-    ssButton->setStyleSheet(QString("background-color: none;"));
-    floatingWidget->setWidget(ssButton);
-}
-#endif
 
 static void setupGoBackNext(){
     QPushButton *backButton = create_button(":images/go-back.svg", [=](){
@@ -470,9 +497,6 @@ void setupWidgets(){
     setupPenType();
     setupPenSize();
     setupBackground();
-#ifdef screenshot
-    setupScreenShot();
-#endif
     setupClear();
     setupMinify();
     setupGoBackNext();

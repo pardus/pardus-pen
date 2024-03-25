@@ -29,6 +29,8 @@ public:
     void drawLineTo(const QPoint &endPoint);
     void goPrevious();
     void goNext();
+    void goPreviousPage();
+    void goNextPage();
     void clear();
     int penType;
 
