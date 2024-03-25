@@ -357,6 +357,10 @@ static void setupBackground(){
     backgroundLabel->setText(QString("Background:"));
     backgroundLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
+    QLabel *pageLabel = new QLabel();
+    pageLabel->setText(QString::number(0));
+    pageLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
     QWidget *backgroundDialog = new QWidget();
     QWidget *pageDialog = new QWidget();
     QWidget *backgroundWidget = new QWidget();
@@ -391,22 +395,15 @@ static void setupBackground(){
     
     QPushButton *previousPage = create_button(":images/go-back.svg", [=](){
         window->goPreviousPage();
+        pageLabel->setText(QString::number(window->getPageNum()));
     });
     previousPage->setStyleSheet(QString("background-color: none;"));
 
-    #ifdef screenshot
-    QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
-        floatingSettings->hide();
-        floatingWidget->hide();
-        takeScreenshot();
-        floatingSettings->show();
-        floatingWidget->show();
-    });
-    ssButton->setStyleSheet(QString("background-color: none;"));
-    #endif
+
 
     QPushButton *nextPage = create_button(":images/go-next.svg", [=](){
         window->goNextPage();
+        pageLabel->setText(QString::number(window->getPageNum()));
     });
     nextPage->setStyleSheet(QString("background-color: none;"));
 
@@ -417,7 +414,7 @@ static void setupBackground(){
     
     
     pageLayout->addWidget(previousPage);
-    pageLayout->addWidget(ssButton);
+    pageLayout->addWidget(pageLabel);
     pageLayout->addWidget(nextPage);
     
     backgroundStyleEvent();
@@ -428,6 +425,7 @@ static void setupBackground(){
     pageLayout->setContentsMargins(0, 0, 0, 0);
     backgroundMainLayout->setContentsMargins(padding, padding, padding, padding);
     backgroundLabel->setFixedSize(w ,h / 3);
+    pageLabel->setFixedSize(blackButton->size().width() ,blackButton->size().height());
     backgroundWidget->setFixedSize(w + padding*2, h + backgroundLabel->size().height() +pageDialog->size().height()  + padding*3);
 
     backgroundWidget->setStyleSheet(QString("background-color: none;"));
@@ -477,6 +475,20 @@ static void setupMinify(){
     floatingWidget->setWidget(minify);
 
 }
+static void setupScreenShot(){
+    #ifdef screenshot
+    QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
+        floatingSettings->hide();
+        floatingWidget->hide();
+        takeScreenshot();
+        floatingSettings->show();
+        floatingWidget->show();
+    });
+    floatingWidget->setWidget(ssButton);
+    ssButton->setStyleSheet(QString("background-color: none;"));
+    #endif
+}
+
 
 static void setupClear(){
     QPushButton *clear = create_button(":images/clear.svg", [=](){
@@ -502,6 +514,7 @@ void setupWidgets(){
     setupBackground();
     setupClear();
     setupMinify();
+    setupScreenShot();
     setupGoBackNext();
     setupExit();
 }

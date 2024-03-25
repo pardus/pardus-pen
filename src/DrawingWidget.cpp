@@ -60,8 +60,8 @@ private:
 
 class PageStorage {
 public:
-    int last_page_num = -1;
-    int page_count = -1;
+    int last_page_num = 0;
+    int page_count = 0;
     void saveValue(qint64 id, ImageStorage data) {
         values[id] = data;
     }
@@ -286,6 +286,9 @@ void DrawingWidget::syncPageType(int type){
     images.pageType = type;
 }
 
+int DrawingWidget::getPageNum(){
+    return pages.last_page_num;
+}
 
 
 QColor convertColor(QColor color) {

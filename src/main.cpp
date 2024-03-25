@@ -35,6 +35,9 @@ QPushButton *ssButton;
 
 extern void setupWidgets();
 
+extern int screenWidth;
+extern int screenHeight;
+
 int pagestatus;
 
 int eraser_status;
@@ -88,7 +91,10 @@ int main(int argc, char *argv[]) {
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
-    mainWindow->setStyleSheet("background: none;");
+    mainWindow->setStyleSheet(
+        "background: none;"
+        "font-size: "+QString::number(screenHeight / 62)+"px;"
+    );
     mainWindow->showFullScreen();
 
     return app.exec();
