@@ -70,6 +70,9 @@ void FloatingWidget::moveAction(int new_x, int new_y){
             if (new_yy > screenHeight - floatingSettings->cur_height) {
                 new_yy = screenHeight - floatingSettings->cur_height;
             }
+            if(new_yy + floatingSettings->cur_height > new_y + cur_height) {
+                new_yy = new_y + cur_height - floatingSettings->cur_height - padding;
+            }
             floatingSettings->move(new_xx, new_yy + padding);
         }
 }

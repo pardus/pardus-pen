@@ -474,7 +474,7 @@ static void setupExit(){
 
     QPushButton *close = create_button(":images/close.svg", [=](){
         floatingSettings->setPage(2);
-        floatingWidget->setFloatingOffset(8);
+        floatingWidget->setFloatingOffset(10);
     });
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
