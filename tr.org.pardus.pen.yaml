@@ -22,7 +22,3 @@ modules:
     build-commands:
       - glib-compile-schemas /app/share/glib-2.0/schemas
 
-  - name: fix-desktop
-    buildsystem: simple
-    build-commands:
-      - sed -i "s|/usr/bin|/app/bin|g" /app/share/applications/*.desktop

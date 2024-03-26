@@ -17,8 +17,10 @@ public:
     FloatingSettings(QWidget *parent = nullptr);
     void addPage(QWidget *widget);
     void setPage(int num);
+    void reload();
 private:
     int num_of_item = 0;
+    int current_page = 0;
     QPoint dragPosition;
     QLabel *label;
     QVBoxLayout *layout;

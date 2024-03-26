@@ -49,6 +49,8 @@ extern int screenHeight;
 
 bool sliderLock = false;
 
+QWidget *penSettings;
+QWidget *colorDialog;
 QSlider *thicknessSlider;
 QLabel *thicknessLabel;
 QLabel *colorLabel;
@@ -90,6 +92,29 @@ static void penSizeEvent(){
     }
     thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
     colorLabel->setText(QString(penText)+QString(_(" Color:")));
+
+    if(window->penType == ERASER) {
+        penSettings->setFixedSize(
+            colorDialog->size().width() + padding*2,
+            padding*2
+             + thicknessLabel->size().height()
+             + thicknessSlider->size().height()
+        );
+        colorDialog->hide();
+        colorLabel->hide();
+    } else {
+        penSettings->setFixedSize(
+            colorDialog->size().width() + padding*2,
+            padding*2
+             + thicknessLabel->size().height()
+             + thicknessSlider->size().height()
+             + colorDialog->size().height()
+             + colorLabel->size().height()
+        );
+        colorDialog->show();
+        colorLabel->show();
+    }
+    floatingSettings->reload();
 }
 
 static void backgroundStyleEvent(){
@@ -119,7 +144,7 @@ static void setupPenSize(){
 
     // Thickness settings
 
-    QWidget *penSettings = new QWidget();
+    penSettings = new QWidget();
     QVBoxLayout *penSettingsLayout = new QVBoxLayout(penSettings);
     penSettings->setStyleSheet(
         "QWidget {"
@@ -182,7 +207,7 @@ static void setupPenSize(){
     colorLabel->setText(QString(penText)+QString(_(" Color:")));
     colorLabel->setAlignment(Qt::AlignHCenter);
 
-    QWidget *colorDialog = new QWidget();
+    colorDialog = new QWidget();
     colorDialog->setWindowTitle(_("Color Picker"));
 
 
@@ -301,7 +326,7 @@ static void setupPenSize(){
          + colorDialog->size().height()
          + colorLabel->size().height()
     );
-
+    floatingSettings->reload();
 }
 
 static void setupPenType(){

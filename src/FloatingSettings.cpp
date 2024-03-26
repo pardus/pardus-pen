@@ -51,18 +51,29 @@ void FloatingSettings::addPage(QWidget *widget) {
     num_of_item++;
 }
 
+void FloatingSettings::reload(){
+    if(num_of_item <= current_page){
+        return;
+    }
+    settingsPages.getPage(current_page)->show();
+    cur_width = settingsPages.getPage(current_page)->size().width();
+    cur_height = settingsPages.getPage(current_page)->size().height();
+    setFixedSize(cur_width, cur_height);
+}
+
 void FloatingSettings::setPage(int num){
-    if(settingsPages.getPage(num)->isVisible()){
-        settingsPages.getPage(num)->hide();
+    if(num_of_item < num){
+        return;
+    }
+    current_page = num;
+    if(settingsPages.getPage(current_page)->isVisible()){
+        settingsPages.getPage(current_page)->hide();
         hide();
         return;
     }
     for(int i=0;i<num_of_item;i++){
         settingsPages.getPage(i)->hide();
     }
-    settingsPages.getPage(num)->show();
-    cur_width = settingsPages.getPage(num)->size().width();
-    cur_height = settingsPages.getPage(num)->size().height();
-    setFixedSize(cur_width, cur_height);
+    reload();
     show();
 }
