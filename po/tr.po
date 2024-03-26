@@ -47,7 +47,7 @@ msgstr " Boyutu: "
 
 #: src/SetupWidgets.cpp:181
 msgid " Color:"
-msgstr " Renk:"
+msgstr " Rengi:"
 
 #: src/SetupWidgets.cpp:185
 msgid "Color Picker"

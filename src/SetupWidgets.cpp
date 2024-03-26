@@ -51,6 +51,7 @@ bool sliderLock = false;
 
 QSlider *thicknessSlider;
 QLabel *thicknessLabel;
+QLabel *colorLabel;
 
 QString penText = "";
 
@@ -88,6 +89,7 @@ static void penSizeEvent(){
             break;
     }
     thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
+    colorLabel->setText(QString(penText)+QString(_(" Color:")));
 }
 
 static void backgroundStyleEvent(){
@@ -177,7 +179,7 @@ static void setupPenSize(){
     penSizeEvent();
 
     // Color Settings    
-    QLabel *colorLabel = new QLabel();
+    colorLabel = new QLabel();
     colorLabel->setText(QString(penText)+QString(_(" Color:")));
     colorLabel->setAlignment(Qt::AlignHCenter);
 
