@@ -486,10 +486,10 @@ static void setupClear(){
     clearLayout->addWidget(clearLabel);
     clearLayout->addWidget(clearButtonDialog);
 
-    QPushButton * noButton = create_button_text("No", [=](){
+    QPushButton * noButton = create_button_text(_("No"), [=](){
         floatingSettings->hide();
     });
-    QPushButton * yesButton = create_button_text("Yes", [=](){
+    QPushButton * yesButton = create_button_text(_("Yes"), [=](){
         window->clear();
         floatingSettings->hide();
     });
@@ -523,10 +523,10 @@ static void setupExit(){
     exitLayout->addWidget(exitLabel);
     exitLayout->addWidget(exitButtonDialog);
 
-    QPushButton * noButton = create_button_text("No", [=](){
+    QPushButton * noButton = create_button_text(_("No"), [=](){
         floatingSettings->hide();
     });
-    QPushButton * yesButton = create_button_text("Yes", [=](){
+    QPushButton * yesButton = create_button_text(_("Yes"), [=](){
         QApplication::quit();
     });
     exitButtonLayout->addWidget(noButton);
