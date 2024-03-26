@@ -75,19 +75,19 @@ static void penSizeEvent(){
     int value = window->penSize[window->penType];
     switch(window->penType){
         case PEN:
-            penText = "Pen";
+            penText = _("Pen");
             set_int((char*)"pen-size",value);
             break;
         case MARKER:
-            penText = "Marker";
+            penText = _("Marker");
             set_int((char*)"marker-size",value);
             break;
         case ERASER:
-            penText = "Eraser";
+            penText = _("Eraser");
             set_int((char*)"eraser-size",value);
             break;
     }
-    thicknessLabel->setText(QString(penText)+QString(" Size: ")+QString::number(value));
+    thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
 }
 
 static void backgroundStyleEvent(){
@@ -178,11 +178,11 @@ static void setupPenSize(){
 
     // Color Settings    
     QLabel *colorLabel = new QLabel();
-    colorLabel->setText(QString(penText)+QString(" Color:"));
+    colorLabel->setText(QString(penText)+QString(_(" Color:")));
     colorLabel->setAlignment(Qt::AlignHCenter);
 
     QWidget *colorDialog = new QWidget();
-    colorDialog->setWindowTitle("Color Picker");
+    colorDialog->setWindowTitle(_("Color Picker"));
 
 
     QGridLayout *gridLayout = new QGridLayout(colorDialog);
@@ -227,7 +227,7 @@ static void setupPenSize(){
     gridLayout->setSpacing(padding);
 
     colorpicker = create_button(":images/color-picker.svg", [=](){
-        QColor newCol = QColorDialog::getColor(window->penColor, mainWindow, "Select Color");
+        QColor newCol = QColorDialog::getColor(window->penColor, mainWindow, _("Select Color"));
         if(! newCol.isValid()){
             return;
         }
@@ -355,7 +355,7 @@ static void setupBackground(){
     });
 
     QLabel *backgroundLabel = new QLabel();
-    backgroundLabel->setText(QString("Background:"));
+    backgroundLabel->setText(QString(_("Background:")));
     backgroundLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     QLabel *pageLabel = new QLabel();

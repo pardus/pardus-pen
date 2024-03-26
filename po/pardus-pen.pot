@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-26 08:46+0300\n"
+"POT-Creation-Date: 2024-03-26 10:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,22 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/SetupWidgets.cpp:482
-msgid "Are you want to clear screen?"
-msgstr ""
-
-#: src/SetupWidgets.cpp:489 src/SetupWidgets.cpp:526
-msgid "No"
-msgstr ""
-
-#: src/SetupWidgets.cpp:492 src/SetupWidgets.cpp:529
-msgid "Yes"
-msgstr ""
-
-#: src/SetupWidgets.cpp:519
-msgid "Are you want to quit pardus pen?"
-msgstr ""
 
 #: src/ScreenShot.cpp:42
 msgid "Info"
@@ -43,4 +27,52 @@ msgstr ""
 
 #: src/ScreenShot.cpp:47
 msgid "Failed To save:"
+msgstr ""
+
+#: src/SetupWidgets.cpp:78
+msgid "Pen"
+msgstr ""
+
+#: src/SetupWidgets.cpp:82
+msgid "Marker"
+msgstr ""
+
+#: src/SetupWidgets.cpp:86
+msgid "Eraser"
+msgstr ""
+
+#: src/SetupWidgets.cpp:90
+msgid " Size: "
+msgstr ""
+
+#: src/SetupWidgets.cpp:181
+msgid " Color:"
+msgstr ""
+
+#: src/SetupWidgets.cpp:185
+msgid "Color Picker"
+msgstr ""
+
+#: src/SetupWidgets.cpp:230
+msgid "Select Color"
+msgstr ""
+
+#: src/SetupWidgets.cpp:358
+msgid "Background:"
+msgstr ""
+
+#: src/SetupWidgets.cpp:483
+msgid "Are you want to clear screen?"
+msgstr ""
+
+#: src/SetupWidgets.cpp:491 src/SetupWidgets.cpp:531
+msgid "No"
+msgstr ""
+
+#: src/SetupWidgets.cpp:494 src/SetupWidgets.cpp:534
+msgid "Yes"
+msgstr ""
+
+#: src/SetupWidgets.cpp:521
+msgid "Are you want to quit pardus pen?"
 msgstr ""
