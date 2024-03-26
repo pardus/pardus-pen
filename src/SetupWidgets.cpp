@@ -396,10 +396,11 @@ static void setupBackground(){
         board->setType(WHITE);
         backgroundStyleEvent();
     });
-    
+
     QPushButton *previousPage = create_button(":images/go-back.svg", [=](){
         window->goPreviousPage();
         pageLabel->setText(QString::number(window->getPageNum()));
+        backgroundStyleEvent();
     });
     previousPage->setStyleSheet(QString("background-color: none;"));
 
@@ -407,11 +408,12 @@ static void setupBackground(){
 
     QPushButton *nextPage = create_button(":images/go-next.svg", [=](){
         window->goNextPage();
+        backgroundStyleEvent();
         pageLabel->setText(QString::number(window->getPageNum()));
     });
     nextPage->setStyleSheet(QString("background-color: none;"));
 
-    
+
     addToBackgroundWidget(transparentButton);
     addToBackgroundWidget(blackButton);
     addToBackgroundWidget(whiteButton);

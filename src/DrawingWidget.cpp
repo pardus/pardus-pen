@@ -4,6 +4,12 @@
 #include "WhiteBoard.h"
 #include <stdio.h>
 
+extern WhiteBoard *board;
+
+int screenWidth = 0;
+int screenHeight = 0;
+
+
 /*
 penType:
  - 0 eraser
@@ -76,7 +82,9 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            return ImageStorage();
+            ImageStorage imgs = ImageStorage();
+            imgs.pageType = board->getType();
+            return imgs;
         }
     }
 
@@ -90,11 +98,6 @@ ValueStorage storage;
 
 PageStorage pages;
 
-extern WhiteBoard *board;
-
-
-int screenWidth = 0;
-int screenHeight = 0;
 
 int curEventButtons = 0;
 bool isMoved = 0;
