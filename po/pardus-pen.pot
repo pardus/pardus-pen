@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-08 13:47+0000\n"
+"POT-Creation-Date: 2024-03-26 08:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/ScreenShot.cpp:41
+#: src/SetupWidgets.cpp:482
+msgid "Are you want to clear screen?"
+msgstr ""
+
+#: src/SetupWidgets.cpp:489 src/SetupWidgets.cpp:526
+msgid "No"
+msgstr ""
+
+#: src/SetupWidgets.cpp:492 src/SetupWidgets.cpp:529
+msgid "Yes"
+msgstr ""
+
+#: src/SetupWidgets.cpp:519
+msgid "Are you want to quit pardus pen?"
+msgstr ""
+
+#: src/ScreenShot.cpp:42
 msgid "Info"
 msgstr ""
 
-#: src/ScreenShot.cpp:44
+#: src/ScreenShot.cpp:45
 msgid "Screenshot saved:"
 msgstr ""
 
-#: src/ScreenShot.cpp:46
+#: src/ScreenShot.cpp:47
 msgid "Failed To save:"
-msgstr ""
-
-#: src/main.cpp:192
-msgid "Quit"
-msgstr ""
-
-#: src/main.cpp:192
-msgid "Are you want to quit pardus pen?"
 msgstr ""
