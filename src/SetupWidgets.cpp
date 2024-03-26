@@ -54,7 +54,8 @@ QLabel *thicknessLabel;
 
 QString penText = "";
 
-
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
 static void penStyleEvent(){
     penButton->setStyleSheet(QString("background-color: none;"));
@@ -479,7 +480,8 @@ static void setupClear(){
     QHBoxLayout *clearButtonLayout = new QHBoxLayout(clearButtonDialog);
 
     QLabel *clearLabel = new QLabel();
-    clearLabel->setText(_("Are you want to clear screen?"));
+    char* clearText = _("Are you want to clear screen?");
+    clearLabel->setText(clearText);
     clearLabel->setAlignment(Qt::AlignHCenter);
     clearDialog->setStyleSheet(QString("background-color: none;"));
 
@@ -502,7 +504,7 @@ static void setupClear(){
     });
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
-        screenWidth / 6,
+        screenWidth * strlen(clearText) / 169,
         screenHeight / 12
     );
     floatingSettings->addPage(clearDialog);
@@ -516,8 +518,11 @@ static void setupExit(){
     QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
 
     QLabel *exitLabel = new QLabel();
-    exitLabel->setText(_("Are you want to quit pardus pen?"));
+    char* exitText = _("Are you want to quit pardus pen?");
+    exitLabel->setText(exitText);
     exitLabel->setAlignment(Qt::AlignHCenter);
+    exitLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+
     exitDialog->setStyleSheet(QString("background-color: none;"));
 
     exitLayout->addWidget(exitLabel);
@@ -538,12 +543,11 @@ static void setupExit(){
     });
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
-        screenWidth / 6,
+        screenWidth * strlen(exitText) / 169,
         screenHeight / 12
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);
-
 }
 
 void setupWidgets(){
