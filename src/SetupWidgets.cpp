@@ -176,7 +176,6 @@ static void setupPenSize(){
         }
         
     });
-    penSizeEvent();
 
     // Color Settings    
     colorLabel = new QLabel();
@@ -239,6 +238,8 @@ static void setupPenSize(){
         backgroundStyleEvent();
     });
     colorpicker->setStyleSheet(QString("background: none;"));
+
+    penSizeEvent();
 
 
     // Create buttons for each color
