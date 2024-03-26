@@ -21,6 +21,8 @@ if get_option('resources')
     src += [meson.current_build_dir()/'resources.cpp']
 
 endif
+add_project_arguments(['-O3', '-Wextra', '-Wall'], language: 'cpp')
+
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
     src += ['src/ScreenShot.cpp']
