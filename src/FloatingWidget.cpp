@@ -24,6 +24,8 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout->setContentsMargins(padding, padding, padding, padding);
     setStyleSheet(style);
     cur_height = padding;
+    new_x = get_int((char*)"cur-x");
+    new_y = get_int((char*)"cur-y");
 }
 
 
@@ -39,18 +41,22 @@ void FloatingWidget::setWidget(QWidget *widget) {
     num_of_item++;
     setFixedSize(cur_width, cur_height);
     layout->addWidget(widget);
-    new_x = get_int((char*)"cur-x");
-    new_y = get_int((char*)"cur-y");
-    moveAction(new_x, new_y);
+    moveAction();
 }
 
+void FloatingWidget::mousePressEvent(QMouseEvent *event) {
+    offset_x = abs(event->globalPos().x() - new_x);
+    offset_y = abs(event->globalPos().y() - new_y);
+}
 
 void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
-        set_int((char*)"cur-x", new_x);
-        set_int((char*)"cur-y", new_y);
+    offset_x =-1;
+    offset_y =-1;
+    set_int((char*)"cur-x", new_x);
+    set_int((char*)"cur-y", new_y);
 }
 
-void FloatingWidget::moveAction(int new_x, int new_y){
+void FloatingWidget::moveAction(){
         if (new_x < 0) {
             new_x = 0;
         }if (new_y < 0) {
@@ -79,14 +85,17 @@ void FloatingWidget::moveAction(int new_x, int new_y){
 
 void FloatingWidget::setFloatingOffset(int offset){
     settingsOffset = offset;
-    moveAction(new_x, new_y);
+    moveAction();
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {
+    if(offset_x < 0 || offset_y < 0){
+        return;
+    }
     if (event->buttons() & Qt::LeftButton) {
-        new_x = event->globalPos().x() - (cur_width / 2);
-        new_y = event->globalPos().y() - (cur_height / 2);
-        moveAction(new_x, new_y);
+        new_x = event->globalPos().x() - offset_x;
+        new_y = event->globalPos().y() - offset_y;
+        moveAction();
         event->accept();
     }
 }

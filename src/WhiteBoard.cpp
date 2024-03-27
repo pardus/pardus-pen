@@ -34,7 +34,6 @@ void WhiteBoard::setType(int page){
     if(page == TRANSPARENT){
         background = Qt::transparent;
         lineColor = QColor("#808080");
-        puts("aaa");
     } else if (page == BLACK) {
         background = Qt::black;
         lineColor = Qt::white;

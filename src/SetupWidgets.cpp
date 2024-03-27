@@ -170,12 +170,19 @@ static void backgroundStyleEvent(){
 }
 
 
+static void setupMove(){
+    QLabel* move = new QLabel("");
+    move->setStyleSheet(QString("background-color: none;"));
+    move->setFixedSize(butsize, butsize);
+    floatingWidget->setWidget(move);
+}
+
 
 static void setupPenSize(){
 
     QPushButton *penSettingsButton = create_button(":images/pen-settings.svg",  [=](){
         floatingSettings->setPage(0);
-        floatingWidget->setFloatingOffset(3);
+        floatingWidget->setFloatingOffset(4);
     });
     penSettingsButton->setStyleSheet(QString("background-color: none;"));
 
@@ -418,7 +425,7 @@ static void setupBackground(){
     int h = padding*2;
     backgroundButton = create_button("",  [=](){
         floatingSettings->setPage(1);
-        floatingWidget->setFloatingOffset(4);
+        floatingWidget->setFloatingOffset(5);
     });
 
     QLabel *pageLabel = new QLabel();
@@ -615,7 +622,7 @@ static void setupClear(){
 
     QPushButton *clear = create_button(":images/clear.svg", [=](){
         floatingSettings->setPage(2);
-        floatingWidget->setFloatingOffset(5);
+        floatingWidget->setFloatingOffset(6);
     });
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
@@ -654,7 +661,7 @@ static void setupExit(){
 
     QPushButton *close = create_button(":images/close.svg", [=](){
         floatingSettings->setPage(3);
-        floatingWidget->setFloatingOffset(10);
+        floatingWidget->setFloatingOffset(11);
     });
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
@@ -667,6 +674,7 @@ static void setupExit(){
 
 void setupWidgets(){
     window->floatingSettings = floatingSettings;
+    setupMove();
     setupPenType();
     setupPenSize();
     setupBackground();
