@@ -9,6 +9,7 @@ src = [
     'src/Button.cpp',
     'src/SetupWidgets.cpp',
     'src/settings.c',
+    'src/OverView.cpp',
     'src/which.c'
 ]
 

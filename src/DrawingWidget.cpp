@@ -165,6 +165,7 @@ void DrawingWidget::resizeEvent(QResizeEvent *event) {
 }
 
 void DrawingWidget::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);

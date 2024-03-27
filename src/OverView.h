@@ -1,0 +1,15 @@
+#include <QPoint>
+#include <QPainter>
+#include <QWidget>
+
+
+class OverView : public QWidget {
+public:
+    float penSize;
+    QColor color;
+    QColor background;
+    void updateImage();
+protected:
+    void paintEvent(QPaintEvent *event) override;
+    QPainter painter;
+};

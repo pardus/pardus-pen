@@ -12,6 +12,7 @@
 #include "WhiteBoard.h"
 #include "Button.h"
 #include "ScreenShot.h"
+#include "OverView.h"
 
 
 extern "C" {
@@ -44,6 +45,8 @@ QPushButton* blackButton;
 QPushButton* whiteButton;
 QPushButton* colorpicker;
 
+OverView *ov;
+
 extern int screenWidth;
 extern int screenHeight;
 
@@ -56,6 +59,8 @@ QLabel *thicknessLabel;
 QLabel *colorLabel;
 
 QString penText = "";
+
+#define butsize screenHeight/23
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -71,6 +76,9 @@ static void penStyleEvent(){
     } else{
         eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
     }
+    ov->penSize = window->penSize[window->penType];
+    ov->color = window->penColor;
+    ov->updateImage();
 }
 
 
@@ -93,6 +101,7 @@ static void penSizeEvent(){
     thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
     colorLabel->setText(QString(penText)+QString(_(" Color:")));
 
+
     if(window->penType == ERASER) {
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
@@ -101,11 +110,13 @@ static void penSizeEvent(){
              + thicknessSlider->size().height()
         );
         colorDialog->hide();
+        ov->hide();
         colorLabel->hide();
     } else {
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
             padding*2
+             + ov->size().height()
              + thicknessLabel->size().height()
              + thicknessSlider->size().height()
              + colorDialog->size().height()
@@ -113,7 +124,11 @@ static void penSizeEvent(){
         );
         colorDialog->show();
         colorLabel->show();
+        ov->show();
     }
+    ov->penSize = value;
+    ov->color = window->penColor;
+    ov->updateImage();
     floatingSettings->reload();
 }
 
@@ -124,18 +139,23 @@ static void backgroundStyleEvent(){
     if (board->getType() == BLACK) {
         set_icon(":images/paper-black.svg",backgroundButton);
         blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+        ov->background = Qt::black;
     } else if (board->getType() == WHITE) {
         whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
         set_icon(":images/paper-white.svg",backgroundButton);
+        ov->background = Qt::white;
     }else {
         transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
         set_icon(":images/paper-transparent.svg",backgroundButton);
+        ov->background = Qt::transparent;
     }
+    ov->updateImage();
 }
 
 
 
 static void setupPenSize(){
+
     QPushButton *penSettingsButton = create_button(":images/pen-settings.svg",  [=](){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(3);
@@ -175,6 +195,9 @@ static void setupPenSize(){
             "border-radius:"+QString::number(screenHeight / 200)+"px;"
         "}"
     );
+
+    ov->updateImage();
+    penSettingsLayout->addWidget(ov);
 
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setRange(1,31);
@@ -264,13 +287,11 @@ static void setupPenSize(){
     });
     colorpicker->setStyleSheet(QString("background: none;"));
 
-    penSizeEvent();
 
 
     // Create buttons for each color
     int num_of_color = sizeof(colors) / sizeof(QColor);
     int rowsize = 7;
-    int butsize = screenHeight/23;
     gridLayout->addWidget(colorpicker, 0, 0, Qt::AlignCenter);
     for (int i = 0; i < num_of_color; i++) {
         QPushButton *button = new QPushButton(colorDialog);
@@ -311,6 +332,11 @@ static void setupPenSize(){
         colorDialog->size().width(),
         colorLabel->size().height()
     );
+    
+    ov->setFixedSize(
+        colorDialog->size().width(),
+        butsize*3
+    );
 
     penSettingsLayout->addWidget(colorLabel);
     penSettingsLayout->addWidget(colorDialog);
@@ -318,18 +344,14 @@ static void setupPenSize(){
     floatingSettings->addPage(penSettings);
     floatingWidget->setWidget(penSettingsButton);
 
-    penSettings->setFixedSize(
-        colorDialog->size().width() + padding*2,
-        padding*2
-         + thicknessLabel->size().height()
-         + thicknessSlider->size().height()
-         + colorDialog->size().height()
-         + colorLabel->size().height()
-    );
+    penSizeEvent();
+
     floatingSettings->reload();
 }
 
 static void setupPenType(){
+
+    ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
         sliderLock = true;
