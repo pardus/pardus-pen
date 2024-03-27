@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
     board->setType(get_int((char*)"page"));
+    board->setOverlayType(get_int((char*)"page-overlay"));
 
     window->penSize[PEN] = get_int((char*)"pen-size");
     window->penSize[ERASER] = get_int((char*)"eraser-size");

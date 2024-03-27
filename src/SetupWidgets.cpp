@@ -421,54 +421,63 @@ static void setupBackground(){
         floatingWidget->setFloatingOffset(4);
     });
 
-    QLabel *backgroundLabel = new QLabel();
-    backgroundLabel->setText(QString(_("Background:")));
-    backgroundLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     QLabel *pageLabel = new QLabel();
     pageLabel->setText(QString::number(0));
     pageLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    QWidget *backgroundDialog = new QWidget();
-    QWidget *pageDialog = new QWidget();
+
+    // main widget
     QWidget *backgroundWidget = new QWidget();
     QVBoxLayout *backgroundMainLayout = new QVBoxLayout(backgroundWidget);
-    QHBoxLayout *pageLayout = new QHBoxLayout(pageDialog);
-    QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundDialog);
-
-    backgroundLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    backgroundMainLayout->addWidget(backgroundLabel);
-    backgroundMainLayout->addWidget(backgroundDialog);
-    backgroundMainLayout->addWidget(pageDialog);
-    pageLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-    backgroundLayout->setSpacing(padding);
-    pageLayout->setSpacing(padding);
+    backgroundMainLayout->setContentsMargins(padding, padding, padding, padding);
     backgroundMainLayout->setSpacing(0);
+
+    backgroundWidget->setStyleSheet(QString("background-color: none;"));
+    backgroundButton->setStyleSheet(QString("background-color: none;"));
+
+
+    // background dialog
+    QWidget *backgroundDialog = new QWidget();
+    QHBoxLayout *backgroundLayout = new QHBoxLayout(backgroundDialog);
+    backgroundLayout->setSpacing(padding);
+    backgroundLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    backgroundLayout->setContentsMargins(0, 0, 0, 0);
+
+    
+    // background buttons
     transparentButton = create_button(":images/paper-transparent.svg", [=](){
-        window->syncPageType(TRANSPARENT);
         board->setType(TRANSPARENT);
         backgroundStyleEvent();
     });
     blackButton = create_button(":images/paper-black.svg", [=](){
-        window->syncPageType(BLACK);
         board->setType(BLACK);
         backgroundStyleEvent();
     });
     whiteButton = create_button(":images/paper-white.svg", [=](){
-        window->syncPageType(WHITE);
         board->setType(WHITE);
         backgroundStyleEvent();
     });
 
+    addToBackgroundWidget(transparentButton);
+    addToBackgroundWidget(blackButton);
+    addToBackgroundWidget(whiteButton);
+
+    // page dialog
+    QWidget *pageDialog = new QWidget();
+    QHBoxLayout *pageLayout = new QHBoxLayout(pageDialog);
+    pageLayout->setContentsMargins(0, 0, 0, 0);
+
+
+    pageLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    pageLayout->setSpacing(padding);
+
+    // page buttons
     QPushButton *previousPage = create_button(":images/go-back.svg", [=](){
         window->goPreviousPage();
         pageLabel->setText(QString::number(window->getPageNum()));
         backgroundStyleEvent();
     });
     previousPage->setStyleSheet(QString("background-color: none;"));
-
-
 
     QPushButton *nextPage = create_button(":images/go-next.svg", [=](){
         window->goNextPage();
@@ -478,31 +487,68 @@ static void setupBackground(){
     nextPage->setStyleSheet(QString("background-color: none;"));
 
 
-    addToBackgroundWidget(transparentButton);
-    addToBackgroundWidget(blackButton);
-    addToBackgroundWidget(whiteButton);
-    
-    
     pageLayout->addWidget(previousPage);
     pageLayout->addWidget(pageLabel);
     pageLayout->addWidget(nextPage);
-    
-    backgroundStyleEvent();
+
+
+    // overlay dialog
+    QWidget *overlayDialog = new QWidget();
+    QHBoxLayout *overlayLayout = new QHBoxLayout(overlayDialog);
+    overlayLayout->setContentsMargins(0, 0, 0, 0);
+
+
+    overlayLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    overlayLayout->setSpacing(padding);
+
+    // overlay buttons
+    QPushButton *overlayNone = create_button(":images/overlay-none.svg", [=](){
+        board->setOverlayType(NONE);
+    });
+    overlayNone->setStyleSheet(QString("background-color: none;"));
+
+    QPushButton *overlaySquares = create_button(":images/overlay-squares.svg", [=](){
+        board->setOverlayType(SQUARES);
+    });
+    overlaySquares->setStyleSheet(QString("background-color: none;"));
+
+    QPushButton *overlayLines = create_button(":images/overlay-lines.svg", [=](){
+        board->setOverlayType(LINES);
+    });
+    overlayLines->setStyleSheet(QString("background-color: none;"));
+
+    overlayLayout->addWidget(overlayNone);
+    overlayLayout->addWidget(overlaySquares);
+    overlayLayout->addWidget(overlayLines);
+
+    // set sizes
+    pageLabel->setFixedSize(
+        blackButton->size().width(),
+        blackButton->size().height()
+    );
+
 
     backgroundDialog->setFixedSize(w,h);
     pageDialog->setFixedSize(w,h);
-    backgroundLayout->setContentsMargins(0, 0, 0, 0);
-    pageLayout->setContentsMargins(0, 0, 0, 0);
-    backgroundMainLayout->setContentsMargins(padding, padding, padding, padding);
-    backgroundLabel->setFixedSize(w ,h / 3);
-    pageLabel->setFixedSize(blackButton->size().width() ,blackButton->size().height());
-    backgroundWidget->setFixedSize(w + padding*2, h + backgroundLabel->size().height() +pageDialog->size().height()  + padding*3);
+    overlayDialog->setFixedSize(w,h);
+    
+    backgroundWidget->setFixedSize(
+        w + padding*2,
+        h
+        + pageDialog->size().height()
+        + overlayDialog->size().height()
+        + padding*3
+    );
 
-    backgroundWidget->setStyleSheet(QString("background-color: none;"));
-    backgroundButton->setStyleSheet(QString("background-color: none;"));
+
+    backgroundMainLayout->addWidget(pageDialog);
+    backgroundMainLayout->addWidget(backgroundDialog);
+    backgroundMainLayout->addWidget(overlayDialog);
 
     floatingSettings->addPage(backgroundWidget);
     floatingWidget->setWidget(backgroundButton);
+    
+    backgroundStyleEvent();
 }
 
 static void setupGoBackNext(){

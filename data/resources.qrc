@@ -14,6 +14,9 @@
         <file>images/close.svg</file>
         <file>images/go-back.svg</file>
         <file>images/go-next.svg</file>
+        <file>images/overlay-none.svg</file>
+        <file>images/overlay-squares.svg</file>
+        <file>images/overlay-lines.svg</file>
         <file>images/circle.svg</file>
         <file>tr.org.pardus.pen.svg</file>
     </qresource>

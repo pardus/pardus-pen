@@ -45,6 +45,7 @@ public:
     int last_image_num = -1;
     int image_count = -1;
     int pageType = TRANSPARENT;
+    int overlayType = NONE;
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
     }
@@ -228,18 +229,24 @@ void DrawingWidget::loadImage(int num){
 }
 
 void DrawingWidget::goNextPage(){
+    images.overlayType = board->getOverlayType();
+    images.pageType = board->getType();
     pages.saveValue(pages.last_page_num, images);
     pages.last_page_num++;
     images = pages.loadValue(pages.last_page_num);
     board->setType(images.pageType);
+    board->setOverlayType(images.overlayType);
     loadImage(images.last_image_num);
 }
 
 void DrawingWidget::goPreviousPage(){
+    images.overlayType = board->getOverlayType();
+    images.pageType = board->getType();
     pages.saveValue(pages.last_page_num, images);
     pages.last_page_num--;
     images = pages.loadValue(pages.last_page_num);
     board->setType(images.pageType);
+    board->setOverlayType(images.overlayType);
     loadImage(images.last_image_num);
 }
 
@@ -308,10 +315,6 @@ bool DrawingWidget::event(QEvent *ev) {
             break;
     }
     return QWidget::event(ev);
-}
-
-void DrawingWidget::syncPageType(int type){
-    images.pageType = type;
 }
 
 int DrawingWidget::getPageNum(){

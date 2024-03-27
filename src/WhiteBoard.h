@@ -10,16 +10,27 @@
 #define WHITE 1
 #define BLACK 2
 
+#define NONE 0
+#define SQUARES 1
+#define LINES 2
+
 class WhiteBoard : public QWidget {
 public:
     WhiteBoard(QWidget *parent = nullptr);
     int getType();
+    int getOverlayType();
     void setType(int type);
+    void setOverlayType(int type);
+    void drawSquarePaper();
+    void drawLinePaper();
 private:
-    void enable();
-    void enableDark();
-    void disable();
+    QColor background;
+    QColor lineColor;
+    int overlayType = 0;
     int type = 0;
+    QPainter painter;
+    int gridSize;
+    void paintEvent(QPaintEvent *event) override ;
 };
 
 #endif // FLOATINGWIDGET_H
