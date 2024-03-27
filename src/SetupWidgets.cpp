@@ -377,37 +377,46 @@ static void setupPenType(){
     ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
+        if(window->penType == PEN){
+            floatingSettings->hide();
+            return;
+        }
         sliderLock = true;
         window->penType = PEN;
         penStyleEvent();
         thicknessSlider->setRange(1,31);
         thicknessSlider->setValue(window->penSize[PEN]);
         penSizeEvent();
-        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
 
     markerButton = create_button(":images/marker.svg", [=](){
+        if(window->penType == MARKER){
+            floatingSettings->hide();
+            return;
+        }
         sliderLock = true;
         window->penType = MARKER;
         penStyleEvent();
         thicknessSlider->setRange(1,100);
         thicknessSlider->setValue(window->penSize[MARKER]);
         penSizeEvent();
-        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
 
     eraserButton = create_button(":images/eraser.svg", [=](){
+        if(window->penType == ERASER){
+            floatingSettings->hide();
+            return;
+        }
         sliderLock = true;
         window->penType = ERASER;
         penStyleEvent();
         thicknessSlider->setRange(31,310);
         thicknessSlider->setValue(window->penSize[ERASER]);
         penSizeEvent();
-        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(eraserButton);
