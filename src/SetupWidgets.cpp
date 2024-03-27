@@ -242,11 +242,10 @@ static void setupPenSize(){
     penSettings->show();
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
-        penSizeEvent();
         if(!sliderLock){
             window->penSize[window->penType] = value;
         }
-        
+        penSizeEvent();
     });
 
     // Color Settings    
@@ -384,6 +383,7 @@ static void setupPenType(){
         thicknessSlider->setRange(1,31);
         thicknessSlider->setValue(window->penSize[PEN]);
         penSizeEvent();
+        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
@@ -395,6 +395,7 @@ static void setupPenType(){
         thicknessSlider->setRange(1,100);
         thicknessSlider->setValue(window->penSize[MARKER]);
         penSizeEvent();
+        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
@@ -406,6 +407,7 @@ static void setupPenType(){
         thicknessSlider->setRange(31,310);
         thicknessSlider->setValue(window->penSize[ERASER]);
         penSizeEvent();
+        floatingSettings->hide();
         sliderLock = false;
     });
     floatingWidget->setWidget(eraserButton);
