@@ -6,6 +6,8 @@
 
 extern WhiteBoard *board;
 
+extern void updateGoBackButtons();
+
 int screenWidth = 0;
 int screenHeight = 0;
 
@@ -42,12 +44,13 @@ private:
 
 class ImageStorage {
 public:
-    int last_image_num = -1;
-    int image_count = -1;
+    int last_image_num = 0;
+    int image_count = 0;
     int pageType = TRANSPARENT;
     int overlayType = NONE;
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
+        updateGoBackButtons();
     }
 
     void clear(){
@@ -251,13 +254,16 @@ void DrawingWidget::goPreviousPage(){
 }
 
 void DrawingWidget::goPrevious(){
+    if(!isBackAvailable()){
+        return;
+    }
     images.last_image_num--;
     loadImage(images.last_image_num);
 }
 
 
 void DrawingWidget::goNext(){
-    if(images.last_image_num >= images.image_count){
+    if(!isNextAvailable()){
         return;
     }
     images.last_image_num++;
@@ -319,6 +325,16 @@ bool DrawingWidget::event(QEvent *ev) {
 
 int DrawingWidget::getPageNum(){
     return pages.last_page_num;
+}
+
+bool DrawingWidget::isBackAvailable(){
+    printf("%d %d\n", images.last_image_num, images.image_count );
+    return images.last_image_num > 0;
+}
+
+bool DrawingWidget::isNextAvailable(){
+    printf("%d %d\n", images.last_image_num, images.image_count );
+    return images.last_image_num < images.image_count;
 }
 
 

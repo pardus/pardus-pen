@@ -45,6 +45,9 @@ QPushButton* blackButton;
 QPushButton* whiteButton;
 QPushButton* colorpicker;
 
+QPushButton *backButton;
+QPushButton *nextButton;
+
 OverView *ov;
 
 extern int screenWidth;
@@ -569,17 +572,33 @@ static void setupBackground(){
     backgroundStyleEvent();
 }
 
+void updateGoBackButtons(){
+    if(window->isBackAvailable()){
+        set_icon(":images/go-back.svg", backButton);
+    } else{
+        set_icon(":images/go-back-disabled.svg", backButton);
+    }
+    if(window->isNextAvailable()){
+        set_icon(":images/go-next.svg", nextButton);
+    } else{
+        set_icon(":images/go-next-disabled.svg", nextButton);
+    }
+}
+
 static void setupGoBackNext(){
-    QPushButton *backButton = create_button(":images/go-back.svg", [=](){
+    backButton = create_button(":images/go-back.svg", [=](){
         window->goPrevious();
+        updateGoBackButtons();
     });
     backButton->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(backButton);
-    QPushButton *nextButton = create_button(":images/go-next.svg", [=](){
+    nextButton = create_button(":images/go-next.svg", [=](){
         window->goNext();
+        updateGoBackButtons();
     });
     nextButton->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(nextButton);
+    updateGoBackButtons();
 }
 
 

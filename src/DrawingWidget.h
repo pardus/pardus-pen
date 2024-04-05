@@ -35,6 +35,8 @@ public:
     int penType;
     void syncPageType(int type);
     int getPageNum();
+    bool isBackAvailable();
+    bool isNextAvailable();
 
 protected:
     bool drawing;
