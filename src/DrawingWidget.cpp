@@ -55,6 +55,9 @@ public:
 
     void clear(){
         values.clear();
+        image_count = 0;
+        last_image_num = 0;
+        updateGoBackButtons();
     }
 
     QImage loadValue(qint64 id) {
