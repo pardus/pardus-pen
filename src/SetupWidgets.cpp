@@ -195,7 +195,10 @@ static void backgroundStyleEvent(){
 
 
 static void setupMove(){
-    QLabel* move = new QLabel("");
+    QLabel *move = new QLabel("");
+    QIcon icon = QIcon(":images/move-icon.svg");
+    QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(screenHeight/23, screenHeight/23)));
+    move->setPixmap(pixmap);
     move->setStyleSheet(QString("background-color: none;"));
     move->setFixedSize(butsize, butsize);
     floatingWidget->setWidget(move);

@@ -24,6 +24,7 @@
         <file>images/overlay-squares.svg</file>
         <file>images/overlay-lines.svg</file>
         <file>images/circle.svg</file>
+        <file>images/move-icon.svg</file>
         <file>tr.org.pardus.pen.svg</file>
     </qresource>
 </RCC>
