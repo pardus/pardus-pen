@@ -1,21 +1,85 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 392.08 246.11">
-  <defs>
-    <style>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="katman_2"
+   data-name="katman 2"
+   viewBox="0 0 392.08 246.11"
+   version="1.1"
+   sodipodi:docname="move-icon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.325852"
+     inkscape:cx="196.19033"
+     inkscape:cy="122.97601"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="katman_2" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">
       .cls-1 {
         fill: #343434;
         stroke-width: 0px;
       }
     </style>
   </defs>
-  <g id="katman_1" data-name="katman 1">
-    <g>
-      <circle class="cls-1" cx="46.57" cy="46.57" r="46.57"/>
-      <circle class="cls-1" cx="196.04" cy="46.57" r="46.57"/>
-      <circle class="cls-1" cx="345.51" cy="46.57" r="46.57"/>
-      <circle class="cls-1" cx="46.57" cy="199.54" r="46.57"/>
-      <circle class="cls-1" cx="196.04" cy="199.54" r="46.57"/>
-      <circle class="cls-1" cx="345.51" cy="199.54" r="46.57"/>
+  <g
+     id="katman_1"
+     data-name="katman 1">
+    <g
+       id="g18">
+      <circle
+         class="cls-1"
+         cx="46.57"
+         cy="46.57"
+         r="46.57"
+         id="circle6" />
+      <circle
+         class="cls-1"
+         cx="196.03999"
+         cy="46.57"
+         r="46.57"
+         id="circle8" />
+      <circle
+         class="cls-1"
+         cx="345.51001"
+         cy="46.57"
+         r="46.57"
+         id="circle10" />
+      <circle
+         class="cls-1"
+         cx="46.57"
+         cy="199.53999"
+         r="46.57"
+         id="circle12" />
+      <circle
+         class="cls-1"
+         cx="196.03999"
+         cy="199.53999"
+         r="46.57"
+         id="circle14" />
+      <circle
+         class="cls-1"
+         cx="345.51001"
+         cy="199.53999"
+         r="46.57"
+         id="circle16" />
     </g>
   </g>
 </svg>

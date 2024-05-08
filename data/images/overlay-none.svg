@@ -1,7 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 513.43 514.46">
-  <defs>
-    <style>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="katman_2"
+   data-name="katman 2"
+   viewBox="0 0 513.43 514.46"
+   version="1.1"
+   sodipodi:docname="overlay-none.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview40"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.7202503"
+     inkscape:cx="257.23001"
+     inkscape:cy="257.52067"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="katman_2" />
+  <defs
+     id="defs24">
+    <style
+       id="style2">
       .cls-1 {
         fill: url(#Adsız_degrade_113);
       }
@@ -22,27 +53,96 @@
         fill: #fff;
       }
     </style>
-    <linearGradient id="Adsız_degrade_113" data-name="Adsız degrade 113" x1="271.02" y1="245.09" x2="461.56" y2="49.04" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#c1c8cc"/>
-      <stop offset=".1" stop-color="rgba(195, 202, 206, .96)" stop-opacity=".96"/>
-      <stop offset=".26" stop-color="rgba(202, 208, 211, .85)" stop-opacity=".85"/>
-      <stop offset=".45" stop-color="rgba(213, 218, 220, .67)" stop-opacity=".67"/>
-      <stop offset=".68" stop-color="rgba(228, 231, 233, .42)" stop-opacity=".42"/>
-      <stop offset=".92" stop-color="rgba(248, 249, 249, .11)" stop-opacity=".11"/>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient
+       id="Adsız_degrade_113"
+       data-name="Adsız degrade 113"
+       x1="271.02"
+       y1="245.09"
+       x2="461.56"
+       y2="49.04"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#c1c8cc"
+         id="stop4" />
+      <stop
+         offset=".1"
+         stop-color="rgba(195, 202, 206, .96)"
+         stop-opacity=".96"
+         id="stop6" />
+      <stop
+         offset=".26"
+         stop-color="rgba(202, 208, 211, .85)"
+         stop-opacity=".85"
+         id="stop8" />
+      <stop
+         offset=".45"
+         stop-color="rgba(213, 218, 220, .67)"
+         stop-opacity=".67"
+         id="stop10" />
+      <stop
+         offset=".68"
+         stop-color="rgba(228, 231, 233, .42)"
+         stop-opacity=".42"
+         id="stop12" />
+      <stop
+         offset=".92"
+         stop-color="rgba(248, 249, 249, .11)"
+         stop-opacity=".11"
+         id="stop14" />
+      <stop
+         offset="1"
+         stop-color="#fff"
+         stop-opacity="0"
+         id="stop16" />
     </linearGradient>
-    <linearGradient id="Adsız_degrade_111" data-name="Adsız degrade 111" x1="371.15" y1="142.07" x2="478.66" y2="31.62" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#c1c8cc"/>
-      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    <linearGradient
+       id="Adsız_degrade_111"
+       data-name="Adsız degrade 111"
+       x1="371.15"
+       y1="142.07"
+       x2="478.66"
+       y2="31.62"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#c1c8cc"
+         id="stop19" />
+      <stop
+         offset="1"
+         stop-color="#fff"
+         stop-opacity="0"
+         id="stop21" />
     </linearGradient>
   </defs>
-  <g id="katman_1" data-name="katman 1">
-    <g>
-      <rect class="cls-4" y="1.02" width="513.43" height="513.43"/>
-      <g>
-        <polygon class="cls-1" points="512.15 209 303.15 209 303.15 0 512.15 209"/>
-        <polygon class="cls-3" points="512.15 203.92 308.24 203.92 308.24 0 512.15 203.92"/>
-        <polygon class="cls-2" points="308.24 0 512.15 0 512.15 203.92 308.24 0"/>
+  <g
+     id="katman_1"
+     data-name="katman 1">
+    <g
+       id="g36">
+      <rect
+         class="cls-4"
+         y="1.02"
+         width="513.42999"
+         height="513.42999"
+         id="rect26"
+         x="0" />
+      <g
+         id="g34">
+        <polygon
+           class="cls-1"
+           points="303.15,0 512.15,209 303.15,209 "
+           id="polygon28"
+           style="fill:url(#Ads%C4%B1z_degrade_113)" />
+        <polygon
+           class="cls-3"
+           points="308.24,0 512.15,203.92 308.24,203.92 "
+           id="polygon30" />
+        <polygon
+           class="cls-2"
+           points="512.15,203.92 308.24,0 512.15,0 "
+           id="polygon32"
+           style="fill:url(#Ads%C4%B1z_degrade_111)" />
       </g>
     </g>
   </g>

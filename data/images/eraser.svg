@@ -1,1 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?><svg id="katman_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463.57 376.26"><defs><style>.cls-1{fill:#3a4654;stroke:#3a4654;stroke-miterlimit:10;stroke-width:2.5px;}.cls-2{fill:#161a1e;opacity:.1;}.cls-3{fill:#f2908b;}.cls-4{fill:#fff;}.cls-5{fill:#1d71b8;}</style></defs><g id="katman_1"><g><path class="cls-3" d="M132.01,370.83l-74.05-74.05c-14.39-14.4-14.39-37.96,0-52.35L291.61,10.8c14.39-14.39,37.95-14.39,52.35,0l108.81,108.8c14.4,14.39,14.4,37.96,0,52.35l-198.92,198.89h-121.83Z"/><path class="cls-5" d="M452.77,119.6L343.96,10.8c-14.4-14.39-37.96-14.39-52.35,0l-111.62,111.61,161.37,160.92,111.41-111.39c14.39-14.39,14.39-37.96,0-52.35Z"/><path class="cls-1" d="M29.82,358.91c0,3.19-2.57,5.77-5.76,5.77s-5.77-2.57-5.77-5.77,2.59-5.77,5.77-5.77,5.76,2.57,5.76,5.77Z"/><path class="cls-1" d="M12.78,312.25c0,3.19-2.57,5.77-5.76,5.77s-5.77-2.57-5.77-5.77,2.59-5.77,5.77-5.77,5.76,2.57,5.76,5.77Z"/><path class="cls-1" d="M93.08,369.25c0,3.19-2.57,5.77-5.76,5.77s-5.77-2.57-5.77-5.77,2.59-5.77,5.77-5.77,5.76,2.57,5.76,5.77Z"/><rect class="cls-4" x="248.68" y="88.92" width="24" height="227.9" transform="translate(-67.04 244.21) rotate(-45.08)"/><path class="cls-2" d="M452.77,119.6l-55.97-55.97L113.41,352.97l17.86,17.86h121.83l87.89-87.87,.37,.37,111.41-111.39c14.39-14.39,14.39-37.96,0-52.35Z"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="katman_2"
+   viewBox="0 0 463.57 376.26"
+   version="1.1"
+   sodipodi:docname="eraser.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview24"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.3520969"
+     inkscape:cx="231.92072"
+     inkscape:cy="188.34258"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="katman_2" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#3a4654;stroke:#3a4654;stroke-miterlimit:10;stroke-width:2.5px;}.cls-2{fill:#161a1e;opacity:.1;}.cls-3{fill:#f2908b;}.cls-4{fill:#fff;}.cls-5{fill:#1d71b8;}</style>
+  </defs>
+  <g
+     id="katman_1">
+    <g
+       id="g20">
+      <path
+         class="cls-3"
+         d="M 132.01,370.83 57.96,296.78 c -14.39,-14.4 -14.39,-37.96 0,-52.35 L 291.61,10.8 c 14.39,-14.39 37.95,-14.39 52.35,0 l 108.81,108.8 c 14.4,14.39 14.4,37.96 0,52.35 L 253.85,370.84 H 132.02 Z"
+         id="path6" />
+      <path
+         class="cls-5"
+         d="M 452.77,119.6 343.96,10.8 C 329.56,-3.59 306,-3.59 291.61,10.8 L 179.99,122.41 341.36,283.33 452.77,171.94 c 14.39,-14.39 14.39,-37.96 0,-52.35 z"
+         id="path8" />
+      <path
+         class="cls-1"
+         d="m 29.82,358.91 c 0,3.19 -2.57,5.77 -5.76,5.77 -3.19,0 -5.77,-2.57 -5.77,-5.77 0,-3.2 2.59,-5.77 5.77,-5.77 3.18,0 5.76,2.57 5.76,5.77 z"
+         id="path10" />
+      <path
+         class="cls-1"
+         d="m 12.78,312.25 c 0,3.19 -2.57,5.77 -5.76,5.77 -3.19,0 -5.77,-2.57 -5.77,-5.77 0,-3.2 2.59,-5.77 5.77,-5.77 3.18,0 5.76,2.57 5.76,5.77 z"
+         id="path12" />
+      <path
+         class="cls-1"
+         d="m 93.08,369.25 c 0,3.19 -2.57,5.77 -5.76,5.77 -3.19,0 -5.77,-2.57 -5.77,-5.77 0,-3.2 2.59,-5.77 5.77,-5.77 3.18,0 5.76,2.57 5.76,5.77 z"
+         id="path14" />
+      <rect
+         class="cls-4"
+         x="248.67999"
+         y="88.919998"
+         width="24"
+         height="227.89999"
+         transform="rotate(-45.08,260.68643,202.86991)"
+         id="rect16" />
+      <path
+         class="cls-2"
+         d="M 452.77,119.6 396.8,63.63 113.41,352.97 131.27,370.83 H 253.1 l 87.89,-87.87 0.37,0.37 111.41,-111.39 c 14.39,-14.39 14.39,-37.96 0,-52.35 z"
+         id="path18" />
+    </g>
+  </g>
+</svg>
