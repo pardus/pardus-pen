@@ -48,6 +48,9 @@ QPushButton* colorpicker;
 QPushButton *backButton;
 QPushButton *nextButton;
 
+QPushButton *previousPage;
+QPushButton *nextPage;
+
 OverView *ov;
 
 extern int screenWidth;
@@ -149,6 +152,24 @@ static void penSizeEvent(){
     ov->color = window->penColor;
     ov->updateImage();
     floatingSettings->reload();
+}
+
+void updateGoBackButtons(){
+    if(window->isBackAvailable()){
+        set_icon(":images/go-back.svg", backButton);
+    } else{
+        set_icon(":images/go-back-disabled.svg", backButton);
+    }
+    if(window->isNextAvailable()){
+        set_icon(":images/go-next.svg", nextButton);
+    } else{
+        set_icon(":images/go-next-disabled.svg", nextButton);
+    }
+    if(window->getPageNum() == 0){
+        set_icon(":images/go-page-previous-disabled.svg", previousPage);
+    } else {
+        set_icon(":images/go-page-previous.svg", previousPage);
+    }
 }
 
 
@@ -493,17 +514,22 @@ static void setupBackground(){
     pageLayout->setSpacing(padding);
 
     // page buttons
-    QPushButton *previousPage = create_button(":images/go-back.svg", [=](){
+    previousPage = create_button(":images/go-page-previous.svg", [=](){
+        if(window->getPageNum() == 0){
+            return;
+        }
         window->goPreviousPage();
         pageLabel->setText(QString::number(window->getPageNum()));
         backgroundStyleEvent();
+        updateGoBackButtons();
     });
     previousPage->setStyleSheet(QString("background-color: none;"));
 
-    QPushButton *nextPage = create_button(":images/go-next.svg", [=](){
+    nextPage = create_button(":images/go-page-next.svg", [=](){
         window->goNextPage();
         backgroundStyleEvent();
         pageLabel->setText(QString::number(window->getPageNum()));
+        updateGoBackButtons();
     });
     nextPage->setStyleSheet(QString("background-color: none;"));
 
@@ -572,18 +598,6 @@ static void setupBackground(){
     backgroundStyleEvent();
 }
 
-void updateGoBackButtons(){
-    if(window->isBackAvailable()){
-        set_icon(":images/go-back.svg", backButton);
-    } else{
-        set_icon(":images/go-back-disabled.svg", backButton);
-    }
-    if(window->isNextAvailable()){
-        set_icon(":images/go-next.svg", nextButton);
-    } else{
-        set_icon(":images/go-next-disabled.svg", nextButton);
-    }
-}
 
 static void setupGoBackNext(){
     backButton = create_button(":images/go-back.svg", [=](){

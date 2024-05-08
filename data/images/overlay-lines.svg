@@ -1,98 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 513.43 513.43">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Adsız_degrade_113);
+      }
 
-<svg
-   width="64"
-   height="64"
-   viewBox="0 0 16.933333 16.933333"
-   version="1.1"
-   id="svg1"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   sodipodi:docname="lines.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     inkscape:zoom="5.9580247"
-     inkscape:cx="59.751347"
-     inkscape:cy="43.806465"
-     inkscape:window-width="1920"
-     inkscape:window-height="1034"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <path
-       style="fill:#f9f9f9;stroke-width:0.0217256;paint-order:stroke fill markers"
-       d="M 0.22856979,2.9859825 H 16.446771"
-       id="path7" />
-    <rect
-       style="fill:#f9f9f9;stroke-width:0.0217256;paint-order:stroke fill markers"
-       id="rect7"
-       width="17.017048"
-       height="0.9453916"
-       x="-0.041857503"
-       y="7.9939709"
-       ry="0.41004416" />
-    <rect
-       style="fill:#f9f9f9;stroke-width:0.0217256;paint-order:stroke fill markers"
-       id="rect8"
-       width="17.017048"
-       height="0.9453916"
-       x="-0.041857503"
-       y="3.2037871"
-       ry="0.41004416" />
-    <rect
-       style="fill:#f9f9f9;stroke-width:0.0217256;paint-order:stroke fill markers"
-       id="rect9"
-       width="17.017048"
-       height="0.9453916"
-       x="-0.041857503"
-       y="12.784155"
-       ry="0.41004416" />
-    <path
-       style="fill:#000000;stroke-width:0.0212395;paint-order:stroke fill markers"
-       d="M 0.4128925,3.1086097 H 16.26822"
-       id="path1" />
-    <rect
-       style="fill:#000000;stroke-width:0.0212395;paint-order:stroke fill markers"
-       id="rect1"
-       width="16.636301"
-       height="0.92423904"
-       x="0.14851587"
-       y="8.0045471"
-       ry="0.40086967" />
-    <rect
-       style="fill:#000000;stroke-width:0.0212395;paint-order:stroke fill markers"
-       id="rect2"
-       width="16.636301"
-       height="0.92423904"
-       x="0.14851587"
-       y="3.3215411"
-       ry="0.40086967" />
-    <rect
-       style="fill:#000000;stroke-width:0.0212395;paint-order:stroke fill markers"
-       id="rect3"
-       width="16.636301"
-       height="0.92423904"
-       x="0.14851587"
-       y="12.687554"
-       ry="0.40086967" />
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Adsız_degrade_111);
+      }
+
+      .cls-3 {
+        fill: #e83d43;
+      }
+
+      .cls-4 {
+        fill: #f4f4f4;
+      }
+
+      .cls-5 {
+        fill: #00b1d9;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="Adsız_degrade_113" data-name="Adsız degrade 113" x1="271.07" y1="246.32" x2="461.61" y2="50.26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c1c8cc"/>
+      <stop offset=".1" stop-color="rgba(195, 202, 206, .96)" stop-opacity=".96"/>
+      <stop offset=".26" stop-color="rgba(202, 208, 211, .85)" stop-opacity=".85"/>
+      <stop offset=".45" stop-color="rgba(213, 218, 220, .67)" stop-opacity=".67"/>
+      <stop offset=".68" stop-color="rgba(228, 231, 233, .42)" stop-opacity=".42"/>
+      <stop offset=".92" stop-color="rgba(248, 249, 249, .11)" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="Adsız_degrade_111" data-name="Adsız degrade 111" x1="371.2" y1="143.3" x2="478.71" y2="32.85" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c1c8cc"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="katman_1" data-name="katman 1">
+    <g>
+      <rect class="cls-6" width="513.43" height="513.43"/>
+      <g>
+        <rect class="cls-5" x="1.23" y="123.08" width="510.98" height="5.78"/>
+        <rect class="cls-5" x="1.23" y="203.77" width="510.98" height="5.78"/>
+        <rect class="cls-5" x="1.23" y="284.46" width="510.98" height="5.78"/>
+        <rect class="cls-5" x="1.23" y="365.15" width="510.98" height="5.78"/>
+        <rect class="cls-5" x="1.23" y="445.84" width="510.98" height="5.78"/>
+        <rect class="cls-3" x="75.55" y="2.25" width="5.78" height="509.95"/>
+        <g>
+          <polygon class="cls-1" points="512.2 210.23 303.21 210.23 303.21 1.23 512.2 210.23"/>
+          <polygon class="cls-4" points="512.2 205.14 308.29 205.14 308.29 1.23 512.2 205.14"/>
+          <polygon class="cls-2" points="308.29 1.23 512.2 1.23 512.2 205.14 308.29 1.23"/>
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

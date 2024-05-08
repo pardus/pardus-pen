@@ -1,161 +1,61 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 519.38 515.93">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Adsız_degrade_113);
+      }
 
-<svg
-   width="64"
-   height="64"
-   viewBox="0 0 16.933333 16.933333"
-   version="1.1"
-   id="svg1"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   sodipodi:docname="squares.svg"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     inkscape:zoom="5.9580247"
-     inkscape:cx="59.751347"
-     inkscape:cy="43.806465"
-     inkscape:window-width="1920"
-     inkscape:window-height="1034"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <g
-       id="g12"
-       transform="matrix(0.90523161,0,0,0.90523161,0.80237236,0.80237239)"
-       style="fill:#f9f9f9">
-      <path
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         d="M -0.63387377,2.4122115 H 17.282205"
-         id="path7" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect7"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="7.9444847"
-         ry="0.45297155" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect8"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="2.652818"
-         ry="0.45297155" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect9"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="13.236152"
-         ry="0.45297155" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect10"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-8.9888487"
-         ry="0.45297155"
-         transform="rotate(90)" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect11"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-14.280516"
-         ry="0.45297155"
-         transform="rotate(90)" />
-      <rect
-         style="fill:#f9f9f9;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect12"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-3.6971819"
-         ry="0.45297155"
-         transform="rotate(90)" />
-    </g>
-    <g
-       id="g6"
-       transform="matrix(0.88497757,0,0,0.88497757,0.97385657,0.9738566)">
-      <path
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         d="M -0.63387377,2.4122115 H 17.282205"
-         id="path1" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect1"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="7.9444847"
-         ry="0.45297155" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect2"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="2.652818"
-         ry="0.45297155" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect3"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.932612"
-         y="13.236152"
-         ry="0.45297155" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect4"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-8.9888487"
-         ry="0.45297155"
-         transform="rotate(90)" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect5"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-14.280516"
-         ry="0.45297155"
-         transform="rotate(90)" />
-      <rect
-         style="fill:#000000;stroke-width:0.024;paint-order:stroke fill markers"
-         id="rect6"
-         width="18.798557"
-         height="1.0443643"
-         x="-0.93261176"
-         y="-3.6971819"
-         ry="0.45297155"
-         transform="rotate(90)" />
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#Adsız_degrade_111);
+      }
+
+      .cls-3 {
+        fill: #e83d43;
+      }
+
+      .cls-4 {
+        fill: #f4f4f4;
+      }
+
+      .cls-5 {
+        fill: #00b1d9;
+      }
+
+      .cls-6 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="Adsız_degrade_113" data-name="Adsız degrade 113" x1="274.56" y1="246.57" x2="465.09" y2="50.51" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c1c8cc"/>
+      <stop offset=".1" stop-color="rgba(195, 202, 206, .96)" stop-opacity=".96"/>
+      <stop offset=".26" stop-color="rgba(202, 208, 211, .85)" stop-opacity=".85"/>
+      <stop offset=".45" stop-color="rgba(213, 218, 220, .67)" stop-opacity=".67"/>
+      <stop offset=".68" stop-color="rgba(228, 231, 233, .42)" stop-opacity=".42"/>
+      <stop offset=".92" stop-color="rgba(248, 249, 249, .11)" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="Adsız_degrade_111" data-name="Adsız degrade 111" x1="374.69" y1="143.55" x2="482.2" y2="33.09" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c1c8cc"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="katman_1" data-name="katman 1">
+    <g>
+      <rect class="cls-6" x="3.7" y="2.5" width="513.43" height="513.43"/>
+      <g>
+        <path class="cls-5" d="M.19,126.71v1.6C-.06,252.16-.06,377.4.19,500.54v14.42h519.19V126.71H.19ZM513.5,166.19h-36.49v-36.39h36.49v36.39ZM3.19,406.12h36.46v36.49H3.19v-36.49ZM3.19,366.63h36.46v36.49H3.19v-36.49ZM3.19,327.14h36.46v36.49H3.19v-36.49ZM3.19,287.66h36.46v36.49H3.19v-36.49ZM3.19,248.17h36.46v36.49H3.19v-36.49ZM3.19,208.68h36.46v36.49H3.19v-36.49ZM3.19,169.19h36.46v36.49H3.19v-36.49ZM474.02,166.19h-36.49v-36.39h36.49v36.39ZM316.07,284.66h-36.49v-36.49h36.49v36.49ZM319.07,248.17h36.49v36.49h-36.49v-36.49ZM276.58,284.66h-36.49v-36.49h36.49v36.49ZM237.09,284.66h-36.49v-36.49h36.49v36.49ZM197.6,284.66h-36.49v-36.49h36.49v36.49ZM158.12,284.66h-36.49v-36.49h36.49v36.49ZM158.12,287.66v36.49h-36.49v-36.49h36.49ZM161.12,287.66h36.49v36.49h-36.49v-36.49ZM200.6,287.66h36.49v36.49h-36.49v-36.49ZM240.09,287.66h36.49v36.49h-36.49v-36.49ZM279.58,287.66h36.49v36.49h-36.49v-36.49ZM319.07,287.66h36.49v36.49h-36.49v-36.49ZM358.55,287.66h36.49v36.49h-36.49v-36.49ZM358.55,284.66v-36.49h36.49v36.49h-36.49ZM358.55,245.17v-36.49h36.49v36.49h-36.49ZM355.55,245.17h-36.49v-36.49h36.49v36.49ZM316.07,245.17h-36.49v-36.49h36.49v36.49ZM276.58,245.17h-36.49v-36.49h36.49v36.49ZM237.09,245.17h-36.49v-36.49h36.49v36.49ZM197.6,245.17h-36.49v-36.49h36.49v36.49ZM158.12,245.17h-36.49v-36.49h36.49v36.49ZM118.63,245.17h-36.49v-36.49h36.49v36.49ZM118.63,248.17v36.49h-36.49v-36.49h36.49ZM118.63,287.66v36.49h-36.49v-36.49h36.49ZM118.63,327.14v36.49h-36.49v-36.49h36.49ZM121.63,327.14h36.49v36.49h-36.49v-36.49ZM161.12,327.14h36.49v36.49h-36.49v-36.49ZM200.6,327.14h36.49v36.49h-36.49v-36.49ZM240.09,327.14h36.49v36.49h-36.49v-36.49ZM279.58,327.14h36.49v36.49h-36.49v-36.49ZM319.07,327.14h36.49v36.49h-36.49v-36.49ZM358.55,327.14h36.49v36.49h-36.49v-36.49ZM398.04,327.14h36.49v36.49h-36.49v-36.49ZM398.04,324.14v-36.49h36.49v36.49h-36.49ZM398.04,284.66v-36.49h36.49v36.49h-36.49ZM398.04,245.17v-36.49h36.49v36.49h-36.49ZM398.04,205.68v-36.49h36.49v36.49h-36.49ZM395.04,205.68h-36.49v-36.49h36.49v36.49ZM355.55,205.68h-36.49v-36.49h36.49v36.49ZM316.07,205.68h-36.49v-36.49h36.49v36.49ZM276.58,205.68h-36.49v-36.49h36.49v36.49ZM237.09,205.68h-36.49v-36.49h36.49v36.49ZM197.6,205.68h-36.49v-36.49h36.49v36.49ZM158.12,205.68h-36.49v-36.49h36.49v36.49ZM118.63,205.68h-36.49v-36.49h36.49v36.49ZM79.14,205.68h-36.49v-36.49h36.49v36.49ZM79.14,208.68v36.49h-36.49v-36.49h36.49ZM79.14,248.17v36.49h-36.49v-36.49h36.49ZM79.14,287.66v36.49h-36.49v-36.49h36.49ZM79.14,327.14v36.49h-36.49v-36.49h36.49ZM79.14,366.63v36.49h-36.49v-36.49h36.49ZM82.14,366.63h36.49v36.49h-36.49v-36.49ZM121.63,366.63h36.49v36.49h-36.49v-36.49ZM161.12,366.63h36.49v36.49h-36.49v-36.49ZM200.6,366.63h36.49v36.49h-36.49v-36.49ZM240.09,366.63h36.49v36.49h-36.49v-36.49ZM279.58,366.63h36.49v36.49h-36.49v-36.49ZM319.07,366.63h36.49v36.49h-36.49v-36.49ZM358.55,366.63h36.49v36.49h-36.49v-36.49ZM398.04,366.63h36.49v36.49h-36.49v-36.49ZM437.53,366.63h36.49v36.49h-36.49v-36.49ZM437.53,363.63v-36.49h36.49v36.49h-36.49ZM437.53,324.14v-36.49h36.49v36.49h-36.49ZM437.53,284.66v-36.49h36.49v36.49h-36.49ZM437.53,245.17v-36.49h36.49v36.49h-36.49ZM437.53,205.68v-36.49h36.49v36.49h-36.49ZM434.53,166.19h-36.49v-36.39h36.49v36.39ZM395.04,166.19h-36.49v-36.39h36.49v36.39ZM355.55,166.19h-36.49v-36.39h36.49v36.39ZM316.07,166.19h-36.49v-36.39h36.49v36.39ZM276.58,166.19h-36.49v-36.39h36.49v36.39ZM237.09,166.19h-36.49v-36.39h36.49v36.39ZM197.6,166.19h-36.49v-36.39h36.49v36.39ZM158.12,166.19h-36.49v-36.39h36.49v36.39ZM118.63,166.19h-36.49v-36.39h36.49v36.39ZM79.14,166.19h-36.49v-36.39h36.49v36.39ZM39.65,166.19H3.19v-36.39h36.46v36.39ZM42.65,406.12h36.49v36.49h-36.49v-36.49ZM82.14,406.12h36.49v36.49h-36.49v-36.49ZM121.63,406.12h36.49v36.49h-36.49v-36.49ZM161.12,406.12h36.49v36.49h-36.49v-36.49ZM200.6,406.12h36.49v36.49h-36.49v-36.49ZM240.09,406.12h36.49v36.49h-36.49v-36.49ZM279.58,406.12h36.49v36.49h-36.49v-36.49ZM319.07,406.12h36.49v36.49h-36.49v-36.49ZM358.55,406.12h36.49v36.49h-36.49v-36.49ZM398.04,406.12h36.49v36.49h-36.49v-36.49ZM437.53,406.12h36.49v36.49h-36.49v-36.49ZM477.02,406.12h36.49v36.49h-36.49v-36.49ZM477.02,403.12v-36.49h36.49v36.49h-36.49ZM477.02,363.63v-36.49h36.49v36.49h-36.49ZM477.02,324.14v-36.49h36.49v36.49h-36.49ZM477.02,284.66v-36.49h36.49v36.49h-36.49ZM477.02,245.17v-36.49h36.49v36.49h-36.49ZM477.02,205.68v-36.49h36.49v36.49h-36.49ZM3.19,445.6h36.46v36.49H3.19v-36.49ZM42.65,445.6h36.49v36.49h-36.49v-36.49ZM82.14,445.6h36.49v36.49h-36.49v-36.49ZM121.63,445.6h36.49v36.49h-36.49v-36.49ZM161.12,445.6h36.49v36.49h-36.49v-36.49ZM200.6,445.6h36.49v36.49h-36.49v-36.49ZM240.09,445.6h36.49v36.49h-36.49v-36.49ZM279.58,445.6h36.49v36.49h-36.49v-36.49ZM319.07,445.6h36.49v36.49h-36.49v-36.49ZM358.55,445.6h36.49v36.49h-36.49v-36.49ZM398.04,445.6h36.49v36.49h-36.49v-36.49ZM437.53,445.6h36.49v36.49h-36.49v-36.49ZM477.02,445.6h36.49v36.49h-36.49v-36.49ZM3.19,511.95v-26.86h36.46v26.86H3.19ZM42.65,511.95v-26.86h36.49v26.86h-36.49ZM82.14,511.95v-26.86h36.49v26.86h-36.49ZM121.63,511.95v-26.86h36.49v26.86h-36.49ZM161.12,511.95v-26.86h36.49v26.86h-36.49ZM200.6,511.95v-26.86h36.49v26.86h-36.49ZM240.09,511.95v-26.86h36.49v26.86h-36.49ZM279.58,511.95v-26.86h36.49v26.86h-36.49ZM319.07,511.95v-26.86h36.49v26.86h-36.49ZM358.55,511.95v-26.86h36.49v26.86h-36.49ZM398.04,511.95v-26.86h36.49v26.86h-36.49ZM437.53,511.95v-26.86h36.49v26.86h-36.49ZM477.02,511.95v-26.86h36.49v26.86h-36.49Z"/>
+        <rect class="cls-3" x="77.71" width="5.78" height="513.45"/>
+      </g>
+      <g>
+        <polygon class="cls-1" points="515.69 210.47 306.69 210.47 306.69 1.48 515.69 210.47"/>
+        <polygon class="cls-4" points="515.69 205.39 311.77 205.39 311.77 1.48 515.69 205.39"/>
+        <polygon class="cls-2" points="311.77 1.48 515.69 1.48 515.69 205.39 311.77 1.48"/>
+      </g>
     </g>
   </g>
 </svg>

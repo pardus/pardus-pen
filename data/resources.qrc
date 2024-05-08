@@ -14,6 +14,8 @@
         <file>images/close.svg</file>
         <file>images/go-page-previous.svg</file>
         <file>images/go-page-next.svg</file>
+        <file>images/go-page-previous-disabled.svg</file>
+        <file>images/go-page-next-disabled.svg</file>
         <file>images/go-next-disabled.svg</file>
         <file>images/go-back-disabled.svg</file>
         <file>images/go-back.svg</file>
