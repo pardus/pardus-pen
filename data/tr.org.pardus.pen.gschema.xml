@@ -16,6 +16,14 @@
       <default>31</default>
       <summary>Marker size</summary>
     </key>
+    <key type="i" name="liner-size">
+      <default>3</default>
+      <summary>Line size</summary>
+    </key>
+    <key type="i" name="circle-size">
+      <default>3</default>
+      <summary>Circle size</summary>
+    </key>
     <key type="i" name="cur-x">
       <default>0</default>
       <summary>Current X of toolbar</summary>

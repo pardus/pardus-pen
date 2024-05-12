@@ -126,6 +126,8 @@ DrawingWidget::~DrawingWidget() {}
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     drawing = true;
     lastPoint = event->pos();
+    firstPoint = event->pos();
+    imageBackup = image;
     curEventButtons = event->buttons();
     isMoved = false;
     if(floatingSettings->isVisible()){
@@ -200,27 +202,45 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
         return;
     }
     painter.begin(&image);
+    penColor.setAlpha(255);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
     switch(penType){
+        case PEN:
+            break;
         case ERASER:
             painter.setCompositionMode(QPainter::CompositionMode_Clear);
-            penColor.setAlpha(255);
             break;
         case MARKER:
             penColor.setAlpha(127);
-            painter.setCompositionMode(QPainter::CompositionMode_Source);
             break;
-        case PEN:
-            penColor.setAlpha(255);
-            painter.setCompositionMode(QPainter::CompositionMode_Source);
+        case LINE:
+        case CIRCLE:
+            startPoint = firstPoint;
+            painter.end();
+            image = imageBackup;
+            painter.begin(&image);
             break;
     }
     painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    rad = (penSize[penType]*pressure*screenHeight)/1080;
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    painter.drawLine(startPoint, endPoint);
-    update(QRect(startPoint, endPoint).normalized()
-           .adjusted(-rad, -rad, +rad, +rad));
+
+    switch(penType){
+        case ERASER:
+        case MARKER:
+        case PEN:
+        case LINE:
+            rad = (penSize[penType]*pressure*screenHeight)/1080;
+            painter.drawLine(startPoint, endPoint);
+            update(QRect(startPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
+            break;
+        case CIRCLE:
+            rad = QLineF(startPoint, endPoint).length();
+            painter.drawEllipse(startPoint, rad, rad);
+            update();
+            break;
+    }
+
     painter.end();
 }
 
@@ -303,6 +323,8 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TabletPress: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             lastPoint = tabletEvent->pos();
+            firstPoint = tabletEvent->pos();
+            imageBackup = image;
             tabletActive = true;
             break;
         }

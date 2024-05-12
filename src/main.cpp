@@ -71,6 +71,8 @@ int main(int argc, char *argv[]) {
     window->penSize[PEN] = get_int((char*)"pen-size");
     window->penSize[ERASER] = get_int((char*)"eraser-size");
     window->penSize[MARKER] = get_int((char*)"marker-size");
+    window->penSize[LINE] = get_int((char*)"liner-size");
+    window->penSize[CIRCLE] = get_int((char*)"circle-size");
     window->penType=PEN;
     window->penColor = QColor(get_string((char*)"color"));
 

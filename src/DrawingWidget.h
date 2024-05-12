@@ -14,6 +14,8 @@
 #define ERASER 0
 #define PEN 1
 #define MARKER 2
+#define LINE 3
+#define CIRCLE 4
 
 class DrawingWidget : public QWidget {
 public:
@@ -22,9 +24,10 @@ public:
 
     QImage image;
     QPoint lastPoint;
+    QPoint firstPoint;
     QColor penColor;
     QWidget* floatingSettings;
-    int penSize[3];
+    int penSize[5];
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
     void goPrevious();
@@ -40,6 +43,7 @@ public:
 
 protected:
     bool drawing;
+    QImage imageBackup;
     bool eraser;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;

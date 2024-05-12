@@ -37,6 +37,8 @@ extern QMainWindow* mainWindow;
 QPushButton *penButton;
 QPushButton *markerButton;
 QPushButton *eraserButton;
+QPushButton *lineButton;
+QPushButton *circleButton;
 
 QPushButton *backgroundButton;
 
@@ -75,12 +77,24 @@ static void penStyleEvent(){
     penButton->setStyleSheet(QString("background-color: none;"));
     markerButton->setStyleSheet(QString("background-color: none;"));
     eraserButton->setStyleSheet(QString("background-color: none;"));
-    if(window->penType == PEN){
-        penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    } else if(window->penType == MARKER){
-        markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-    } else{
-        eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+    lineButton->setStyleSheet(QString("background-color: none;"));
+    circleButton->setStyleSheet(QString("background-color: none;"));
+    switch(window->penType){
+        case PEN:
+            penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case MARKER:
+            markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case LINE:
+            lineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case CIRCLE:
+            circleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        default:
+            eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
     }
     ov->penSize = window->penSize[window->penType];
     ov->color = window->penColor;
@@ -115,6 +129,14 @@ static void penSizeEvent(){
         case ERASER:
             penText = _("Eraser");
             set_int((char*)"eraser-size",value);
+            break;
+        case LINE:
+            penText = _("Line");
+            set_int((char*)"liner-size",value);
+            break;
+        case CIRCLE:
+            penText = _("Circle");
+            set_int((char*)"circle-size",value);
             break;
     }
     thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
@@ -432,6 +454,36 @@ static void setupPenType(){
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
+
+    lineButton = create_button(":images/liner.svg", [=](){
+        if(window->penType == LINE){
+            floatingSettings->hide();
+            return;
+        }
+        sliderLock = true;
+        window->penType = LINE;
+        penStyleEvent();
+        thicknessSlider->setRange(1,100);
+        thicknessSlider->setValue(window->penSize[LINE]);
+        penSizeEvent();
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(lineButton);
+    
+    circleButton = create_button(":images/circle.svg", [=](){
+        if(window->penType == CIRCLE){
+            floatingSettings->hide();
+            return;
+        }
+        sliderLock = true;
+        window->penType = CIRCLE;
+        penStyleEvent();
+        thicknessSlider->setRange(1,100);
+        thicknessSlider->setValue(window->penSize[CIRCLE]);
+        penSizeEvent();
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(circleButton);
 
     eraserButton = create_button(":images/eraser.svg", [=](){
         if(window->penType == ERASER){
