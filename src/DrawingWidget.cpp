@@ -232,10 +232,13 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
 
     switch(penStyle){
         case SPLINE:
-        case LINE:
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             painter.drawLine(startPoint, endPoint);
             update(QRect(startPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
+            break;
+        case LINE:
+            painter.drawLine(startPoint, endPoint);
+            update();
             break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
