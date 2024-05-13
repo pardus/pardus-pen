@@ -10,19 +10,11 @@
     </key>
     <key type="i" name="eraser-size">
       <default>100</default>
-      <summary>Pen size</summary>
+      <summary>Eraser size</summary>
     </key>
     <key type="i" name="marker-size">
       <default>31</default>
       <summary>Marker size</summary>
-    </key>
-    <key type="i" name="liner-size">
-      <default>3</default>
-      <summary>Line size</summary>
-    </key>
-    <key type="i" name="circle-size">
-      <default>3</default>
-      <summary>Circle size</summary>
     </key>
     <key type="i" name="cur-x">
       <default>0</default>

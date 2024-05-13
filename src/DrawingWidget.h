@@ -14,8 +14,11 @@
 #define ERASER 0
 #define PEN 1
 #define MARKER 2
-#define LINE 3
-#define CIRCLE 4
+
+
+#define LINE 0
+#define CIRCLE 1
+#define SPLINE 2
 
 class DrawingWidget : public QWidget {
 public:
@@ -27,7 +30,7 @@ public:
     QPoint firstPoint;
     QColor penColor;
     QWidget* floatingSettings;
-    int penSize[5];
+    int penSize[3];
     void initializeImage(const QSize &size);
     void drawLineTo(const QPoint &endPoint);
     void goPrevious();
@@ -36,6 +39,7 @@ public:
     void goNextPage();
     void clear();
     int penType;
+    int penStyle;
     void syncPageType(int type);
     int getPageNum();
     bool isBackAvailable();

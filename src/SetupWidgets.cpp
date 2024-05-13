@@ -35,8 +35,10 @@ extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
 
 QPushButton *penButton;
+QPushButton *typeButton;
 QPushButton *markerButton;
 QPushButton *eraserButton;
+QPushButton *splineButton;
 QPushButton *lineButton;
 QPushButton *circleButton;
 
@@ -62,6 +64,7 @@ bool sliderLock = false;
 
 QWidget *penSettings;
 QWidget *colorDialog;
+QWidget *typeDialog;
 QSlider *thicknessSlider;
 QLabel *thicknessLabel;
 QLabel *colorLabel;
@@ -78,6 +81,7 @@ static void penStyleEvent(){
     markerButton->setStyleSheet(QString("background-color: none;"));
     eraserButton->setStyleSheet(QString("background-color: none;"));
     lineButton->setStyleSheet(QString("background-color: none;"));
+    splineButton->setStyleSheet(QString("background-color: none;"));
     circleButton->setStyleSheet(QString("background-color: none;"));
     switch(window->penType){
         case PEN:
@@ -86,6 +90,11 @@ static void penStyleEvent(){
         case MARKER:
             markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
+        default:
+            eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+    }
+    switch(window->penStyle){
         case LINE:
             lineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
@@ -93,7 +102,7 @@ static void penStyleEvent(){
             circleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
         default:
-            eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            splineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
     }
     ov->penSize = window->penSize[window->penType];
@@ -129,14 +138,6 @@ static void penSizeEvent(){
         case ERASER:
             penText = _("Eraser");
             set_int((char*)"eraser-size",value);
-            break;
-        case LINE:
-            penText = _("Line");
-            set_int((char*)"liner-size",value);
-            break;
-        case CIRCLE:
-            penText = _("Circle");
-            set_int((char*)"circle-size",value);
             break;
     }
     thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
@@ -230,8 +231,8 @@ static void setupMove(){
 static void setupPenSize(){
 
     QPushButton *penSettingsButton = create_button(":images/pen-settings.svg",  [=](){
-        floatingSettings->setPage(0);
-        floatingWidget->setFloatingOffset(4);
+        floatingSettings->setPage(1);
+        floatingWidget->setFloatingOffset(5);
     });
     penSettingsButton->setStyleSheet(QString("background-color: none;"));
 
@@ -455,35 +456,58 @@ static void setupPenType(){
     });
     floatingWidget->setWidget(markerButton);
 
+    typeDialog = new QWidget();
+    typeDialog->setWindowTitle(_("Pen Style"));
+
+    typeButton = create_button(":images/spline.svg", [=](){
+        floatingSettings->setPage(0);
+        floatingWidget->setFloatingOffset(4);
+    });
+    floatingSettings->addPage(typeDialog);
+
+
+    QGridLayout *gridLayout = new QGridLayout(typeDialog);
+    gridLayout->setContentsMargins(0,0,0,0);
+    gridLayout->setSpacing(padding);
+
+
     lineButton = create_button(":images/liner.svg", [=](){
-        if(window->penType == LINE){
+        if(window->penStyle == LINE){
             floatingSettings->hide();
             return;
         }
-        sliderLock = true;
-        window->penType = LINE;
+        window->penStyle = LINE;
         penStyleEvent();
-        thicknessSlider->setRange(1,100);
-        thicknessSlider->setValue(window->penSize[LINE]);
-        penSizeEvent();
-        sliderLock = false;
+        set_icon(":images/liner.svg", typeButton);
     });
-    floatingWidget->setWidget(lineButton);
-    
+    gridLayout->addWidget(lineButton, 0, 0);
+
     circleButton = create_button(":images/circle.svg", [=](){
-        if(window->penType == CIRCLE){
+        if(window->penStyle == CIRCLE){
             floatingSettings->hide();
             return;
         }
-        sliderLock = true;
-        window->penType = CIRCLE;
+        window->penStyle = CIRCLE;
         penStyleEvent();
-        thicknessSlider->setRange(1,100);
-        thicknessSlider->setValue(window->penSize[CIRCLE]);
-        penSizeEvent();
-        sliderLock = false;
+        set_icon(":images/circle.svg", typeButton);
     });
-    floatingWidget->setWidget(circleButton);
+    gridLayout->addWidget(circleButton, 0, 1);
+
+    splineButton = create_button(":images/spline.svg", [=](){
+        if(window->penStyle == SPLINE){
+            floatingSettings->hide();
+            return;
+        }
+        window->penStyle = SPLINE;
+        penStyleEvent();
+        set_icon(":images/spline.svg", typeButton);
+    });
+    gridLayout->addWidget(splineButton, 0, 2);
+
+    typeDialog->setFixedSize(
+        (butsize+padding)*3 + padding,
+        (butsize+padding)*1 + padding
+    );
 
     eraserButton = create_button(":images/eraser.svg", [=](){
         if(window->penType == ERASER){
@@ -499,6 +523,7 @@ static void setupPenType(){
         sliderLock = false;
     });
     floatingWidget->setWidget(eraserButton);
+    floatingWidget->setWidget(typeButton);
     penStyleEvent();
 }
 
@@ -514,7 +539,7 @@ static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
     backgroundButton = create_button("",  [=](){
-        floatingSettings->setPage(1);
+        floatingSettings->setPage(2);
         floatingWidget->setFloatingOffset(5);
     });
 
@@ -720,8 +745,8 @@ static void setupClear(){
     clearButtonLayout->addWidget(yesButton);
 
     QPushButton *clear = create_button(":images/clear.svg", [=](){
-        floatingSettings->setPage(2);
-        floatingWidget->setFloatingOffset(6);
+        floatingSettings->setPage(3);
+        floatingWidget->setFloatingOffset(7);
     });
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
@@ -759,8 +784,8 @@ static void setupExit(){
     exitButtonLayout->addWidget(yesButton);
 
     QPushButton *close = create_button(":images/close.svg", [=](){
-        floatingSettings->setPage(3);
-        floatingWidget->setFloatingOffset(11);
+        floatingSettings->setPage(4);
+        floatingWidget->setFloatingOffset(12);
     });
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(

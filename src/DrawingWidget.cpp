@@ -201,7 +201,18 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
-    painter.begin(&image);
+
+    switch(penStyle){
+        case SPLINE:
+            painter.begin(&image);
+            break;
+        case LINE:
+        case CIRCLE:
+            startPoint = firstPoint;
+            image = imageBackup;
+            painter.begin(&image);
+            break;
+    }
     penColor.setAlpha(255);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
     switch(penType){
@@ -213,22 +224,14 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
         case MARKER:
             penColor.setAlpha(127);
             break;
-        case LINE:
-        case CIRCLE:
-            startPoint = firstPoint;
-            painter.end();
-            image = imageBackup;
-            painter.begin(&image);
-            break;
     }
+
     painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
-    switch(penType){
-        case ERASER:
-        case MARKER:
-        case PEN:
+    switch(penStyle){
+        case SPLINE:
         case LINE:
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             painter.drawLine(startPoint, endPoint);
