@@ -463,6 +463,7 @@ static void setupPenType(){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(4);
     });
+    typeButton->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(typeDialog);
 
 

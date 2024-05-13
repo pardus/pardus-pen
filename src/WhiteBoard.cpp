@@ -69,13 +69,11 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case LINES:
             drawLinePaper();
             break;
-                
     }
     painter.end();
 }
 
 void WhiteBoard::drawSquarePaper() {
-    
     // Draw horizontal lines
     for (int y = 0; y < height(); y += gridSize) {
         painter.drawLine(0, y, width(), y);
