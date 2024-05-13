@@ -4,7 +4,7 @@
    data-name="katman 2"
    viewBox="0 0 434.99 421.82"
    version="1.1"
-   sodipodi:docname="circle.svg"
+   sodipodi:docname="spline.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -74,16 +74,9 @@
       }
     </style>
   </defs>
-  <circle
-     style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:50;stroke-dasharray:none"
-     id="circle948"
-     cx="217.495"
-     cy="210.91"
-     r="180.49223" />
-  <circle
-     style="fill:#000000;fill-opacity:0;stroke:#ffffff;stroke-width:31;stroke-opacity:1;stroke-dasharray:none"
-     id="path946"
-     cx="217.495"
-     cy="210.91"
-     r="180.8763" />
+  <path
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:5;stroke-dasharray:none"
+     d="m 73.733266,326.06138 c 20.612134,-30.85425 42.087614,-50.01999 73.534374,-71.767 44.67586,-30.89558 103.45185,-34.13691 144.57749,-69.62142 40.41117,-34.86803 26.54483,-74.92905 68.83812,-105.27576 5.64087,-4.047487 15.61916,-6.525455 17.0378,0.270793 C 388.16391,129.69626 355.54282,181.65194 319.36433,217.749 276.87195,260.14575 233.47731,257.08588 172.852,283.63758 110.29711,311.03435 116.47331,378.38682 79.796848,373.10845 70.744466,371.80566 68.6529,333.66616 73.733266,326.06138 Z"
+     id="path1080"
+     sodipodi:nodetypes="sssssssss" />
 </svg>

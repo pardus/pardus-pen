@@ -3,7 +3,9 @@
         <file>images/eraser.svg</file>
         <file>images/marker.svg</file>
         <file>images/pen.svg</file>
-        <file>images/liner.svg</file>
+        <file>images/line.svg</file>
+        <file>images/circle.svg</file>
+        <file>images/spline.svg</file>
         <file>images/screen.svg</file>
         <file>images/clear.svg</file>
         <file>images/paper-transparent.svg</file>
@@ -24,7 +26,7 @@
         <file>images/overlay-none.svg</file>
         <file>images/overlay-squares.svg</file>
         <file>images/overlay-lines.svg</file>
-        <file>images/circle.svg</file>
+        <file>images/cursor.svg</file>
         <file>images/move-icon.svg</file>
         <file>tr.org.pardus.pen.svg</file>
     </qresource>

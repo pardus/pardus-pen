@@ -154,7 +154,7 @@ static void penSizeEvent(){
         colorDialog->hide();
         ov->hide();
         colorLabel->hide();
-        setCursor(":images/circle.svg");
+        setCursor(":images/cursor.svg");
     } else {
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
@@ -471,14 +471,14 @@ static void setupPenType(){
     gridLayout->setSpacing(padding);
 
 
-    lineButton = create_button(":images/liner.svg", [=](){
+    lineButton = create_button(":images/line.svg", [=](){
         if(window->penStyle == LINE){
             floatingSettings->hide();
             return;
         }
         window->penStyle = LINE;
         penStyleEvent();
-        set_icon(":images/liner.svg", typeButton);
+        set_icon(":images/line.svg", typeButton);
     });
     gridLayout->addWidget(lineButton, 0, 0);
 
