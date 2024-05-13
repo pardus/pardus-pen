@@ -1,43 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   id="katman_2"
-   viewBox="0 0 317.62 327.78"
-   version="1.1"
-   sodipodi:docname="go-page-previous.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview10"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="2.6999817"
-     inkscape:cx="159.07515"
-     inkscape:cy="164.07519"
-     inkscape:window-width="1920"
-     inkscape:window-height="1057"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="katman_2" />
-  <defs
-     id="defs4">
-    <style
-       id="style2">.cls-1{fill:#1eb8d3;stroke:#1f71b8;stroke-miterlimit:10;stroke-width:6px;}</style>
-  </defs>
-  <g
-     id="katman_1">
-    <path
-       class="cls-1"
-       d="M 5.07,159.15 171.12,4.74 c 2.63,-2.44 6.74,-2.3 9.18,0.33 l 18.42,19.78 c 2.45,2.63 2.3,6.74 -0.33,9.19 L 80.24,143.87 h 234.38 v 40 H 80.17 c 0,0 118.23,109.87 118.23,109.87 2.63,2.45 2.78,6.56 0.33,9.19 l -18.42,19.78 c -2.45,2.63 -6.55,2.77 -9.18,0.33 L 5.07,168.67 c -2.77,-2.57 -2.77,-6.95 0,-9.52 z"
-       id="path6" />
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.0" id="katman_2_00000015328674555090814690000013762126697356173469_"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+	 style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#1EB7D2;}
+	.st1{fill:#1F71B7;}
+</style>
+<path class="st0" d="M102.3,251.3l166-154.4c2.6-2.4,6.7-2.3,9.2,0.3l18.4,19.8c2.4,2.6,2.3,6.7-0.3,9.2L177.4,236h234.4v40H177.4
+	l118.2,109.9c2.6,2.4,2.8,6.6,0.3,9.2l-18.4,19.8c-2.4,2.6-6.6,2.8-9.2,0.3l-166-154.4C99.5,258.2,99.5,253.8,102.3,251.3z"/>
+<path class="st1" d="M266.3,417.3L100.2,263c-1.9-1.8-3-4.3-3-7c0-2.6,1.1-5.2,3-7l166-154.4c3.8-3.6,9.9-3.3,13.4,0.5l18.4,19.8
+	c1.7,1.9,2.6,4.3,2.5,6.8c-0.1,2.5-1.2,4.9-3,6.6L185.1,233h229.7v46H185l112.6,104.7c1.9,1.7,2.9,4.1,3,6.6c0.1,2.5-0.8,5-2.5,6.8
+	l-18.4,19.8c-1.9,2-4.4,3-7,3C270.4,419.9,268.1,419,266.3,417.3z M408.8,239h-239l123.7-115c0.7-0.6,1.1-1.5,1.1-2.4
+	c0-0.9-0.3-1.8-0.9-2.5l-18.4-19.8c-1.3-1.4-3.5-1.5-4.9-0.2l-166,154.4c-0.7,0.7-1.1,1.6-1.1,2.6c0,1,0.4,1.9,1.1,2.6l166,154.4
+	c1.4,1.3,3.6,1.2,4.9-0.2l18.4-19.8c0.6-0.7,1-1.6,0.9-2.5c0-0.9-0.4-1.8-1.1-2.4L169.7,273h239.1V239z"/>
 </svg>
