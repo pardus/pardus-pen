@@ -21,10 +21,15 @@ Simple qt based pen application
 ## How to build
 ### Installing Dependencies
 For debian:
+
 `apt install meson ninja-build qtbase5-dev qtchooser libglib2.0-dev`
+
 For archlinux:
+
 `pacman -Sy meson ninja qt5-base qt5-tools glib2`
+
 For alpine:
+
 `apk add qt5-qtbase-dev qt5-qttools-dev glib-dev`
 
 ### Building
