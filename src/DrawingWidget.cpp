@@ -201,8 +201,12 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
+    int fpenStyle =  penStyle;
+    if (penType == ERASER) {
+        penStyle = SPLINE;
+    }
 
-    switch(penStyle){
+    switch(fpenStyle){
         case SPLINE:
             painter.begin(&image);
             break;
@@ -230,7 +234,7 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
-    switch(penStyle){
+    switch(fpenStyle){
         case SPLINE:
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             painter.drawLine(startPoint, endPoint);
