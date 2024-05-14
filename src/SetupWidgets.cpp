@@ -49,6 +49,11 @@ QPushButton* blackButton;
 QPushButton* whiteButton;
 QPushButton* colorpicker;
 
+QPushButton* overlayLines;
+QPushButton* overlaySquares;
+QPushButton* overlayNone;
+
+
 QPushButton *backButton;
 QPushButton *nextButton;
 
@@ -200,18 +205,35 @@ static void backgroundStyleEvent(){
     transparentButton->setStyleSheet(QString("background-color: none;"));
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
-    if (board->getType() == BLACK) {
-        set_icon(":images/paper-black.svg",backgroundButton);
-        blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        ov->background = Qt::black;
-    } else if (board->getType() == WHITE) {
-        whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        set_icon(":images/paper-white.svg",backgroundButton);
-        ov->background = Qt::white;
-    }else {
-        transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
-        set_icon(":images/paper-transparent.svg",backgroundButton);
-        ov->background = Qt::transparent;
+    overlayLines->setStyleSheet(QString("background-color: none;"));
+    overlaySquares->setStyleSheet(QString("background-color: none;"));
+    overlayNone->setStyleSheet(QString("background-color: none;"));
+    switch(board->getType()){
+        case BLACK:
+            set_icon(":images/paper-black.svg",backgroundButton);
+            blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            ov->background = Qt::black;
+            break;
+        case WHITE:
+            whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/paper-white.svg",backgroundButton);
+            ov->background = Qt::white;
+            break;
+        default:
+            transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/paper-transparent.svg",backgroundButton);
+            ov->background = Qt::transparent;
+            break;
+    }
+    switch(board->getOverlayType()){
+        case LINES:
+            overlayLines->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case SQUARES:
+            overlaySquares->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        default:
+            overlayNone->setStyleSheet("background-color:"+window->penColor.name()+";");
     }
     ov->updateImage();
 }
@@ -630,18 +652,21 @@ static void setupBackground(){
     overlayLayout->setSpacing(padding);
 
     // overlay buttons
-    QPushButton *overlayNone = create_button(":images/overlay-none.svg", [=](){
+    overlayNone = create_button(":images/overlay-none.svg", [=](){
         board->setOverlayType(NONE);
+        backgroundStyleEvent();
     });
     overlayNone->setStyleSheet(QString("background-color: none;"));
 
-    QPushButton *overlaySquares = create_button(":images/overlay-squares.svg", [=](){
+    overlaySquares = create_button(":images/overlay-squares.svg", [=](){
         board->setOverlayType(SQUARES);
+        backgroundStyleEvent();
     });
     overlaySquares->setStyleSheet(QString("background-color: none;"));
 
-    QPushButton *overlayLines = create_button(":images/overlay-lines.svg", [=](){
+    overlayLines = create_button(":images/overlay-lines.svg", [=](){
         board->setOverlayType(LINES);
+        backgroundStyleEvent();
     });
     overlayLines->setStyleSheet(QString("background-color: none;"));
 
