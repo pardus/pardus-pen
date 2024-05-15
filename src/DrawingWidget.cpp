@@ -203,7 +203,7 @@ void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoin
     }
     int fpenStyle =  penStyle;
     if (penType == ERASER) {
-        penStyle = SPLINE;
+        fpenStyle = SPLINE;
     }
 
     switch(fpenStyle){
