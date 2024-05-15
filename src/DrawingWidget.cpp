@@ -197,7 +197,7 @@ void DrawingWidget::drawLineTo(const QPoint &endPoint) {
     lastPoint = endPoint;
 }
 
-void DrawingWidget::drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressure) {
+void DrawingWidget::drawLineToFunc(QPoint startPoint, QPoint endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }

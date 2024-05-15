@@ -50,6 +50,7 @@ void FloatingWidget::mousePressEvent(QMouseEvent *event) {
 }
 
 void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
+    (void)(event); // fix unused warning
     offset_x =-1;
     offset_y =-1;
     set_int((char*)"cur-x", new_x);
