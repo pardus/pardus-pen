@@ -22,6 +22,11 @@ penType:
 #include <QDebug>
 #include <QMap>
 
+#ifdef QT5
+#define points touchPoints
+#define position pos
+#endif
+
 
 class ValueStorage {
 public:
@@ -125,8 +130,8 @@ DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     drawing = true;
-    lastPoint = event->pos();
-    firstPoint = event->pos();
+    lastPoint = event->position();
+    firstPoint = event->position();
     imageBackup = image;
     curEventButtons = event->buttons();
     isMoved = false;
@@ -144,7 +149,7 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
         penType = MARKER;
     }
     if (drawing) {
-        drawLineTo(event->pos());
+        drawLineTo(event->position());
     }
     isMoved = true;
     penType = penTypeBak;
@@ -152,7 +157,7 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if(curEventButtons & Qt::LeftButton && !isMoved) {
-        drawLineTo(event->pos()+QPoint(0,1));
+        drawLineTo(event->position()+QPointF(0,1));
     }
     if (drawing) {
        drawing = false;
@@ -192,12 +197,12 @@ void DrawingWidget::clear() {
 
 int rad = 0;
 
-void DrawingWidget::drawLineTo(const QPoint &endPoint) {
+void DrawingWidget::drawLineTo(const QPointF &endPoint) {
     drawLineToFunc(lastPoint, endPoint, 1.0);
     lastPoint = endPoint;
 }
 
-void DrawingWidget::drawLineToFunc(QPoint startPoint, QPoint endPoint, qreal pressure) {
+void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
@@ -238,7 +243,12 @@ void DrawingWidget::drawLineToFunc(QPoint startPoint, QPoint endPoint, qreal pre
         case SPLINE:
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             painter.drawLine(startPoint, endPoint);
-            update(QRect(startPoint, endPoint).normalized().adjusted(-rad, -rad, +rad, +rad));
+            update(QRect(
+                startPoint.x() - rad,
+                startPoint.y() - rad,
+                endPoint.x() + rad,
+                endPoint.y() + rad
+            ));
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
@@ -260,7 +270,7 @@ void DrawingWidget::loadImage(int num){
     QRectF target(0, 0, screenWidth, screenHeight);
     QRectF source(0.0, 0.0, screenWidth, screenHeight);
     image.fill(QColor("transparent"));
-    p.drawImage(QPoint(0,0), img);
+    p.drawImage(QPointF(0,0), img);
     update();
 }
 
@@ -314,13 +324,13 @@ bool DrawingWidget::event(QEvent *ev) {
                 floatingSettings->hide();
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
-            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
-                QPointF pos = touchPoint.pos();
-                if (touchPoint.state() == Qt::TouchPointPressed) {
+                QPointF pos = touchPoint.position();
+                if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
                     storage.saveValue(touchPoint.id(), pos);
                 }
-                else if (touchPoint.state() == Qt::TouchPointReleased) {
+                else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     storage.saveValue(touchPoint.id(), QPointF(-1,-1));
                     continue;
                 }
@@ -332,8 +342,8 @@ bool DrawingWidget::event(QEvent *ev) {
         }
         case QEvent::TabletPress: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            lastPoint = tabletEvent->pos();
-            firstPoint = tabletEvent->pos();
+            lastPoint = tabletEvent->position();
+            firstPoint = tabletEvent->position();
             imageBackup = image;
             tabletActive = true;
             break;
@@ -347,9 +357,9 @@ bool DrawingWidget::event(QEvent *ev) {
                 break;
             }
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            QPointF pos = tabletEvent->pos();
+            QPointF pos = tabletEvent->position();
             drawLineToFunc(lastPoint, pos.toPoint(), tabletEvent->pressure());
-            lastPoint = tabletEvent->pos();
+            lastPoint = tabletEvent->position();
         }
 
         default:

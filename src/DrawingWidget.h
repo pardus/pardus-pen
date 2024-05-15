@@ -26,13 +26,13 @@ public:
     ~DrawingWidget(); // Destructor
 
     QImage image;
-    QPoint lastPoint;
-    QPoint firstPoint;
+    QPointF lastPoint;
+    QPointF firstPoint;
     QColor penColor;
     QWidget* floatingSettings;
     int penSize[3];
     void initializeImage(const QSize &size);
-    void drawLineTo(const QPoint &endPoint);
+    void drawLineTo(const QPointF &endPoint);
     void goPrevious();
     void goNext();
     void goPreviousPage();
@@ -54,7 +54,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
-    void drawLineToFunc(const QPoint startPoint, const QPoint endPoint, qreal pressure);
+    void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
     void loadImage(int num);
     bool event(QEvent * ev);
     QPainter painter;

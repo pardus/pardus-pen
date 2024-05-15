@@ -33,12 +33,14 @@ qt_dep = [
     dependency('gio-2.0')
 ]
 if get_option('qt') == '5'
+    add_project_arguments('-DQT5', language: 'cpp')
     qt_dep += [
         dependency('Qt5Core'),
         dependency('Qt5Gui'),
         dependency('Qt5Widgets'),
     ]
 elif get_option('qt') == '6'
+    add_project_arguments('-DQT6', language: 'cpp')
     qt_dep += [
         dependency('Qt6Core'),
         dependency('Qt6Gui'),

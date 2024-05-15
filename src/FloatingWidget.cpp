@@ -11,6 +11,9 @@ extern "C" {
 #include "settings.h"
 }
 
+#ifdef QT5
+#define globalPosition globalPos
+#endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
@@ -45,8 +48,8 @@ void FloatingWidget::setWidget(QWidget *widget) {
 }
 
 void FloatingWidget::mousePressEvent(QMouseEvent *event) {
-    offset_x = abs(event->globalPos().x() - new_x);
-    offset_y = abs(event->globalPos().y() - new_y);
+    offset_x = abs(event->globalPosition().x() - new_x);
+    offset_y = abs(event->globalPosition().y() - new_y);
 }
 
 void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
@@ -94,8 +97,8 @@ void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {
         return;
     }
     if (event->buttons() & Qt::LeftButton) {
-        new_x = event->globalPos().x() - offset_x;
-        new_y = event->globalPos().y() - offset_y;
+        new_x = event->globalPosition().x() - offset_x;
+        new_y = event->globalPosition().y() - offset_y;
         moveAction();
         event->accept();
     }
