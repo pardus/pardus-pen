@@ -243,12 +243,9 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
         case SPLINE:
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             painter.drawLine(startPoint, endPoint);
-            update(QRect(
-                startPoint.x() - rad,
-                startPoint.y() - rad,
-                endPoint.x() + rad,
-                endPoint.y() + rad
-            ));
+            update(QRectF(
+                startPoint, endPoint
+            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
