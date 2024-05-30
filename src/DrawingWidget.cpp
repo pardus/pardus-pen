@@ -117,12 +117,9 @@ bool isMoved = 0;
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
-    QList<QScreen*> screens = QGuiApplication::screens();
-    for (QScreen *screen : screens) {
-        screenWidth  += screen->geometry().width();
-        screenHeight += screen->geometry().height();
-        break;
-    }
+    QScreen *screen = QGuiApplication::primaryScreen();
+    screenWidth  = screen->geometry().width();
+    screenHeight = screen->geometry().height();
     setFixedSize(screenWidth, screenHeight);
 }
 

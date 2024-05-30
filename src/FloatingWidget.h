@@ -20,7 +20,7 @@ public:
     void setWidget(QWidget *widget);
     void setSettings(QWidget *widget);
     void setFloatingOffset(int offset);
-
+    void moveAction();
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
@@ -28,7 +28,6 @@ protected:
 private:
     int settingsOffset = 0;
     int num_of_item = 0;
-    void moveAction();
     int offset_x = -1;
     int offset_y = -1;
     FloatingSettings* floatingSettings;

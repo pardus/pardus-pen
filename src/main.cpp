@@ -99,5 +99,18 @@ int main(int argc, char *argv[]) {
     );
     mainWindow->showFullScreen();
 
+    // Create a lambda function to handle geometry changes
+    auto handleGeometryChange = [](const QRect &newGeometry){
+        (void)newGeometry;
+        screenWidth  = newGeometry.width();
+        screenHeight = newGeometry.height();
+        mainWindow->setFixedSize(screenWidth, screenHeight);
+        floatingWidget->moveAction();
+        puts("Screen geometry changed");
+    };
+
+    QObject::connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged,
+                     handleGeometryChange);
+
     return app.exec();
 }
