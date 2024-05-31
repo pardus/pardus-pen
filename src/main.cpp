@@ -105,6 +105,8 @@ int main(int argc, char *argv[]) {
         screenWidth  = newGeometry.width();
         screenHeight = newGeometry.height();
         mainWindow->setFixedSize(screenWidth, screenHeight);
+        window->setFixedSize(screenWidth, screenHeight);
+        board->setFixedSize(screenWidth, screenHeight);
         floatingWidget->moveAction();
         puts("Screen geometry changed");
     };
