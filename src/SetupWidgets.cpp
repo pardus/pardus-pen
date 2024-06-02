@@ -783,6 +783,25 @@ static void setupClear(){
     floatingWidget->setWidget(clear);
 
 }
+static void setupSave(){
+
+    QPushButton *save = create_button(":images/save.svg", [=](){
+        window->saveAll();
+    });
+    save->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(save);
+    
+    QPushButton *open = create_button(":images/open.svg", [=](){
+        QString filename = QFileDialog::getOpenFileName(window, _("Open File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+        if(!filename.isEmpty()){
+            window->loadArchive(filename);
+        }
+    });
+    open->setStyleSheet(QString("background-color: none;"));
+    floatingWidget->setWidget(open);
+    
+}
+
 static void setupExit(){
     QWidget *exitDialog = new QWidget();
     QVBoxLayout *exitLayout = new QVBoxLayout(exitDialog);
@@ -820,6 +839,7 @@ static void setupExit(){
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);
+    
 }
 
 void setupWidgets(){
@@ -832,5 +852,6 @@ void setupWidgets(){
     setupMinify();
     setupScreenShot();
     setupGoBackNext();
+    setupSave();
     setupExit();
 }

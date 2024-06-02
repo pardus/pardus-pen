@@ -10,6 +10,12 @@
 #include <QScreen>
 #include <iostream>
 
+#include <QtWidgets>
+
+#include <QImage>
+#include <QPainter>
+#include <QSvgGenerator>
+
 
 #define ERASER 0
 #define PEN 1
@@ -38,12 +44,15 @@ public:
     void goPreviousPage();
     void goNextPage();
     void clear();
+    void saveAll();
+    void loadArchive(const QString& filename);
     int penType;
     int penStyle;
     void syncPageType(int type);
     int getPageNum();
     bool isBackAvailable();
     bool isNextAvailable();
+    void loadImage(int num);
 
 protected:
     bool drawing;
@@ -55,12 +64,12 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
-    void loadImage(int num);
     bool event(QEvent * ev);
     QPainter painter;
 };
 
 QColor convertColor(QColor color);
+void qImageToFile(const QImage& image, const QString& filename);
 
 #endif // DRAWINGWIDGET_H
 

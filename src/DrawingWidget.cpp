@@ -1,12 +1,21 @@
-#include <QtWidgets>
-
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
+#include "Archive.h"
 #include <stdio.h>
+
+
+#include <stdlib.h>
+#include <locale.h>
+#include <libintl.h>
+
+#define _(String) gettext(String)
 
 extern WhiteBoard *board;
 
+extern DrawingWidget *window;
+
 extern void updateGoBackButtons();
+void removeDirectory(const QString &path);
 
 int screenWidth = 0;
 int screenHeight = 0;
@@ -46,6 +55,7 @@ public:
 private:
     QMap<qint64, QPointF> values;
 };
+ValueStorage storage;
 
 class ImageStorage {
 public:
@@ -76,6 +86,7 @@ public:
 private:
     QMap<qint64, QImage> values;
 };
+ImageStorage images;
 
 
 class PageStorage {
@@ -88,9 +99,59 @@ public:
 
     void clear(){
         values.clear();
+        last_page_num = 0;
+        page_count = 0;
+    }
+    
+    void saveAll(const QString& filename){
+        values[last_page_num] = images;
+        ArchiveCreator archive;
+        archive.create(filename.toStdString());
+        removeDirectory("/tm/pardus-pen/");
+        for(int i=0;i<=page_count;i++){
+            printf("AAA: %d %d\n", page_count,loadValue(i).image_count );
+            for(int j=1;j<=loadValue(i).image_count;j++){
+                QString p = "/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j-1)+".png";
+                qImageToFile(values[i].loadValue(j),p);
+                archive.addPath(p.toStdString(), (QString::number(i)+"/"+QString::number(j-1)+".png").toStdString());
+            }
+        }
+        puts(filename.toStdString().c_str());
+        archive.closePath();
+    }
+    
+    void loadArchive(const QString& filename){
+        removeDirectory("/tmp/pardus-pen");
+        ArchiveCreator archive;
+        archive.extract(filename.toStdString(), "/tmp/pardus-pen");
+        int i=0;
+        QString dirname(("/tmp/pardus-pen/"+QString::number(i)));
+        while(QFileInfo(dirname).isDir()) {
+            int j = 0;
+            QString fname(("/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j)+".png"));
+            ImageStorage data;
+            while(QFileInfo(fname).isFile()) {
+                data.saveValue(j+1,QImage(fname));
+                data.last_image_num++;
+                data.image_count++;
+                printf("Load: %d %d\n", i, j);
+                j++;
+                fname = ("/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j)+".png");
+            }
+            saveValue(i,data);
+            i++;
+            dirname = ("/tmp/pardus-pen/"+QString::number(i));
+        }
+        images = loadValue(0);
+        window->loadImage(images.last_image_num);
+        updateGoBackButtons();
+        removeDirectory("/tmp/pardus-pen");
     }
 
     ImageStorage loadValue(qint64 id) {
+        if (id > page_count){
+            page_count = id;
+        }
         if (values.contains(id)) {
             return values[id];
         } else {
@@ -103,11 +164,6 @@ public:
 private:
     QMap<qint64, ImageStorage> values;
 };
-
-ImageStorage images;
-
-ValueStorage storage;
-
 PageStorage pages;
 
 
@@ -258,6 +314,17 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
     painter.end();
 }
 
+void DrawingWidget::saveAll(){
+    QString dir = QFileDialog::getSaveFileName(this, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+    if (!dir.isEmpty()) {
+        pages.saveAll(dir);
+    }
+}
+
+void DrawingWidget::loadArchive(const QString& filename){
+    pages.loadArchive(filename);
+}
+
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
     QPainter p(&image);
@@ -386,3 +453,38 @@ QColor convertColor(QColor color) {
 
     }
 }
+
+void removeDirectory(const QString &path) {
+    QDir dir(path);
+    if (!dir.exists())
+        return;
+
+    QFileInfoList fileInfoList = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::AllEntries | QDir::Hidden);
+    foreach (const QFileInfo &fi, fileInfoList) {
+        if (fi.isDir()) {
+            removeDirectory(fi.absoluteFilePath());
+        } else {
+            QFile::remove(fi.absoluteFilePath());
+            qDebug() << "Remove:" << fi.absoluteFilePath();
+        }
+    }
+
+    dir.rmdir(path);
+}
+
+void qImageToFile(const QImage& image, const QString& filename) {
+    QFileInfo fileInfo(filename);
+    QString dirname = fileInfo.dir().absolutePath();
+    qDebug() << "Directory" << dirname;
+    QDir dir(dirname);
+    if (!dir.exists(dirname)) {
+        dir.mkpath(dirname);
+    }
+    QPixmap pixmap = QPixmap::fromImage(image);
+      if (pixmap.save(filename, "PNG")) {
+            qDebug() << "Image saved successfully as" << filename;
+        } else {
+            qDebug() << "Failed to save image at" << filename;
+        }
+}
+

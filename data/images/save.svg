@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   viewBox="0 0 512 512"
+   xml:space="preserve"
+   sodipodi:docname="save.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs7" /><sodipodi:namedview
+   id="namedview7"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="0.81347656"
+   inkscape:cx="255.69268"
+   inkscape:cy="256.30732"
+   inkscape:window-width="1920"
+   inkscape:window-height="1031"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+
+
+
+
+
+
+
+<g
+   id="g7"
+   transform="matrix(0.84339918,0,0,0.84339918,40.089811,40.089811)"><polygon
+     style="fill:#324860"
+     points="278.261,178.087 111.861,0 0,0 0,512 66.783,512 278.261,289.391 "
+     id="polygon1" /><polygon
+     style="fill:#263648"
+     points="401.252,0 378.435,22.261 355.617,0 278.817,0 256,200.348 256,267.13 445.217,512 512,512 512,66.783 445.217,0 "
+     id="polygon2" /><polygon
+     style="fill:#bfdcff"
+     points="66.783,512 256,512 278.261,311.652 66.783,333.913 "
+     id="polygon3" /><polygon
+     style="fill:#8bc0ff"
+     points="256,512 445.217,512 445.217,333.913 256,311.652 "
+     id="polygon4" /><polygon
+     style="fill:#bfdcff"
+     points="267.13,100.174 256,0 111.861,0 111.861,200.348 256,200.348 "
+     id="polygon5" /><polygon
+     style="fill:#8bc0ff"
+     points="355.617,155.826 278.817,155.826 278.817,0 256,0 256,200.348 401.252,200.348 401.252,0 355.617,0 "
+     id="polygon6" /><polygon
+     style="fill:#ff7855"
+     points="256,333.913 278.261,300.522 256,267.13 66.783,267.13 66.783,333.913 "
+     id="polygon7" /><rect
+     x="256"
+     y="267.13"
+     style="fill:#ff562b"
+     width="189.217"
+     height="66.782997"
+     id="rect7" /></g>
+</svg>

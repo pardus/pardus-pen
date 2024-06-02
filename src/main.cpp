@@ -114,5 +114,6 @@ int main(int argc, char *argv[]) {
     QObject::connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged,
                      handleGeometryChange);
 
+    window->loadArchive("/home/a/test/ff.tar.gz");
     return app.exec();
 }

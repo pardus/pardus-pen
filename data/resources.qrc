@@ -28,6 +28,8 @@
         <file>images/overlay-lines.svg</file>
         <file>images/cursor.svg</file>
         <file>images/move-icon.svg</file>
+        <file>images/save.svg</file>
+        <file>images/open.svg</file>
         <file>tr.org.pardus.pen.svg</file>
     </qresource>
 </RCC>
