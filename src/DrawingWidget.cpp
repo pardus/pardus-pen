@@ -109,7 +109,6 @@ public:
         archive.create(filename.toStdString());
         removeDirectory("/tm/pardus-pen/");
         for(int i=0;i<=page_count;i++){
-            printf("AAA: %d %d\n", page_count,loadValue(i).image_count );
             for(int j=1;j<=loadValue(i).image_count;j++){
                 QString p = "/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j-1)+".png";
                 qImageToFile(values[i].loadValue(j),p);
@@ -134,7 +133,6 @@ public:
                 data.saveValue(j+1,QImage(fname));
                 data.last_image_num++;
                 data.image_count++;
-                printf("Load: %d %d\n", i, j);
                 j++;
                 fname = ("/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j)+".png");
             }
@@ -465,7 +463,6 @@ void removeDirectory(const QString &path) {
             removeDirectory(fi.absoluteFilePath());
         } else {
             QFile::remove(fi.absoluteFilePath());
-            qDebug() << "Remove:" << fi.absoluteFilePath();
         }
     }
 
@@ -475,7 +472,6 @@ void removeDirectory(const QString &path) {
 void qImageToFile(const QImage& image, const QString& filename) {
     QFileInfo fileInfo(filename);
     QString dirname = fileInfo.dir().absolutePath();
-    qDebug() << "Directory" << dirname;
     QDir dir(dirname);
     if (!dir.exists(dirname)) {
         dir.mkpath(dirname);
