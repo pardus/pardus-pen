@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-pardus-pen">
+    <comment>Pardus pen save file</comment>
+    <icon name="tr.org.pardus.pen"/>
+    <glob-deleteall/>
+    <glob pattern="*.pen"/>
+  </mime-type>
+</mime-info>
