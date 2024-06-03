@@ -313,9 +313,12 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
 }
 
 void DrawingWidget::saveAll(){
-    QString dir = QFileDialog::getSaveFileName(this, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
-    if (!dir.isEmpty()) {
-        pages.saveAll(dir);
+    QString file = QFileDialog::getSaveFileName(this, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+    if (!file.isEmpty()) {
+        if(!file.endsWith(".pen")){
+            file += ".pen";
+        }
+        pages.saveAll(file);
     }
 }
 
