@@ -499,6 +499,9 @@ static void setupPenType(){
             floatingSettings->hide();
             return;
         }
+        if(window->penType == ERASER){
+            window->penType = PEN;
+        }
         window->penStyle = LINE;
         penStyleEvent();
         set_icon(":images/line.svg", typeButton);
@@ -506,9 +509,12 @@ static void setupPenType(){
     gridLayout->addWidget(lineButton, 0, 0);
 
     circleButton = create_button(":images/circle.svg", [=](){
-        if(window->penStyle == CIRCLE){
+        if(window->penStyle  == CIRCLE){
             floatingSettings->hide();
             return;
+        }
+        if(window->penType == ERASER){
+            window->penType = PEN;
         }
         window->penStyle = CIRCLE;
         penStyleEvent();
@@ -520,6 +526,9 @@ static void setupPenType(){
         if(window->penStyle == SPLINE){
             floatingSettings->hide();
             return;
+        }
+        if(window->penType == ERASER){
+            window->penType = PEN;
         }
         window->penStyle = SPLINE;
         penStyleEvent();
