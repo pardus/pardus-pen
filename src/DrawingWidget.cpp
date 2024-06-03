@@ -79,7 +79,9 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            return QImage(0,0, QImage::Format_ARGB32);
+            QImage image = QImage(screenWidth,screenHeight, QImage::Format_ARGB32);
+            image.fill(QColor("transparent"));
+            return image;
         }
     }
 
@@ -105,45 +107,41 @@ public:
     
     void saveAll(const QString& filename){
         values[last_page_num] = images;
-        ArchiveCreator archive;
-        archive.create(filename.toStdString());
-        removeDirectory("/tm/pardus-pen/");
         for(int i=0;i<=page_count;i++){
             for(int j=1;j<=loadValue(i).image_count;j++){
-                QString p = "/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j-1)+".png";
-                qImageToFile(values[i].loadValue(j),p);
-                archive.addPath(p.toStdString(), (QString::number(i)+"/"+QString::number(j-1)+".png").toStdString());
+                archive_add(QString::number(i)+"/"+QString::number(j-1), values[i].loadValue(j));
             }
         }
-        puts(filename.toStdString().c_str());
-        archive.closePath();
+        archive_create(filename);
     }
     
     void loadArchive(const QString& filename){
-        removeDirectory("/tmp/pardus-pen");
-        ArchiveCreator archive;
-        archive.extract(filename.toStdString(), "/tmp/pardus-pen");
-        int i=0;
-        QString dirname(("/tmp/pardus-pen/"+QString::number(i)));
-        while(QFileInfo(dirname).isDir()) {
-            int j = 0;
-            QString fname(("/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j)+".png"));
-            ImageStorage data;
-            while(QFileInfo(fname).isFile()) {
-                data.saveValue(j+1,QImage(fname));
-                data.last_image_num++;
-                data.image_count++;
-                j++;
-                fname = ("/tmp/pardus-pen/"+QString::number(i)+"/"+QString::number(j)+".png");
+        QMap<QString, QImage> archive = archive_load(filename);
+        page_count = 1;
+        for (auto it = archive.begin(); it != archive.end(); ++it) {
+            QString path = it.key();
+            QStringList parts = path.split("/");
+            QImage image = it.value();
+            int page = parts[0].toInt();
+            int frame = parts[1].toInt();
+            if(page > page_count){
+                page_count = page;
             }
-            saveValue(i,data);
-            i++;
-            dirname = ("/tmp/pardus-pen/"+QString::number(i));
+            if (!values.contains(page)) {
+                ImageStorage data;
+                values[page] = data;
+                values[page].image_count = 0;
+                values[page].last_image_num = 0;
+            }
+            values[page].saveValue(frame+1, image);
+            values[page].image_count++;
+            values[page].last_image_num = values[page].image_count;
+            printf("Load: page: %d frame %d\n", page, frame);
         }
-        images = loadValue(0);
+        images = values[0];
         window->loadImage(images.last_image_num);
+        window->update();
         updateGoBackButtons();
-        removeDirectory("/tmp/pardus-pen");
     }
 
     ImageStorage loadValue(qint64 id) {
@@ -327,6 +325,9 @@ void DrawingWidget::loadArchive(const QString& filename){
 
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
+    if(img.isNull()){
+        return;
+    }
     QPainter p(&image);
     QRectF target(0, 0, screenWidth, screenHeight);
     QRectF source(0.0, 0.0, screenWidth, screenHeight);

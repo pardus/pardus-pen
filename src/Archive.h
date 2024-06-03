@@ -1,23 +1,9 @@
-#ifndef ARCHIVE_CREATOR_H
-#define ARCHIVE_CREATOR_H
+#ifndef _ARCHIVE_H
+#define _ARCHIVE_H
+#include <QImage>
+#include <QString>
+void archive_add(const QString& path, const QImage& image);
+void archive_create(const QString& archiveFileName);
+QMap<QString, QImage> archive_load(const QString& archiveFileName) ;
 
-#include <archive.h>
-#include <archive_entry.h>
-#include <string>
-
-class ArchiveCreator {
-private:
-    struct archive *a;
-
-public:
-    ArchiveCreator();
-    ~ArchiveCreator();
-
-    int addPath(const std::string& filePath, const std::string& entryName);
-    int create(const std::string& archivePath);
-    int closePath();
-    int extract(const std::string& archivePath, const std::string& targetPath);
-};
-
-#endif // ARCHIVE_CREATOR_H
-
+#endif
