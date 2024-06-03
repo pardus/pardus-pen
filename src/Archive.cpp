@@ -89,6 +89,7 @@ public:
                     QStringList res = QString::fromUtf8(*imageData).split("x");
                     width = res[0].toInt();
                     height = res[1].toInt();
+                    continue;
                 }
                 QImage image = QImage(reinterpret_cast<const uchar*>(imageData->data()), width, height, QImage::Format_ARGB32);
                 if (image.isNull()) {

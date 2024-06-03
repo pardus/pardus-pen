@@ -117,7 +117,7 @@ public:
     
     void loadArchive(const QString& filename){
         QMap<QString, QImage> archive = archive_load(filename);
-        page_count = 1;
+        clear();
         for (auto it = archive.begin(); it != archive.end(); ++it) {
             QString path = it.key();
             QStringList parts = path.split("/");

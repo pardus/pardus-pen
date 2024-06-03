@@ -793,10 +793,15 @@ static void setupClear(){
 
 }
 extern "C" {
-static QString save_target;
+static QString archive_target;
 void *save_all(void* arg) {
     (void)arg;
-    window->saveAll(save_target);
+    window->saveAll(archive_target);
+    return NULL;
+}
+void *load_archive(void* arg) {
+    (void)arg;
+    window->loadArchive(archive_target);
     return NULL;
 }
 }
@@ -808,7 +813,7 @@ static void setupSave(){
         //window->saveAll(file);
         pthread_t ptid;
         // Creating a new thread
-        save_target = file;
+        archive_target = file;
         pthread_create(&ptid, NULL, &save_all, NULL);
     });
     save->setStyleSheet(QString("background-color: none;"));
@@ -817,7 +822,9 @@ static void setupSave(){
     QPushButton *open = create_button(":images/open.svg", [=](){
         QString filename = QFileDialog::getOpenFileName(window, _("Open File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
         if(!filename.isEmpty()){
-            window->loadArchive(filename);
+            pthread_t ptid;
+            archive_target = filename;
+            pthread_create(&ptid, NULL, &load_archive, NULL);
         }
     });
     open->setStyleSheet(QString("background-color: none;"));
