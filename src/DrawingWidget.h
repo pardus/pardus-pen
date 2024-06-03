@@ -44,7 +44,7 @@ public:
     void goPreviousPage();
     void goNextPage();
     void clear();
-    void saveAll();
+    void saveAll(QString filename);
     void loadArchive(const QString& filename);
     int penType;
     int penStyle;
