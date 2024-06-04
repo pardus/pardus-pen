@@ -44,12 +44,25 @@ int pagestatus;
 
 int eraser_status;
 
-#ifdef ETAP19
 void sighandler(int signum) {
     (void)signum;
     return;
 }
-#endif
+
+class MainWindow : public QMainWindow {
+
+public:
+    MainWindow(){
+
+    }
+
+protected:
+     void closeEvent(QCloseEvent *event){
+        puts("Close event");
+        sighandler(SIGTERM);
+        event->ignore();
+     }
+};
 
 int main(int argc, char *argv[]) {
 
@@ -83,7 +96,7 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
-    mainWindow = new QMainWindow();
+    mainWindow = new MainWindow();
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
     board->setType(get_int((char*)"page"));
@@ -140,10 +153,8 @@ int main(int argc, char *argv[]) {
         window->loadArchive(argv[1]);
     }
 #endif
-#ifdef ETAP19
     signal(SIGINT, sighandler);
     signal(SIGTERM, sighandler);
     signal(SIGQUIT, sighandler);
-#endif
     return app.exec();
 }
