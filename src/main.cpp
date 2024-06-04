@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QMainWindow>
 #include <QColorDialog>
+#include <QProcess>
 
 #include <stdlib.h>
 #include <locale.h>
@@ -43,6 +44,18 @@ int pagestatus;
 int eraser_status;
 
 int main(int argc, char *argv[]) {
+
+#ifdef ETAP19
+    QStringList args1;
+    QProcess p1;
+    args1 << "-e" << "eta-disable-gestures@pardus.org.tr";
+    p1.execute("gnome-shell-extension-tool", args1);
+
+    QStringList args2;
+    QProcess p2;
+    args2 << "set" << "org.gnome.mutter" << "overlay-key" << "''";
+    p2.execute("gsettings", args2);
+#endif
 
     // Force use X11 or Xwayland
     setenv("QT_QPA_PLATFORM", "xcb",1);

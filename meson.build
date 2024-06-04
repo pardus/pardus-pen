@@ -33,6 +33,11 @@ endif
 qt_dep = [
     dependency('gio-2.0'),
 ]
+if get_option('etap19')
+    add_project_arguments('-DETAP19', '-pthread',  language: 'cpp')
+endif
+
+
 if get_option('save')
     qt_dep += dependency('libarchive')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')

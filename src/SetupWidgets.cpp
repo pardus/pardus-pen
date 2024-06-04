@@ -5,6 +5,8 @@
 #include <QColorDialog>
 #include <QMessageBox>
 #include <QSlider>
+#include <QProcess>
+
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
@@ -855,6 +857,17 @@ static void setupExit(){
         floatingSettings->hide();
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
+#ifdef ETAP19
+    QStringList args3;
+    QProcess p3;
+    args3 << "-d" << "eta-disable-gestures@pardus.org.tr";
+    p3.execute("gnome-shell-extension-tool", args3);
+
+    QStringList args4;
+    QProcess p4;
+    args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
+    p4.execute("gsettings", args4);
+#endif
         QApplication::quit();
     });
     exitButtonLayout->addWidget(noButton);
