@@ -330,12 +330,11 @@ void DrawingWidget::loadArchive(const QString& filename){
 #endif
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
+    img = img.scaled(screenWidth, screenHeight);
     if(img.isNull()){
         return;
     }
     QPainter p(&image);
-    QRectF target(0, 0, screenWidth, screenHeight);
-    QRectF source(0.0, 0.0, screenWidth, screenHeight);
     image.fill(QColor("transparent"));
     p.drawImage(QPointF(0,0), img);
     update();
