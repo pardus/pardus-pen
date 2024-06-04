@@ -20,6 +20,7 @@
 
 extern "C" {
 #include "settings.h"
+extern void* load_archive(void*args);
 }
 
 
@@ -39,6 +40,8 @@ extern void setupWidgets();
 
 extern int screenWidth;
 extern int screenHeight;
+
+extern QString archive_target;
 
 int pagestatus;
 
@@ -161,7 +164,9 @@ int main(int argc, char *argv[]) {
 
 #ifdef LIBARCHIVE
     if (argc > 1) {
-        window->loadArchive(argv[1]);
+        pthread_t ptid;
+        archive_target = QString(argv[1]);
+        pthread_create(&ptid, NULL, &load_archive, NULL);
     }
 #endif
     signal(SIGINT, sighandler);

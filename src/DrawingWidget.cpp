@@ -121,12 +121,14 @@ public:
     void loadArchive(const QString& filename){
         QMap<QString, QImage> archive = archive_load(filename);
         clear();
+        puts("aaa");
         for (auto it = archive.begin(); it != archive.end(); ++it) {
             QString path = it.key();
             QStringList parts = path.split("/");
             QImage image = it.value();
             int page = parts[0].toInt();
             int frame = parts[1].toInt();
+            printf("Load: page: %d frame %d\n", page, frame);
             if(page > page_count){
                 page_count = page;
             }
@@ -139,7 +141,6 @@ public:
             values[page].saveValue(frame+1, image);
             values[page].image_count++;
             values[page].last_image_num = values[page].image_count;
-            printf("Load: page: %d frame %d\n", page, frame);
         }
         images = values[0];
         window->loadImage(images.last_image_num);

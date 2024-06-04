@@ -797,7 +797,7 @@ static void setupClear(){
 }
 #ifdef LIBARCHIVE
 extern "C" {
-static QString archive_target;
+QString archive_target;
 void *save_all(void* arg) {
     (void)arg;
     window->saveAll(archive_target);

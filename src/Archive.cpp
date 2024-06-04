@@ -80,6 +80,10 @@ public:
                 size_t size;
                 size_t total_size = 0;
                 while ((size = archive_read_data(ar, buff, sizeof(buff))) > 0) {
+                    if(size > 10240){
+                        break;
+                    }
+                    printf("Read: %ld bytes\n", size);
                     imageData->append(buff, size);
                     total_size+= size;
                 }
@@ -97,6 +101,8 @@ public:
                 }
                 image = image.scaled(screenWidth, screenHeight);
                 values.insert(QString(entryName), image);
+            } else {
+                break;
             }
         }
         // Close the archive
