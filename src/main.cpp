@@ -43,6 +43,12 @@ int pagestatus;
 
 int eraser_status;
 
+#ifdef ETAP19
+void sighandler(int signum) {
+    return;
+}
+#endif
+
 int main(int argc, char *argv[]) {
 
 #ifdef ETAP19
@@ -131,6 +137,11 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         window->loadArchive(argv[1]);
     }
+#endif
+#ifdef ETAP19
+    signal(SIGINT, sighandler);
+    signal(SIGTERM, sighandler);
+    signal(SIGQUIT, sighandler);
 #endif
     return app.exec();
 }
