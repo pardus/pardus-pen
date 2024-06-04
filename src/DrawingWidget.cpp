@@ -21,6 +21,7 @@ void removeDirectory(const QString &path);
 
 int screenWidth = 0;
 int screenHeight = 0;
+int padding = 8;
 
 
 /*
@@ -176,6 +177,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     screenWidth  = screen->geometry().width();
     screenHeight = screen->geometry().height();
     setFixedSize(screenWidth, screenHeight);
+    padding = screenWidth / 240;
 }
 
 DrawingWidget::~DrawingWidget() {}

@@ -28,8 +28,7 @@ extern "C" {
 
 #define _(String) gettext(String)
 
-#define padding 8
-
+extern int padding;
 extern DrawingWidget *window;
 extern FloatingWidget *floatingWidget;
 extern FloatingSettings *floatingSettings;
@@ -790,7 +789,7 @@ static void setupClear(){
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
         screenWidth * strlen(clearText) / 169,
-        screenHeight / 12
+        screenHeight / 10
     );
     floatingSettings->addPage(clearDialog);
     floatingWidget->setWidget(clear);
@@ -882,7 +881,7 @@ static void setupExit(){
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
         screenWidth * strlen(exitText) / 169,
-        screenHeight / 12
+        screenHeight / 10
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);

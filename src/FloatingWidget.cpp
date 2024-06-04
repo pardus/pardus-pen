@@ -5,7 +5,8 @@ extern int screenHeight;
 
 int new_x;
 int new_y;
-#define padding 8
+
+extern int padding;
 
 extern "C" {
 #include "settings.h"
