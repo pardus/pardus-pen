@@ -74,7 +74,6 @@ public:
             const char* entryName = archive_entry_pathname(entry);
             // Check if it's an image file (you may need to modify this condition)
             if (entryName) {
-            
                 // Extract the image data
                 QByteArray *imageData = new QByteArray();
                 char buff[10240];
@@ -96,6 +95,7 @@ public:
                     puts("Image load fail");
                     continue;
                 }
+                image = image.scaled(screenWidth, screenHeight);
                 values.insert(QString(entryName), image);
             }
         }
