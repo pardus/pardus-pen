@@ -39,6 +39,9 @@ penType:
 #define position pos
 #endif
 
+#ifndef HISTORY
+#define HISTORY 15
+#endif
 
 class ValueStorage {
 public:
@@ -66,9 +69,14 @@ public:
     int image_count = 0;
     int pageType = TRANSPARENT;
     int overlayType = NONE;
+    int removed = 0;
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
         updateGoBackButtons();
+        if(id > HISTORY){
+            remove(id-HISTORY);
+            removed++;
+        }
     }
 
     void clear(){
@@ -79,6 +87,9 @@ public:
     }
 
     QImage loadValue(qint64 id) {
+        if(removed >= id) {
+            id =  removed +1;
+        }
         if (values.contains(id)) {
             return values[id];
         } else {
@@ -86,6 +97,15 @@ public:
             image.fill(QColor("transparent"));
             return image;
         }
+    }
+    
+    void remove(qint64 id){
+        for (auto it = values.begin(); it != values.end(); ++it) {
+            if (it.key() == id) {
+                values.erase(it);
+                break;
+            }
+        }  
     }
 
 private:
@@ -111,8 +131,8 @@ public:
     void saveAll(const QString& filename){
         values[last_page_num] = images;
         for(int i=0;i<=page_count;i++){
-            for(int j=1;j<=loadValue(i).image_count;j++){
-                archive_add(QString::number(i)+"/"+QString::number(j-1), values[i].loadValue(j));
+            for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
+                archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
         }
         archive_create(filename);
@@ -440,7 +460,7 @@ int DrawingWidget::getPageNum(){
 
 bool DrawingWidget::isBackAvailable(){
     //printf("%d %d\n", images.last_image_num, images.image_count );
-    return images.last_image_num > 0;
+    return images.last_image_num > images.removed +1;
 }
 
 bool DrawingWidget::isNextAvailable(){
