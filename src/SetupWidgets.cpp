@@ -36,6 +36,8 @@ extern FloatingSettings *floatingSettings;
 extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
 
+extern bool fuarMode;
+
 QPushButton *penButton;
 QPushButton *typeButton;
 QPushButton *markerButton;
@@ -894,11 +896,15 @@ void setupWidgets(){
     setupPenSize();
     setupBackground();
     setupClear();
-    setupMinify();
+    if(!fuarMode){
+        setupMinify();
+    }
     setupScreenShot();
     setupGoBackNext();
 #ifdef LIBARCHIVE
     setupSave();
 #endif
-    setupExit();
+    if(!fuarMode){
+        setupExit();
+    }
 }

@@ -64,6 +64,8 @@ protected:
      }
 };
 
+bool fuarMode;
+
 int main(int argc, char *argv[]) {
 
 #ifdef ETAP19
@@ -93,6 +95,15 @@ int main(int argc, char *argv[]) {
         std::cerr << "LANG environment variable not set." << std::endl;
         return 1;
     }
+
+    // Fuar mode
+    fuarMode = false;
+    if (argc > 1) {
+        if (strcmp(argv[1], "--fuar") == 0) {
+            fuarMode = true;
+        }
+    }
+
 
     QApplication app(argc, argv);
 

@@ -8,4 +8,4 @@ rm -rf build || true
 meson setup build --prefix=/usr -Dresources=true "$@"
 ninja -C build
 strip ./build/pardus-pen
-echo -e "run\nbacktrace\n" | gdb ./build/pardus-pen
+echo -e "run\nbacktrace\n" | gdb ./build/pardus-pen $ARGS
