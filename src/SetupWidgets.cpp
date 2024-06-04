@@ -870,6 +870,7 @@ static void setupExit(){
     p4.execute("gsettings", args4);
 #endif
         QApplication::quit();
+        exit(0);
     });
     exitButtonLayout->addWidget(noButton);
     exitButtonLayout->addWidget(yesButton);
