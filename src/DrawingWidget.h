@@ -14,7 +14,6 @@
 
 #include <QImage>
 #include <QPainter>
-#include <QSvgGenerator>
 
 
 #define ERASER 0
@@ -44,8 +43,10 @@ public:
     void goPreviousPage();
     void goNextPage();
     void clear();
+#ifdef LIBARCHIVE
     void saveAll(QString filename);
     void loadArchive(const QString& filename);
+#endif
     int penType;
     int penStyle;
     void syncPageType(int type);

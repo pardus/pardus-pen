@@ -792,6 +792,7 @@ static void setupClear(){
     floatingWidget->setWidget(clear);
 
 }
+#ifdef LIBARCHIVE
 extern "C" {
 static QString archive_target;
 void *save_all(void* arg) {
@@ -831,6 +832,7 @@ static void setupSave(){
     floatingWidget->setWidget(open);
 
 }
+#endif
 
 static void setupExit(){
     QWidget *exitDialog = new QWidget();
@@ -869,7 +871,7 @@ static void setupExit(){
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);
-    
+
 }
 
 void setupWidgets(){
@@ -882,6 +884,8 @@ void setupWidgets(){
     setupMinify();
     setupScreenShot();
     setupGoBackNext();
+#ifdef LIBARCHIVE
     setupSave();
+#endif
     setupExit();
 }

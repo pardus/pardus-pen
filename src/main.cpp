@@ -114,8 +114,10 @@ int main(int argc, char *argv[]) {
     QObject::connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged,
                      handleGeometryChange);
 
+#ifdef LIBARCHIVE
     if (argc > 1) {
         window->loadArchive(argv[1]);
     }
+#endif
     return app.exec();
 }

@@ -2,7 +2,6 @@ project('pardus-pen', ['cpp', 'c'])
 # Source files
 src = [
     'src/main.cpp',
-    'src/Archive.cpp',
     'src/DrawingWidget.cpp',
     'src/FloatingWidget.cpp',
     'src/FloatingSettings.cpp',
@@ -24,6 +23,7 @@ if get_option('resources')
 
 endif
 add_project_arguments(['-O3', '-Wextra', '-Wall', '-Werror', '-s'], language: 'cpp')
+add_project_arguments(['-Wno-error=template-id-cdtor', '-g3' ], language: 'cpp')
 
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
@@ -32,15 +32,19 @@ endif
 # Qt dependencies
 qt_dep = [
     dependency('gio-2.0'),
-    dependency('libarchive')
 ]
+if get_option('save')
+    qt_dep += dependency('libarchive')
+    add_project_arguments('-DLIBARCHIVE', language: 'cpp')
+    src += 'src/Archive.cpp'
+endif
+
 if get_option('qt') == '5'
     add_project_arguments('-DQT5', language: 'cpp')
     qt_dep += [
         dependency('Qt5Core'),
         dependency('Qt5Gui'),
         dependency('Qt5Widgets'),
-        dependency('Qt5Svg'),
     ]
 elif get_option('qt') == '6'
     add_project_arguments('-DQT6', language: 'cpp')
@@ -48,7 +52,6 @@ elif get_option('qt') == '6'
         dependency('Qt6Core'),
         dependency('Qt6Gui'),
         dependency('Qt6Widgets'),
-        dependency('Qt6Svg'),
     ]
 else
     error('Your qt version is ont supperted')

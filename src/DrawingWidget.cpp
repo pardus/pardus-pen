@@ -1,6 +1,8 @@
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
+#ifdef LIBARCHIVE
 #include "Archive.h"
+#endif
 #include <stdio.h>
 
 
@@ -104,7 +106,7 @@ public:
         last_page_num = 0;
         page_count = 0;
     }
-    
+#ifdef LIBARCHIVE
     void saveAll(const QString& filename){
         values[last_page_num] = images;
         for(int i=0;i<=page_count;i++){
@@ -114,7 +116,7 @@ public:
         }
         archive_create(filename);
     }
-    
+
     void loadArchive(const QString& filename){
         QMap<QString, QImage> archive = archive_load(filename);
         clear();
@@ -143,6 +145,7 @@ public:
         window->update();
         updateGoBackButtons();
     }
+#endif
 
     ImageStorage loadValue(qint64 id) {
         if (id > page_count){
@@ -309,7 +312,7 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
 
     painter.end();
 }
-
+#ifdef LIBARCHIVE
 void DrawingWidget::saveAll(QString file){
     if (!file.isEmpty()) {
         if(!file.endsWith(".pen")){
@@ -322,7 +325,7 @@ void DrawingWidget::saveAll(QString file){
 void DrawingWidget::loadArchive(const QString& filename){
     pages.loadArchive(filename);
 }
-
+#endif
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
     if(img.isNull()){
