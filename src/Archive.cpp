@@ -83,7 +83,7 @@ public:
                     if(size > 10240){
                         break;
                     }
-                    printf("Read: %ld bytes\n", size);
+                    // printf("Read: %ld bytes\n", size);
                     imageData->append(buff, size);
                     total_size+= size;
                 }

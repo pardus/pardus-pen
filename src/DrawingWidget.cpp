@@ -121,7 +121,6 @@ public:
     void loadArchive(const QString& filename){
         QMap<QString, QImage> archive = archive_load(filename);
         clear();
-        puts("aaa");
         for (auto it = archive.begin(); it != archive.end(); ++it) {
             QString path = it.key();
             QStringList parts = path.split("/");
@@ -441,12 +440,12 @@ int DrawingWidget::getPageNum(){
 }
 
 bool DrawingWidget::isBackAvailable(){
-    printf("%d %d\n", images.last_image_num, images.image_count );
+    //printf("%d %d\n", images.last_image_num, images.image_count );
     return images.last_image_num > 0;
 }
 
 bool DrawingWidget::isNextAvailable(){
-    printf("%d %d\n", images.last_image_num, images.image_count );
+    //printf("%d %d\n", images.last_image_num, images.image_count );
     return images.last_image_num < images.image_count;
 }
 
