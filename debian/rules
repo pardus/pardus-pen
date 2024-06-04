@@ -2,3 +2,11 @@
 
 %:
 	dh $@ --buildsystem=meson
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-Dsave=true \
+		-Detap19=false \
+		-Dresources=true \
+		-Dscreenshot=true \
+		-Dqt=5
