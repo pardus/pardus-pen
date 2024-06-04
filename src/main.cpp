@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <libintl.h>
+#include <signal.h>
 
 #include "DrawingWidget.h"
 #include "FloatingWidget.h"
