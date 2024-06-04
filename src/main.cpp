@@ -45,6 +45,7 @@ int eraser_status;
 
 #ifdef ETAP19
 void sighandler(int signum) {
+    (void)signum;
     return;
 }
 #endif
