@@ -65,7 +65,7 @@ ValueStorage storage;
 
 class ImageStorage {
 public:
-    int last_image_num = 0;
+    int last_image_num = 1;
     int image_count = 0;
     int pageType = TRANSPARENT;
     int overlayType = NONE;
@@ -82,7 +82,8 @@ public:
     void clear(){
         values.clear();
         image_count = 0;
-        last_image_num = 0;
+        last_image_num = 1;
+        removed = 0;
         updateGoBackButtons();
     }
 
@@ -98,14 +99,14 @@ public:
             return image;
         }
     }
-    
+
     void remove(qint64 id){
         for (auto it = values.begin(); it != values.end(); ++it) {
             if (it.key() == id) {
                 values.erase(it);
                 break;
             }
-        }  
+        }
     }
 
 private:
