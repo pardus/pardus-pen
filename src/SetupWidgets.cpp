@@ -455,14 +455,13 @@ static void setupPenType(){
     ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
-        window->penStyle = SPLINE;
-        if(window->penType == PEN){
-            penStyleEvent();
+        if(floatingSettings->isVisible()){
             floatingSettings->hide();
             return;
         }
         sliderLock = true;
         window->penType = PEN;
+        window->penStyle = SPLINE;
         thicknessSlider->setRange(1,31);
         thicknessSlider->setValue(window->penSize[PEN]);
         penSizeEvent();
@@ -472,9 +471,7 @@ static void setupPenType(){
     floatingWidget->setWidget(penButton);
 
     markerButton = create_button(":images/marker.svg", [=](){
-        window->penStyle = SPLINE;
-        if(window->penType == PEN){
-            penStyleEvent();
+        if(floatingSettings->isVisible()){
             floatingSettings->hide();
             return;
         }
@@ -550,7 +547,7 @@ static void setupPenType(){
     );
 
     eraserButton = create_button(":images/eraser.svg", [=](){
-        if(window->penType == ERASER){
+        if(floatingSettings->isVisible()){
             floatingSettings->hide();
             return;
         }
