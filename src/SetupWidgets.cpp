@@ -105,12 +105,15 @@ static void penStyleEvent(){
     switch(window->penStyle){
         case LINE:
             lineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/line.svg", typeButton);
             break;
         case CIRCLE:
             circleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/circle.svg", typeButton);
             break;
         default:
             splineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/spline.svg", typeButton);
             break;
     }
     ov->penSize = window->penSize[window->penType];
@@ -452,31 +455,36 @@ static void setupPenType(){
     ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
+        window->penStyle = SPLINE;
         if(window->penType == PEN){
+            penStyleEvent();
             floatingSettings->hide();
             return;
         }
         sliderLock = true;
         window->penType = PEN;
-        penStyleEvent();
         thicknessSlider->setRange(1,31);
         thicknessSlider->setValue(window->penSize[PEN]);
         penSizeEvent();
+        penStyleEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
 
     markerButton = create_button(":images/marker.svg", [=](){
-        if(window->penType == MARKER){
+        window->penStyle = SPLINE;
+        if(window->penType == PEN){
+            penStyleEvent();
             floatingSettings->hide();
             return;
         }
         sliderLock = true;
         window->penType = MARKER;
-        penStyleEvent();
+        window->penStyle = SPLINE;
         thicknessSlider->setRange(1,100);
         thicknessSlider->setValue(window->penSize[MARKER]);
         penSizeEvent();
+        penStyleEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
@@ -507,7 +515,6 @@ static void setupPenType(){
         }
         window->penStyle = LINE;
         penStyleEvent();
-        set_icon(":images/line.svg", typeButton);
     });
     gridLayout->addWidget(lineButton, 0, 0);
 
@@ -521,7 +528,6 @@ static void setupPenType(){
         }
         window->penStyle = CIRCLE;
         penStyleEvent();
-        set_icon(":images/circle.svg", typeButton);
     });
     gridLayout->addWidget(circleButton, 0, 1);
 
@@ -535,7 +541,6 @@ static void setupPenType(){
         }
         window->penStyle = SPLINE;
         penStyleEvent();
-        set_icon(":images/spline.svg", typeButton);
     });
     gridLayout->addWidget(splineButton, 0, 2);
 
