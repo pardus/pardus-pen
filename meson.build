@@ -76,5 +76,6 @@ desktopdir = get_option('prefix')/'share/applications'
 executable('pardus-pen', src, dependencies: qt_dep, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
-install_data('data/pardus-pen.desktop', install_dir : desktopdir)
+install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
+install_data('data/tr.org.pardus.pen.appdata.xml', install_dir : get_option('prefix') / 'metainfo')
 install_data('data/tr.org.pardus.pen.mime.xml', install_dir : get_option('prefix') / 'share/mime/packages/')

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>tr.org.pardus.pen</id>
+  <metadata_license>GPL-3.0+</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Pardus Pen</name>
+  <name xml:lang="tr">Pardus Kalem</name>
+  <summary>Pen for pardus</summary>
+  <summary xml:lang="tr">Pardus için kalem</summary>
+  <developer_name translate="no">Tubitak ULAKBİM</developer_name>
+  <description>
+    <p>A simple and easy usable application for Pardus</p>
+  </description>
+  <launchable type="desktop-id">tr.org.pardus.pen.desktop</launchable>
+  <url type="homepage">https://pardus.org.tr/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>EDIT ME</image>
+      <caption>Pardus Pen</caption>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="3.0.0" date="2024-06-24"/>
+  </releases>
+</component>
