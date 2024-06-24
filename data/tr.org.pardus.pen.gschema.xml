@@ -28,6 +28,10 @@
       <default>0</default>
       <summary>Current page mode</summary>
     </key>
+    <key type="i" name="grid-count">
+      <default>31</default>
+      <summary>Current page mode</summary>
+    </key>
     <key type="i" name="page-overlay">
       <default>0</default>
       <summary>Current page overlay mode</summary>

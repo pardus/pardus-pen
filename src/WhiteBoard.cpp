@@ -48,7 +48,7 @@ void WhiteBoard::setType(int page){
 void WhiteBoard::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
 
-    gridSize = screenHeight / 31;
+    gridSize = (float)screenHeight / (float)get_int((char*)"grid-count");
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -75,12 +75,12 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
 void WhiteBoard::drawSquarePaper() {
     // Draw horizontal lines
-    for (int y = 0; y < height(); y += gridSize) {
+    for (float y = 0; y < height(); y += gridSize) {
         painter.drawLine(0, y, width(), y);
     }
 
     // Draw vertical lines
-    for (int x = 0; x < width(); x += gridSize) {
+    for (float x = 0; x < width(); x += gridSize) {
         painter.drawLine(x, 0, x, height());
     }
 
@@ -90,7 +90,7 @@ void WhiteBoard::drawSquarePaper() {
 void WhiteBoard::drawLinePaper() {
 
     // Draw horizontal lines
-    for (int y = 0; y < height(); y += gridSize) {
+    for (float y = 0; y < height(); y += gridSize) {
         painter.drawLine(0, y, width(), y);
     }
 }

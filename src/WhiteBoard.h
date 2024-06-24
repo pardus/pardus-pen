@@ -29,7 +29,7 @@ private:
     int overlayType = 0;
     int type = 0;
     QPainter painter;
-    int gridSize;
+    float gridSize;
     void paintEvent(QPaintEvent *event) override ;
 };
 
