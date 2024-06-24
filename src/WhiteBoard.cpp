@@ -56,7 +56,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
 
     painter.setPen(
-        QPen(lineColor, (screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+        QPen(lineColor, (screenHeight)/1080, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
     );
 
     // Draw the square paper background
