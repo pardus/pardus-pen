@@ -12,6 +12,10 @@
 
 #define _(String) gettext(String)
 
+extern "C" {
+#include "settings.h"
+}
+
 extern WhiteBoard *board;
 
 extern DrawingWidget *window;
@@ -190,6 +194,7 @@ PageStorage pages;
 
 int curEventButtons = 0;
 bool isMoved = 0;
+float fpressure = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
@@ -199,6 +204,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     screenHeight = screen->geometry().height();
     setFixedSize(screenWidth, screenHeight);
     padding = screenWidth / 240;
+    fpressure = get_int((char*)"pressure") / 100.0;
 }
 
 DrawingWidget::~DrawingWidget() {}
@@ -280,6 +286,9 @@ void DrawingWidget::drawLineTo(const QPointF &endPoint) {
 void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
+    }
+    if (fpressure > 0){
+        pressure = fpressure;
     }
     int fpenStyle =  penStyle;
     if (penType == ERASER) {

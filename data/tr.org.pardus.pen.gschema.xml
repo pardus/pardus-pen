@@ -32,5 +32,9 @@
       <default>0</default>
       <summary>Current page overlay mode</summary>
     </key>
+    <key type="i" name="pressure">
+      <default>0</default>
+      <summary>Ignore pressure value and use fixed value</summary>
+    </key>
   </schema>
 </schemalist>
