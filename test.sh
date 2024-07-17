@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -ex
 export CFLAGS='-g3'
 export CXXFLAGS='-g3'
