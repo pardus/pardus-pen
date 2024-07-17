@@ -13,6 +13,7 @@
 #define NONE 0
 #define SQUARES 1
 #define LINES 2
+#define ISOMETRIC 3
 
 class WhiteBoard : public QWidget {
 public:
@@ -23,6 +24,7 @@ public:
     void setOverlayType(int type);
     void drawSquarePaper();
     void drawLinePaper();
+    void drawIsometricPaper();
 private:
     QColor background;
     QColor lineColor;

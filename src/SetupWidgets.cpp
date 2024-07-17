@@ -52,6 +52,7 @@ QPushButton* blackButton;
 QPushButton* whiteButton;
 QPushButton* colorpicker;
 
+QPushButton* overlayIsometric;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -211,6 +212,7 @@ static void backgroundStyleEvent(){
     transparentButton->setStyleSheet(QString("background-color: none;"));
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
+    overlayIsometric->setStyleSheet(QString("background-color: none;"));
     overlayLines->setStyleSheet(QString("background-color: none;"));
     overlaySquares->setStyleSheet(QString("background-color: none;"));
     overlayNone->setStyleSheet(QString("background-color: none;"));
@@ -232,8 +234,12 @@ static void backgroundStyleEvent(){
             break;
     }
     switch(board->getOverlayType()){
+        
         case LINES:
             overlayLines->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case ISOMETRIC:
+            overlayIsometric->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
         case SQUARES:
             overlaySquares->setStyleSheet("background-color:"+window->penColor.name()+";");
@@ -684,9 +690,16 @@ static void setupBackground(){
     });
     overlayLines->setStyleSheet(QString("background-color: none;"));
 
+    overlayIsometric = create_button(":images/overlay-isometric.svg", [=](){
+        board->setOverlayType(ISOMETRIC);
+        backgroundStyleEvent();
+    });
+    overlayIsometric->setStyleSheet(QString("background-color: none;"));
+
     overlayLayout->addWidget(overlayNone);
     overlayLayout->addWidget(overlaySquares);
     overlayLayout->addWidget(overlayLines);
+    overlayLayout->addWidget(overlayIsometric);
 
     // set sizes
     pageLabel->setFixedSize(

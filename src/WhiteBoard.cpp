@@ -6,6 +6,7 @@ extern "C" {
 #include "settings.h"
 }
 
+
 extern int screenWidth;
 extern int screenHeight;
 
@@ -69,6 +70,12 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case LINES:
             drawLinePaper();
             break;
+        case ISOMETRIC:
+            painter.setPen(
+                QPen(lineColor, (screenHeight)/(540), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+            );
+            drawIsometricPaper();
+            break;
     }
     painter.end();
 }
@@ -88,9 +95,26 @@ void WhiteBoard::drawSquarePaper() {
 
 
 void WhiteBoard::drawLinePaper() {
-
     // Draw horizontal lines
     for (float y = 0; y < height(); y += gridSize) {
         painter.drawLine(0, y, width(), y);
     }
+}
+
+void WhiteBoard::drawIsometricPaper() {
+
+    for (int y = 0; y <= height(); y += gridSize) {
+        for(int x = 0; x <= width(); x += gridSize) {
+            if (x + gridSize <= width()) {
+                painter.drawLine(x + gridSize,y,x + gridSize,y+1);
+            }
+            if (y + gridSize <= height()) {
+                painter.drawLine(x,y + gridSize,x,y + gridSize+1);
+            }
+            if (x + 1 <= width() && y + 1 <= height()) {
+                painter.drawLine(x+(gridSize/2),y+(gridSize/2),x+(gridSize/2),y+(gridSize/2)+1);
+            }
+        }
+    }
+
 }
