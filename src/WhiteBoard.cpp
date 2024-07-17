@@ -108,9 +108,6 @@ void WhiteBoard::drawIsometricPaper() {
             if (x + gridSize <= width()) {
                 painter.drawLine(x + gridSize,y,x + gridSize,y+1);
             }
-            if (y + gridSize <= height()) {
-                painter.drawLine(x,y + gridSize,x,y + gridSize+1);
-            }
             if (x + 1 <= width() && y + 1 <= height()) {
                 painter.drawLine(x+(gridSize/2),y+(gridSize/2),x+(gridSize/2),y+(gridSize/2)+1);
             }
