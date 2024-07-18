@@ -664,12 +664,12 @@ static void setupBackground(){
 
     // overlay dialog
     QWidget *overlayDialog = new QWidget();
-    QHBoxLayout *overlayLayout = new QHBoxLayout(overlayDialog);
-    overlayLayout->setContentsMargins(0, 0, 0, 0);
+    QGridLayout *gridLayout = new QGridLayout(overlayDialog);
+    gridLayout->setContentsMargins(0, 0, 0, 0);
 
 
-    overlayLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    overlayLayout->setSpacing(padding);
+    gridLayout->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    gridLayout->setSpacing(padding);
 
     // overlay buttons
     overlayNone = create_button(":images/overlay-none.svg", [=](){
@@ -696,10 +696,10 @@ static void setupBackground(){
     });
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
 
-    overlayLayout->addWidget(overlayNone);
-    overlayLayout->addWidget(overlaySquares);
-    overlayLayout->addWidget(overlayLines);
-    overlayLayout->addWidget(overlayIsometric);
+    gridLayout->addWidget(overlayNone, 0, 0, Qt::AlignCenter);
+    gridLayout->addWidget(overlaySquares, 0, 1, Qt::AlignCenter);
+    gridLayout->addWidget(overlayLines, 1, 0, Qt::AlignCenter);
+    gridLayout->addWidget(overlayIsometric, 1, 1, Qt::AlignCenter);
 
     // set sizes
     pageLabel->setFixedSize(
@@ -710,7 +710,7 @@ static void setupBackground(){
 
     backgroundDialog->setFixedSize(w,h);
     pageDialog->setFixedSize(w,h);
-    overlayDialog->setFixedSize(w,h);
+    overlayDialog->setFixedSize(w,h*2);
     
     backgroundWidget->setFixedSize(
         w + padding*2,
