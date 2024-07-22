@@ -1,37 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 28.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.0" id="katman_2_00000010990981225320569060000003076781831114636700_"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-	 style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-	.st1{fill:url(#SVGID_1_);}
-	.st2{opacity:0.5;fill:url(#SVGID_00000157276686623566702460000001001931871962639253_);}
-	.st3{fill:#F4F4F4;}
-	.st4{fill:url(#SVGID_00000151536544282397182180000015753495927527793547_);}
-</style>
-<rect x="45.5" y="45.9" class="st0" width="421" height="421"/>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-153.9328" y1="646.3002" x2="385.9731" y2="132.7955">
-	<stop  offset="0" style="stop-color:#C1C8CC"/>
-	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-</linearGradient>
-<rect x="45.5" y="45.9" class="st1" width="421" height="421"/>
-<linearGradient id="SVGID_00000053524059831040938460000016396695012232367243_" gradientUnits="userSpaceOnUse" x1="267.7261" y1="266.7903" x2="423.9642" y2="427.5465" gradientTransform="matrix(1 0 0 -1 0 512.8312)">
-	<stop  offset="0" style="stop-color:#C1C8CC"/>
-	<stop  offset="0.1" style="stop-color:#000000;stop-opacity:0.96"/>
-	<stop  offset="0.26" style="stop-color:#000000;stop-opacity:0.85"/>
-	<stop  offset="0.45" style="stop-color:#000000;stop-opacity:0.67"/>
-	<stop  offset="0.68" style="stop-color:#000000;stop-opacity:0.42"/>
-	<stop  offset="0.92" style="stop-color:#000000;stop-opacity:0.11"/>
-	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-</linearGradient>
-<polygon style="opacity:0.5;fill:url(#SVGID_00000053524059831040938460000016396695012232367243_);" points="465.5,216.5 
-	294.1,216.5 294.1,45.1 "/>
-<polygon class="st3" points="465.5,212.3 298.2,212.3 298.2,45.1 "/>
-<linearGradient id="SVGID_00000145035916831579120420000004097856257659663765_" gradientUnits="userSpaceOnUse" x1="349.835" y1="351.2595" x2="437.9906" y2="441.8258" gradientTransform="matrix(1 0 0 -1 0 512.8312)">
-	<stop  offset="0" style="stop-color:#C1C8CC"/>
-	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-</linearGradient>
-<polygon style="fill:url(#SVGID_00000145035916831579120420000004097856257659663765_);" points="298.2,45.1 465.5,45.1 
-	465.5,212.3 "/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.38 512.38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Adsız_degrade_16);
+      }
+
+      .cls-1, .cls-2 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <radialGradient id="Adsız_degrade_16" data-name="Adsız degrade 16" cx="256.19" cy="256.19" fx="256.19" fy="256.19" r="362.66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#d3dbdf"/>
+    </radialGradient>
+  </defs>
+  <g id="katman_1" data-name="katman 1">
+    <g>
+      <rect class="cls-2" width="512.38" height="512.38"/>
+      <rect class="cls-1" width="512.38" height="512.38"/>
+    </g>
+  </g>
 </svg>
