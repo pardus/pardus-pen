@@ -1,29 +1,126 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 514.82 512.18">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #e83d43;
-      }
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 28.5.0, SVG Export Plug-In . SVG Version: 9.03 Build 54727)  -->
 
-      .cls-1, .cls-2, .cls-3 {
-        stroke-width: 0px;
-      }
+<svg
+   version="1.0"
+   id="katman_2_00000078725689803714063050000012307051137647818159_"
+   x="0px"
+   y="0px"
+   viewBox="0 0 514.8 512.3"
+   style="enable-background:new 0 0 514.8 512.3;"
+   xml:space="preserve"
+   sodipodi:docname="Varlık 31.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs10" /><sodipodi:namedview
+   id="namedview10"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="1.6802642"
+   inkscape:cx="253.82913"
+   inkscape:cy="261.26844"
+   inkscape:window-width="1462"
+   inkscape:window-height="1131"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="katman_2_00000078725689803714063050000012307051137647818159_"
+   showgrid="false" />
+<style
+   type="text/css"
+   id="style1">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#00B1D9;}
+	.st2{fill:#E83D43;}
+	.st3{fill:url(#SVGID_1_);}
+	.st4{fill:#F4F4F4;}
+	.st5{fill:url(#SVGID_00000088843325418996795160000016939047574646756995_);}
+</style>
 
-      .cls-2 {
-        fill: #00b1d9;
-      }
 
-      .cls-3 {
-        fill: #fff;
-      }
-    </style>
-  </defs>
-  <g id="katman_1" data-name="katman 1">
-    <g>
-      <rect class="cls-3" x=".79" y="2.09" width="507.67" height="507.67"/>
-      <path class="cls-2" d="M0,509.28v2.9h514.82v-2.9h-71.68v-75.05h71.68v-6.17h-71.68v-75.05h71.68v-6.17h-71.68v-75.05h71.68v-6.17h-71.68v-74.84h71.68v-6.38H0v6.38h30.89v74.84H0v6.17h30.89v75.05H0v6.17h30.89v75.05H0v6.17h30.89v75.05H0ZM361.93,190.79h75.05v74.84h-75.05v-74.84ZM361.93,271.8h75.05v75.05h-75.05v-75.05ZM361.93,353.02h75.05v75.05h-75.05v-75.05ZM361.93,434.24h75.05v75.05h-75.05v-75.05ZM280.71,190.79h75.05v74.84h-75.05v-74.84ZM280.71,271.8h75.05v75.05h-75.05v-75.05ZM280.71,353.02h75.05v75.05h-75.05v-75.05ZM280.71,434.24h75.05v75.05h-75.05v-75.05ZM199.49,190.79h75.05v74.84h-75.05v-74.84ZM199.49,271.8h75.05v75.05h-75.05v-75.05ZM199.49,353.02h75.05v75.05h-75.05v-75.05ZM199.49,434.24h75.05v75.05h-75.05v-75.05ZM118.27,190.79h75.05v74.84h-75.05v-74.84ZM118.27,271.8h75.05v75.05h-75.05v-75.05ZM118.27,353.02h75.05v75.05h-75.05v-75.05ZM118.27,434.24h75.05v75.05h-75.05v-75.05ZM37.06,190.79h75.05v74.84H37.06v-74.84ZM37.06,271.8h75.05v75.05H37.06v-75.05ZM37.06,353.02h75.05v75.05H37.06v-75.05ZM37.06,434.24h75.05v75.05H37.06v-75.05Z"/>
-      <rect class="cls-1" x="110.97" width="8.48" height="512.18"/>
-    </g>
-  </g>
+
+<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="158.8378"
+   y1="151.0038"
+   x2="438.5178"
+   y2="438.7938"
+   gradientTransform="matrix(1,0,0,-1,0,510.7717)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop2" />
+	<stop
+   offset="0.1"
+   style="stop-color:#000000;stop-opacity:0.96"
+   id="stop3" />
+	<stop
+   offset="0.26"
+   style="stop-color:#000000;stop-opacity:0.85"
+   id="stop4" />
+	<stop
+   offset="0.45"
+   style="stop-color:#000000;stop-opacity:0.67"
+   id="stop5" />
+	<stop
+   offset="0.68"
+   style="stop-color:#000000;stop-opacity:0.42"
+   id="stop6" />
+	<stop
+   offset="0.92"
+   style="stop-color:#000000;stop-opacity:0.11"
+   id="stop7" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop8" />
+</linearGradient>
+
+
+<linearGradient
+   id="SVGID_00000085959610406410372280000017031354277105598633_"
+   gradientUnits="userSpaceOnUse"
+   x1="305.8145"
+   y1="302.2273"
+   x2="463.6245"
+   y2="464.3573"
+   gradientTransform="matrix(1,0,0,-1,0,510.7717)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop9" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop10" />
+</linearGradient>
+<rect
+   x="58.021595"
+   y="58.830639"
+   class="st0"
+   width="394.48331"
+   height="394.48331"
+   id="rect1"
+   style="stroke-width:0.777001"
+   ry="15.855021" /><path
+   class="st1"
+   d="m 57.399993,452.92544 v 2.2533 H 457.39999 v -2.2533 h -55.71095 v -58.35276 h 55.71095 v -4.81741 h -55.71095 v -58.35276 h 55.71095 v -4.8174 h -55.71095 v -58.35276 h 55.71095 v -4.8174 h -55.71095 v -58.11966 h 55.71095 v -4.97281 H 57.399993 v 4.97281 h 24.009324 v 58.11966 H 57.399993 v 4.8174 h 24.009324 v 58.27506 H 57.399993 v 4.8174 h 24.009324 v 58.35276 H 57.399993 v 4.81741 h 24.009324 v 58.35276 H 57.399993 Z M 338.59658,205.45069 h 58.27505 v 58.11966 h -58.27505 z m 0,62.93706 h 58.27505 v 58.35276 h -58.27505 z m 0,63.09246 h 58.27505 v 58.27506 h -58.27505 z m 0,63.09247 h 58.27505 v 58.35276 H 338.59658 Z M 275.50411,205.45069 h 58.35276 v 58.11966 h -58.27506 z m 0,62.93706 h 58.35276 v 58.35276 h -58.27506 z m 0,63.09246 h 58.35276 v 58.27506 h -58.27506 z m 0,63.09247 h 58.35276 v 58.35276 H 275.58181 Z M 212.41165,205.45069 h 58.35276 v 58.11966 h -58.35276 z m 0,62.93706 h 58.35276 v 58.35276 h -58.35276 z m 0,63.09246 h 58.35276 v 58.27506 h -58.35276 z m 0,63.09247 h 58.35276 v 58.35276 H 212.41165 Z M 149.31919,205.45069 h 58.35275 v 58.11966 h -58.35275 z m 0,62.93706 h 58.35275 v 58.35276 h -58.35275 z m 0,63.09246 h 58.35275 v 58.27506 h -58.35275 c 0,0.0777 0,-58.27506 0,-58.27506 z m 0,63.09247 h 58.35275 v 58.35276 H 149.31919 Z M 86.226722,205.45069 h 58.352758 v 58.11966 H 86.226722 Z m 0,62.93706 h 58.352758 v 58.35276 H 86.226722 Z m 0,63.09246 h 58.352758 v 58.27506 H 86.226722 Z m 0,63.09247 h 58.352758 v 58.35276 H 86.226722 Z"
+   id="path1"
+   style="stroke-width:0.777001" /><rect
+   x="143.64708"
+   y="57.19894"
+   class="st2"
+   width="6.6045065"
+   height="397.9798"
+   id="rect2"
+   style="stroke-width:0.777001" />
 </svg>

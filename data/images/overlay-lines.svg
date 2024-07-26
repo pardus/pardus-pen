@@ -1,31 +1,145 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="katman_2" data-name="katman 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 513.33 512.32">
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #e83d43;
-      }
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 28.5.0, SVG Export Plug-In . SVG Version: 9.03 Build 54727)  -->
 
-      .cls-1, .cls-2, .cls-3 {
-        stroke-width: 0px;
-      }
+<svg
+   version="1.0"
+   id="katman_2_00000178912201296417896060000006464800653676992172_"
+   x="0px"
+   y="0px"
+   viewBox="0 0 513.3 512.3"
+   style="enable-background:new 0 0 513.3 512.3;"
+   xml:space="preserve"
+   sodipodi:docname="Varlık 32.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs13" /><sodipodi:namedview
+   id="namedview13"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="1.6793299"
+   inkscape:cx="276.00295"
+   inkscape:cy="261.41379"
+   inkscape:window-width="1420"
+   inkscape:window-height="1111"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="katman_2_00000178912201296417896060000006464800653676992172_"
+   showgrid="false" />
+<style
+   type="text/css"
+   id="style1">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#00B1D9;}
+	.st2{fill:#E83D43;}
+	.st3{fill:url(#SVGID_1_);}
+	.st4{fill:#F4F4F4;}
+	.st5{fill:url(#SVGID_00000115515911668440732970000000870163825399438778_);}
+</style>
 
-      .cls-2 {
-        fill: #00b1d9;
-      }
 
-      .cls-3 {
-        fill: #fff;
-      }
-    </style>
-  </defs>
-  <g id="katman_1" data-name="katman 1">
-    <g>
-      <rect class="cls-3" x="1.33" width="512" height="512"/>
-      <rect class="cls-2" y="180.67" width="511.53" height="8.48"/>
-      <rect class="cls-2" y="299.11" width="511.53" height="8.48"/>
-      <rect class="cls-2" y="417.56" width="511.53" height="8.48"/>
-      <rect class="cls-1" x="111.52" y=".13" width="8.48" height="512.18"/>
-    </g>
-  </g>
+
+
+
+<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="159.383"
+   y1="76.1329"
+   x2="439.063"
+   y2="-211.6571"
+   gradientTransform="translate(0,284.0001)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop5" />
+	<stop
+   offset="0.1"
+   style="stop-color:#000000;stop-opacity:0.96"
+   id="stop6" />
+	<stop
+   offset="0.26"
+   style="stop-color:#000000;stop-opacity:0.85"
+   id="stop7" />
+	<stop
+   offset="0.45"
+   style="stop-color:#000000;stop-opacity:0.67"
+   id="stop8" />
+	<stop
+   offset="0.68"
+   style="stop-color:#000000;stop-opacity:0.42"
+   id="stop9" />
+	<stop
+   offset="0.92"
+   style="stop-color:#000000;stop-opacity:0.11"
+   id="stop10" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop11" />
+</linearGradient>
+
+
+<linearGradient
+   id="SVGID_00000149345696055415298340000010573641584786545296_"
+   gradientUnits="userSpaceOnUse"
+   x1="306.3609"
+   y1="-75.0891"
+   x2="464.171"
+   y2="-237.2291"
+   gradientTransform="translate(0,284.0001)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop12" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop13" />
+</linearGradient>
+<rect
+   x="57.663048"
+   y="56.539623"
+   class="st0"
+   width="398.98694"
+   height="398.98694"
+   id="rect1"
+   style="stroke-width:0.779271"
+   ry="18.548136" /><rect
+   y="197.35396"
+   class="st1"
+   width="398.59732"
+   height="6.623807"
+   id="rect2"
+   x="56.649994"
+   style="stroke-width:0.779271" /><rect
+   y="289.61969"
+   class="st1"
+   width="398.59732"
+   height="6.623807"
+   id="rect3"
+   x="56.649994"
+   style="stroke-width:0.779271" /><rect
+   y="381.96335"
+   class="st1"
+   width="398.59732"
+   height="6.623807"
+   id="rect4"
+   x="56.649994"
+   style="stroke-width:0.779271" /><rect
+   x="143.53876"
+   y="56.617554"
+   class="st2"
+   width="6.623807"
+   height="399.14282"
+   id="rect5"
+   style="stroke-width:0.779271" />
 </svg>

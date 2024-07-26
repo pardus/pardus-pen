@@ -1,127 +1,236 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 28.5.0, SVG Export Plug-In . SVG Version: 9.03 Build 54727)  -->
+
 <svg
-   id="katman_2"
-   data-name="katman 2"
-   viewBox="0 0 512.38 512.38"
-   version="1.1"
+   version="1.0"
+   id="katman_2_00000037673643222829538920000008193321394449358778_"
+   x="0px"
+   y="0px"
+   viewBox="0 0 512.4 512.4"
+   style="enable-background:new 0 0 512.4 512.4;"
+   xml:space="preserve"
    sodipodi:docname="overlay-isometric.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview19"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="0.70865242"
-     inkscape:cx="-153.1075"
-     inkscape:cy="326.67637"
-     inkscape:window-width="1906"
-     inkscape:window-height="1126"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="katman_2" />
-  <defs
-     id="defs9">
-    <style
-       id="style2">
-      .cls-1 {
-        fill: url(#Adsız_degrade_16);
-      }
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs9" /><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="1.6881342"
+   inkscape:cx="223.91585"
+   inkscape:cy="153.42382"
+   inkscape:window-width="1617"
+   inkscape:window-height="1187"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="katman_2_00000037673643222829538920000008193321394449358778_"
+   showgrid="false" />
+<style
+   type="text/css"
+   id="style1">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:#F4F4F4;}
+	.st3{fill:url(#SVGID_00000133493966754488290720000004194618672654035089_);}
+</style>
 
-      .cls-1, .cls-2 {
-        stroke-width: 0px;
-      }
+<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="158.4278"
+   y1="151.0038"
+   x2="438.1078"
+   y2="438.7938"
+   gradientTransform="matrix(1,0,0,-1,0,510.7717)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop1" />
+	<stop
+   offset="0.1"
+   style="stop-color:#000000;stop-opacity:0.96"
+   id="stop2" />
+	<stop
+   offset="0.26"
+   style="stop-color:#000000;stop-opacity:0.85"
+   id="stop3" />
+	<stop
+   offset="0.45"
+   style="stop-color:#000000;stop-opacity:0.67"
+   id="stop4" />
+	<stop
+   offset="0.68"
+   style="stop-color:#000000;stop-opacity:0.42"
+   id="stop5" />
+	<stop
+   offset="0.92"
+   style="stop-color:#000000;stop-opacity:0.11"
+   id="stop6" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop7" />
+</linearGradient>
 
-      .cls-2 {
-        fill: #fff;
-      }
-    </style>
-    <radialGradient
-       id="Adsız_degrade_16"
-       data-name="Adsız degrade 16"
-       cx="256.19"
-       cy="256.19"
-       fx="256.19"
-       fy="256.19"
-       r="362.66"
-       gradientUnits="userSpaceOnUse">
-      <stop
-         offset="0"
-         stop-color="#fff"
-         stop-opacity="0"
-         id="stop4" />
-      <stop
-         offset="1"
-         stop-color="#d3dbdf"
-         id="stop6" />
-    </radialGradient>
-  </defs>
-  <g
-     id="katman_1"
-     data-name="katman 1">
-    <g
-       id="g15">
-      <rect
-         class="cls-2"
-         width="512.38"
-         height="512.38"
-         id="rect11" />
-      <rect
-         class="cls-1"
-         width="512.38"
-         height="512.38"
-         id="rect13" />
-    </g>
-  </g>
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="path542"
-     cx="256.19"
-     cy="256.19"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1795"
-     cx="376.19"
-     cy="176.19"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1806"
-     cx="136.19"
-     cy="176.19"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1808"
-     cx="376.19"
-     cy="336.19"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1810"
-     cx="136.19"
-     cy="336.19"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1812"
-     cx="256.19"
-     cy="96.190002"
-     r="19.706923" />
-  <circle
-     style="fill:#000000;stroke:none;stroke-width:75.2815;stroke-opacity:1"
-     id="circle1814"
-     cx="256.19"
-     cy="416.19"
-     r="19.706923" />
-</svg>
+
+<linearGradient
+   id="SVGID_00000039129363701744068830000008735913812780181133_"
+   gradientUnits="userSpaceOnUse"
+   x1="305.4045"
+   y1="302.2273"
+   x2="463.2145"
+   y2="464.3573"
+   gradientTransform="matrix(1,0,0,-1,0,510.7717)">
+	<stop
+   offset="0"
+   style="stop-color:#C1C8CC"
+   id="stop8" />
+	<stop
+   offset="1"
+   style="stop-color:#FFFFFF;stop-opacity:0"
+   id="stop9" />
+</linearGradient>
+<rect
+   y="56.200012"
+   class="st0"
+   width="400"
+   height="400"
+   id="rect1"
+   x="56.200012"
+   style="stroke-width:0.78064;fill:#ffffff"
+   ry="17.743332" />
+<circle
+   style="fill:#000000;stroke-width:31"
+   id="path1320"
+   cx="256.20001"
+   cy="256.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2048"
+   cx="336.20001"
+   cy="256.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2050"
+   cx="176.20001"
+   cy="256.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2052"
+   cx="296.20001"
+   cy="176.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2054"
+   cx="376.20001"
+   cy="176.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2056"
+   cx="216.20001"
+   cy="176.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2058"
+   cx="136.20001"
+   cy="176.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2060"
+   cx="216.20001"
+   cy="176.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2070"
+   cx="296.20001"
+   cy="336.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2072"
+   cx="376.20001"
+   cy="336.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2074"
+   cx="216.20001"
+   cy="336.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2076"
+   cx="136.20001"
+   cy="336.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2078"
+   cx="216.20001"
+   cy="336.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2080"
+   cx="416.20001"
+   cy="256.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2082"
+   cx="96.200012"
+   cy="256.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2084"
+   cx="256.20001"
+   cy="416.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2086"
+   cx="336.20001"
+   cy="416.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2088"
+   cx="176.20001"
+   cy="416.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2100"
+   cx="416.20001"
+   cy="416.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2102"
+   cx="96.200012"
+   cy="416.20001"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2104"
+   cx="256.20001"
+   cy="96.200012"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2106"
+   cx="336.20001"
+   cy="96.200012"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2108"
+   cx="176.20001"
+   cy="96.200012"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2110"
+   cx="416.20001"
+   cy="96.200012"
+   r="3" /><circle
+   style="fill:#000000;stroke-width:31"
+   id="circle2112"
+   cx="96.200012"
+   cy="96.200012"
+   r="3" /></svg>
