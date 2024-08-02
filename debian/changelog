@@ -1,7 +1,132 @@
 pardus-pen (3.0.0) unstable; urgency=medium
 
-  [ Ali Riza Keskin ]
-  * init
+  [ Ali Riza KESKIN ]
+  * fix missing dependenciey
+  * touch event listener improvement
+  * multi touch drawing
+  * multi touch drawing fix
+  * scaled icons
+  * icon size scaled
+  * scaled pen size
+  * scaled pen size fix
+  * exit button added, yes no question added
+  * yesno question icon
+  * icons fix
+  * button label size fix
+  * icon size fix
+  * floating settings
+  * settings page multi page system
+  * improvements
+  * fix move events
+  * pen selector
+  * improvements
+  * page type selector
+  * improvements
+  * page selection indicator
+  * touch input pressuse
+  * fix padding in page type menu
+  * fix color select dialog
+  * fix pen size selector
+  * pen colors and add missing icons
+  * right button erase feature added
+  * middle button marker feature added
+  * alpha channel set fix
+  * improvements
+  * fix color picker cancel event
+  * screenshot button remove support fix
+  * go back and go next added
+  * merge color settings with pen size settings
+  * clear image storage when click crear button
+  * create flatpak manifest (unfinished)
+  * flatpak manifet fix
+  * screenshot feature disabled on flatpak
+  * multi page and move screenshot buttons into page settings
+  * page type save restore on next/previous event
+  * some improvements about tab to dot feature
+  * visual fixes
+  * exit dialog embed into floatingSettings
+  * floatingSettings position fix
+  * clear dialog embed into floatingSettings
+  * stylus events added
+  * dialog width is dynamic
+  * update missing translations
+  * new page background is same as current one
+  * hide color dialog when pen type is eraser
+  * -O3 -Wall -Wextra
+  * overview
+  * eraser indicator cursor
+  * overlay type added
+  * move header added
+  * fix slider bug
+  * floating settings hide if current mode tool clicked
+  * fix pin issue
+  * update images
+  * fix next - back buttons update
+  * clear button event fixx
+  * update icons
+  * update more icons and move label pixmap
+  * svg format fix for etap19
+  * test script update
+  * line and circle draw tools added
+  * penStyle added
+  * missing icons fix
+  * fix update issue about line
+  * fix type button background
+  * fix icons for etap19
+  * update other icons
+  * overlay type indicator
+  * Eraser force pen style as spline
+  * Update readme
+  * Update readme
+  * fix minor issue about eraser force mode
+  * add -Werror and fix warnings
+  * fix
+  * screen resolution change event handle
+  * fix resize screen event issue
+  * save/load feature added
+  * open save file with first argument
+  * mimetype
+  * change pen type if pen stype selected and pen type is eraser
+  * save file suffix fix
+  * async save using thread
+  * save image format is raw
+  * minor fix
+  * save feature disable support added
+  * etap19 fixes added
+  * debian package configuration
+  * sigterm blocked if etap19 enabled
+  * sigterm blocked if etap19 enabled
+  * sigterm blocked if etap19 enabled
+  * closeEvent blocked
+  * fuar mode added
+  * hide build fix for my gentoo
+  * padding fix for screen resolution
+  * load from save scale addedx
+  * fix big archive read issue and async load from file
+  * hide debug outputs
+  * screen resolution change event image draw size fix
+  * max history added
+  * qt6 exit issue fix
+  * fix page clearx
+  * select spline mode on pen moe changes
+  * pen style buttons dont change type when floating settings shown
+  * fixed pressure feature added
+  * whiteboard line style is dash line
+  * dynamic grid count
+  * flatpak version uses qt6
+  * metainfo added
+  * overlay button box replaced with grid
+  * isometric paper fix
+  * replace icons
+  * fix icons
+  * update icon
 
- -- Ali Riza KESKIN <aliriza.keskin@pardus.org.tr>  Thu, 25 Jan 2024 16:23:45 +0300
+  [ busra ]
+  * add translation
+  * add 'how to make deb package'
+  * fix translation files and update README.md
+  * add isometric paper
+  * equalize transparency of points
+  * new translations added
 
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 02 Aug 2024 17:41:15 +0300
