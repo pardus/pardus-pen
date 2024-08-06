@@ -26,6 +26,14 @@
       <image>https://apps.pardus.org.tr/files/screenshots/pardus-pen/pardus-pen-1.png</image>
       <caption>Pardus Pen</caption>
     </screenshot>
+    <screenshot>
+      <image>https://apps.pardus.org.tr/files/screenshots/pardus-pen/pardus-pen-2.png</image>
+      <caption>Change Pardus Pen size and color</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://apps.pardus.org.tr/files/screenshots/pardus-pen/pardus-pen-3.png</image>
+      <caption>Pardus Pen with background options</caption>
+    </screenshot>
   </screenshots>
   <releases>
     <release version="3.0.0" date="2024-06-24"/>
