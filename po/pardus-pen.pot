@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-26 10:32+0300\n"
+"POT-Creation-Date: 2024-08-07 00:12+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,50 +29,62 @@ msgstr ""
 msgid "Failed To save:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:78
+#: src/SetupWidgets.cpp:143
 msgid "Pen"
 msgstr ""
 
-#: src/SetupWidgets.cpp:82
+#: src/SetupWidgets.cpp:147
 msgid "Marker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:86
+#: src/SetupWidgets.cpp:151
 msgid "Eraser"
 msgstr ""
 
-#: src/SetupWidgets.cpp:90
+#: src/SetupWidgets.cpp:155
 msgid " Size: "
 msgstr ""
 
-#: src/SetupWidgets.cpp:181
+#: src/SetupWidgets.cpp:156 src/SetupWidgets.cpp:337
 msgid " Color:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:185
+#: src/SetupWidgets.cpp:341
 msgid "Color Picker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:230
+#: src/SetupWidgets.cpp:386
 msgid "Select Color"
 msgstr ""
 
-#: src/SetupWidgets.cpp:358
-msgid "Background:"
+#: src/SetupWidgets.cpp:496
+msgid "Pen Style"
 msgstr ""
 
-#: src/SetupWidgets.cpp:483
+#: src/SetupWidgets.cpp:782
 msgid "Are you want to clear screen?"
 msgstr ""
 
-#: src/SetupWidgets.cpp:491 src/SetupWidgets.cpp:531
+#: src/SetupWidgets.cpp:790 src/SetupWidgets.cpp:872
 msgid "No"
 msgstr ""
 
-#: src/SetupWidgets.cpp:494 src/SetupWidgets.cpp:534
+#: src/SetupWidgets.cpp:793 src/SetupWidgets.cpp:875
 msgid "Yes"
 msgstr ""
 
-#: src/SetupWidgets.cpp:521
+#: src/SetupWidgets.cpp:831
+msgid "Save File"
+msgstr ""
+
+#: src/SetupWidgets.cpp:831 src/SetupWidgets.cpp:842
+msgid "Pen Files (*.pen);;All Files (*.*)"
+msgstr ""
+
+#: src/SetupWidgets.cpp:842
+msgid "Open File"
+msgstr ""
+
+#: src/SetupWidgets.cpp:862
 msgid "Are you want to quit pardus pen?"
 msgstr ""
