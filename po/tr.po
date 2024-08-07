@@ -1,21 +1,23 @@
-# Turkish translations for PACKAGE package.
-# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# busra <busra.cagliyan@pardus.org.tr>, 2024.
+# Turkish translations for tr.org.pardus.pen package.
+# Copyright (C) 2024 tr.org.pardus.pen'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tr.org.pardus.pen package.
+#
+# Büşra Çağlıyan <busra.cagliyan@pardus.org.tr>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-26 10:32+0300\n"
-"PO-Revision-Date: 2024-03-26 08:30+0300\n"
-"Last-Translator: busra <busra.cagliyan@pardus.org.tr>\n"
-"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"POT-Creation-Date: 2024-08-07 00:17+0300\n"
+"PO-Revision-Date: 2024-08-07 00:19+0300\n"
+"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.3\n"
 
 #: src/ScreenShot.cpp:42
 msgid "Info"
@@ -29,50 +31,62 @@ msgstr "Ekran görüntüsü kaydedildi:"
 msgid "Failed To save:"
 msgstr "Kaydedilemedi:"
 
-#: src/SetupWidgets.cpp:78
+#: src/SetupWidgets.cpp:143
 msgid "Pen"
 msgstr "Kalem"
 
-#: src/SetupWidgets.cpp:82
+#: src/SetupWidgets.cpp:147
 msgid "Marker"
 msgstr "İşaretleyici"
 
-#: src/SetupWidgets.cpp:86
+#: src/SetupWidgets.cpp:151
 msgid "Eraser"
 msgstr "Silgi"
 
-#: src/SetupWidgets.cpp:90
+#: src/SetupWidgets.cpp:155
 msgid " Size: "
 msgstr " Boyutu: "
 
-#: src/SetupWidgets.cpp:181
+#: src/SetupWidgets.cpp:156 src/SetupWidgets.cpp:337
 msgid " Color:"
 msgstr " Rengi:"
 
-#: src/SetupWidgets.cpp:185
+#: src/SetupWidgets.cpp:341
 msgid "Color Picker"
 msgstr "Renk Seçici"
 
-#: src/SetupWidgets.cpp:230
+#: src/SetupWidgets.cpp:386
 msgid "Select Color"
 msgstr "Renk Seçin"
 
-#: src/SetupWidgets.cpp:358
-msgid "Background:"
-msgstr "Arka plan:"
+#: src/SetupWidgets.cpp:496
+msgid "Pen Style"
+msgstr "Kalem Biçemi"
 
-#: src/SetupWidgets.cpp:483
+#: src/SetupWidgets.cpp:782
 msgid "Are you want to clear screen?"
 msgstr "Ekranı temizlemek istiyor musunuz?"
 
-#: src/SetupWidgets.cpp:491 src/SetupWidgets.cpp:531
+#: src/SetupWidgets.cpp:790 src/SetupWidgets.cpp:872
 msgid "No"
 msgstr "Hayır"
 
-#: src/SetupWidgets.cpp:494 src/SetupWidgets.cpp:534
+#: src/SetupWidgets.cpp:793 src/SetupWidgets.cpp:875
 msgid "Yes"
 msgstr "Evet"
 
-#: src/SetupWidgets.cpp:521
-msgid "Are you want to quit pardus pen?"
+#: src/SetupWidgets.cpp:831
+msgid "Save File"
+msgstr "Dosya Kaydet"
+
+#: src/SetupWidgets.cpp:831 src/SetupWidgets.cpp:842
+msgid "Pen Files (*.pen);;All Files (*.*)"
+msgstr "Kalem Dosyaları (*.pen);;Tüm Dosyalar (*.*)"
+
+#: src/SetupWidgets.cpp:842
+msgid "Open File"
+msgstr "Dosya Aç"
+
+#: src/SetupWidgets.cpp:862
+msgid "Are you want to quit Pardus pen?"
 msgstr "Pardus kalem'i kapatmak istiyor musunuz?"

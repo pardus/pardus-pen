@@ -859,7 +859,7 @@ static void setupExit(){
     QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
 
     QLabel *exitLabel = new QLabel();
-    char* exitText = _("Are you want to quit pardus pen?");
+    char* exitText = _("Are you want to quit Pardus pen?");
     exitLabel->setText(exitText);
     exitLabel->setAlignment(Qt::AlignHCenter);
     exitLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
