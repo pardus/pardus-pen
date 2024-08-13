@@ -123,19 +123,6 @@ static void penStyleEvent(){
 }
 
 
-static void setCursor(const char* name){
-    QIcon icon = QIcon(name);
-    QPixmap pixmap = icon.pixmap(
-        icon.actualSize(
-            QSize(window->penSize[window->penType],
-            window->penSize[window->penType])
-        )
-   );
-   QCursor cur(pixmap);
-   window->setCursor(cur);
-   floatingSettings->setCursor(cur);
-}
-
 static void penSizeEvent(){
     int value = window->penSize[window->penType];
     switch(window->penType){
@@ -166,7 +153,6 @@ static void penSizeEvent(){
         colorDialog->hide();
         ov->hide();
         colorLabel->hide();
-        setCursor(":images/cursor.svg");
     } else {
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
@@ -180,8 +166,6 @@ static void penSizeEvent(){
         colorDialog->show();
         colorLabel->show();
         ov->show();
-        window->unsetCursor();
-        floatingSettings->unsetCursor();
     }
     ov->penSize = value;
     ov->color = window->penColor;

@@ -17,7 +17,7 @@ extern "C" {
 }
 
 extern WhiteBoard *board;
-
+extern QMainWindow* mainWindow;
 extern DrawingWidget *window;
 
 extern void updateGoBackButtons();
@@ -66,6 +66,62 @@ private:
     QMap<qint64, QPointF> values;
 };
 ValueStorage storage;
+
+class CursorStorage {
+public:
+    void init(qint64 id){
+        if(!images.contains(id)){
+            labels[id] = new QLabel("");
+            labels[id]->setStyleSheet(QString("background-color: none;"));
+            images[id] = new QWidget(mainWindow);
+            images[id]->stackUnder(window);
+            layouts[id] = new QVBoxLayout(images[id]);
+            layouts[id]->addWidget(labels[id]);
+            layouts[id]->setContentsMargins(0,0,0,0);
+            layouts[id]->setSpacing(0);
+            sizes[id] = 0;
+        }
+    }
+    void setPosition(qint64 id, QPoint data) {
+        init(id);
+        //printf("%lld move\n", id);
+        images[id]->move(QPoint(
+            data.x() - sizes[id]/2,
+            data.y() - sizes[id]/2
+        ));
+        images[id]->show();
+        setCursor(id, sizes[id]);
+    }
+
+    void setCursor(qint64 id, int size){
+        if(sizes[id] == size){
+            return;
+        }
+        sizes[id] = size;
+        QIcon icon = QIcon(":images/cursor.svg");
+        QPixmap pixmap = icon.pixmap(
+            icon.actualSize(
+                QSize(size, size)
+            )
+        );
+        //printf("%lld resize %d\n", id, size);
+        labels[id]->setFixedSize(size, size);
+        images[id]->setFixedSize(size, size);
+        labels[id]->setPixmap(pixmap);
+    }
+
+    void hide(qint64 id){
+        init(id);
+        images[id]->hide();
+    }
+
+private:
+    QMap<qint64, QWidget*> images;
+    QMap<qint64, QLabel*> labels;
+    QMap<qint64, QVBoxLayout*> layouts;
+    QMap<qint64, int> sizes;
+};
+CursorStorage curs;
 
 class ImageStorage {
 public:
@@ -199,6 +255,7 @@ float fpressure = 0;
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
+    setMouseTracking(true);
     QScreen *screen = QGuiApplication::primaryScreen();
     screenWidth  = screen->geometry().width();
     screenHeight = screen->geometry().height();
@@ -210,6 +267,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
+    updateCursorMouse(-1, event->position());
+    curs.setCursor(-1, penSize[penType]*2);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
@@ -219,7 +278,14 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     if(floatingSettings->isVisible()){
         floatingSettings->hide();
     }
+}
 
+void DrawingWidget::updateCursorMouse(qint64 i, QPoint pos){
+    if(penType != ERASER){
+        curs.hide(i);
+    } else {
+        curs.setPosition(i, pos);
+    }
 }
 
 void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
@@ -230,7 +296,10 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
         penType = MARKER;
     }
     if (drawing) {
+        updateCursorMouse(-1, event->position());
         drawLineTo(event->position());
+    } else {
+        curs.hide(-1);
     }
     isMoved = true;
     penType = penTypeBak;
@@ -247,6 +316,7 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     images.image_count = images.last_image_num;
     images.saveValue(images.last_image_num, image.copy());
     curEventButtons = 0;
+    curs.hide(-1);
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
@@ -427,12 +497,15 @@ bool DrawingWidget::event(QEvent *ev) {
                     storage.saveValue(touchPoint.id(), pos);
                 }
                 else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
+                    curs.hide(touchPoint.id());
                     storage.saveValue(touchPoint.id(), QPointF(-1,-1));
                     continue;
                 }
                 QPointF oldPos = storage.loadValue(touchPoint.id());
                 drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
+                updateCursorMouse(touchPoint.id(), pos.toPoint());
+                curs.setCursor(touchPoint.id(), penSize[penType]*2);
             }
             break;
         }
