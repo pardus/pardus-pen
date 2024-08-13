@@ -56,7 +56,7 @@ public:
     void loadImage(int num);
 
 protected:
-    bool drawing;
+    bool drawing = false;
     QImage imageBackup;
     bool eraser;
     void mousePressEvent(QMouseEvent *event) override;
