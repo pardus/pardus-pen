@@ -779,7 +779,7 @@ static void setupClear(){
     QHBoxLayout *clearButtonLayout = new QHBoxLayout(clearButtonDialog);
 
     QLabel *clearLabel = new QLabel();
-    char* clearText = _("Are you want to clear screen?");
+    char* clearText = _("Do you want to clear screen?");
     clearLabel->setText(clearText);
     clearLabel->setAlignment(Qt::AlignHCenter);
     clearDialog->setStyleSheet(QString("background-color: none;"));
@@ -859,7 +859,7 @@ static void setupExit(){
     QHBoxLayout *exitButtonLayout = new QHBoxLayout(exitButtonDialog);
 
     QLabel *exitLabel = new QLabel();
-    char* exitText = _("Are you want to quit Pardus pen?");
+    char* exitText = _("Do you want to quit Pardus pen?");
     exitLabel->setText(exitText);
     exitLabel->setAlignment(Qt::AlignHCenter);
     exitLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);

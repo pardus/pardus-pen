@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pardus-pen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 00:17+0300\n"
+"POT-Creation-Date: 2024-08-13 06:39+0000\n"
 "PO-Revision-Date: 2024-08-11 00:09+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese\n"
@@ -63,7 +63,7 @@ msgid "Pen Style"
 msgstr "Estilo de caneta"
 
 #: src/SetupWidgets.cpp:782
-msgid "Are you want to clear screen?"
+msgid "Do you want to clear screen?"
 msgstr "Limpar o ecrã?"
 
 #: src/SetupWidgets.cpp:790 src/SetupWidgets.cpp:872
@@ -87,5 +87,5 @@ msgid "Open File"
 msgstr "Abrir ficheiro"
 
 #: src/SetupWidgets.cpp:862
-msgid "Are you want to quit Pardus pen?"
+msgid "Do you want to quit Pardus pen?"
 msgstr "Sair da caneta Pardus?"
