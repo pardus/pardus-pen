@@ -268,7 +268,7 @@ DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     updateCursorMouse(-1, event->position());
-    curs.setCursor(-1, penSize[penType]*2);
+    curs.setCursor(-1, penSize[penType]*screenHeight/1080);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
@@ -505,7 +505,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
-                curs.setCursor(touchPoint.id(), penSize[penType]*2);
+                curs.setCursor(touchPoint.id(), penSize[penType]*screenHeight/1080);
             }
             break;
         }
