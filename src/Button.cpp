@@ -30,8 +30,8 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
 
 void set_icon(const char* name, QPushButton * button) {
     QIcon icon = QIcon(name);
-    QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(screenHeight/23, screenHeight/23)));
+    QPixmap pixmap = icon.pixmap(QSize(screenHeight/23, screenHeight/23));
     button->setIcon(icon);
-    button->setIconSize(pixmap.rect().size());
+    button->setIconSize(QSize(screenHeight/23, screenHeight/23));
     button->setFlat(true);
 }
