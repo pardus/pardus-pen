@@ -280,6 +280,9 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }
 }
 
+void DrawingWidget::updateCursorMouse(qint64 i, QPointF pos){
+    updateCursorMouse(i, pos.toPoint());
+}
 void DrawingWidget::updateCursorMouse(qint64 i, QPoint pos){
     if(penType != ERASER){
         curs.hide(i);

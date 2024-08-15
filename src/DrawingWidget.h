@@ -65,6 +65,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void updateCursorMouse(qint64 i, QPoint pos);
+    void updateCursorMouse(qint64 i, QPointF pos);
     void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
     bool event(QEvent * ev);
     QPainter painter;
