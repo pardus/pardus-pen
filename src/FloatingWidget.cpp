@@ -8,6 +8,7 @@ int new_y;
 
 extern int padding;
 
+
 extern "C" {
 #include "settings.h"
 }
@@ -17,15 +18,20 @@ extern "C" {
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
-    layout = new QVBoxLayout(this);
+    is_vertical = get_bool((char*)"is-vertical");
+    if(is_vertical){
+        layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
+    } else {
+        layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
+    }
     setLayout(layout);
+    layout->setSpacing(padding);
+    layout->setContentsMargins(padding, padding, padding, padding);
     QString style = QString(
     "QWidget {"
         "border-radius:13px;"
         "background-color: #cc939393;"
     "}");
-    layout->setSpacing(padding);
-    layout->setContentsMargins(padding, padding, padding, padding);
     setStyleSheet(style);
     cur_height = padding;
     new_x = get_int((char*)"cur-x");
@@ -38,9 +44,16 @@ void FloatingWidget::setSettings(QWidget *widget) {
 }
 
 void FloatingWidget::setWidget(QWidget *widget) {
-    cur_height += widget->size().height() + padding;
-    if (cur_width < widget->size().width()) {
-        cur_width = widget->size().width() + padding*2;
+    if(is_vertical){
+        cur_height += widget->size().height() + padding;
+        if (cur_width < widget->size().width()) {
+            cur_width = widget->size().width() + padding*2;
+        }
+    } else {
+        cur_width += widget->size().width() + padding;
+        if (cur_height < widget->size().height()) {
+            cur_height = widget->size().height() + padding*2;
+        }
     }
     num_of_item++;
     setFixedSize(cur_width, cur_height);
@@ -60,6 +73,7 @@ void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
     set_int((char*)"cur-x", new_x);
     set_int((char*)"cur-y", new_y);
 }
+static int new_xx, new_yy;
 
 void FloatingWidget::moveAction(){
         if (new_x < 0) {
@@ -73,16 +87,25 @@ void FloatingWidget::moveAction(){
         }
         move(new_x, new_y);
         if(floatingSettings != NULL){
-            int new_xx = new_x+padding+cur_width;
-            if(new_xx  > screenWidth - floatingSettings->cur_width){
-                new_xx = new_x - padding - floatingSettings->cur_width;
-            }
-            int new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
-            if (new_yy > screenHeight - floatingSettings->cur_height) {
-                new_yy = screenHeight - floatingSettings->cur_height;
-            }
-            if(new_yy + floatingSettings->cur_height > new_y + cur_height) {
-                new_yy = new_y + cur_height - floatingSettings->cur_height - padding;
+            if(is_vertical){
+                new_xx = new_x+padding+cur_width;
+                if(new_xx  > screenWidth - floatingSettings->cur_width){
+                    new_xx = new_x - padding - floatingSettings->cur_width;
+                }
+                new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
+                if (new_yy > screenHeight - floatingSettings->cur_height) {
+                    new_yy = screenHeight - floatingSettings->cur_height;
+                }
+
+            } else {
+                new_xx = new_x + (cur_width / num_of_item) * settingsOffset;
+                if (new_xx > screenWidth - floatingSettings->cur_width) {
+                    new_xx = screenWidth - floatingSettings->cur_width;
+                }
+                new_yy = new_y + cur_height + padding;
+                if(new_yy  > screenHeight - floatingSettings->cur_height){
+                    new_yy = new_y - padding - floatingSettings->cur_height;
+                }
             }
             floatingSettings->move(new_xx, new_yy + padding);
         }

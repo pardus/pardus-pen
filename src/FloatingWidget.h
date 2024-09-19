@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QMouseEvent>
 #include <QScreen>
 #include <QApplication>
@@ -21,6 +22,7 @@ public:
     void setSettings(QWidget *widget);
     void setFloatingOffset(int offset);
     void moveAction();
+    bool is_vertical;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
@@ -33,7 +35,7 @@ private:
     FloatingSettings* floatingSettings;
     QPoint dragPosition;
     QLabel *label;
-    QVBoxLayout *layout;
+    QBoxLayout *layout;
 };
 
 #endif // FLOATINGWIDGET_H

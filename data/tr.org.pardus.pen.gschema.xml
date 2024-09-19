@@ -40,5 +40,9 @@
       <default>0</default>
       <summary>Ignore pressure value and use fixed value</summary>
     </key>
+    <key type="b" name="is-vertical">
+      <default>true</default>
+      <summary>Toolbar is vertical or horizontal</summary>
+    </key>
   </schema>
 </schemalist>
