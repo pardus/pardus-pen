@@ -1,3 +1,29 @@
+pardus-pen (3.1.0) unstable; urgency=medium
+
+  [ Sabri Ünal ]
+  * Fix POTFILES
+  * i18n: Update POT file
+  * Fix Branding
+  * i18n: Update POT file
+  * Update Turkish translation
+  * Fix appdata papercuts
+  * appdata: Add other screenshots
+
+  [ Hugo Carvalho ]
+  * Add Portuguese language/translations
+
+  [ Ali Riza KESKIN ]
+  * Create blank.yml
+  * fix clear button label text
+  * improve erase cursor
+  * define initial drawing status false
+  * fix scale issue
+  * fix qt6 build
+  * qt6 scale issue fix
+  * horizontal toolbar settings added
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 24 Sep 2024 11:58:07 +0300
+
 pardus-pen (3.0.0) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
