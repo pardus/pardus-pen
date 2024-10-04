@@ -26,7 +26,7 @@ For debian:
 
 For archlinux:
 
-`pacman -Sy meson ninja qt5-base qt5-tools glib2`
+`pacman -Syu meson ninja qt5-base qt5-tools glib2`
 
 For alpine:
 
