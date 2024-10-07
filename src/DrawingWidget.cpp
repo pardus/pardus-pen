@@ -268,7 +268,13 @@ DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     updateCursorMouse(-1, event->position());
-    curs.setCursor(-1, penSize[penType]*screenHeight/1080);
+    int ev_pen = penType;
+    if(event->buttons() & Qt::RightButton) {
+        ev_pen = ERASER;
+    }else if(event->buttons() & Qt::MiddleButton) {
+        ev_pen = MARKER;
+    }
+    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080);    
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();

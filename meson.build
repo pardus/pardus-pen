@@ -22,8 +22,10 @@ if get_option('resources')
     src += [meson.current_build_dir()/'resources.cpp']
 
 endif
+if get_option('fix1')
+    add_project_arguments(['-Wno-error=template-id-cdtor', '-g3' ], language: 'cpp')
+endif
 add_project_arguments(['-O3', '-Wextra', '-Wall', '-Werror', '-s'], language: 'cpp')
-#add_project_arguments(['-Wno-error=template-id-cdtor', '-g3' ], language: 'cpp')
 
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
