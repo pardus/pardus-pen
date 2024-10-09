@@ -361,6 +361,8 @@ void DrawingWidget::drawLineTo(const QPointF &endPoint) {
     drawLineToFunc(lastPoint, endPoint, 1.0);
     lastPoint = endPoint;
 }
+static QPointF last_end = QPointF(0,0);
+static QPointF last_begin = QPointF(0,0);
 
 void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
@@ -414,9 +416,13 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             painter.drawLine(startPoint, endPoint);
             rad = (penSize[penType]*pressure*screenHeight)/1080;
             update(QRectF(
+                last_begin, last_end
+            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
+            update(QRectF(
                 startPoint, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            update();
+            last_begin = startPoint;
+            last_end = endPoint;
             break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
