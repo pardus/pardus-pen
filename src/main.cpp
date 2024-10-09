@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
 
     mainWindow->setCentralWidget(window);
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
-    mainWindow->setWindowTitle(QString("Pardus Pen"));
+    mainWindow->setWindowTitle(QString(_("Pardus Pen")));
 
     floatingSettings = new FloatingSettings(mainWindow);
     floatingSettings->hide();
