@@ -412,6 +412,10 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
+            rad = (penSize[penType]*pressure*screenHeight)/1080;
+            update(QRectF(
+                startPoint, endPoint
+            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             update();
             break;
         case CIRCLE:
