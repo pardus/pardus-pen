@@ -110,6 +110,9 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
+    QCoreApplication::setApplicationName(_("Pardus Pen"));
+    QCoreApplication::setOrganizationName("Pardus");
+
     mainWindow = new MainWindow();
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
