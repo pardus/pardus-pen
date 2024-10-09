@@ -15,3 +15,4 @@ GenericName=Screen Drawing Tool
 GenericName[pt]=Ferramenta de desenho de ecrã
 GenericName[tr]=Ekran Çizim Aracı
 MimeType=application/x-pardus-pen
+StartupWMClass=pardus-pen
