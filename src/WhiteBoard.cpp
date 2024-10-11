@@ -76,6 +76,9 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
             );
             drawIsometricPaper();
             break;
+        case MUSIC:
+            drawMusicPaper();
+            break;
     }
     painter.end();
 }
@@ -111,6 +114,18 @@ void WhiteBoard::drawIsometricPaper() {
             if (x + 1 <= width() && y + 1 <= height()) {
                 painter.drawLine((x+(gridSize/2))*1.44,y+(gridSize/2),(x+(gridSize/2))*1.44,y+(gridSize/2)+1);
             }
+        }
+    }
+
+}
+
+void WhiteBoard::drawMusicPaper() {
+    QPainter painter(this);
+    int lineSpacing = screenHeight/85;
+    
+    for (int y = gridSize; y < height() - gridSize; y += lineSpacing * 10) {
+        for (int i = 0; i < 5; ++i) {
+            painter.drawLine(gridSize, y + i * lineSpacing, width() - gridSize, y + i * lineSpacing);
         }
     }
 
