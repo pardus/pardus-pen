@@ -14,6 +14,7 @@
 #define SQUARES 1
 #define LINES 2
 #define ISOMETRIC 3
+#define MUSIC 4
 
 class WhiteBoard : public QWidget {
 public:
@@ -25,6 +26,7 @@ public:
     void drawSquarePaper();
     void drawLinePaper();
     void drawIsometricPaper();
+    void drawMusicPaper();
 private:
     QColor background;
     QColor lineColor;

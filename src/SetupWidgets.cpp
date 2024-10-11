@@ -53,6 +53,7 @@ QPushButton* whiteButton;
 QPushButton* colorpicker;
 
 QPushButton* overlayIsometric;
+QPushButton* overlayMusic;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -197,6 +198,7 @@ static void backgroundStyleEvent(){
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
+    overlayMusic->setStyleSheet(QString("background-color: none;"));
     overlayLines->setStyleSheet(QString("background-color: none;"));
     overlaySquares->setStyleSheet(QString("background-color: none;"));
     overlayNone->setStyleSheet(QString("background-color: none;"));
@@ -224,6 +226,9 @@ static void backgroundStyleEvent(){
             break;
         case ISOMETRIC:
             overlayIsometric->setStyleSheet("background-color:"+window->penColor.name()+";");
+            break;
+        case MUSIC:
+            overlayMusic->setStyleSheet("background-color:"+window->penColor.name()+";");
             break;
         case SQUARES:
             overlaySquares->setStyleSheet("background-color:"+window->penColor.name()+";");
@@ -680,10 +685,18 @@ static void setupBackground(){
     });
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
 
+    overlayMusic = create_button(":images/overlay-squares.svg", [=](){
+        board->setOverlayType(MUSIC);
+        backgroundStyleEvent();
+    });
+    overlayMusic->setStyleSheet(QString("background-color: none;"));
+
+
     gridLayout->addWidget(overlayNone, 0, 0, Qt::AlignCenter);
     gridLayout->addWidget(overlaySquares, 0, 1, Qt::AlignCenter);
     gridLayout->addWidget(overlayLines, 1, 0, Qt::AlignCenter);
     gridLayout->addWidget(overlayIsometric, 1, 1, Qt::AlignCenter);
+    gridLayout->addWidget(overlayMusic, 0, 2, Qt::AlignCenter);
 
     // set sizes
     pageLabel->setFixedSize(
