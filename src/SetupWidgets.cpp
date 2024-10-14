@@ -685,7 +685,7 @@ static void setupBackground(){
     });
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
 
-    overlayMusic = create_button(":images/overlay-squares.svg", [=](){
+    overlayMusic = create_button(":images/overlay-music.svg", [=](){
         board->setOverlayType(MUSIC);
         backgroundStyleEvent();
     });
