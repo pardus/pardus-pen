@@ -122,7 +122,7 @@ void WhiteBoard::drawIsometricPaper() {
 void WhiteBoard::drawMusicPaper() {
     QPainter painter(this);
 
-    for (int y = gridSize ; y < height() - gridSize; y += gridSize * 3) {
+    for (int y = gridSize ; y < height() - gridSize; y += gridSize * 5) {
         for (int i = 0; i < 5; ++i) {
             painter.drawLine(gridSize, y + i * gridSize / 2 , width() - gridSize, y + i * gridSize / 2);
         }
