@@ -6,6 +6,7 @@
 class OverView : public QWidget {
 public:
     float penSize;
+    int penType;
     QColor color;
     QColor background;
     void updateImage();

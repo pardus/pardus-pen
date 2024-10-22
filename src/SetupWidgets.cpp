@@ -119,6 +119,7 @@ static void penStyleEvent(){
             break;
     }
     ov->penSize = window->penSize[window->penType];
+    ov->penType = window->penType;
     ov->color = window->penColor;
     ov->updateImage();
 }
@@ -145,16 +146,26 @@ static void penSizeEvent(){
 
 
     if(window->penType == ERASER) {
+        ov->setFixedSize(
+            colorDialog->size().width(),
+            (colorDialog->size().width()*3)/4
+        );
+
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
             padding*2
+             + ov->size().height()
              + thicknessLabel->size().height()
              + thicknessSlider->size().height()
         );
         colorDialog->hide();
-        ov->hide();
+        //ov->hide();
         colorLabel->hide();
     } else {
+        ov->setFixedSize(
+            colorDialog->size().width(),
+            butsize*3
+        );
         penSettings->setFixedSize(
             colorDialog->size().width() + padding*2,
             padding*2
@@ -166,7 +177,7 @@ static void penSizeEvent(){
         );
         colorDialog->show();
         colorLabel->show();
-        ov->show();
+        //ov->show();
     }
     ov->penSize = value;
     ov->color = window->penColor;
@@ -428,11 +439,7 @@ static void setupPenSize(){
         colorDialog->size().width(),
         colorLabel->size().height()
     );
-    
-    ov->setFixedSize(
-        colorDialog->size().width(),
-        butsize*3
-    );
+
 
     penSettingsLayout->addWidget(colorLabel);
     penSettingsLayout->addWidget(colorDialog);
