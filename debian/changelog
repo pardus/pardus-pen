@@ -1,3 +1,47 @@
+pardus-pen (3.2.0) unstable; urgency=medium
+
+  [ sulincix ]
+  * fix metainfo path
+
+  [ Fatih Altun ]
+  * Update changelog for 3.1.0 release
+
+  [ Edip ]
+  * Update Readme.md: Replace pacman -Sy with pacman -Syu
+
+  [ aliriza ]
+  * fix cursor size on mouse right click and cflag fix options
+
+  [ Ali Riza KESKIN ]
+  * add translation
+  * fix1 default value false
+  * App name added
+  * startup wm class added
+  * partical update on line drawing (can be better)
+  * fix partical update last position glitch
+
+  [ busra ]
+  * add music paper
+
+  [ Ali Riza KESKIN ]
+  * better grid size
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Ali Riza KESKIN ]
+  * improve music paper
+  * temporary music paper icon
+  * improve music paper
+  * eraser overview added
+  * fix scale issue about pen overview
+  * fix music paper line color
+
+  [ Fatih Altun ]
+  * Update music overlay icon
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 22 Oct 2024 12:31:02 +0300
+
 pardus-pen (3.1.0) unstable; urgency=medium
 
   [ Sabri Ünal ]
