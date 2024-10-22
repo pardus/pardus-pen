@@ -8,6 +8,8 @@
 #include "OverView.h"
 #include "DrawingWidget.h"
 
+extern int screenWidth;
+extern int screenHeight;
 
 void OverView::updateImage(){
     update();
@@ -29,14 +31,15 @@ void OverView::paintEvent(QPaintEvent *event) {
 
     if(penType == ERASER){
         QIcon icon = QIcon(":images/cursor.svg");
+        float scale = screenHeight/1080;
         QPixmap pixmap = icon.pixmap(
             icon.actualSize(
-                QSize(penSize, penSize)
+                QSize(penSize*scale, penSize*scale)
             )
 	      );
-	      int w1 = (geometry().width() - penSize) / 2;
-	      int h1 = (geometry().height() - penSize) / 2;
-        painter.drawPixmap(QRect(w1, h1, penSize, penSize), pixmap);
+	      int w1 = (geometry().width() - penSize*scale) / 2;
+	      int h1 = (geometry().height() - penSize*scale) / 2;
+        painter.drawPixmap(QRect(w1, h1, penSize*scale, penSize*scale), pixmap);
     } else {
         // Draw the sine wave
         int xPrev, yPrev;

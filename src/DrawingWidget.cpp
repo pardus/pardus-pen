@@ -274,7 +274,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }else if(event->buttons() & Qt::MiddleButton) {
         ev_pen = MARKER;
     }
-    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080);    
+    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
