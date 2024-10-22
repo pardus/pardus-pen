@@ -121,6 +121,9 @@ void WhiteBoard::drawIsometricPaper() {
 
 void WhiteBoard::drawMusicPaper() {
     QPainter painter(this);
+    painter.setPen(
+        QPen(lineColor, (screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+    );
 
     for (int y = gridSize* 2; y < height() - gridSize; y += gridSize * 5) {
         for (int i = 0; i < 5; ++i) {
