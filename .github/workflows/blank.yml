@@ -23,7 +23,7 @@ jobs:
           sudo mv ../*.deb /output/
           sudo mv ./*.deb /output/
           sudo QT_PATH="/usr/lib/x86_64-linux-gnu/qt5" bash appimage/create_appimage.sh
-          sudo mv build/*.appimage /output/
+          sudo mv build/*.AppImage /output/
           
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
