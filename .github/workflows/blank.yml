@@ -16,7 +16,7 @@ jobs:
       - name: Building deb package
         run: |
           sudo apt update
-          sudo apt install devscripts equivs -y
+          sudo apt install devscripts equivs fuse libfuse2-y
           sudo mk-build-deps --install
           sudo debuild -us -uc -b
           sudo mkdir -p /output/
