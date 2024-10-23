@@ -6,6 +6,7 @@ Build-Depends: meson, ninja-build,
          qtbase5-dev,
          qtchooser,
          libglib2.0-dev,
+         libqt5svg5-dev,
          libarchive-dev
 Standards-Version: 4.3.0
 Homepage: https://pardus.org.tr
@@ -15,6 +16,7 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          libqt5gui5,
+         libqt5svg5,
          libqt5widgets5,
          libqt5core5a,
          libglib2.0-0
