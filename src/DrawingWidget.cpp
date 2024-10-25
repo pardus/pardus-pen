@@ -382,6 +382,7 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case LINE:
         case CIRCLE:
+        case RECTANGLE:
             startPoint = firstPoint;
             image = imageBackup;
             painter.begin(&image);
@@ -427,6 +428,10 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
             painter.drawEllipse(startPoint, rad, rad);
+            update();
+            break;
+        case RECTANGLE:
+            painter.drawRect(QRectF(startPoint,endPoint));
             update();
             break;
     }

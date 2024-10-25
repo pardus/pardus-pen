@@ -44,6 +44,7 @@ QPushButton *eraserButton;
 QPushButton *splineButton;
 QPushButton *lineButton;
 QPushButton *circleButton;
+QPushButton *rectButton;
 
 QPushButton *backgroundButton;
 
@@ -93,6 +94,7 @@ static void penStyleEvent(){
     lineButton->setStyleSheet(QString("background-color: none;"));
     splineButton->setStyleSheet(QString("background-color: none;"));
     circleButton->setStyleSheet(QString("background-color: none;"));
+    rectButton->setStyleSheet(QString("background-color: none;"));
     switch(window->penType){
         case PEN:
             penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
@@ -112,6 +114,10 @@ static void penStyleEvent(){
         case CIRCLE:
             circleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             set_icon(":images/circle.svg", typeButton);
+            break;
+        case RECTANGLE:
+            rectButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/rectangle.svg", typeButton);
             break;
         default:
             splineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
@@ -529,6 +535,18 @@ static void setupPenType(){
         penStyleEvent();
     });
     gridLayout->addWidget(circleButton, 0, 1);
+    rectButton = create_button(":images/rectangle.svg", [=](){
+        if(window->penStyle  == RECTANGLE){
+            floatingSettings->hide();
+            return;
+        }
+        if(window->penType == ERASER){
+            window->penType = PEN;
+        }
+        window->penStyle = RECTANGLE;
+        penStyleEvent();
+    });
+    gridLayout->addWidget(rectButton, 1, 0);
 
     splineButton = create_button(":images/spline.svg", [=](){
         if(window->penStyle == SPLINE){
@@ -545,7 +563,7 @@ static void setupPenType(){
 
     typeDialog->setFixedSize(
         (butsize+padding)*3 + padding,
-        (butsize+padding)*1 + padding
+        (butsize+padding)*2 + padding
     );
 
     eraserButton = create_button(":images/eraser.svg", [=](){
