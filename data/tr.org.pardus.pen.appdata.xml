@@ -21,6 +21,10 @@
   <url type="vcs-browser">https://github.com/pardus/pardus-pen</url>
   <url type="translate">https://github.com/pardus/pardus-pen/tree/master/po</url>
   <content_rating type="oars-1.1" />
+  <branding>
+    <color type="primary" scheme_preference="light">#ff00ff</color>
+    <color type="primary" scheme_preference="dark">#993d3d</color>
+  </branding>
   <screenshots>
     <screenshot type="default">
       <image>https://apps.pardus.org.tr/files/screenshots/pardus-pen/pardus-pen-1.png</image>
