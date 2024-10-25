@@ -141,8 +141,8 @@ static void penSizeEvent(){
             set_int((char*)"eraser-size",value);
             break;
     }
-    thicknessLabel->setText(QString(penText)+QString(_(" Size: "))+QString::number(value));
-    colorLabel->setText(QString(penText)+QString(_(" Color:")));
+    thicknessLabel->setText(QString(penText)+QString(" ")+QString(_("Size:"))+QString(" ")+QString::number(value));
+    colorLabel->setText(QString(penText)+QString(" ")+QString(_("Color:")));
 
 
     if(window->penType == ERASER) {

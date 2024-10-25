@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-09 08:56+0000\n"
+"POT-Creation-Date: 2024-10-25 06:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.cpp:128
+#: src/main.cpp:113 src/main.cpp:131
 msgid "Pardus Pen"
 msgstr ""
 
@@ -33,62 +33,66 @@ msgstr ""
 msgid "Failed To save:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:130
+#: src/SetupWidgets.cpp:132
 msgid "Pen"
 msgstr ""
 
-#: src/SetupWidgets.cpp:134
+#: src/SetupWidgets.cpp:136
 msgid "Marker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:138
+#: src/SetupWidgets.cpp:140
 msgid "Eraser"
 msgstr ""
 
-#: src/SetupWidgets.cpp:142
-msgid " Size: "
+#: src/SetupWidgets.cpp:144
+msgid "Size:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:143 src/SetupWidgets.cpp:321
+#: src/SetupWidgets.cpp:145
+msgid "Color:"
+msgstr ""
+
+#: src/SetupWidgets.cpp:337
 msgid " Color:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:325
+#: src/SetupWidgets.cpp:341
 msgid "Color Picker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:370
+#: src/SetupWidgets.cpp:386
 msgid "Select Color"
 msgstr ""
 
-#: src/SetupWidgets.cpp:480
+#: src/SetupWidgets.cpp:492
 msgid "Pen Style"
 msgstr ""
 
-#: src/SetupWidgets.cpp:766
+#: src/SetupWidgets.cpp:786
 msgid "Do you want to clear screen?"
 msgstr ""
 
-#: src/SetupWidgets.cpp:774 src/SetupWidgets.cpp:856
+#: src/SetupWidgets.cpp:794 src/SetupWidgets.cpp:876
 msgid "No"
 msgstr ""
 
-#: src/SetupWidgets.cpp:777 src/SetupWidgets.cpp:859
+#: src/SetupWidgets.cpp:797 src/SetupWidgets.cpp:879
 msgid "Yes"
 msgstr ""
 
-#: src/SetupWidgets.cpp:815
+#: src/SetupWidgets.cpp:835
 msgid "Save File"
 msgstr ""
 
-#: src/SetupWidgets.cpp:815 src/SetupWidgets.cpp:826
+#: src/SetupWidgets.cpp:835 src/SetupWidgets.cpp:846
 msgid "Pen Files (*.pen);;All Files (*.*)"
 msgstr ""
 
-#: src/SetupWidgets.cpp:826
+#: src/SetupWidgets.cpp:846
 msgid "Open File"
 msgstr ""
 
-#: src/SetupWidgets.cpp:846
+#: src/SetupWidgets.cpp:866
 msgid "Do you want to quit Pardus pen?"
 msgstr ""
