@@ -140,8 +140,11 @@ int main(int argc, char *argv[]) {
 
     floatingWidget->show();
 
+    mainWindow->setWindowFlags(Qt::WindowStaysOnTopHint
+                              | Qt::WindowSystemMenuHint
+                              );
+
     mainWindow->setAttribute(Qt::WA_StaticContents);
-    mainWindow->setAttribute(Qt::WA_X11NetWmWindowTypeDesktop);
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
