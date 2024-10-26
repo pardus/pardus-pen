@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-25 06:37+0000\n"
+"PO-Revision-Date: 2024-10-26 15:14-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: src/main.cpp:113 src/main.cpp:131
+msgid "Pardus Pen"
+msgstr "Lápiz Pardus"
+
+#: src/ScreenShot.cpp:42
+msgid "Info"
+msgstr "Información"
+
+#: src/ScreenShot.cpp:45
+msgid "Screenshot saved:"
+msgstr "Captura de pantalla guardada:"
+
+#: src/ScreenShot.cpp:47
+msgid "Failed To save:"
+msgstr "Error al guardar:"
+
+#: src/SetupWidgets.cpp:132
+msgid "Pen"
+msgstr "Lápiz"
+
+#: src/SetupWidgets.cpp:136
+msgid "Marker"
+msgstr "Marcador"
+
+#: src/SetupWidgets.cpp:140
+msgid "Eraser"
+msgstr "Borrador"
+
+#: src/SetupWidgets.cpp:144
+msgid "Size:"
+msgstr "Tamaño:"
+
+#: src/SetupWidgets.cpp:145
+msgid "Color:"
+msgstr "Color:"
+
+#: src/SetupWidgets.cpp:337
+msgid " Color:"
+msgstr " Color:"
+
+#: src/SetupWidgets.cpp:341
+msgid "Color Picker"
+msgstr "Selector de color"
+
+#: src/SetupWidgets.cpp:386
+msgid "Select Color"
+msgstr "Seleccione el color"
+
+#: src/SetupWidgets.cpp:492
+msgid "Pen Style"
+msgstr "Estilo de lápiz"
+
+#: src/SetupWidgets.cpp:786
+msgid "Do you want to clear screen?"
+msgstr "¿Desea borrar la pantalla?"
+
+#: src/SetupWidgets.cpp:794 src/SetupWidgets.cpp:876
+msgid "No"
+msgstr "No"
+
+#: src/SetupWidgets.cpp:797 src/SetupWidgets.cpp:879
+msgid "Yes"
+msgstr "Si"
+
+#: src/SetupWidgets.cpp:835
+msgid "Save File"
+msgstr "Guardar archivo"
+
+#: src/SetupWidgets.cpp:835 src/SetupWidgets.cpp:846
+msgid "Pen Files (*.pen);;All Files (*.*)"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/SetupWidgets.cpp:846
+msgid "Open File"
+msgstr "Abrir archivo"
+
+#: src/SetupWidgets.cpp:866
+msgid "Do you want to quit Pardus pen?"
+msgstr "¿Quiere salir de Lápiz Pardus?"
