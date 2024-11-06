@@ -52,6 +52,7 @@ if get_option('qt') == '5'
         dependency('Qt5Core'),
         dependency('Qt5Gui'),
         dependency('Qt5Widgets'),
+        dependency('Qt5Svg'),
     ]
 elif get_option('qt') == '6'
     add_project_arguments('-DQT6', language: 'cpp')
@@ -59,6 +60,7 @@ elif get_option('qt') == '6'
         dependency('Qt6Core'),
         dependency('Qt6Gui'),
         dependency('Qt6Widgets'),
+        dependency('Qt6Svg'),
     ]
 else
     error('Your qt version is ont supperted')

@@ -2,6 +2,8 @@
 #include <QWidget>
 #include <QPainter>
 #include <QColor>
+#include <QSvgRenderer>
+#include <QPixmap>
 
 #include <math.h>
 
@@ -30,15 +32,19 @@ void OverView::paintEvent(QPaintEvent *event) {
     painter.fillRect(rect(), background);
 
     if(penType == ERASER){
-        QIcon icon = QIcon(":images/cursor.svg");
+        QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));
         float scale = screenHeight/1080;
-        QPixmap pixmap = icon.pixmap(
-            icon.actualSize(
-                QSize(penSize*scale, penSize*scale)
-            )
-	      );
-	      int w1 = (geometry().width() - penSize*scale) / 2;
-	      int h1 = (geometry().height() - penSize*scale) / 2;
+
+        QSize pixmapSize(penSize*scale, penSize*scale);
+        QPixmap pixmap(pixmapSize);
+        // Render the SVG onto the QPixmap
+        pixmap.fill(Qt::transparent);
+        QPainter pp(&pixmap);
+        svgRenderer.render(&pp);
+        pp.end();
+        
+        int w1 = (geometry().width() - penSize*scale) / 2;
+        int h1 = (geometry().height() - penSize*scale) / 2;
         painter.drawPixmap(QRect(w1, h1, penSize*scale, penSize*scale), pixmap);
     } else {
         // Draw the sine wave
