@@ -274,7 +274,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }else if(event->buttons() & Qt::MiddleButton) {
         ev_pen = MARKER;
     }
-    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080);
+    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080.0);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
@@ -401,13 +401,13 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
     }
 
-    painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
     switch(fpenStyle){
         case SPLINE:
-            rad = (penSize[penType]*pressure*screenHeight)/1080;
+            rad = (penSize[penType]*pressure*screenHeight)/1080.0;
             painter.drawLine(startPoint, endPoint);
             update(QRectF(
                 startPoint, endPoint
@@ -415,7 +415,7 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
-            rad = (penSize[penType]*pressure*screenHeight)/1080;
+            rad = (penSize[penType]*pressure*screenHeight)/1080.0;
             update(QRectF(
                 last_begin, last_end
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
@@ -529,7 +529,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
-                curs.setCursor(touchPoint.id(), penSize[penType]*screenHeight/1080);
+                curs.setCursor(touchPoint.id(), penSize[penType]*screenHeight/1080.0);
             }
             break;
         }

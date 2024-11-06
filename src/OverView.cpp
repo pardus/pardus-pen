@@ -33,7 +33,7 @@ void OverView::paintEvent(QPaintEvent *event) {
 
     if(penType == ERASER){
         QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));
-        float scale = screenHeight/1080;
+        float scale = screenHeight/1080.0;
 
         QSize pixmapSize(penSize*scale, penSize*scale);
         QPixmap pixmap(pixmapSize);
