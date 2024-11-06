@@ -10,14 +10,14 @@
 #include "OverView.h"
 #include "DrawingWidget.h"
 
-extern int screenWidth;
-extern int screenHeight;
 
 void OverView::updateImage(){
     update();
 }
 
 void OverView::paintEvent(QPaintEvent *event) {
+    QScreen *screen = QGuiApplication::primaryScreen();
+    int screenHeight = screen->geometry().height();
     Q_UNUSED(event);
     QPainter painter(this);
     int padding = 8;
