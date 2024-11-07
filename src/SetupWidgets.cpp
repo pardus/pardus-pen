@@ -96,6 +96,7 @@ static void penStyleEvent(){
     splineButton->setStyleSheet(QString("background-color: none;"));
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
+    triangleButton->setStyleSheet(QString("background-color: none;"));
     switch(window->penType){
         case PEN:
             penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
