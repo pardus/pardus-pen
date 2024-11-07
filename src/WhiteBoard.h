@@ -23,12 +23,14 @@ public:
     int getOverlayType();
     void setType(int type);
     void setOverlayType(int type);
+    void setImage(QImage image);
     void drawSquarePaper();
     void drawLinePaper();
     void drawIsometricPaper();
     void drawMusicPaper();
 private:
     QColor background;
+    QImage backgroundImage;
     QColor lineColor;
     int overlayType = 0;
     int type = 0;

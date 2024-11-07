@@ -46,8 +46,13 @@ void WhiteBoard::setType(int page){
     update();
 }
 
+void WhiteBoard::setImage(QImage image){
+    backgroundImage = image;
+    update();
+}
+
 void WhiteBoard::paintEvent(QPaintEvent *event) {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
 
     gridSize = (float)screenHeight / (float)get_int((char*)"grid-count");
     painter.begin(this);
@@ -55,6 +60,11 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
     painter.fillRect(rect(), background);
 
+    if (backgroundImage.width() > 0 && backgroundImage.height() > 0){
+        int h1 = (screenHeight - backgroundImage.height() ) / 2;
+        int w1 = (screenWidth - backgroundImage.width() ) / 2;
+        painter.drawImage(QPoint(w1, h1), backgroundImage);
+    }
 
     painter.setPen(
         QPen(lineColor, (screenHeight)/1080, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
