@@ -383,6 +383,7 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
         case LINE:
         case CIRCLE:
         case RECTANGLE:
+        case TRIANGLE:
             startPoint = firstPoint;
             image = imageBackup;
             painter.begin(&image);
@@ -432,6 +433,12 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case RECTANGLE:
             painter.drawRect(QRectF(startPoint,endPoint));
+            update();
+            break;
+        case TRIANGLE:
+            painter.drawLine(startPoint, endPoint);
+            painter.drawLine(startPoint, QPointF(startPoint.x(), endPoint.y()));
+            painter.drawLine(QPointF(startPoint.x(), endPoint.y()), endPoint);
             update();
             break;
     }

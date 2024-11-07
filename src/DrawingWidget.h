@@ -25,6 +25,7 @@
 #define CIRCLE 1
 #define SPLINE 2
 #define RECTANGLE 3
+#define TRIANGLE 4
 
 class DrawingWidget : public QWidget {
 public:

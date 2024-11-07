@@ -44,6 +44,7 @@ QPushButton *eraserButton;
 QPushButton *splineButton;
 QPushButton *lineButton;
 QPushButton *circleButton;
+QPushButton *triangleButton;
 QPushButton *rectButton;
 
 QPushButton *backgroundButton;
@@ -118,6 +119,10 @@ static void penStyleEvent(){
         case RECTANGLE:
             rectButton->setStyleSheet("background-color:"+window->penColor.name()+";");
             set_icon(":images/rectangle.svg", typeButton);
+            break;
+        case TRIANGLE:
+            triangleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            set_icon(":images/triangle.svg", typeButton);
             break;
         default:
             splineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
@@ -535,6 +540,20 @@ static void setupPenType(){
         penStyleEvent();
     });
     gridLayout->addWidget(circleButton, 0, 1);
+
+    triangleButton = create_button(":images/triangle.svg", [=](){
+        if(window->penStyle  == TRIANGLE){
+            floatingSettings->hide();
+            return;
+        }
+        if(window->penType == ERASER){
+            window->penType = PEN;
+        }
+        window->penStyle = TRIANGLE;
+        penStyleEvent();
+    });
+    gridLayout->addWidget(triangleButton, 1, 1);
+
     rectButton = create_button(":images/rectangle.svg", [=](){
         if(window->penStyle  == RECTANGLE){
             floatingSettings->hide();
