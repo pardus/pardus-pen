@@ -1,3 +1,38 @@
+pardus-pen (3.3.0) unstable; urgency=medium
+
+  [ sulincix ]
+  * create appimage added
+  * Update blank.yml
+  * typo fix
+  * Update blank.yml
+  * fix missing dependency
+
+  [ Ali Riza KESKIN ]
+  * add branding colors
+  * translation update
+  * desktop hint
+  * flag fix
+  * rectangle tool added
+
+  [ haggen88 ]
+  * Update LINGUAS - add spanish
+  * add es.po
+
+  [ sulincix ]
+  * fix eraser overview svg load issue
+  * local screen hegiht calculation
+  * scale calculation fix
+
+  [ Ali Riza KESKIN ]
+  * triangle tool
+  * button style event fix
+  * background image set added
+
+  [ Fatih Altun ]
+  * Update developer name
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 28 Nov 2024 19:21:38 +0300
+
 pardus-pen (3.2.0) unstable; urgency=medium
 
   [ sulincix ]
