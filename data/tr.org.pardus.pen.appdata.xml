@@ -7,9 +7,9 @@
   <name xml:lang="tr">Pardus Kalem</name>
   <summary>Pen for pardus</summary>
   <summary xml:lang="tr">Pardus için kalem</summary>
-  <developer_name translate="no">Tübitak ULAKBİM</developer_name>
+  <developer_name translate="no">TÜBİTAK BİLGEM</developer_name>
   <developer id="tr.org.pardus">
-    <name translate="no">Tübitak ULAKBİM</name>
+    <name translate="no">TÜBİTAK BİLGEM</name>
   </developer>
   <description>
     <p>A simple and easy whiteboard pen application</p>
