@@ -1,12 +1,10 @@
 #include "FloatingWidget.h"
 #include "FloatingSettings.h"
-extern int screenWidth;
-extern int screenHeight;
 
 int new_x;
 int new_y;
 
-extern int padding;
+#define padding 8
 
 
 extern "C" {
@@ -18,6 +16,7 @@ extern "C" {
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
+    mainWindow = (QMainWindow*)parent;
     is_vertical = get_bool((char*)"is-vertical");
     if(is_vertical){
         layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
@@ -29,13 +28,11 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout->setContentsMargins(padding, padding, padding, padding);
     QString style = QString(
     "QWidget {"
-        "border-radius:13px;"
+        "border-radius: 13px;"
         "background-color: #cc939393;"
     "}");
     setStyleSheet(style);
     cur_height = padding;
-    new_x = get_int((char*)"cur-x");
-    new_y = get_int((char*)"cur-y");
 }
 
 
@@ -80,30 +77,30 @@ void FloatingWidget::moveAction(){
             new_x = 0;
         }if (new_y < 0) {
             new_y = 0;
-        }if (new_x > screenWidth - cur_width) {
-            new_x = screenWidth - cur_width;
-        }if (new_y > screenHeight - cur_height) {
-            new_y = screenHeight - cur_height;
+        }if (new_x > mainWindow->geometry().width() - cur_width) {
+            new_x = mainWindow->geometry().width() - cur_width;
+        }if (new_y > mainWindow->geometry().height() - cur_height) {
+            new_y = mainWindow->geometry().height() - cur_height;
         }
         move(new_x, new_y);
         if(floatingSettings != NULL){
             if(is_vertical){
                 new_xx = new_x+padding+cur_width;
-                if(new_xx  > screenWidth - floatingSettings->cur_width){
+                if(new_xx  > mainWindow->geometry().width() - floatingSettings->cur_width){
                     new_xx = new_x - padding - floatingSettings->cur_width;
                 }
                 new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
-                if (new_yy > screenHeight - floatingSettings->cur_height) {
-                    new_yy = screenHeight - floatingSettings->cur_height;
+                if (new_yy > mainWindow->geometry().height() - floatingSettings->cur_height) {
+                    new_yy = mainWindow->geometry().height() - floatingSettings->cur_height;
                 }
 
             } else {
                 new_xx = new_x + (cur_width / num_of_item) * settingsOffset;
-                if (new_xx > screenWidth - floatingSettings->cur_width) {
-                    new_xx = screenWidth - floatingSettings->cur_width;
+                if (new_xx > mainWindow->geometry().width() - floatingSettings->cur_width) {
+                    new_xx = mainWindow->geometry().width() - floatingSettings->cur_width;
                 }
                 new_yy = new_y + cur_height + padding;
-                if(new_yy  > screenHeight - floatingSettings->cur_height){
+                if(new_yy  > mainWindow->geometry().height() - floatingSettings->cur_height){
                     new_yy = new_y - padding - floatingSettings->cur_height;
                 }
             }

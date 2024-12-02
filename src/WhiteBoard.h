@@ -5,6 +5,7 @@
 #include <QResizeEvent>
 #include <QScreen>
 #include <QApplication>
+#include <QMainWindow>
 
 #define TRANSPARENT 0
 #define WHITE 1
@@ -27,6 +28,7 @@ public:
     void drawSquarePaper();
     void drawLinePaper();
     void drawIsometricPaper();
+    QMainWindow *mainWindow;
     void drawMusicPaper();
 private:
     QColor background;

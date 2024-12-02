@@ -6,9 +6,9 @@
 #include <QDebug>
 #include <archive.h>
 #include <archive_entry.h>
+#include <QMainWindow>
 
-extern int screenWidth;
-extern int screenHeight;
+extern QMainWindow* mainWindow;
 
 class ArchiveStorage {
 public:
@@ -24,7 +24,7 @@ public:
         archive_write_open_filename(ar, archiveFileName.toStdString().c_str());
         // write config
         struct archive_entry* entry = archive_entry_new();
-        QString config = QString::number(screenWidth) + "x" + QString::number(screenHeight);
+        QString config = QString::number(mainWindow->geometry().width()) + "x" + QString::number(mainWindow->geometry().height());
         archive_entry_set_pathname(entry, "config");
         archive_entry_set_filetype(entry, AE_IFREG);
         archive_entry_set_perm(entry, 0644);
@@ -67,8 +67,8 @@ public:
             qDebug() << "Failed to open archive: " << archive_error_string(ar);
             return values;
         }
-        int width = screenWidth;
-        int height = screenHeight;
+        int width = mainWindow->geometry().width();
+        int height = mainWindow->geometry().height();
         while (archive_read_next_header(ar, &entry) == ARCHIVE_OK) {
             // Get entry name
             const char* entryName = archive_entry_pathname(entry);
@@ -99,7 +99,7 @@ public:
                     puts("Image load fail");
                     continue;
                 }
-                image = image.scaled(screenWidth, screenHeight);
+                image = image.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
                 values.insert(QString(entryName), image);
             } else {
                 break;

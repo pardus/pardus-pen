@@ -23,10 +23,7 @@ extern DrawingWidget *window;
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
 
-int screenWidth = 0;
-int screenHeight = 0;
-int padding = 8;
-
+#define padding 8
 
 /*
 penType:
@@ -154,7 +151,7 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            QImage image = QImage(screenWidth,screenHeight, QImage::Format_ARGB32);
+            QImage image = QImage(mainWindow->geometry().width(),mainWindow->geometry().height(), QImage::Format_ARGB32);
             image.fill(QColor("transparent"));
             return image;
         }
@@ -256,11 +253,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
     setMouseTracking(true);
-    QScreen *screen = QGuiApplication::primaryScreen();
-    screenWidth  = screen->geometry().width();
-    screenHeight = screen->geometry().height();
-    setFixedSize(screenWidth, screenHeight);
-    padding = screenWidth / 240;
+    //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
 }
 
@@ -274,7 +267,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }else if(event->buttons() & Qt::MiddleButton) {
         ev_pen = MARKER;
     }
-    curs.setCursor(-1, penSize[ev_pen]*screenHeight/1080.0);
+    curs.setCursor(-1, penSize[ev_pen]*mainWindow->geometry().height()/1080.0);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
@@ -402,13 +395,13 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
     }
 
-    painter.setPen(QPen(penColor, (penSize[penType]*pressure*screenHeight)/1080.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(penColor, (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
     switch(fpenStyle){
         case SPLINE:
-            rad = (penSize[penType]*pressure*screenHeight)/1080.0;
+            rad = (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0;
             painter.drawLine(startPoint, endPoint);
             update(QRectF(
                 startPoint, endPoint
@@ -416,7 +409,7 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
-            rad = (penSize[penType]*pressure*screenHeight)/1080.0;
+            rad = (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0;
             update(QRectF(
                 last_begin, last_end
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
@@ -461,7 +454,7 @@ void DrawingWidget::loadArchive(const QString& filename){
 #endif
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
-    img = img.scaled(screenWidth, screenHeight);
+    img = img.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
     if(img.isNull()){
         return;
     }
@@ -536,7 +529,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
-                curs.setCursor(touchPoint.id(), penSize[penType]*screenHeight/1080.0);
+                curs.setCursor(touchPoint.id(), penSize[penType]*mainWindow->geometry().height()/1080.0);
             }
             break;
         }

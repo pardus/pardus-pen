@@ -38,14 +38,15 @@ QPushButton *ssButton;
 
 extern void setupWidgets();
 
-extern int screenWidth;
-extern int screenHeight;
 
 extern QString archive_target;
 
 int pagestatus;
 
 int eraser_status;
+
+extern int new_x;
+extern int new_y;
 
 void sighandler(int signum) {
     (void)signum;
@@ -65,6 +66,15 @@ protected:
         sighandler(SIGTERM);
         event->ignore();
      }
+     void resizeEvent(QResizeEvent *event) override {
+        board->setFixedSize(event->size().width(), event->size().height());
+        printf("%d %d\n",event->size().width(), event->size().height());
+        new_x = get_int((char*)"cur-x");
+        new_y = get_int((char*)"cur-y");
+        floatingWidget->moveAction();
+        // Call the base class implementation
+        QWidget::resizeEvent(event);
+    }
 };
 
 bool fuarMode;
@@ -154,26 +164,11 @@ int main(int argc, char *argv[]) {
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
     mainWindow->setStyleSheet(
         "background: none;"
-        "font-size: "+QString::number(screenHeight / 62)+"px;"
+        "font-size: 18px;"
     );
 
     mainWindow->showFullScreen();
 
-    // Create a lambda function to handle geometry changes
-    auto handleGeometryChange = [](const QRect &newGeometry){
-        (void)newGeometry;
-        screenWidth  = newGeometry.width();
-        screenHeight = newGeometry.height();
-        mainWindow->setFixedSize(screenWidth, screenHeight);
-        window->setFixedSize(screenWidth, screenHeight);
-        board->setFixedSize(screenWidth, screenHeight);
-        floatingWidget->moveAction();
-        puts("Screen geometry changed");
-    };
-
-
-    QObject::connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged,
-                     handleGeometryChange);
 
 #ifdef LIBARCHIVE
     if (argc > 1) {

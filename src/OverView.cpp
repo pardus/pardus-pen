@@ -16,8 +16,6 @@ void OverView::updateImage(){
 }
 
 void OverView::paintEvent(QPaintEvent *event) {
-    QScreen *screen = QGuiApplication::primaryScreen();
-    int screenHeight = screen->geometry().height();
     Q_UNUSED(event);
     QPainter painter(this);
     int padding = 8;
@@ -33,9 +31,8 @@ void OverView::paintEvent(QPaintEvent *event) {
 
     if(penType == ERASER){
         QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));
-        float scale = screenHeight/1080.0;
 
-        QSize pixmapSize(penSize*scale, penSize*scale);
+        QSize pixmapSize(penSize, penSize);
         QPixmap pixmap(pixmapSize);
         // Render the SVG onto the QPixmap
         pixmap.fill(Qt::transparent);
@@ -43,9 +40,9 @@ void OverView::paintEvent(QPaintEvent *event) {
         svgRenderer.render(&pp);
         pp.end();
         
-        int w1 = (geometry().width() - penSize*scale) / 2;
-        int h1 = (geometry().height() - penSize*scale) / 2;
-        painter.drawPixmap(QRect(w1, h1, penSize*scale, penSize*scale), pixmap);
+        int w1 = (geometry().width() - penSize) / 2;
+        int h1 = (geometry().height() - penSize) / 2;
+        painter.drawPixmap(QRect(w1, h1, penSize, penSize), pixmap);
     } else {
         // Draw the sine wave
         int xPrev, yPrev;

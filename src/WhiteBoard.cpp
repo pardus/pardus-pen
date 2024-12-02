@@ -7,12 +7,10 @@ extern "C" {
 }
 
 
-extern int screenWidth;
-extern int screenHeight;
 
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
-    setFixedSize(screenWidth, screenHeight);
     setStyleSheet("background: none");
+    mainWindow = (QMainWindow*)parent;
     show();
 }
 
@@ -54,20 +52,20 @@ void WhiteBoard::setImage(QImage image){
 void WhiteBoard::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event)
 
-    gridSize = (float)screenHeight / (float)get_int((char*)"grid-count");
+    gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count");
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.fillRect(rect(), background);
 
     if (backgroundImage.width() > 0 && backgroundImage.height() > 0){
-        int h1 = (screenHeight - backgroundImage.height() ) / 2;
-        int w1 = (screenWidth - backgroundImage.width() ) / 2;
+        int h1 = (mainWindow->geometry().height() - backgroundImage.height() ) / 2;
+        int w1 = (mainWindow->geometry().width() - backgroundImage.width() ) / 2;
         painter.drawImage(QPoint(w1, h1), backgroundImage);
     }
 
     painter.setPen(
-        QPen(lineColor, (screenHeight)/1080, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
+        QPen(lineColor, 1, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
     );
 
     // Draw the square paper background
@@ -82,7 +80,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
             break;
         case ISOMETRIC:
             painter.setPen(
-                QPen(lineColor, (screenHeight)/(540), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+                QPen(lineColor, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
             );
             drawIsometricPaper();
             break;
@@ -132,7 +130,7 @@ void WhiteBoard::drawIsometricPaper() {
 void WhiteBoard::drawMusicPaper() {
     QPainter painter(this);
     painter.setPen(
-        QPen(lineColor, (screenHeight)/1080, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
+        QPen(lineColor, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     );
 
     for (int y = gridSize* 2; y < height() - gridSize; y += gridSize * 5) {

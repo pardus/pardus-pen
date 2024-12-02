@@ -28,7 +28,7 @@ extern "C" {
 
 #define _(String) gettext(String)
 
-extern int padding;
+
 extern DrawingWidget *window;
 extern FloatingWidget *floatingWidget;
 extern FloatingSettings *floatingSettings;
@@ -69,8 +69,6 @@ QPushButton *nextPage;
 
 OverView *ov;
 
-extern int screenWidth;
-extern int screenHeight;
 
 bool sliderLock = false;
 
@@ -83,7 +81,8 @@ QLabel *colorLabel;
 
 QString penText = "";
 
-#define butsize screenHeight/23
+#define butsize 48
+#define padding 8
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -266,7 +265,7 @@ static void backgroundStyleEvent(){
 static void setupMove(){
     QLabel *move = new QLabel("");
     QIcon icon = QIcon(":images/move-icon.svg");
-    QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(screenHeight/23, screenHeight/23)));
+    QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(butsize, butsize)));
     move->setPixmap(pixmap);
     move->setStyleSheet(QString("background-color: none;"));
     move->setFixedSize(butsize, butsize);
@@ -293,15 +292,15 @@ static void setupPenSize(){
          "QSlider::groove:horizontal {"
             "border: 1px solid #bbb;"
             "background: white;"
-            "height: "+QString::number(screenHeight / 50)+"px;"
-            "border-radius: "+QString::number(screenHeight / 100)+"px;"
+            "height: 22px;"
+            "border-radius: 11px;"
         "}"
         "QSlider::handle:horizontal {"
             "background: #fff;"
             "border: 1px solid #777;"
-            "width: "+QString::number(screenHeight / 25)+"px;"
-            "margin: -"+QString::number(screenHeight / 216)+"px 0;"
-            "border-radius: "+QString::number(screenHeight / 100)+"px;"
+            "width: 44px;"
+            "margin: -4px 0;"
+            "border-radius: 18px;"
         "}"
         "QSlider::handle:horizontal:hover {"
             "background: #ccc;"
@@ -312,7 +311,7 @@ static void setupPenSize(){
         "}"
         "QSlider::add-page:horizontal {"
             "background: #FBFBFB;"
-            "border-radius:"+QString::number(screenHeight / 200)+"px;"
+            "border-radius:5px;"
         "}"
     );
 
@@ -845,8 +844,8 @@ static void setupClear(){
     });
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
-        screenWidth * strlen(clearText) / 169,
-        screenHeight / 10
+        butsize * 10,
+        butsize * 2
     );
     floatingSettings->addPage(clearDialog);
     floatingWidget->setWidget(clear);
@@ -938,8 +937,8 @@ static void setupExit(){
     });
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
-        screenWidth * strlen(exitText) / 169,
-        screenHeight / 10
+        butsize * 10,
+        butsize * 2
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);

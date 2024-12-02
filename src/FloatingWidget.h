@@ -8,6 +8,7 @@
 #include <QMouseEvent>
 #include <QScreen>
 #include <QApplication>
+#include <QMainWindow>
 
 #include "FloatingSettings.h"
 
@@ -23,6 +24,7 @@ public:
     void setFloatingOffset(int offset);
     void moveAction();
     bool is_vertical;
+    QMainWindow *mainWindow;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
