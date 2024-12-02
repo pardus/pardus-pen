@@ -257,13 +257,11 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penType = 1;
     setMouseTracking(true);
     QScreen *screen = QGuiApplication::primaryScreen();
-    qreal dpi = screen->logicalDotsPerInch();
     screenWidth  = screen->geometry().width();
     screenHeight = screen->geometry().height();
     setFixedSize(screenWidth, screenHeight);
     padding = screenWidth / 240;
     fpressure = get_int((char*)"pressure") / 100.0;
-    printf("%d %d %f\n", screenWidth, screenHeight, dpi);
 }
 
 DrawingWidget::~DrawingWidget() {}

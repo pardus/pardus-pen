@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 #endif
 
     // Force use X11 or Xwayland
-//    setenv("QT_QPA_PLATFORM", "xcb",1);
+    //setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
 
     settings_init();
 
@@ -170,6 +170,7 @@ int main(int argc, char *argv[]) {
         floatingWidget->moveAction();
         puts("Screen geometry changed");
     };
+
 
     QObject::connect(QGuiApplication::primaryScreen(), &QScreen::geometryChanged,
                      handleGeometryChange);

@@ -30,7 +30,7 @@ void takeScreenshot(){
         std::string spectacle(which((char*)"spectacle"));
         std::string grim(which((char*)"grim"));
         if(strlen(spectacle.c_str()) != 0){
-            status = system(("QT_QPA_PLATFORM='' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+            status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
         } else if(strlen(grim.c_str()) != 0){
             status = system((grim+" -t png "+imgname.toStdString()).c_str());
         }
