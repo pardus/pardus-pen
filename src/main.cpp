@@ -153,20 +153,16 @@ int main(int argc, char *argv[]) {
     setupWidgets();
 
     floatingWidget->show();
-
-    mainWindow->setWindowFlags(Qt::WindowStaysOnTopHint
-                              | Qt::WindowSystemMenuHint
-                              );
-
-    mainWindow->setAttribute(Qt::WA_StaticContents);
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
-    mainWindow->setAttribute(Qt::WA_NoSystemBackground);
+    mainWindow->setAttribute(Qt::WA_NoSystemBackground, true);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
     mainWindow->setStyleSheet(
         "background: none;"
         "font-size: 18px;"
     );
 
+    QScreen *screen = QGuiApplication::primaryScreen();
+    mainWindow->resize(screen->size().width(), screen->size().height());
     mainWindow->showFullScreen();
 
 
