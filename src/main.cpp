@@ -132,8 +132,10 @@ int main(int argc, char *argv[]) {
     }
 
 
+    #ifdef QT5
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    #endif
 
     QCoreApplication::setApplicationName(_("Pardus Pen"));
     QCoreApplication::setOrganizationName("Pardus");
