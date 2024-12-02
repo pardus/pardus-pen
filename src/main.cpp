@@ -77,10 +77,17 @@ protected:
         // Call the base class implementation
         QWidget::resizeEvent(event);
     }
-    void showEvent(QShowEvent *event) override {
-        (void)event;
-        tool->show();
-        QMainWindow::showEvent(event);
+    void changeEvent(QEvent *event) override {
+        // Call the base class implementation
+        QMainWindow::changeEvent(event);
+
+        if (event->type() == QEvent::WindowStateChange) {
+            if (isMinimized()) {
+                tool->hide();
+            } else {
+                tool->show();
+            }
+        }
     }
 };
 
