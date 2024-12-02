@@ -794,6 +794,7 @@ static void setupGoBackNext(){
 static void setupMinify(){
     QPushButton *minify = create_button(":images/screen.svg", [=](){
         mainWindow->showMinimized();
+        floatingWidget->hide();
     });
     minify->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(minify);

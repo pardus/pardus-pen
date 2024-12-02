@@ -77,6 +77,11 @@ protected:
         // Call the base class implementation
         QWidget::resizeEvent(event);
     }
+    void showEvent(QShowEvent *event) override {
+        (void)event;
+        floatingWidget->show();
+        QMainWindow::showEvent(event);
+    }
 };
 
 bool fuarMode;
