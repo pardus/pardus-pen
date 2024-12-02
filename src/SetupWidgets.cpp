@@ -34,6 +34,7 @@ extern FloatingWidget *floatingWidget;
 extern FloatingSettings *floatingSettings;
 extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
+extern QMainWindow* tool;
 
 extern bool fuarMode;
 
@@ -794,7 +795,7 @@ static void setupGoBackNext(){
 static void setupMinify(){
     QPushButton *minify = create_button(":images/screen.svg", [=](){
         mainWindow->showMinimized();
-        floatingWidget->hide();
+        tool->hide();
     });
     minify->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(minify);

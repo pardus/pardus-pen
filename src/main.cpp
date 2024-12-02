@@ -79,7 +79,7 @@ protected:
     }
     void showEvent(QShowEvent *event) override {
         (void)event;
-        floatingWidget->show();
+        tool->show();
         QMainWindow::showEvent(event);
     }
 };
@@ -163,7 +163,7 @@ int main(int argc, char *argv[]) {
     setupWidgets();
 
     tool->setWindowFlags(Qt::WindowStaysOnTopHint
-                              | Qt::X11BypassWindowManagerHint
+                              | Qt::Tool
                               | Qt::WindowSystemMenuHint
                               | Qt::FramelessWindowHint);
     tool->setAttribute(Qt::WA_TranslucentBackground, true);
