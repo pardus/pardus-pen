@@ -21,6 +21,7 @@ public:
     FloatingWidget(QWidget *parent = nullptr);
     void setWidget(QWidget *widget);
     void setSettings(QWidget *widget);
+    void setMainWindow(QWidget *widget);
     void setFloatingOffset(int offset);
     void moveAction();
     bool is_vertical;

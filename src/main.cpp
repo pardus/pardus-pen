@@ -29,6 +29,7 @@ FloatingWidget *floatingWidget;
 FloatingSettings *floatingSettings;
 WhiteBoard *board;
 QMainWindow* mainWindow;
+QMainWindow* tool;
 
 #ifdef screenshot
 #include "ScreenShot.h"
@@ -71,6 +72,7 @@ protected:
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
         new_y = get_int((char*)"cur-y");
+        tool->resize(floatingWidget->geometry().width(), floatingWidget->geometry().height());
         floatingWidget->moveAction();
         // Call the base class implementation
         QWidget::resizeEvent(event);
@@ -147,12 +149,28 @@ int main(int argc, char *argv[]) {
     floatingSettings = new FloatingSettings(mainWindow);
     floatingSettings->hide();
 
-    floatingWidget = new FloatingWidget(mainWindow);
+    tool = new QMainWindow();;
+
+    floatingWidget = new FloatingWidget(tool);
+    floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
 
     setupWidgets();
 
-    floatingWidget->show();
+    tool->setWindowFlags(Qt::WindowStaysOnTopHint
+                              | Qt::X11BypassWindowManagerHint
+                              | Qt::WindowSystemMenuHint
+                              | Qt::FramelessWindowHint);
+    tool->setAttribute(Qt::WA_TranslucentBackground, true);
+    tool->setAttribute(Qt::WA_NoSystemBackground, true);
+    tool->setStyleSheet(
+        "background: none;"
+        "font-size: 18px;"
+    );
+
+    tool->show();
+
+
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground, true);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
@@ -164,6 +182,7 @@ int main(int argc, char *argv[]) {
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
     mainWindow->showFullScreen();
+    mainWindow->move(0,0);
 
 
 #ifdef LIBARCHIVE
