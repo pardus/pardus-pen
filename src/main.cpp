@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 #endif
 
     // Force use X11 or Xwayland
-    setenv("QT_QPA_PLATFORM", "xcb",1);
+//    setenv("QT_QPA_PLATFORM", "xcb",1);
 
     settings_init();
 
@@ -108,12 +108,16 @@ int main(int argc, char *argv[]) {
     }
 
 
-    QApplication app(argc, argv);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QCoreApplication::setApplicationName(_("Pardus Pen"));
     QCoreApplication::setOrganizationName("Pardus");
 
+    QApplication app(argc, argv);
+
     mainWindow = new MainWindow();
+
     window = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
     board->setType(get_int((char*)"page"));
@@ -152,6 +156,7 @@ int main(int argc, char *argv[]) {
         "background: none;"
         "font-size: "+QString::number(screenHeight / 62)+"px;"
     );
+
     mainWindow->showFullScreen();
 
     // Create a lambda function to handle geometry changes
