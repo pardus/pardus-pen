@@ -74,7 +74,11 @@ protected:
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
         new_y = get_int((char*)"cur-y");
-        tool->resize(floatingWidget->geometry().width(), floatingWidget->geometry().height());
+        // tool is not set under wayland
+        if(tool != nullptr){
+            tool->resize(floatingWidget->geometry().width(), floatingWidget->geometry().height());
+            floatingWidget->moveAction();
+        }
         floatingWidget->moveAction();
         // Call the base class implementation
         QWidget::resizeEvent(event);
@@ -83,12 +87,13 @@ protected:
     void changeEvent(QEvent *event) override {
         // Call the base class implementation
         QMainWindow::changeEvent(event);
-
-        if (event->type() == QEvent::WindowStateChange) {
-            if (isMinimized()) {
-                tool->hide();
-            } else {
-                tool->show();
+        if(tool != nullptr){
+            if (event->type() == QEvent::WindowStateChange) {
+                if (isMinimized()) {
+                    tool->hide();
+                } else {
+                    tool->show();
+                }
             }
         }
         drawing->update();
@@ -179,25 +184,27 @@ int main(int argc, char *argv[]) {
     if(!getenv("WAYLAND_DISPLAY")){
         floatingWidget = new FloatingWidget(tool);
     } else {
+        tool = nullptr;
         floatingWidget = new FloatingWidget(mainWindow);
     }
     floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
 
     setupWidgets();
+    if (tool != nullptr) {
+        tool->setWindowFlags(Qt::WindowStaysOnTopHint
+                                  | Qt::Tool
+                                  | Qt::WindowSystemMenuHint
+                                  | Qt::FramelessWindowHint);
+        tool->setAttribute(Qt::WA_TranslucentBackground, true);
+        tool->setAttribute(Qt::WA_NoSystemBackground, true);
+        tool->setStyleSheet(
+            "background: none;"
+            "font-size: "+QString::number(18*scale)+"px;"
+        );
 
-    tool->setWindowFlags(Qt::WindowStaysOnTopHint
-                              | Qt::Tool
-                              | Qt::WindowSystemMenuHint
-                              | Qt::FramelessWindowHint);
-    tool->setAttribute(Qt::WA_TranslucentBackground, true);
-    tool->setAttribute(Qt::WA_NoSystemBackground, true);
-    tool->setStyleSheet(
-        "background: none;"
-        "font-size: "+QString::number(18*scale)+"px;"
-    );
-
-    tool->show();
+        tool->show();
+    }
 
     mainWindow->setWindowFlags(Qt::WindowSystemMenuHint
                           | Qt::FramelessWindowHint);
