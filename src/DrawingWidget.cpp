@@ -402,15 +402,35 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
 
     switch(fpenStyle){
         case SPLINE:
-            rad = (penSize[penType]*pressure);
             painter.drawLine(startPoint, endPoint);
+            break;
+        case LINE:
+            painter.drawLine(startPoint, endPoint);
+            break;
+        case CIRCLE:
+            rad = QLineF(startPoint, endPoint).length();
+            painter.drawEllipse(startPoint, rad, rad);
+            break;
+        case RECTANGLE:
+            painter.drawRect(QRectF(startPoint,endPoint));
+            break;
+        case TRIANGLE:
+            painter.drawLine(startPoint, endPoint);
+            painter.drawLine(startPoint, QPointF(startPoint.x(), endPoint.y()));
+            painter.drawLine(QPointF(startPoint.x(), endPoint.y()), endPoint);
+            break;
+    }
+    switch(fpenStyle){
+        case SPLINE:
+            rad = penSize[penType];
             update(QRectF(
                 startPoint, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case LINE:
-            painter.drawLine(startPoint, endPoint);
-            rad = (penSize[penType]*pressure);
+        case TRIANGLE:
+        case RECTANGLE:
+            rad = penSize[penType];
             update(QRectF(
                 last_begin, last_end
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
@@ -419,41 +439,22 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case CIRCLE:
-            rad = QLineF(startPoint, endPoint).length();
-            frad = QLineF(last_begin, last_end).length();
-            painter.drawEllipse(startPoint, rad, rad);
+            rad = QLineF(startPoint, endPoint).length() + penSize[penType];
+            frad = QLineF(last_begin, last_end).length() + penSize[penType];
             update(QRectF(
                 startPoint,startPoint
-            ).toRect().normalized().adjusted(
-                - rad - penSize[penType],
-                - rad - penSize[penType],
-                + rad + penSize[penType],
-                + rad + penSize[penType]
-            ));
+            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             update(QRectF(
                 startPoint,startPoint
-            ).toRect().normalized().adjusted(
-                - frad - penSize[penType],
-                - frad - penSize[penType],
-                + frad + penSize[penType],
-                + frad + penSize[penType]
-            ));
+            ).toRect().normalized().adjusted(-frad, -frad, +frad, +frad));
             break;
-        case RECTANGLE:
-            painter.drawRect(QRectF(startPoint,endPoint));
-            update();
-            break;
-        case TRIANGLE:
-            painter.drawLine(startPoint, endPoint);
-            painter.drawLine(startPoint, QPointF(startPoint.x(), endPoint.y()));
-            painter.drawLine(QPointF(startPoint.x(), endPoint.y()), endPoint);
-            update();
-            break;
-    }
+     }
+
     last_begin = startPoint;
     last_end = endPoint;
 
     painter.end();
+
 }
 #ifdef LIBARCHIVE
 void DrawingWidget::saveAll(QString file){
