@@ -321,7 +321,7 @@ static void setupPenSize(){
     penSettingsLayout->addWidget(ov);
 
     thicknessSlider = new QSlider(Qt::Horizontal);
-    thicknessSlider->setRange(1,100*scale);
+    thicknessSlider->setRange(1,50*scale);
     thicknessSlider->setSingleStep(1);
     thicknessSlider->setValue(drawing->penSize[PEN]);
 
@@ -477,7 +477,7 @@ static void setupPenType(){
         sliderLock = true;
         drawing->penType = PEN;
         drawing->penStyle = SPLINE;
-        thicknessSlider->setRange(1,100*scale);
+        thicknessSlider->setRange(1,50*scale);
         thicknessSlider->setValue(drawing->penSize[PEN]);
         penSizeEvent();
         penStyleEvent();
@@ -493,7 +493,7 @@ static void setupPenType(){
         sliderLock = true;
         drawing->penType = MARKER;
         drawing->penStyle = SPLINE;
-        thicknessSlider->setRange(1,100*scale);
+        thicknessSlider->setRange(1,50*scale);
         thicknessSlider->setValue(drawing->penSize[MARKER]);
         penSizeEvent();
         penStyleEvent();
@@ -595,7 +595,7 @@ static void setupPenType(){
         sliderLock = true;
         drawing->penType = ERASER;
         penStyleEvent();
-        thicknessSlider->setRange(10*scale,314*scale);
+        thicknessSlider->setRange(10*scale,200*scale);
         thicknessSlider->setValue(drawing->penSize[ERASER]);
         penSizeEvent();
         sliderLock = false;
