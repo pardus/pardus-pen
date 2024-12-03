@@ -18,7 +18,7 @@ extern "C" {
 
 extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
-extern DrawingWidget *window;
+extern DrawingWidget *drawing;
 
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
@@ -71,7 +71,7 @@ public:
             labels[id] = new QLabel("");
             labels[id]->setStyleSheet(QString("background-color: none;"));
             images[id] = new QWidget(mainWindow);
-            images[id]->stackUnder(window);
+            images[id]->stackUnder(drawing);
             layouts[id] = new QVBoxLayout(images[id]);
             layouts[id]->addWidget(labels[id]);
             layouts[id]->setContentsMargins(0,0,0,0);
@@ -220,8 +220,8 @@ public:
             values[page].last_image_num = values[page].image_count;
         }
         images = values[0];
-        window->loadImage(images.last_image_num);
-        window->update();
+        drawing->loadImage(images.last_image_num);
+        drawing->update();
         updateGoBackButtons();
     }
 #endif
@@ -252,6 +252,7 @@ float fpressure = 0;
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = 1;
+    reset = true;
     setMouseTracking(true);
     //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
@@ -328,6 +329,7 @@ void DrawingWidget::initializeImage(const QSize &size) {
 
 void DrawingWidget::resizeEvent(QResizeEvent *event) {
     initializeImage(event->size());
+    loadImage(images.last_image_num);
     QWidget::resizeEvent(event);
 }
 

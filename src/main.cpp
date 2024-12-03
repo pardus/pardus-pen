@@ -24,7 +24,7 @@ extern void* load_archive(void*args);
 }
 
 
-DrawingWidget *window;
+DrawingWidget *drawing;
 FloatingWidget *floatingWidget;
 FloatingSettings *floatingSettings;
 WhiteBoard *board;
@@ -36,6 +36,8 @@ QMainWindow* tool;
 QPushButton *ssButton;
 #endif
 
+
+float scale = 1.0;
 
 extern void setupWidgets();
 
@@ -76,6 +78,7 @@ protected:
         floatingWidget->moveAction();
         // Call the base class implementation
         QWidget::resizeEvent(event);
+        drawing->update();
     }
     void changeEvent(QEvent *event) override {
         // Call the base class implementation
@@ -88,6 +91,7 @@ protected:
                 tool->show();
             }
         }
+        drawing->update();
     }
 };
 
@@ -108,7 +112,10 @@ int main(int argc, char *argv[]) {
 #endif
 
     // Force use X11 or Xwayland
-    //setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
+    setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
+    //Force ignore system dpi
+    setenv("QT_AUTO_SCREEN_SCALE_FACTOR", "0", 1);
+    setenv("QT_SCALE_FACTOR", "1", 1);
 
     settings_init();
 
@@ -143,27 +150,28 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     mainWindow = new MainWindow();
+    scale = QGuiApplication::primaryScreen()->geometry().height() / 1080.0;
 
-    window = new DrawingWidget();
+    drawing = new DrawingWidget();
     board = new WhiteBoard(mainWindow);
     board->setType(get_int((char*)"page"));
     board->setOverlayType(get_int((char*)"page-overlay"));
 
-    window->penSize[PEN] = get_int((char*)"pen-size");
-    window->penSize[ERASER] = get_int((char*)"eraser-size");
-    window->penSize[MARKER] = get_int((char*)"marker-size");
-    window->penType=PEN;
-    window->penStyle=SPLINE;
-    window->penColor = QColor(get_string((char*)"color"));
+    drawing->penSize[PEN] = get_int((char*)"pen-size");
+    drawing->penSize[ERASER] = get_int((char*)"eraser-size");
+    drawing->penSize[MARKER] = get_int((char*)"marker-size");
+    drawing->penType=PEN;
+    drawing->penStyle=SPLINE;
+    drawing->penColor = QColor(get_string((char*)"color"));
 
-    mainWindow->setCentralWidget(window);
+    mainWindow->setCentralWidget(drawing);
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
 
     floatingSettings = new FloatingSettings(mainWindow);
     floatingSettings->hide();
 
-    tool = new QMainWindow();;
+    tool = new QMainWindow();
 
     floatingWidget = new FloatingWidget(tool);
     floatingWidget->setMainWindow(mainWindow);
@@ -179,18 +187,20 @@ int main(int argc, char *argv[]) {
     tool->setAttribute(Qt::WA_NoSystemBackground, true);
     tool->setStyleSheet(
         "background: none;"
-        "font-size: 18px;"
+        "font-size: "+QString::number(18*scale)+"px;"
     );
 
     tool->show();
 
+    mainWindow->setWindowFlags(Qt::WindowSystemMenuHint
+                          | Qt::FramelessWindowHint);
 
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground, true);
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
     mainWindow->setStyleSheet(
         "background: none;"
-        "font-size: 18px;"
+        "font-size: "+QString::number(18*scale)+"px;"
     );
 
     QScreen *screen = QGuiApplication::primaryScreen();

@@ -29,7 +29,7 @@ extern "C" {
 #define _(String) gettext(String)
 
 
-extern DrawingWidget *window;
+extern DrawingWidget *drawing;
 extern FloatingWidget *floatingWidget;
 extern FloatingSettings *floatingSettings;
 extern WhiteBoard *board;
@@ -81,8 +81,10 @@ QLabel *colorLabel;
 
 QString penText = "";
 
-#define butsize 48
-#define padding 8
+extern float scale;
+
+#define butsize 48*scale
+#define padding 8*scale
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -96,49 +98,49 @@ static void penStyleEvent(){
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
-    switch(window->penType){
+    switch(drawing->penType){
         case PEN:
-            penButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            penButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         case MARKER:
-            markerButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            markerButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
-            eraserButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            eraserButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
     }
-    switch(window->penStyle){
+    switch(drawing->penStyle){
         case LINE:
-            lineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            lineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/line.svg", typeButton);
             break;
         case CIRCLE:
-            circleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            circleButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/circle.svg", typeButton);
             break;
         case RECTANGLE:
-            rectButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            rectButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/rectangle.svg", typeButton);
             break;
         case TRIANGLE:
-            triangleButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            triangleButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/triangle.svg", typeButton);
             break;
         default:
-            splineButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/spline.svg", typeButton);
             break;
     }
-    ov->penSize = window->penSize[window->penType];
-    ov->penType = window->penType;
-    ov->color = window->penColor;
+    ov->penSize = drawing->penSize[drawing->penType];
+    ov->penType = drawing->penType;
+    ov->color = drawing->penColor;
     ov->updateImage();
 }
 
 
 static void penSizeEvent(){
-    int value = window->penSize[window->penType];
-    switch(window->penType){
+    int value = drawing->penSize[drawing->penType];
+    switch(drawing->penType){
         case PEN:
             penText = _("Pen");
             set_int((char*)"pen-size",value);
@@ -156,7 +158,7 @@ static void penSizeEvent(){
     colorLabel->setText(QString(penText)+QString(" ")+QString(_("Color:")));
 
 
-    if(window->penType == ERASER) {
+    if(drawing->penType == ERASER) {
         ov->setFixedSize(
             colorDialog->size().width(),
             (colorDialog->size().width()*3)/4
@@ -191,23 +193,23 @@ static void penSizeEvent(){
         //ov->show();
     }
     ov->penSize = value;
-    ov->color = window->penColor;
+    ov->color = drawing->penColor;
     ov->updateImage();
     floatingSettings->reload();
 }
 
 void updateGoBackButtons(){
-    if(window->isBackAvailable()){
+    if(drawing->isBackAvailable()){
         set_icon(":images/go-back.svg", backButton);
     } else{
         set_icon(":images/go-back-disabled.svg", backButton);
     }
-    if(window->isNextAvailable()){
+    if(drawing->isNextAvailable()){
         set_icon(":images/go-next.svg", nextButton);
     } else{
         set_icon(":images/go-next-disabled.svg", nextButton);
     }
-    if(window->getPageNum() == 0){
+    if(drawing->getPageNum() == 0){
         set_icon(":images/go-page-previous-disabled.svg", previousPage);
     } else {
         set_icon(":images/go-page-previous.svg", previousPage);
@@ -227,16 +229,16 @@ static void backgroundStyleEvent(){
     switch(board->getType()){
         case BLACK:
             set_icon(":images/paper-black.svg",backgroundButton);
-            blackButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            blackButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             ov->background = Qt::black;
             break;
         case WHITE:
-            whiteButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            whiteButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/paper-white.svg",backgroundButton);
             ov->background = Qt::white;
             break;
         default:
-            transparentButton->setStyleSheet("background-color:"+window->penColor.name()+";");
+            transparentButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/paper-transparent.svg",backgroundButton);
             ov->background = Qt::transparent;
             break;
@@ -244,19 +246,19 @@ static void backgroundStyleEvent(){
     switch(board->getOverlayType()){
         
         case LINES:
-            overlayLines->setStyleSheet("background-color:"+window->penColor.name()+";");
+            overlayLines->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         case ISOMETRIC:
-            overlayIsometric->setStyleSheet("background-color:"+window->penColor.name()+";");
+            overlayIsometric->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         case MUSIC:
-            overlayMusic->setStyleSheet("background-color:"+window->penColor.name()+";");
+            overlayMusic->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         case SQUARES:
-            overlaySquares->setStyleSheet("background-color:"+window->penColor.name()+";");
+            overlaySquares->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
-            overlayNone->setStyleSheet("background-color:"+window->penColor.name()+";");
+            overlayNone->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     }
     ov->updateImage();
 }
@@ -292,15 +294,15 @@ static void setupPenSize(){
          "QSlider::groove:horizontal {"
             "border: 1px solid #bbb;"
             "background: white;"
-            "height: 22px;"
-            "border-radius: 11px;"
+            "height: "+QString::number(22*scale)+"px;"
+            "border-radius: "+QString::number(11*scale)+"px;"
         "}"
         "QSlider::handle:horizontal {"
             "background: #fff;"
             "border: 1px solid #777;"
-            "width: 44px;"
+            "width: "+QString::number(44*scale)+"px;"
             "margin: -4px 0;"
-            "border-radius: 18px;"
+            "border-radius: "+QString::number(18*scale)+"px;"
         "}"
         "QSlider::handle:horizontal:hover {"
             "background: #ccc;"
@@ -321,7 +323,7 @@ static void setupPenSize(){
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setRange(1,100);
     thicknessSlider->setSingleStep(1);
-    thicknessSlider->setValue(window->penSize[PEN]);
+    thicknessSlider->setValue(drawing->penSize[PEN]);
 
 
     penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
@@ -338,7 +340,7 @@ static void setupPenSize(){
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
         if(!sliderLock){
-            window->penSize[window->penType] = value;
+            drawing->penSize[drawing->penType] = value;
         }
         penSizeEvent();
     });
@@ -394,12 +396,12 @@ static void setupPenSize(){
     gridLayout->setSpacing(padding);
 
     colorpicker = create_button(":images/color-picker.svg", [=](){
-        QColor newCol = QColorDialog::getColor(window->penColor, mainWindow, _("Select Color"));
+        QColor newCol = QColorDialog::getColor(drawing->penColor, mainWindow, _("Select Color"));
         if(! newCol.isValid()){
             return;
         }
-        window->penColor = newCol;
-        set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
+        drawing->penColor = newCol;
+        set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
         penStyleEvent();
         backgroundStyleEvent();
     });
@@ -420,8 +422,8 @@ static void setupPenSize(){
              "border: 1px solid "+convertColor(colors[i]).name()+";"
         ).arg(colors[i].name()));
         QObject::connect(button, &QPushButton::clicked, [=]() {
-            window->penColor = colors[i];
-            set_string((char*)"color", (char*)window->penColor.name().toStdString().c_str());
+            drawing->penColor = colors[i];
+            set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
             penStyleEvent();
             backgroundStyleEvent();
         });
@@ -473,10 +475,10 @@ static void setupPenType(){
             return;
         }
         sliderLock = true;
-        window->penType = PEN;
-        window->penStyle = SPLINE;
+        drawing->penType = PEN;
+        drawing->penStyle = SPLINE;
         thicknessSlider->setRange(1,100);
-        thicknessSlider->setValue(window->penSize[PEN]);
+        thicknessSlider->setValue(drawing->penSize[PEN]);
         penSizeEvent();
         penStyleEvent();
         sliderLock = false;
@@ -489,10 +491,10 @@ static void setupPenType(){
             return;
         }
         sliderLock = true;
-        window->penType = MARKER;
-        window->penStyle = SPLINE;
+        drawing->penType = MARKER;
+        drawing->penStyle = SPLINE;
         thicknessSlider->setRange(1,100);
-        thicknessSlider->setValue(window->penSize[MARKER]);
+        thicknessSlider->setValue(drawing->penSize[MARKER]);
         penSizeEvent();
         penStyleEvent();
         sliderLock = false;
@@ -516,66 +518,66 @@ static void setupPenType(){
 
 
     lineButton = create_button(":images/line.svg", [=](){
-        if(window->penStyle == LINE){
+        if(drawing->penStyle == LINE){
             floatingSettings->hide();
             return;
         }
-        if(window->penType == ERASER){
-            window->penType = PEN;
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
         }
-        window->penStyle = LINE;
+        drawing->penStyle = LINE;
         penStyleEvent();
     });
     gridLayout->addWidget(lineButton, 0, 0);
 
     circleButton = create_button(":images/circle.svg", [=](){
-        if(window->penStyle  == CIRCLE){
+        if(drawing->penStyle  == CIRCLE){
             floatingSettings->hide();
             return;
         }
-        if(window->penType == ERASER){
-            window->penType = PEN;
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
         }
-        window->penStyle = CIRCLE;
+        drawing->penStyle = CIRCLE;
         penStyleEvent();
     });
     gridLayout->addWidget(circleButton, 0, 1);
 
     triangleButton = create_button(":images/triangle.svg", [=](){
-        if(window->penStyle  == TRIANGLE){
+        if(drawing->penStyle  == TRIANGLE){
             floatingSettings->hide();
             return;
         }
-        if(window->penType == ERASER){
-            window->penType = PEN;
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
         }
-        window->penStyle = TRIANGLE;
+        drawing->penStyle = TRIANGLE;
         penStyleEvent();
     });
     gridLayout->addWidget(triangleButton, 1, 1);
 
     rectButton = create_button(":images/rectangle.svg", [=](){
-        if(window->penStyle  == RECTANGLE){
+        if(drawing->penStyle  == RECTANGLE){
             floatingSettings->hide();
             return;
         }
-        if(window->penType == ERASER){
-            window->penType = PEN;
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
         }
-        window->penStyle = RECTANGLE;
+        drawing->penStyle = RECTANGLE;
         penStyleEvent();
     });
     gridLayout->addWidget(rectButton, 1, 0);
 
     splineButton = create_button(":images/spline.svg", [=](){
-        if(window->penStyle == SPLINE){
+        if(drawing->penStyle == SPLINE){
             floatingSettings->hide();
             return;
         }
-        if(window->penType == ERASER){
-            window->penType = PEN;
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
         }
-        window->penStyle = SPLINE;
+        drawing->penStyle = SPLINE;
         penStyleEvent();
     });
     gridLayout->addWidget(splineButton, 0, 2);
@@ -591,10 +593,10 @@ static void setupPenType(){
             return;
         }
         sliderLock = true;
-        window->penType = ERASER;
+        drawing->penType = ERASER;
         penStyleEvent();
         thicknessSlider->setRange(10,314);
-        thicknessSlider->setValue(window->penSize[ERASER]);
+        thicknessSlider->setValue(drawing->penSize[ERASER]);
         penSizeEvent();
         sliderLock = false;
     });
@@ -671,20 +673,20 @@ static void setupBackground(){
 
     // page buttons
     previousPage = create_button(":images/go-page-previous.svg", [=](){
-        if(window->getPageNum() == 0){
+        if(drawing->getPageNum() == 0){
             return;
         }
-        window->goPreviousPage();
-        pageLabel->setText(QString::number(window->getPageNum()));
+        drawing->goPreviousPage();
+        pageLabel->setText(QString::number(drawing->getPageNum()));
         backgroundStyleEvent();
         updateGoBackButtons();
     });
     previousPage->setStyleSheet(QString("background-color: none;"));
 
     nextPage = create_button(":images/go-page-next.svg", [=](){
-        window->goNextPage();
+        drawing->goNextPage();
         backgroundStyleEvent();
-        pageLabel->setText(QString::number(window->getPageNum()));
+        pageLabel->setText(QString::number(drawing->getPageNum()));
         updateGoBackButtons();
     });
     nextPage->setStyleSheet(QString("background-color: none;"));
@@ -775,13 +777,13 @@ static void setupBackground(){
 
 static void setupGoBackNext(){
     backButton = create_button(":images/go-back.svg", [=](){
-        window->goPrevious();
+        drawing->goPrevious();
         updateGoBackButtons();
     });
     backButton->setStyleSheet(QString("background-color: none;"));
     floatingWidget->setWidget(backButton);
     nextButton = create_button(":images/go-next.svg", [=](){
-        window->goNext();
+        drawing->goNext();
         updateGoBackButtons();
     });
     nextButton->setStyleSheet(QString("background-color: none;"));
@@ -832,7 +834,7 @@ static void setupClear(){
         floatingSettings->hide();
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
-        window->clear();
+        drawing->clear();
         floatingSettings->hide();
     });
     clearButtonLayout->addWidget(noButton);
@@ -856,12 +858,12 @@ extern "C" {
 QString archive_target;
 void *save_all(void* arg) {
     (void)arg;
-    window->saveAll(archive_target);
+    drawing->saveAll(archive_target);
     return NULL;
 }
 void *load_archive(void* arg) {
     (void)arg;
-    window->loadArchive(archive_target);
+    drawing->loadArchive(archive_target);
     return NULL;
 }
 }
@@ -869,8 +871,8 @@ void *load_archive(void* arg) {
 static void setupSave(){
 
     QPushButton *save = create_button(":images/save.svg", [=](){
-        QString file = QFileDialog::getSaveFileName(window, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
-        //window->saveAll(file);
+        QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+        //drawing->saveAll(file);
         pthread_t ptid;
         // Creating a new thread
         archive_target = file;
@@ -880,7 +882,7 @@ static void setupSave(){
     floatingWidget->setWidget(save);
 
     QPushButton *open = create_button(":images/open.svg", [=](){
-        QString filename = QFileDialog::getOpenFileName(window, _("Open File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+        QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
         if(!filename.isEmpty()){
             pthread_t ptid;
             archive_target = filename;
@@ -946,7 +948,7 @@ static void setupExit(){
 }
 
 void setupWidgets(){
-    window->floatingSettings = floatingSettings;
+    drawing->floatingSettings = floatingSettings;
     setupMove();
     setupPenType();
     setupPenSize();

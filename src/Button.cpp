@@ -1,8 +1,10 @@
 #include "Button.h"
 #include <stdio.h>
 
-#define padding 3
-#define butsize 48
+extern float scale;
+
+#define padding 3*scale
+#define butsize 48*scale
 
 QPushButton* create_button_text(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton(name);
@@ -10,7 +12,7 @@ QPushButton* create_button_text(const char* name, ButtonEvent event) {
         QObject::connect(button, &QPushButton::clicked, event);
     }
     QFont font = button->font();
-    font.setPointSize(18);
+    font.setPointSize(18*scale);
     button->setFont(font);
     return button;
 }
@@ -21,7 +23,7 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     }
     set_icon(name, button);
     QFont font = button->font();
-    font.setPointSize(18);
+    font.setPointSize(18*scale);
     button->setFixedSize(butsize+padding, butsize+padding);
     button->setFont(font);
     return button;

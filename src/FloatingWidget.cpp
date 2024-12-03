@@ -4,7 +4,9 @@
 int new_x;
 int new_y;
 
-#define padding 8
+extern float scale;
+
+#define padding 8*scale
 
 
 extern "C" {

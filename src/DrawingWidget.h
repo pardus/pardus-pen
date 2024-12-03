@@ -38,6 +38,7 @@ public:
     QColor penColor;
     QWidget* floatingSettings;
     int penSize[3];
+    bool reset;
     void initializeImage(const QSize &size);
     void drawLineTo(const QPointF &endPoint);
     void goPrevious();
