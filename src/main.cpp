@@ -112,7 +112,9 @@ int main(int argc, char *argv[]) {
 #endif
 
     // Force use X11 or Xwayland
-    setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
+    if(get_bool((char*)"xwayland")){
+        setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
+    }
     //Force ignore system dpi
     setenv("QT_AUTO_SCREEN_SCALE_FACTOR", "0", 1);
     setenv("QT_SCALE_FACTOR", "1", 1);
@@ -173,7 +175,12 @@ int main(int argc, char *argv[]) {
 
     tool = new QMainWindow();
 
-    floatingWidget = new FloatingWidget(tool);
+    // detect x11
+    if(!getenv("WAYLAND_DISPLAY")){
+        floatingWidget = new FloatingWidget(tool);
+    } else {
+        floatingWidget = new FloatingWidget(mainWindow);
+    }
     floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
 

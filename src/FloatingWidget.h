@@ -31,6 +31,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 private:
+    QMainWindow *fparent;
     int settingsOffset = 0;
     int num_of_item = 0;
     int offset_x = -1;

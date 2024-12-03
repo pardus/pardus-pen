@@ -17,9 +17,8 @@ extern "C" {
 #define globalPosition globalPos
 #endif
 
-extern QMainWindow* tool;
-
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
+    fparent = (QMainWindow*)parent;
     is_vertical = get_bool((char*)"is-vertical");
     if(is_vertical){
         layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
@@ -88,7 +87,11 @@ void FloatingWidget::moveAction(){
         }if (new_y > mainWindow->geometry().height() - cur_height) {
             new_y = mainWindow->geometry().height() - cur_height;
         }
-        tool->move(new_x, new_y);
+        if(!getenv("WAYLAND_DISPLAY")){
+            fparent->move(new_x, new_y);
+        } else {
+            move(new_x, new_y);
+        }
         if(floatingSettings != NULL){
             if(is_vertical){
                 new_xx = new_x+padding+cur_width;
