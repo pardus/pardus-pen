@@ -127,14 +127,13 @@ int main(int argc, char *argv[]) {
     settings_init();
 
     // translation part
-    const char *systemLanguage = std::getenv("LANG");
+    const char *systemLanguage = getenv("LANG");
     if (systemLanguage != nullptr) {
         bindtextdomain("pardus-pen", "/usr/share/locale");
         setlocale(LC_ALL, systemLanguage);
         textdomain("pardus-pen");
     } else {
-        std::cerr << "LANG environment variable not set." << std::endl;
-        return 1;
+        fprintf(stderr, "WARNING: LANG environment variable not set.\n");
     }
 
     // Fuar mode
@@ -178,10 +177,9 @@ int main(int argc, char *argv[]) {
     floatingSettings = new FloatingSettings(mainWindow);
     floatingSettings->hide();
 
-    tool = new QMainWindow();
-
     // detect x11
     if(!getenv("WAYLAND_DISPLAY")){
+        tool = new QMainWindow();
         floatingWidget = new FloatingWidget(tool);
     } else {
         tool = nullptr;
