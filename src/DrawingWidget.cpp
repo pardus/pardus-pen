@@ -570,9 +570,14 @@ bool DrawingWidget::event(QEvent *ev) {
                 break;
             }
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
+            int penTypeBak = penType;
+            if(tabletEvent->buttons() & Qt::RightButton) {
+                penType = ERASER;
+            }
             QPointF pos = tabletEvent->position();
             drawLineToFunc(lastPoint, pos.toPoint(), tabletEvent->pressure());
             lastPoint = tabletEvent->position();
+            penType = penTypeBak;
         }
 
         default:
