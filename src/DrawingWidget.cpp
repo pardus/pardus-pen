@@ -267,7 +267,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }else if(event->buttons() & Qt::MiddleButton) {
         ev_pen = MARKER;
     }
-    curs.setCursor(-1, penSize[ev_pen]*mainWindow->geometry().height()/1080.0);
+    curs.setCursor(-1, penSize[ev_pen]);
     drawing = true;
     lastPoint = event->position();
     firstPoint = event->position();
@@ -349,6 +349,7 @@ void DrawingWidget::clear() {
 
 
 int rad = 0;
+int frad = 0;
 
 void DrawingWidget::drawLineTo(const QPointF &endPoint) {
     drawLineToFunc(lastPoint, endPoint, 1.0);
@@ -395,13 +396,13 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
     }
 
-    painter.setPen(QPen(penColor, (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    painter.setPen(QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
     switch(fpenStyle){
         case SPLINE:
-            rad = (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0;
+            rad = (penSize[penType]*pressure);
             painter.drawLine(startPoint, endPoint);
             update(QRectF(
                 startPoint, endPoint
@@ -409,20 +410,34 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
-            rad = (penSize[penType]*pressure*mainWindow->geometry().height())/1080.0;
+            rad = (penSize[penType]*pressure);
             update(QRectF(
                 last_begin, last_end
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             update(QRectF(
                 startPoint, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            last_begin = startPoint;
-            last_end = endPoint;
             break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
+            frad = QLineF(last_begin, last_end).length();
             painter.drawEllipse(startPoint, rad, rad);
-            update();
+            update(QRectF(
+                startPoint,startPoint
+            ).toRect().normalized().adjusted(
+                - rad - penSize[penType],
+                - rad - penSize[penType],
+                + rad + penSize[penType],
+                + rad + penSize[penType]
+            ));
+            update(QRectF(
+                startPoint,startPoint
+            ).toRect().normalized().adjusted(
+                - frad - penSize[penType],
+                - frad - penSize[penType],
+                + frad + penSize[penType],
+                + frad + penSize[penType]
+            ));
             break;
         case RECTANGLE:
             painter.drawRect(QRectF(startPoint,endPoint));
@@ -435,6 +450,8 @@ void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal p
             update();
             break;
     }
+    last_begin = startPoint;
+    last_end = endPoint;
 
     painter.end();
 }
@@ -529,7 +546,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
                 storage.saveValue(touchPoint.id(), pos);
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
-                curs.setCursor(touchPoint.id(), penSize[penType]*mainWindow->geometry().height()/1080.0);
+                curs.setCursor(touchPoint.id(), penSize[penType]);
             }
             break;
         }
