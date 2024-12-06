@@ -474,7 +474,7 @@ static void setupPenType(){
     ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
-        if(floatingSettings->isVisible()){
+        if(floatingSettings->isVisible() && drawing->penType == PEN){
             floatingSettings->hide();
             return;
         }
@@ -490,7 +490,7 @@ static void setupPenType(){
     floatingWidget->setWidget(penButton);
 
     markerButton = create_button(":images/marker.svg", [=](){
-        if(floatingSettings->isVisible()){
+        if(floatingSettings->isVisible() && drawing->penType == MARKER){
             floatingSettings->hide();
             return;
         }
@@ -592,7 +592,7 @@ static void setupPenType(){
     );
 
     eraserButton = create_button(":images/eraser.svg", [=](){
-        if(floatingSettings->isVisible()){
+        if(floatingSettings->isVisible() && drawing->penType == ERASER){
             floatingSettings->hide();
             return;
         }
