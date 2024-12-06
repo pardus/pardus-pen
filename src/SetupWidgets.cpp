@@ -138,8 +138,47 @@ static void penStyleEvent(){
 }
 
 
+static int last_pen_type = 0;
 static void penSizeEvent(){
     int value = drawing->penSize[drawing->penType];
+    if(drawing->penType != last_pen_type){
+        last_pen_type = drawing->penType;
+
+        if(drawing->penType == ERASER) {
+            ov->setFixedSize(
+                colorDialog->size().width(),
+                (colorDialog->size().width()*3)/4
+            );
+
+            penSettings->setFixedSize(
+                colorDialog->size().width() + padding*2,
+                padding*2
+                 + ov->size().height()
+                 + thicknessLabel->size().height()
+                 + thicknessSlider->size().height()
+            );
+            colorDialog->hide();
+            //ov->hide();
+            colorLabel->hide();
+        } else {
+            ov->setFixedSize(
+                colorDialog->size().width(),
+                butsize*3
+            );
+            penSettings->setFixedSize(
+                colorDialog->size().width() + padding*2,
+                padding*2
+                 + ov->size().height()
+                 + thicknessLabel->size().height()
+                 + thicknessSlider->size().height()
+                 + colorDialog->size().height()
+                 + colorLabel->size().height()
+            );
+            colorDialog->show();
+            colorLabel->show();
+            //ov->show();
+        }
+    }
     switch(drawing->penType){
         case PEN:
             penText = _("Pen");
@@ -154,44 +193,9 @@ static void penSizeEvent(){
             set_int((char*)"eraser-size",value);
             break;
     }
+
     thicknessLabel->setText(QString(penText)+QString(" ")+QString(_("Size:"))+QString(" ")+QString::number(value));
     colorLabel->setText(QString(penText)+QString(" ")+QString(_("Color:")));
-
-
-    if(drawing->penType == ERASER) {
-        ov->setFixedSize(
-            colorDialog->size().width(),
-            (colorDialog->size().width()*3)/4
-        );
-
-        penSettings->setFixedSize(
-            colorDialog->size().width() + padding*2,
-            padding*2
-             + ov->size().height()
-             + thicknessLabel->size().height()
-             + thicknessSlider->size().height()
-        );
-        colorDialog->hide();
-        //ov->hide();
-        colorLabel->hide();
-    } else {
-        ov->setFixedSize(
-            colorDialog->size().width(),
-            butsize*3
-        );
-        penSettings->setFixedSize(
-            colorDialog->size().width() + padding*2,
-            padding*2
-             + ov->size().height()
-             + thicknessLabel->size().height()
-             + thicknessSlider->size().height()
-             + colorDialog->size().height()
-             + colorLabel->size().height()
-        );
-        colorDialog->show();
-        colorLabel->show();
-        //ov->show();
-    }
     ov->penSize = value;
     ov->color = drawing->penColor;
     ov->updateImage();
