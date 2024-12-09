@@ -12,8 +12,13 @@ extern QMainWindow* mainWindow;
 
 class ArchiveStorage {
 public:
+    QString config = "";
     void add(const QString& path, const QImage& image) {
         values[path] = image;
+    }
+
+    void setConfig(QString cfg){
+        config = cfg;
     }
 
     void create(const QString& archiveFileName) {
@@ -24,7 +29,6 @@ public:
         archive_write_open_filename(ar, archiveFileName.toStdString().c_str());
         // write config
         struct archive_entry* entry = archive_entry_new();
-        QString config = QString::number(mainWindow->geometry().width()) + "x" + QString::number(mainWindow->geometry().height());
         archive_entry_set_pathname(entry, "config");
         archive_entry_set_filetype(entry, AE_IFREG);
         archive_entry_set_perm(entry, 0644);
@@ -32,7 +36,7 @@ public:
         archive_write_header(ar, entry);
         archive_write_data(ar, config.toStdString().c_str(), config.size());
         archive_entry_free(entry);
-        
+
         for (auto it = values.begin(); it != values.end(); ++it) {
             QString path = it.key();
             QImage image = it.value();
@@ -52,10 +56,12 @@ public:
         // Clean up
         archive_write_close(ar);
         archive_write_free(ar);
+        values.clear();
     }
 
     QMap<QString, QImage> load(const QString& archiveFileName) {
         QMap<QString, QImage> values;
+        config = "";
         // Open the archive file
         struct archive *ar;
         struct archive_entry *entry;
@@ -89,9 +95,16 @@ public:
                 }
                 printf("Decompress:%s %ld\n", entryName, total_size);
                 if(strcmp(entryName, "config") == 0){
-                    QStringList res = QString::fromUtf8(*imageData).split("x");
-                    width = res[0].toInt();
-                    height = res[1].toInt();
+                    config = QString::fromUtf8(*imageData);
+                    QStringList list = config.split("\n");
+                    for (const auto &str : std::as_const(list)) {
+                        if(str.startsWith("width=")){
+                            width = str.split("=")[1].toInt();
+                        } else if(str.startsWith("height=")){
+                            height = str.split("=")[1].toInt();
+                        }
+
+                    }
                     continue;
                 }
                 QImage image = QImage(reinterpret_cast<const uchar*>(imageData->data()), width, height, QImage::Format_ARGB32);
@@ -119,6 +132,13 @@ ArchiveStorage archive;
 
 void archive_add(const QString& path, const QImage& image){
     archive.add(path, image);
+}
+
+void archive_set_config(const QString& cfg){
+    archive.setConfig(cfg);
+}
+QString archive_get_config(){
+    return archive.config;
 }
 
 void archive_create(const QString& archiveFileName){

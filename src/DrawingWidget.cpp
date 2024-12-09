@@ -187,17 +187,27 @@ public:
     }
 #ifdef LIBARCHIVE
     void saveAll(const QString& filename){
+        images.overlayType = board->getOverlayType();
+        images.pageType = board->getType();
         values[last_page_num] = images;
+        QString cfg = "[main]\n";
+        cfg += "width="+QString::number(mainWindow->geometry().width())+"\n";
+        cfg += "height="+QString::number(mainWindow->geometry().height())+"\n";
         for(int i=0;i<=page_count;i++){
+            cfg += "[page"+QString::number(i)+"]\n";
+            cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
+            cfg += "page="+QString::number(loadValue(i).pageType)+"\n";
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
         }
+        archive_set_config(cfg);
         archive_create(filename);
     }
 
     void loadArchive(const QString& filename){
         QMap<QString, QImage> archive = archive_load(filename);
+        QString cfg = archive_get_config();
         clear();
         for (auto it = archive.begin(); it != archive.end(); ++it) {
             QString path = it.key();
@@ -219,7 +229,26 @@ public:
             values[page].image_count++;
             values[page].last_image_num = values[page].image_count;
         }
+        QStringList list = cfg.split("\n");
+        QString area = "main";
+        int page = 0;
+        for (const auto &str : std::as_const(list)) {
+            if(str.startsWith("[") && str.endsWith("]")) {
+                area = str.mid(1,str.length()-2);
+                if(area.startsWith("page")){
+                    page = area.mid(4,str.length()-1).toInt();
+                }
+            } else if(str.startsWith("overlay")){
+                values[page].overlayType = str.split("=")[1].toInt();
+                printf("Load: page: %d overlay %d\n", page, values[page].overlayType);
+            } else if(str.startsWith("page")){
+                values[page].pageType = str.split("=")[1].toInt();
+                printf("Load: page: %d page %d\n", page, values[page].pageType);
+            }
+        }
         images = values[0];
+        board->setType(images.pageType);
+        board->setOverlayType(images.overlayType);
         drawing->loadImage(images.last_image_num);
         drawing->update();
         updateGoBackButtons();
