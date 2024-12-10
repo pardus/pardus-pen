@@ -290,7 +290,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     cropLayout->addWidget(crop);
     cropLayout->setContentsMargins(0,0,0,0);
     cropLayout->setSpacing(0);
-    cropWidget->setStyleSheet("border: 2px solid red;");
+    cropWidget->setStyleSheet("border: 2px solid "+penColor.name()+";");
     cropWidget->hide();
     
     //QScreen *screen = QGuiApplication::primaryScreen();

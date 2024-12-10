@@ -237,6 +237,7 @@ static void backgroundStyleEvent(){
     overlayLines->setStyleSheet(QString("background-color: none;"));
     overlaySquares->setStyleSheet(QString("background-color: none;"));
     overlayNone->setStyleSheet(QString("background-color: none;"));
+    drawing->cropWidget->setStyleSheet("border: 2px solid "+drawing->penColor.name()+";");
     switch(board->getType()){
         case BLACK:
             set_icon(":images/paper-black.svg",backgroundButton);
@@ -498,7 +499,7 @@ static void setupPenType(){
     });
     floatingWidget->setWidget(penButton);
     
-    selectButton = create_button(":images/circle.svg", [=](){
+    selectButton = create_button(":images/crop.svg", [=](){
         drawing->penMode = SELECTION;
         penStyleEvent();
     });

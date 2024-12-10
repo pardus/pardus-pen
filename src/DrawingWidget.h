@@ -41,6 +41,7 @@ public:
     QPointF firstPoint;
     QColor penColor;
     QWidget* floatingSettings;
+    MovableWidget* cropWidget;
     int penSize[3];
     bool reset;
     void initializeImage(const QSize &size);
@@ -81,7 +82,6 @@ protected:
     bool event(QEvent * ev);
     QImage cropped;
     QLabel* crop;
-    MovableWidget* cropWidget;
     QPainter painter;
 };
 
