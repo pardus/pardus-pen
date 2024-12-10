@@ -64,6 +64,7 @@ public:
     bool isNextAvailable();
     void loadImage(int num);
     void mergeSelection();
+    void addImage(QImage img);
 
 protected:
     bool drawing = false;

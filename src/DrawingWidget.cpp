@@ -359,6 +359,12 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
     penType = penTypeBak;
 }
 
+void DrawingWidget::addImage(QImage img){
+    images.last_image_num++;
+    images.image_count = images.last_image_num;
+    images.saveValue(images.last_image_num, img.copy());
+}
+
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if(curEventButtons & Qt::LeftButton && !isMoved) {
         drawLineTo(event->position()+QPointF(0,1));
@@ -371,11 +377,10 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
         update();
         return;
     }
-    images.last_image_num++;
-    images.image_count = images.last_image_num;
-    images.saveValue(images.last_image_num, image.copy());
+
     curEventButtons = 0;
     curs.hide(-1);
+    addImage(image);
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {

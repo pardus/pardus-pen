@@ -59,5 +59,6 @@ void DrawingWidget::mergeSelection() {
     cropWidget->move(QPoint(-1,-1));
     update();
     painter.end();
+    addImage(image);
     
 }
