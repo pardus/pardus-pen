@@ -37,6 +37,8 @@ extern QMainWindow* mainWindow;
 
 extern bool fuarMode;
 
+QPushButton *selectButton;
+
 QPushButton *penButton;
 QPushButton *typeButton;
 QPushButton *markerButton;
@@ -91,6 +93,7 @@ extern float scale;
 
 static void penStyleEvent(){
     penButton->setStyleSheet(QString("background-color: none;"));
+    selectButton->setStyleSheet(QString("background-color: none;"));
     markerButton->setStyleSheet(QString("background-color: none;"));
     eraserButton->setStyleSheet(QString("background-color: none;"));
     lineButton->setStyleSheet(QString("background-color: none;"));
@@ -98,17 +101,6 @@ static void penStyleEvent(){
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
-    switch(drawing->penType){
-        case PEN:
-            penButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            break;
-        case MARKER:
-            markerButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            break;
-        default:
-            eraserButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            break;
-    }
     switch(drawing->penStyle){
         case LINE:
             lineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
@@ -130,6 +122,21 @@ static void penStyleEvent(){
             splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             set_icon(":images/spline.svg", typeButton);
             break;
+    }
+    if(drawing->penMode == SELECTION) {
+        selectButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    } else if(drawing->penMode == DRAW) {
+        switch(drawing->penType){
+            case PEN:
+                penButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+                break;
+            case MARKER:
+                markerButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+                break;
+            default:
+                eraserButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+                break;
+        }
     }
     ov->penSize = drawing->penSize[drawing->penType];
     ov->penType = drawing->penType;
@@ -474,6 +481,8 @@ static void setupPenType(){
     ov = new OverView();
 
     penButton = create_button(":images/pen.svg", [=](){
+        drawing->mergeSelection();
+        drawing->penMode = DRAW;
         if(floatingSettings->isVisible() && drawing->penType == PEN){
             floatingSettings->hide();
             return;
@@ -488,8 +497,16 @@ static void setupPenType(){
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
+    
+    selectButton = create_button(":images/circle.svg", [=](){
+        drawing->penMode = SELECTION;
+        penStyleEvent();
+    });
+    floatingWidget->setWidget(selectButton);
 
     markerButton = create_button(":images/marker.svg", [=](){
+        drawing->mergeSelection();
+        drawing->penMode = DRAW;
         if(floatingSettings->isVisible() && drawing->penType == MARKER){
             floatingSettings->hide();
             return;
@@ -504,6 +521,23 @@ static void setupPenType(){
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
+
+    eraserButton = create_button(":images/eraser.svg", [=](){
+        drawing->mergeSelection();
+        drawing->penMode = DRAW;
+        if(floatingSettings->isVisible() && drawing->penType == ERASER){
+            floatingSettings->hide();
+            return;
+        }
+        sliderLock = true;
+        drawing->penType = ERASER;
+        penStyleEvent();
+        thicknessSlider->setRange(10*scale,200*scale);
+        thicknessSlider->setValue(drawing->penSize[ERASER]);
+        penSizeEvent();
+        sliderLock = false;
+    });
+    floatingWidget->setWidget(eraserButton);
 
     typeDialog = new QWidget();
     typeDialog->setWindowTitle(_("Pen Style"));
@@ -591,20 +625,6 @@ static void setupPenType(){
         (butsize+padding)*2 + padding
     );
 
-    eraserButton = create_button(":images/eraser.svg", [=](){
-        if(floatingSettings->isVisible() && drawing->penType == ERASER){
-            floatingSettings->hide();
-            return;
-        }
-        sliderLock = true;
-        drawing->penType = ERASER;
-        penStyleEvent();
-        thicknessSlider->setRange(10*scale,200*scale);
-        thicknessSlider->setValue(drawing->penSize[ERASER]);
-        penSizeEvent();
-        sliderLock = false;
-    });
-    floatingWidget->setWidget(eraserButton);
     floatingWidget->setWidget(typeButton);
     penStyleEvent();
 }

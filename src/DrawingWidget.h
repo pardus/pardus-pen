@@ -20,12 +20,16 @@
 #define PEN 1
 #define MARKER 2
 
+#include "Selection.h"
 
 #define LINE 0
 #define CIRCLE 1
 #define SPLINE 2
 #define RECTANGLE 3
 #define TRIANGLE 4
+
+#define DRAW 0
+#define SELECTION 1
 
 class DrawingWidget : public QWidget {
 public:
@@ -52,11 +56,13 @@ public:
 #endif
     int penType;
     int penStyle;
+    int penMode;
     void syncPageType(int type);
     int getPageNum();
     bool isBackAvailable();
     bool isNextAvailable();
     void loadImage(int num);
+    void mergeSelection();
 
 protected:
     bool drawing = false;
@@ -69,8 +75,13 @@ protected:
     void paintEvent(QPaintEvent *event) override;
     void updateCursorMouse(qint64 i, QPoint pos);
     void updateCursorMouse(qint64 i, QPointF pos);
+    void createSelection();
     void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
+    void selectionDraw(QPointF startPoint, QPointF endPoint);
     bool event(QEvent * ev);
+    QImage cropped;
+    QLabel* crop;
+    MovableWidget* cropWidget;
     QPainter painter;
 };
 

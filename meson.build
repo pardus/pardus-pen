@@ -3,6 +3,7 @@ project('pardus-pen', ['cpp', 'c'])
 src = [
     'src/main.cpp',
     'src/DrawingWidget.cpp',
+    'src/Selection.cpp',
     'src/FloatingWidget.cpp',
     'src/FloatingSettings.cpp',
     'src/WhiteBoard.cpp',

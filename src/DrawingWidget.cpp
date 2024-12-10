@@ -273,16 +273,26 @@ private:
 };
 PageStorage pages;
 
-
 int curEventButtons = 0;
 bool isMoved = 0;
 float fpressure = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
-    penType = 1;
+    penType = PEN;
+    penMode = SELECTION;
     reset = true;
     setMouseTracking(true);
+    crop = new QLabel("");
+    cropWidget = new MovableWidget(mainWindow);
+    cropWidget->stackUnder(this);
+    QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
+    cropLayout->addWidget(crop);
+    cropLayout->setContentsMargins(0,0,0,0);
+    cropLayout->setSpacing(0);
+    cropWidget->setStyleSheet("border: 2px solid red;");
+    cropWidget->hide();
+    
     //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
 }
@@ -290,6 +300,17 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
+    drawing = true;
+    lastPoint = event->position();
+    firstPoint = event->position();
+    mergeSelection();
+    imageBackup = image;
+    if(floatingSettings->isVisible()){
+        floatingSettings->hide();
+    }
+    if(penMode != DRAW) {
+        return;
+    }
     updateCursorMouse(-1, event->position());
     int ev_pen = penType;
     if(event->buttons() & Qt::RightButton) {
@@ -298,15 +319,9 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
         ev_pen = MARKER;
     }
     curs.setCursor(-1, penSize[ev_pen]);
-    drawing = true;
-    lastPoint = event->position();
-    firstPoint = event->position();
-    imageBackup = image;
     curEventButtons = event->buttons();
     isMoved = false;
-    if(floatingSettings->isVisible()){
-        floatingSettings->hide();
-    }
+
 }
 
 void DrawingWidget::updateCursorMouse(qint64 i, QPointF pos){
@@ -328,8 +343,15 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
         penType = MARKER;
     }
     if (drawing) {
-        updateCursorMouse(-1, event->position());
-        drawLineTo(event->position());
+        switch(penMode) {
+            case DRAW:
+                updateCursorMouse(-1, event->position());
+                drawLineTo(event->position());
+                break;
+            case SELECTION:
+                selectionDraw(firstPoint, event->position());
+                break;
+        }
     } else {
         curs.hide(-1);
     }
@@ -343,6 +365,11 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     }
     if (drawing) {
        drawing = false;
+    }
+    if(penMode == SELECTION) {
+        createSelection();
+        update();
+        return;
     }
     images.last_image_num++;
     images.image_count = images.last_image_num;
@@ -388,6 +415,20 @@ void DrawingWidget::drawLineTo(const QPointF &endPoint) {
 }
 static QPointF last_end = QPointF(0,0);
 static QPointF last_begin = QPointF(0,0);
+
+void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
+    image = imageBackup;
+    update();
+    painter.begin(&image);
+    lastPoint = endPoint;
+    painter.setPen(Qt::NoPen);
+    penColor.setAlpha(127);
+    painter.setBrush(QBrush(penColor));
+    painter.drawRect(QRectF(startPoint,endPoint));
+    update();
+    painter.end();
+}
+
 
 void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
