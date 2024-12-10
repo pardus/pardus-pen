@@ -280,7 +280,7 @@ float fpressure = 0;
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
     penType = PEN;
-    penMode = SELECTION;
+    penMode = DRAW;
     reset = true;
     setMouseTracking(true);
     crop = new QLabel("");
