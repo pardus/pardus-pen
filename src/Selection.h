@@ -4,10 +4,14 @@
 #include <QWidget>
 #include <QMouseEvent>
 
+#define DRAG 0
+#define RESIZE 1
+
 class MovableWidget : public QWidget {
 
 public:
     QImage image;
+    QLabel* crop;
     explicit MovableWidget(QWidget *parent = nullptr);
 
 protected:
@@ -17,7 +21,7 @@ protected:
 
 private:
     QPoint lastMousePosition;
-    bool dragging = false;
+    int mode = 0;
 };
 
 #endif

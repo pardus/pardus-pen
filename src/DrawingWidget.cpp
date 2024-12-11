@@ -283,16 +283,15 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penMode = DRAW;
     reset = true;
     setMouseTracking(true);
-    crop = new QLabel("");
     cropWidget = new MovableWidget(mainWindow);
     cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
-    cropLayout->addWidget(crop);
+    cropLayout->addWidget(cropWidget->crop);
     cropLayout->setContentsMargins(0,0,0,0);
     cropLayout->setSpacing(0);
     cropWidget->setStyleSheet("border: 2px solid "+penColor.name()+";");
     cropWidget->hide();
-    
+
     //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
 }
