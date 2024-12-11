@@ -7,6 +7,7 @@
 class MovableWidget : public QWidget {
 
 public:
+    QImage image;
     explicit MovableWidget(QWidget *parent = nullptr);
 
 protected:

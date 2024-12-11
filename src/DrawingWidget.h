@@ -81,7 +81,6 @@ protected:
     void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     bool event(QEvent * ev);
-    QImage cropped;
     QLabel* crop;
     QPainter painter;
 };

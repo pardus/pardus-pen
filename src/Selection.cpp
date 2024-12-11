@@ -27,7 +27,7 @@ void DrawingWidget::createSelection() {
     QPoint bottomRight(qMax(firstPoint.x(), lastPoint.x()), qMax(firstPoint.y(), lastPoint.y()));
     QRect cropRect(topLeft, bottomRight);
 
-    cropped = imageBackup.copy(cropRect);
+    cropWidget->image = imageBackup.copy(cropRect);
 
     painter.begin(&image);
     painter.setBrush(QBrush(penColor));
@@ -39,7 +39,7 @@ void DrawingWidget::createSelection() {
 
     printf("%d %d\n", cropRect.width(), cropRect.height());
     cropWidget->setFixedSize(cropRect.width(), cropRect.height());
-    QPixmap pixmap = QPixmap::fromImage(cropped);
+    QPixmap pixmap = QPixmap::fromImage(cropWidget->image);
     crop->setPixmap(pixmap);
     cropWidget->move(topLeft);
     cropWidget->raise();
@@ -54,11 +54,10 @@ void DrawingWidget::mergeSelection() {
     hasSelection = false;
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
-    painter.drawImage(QPoint(cropWidget->x(), cropWidget->y()), cropped);
+    painter.drawImage(QPoint(cropWidget->x(), cropWidget->y()), cropWidget->image);
     cropWidget->setFixedSize(0,0);
     cropWidget->move(QPoint(-1,-1));
     update();
     painter.end();
     addImage(image);
-    
 }
