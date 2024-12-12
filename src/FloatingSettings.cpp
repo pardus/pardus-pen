@@ -67,6 +67,13 @@ void FloatingSettings::reload(){
 
 }
 
+void FloatingSettings::setHide(){
+    if(tool2 != nullptr) {
+        tool2->hide();
+    }
+    hide();
+}
+
 void FloatingSettings::setPage(int num){
     if(num_of_item < num){
         return;
@@ -74,12 +81,15 @@ void FloatingSettings::setPage(int num){
     current_page = num;
     if(settingsPages.getPage(current_page)->isVisible()){
         settingsPages.getPage(current_page)->hide();
-        hide();
+        setHide();
         return;
     }
     for(int i=0;i<num_of_item;i++){
         settingsPages.getPage(i)->hide();
     }
     reload();
+    if(tool2 != nullptr) {
+        tool2->show();
+    }
     show();
 }

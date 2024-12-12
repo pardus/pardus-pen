@@ -47,7 +47,7 @@ static bool hasSelection = false;
 
 void DrawingWidget::createSelection() {
     hasSelection = true;
-    printf("%f %f %f %f\n", startPoint.x(), endPoint.x(), startPoint.y(), endPoint.y());
+    //printf("%f %f %f %f\n", startPoint.x(), endPoint.x(), startPoint.y(), endPoint.y());
     QPoint topLeft(qMin(startPoint.x(), endPoint.x()), qMin(startPoint.y(), endPoint.y()));
     QPoint bottomRight(qMax(startPoint.x(), endPoint.x()), qMax(startPoint.y(), endPoint.y()));
     QRect cropRect(topLeft, bottomRight);
@@ -62,7 +62,7 @@ void DrawingWidget::createSelection() {
     update();
     painter.end();
 
-    printf("%d %d\n", cropRect.width(), cropRect.height());
+    //printf("%d %d\n", cropRect.width(), cropRect.height());
     cropWidget->setFixedSize(cropRect.width(), cropRect.height());
     QPixmap pixmap = QPixmap::fromImage(cropWidget->image);
     cropWidget->crop->setPixmap(pixmap);

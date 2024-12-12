@@ -82,6 +82,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     // Draw the square paper background
     switch(overlayType){
         case NONE:
+            break;
         case CUSTOM:
         case TURKIYE:
         case WORLD:

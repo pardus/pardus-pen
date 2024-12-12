@@ -200,7 +200,7 @@ int main(int argc, char *argv[]) {
     }
     floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
-    floatingSettings->hide();
+    floatingSettings->setHide();
 
     setupWidgets();
     if (tool != nullptr) {
@@ -228,8 +228,7 @@ int main(int argc, char *argv[]) {
             "background: none;"
             "font-size: "+QString::number(18*scale)+"px;"
         );
-
-        tool2->show();
+        tool2->hide();
     }
 
     //mainWindow->setWindowFlags(Qt::WindowSystemMenuHint

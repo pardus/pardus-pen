@@ -1,5 +1,6 @@
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
+
 #ifdef QPRINTER
 #include <QPrinter>
 #endif
@@ -307,7 +308,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     mergeSelection();
     imageBackup = image;
     if(floatingSettings->isVisible()){
-        floatingSettings->hide();
+        floatingSettings->setHide();
     }
     geo.clear(-1);
     geo.addValue(-1,event->position());
@@ -450,10 +451,10 @@ void DrawingWidget::loadArchive(const QString& filename){
 #endif
 void DrawingWidget::loadImage(int num){
     QImage img = images.loadValue(num);
-    img = img.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
     if(img.isNull()){
         return;
     }
+    img = img.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
     QPainter p(&image);
     image.fill(QColor("transparent"));
     p.drawImage(QPointF(0,0), img);
@@ -507,7 +508,7 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
             if(floatingSettings->isVisible()){
-                floatingSettings->hide();
+                floatingSettings->setHide();
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();

@@ -18,6 +18,7 @@ public:
     void addPage(QWidget *widget);
     void setPage(int num);
     void reload();
+    void setHide();
 private:
     int num_of_item = 0;
     int current_page = 0;

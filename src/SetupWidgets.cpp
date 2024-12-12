@@ -522,7 +522,7 @@ static void setupPenType(){
         drawing->mergeSelection();
         drawing->penMode = DRAW;
         if(floatingSettings->isVisible() && drawing->penType == PEN){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         sliderLock = true;
@@ -546,7 +546,7 @@ static void setupPenType(){
         drawing->mergeSelection();
         drawing->penMode = DRAW;
         if(floatingSettings->isVisible() && drawing->penType == MARKER){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         sliderLock = true;
@@ -564,7 +564,7 @@ static void setupPenType(){
         drawing->mergeSelection();
         drawing->penMode = DRAW;
         if(floatingSettings->isVisible() && drawing->penType == ERASER){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         sliderLock = true;
@@ -595,7 +595,7 @@ static void setupPenType(){
 
     lineButton = create_button(":images/line.svg", [=](){
         if(drawing->penStyle == LINE){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         if(drawing->penType == ERASER){
@@ -608,7 +608,7 @@ static void setupPenType(){
 
     circleButton = create_button(":images/circle.svg", [=](){
         if(drawing->penStyle  == CIRCLE){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         if(drawing->penType == ERASER){
@@ -621,7 +621,7 @@ static void setupPenType(){
 
     triangleButton = create_button(":images/triangle.svg", [=](){
         if(drawing->penStyle  == TRIANGLE){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         if(drawing->penType == ERASER){
@@ -634,7 +634,7 @@ static void setupPenType(){
 
     rectButton = create_button(":images/rectangle.svg", [=](){
         if(drawing->penStyle  == RECTANGLE){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         if(drawing->penType == ERASER){
@@ -647,7 +647,7 @@ static void setupPenType(){
 
     splineButton = create_button(":images/spline.svg", [=](){
         if(drawing->penStyle == SPLINE){
-            floatingSettings->hide();
+            floatingSettings->setHide();
             return;
         }
         if(drawing->penType == ERASER){
@@ -924,7 +924,7 @@ static void setupMinify(){
 static void setupScreenShot(){
     #ifdef screenshot
     QPushButton *ssButton = create_button(":images/screenshot.svg", [=](){
-        floatingSettings->hide();
+        floatingSettings->setHide();
         floatingWidget->hide();
         takeScreenshot();
         floatingWidget->show();
@@ -951,11 +951,11 @@ static void setupClear(){
     clearLayout->addWidget(clearButtonDialog);
 
     QPushButton * noButton = create_button_text(_("No"), [=](){
-        floatingSettings->hide();
+        floatingSettings->setHide();
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
         drawing->clear();
-        floatingSettings->hide();
+        floatingSettings->setHide();
     });
     clearButtonLayout->addWidget(noButton);
     clearButtonLayout->addWidget(yesButton);
@@ -1038,7 +1038,7 @@ static void setupExit(){
     exitLayout->addWidget(exitButtonDialog);
 
     QPushButton * noButton = create_button_text(_("No"), [=](){
-        floatingSettings->hide();
+        floatingSettings->setHide();
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
 #ifdef ETAP19

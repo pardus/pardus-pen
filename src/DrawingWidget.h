@@ -25,6 +25,7 @@
 #define LINELINE 2
 
 #include "Selection.h"
+#include "FloatingSettings.h"
 
 #define LINE 0
 #define CIRCLE 1
@@ -105,7 +106,7 @@ public:
 
     QImage image;
     QColor penColor;
-    QWidget* floatingSettings;
+    FloatingSettings* floatingSettings;
     MovableWidget* cropWidget;
     int penSize[3];
     bool reset;
