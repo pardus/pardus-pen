@@ -933,7 +933,12 @@ void *load_archive(void* arg) {
 static void setupSave(){
 
     QPushButton *save = create_button(":images/save.svg", [=](){
-        QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+        QString filter = _("Pen Files (*.pen);;");
+        #ifdef QPRINTER
+        filter += "PDF Files (*.pdf);;";
+        #endif
+        filter += _("All Files (*.*)");
+        QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), filter);
         //drawing->saveAll(file);
         pthread_t ptid;
         // Creating a new thread

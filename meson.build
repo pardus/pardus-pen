@@ -56,6 +56,10 @@ if get_option('qt') == '5'
         dependency('Qt5Widgets'),
         dependency('Qt5Svg'),
     ]
+    if get_option('pdf')
+        add_project_arguments('-DQPRINTER', language: 'cpp')
+        qt_dep += dependency('Qt5PrintSupport')
+    endif
 elif get_option('qt') == '6'
     add_project_arguments('-DQT6', language: 'cpp')
     qt_dep += [
@@ -64,6 +68,10 @@ elif get_option('qt') == '6'
         dependency('Qt6Widgets'),
         dependency('Qt6Svg'),
     ]
+    if get_option('pdf')
+        add_project_arguments('-DQPRINTER', language: 'cpp')
+        qt_dep += dependency('Qt6PrintSupport')
+    endif
 else
     error('Your qt version is ont supperted')
 endif

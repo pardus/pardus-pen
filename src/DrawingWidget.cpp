@@ -1,5 +1,8 @@
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
+#ifdef QPRINTER
+#include <QPrinter>
+#endif
 #ifdef LIBARCHIVE
 #include "Archive.h"
 #endif
@@ -165,6 +168,28 @@ public:
         last_page_num = 0;
         page_count = 0;
     }
+#ifdef QPRINTER
+    void savePdf(const QString& filename){
+        saveValue(last_page_num, images);
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setOutputFileName(filename);
+        printer.setFullPage(true);
+        QSizeF imageSize(mainWindow->geometry().width(),mainWindow->geometry().height());
+        QPageSize pageSize(imageSize, QPageSize::Point);
+        printer.setPageSize(pageSize);
+        printer.setResolution(72); // TODO: replace this
+            
+        QPainter painter(&printer);
+        for(int i=0;i<=page_count;i++){
+            QImage im = loadValue(i).loadValue(loadValue(i).last_image_num);
+            painter.drawImage(0,0, im);
+            printer.newPage();
+        }
+        painter.end();
+        
+    }
+#endif
 #ifdef LIBARCHIVE
     void saveAll(const QString& filename){
         images.overlayType = board->getOverlayType();
@@ -408,6 +433,10 @@ void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
 #ifdef LIBARCHIVE
 void DrawingWidget::saveAll(QString file){
     if (!file.isEmpty()) {
+        if(file.endsWith(".pdf")){
+            pages.savePdf(file);
+            return;
+        }
         if(!file.endsWith(".pen")){
             file += ".pen";
         }
