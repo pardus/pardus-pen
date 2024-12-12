@@ -31,21 +31,81 @@
 #define DRAW 0
 #define SELECTION 1
 
+class ValueStorage {
+public:
+    int size() {
+        return values.size();
+    }
+    
+    void clear() {
+        return values.clear();
+    }
+
+    void saveValue(qint64 id, QPointF data) {
+        values[id] = data;
+    }
+    QPointF last() {
+        return loadValue(values.size()-1);
+    }
+
+    QPointF first() {
+        return loadValue(0);
+    }
+
+    QPointF loadValue(qint64 id) {
+        if (values.contains(id)) {
+            return values[id];
+        } else {
+            // -1 -1 means disable drawing
+            return QPointF(-1,-1);
+        }
+    }
+    QMap<qint64, QPointF> values;
+};
+
+class GeometryStorage {
+public:
+    void addValue(qint64 id, QPointF data) {
+        values[id].saveValue(values[id].size(), data);
+    }
+    
+    QPointF last(qint64 id){
+        return load(id).last();
+    }
+    
+    QPointF first(qint64 id){
+        return load(id).first();
+    }
+
+    ValueStorage load(qint64 id) {
+        if (values.contains(id)) {
+            return values[id];
+        } else {
+            // -1 -1 means disable drawing
+            ValueStorage v;
+            return v;
+        }
+    }
+    void clear(qint64 id) {
+        return values[id].clear();
+    }
+
+private:
+    QMap<qint64, ValueStorage> values;
+};
+
 class DrawingWidget : public QWidget {
 public:
     explicit DrawingWidget(QWidget *parent = nullptr);
     ~DrawingWidget(); // Destructor
 
     QImage image;
-    QPointF lastPoint;
-    QPointF firstPoint;
     QColor penColor;
     QWidget* floatingSettings;
     MovableWidget* cropWidget;
     int penSize[3];
     bool reset;
     void initializeImage(const QSize &size);
-    void drawLineTo(const QPointF &endPoint);
     void goPrevious();
     void goNext();
     void goPreviousPage();
@@ -68,6 +128,7 @@ public:
 
 protected:
     bool drawing = false;
+    float fpressure;
     QImage imageBackup;
     bool eraser;
     void mousePressEvent(QMouseEvent *event) override;
@@ -78,9 +139,10 @@ protected:
     void updateCursorMouse(qint64 i, QPoint pos);
     void updateCursorMouse(qint64 i, QPointF pos);
     void createSelection();
-    void drawLineToFunc(const QPointF startPoint, const QPointF endPoint, qreal pressure);
+    void drawLineToFunc(qint64 id, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     bool event(QEvent * ev);
+    GeometryStorage geo;
     QPainter painter;
 };
 

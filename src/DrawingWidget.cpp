@@ -44,26 +44,6 @@ penType:
 #define HISTORY 15
 #endif
 
-class ValueStorage {
-public:
-    void saveValue(qint64 id, QPointF data) {
-        values[id] = data;
-    }
-
-    QPointF loadValue(qint64 id) {
-        if (values.contains(id)) {
-            return values[id];
-        } else {
-            // -1 -1 means disable drawing
-            return QPointF(-1,-1);
-        }
-    }
-
-private:
-    QMap<qint64, QPointF> values;
-};
-ValueStorage storage;
-
 class CursorStorage {
 public:
     void init(qint64 id){
@@ -275,7 +255,6 @@ PageStorage pages;
 
 int curEventButtons = 0;
 bool isMoved = 0;
-float fpressure = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
@@ -300,8 +279,6 @@ DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     drawing = true;
-    lastPoint = event->position();
-    firstPoint = event->position();
     mergeSelection();
     imageBackup = image;
     if(floatingSettings->isVisible()){
@@ -319,6 +296,8 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }
     curs.setCursor(-1, penSize[ev_pen]);
     curEventButtons = event->buttons();
+    geo.clear(-1);
+    geo.addValue(-1,event->position());
     isMoved = false;
 
 }
@@ -345,10 +324,11 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
         switch(penMode) {
             case DRAW:
                 updateCursorMouse(-1, event->position());
-                drawLineTo(event->position());
+                geo.addValue(-1, event->position());
+                drawLineToFunc(-1, 1.0);
                 break;
             case SELECTION:
-                selectionDraw(firstPoint, event->position());
+                selectionDraw(geo.first(-1), event->position());
                 break;
         }
     } else {
@@ -366,7 +346,8 @@ void DrawingWidget::addImage(QImage img){
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if(curEventButtons & Qt::LeftButton && !isMoved) {
-        drawLineTo(event->position()+QPointF(0,1));
+        geo.addValue(-1, event->position()+QPointF(0,1));
+        drawLineToFunc(-1, 1.0);
     }
     if (drawing) {
        drawing = false;
@@ -410,21 +391,11 @@ void DrawingWidget::clear() {
 }
 
 
-int rad = 0;
-int frad = 0;
-
-void DrawingWidget::drawLineTo(const QPointF &endPoint) {
-    drawLineToFunc(lastPoint, endPoint, 1.0);
-    lastPoint = endPoint;
-}
-static QPointF last_end = QPointF(0,0);
-static QPointF last_begin = QPointF(0,0);
 
 void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     image = imageBackup;
     update();
     painter.begin(&image);
-    lastPoint = endPoint;
     painter.setPen(Qt::NoPen);
     penColor.setAlpha(127);
     painter.setBrush(QBrush(penColor));
@@ -433,105 +404,6 @@ void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     painter.end();
 }
 
-
-void DrawingWidget::drawLineToFunc(QPointF startPoint, QPointF endPoint, qreal pressure) {
-    if(startPoint.x() < 0 || startPoint.y() < 0){
-        return;
-    }
-    if (fpressure > 0){
-        pressure = fpressure;
-    }
-    int fpenStyle =  penStyle;
-    if (penType == ERASER) {
-        fpenStyle = SPLINE;
-    }
-
-    switch(fpenStyle){
-        case SPLINE:
-            painter.begin(&image);
-            break;
-        case LINE:
-        case CIRCLE:
-        case RECTANGLE:
-        case TRIANGLE:
-            startPoint = firstPoint;
-            image = imageBackup;
-            painter.begin(&image);
-            break;
-    }
-    penColor.setAlpha(255);
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
-    switch(penType){
-        case PEN:
-            break;
-        case ERASER:
-            painter.setCompositionMode(QPainter::CompositionMode_Clear);
-            break;
-        case MARKER:
-            penColor.setAlpha(127);
-            break;
-    }
-
-    painter.setPen(QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-
-    switch(fpenStyle){
-        case SPLINE:
-            painter.drawLine(startPoint, endPoint);
-            break;
-        case LINE:
-            painter.drawLine(startPoint, endPoint);
-            break;
-        case CIRCLE:
-            rad = QLineF(startPoint, endPoint).length();
-            painter.drawEllipse(startPoint, rad, rad);
-            break;
-        case RECTANGLE:
-            painter.drawRect(QRectF(startPoint,endPoint));
-            break;
-        case TRIANGLE:
-            painter.drawLine(startPoint, endPoint);
-            painter.drawLine(startPoint, QPointF(startPoint.x(), endPoint.y()));
-            painter.drawLine(QPointF(startPoint.x(), endPoint.y()), endPoint);
-            break;
-    }
-    switch(fpenStyle){
-        case SPLINE:
-            rad = penSize[penType];
-            update(QRectF(
-                startPoint, endPoint
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            break;
-        case LINE:
-        case TRIANGLE:
-        case RECTANGLE:
-            rad = penSize[penType];
-            update(QRectF(
-                last_begin, last_end
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            update(QRectF(
-                startPoint, endPoint
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            break;
-        case CIRCLE:
-            rad = QLineF(startPoint, endPoint).length() + penSize[penType];
-            frad = QLineF(last_begin, last_end).length() + penSize[penType];
-            update(QRectF(
-                startPoint,startPoint
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            update(QRectF(
-                startPoint,startPoint
-            ).toRect().normalized().adjusted(-frad, -frad, +frad, +frad));
-            break;
-     }
-
-    last_begin = startPoint;
-    last_end = endPoint;
-
-    painter.end();
-
-}
 #ifdef LIBARCHIVE
 void DrawingWidget::saveAll(QString file){
     if (!file.isEmpty()) {
@@ -612,16 +484,15 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
-                    storage.saveValue(touchPoint.id(), pos);
+                    geo.addValue(touchPoint.id(), pos);
                 }
                 else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     curs.hide(touchPoint.id());
-                    storage.saveValue(touchPoint.id(), QPointF(-1,-1));
+                    geo.load(touchPoint.id()).clear();
                     continue;
                 }
-                QPointF oldPos = storage.loadValue(touchPoint.id());
-                drawLineToFunc(oldPos.toPoint(), pos.toPoint(), touchPoint.pressure());
-                storage.saveValue(touchPoint.id(), pos);
+                drawLineToFunc(touchPoint.id(), touchPoint.pressure());
+                geo.addValue(touchPoint.id(), pos);
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
                 curs.setCursor(touchPoint.id(), penSize[penType]);
             }
@@ -629,8 +500,8 @@ bool DrawingWidget::event(QEvent *ev) {
         }
         case QEvent::TabletPress: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            lastPoint = tabletEvent->position();
-            firstPoint = tabletEvent->position();
+            geo.clear(-1);
+            geo.addValue(-1, tabletEvent->position());
             imageBackup = image;
             tabletActive = true;
             break;
@@ -648,9 +519,8 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tabletEvent->buttons() & Qt::RightButton) {
                 penType = ERASER;
             }
-            QPointF pos = tabletEvent->position();
-            drawLineToFunc(lastPoint, pos.toPoint(), tabletEvent->pressure());
-            lastPoint = tabletEvent->position();
+            geo.addValue(-1, tabletEvent->position());
+            drawLineToFunc(-1, tabletEvent->pressure());
             penType = penTypeBak;
         }
 

@@ -44,8 +44,8 @@ static bool hasSelection = false;
 
 void DrawingWidget::createSelection() {
     hasSelection = true;
-    QPoint topLeft(qMin(firstPoint.x(), lastPoint.x()), qMin(firstPoint.y(), lastPoint.y()));
-    QPoint bottomRight(qMax(firstPoint.x(), lastPoint.x()), qMax(firstPoint.y(), lastPoint.y()));
+    QPoint topLeft(qMin(geo.first(-1).x(), geo.last(-1).x()), qMin(geo.first(-1).y(), geo.last(-1).y()));
+    QPoint bottomRight(qMax(geo.first(-1).x(), geo.last(-1).x()), qMax(geo.first(-1).y(), geo.last(-1).y()));
     QRect cropRect(topLeft, bottomRight);
 
     cropWidget->image = imageBackup.copy(cropRect);

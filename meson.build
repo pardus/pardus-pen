@@ -8,6 +8,7 @@ src = [
     'src/FloatingSettings.cpp',
     'src/WhiteBoard.cpp',
     'src/Button.cpp',
+    'src/Geometry.cpp',
     'src/SetupWidgets.cpp',
     'src/settings.c',
     'src/OverView.cpp',
