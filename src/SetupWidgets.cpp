@@ -693,6 +693,8 @@ static void setupPenType(){
     backgroundLayout->addWidget(A);
 
 
+static bool ffist = false;
+
 static void setupBackground(){
     int w = padding*2;
     int h = padding*2;
@@ -837,6 +839,11 @@ static void setupBackground(){
         if(mainWindow->isFullScreen()){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->showNormal();
+            if(!ffist){
+                QScreen *screen = QGuiApplication::primaryScreen();
+                mainWindow->resize(screen->size().width() * 0.9, screen->size().height() * 0.9);
+                ffist = true;
+            }
         } else {
             set_icon(":images/fullscreen-exit.svg", fullscreen);
             mainWindow->showFullScreen();
