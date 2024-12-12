@@ -16,6 +16,7 @@
 #define LINES 2
 #define ISOMETRIC 3
 #define MUSIC 4
+#define CUSTOM 31
 
 class WhiteBoard : public QWidget {
 public:
@@ -30,9 +31,9 @@ public:
     void drawIsometricPaper();
     QMainWindow *mainWindow;
     void drawMusicPaper();
+    QImage backgroundImage;
 private:
     QColor background;
-    QImage backgroundImage;
     QColor lineColor;
     int overlayType = 0;
     int type = 0;

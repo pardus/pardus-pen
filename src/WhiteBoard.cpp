@@ -23,6 +23,16 @@ int WhiteBoard::getOverlayType(){
 }
 
 void WhiteBoard::setOverlayType(int page){
+    if(page == CUSTOM) {
+        QString fileName = QFileDialog::getOpenFileName(this, "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
+        if (!fileName.isEmpty()) {
+            QImage image(fileName);
+            setImage(image);
+        } else {
+            backgroundImage.fill(QColor("transparent"));
+        }
+        return;
+    }
     set_int((char*)"page-overlay",page);
     overlayType = page;
     update();
@@ -71,6 +81,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     // Draw the square paper background
     switch(overlayType){
         case NONE:
+        case CUSTOM:
             break;
         case SQUARES:
             drawSquarePaper();

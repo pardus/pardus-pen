@@ -62,6 +62,7 @@ QPushButton* colorpicker;
 
 QPushButton* overlayIsometric;
 QPushButton* overlayMusic;
+QPushButton* overlayCustom;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -798,6 +799,12 @@ static void setupBackground(){
         backgroundStyleEvent();
     });
     overlayMusic->setStyleSheet(QString("background-color: none;"));
+    
+    overlayCustom = create_button(":images/overlay-custom.svg", [=](){
+        board->setOverlayType(CUSTOM);
+        backgroundStyleEvent();
+    });
+    overlayCustom->setStyleSheet(QString("background-color: none;"));
 
 
     gridLayout->addWidget(overlayNone, 0, 0, Qt::AlignCenter);
@@ -805,6 +812,7 @@ static void setupBackground(){
     gridLayout->addWidget(overlayLines, 1, 0, Qt::AlignCenter);
     gridLayout->addWidget(overlayIsometric, 1, 1, Qt::AlignCenter);
     gridLayout->addWidget(overlayMusic, 0, 2, Qt::AlignCenter);
+    gridLayout->addWidget(overlayCustom, 1, 2, Qt::AlignCenter);
 
     // set sizes
     pageLabel->setFixedSize(
@@ -897,6 +905,7 @@ static void setupClear(){
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
         drawing->clear();
+        board->backgroundImage.fill(QColor("transparent"));
         floatingSettings->hide();
     });
     clearButtonLayout->addWidget(noButton);
