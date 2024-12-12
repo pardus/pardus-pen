@@ -485,15 +485,14 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
-                    geo.addValue(touchPoint.id(), pos);
+                    geo.clear(touchPoint.id());
                 }
                 else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     curs.hide(touchPoint.id());
-                    geo.load(touchPoint.id()).clear();
                     continue;
                 }
-                drawLineToFunc(touchPoint.id(), touchPoint.pressure());
                 geo.addValue(touchPoint.id(), pos);
+                drawLineToFunc(touchPoint.id(), touchPoint.pressure());
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
                 curs.setCursor(touchPoint.id(), penSize[penType]);
             }
