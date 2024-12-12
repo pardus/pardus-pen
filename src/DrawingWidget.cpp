@@ -284,6 +284,8 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     if(floatingSettings->isVisible()){
         floatingSettings->hide();
     }
+    geo.clear(-1);
+    geo.addValue(-1,event->position());
     if(penMode != DRAW) {
         return;
     }
@@ -296,8 +298,6 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     }
     curs.setCursor(-1, penSize[ev_pen]);
     curEventButtons = event->buttons();
-    geo.clear(-1);
-    geo.addValue(-1,event->position());
     isMoved = false;
 
 }
@@ -353,6 +353,7 @@ void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
        drawing = false;
     }
     if(penMode == SELECTION) {
+        geo.addValue(-1, event->position());
         createSelection();
         update();
         return;

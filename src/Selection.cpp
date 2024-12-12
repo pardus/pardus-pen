@@ -8,6 +8,9 @@ MovableWidget::MovableWidget(QWidget *parent) : QWidget(parent) {
 extern float scale;
 #define nearEdge 10*scale
 
+#define startPoint geo.first(-1)
+#define endPoint geo.last(-1)
+
 void MovableWidget::mousePressEvent(QMouseEvent *event) {
     lastMousePosition = event->pos();
     int xx = width() - event->pos().x();
@@ -44,8 +47,9 @@ static bool hasSelection = false;
 
 void DrawingWidget::createSelection() {
     hasSelection = true;
-    QPoint topLeft(qMin(geo.first(-1).x(), geo.last(-1).x()), qMin(geo.first(-1).y(), geo.last(-1).y()));
-    QPoint bottomRight(qMax(geo.first(-1).x(), geo.last(-1).x()), qMax(geo.first(-1).y(), geo.last(-1).y()));
+    printf("%f %f %f %f\n", startPoint.x(), endPoint.x(), startPoint.y(), endPoint.y());
+    QPoint topLeft(qMin(startPoint.x(), endPoint.x()), qMin(startPoint.y(), endPoint.y()));
+    QPoint bottomRight(qMax(startPoint.x(), endPoint.x()), qMax(startPoint.y(), endPoint.y()));
     QRect cropRect(topLeft, bottomRight);
 
     cropWidget->image = imageBackup.copy(cropRect);
