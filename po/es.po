@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-12 23:28+0000\n"
+"POT-Creation-Date: 2024-12-12 23:42+0000\n"
 "PO-Revision-Date: 2024-10-26 15:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -78,20 +78,25 @@ msgstr "Estilo de lápiz"
 msgid "Do you want to clear screen?"
 msgstr "¿Desea borrar la pantalla?"
 
-#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1046
+#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1048
 msgid "No"
 msgstr "No"
 
-#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1049
+#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1051
 msgid "Yes"
 msgstr "Si"
 
-#: src/SetupWidgets.cpp:997
+#: src/SetupWidgets.cpp:997 src/SetupWidgets.cpp:1013
 #, fuzzy
 msgid "Pen Files (*.pen);;"
 msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
 
-#: src/SetupWidgets.cpp:1001
+#: src/SetupWidgets.cpp:999
+#, fuzzy
+msgid "PDF Files (*.pdf);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/SetupWidgets.cpp:1001 src/SetupWidgets.cpp:1014
 #, fuzzy
 msgid "All Files (*.*)"
 msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
@@ -100,18 +105,17 @@ msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
 msgid "Save File"
 msgstr "Guardar archivo"
 
-#: src/SetupWidgets.cpp:1013
+#: src/SetupWidgets.cpp:1015
 msgid "Open File"
 msgstr "Abrir archivo"
 
-#: src/SetupWidgets.cpp:1013
-msgid "Pen Files (*.pen);;All Files (*.*)"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/SetupWidgets.cpp:1033
+#: src/SetupWidgets.cpp:1035
 msgid "Do you want to quit Pardus pen?"
 msgstr "¿Quiere salir de Lápiz Pardus?"
 
 #: src/main.cpp:165 src/main.cpp:187
 msgid "Pardus Pen"
 msgstr "Lápiz Pardus"
+
+#~ msgid "Pen Files (*.pen);;All Files (*.*)"
+#~ msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"

@@ -996,7 +996,7 @@ static void setupSave(){
     QPushButton *save = create_button(":images/save.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
         #ifdef QPRINTER
-        filter += "PDF Files (*.pdf);;";
+        filter += _("PDF Files (*.pdf);;");
         #endif
         filter += _("All Files (*.*)");
         QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), filter);
@@ -1010,7 +1010,9 @@ static void setupSave(){
     floatingWidget->setWidget(save);
 
     QPushButton *open = create_button(":images/open.svg", [=](){
-        QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), _("Pen Files (*.pen);;All Files (*.*)"));
+        QString filter = _("Pen Files (*.pen);;");
+        filter += _("All Files (*.*)");
+        QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
         if(!filename.isEmpty()){
             pthread_t ptid;
             archive_target = filename;
