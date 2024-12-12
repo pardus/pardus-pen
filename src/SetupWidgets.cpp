@@ -55,6 +55,8 @@ QPushButton *lineLineLineButton;
 
 QPushButton *backgroundButton;
 
+QPushButton* fullscreen;
+
 QPushButton* transparentButton;
 QPushButton* blackButton;
 QPushButton* whiteButton;
@@ -821,6 +823,17 @@ static void setupBackground(){
         backgroundStyleEvent();
     });
     overlayTurkiye->setStyleSheet(QString("background-color: none;"));
+    
+    fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
+        if(mainWindow->isFullScreen()){
+            set_icon(":images/fullscreen.svg", fullscreen);
+            mainWindow->showNormal();
+        } else {
+            set_icon(":images/fullscreen-exit.svg", fullscreen);
+            mainWindow->showFullScreen();
+        }
+    });
+    fullscreen->setStyleSheet(QString("background-color: none;"));
 
 
     gridLayout->addWidget(overlayNone, 0, 0, Qt::AlignCenter);
@@ -830,6 +843,9 @@ static void setupBackground(){
     gridLayout->addWidget(overlayMusic, 0, 2, Qt::AlignCenter);
     gridLayout->addWidget(overlayCustom, 1, 2, Qt::AlignCenter);
     gridLayout->addWidget(overlayTurkiye, 2, 0, Qt::AlignCenter);
+    
+    
+    gridLayout->addWidget(fullscreen, 2, 1, Qt::AlignCenter);
 
     // set sizes
     pageLabel->setFixedSize(

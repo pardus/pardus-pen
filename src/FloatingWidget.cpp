@@ -6,6 +6,8 @@ int new_y;
 
 extern float scale;
 
+extern QMainWindow* tool2;
+
 #define padding 8*scale
 
 
@@ -82,12 +84,19 @@ void FloatingWidget::moveAction(){
             new_x = 0;
         }if (new_y < 0) {
             new_y = 0;
-        }if (new_x > mainWindow->geometry().width() - cur_width) {
-            new_x = mainWindow->geometry().width() - cur_width;
-        }if (new_y > mainWindow->geometry().height() - cur_height) {
-            new_y = mainWindow->geometry().height() - cur_height;
         }
-        if(!getenv("WAYLAND_DISPLAY")){
+        int max_width = mainWindow->geometry().width();
+        int max_height = mainWindow->geometry().height();
+        if(tool2 != nullptr){
+            max_width = QGuiApplication::primaryScreen()->size().width();
+            max_height = QGuiApplication::primaryScreen()->size().height();
+        }
+        if (new_x >  max_width- cur_width) {
+            new_x = max_width - cur_width;
+        }if (new_y > max_height - cur_height) {
+            new_y = max_height - cur_height;
+        }
+        if(tool2 != nullptr){
             fparent->move(new_x, new_y);
         } else {
             move(new_x, new_y);
@@ -113,7 +122,11 @@ void FloatingWidget::moveAction(){
                     new_yy = new_y - padding - floatingSettings->cur_height;
                 }
             }
-            floatingSettings->move(new_xx, new_yy + padding);
+            if(tool2 != nullptr){
+                tool2->move(new_xx, new_yy + padding);
+            } else {
+                floatingSettings->move(new_xx, new_yy + padding);
+            }
         }
 }
 

@@ -30,6 +30,7 @@ FloatingSettings *floatingSettings;
 WhiteBoard *board;
 QMainWindow* mainWindow;
 QMainWindow* tool;
+QMainWindow* tool2;
 
 #ifdef screenshot
 #include "ScreenShot.h"
@@ -77,7 +78,9 @@ protected:
         // tool is not set under wayland
         if(tool != nullptr){
             tool->resize(floatingWidget->geometry().width(), floatingWidget->geometry().height());
-            floatingWidget->moveAction();
+        }
+        if(tool2 != nullptr){
+            tool2->resize(floatingSettings->geometry().width(), floatingSettings->geometry().height());
         }
         floatingWidget->moveAction();
         // Call the base class implementation
@@ -93,6 +96,15 @@ protected:
                     tool->hide();
                 } else {
                     tool->show();
+                }
+            }
+        }
+        if(tool2 != nullptr){
+            if (event->type() == QEvent::WindowStateChange) {
+                if (isMinimized()) {
+                    tool2->hide();
+                } else {
+                    tool2->show();
                 }
             }
         }
@@ -174,19 +186,21 @@ int main(int argc, char *argv[]) {
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
 
-    floatingSettings = new FloatingSettings(mainWindow);
-    floatingSettings->hide();
 
     // detect x11
     if(!getenv("WAYLAND_DISPLAY")){
         tool = new QMainWindow();
+        tool2 = new QMainWindow();
+        floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
     } else {
         tool = nullptr;
+        floatingSettings = new FloatingSettings(mainWindow);
         floatingWidget = new FloatingWidget(mainWindow);
     }
     floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
+    floatingSettings->hide();
 
     setupWidgets();
     if (tool != nullptr) {
@@ -203,9 +217,23 @@ int main(int argc, char *argv[]) {
 
         tool->show();
     }
+     if (tool2 != nullptr) {
+        tool2->setWindowFlags(Qt::WindowStaysOnTopHint
+                                  | Qt::Tool
+                                  | Qt::WindowSystemMenuHint
+                                  | Qt::FramelessWindowHint);
+        tool2->setAttribute(Qt::WA_TranslucentBackground, true);
+        tool2->setAttribute(Qt::WA_NoSystemBackground, true);
+        tool2->setStyleSheet(
+            "background: none;"
+            "font-size: "+QString::number(18*scale)+"px;"
+        );
 
-    mainWindow->setWindowFlags(Qt::WindowSystemMenuHint
-                          | Qt::FramelessWindowHint);
+        tool2->show();
+    }
+
+    //mainWindow->setWindowFlags(Qt::WindowSystemMenuHint
+    //                      | Qt::FramelessWindowHint);
 
     mainWindow->setAttribute(Qt::WA_TranslucentBackground, true);
     mainWindow->setAttribute(Qt::WA_NoSystemBackground, true);

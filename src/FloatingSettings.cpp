@@ -1,11 +1,13 @@
 #include "FloatingSettings.h"
-extern int screenWidth;
-extern int screenHeight;
+
+#include <QMainWindow>
 
 extern "C" {
 #include "settings.h"
 }
 
+
+extern QMainWindow* tool2;
 
 #include <QMap>
 
@@ -59,6 +61,10 @@ void FloatingSettings::reload(){
     cur_width = settingsPages.getPage(current_page)->size().width();
     cur_height = settingsPages.getPage(current_page)->size().height();
     setFixedSize(cur_width, cur_height);
+    if(tool2 != nullptr) {
+        tool2->setFixedSize(cur_width, cur_height);
+    }
+
 }
 
 void FloatingSettings::setPage(int num){
