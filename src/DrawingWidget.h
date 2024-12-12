@@ -20,6 +20,10 @@
 #define PEN 1
 #define MARKER 2
 
+#define NORMAL 0
+#define DOTLINE 1
+#define LINELINE 2
+
 #include "Selection.h"
 
 #define LINE 0
@@ -117,6 +121,7 @@ public:
 #endif
     int penType;
     int penStyle;
+    int lineStyle;
     int penMode;
     void syncPageType(int type);
     int getPageNum();

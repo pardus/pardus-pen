@@ -11,6 +11,9 @@
         <file>images/screen.svg</file>
         <file>images/clear.svg</file>
         <file>images/crop.svg</file>
+        <file>images/line-normal.svg</file>
+        <file>images/line-lineline.svg</file>
+        <file>images/line-dotline.svg</file>
         <file>images/paper-transparent.svg</file>
         <file>images/paper-black.svg</file>
         <file>images/paper-white.svg</file>

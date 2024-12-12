@@ -49,6 +49,10 @@ QPushButton *circleButton;
 QPushButton *triangleButton;
 QPushButton *rectButton;
 
+QPushButton *lineNormalButton;
+QPushButton *lineDotLineButton;
+QPushButton *lineLineLineButton;
+
 QPushButton *backgroundButton;
 
 QPushButton* transparentButton;
@@ -101,6 +105,21 @@ static void penStyleEvent(){
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
+    
+    lineDotLineButton->setStyleSheet(QString("background-color: none;"));
+    lineNormalButton->setStyleSheet(QString("background-color: none;"));
+    lineLineLineButton->setStyleSheet(QString("background-color: none;"));
+    switch(drawing->lineStyle){
+        case NORMAL:
+            lineNormalButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case LINELINE:
+            lineLineLineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case DOTLINE:
+            lineDotLineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+    }
     switch(drawing->penStyle){
         case LINE:
             lineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
@@ -621,9 +640,27 @@ static void setupPenType(){
     });
     gridLayout->addWidget(splineButton, 0, 2);
 
+    lineNormalButton = create_button(":images/line-normal.svg", [=](){
+        drawing->lineStyle = NORMAL;
+        penStyleEvent();
+    });
+    gridLayout->addWidget(lineNormalButton, 2, 0);
+
+    lineDotLineButton = create_button(":images/line-dotline.svg", [=](){
+        drawing->lineStyle = DOTLINE;
+        penStyleEvent();
+    });
+    gridLayout->addWidget(lineDotLineButton, 2, 1);
+    
+    lineLineLineButton = create_button(":images/line-lineline.svg", [=](){
+        drawing->lineStyle = LINELINE;
+        penStyleEvent();
+    });
+    gridLayout->addWidget(lineLineLineButton, 2, 2);
+
     typeDialog->setFixedSize(
         (butsize+padding)*3 + padding,
-        (butsize+padding)*2 + padding
+        (butsize+padding)*3 + padding
     );
 
     floatingWidget->setWidget(typeButton);

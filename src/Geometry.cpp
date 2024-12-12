@@ -47,7 +47,17 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     }
 
     QPen pen = QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    //pen.setStyle(Qt::DotLine);
+    switch(lineStyle){
+        case NORMAL:
+            pen.setStyle(Qt::SolidLine);
+            break;
+        case DOTLINE:
+            pen.setStyle(Qt::DotLine);
+            break;
+        case LINELINE:
+            pen.setStyle(Qt::DashLine);
+            break;
+    }
     painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
