@@ -66,6 +66,7 @@ QPushButton* overlayIsometric;
 QPushButton* overlayMusic;
 QPushButton* overlayCustom;
 QPushButton* overlayTurkiye;
+QPushButton* overlayWorld;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -263,6 +264,7 @@ static void backgroundStyleEvent(){
     overlayNone->setStyleSheet(QString("background-color: none;"));
     overlayCustom->setStyleSheet(QString("background-color: none;"));
     overlayTurkiye->setStyleSheet(QString("background-color: none;"));
+    overlayWorld->setStyleSheet(QString("background-color: none;"));
     drawing->cropWidget->setStyleSheet("border: 2px solid "+drawing->penColor.name()+";");
     switch(board->getType()){
         case BLACK:
@@ -300,6 +302,9 @@ static void backgroundStyleEvent(){
             break;
         case TURKIYE:
             overlayTurkiye->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case WORLD:
+            overlayWorld->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
             overlayNone->setStyleSheet("background-color:"+drawing->penColor.name()+";");
@@ -822,7 +827,11 @@ static void setupBackground(){
         board->setOverlayType(TURKIYE);
         backgroundStyleEvent();
     });
-    overlayTurkiye->setStyleSheet(QString("background-color: none;"));
+    overlayWorld = create_button(":images/world-map.svg", [=](){
+        board->setOverlayType(WORLD);
+        backgroundStyleEvent();
+    });
+    overlayWorld->setStyleSheet(QString("background-color: none;"));
     
     fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
         if(mainWindow->isFullScreen()){
@@ -843,6 +852,7 @@ static void setupBackground(){
     gridLayout->addWidget(overlayMusic, 0, 2, Qt::AlignCenter);
     gridLayout->addWidget(overlayCustom, 1, 2, Qt::AlignCenter);
     gridLayout->addWidget(overlayTurkiye, 2, 0, Qt::AlignCenter);
+    gridLayout->addWidget(overlayWorld, 2, 2, Qt::AlignCenter);
     
     
     gridLayout->addWidget(fullscreen, 2, 1, Qt::AlignCenter);

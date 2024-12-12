@@ -31,13 +31,14 @@ void WhiteBoard::setOverlayType(int page){
         } else {
             backgroundImage.fill(QColor("transparent"));
         }
-        return;
     } else if (page == TURKIYE){
         backgroundImage = QImage(":images/turkiye-map.svg");
+    } else if (page == WORLD){
+        backgroundImage = QImage(":images/world-map.svg");
     } else {
         backgroundImage.fill(QColor("transparent"));
+        set_int((char*)"page-overlay",page);
     }
-    set_int((char*)"page-overlay",page);
     overlayType = page;
     update();
 }
@@ -83,6 +84,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case NONE:
         case CUSTOM:
         case TURKIYE:
+        case WORLD:
             // %10 padding
             painter.drawImage(QPoint(w*0.1, h*0.1), backgroundImage.scaled(w*0.8, h*0.8));
             break;
