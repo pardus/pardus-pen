@@ -46,7 +46,9 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             break;
     }
 
-    painter.setPen(QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    QPen pen = QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    //pen.setStyle(Qt::DotLine);
+    painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
 
@@ -54,17 +56,18 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     QMap<qint64, QPointF>::const_iterator it = values.constBegin();
     QMap<qint64, QPointF>::const_iterator nextIt = it;
     ++nextIt;
-    QVector<QLineF> lines;
+    QPainterPath path;
     
 
     switch(fpenStyle){
         case SPLINE:
+            path.moveTo(it.value());
             while (nextIt != values.constEnd()) {
-                lines.append(QLineF(it.value(), nextIt.value()));
+                path.lineTo(nextIt.value());
                 ++it;
                 ++nextIt;
             }
-            painter.drawLines(lines.data(), lines.size());
+            painter.drawPath(path);
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
@@ -86,7 +89,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case SPLINE:
             rad = penSize[penType];
             update(QRectF(
-                startPoint, endPoint
+                last_end, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case LINE:
