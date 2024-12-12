@@ -7,6 +7,11 @@ extern "C" {
 }
 
 
+#include <stdlib.h>
+#include <locale.h>
+#include <libintl.h>
+
+#define _(String) gettext(String)
 
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");
@@ -24,7 +29,7 @@ int WhiteBoard::getOverlayType(){
 
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
-        QString fileName = QFileDialog::getOpenFileName(this, "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
+        QString fileName = QFileDialog::getOpenFileName(this, _("Open Image File"), "", QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)"));
         if (!fileName.isEmpty()) {
             QImage image(fileName);
             setImage(image);

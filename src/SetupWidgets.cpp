@@ -945,7 +945,10 @@ static void setupClear(){
     char* clearText = _("Do you want to clear screen?");
     clearLabel->setText(clearText);
     clearLabel->setAlignment(Qt::AlignHCenter);
-    clearDialog->setStyleSheet(QString("background-color: none;"));
+    clearDialog->setStyleSheet(
+            "background: none;"
+            "font-size: "+QString::number(18*scale)+"px;"
+    );
 
     clearLayout->addWidget(clearLabel);
     clearLayout->addWidget(clearButtonDialog);
@@ -967,7 +970,7 @@ static void setupClear(){
     clear->setStyleSheet(QString("background-color: none;"));
     clearDialog->setFixedSize(
         butsize * 10,
-        butsize * 2
+        butsize * 2 + padding * 3
     );
     floatingSettings->addPage(clearDialog);
     floatingWidget->setWidget(clear);
@@ -1032,7 +1035,10 @@ static void setupExit(){
     exitLabel->setAlignment(Qt::AlignHCenter);
     exitLabel->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
 
-    exitDialog->setStyleSheet(QString("background-color: none;"));
+    exitDialog->setStyleSheet(
+            "background: none;"
+            "font-size: "+QString::number(18*scale)+"px;"
+    );
 
     exitLayout->addWidget(exitLabel);
     exitLayout->addWidget(exitButtonDialog);
@@ -1065,7 +1071,7 @@ static void setupExit(){
     close->setStyleSheet(QString("background-color: none;"));
     exitDialog->setFixedSize(
         butsize * 10,
-        butsize * 2
+        butsize * 2 + padding * 3
     );
     floatingSettings->addPage(exitDialog);
     floatingWidget->setWidget(close);

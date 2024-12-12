@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 06:37+0000\n"
+"POT-Creation-Date: 2024-12-12 23:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,10 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: src/main.cpp:113 src/main.cpp:131
-msgid "Pardus Pen"
-msgstr ""
 
 #: src/ScreenShot.cpp:42
 msgid "Info"
@@ -33,66 +29,86 @@ msgstr ""
 msgid "Failed To save:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:132
+#: src/WhiteBoard.cpp:32
+msgid "Open Image File"
+msgstr ""
+
+#: src/WhiteBoard.cpp:32
+msgid "Images"
+msgstr ""
+
+#: src/SetupWidgets.cpp:215
 msgid "Pen"
 msgstr ""
 
-#: src/SetupWidgets.cpp:136
+#: src/SetupWidgets.cpp:219
 msgid "Marker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:140
+#: src/SetupWidgets.cpp:223
 msgid "Eraser"
 msgstr ""
 
-#: src/SetupWidgets.cpp:144
+#: src/SetupWidgets.cpp:228
 msgid "Size:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:145
+#: src/SetupWidgets.cpp:229
 msgid "Color:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:337
+#: src/SetupWidgets.cpp:399
 msgid " Color:"
 msgstr ""
 
-#: src/SetupWidgets.cpp:341
+#: src/SetupWidgets.cpp:403
 msgid "Color Picker"
 msgstr ""
 
-#: src/SetupWidgets.cpp:386
+#: src/SetupWidgets.cpp:448
 msgid "Select Color"
 msgstr ""
 
-#: src/SetupWidgets.cpp:492
+#: src/SetupWidgets.cpp:581
 msgid "Pen Style"
 msgstr ""
 
-#: src/SetupWidgets.cpp:786
+#: src/SetupWidgets.cpp:945
 msgid "Do you want to clear screen?"
 msgstr ""
 
-#: src/SetupWidgets.cpp:794 src/SetupWidgets.cpp:876
+#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1046
 msgid "No"
 msgstr ""
 
-#: src/SetupWidgets.cpp:797 src/SetupWidgets.cpp:879
+#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1049
 msgid "Yes"
 msgstr ""
 
-#: src/SetupWidgets.cpp:835
+#: src/SetupWidgets.cpp:997
+msgid "Pen Files (*.pen);;"
+msgstr ""
+
+#: src/SetupWidgets.cpp:1001
+msgid "All Files (*.*)"
+msgstr ""
+
+#: src/SetupWidgets.cpp:1002
 msgid "Save File"
 msgstr ""
 
-#: src/SetupWidgets.cpp:835 src/SetupWidgets.cpp:846
-msgid "Pen Files (*.pen);;All Files (*.*)"
-msgstr ""
-
-#: src/SetupWidgets.cpp:846
+#: src/SetupWidgets.cpp:1013
 msgid "Open File"
 msgstr ""
 
-#: src/SetupWidgets.cpp:866
+#: src/SetupWidgets.cpp:1013
+msgid "Pen Files (*.pen);;All Files (*.*)"
+msgstr ""
+
+#: src/SetupWidgets.cpp:1033
 msgid "Do you want to quit Pardus pen?"
+msgstr ""
+
+#: src/main.cpp:165 src/main.cpp:187
+msgid "Pardus Pen"
 msgstr ""

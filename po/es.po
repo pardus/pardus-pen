@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-25 06:37+0000\n"
+"POT-Creation-Date: 2024-12-12 23:28+0000\n"
 "PO-Revision-Date: 2024-10-26 15:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,10 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
-
-#: src/main.cpp:113 src/main.cpp:131
-msgid "Pardus Pen"
-msgstr "Lápiz Pardus"
 
 #: src/ScreenShot.cpp:42
 msgid "Info"
@@ -33,66 +29,89 @@ msgstr "Captura de pantalla guardada:"
 msgid "Failed To save:"
 msgstr "Error al guardar:"
 
-#: src/SetupWidgets.cpp:132
+#: src/WhiteBoard.cpp:32
+#, fuzzy
+msgid "Open Image File"
+msgstr "Abrir archivo"
+
+#: src/WhiteBoard.cpp:32
+msgid "Images"
+msgstr ""
+
+#: src/SetupWidgets.cpp:215
 msgid "Pen"
 msgstr "Lápiz"
 
-#: src/SetupWidgets.cpp:136
+#: src/SetupWidgets.cpp:219
 msgid "Marker"
 msgstr "Marcador"
 
-#: src/SetupWidgets.cpp:140
+#: src/SetupWidgets.cpp:223
 msgid "Eraser"
 msgstr "Borrador"
 
-#: src/SetupWidgets.cpp:144
+#: src/SetupWidgets.cpp:228
 msgid "Size:"
 msgstr "Tamaño:"
 
-#: src/SetupWidgets.cpp:145
+#: src/SetupWidgets.cpp:229
 msgid "Color:"
 msgstr "Color:"
 
-#: src/SetupWidgets.cpp:337
+#: src/SetupWidgets.cpp:399
 msgid " Color:"
 msgstr " Color:"
 
-#: src/SetupWidgets.cpp:341
+#: src/SetupWidgets.cpp:403
 msgid "Color Picker"
 msgstr "Selector de color"
 
-#: src/SetupWidgets.cpp:386
+#: src/SetupWidgets.cpp:448
 msgid "Select Color"
 msgstr "Seleccione el color"
 
-#: src/SetupWidgets.cpp:492
+#: src/SetupWidgets.cpp:581
 msgid "Pen Style"
 msgstr "Estilo de lápiz"
 
-#: src/SetupWidgets.cpp:786
+#: src/SetupWidgets.cpp:945
 msgid "Do you want to clear screen?"
 msgstr "¿Desea borrar la pantalla?"
 
-#: src/SetupWidgets.cpp:794 src/SetupWidgets.cpp:876
+#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1046
 msgid "No"
 msgstr "No"
 
-#: src/SetupWidgets.cpp:797 src/SetupWidgets.cpp:879
+#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1049
 msgid "Yes"
 msgstr "Si"
 
-#: src/SetupWidgets.cpp:835
+#: src/SetupWidgets.cpp:997
+#, fuzzy
+msgid "Pen Files (*.pen);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/SetupWidgets.cpp:1001
+#, fuzzy
+msgid "All Files (*.*)"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/SetupWidgets.cpp:1002
 msgid "Save File"
 msgstr "Guardar archivo"
 
-#: src/SetupWidgets.cpp:835 src/SetupWidgets.cpp:846
-msgid "Pen Files (*.pen);;All Files (*.*)"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/SetupWidgets.cpp:846
+#: src/SetupWidgets.cpp:1013
 msgid "Open File"
 msgstr "Abrir archivo"
 
-#: src/SetupWidgets.cpp:866
+#: src/SetupWidgets.cpp:1013
+msgid "Pen Files (*.pen);;All Files (*.*)"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/SetupWidgets.cpp:1033
 msgid "Do you want to quit Pardus pen?"
 msgstr "¿Quiere salir de Lápiz Pardus?"
+
+#: src/main.cpp:165 src/main.cpp:187
+msgid "Pardus Pen"
+msgstr "Lápiz Pardus"
