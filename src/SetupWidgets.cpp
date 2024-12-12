@@ -63,6 +63,7 @@ QPushButton* colorpicker;
 QPushButton* overlayIsometric;
 QPushButton* overlayMusic;
 QPushButton* overlayCustom;
+QPushButton* overlayTurkiye;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -252,11 +253,14 @@ static void backgroundStyleEvent(){
     transparentButton->setStyleSheet(QString("background-color: none;"));
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
+    
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
     overlayMusic->setStyleSheet(QString("background-color: none;"));
     overlayLines->setStyleSheet(QString("background-color: none;"));
     overlaySquares->setStyleSheet(QString("background-color: none;"));
     overlayNone->setStyleSheet(QString("background-color: none;"));
+    overlayCustom->setStyleSheet(QString("background-color: none;"));
+    overlayTurkiye->setStyleSheet(QString("background-color: none;"));
     drawing->cropWidget->setStyleSheet("border: 2px solid "+drawing->penColor.name()+";");
     switch(board->getType()){
         case BLACK:
@@ -288,6 +292,12 @@ static void backgroundStyleEvent(){
             break;
         case SQUARES:
             overlaySquares->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+       case CUSTOM:
+            overlayCustom->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case TURKIYE:
+            overlayTurkiye->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
             overlayNone->setStyleSheet("background-color:"+drawing->penColor.name()+";");
@@ -806,6 +816,12 @@ static void setupBackground(){
     });
     overlayCustom->setStyleSheet(QString("background-color: none;"));
 
+    overlayTurkiye = create_button(":images/turkiye-map.svg", [=](){
+        board->setOverlayType(TURKIYE);
+        backgroundStyleEvent();
+    });
+    overlayTurkiye->setStyleSheet(QString("background-color: none;"));
+
 
     gridLayout->addWidget(overlayNone, 0, 0, Qt::AlignCenter);
     gridLayout->addWidget(overlaySquares, 0, 1, Qt::AlignCenter);
@@ -813,6 +829,7 @@ static void setupBackground(){
     gridLayout->addWidget(overlayIsometric, 1, 1, Qt::AlignCenter);
     gridLayout->addWidget(overlayMusic, 0, 2, Qt::AlignCenter);
     gridLayout->addWidget(overlayCustom, 1, 2, Qt::AlignCenter);
+    gridLayout->addWidget(overlayTurkiye, 2, 0, Qt::AlignCenter);
 
     // set sizes
     pageLabel->setFixedSize(
@@ -823,7 +840,7 @@ static void setupBackground(){
 
     backgroundDialog->setFixedSize(w,h);
     pageDialog->setFixedSize(w,h);
-    overlayDialog->setFixedSize(w,h*2);
+    overlayDialog->setFixedSize(w,h*3);
     
     backgroundWidget->setFixedSize(
         w + padding*2,
@@ -905,7 +922,6 @@ static void setupClear(){
     });
     QPushButton * yesButton = create_button_text(_("Yes"), [=](){
         drawing->clear();
-        board->backgroundImage.fill(QColor("transparent"));
         floatingSettings->hide();
     });
     clearButtonLayout->addWidget(noButton);

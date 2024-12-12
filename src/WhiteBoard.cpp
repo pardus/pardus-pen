@@ -32,6 +32,10 @@ void WhiteBoard::setOverlayType(int page){
             backgroundImage.fill(QColor("transparent"));
         }
         return;
+    } else if (page == TURKIYE){
+        backgroundImage = QImage(":images/turkiye-map.svg");
+    } else {
+        backgroundImage.fill(QColor("transparent"));
     }
     set_int((char*)"page-overlay",page);
     overlayType = page;
@@ -68,20 +72,19 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
     painter.fillRect(rect(), background);
 
-    if (backgroundImage.width() > 0 && backgroundImage.height() > 0){
-        int h1 = (mainWindow->geometry().height() - backgroundImage.height() ) / 2;
-        int w1 = (mainWindow->geometry().width() - backgroundImage.width() ) / 2;
-        painter.drawImage(QPoint(w1, h1), backgroundImage);
-    }
-
     painter.setPen(
         QPen(lineColor, 1, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
     );
 
+    int w = mainWindow->geometry().width();
+    int h = mainWindow->geometry().height();
     // Draw the square paper background
     switch(overlayType){
         case NONE:
         case CUSTOM:
+        case TURKIYE:
+            // %10 padding
+            painter.drawImage(QPoint(w*0.1, h*0.1), backgroundImage.scaled(w*0.8, h*0.8));
             break;
         case SQUARES:
             drawSquarePaper();
