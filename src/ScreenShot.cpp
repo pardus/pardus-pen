@@ -6,6 +6,10 @@
 #include <iostream>
 
 #include "ScreenShot.h"
+#include "DrawingWidget.h"
+
+extern DrawingWidget *drawing;
+
 
 #define _(String) gettext(String)
 
@@ -18,21 +22,26 @@ void takeScreenshot(){
     QDateTime time = QDateTime::currentDateTime();
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
-    // detect X11
-    if (!getenv("WAYLAND_DISPLAY")){
-        QScreen *screen = QGuiApplication::primaryScreen();
-        QPixmap pixmap = screen->grabWindow(0);
-        QFile file(imgname);
-        file.open(QIODevice::WriteOnly);
-        pixmap.save(&file, "PNG");
+    if (drawing->penMode == SELECTION) {
+        drawing->cropWidget->image.save(imgname);
         status = 0;
-    } else {
-        std::string spectacle(which((char*)"spectacle"));
-        std::string grim(which((char*)"grim"));
-        if(strlen(spectacle.c_str()) != 0){
-            status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
-        } else if(strlen(grim.c_str()) != 0){
-            status = system((grim+" -t png "+imgname.toStdString()).c_str());
+    } else if(drawing->penMode == DRAW) {
+        // detect X11
+        if (!getenv("WAYLAND_DISPLAY")){
+            QScreen *screen = QGuiApplication::primaryScreen();
+            QPixmap pixmap = screen->grabWindow(0);
+            QFile file(imgname);
+            file.open(QIODevice::WriteOnly);
+            pixmap.save(&file, "PNG");
+            status = 0;
+        } else {
+            std::string spectacle(which((char*)"spectacle"));
+            std::string grim(which((char*)"grim"));
+            if(strlen(spectacle.c_str()) != 0){
+                status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+            } else if(strlen(grim.c_str()) != 0){
+                status = system((grim+" -t png "+imgname.toStdString()).c_str());
+            }
         }
     }
     // show message
