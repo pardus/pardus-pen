@@ -58,6 +58,9 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             pen.setStyle(Qt::DashLine);
             break;
     }
+    if(penType == ERASER) {
+        pen.setStyle(Qt::SolidLine);
+    }
     painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
