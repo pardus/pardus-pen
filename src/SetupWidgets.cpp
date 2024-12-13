@@ -100,7 +100,7 @@ extern float scale;
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 
-static void penStyleEvent(){
+void penStyleEvent(){
     penButton->setStyleSheet(QString("background-color: none;"));
     selectButton->setStyleSheet(QString("background-color: none;"));
     markerButton->setStyleSheet(QString("background-color: none;"));
@@ -110,7 +110,7 @@ static void penStyleEvent(){
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
-    
+
     lineDotLineButton->setStyleSheet(QString("background-color: none;"));
     lineNormalButton->setStyleSheet(QString("background-color: none;"));
     lineLineLineButton->setStyleSheet(QString("background-color: none;"));
@@ -166,11 +166,12 @@ static void penStyleEvent(){
     ov->penType = drawing->penType;
     ov->color = drawing->penColor;
     ov->updateImage();
+
 }
 
 
 static int last_pen_type = 0;
-static void penSizeEvent(){
+void penSizeEvent(){
     int value = drawing->penSize[drawing->penType];
     if(drawing->penType != last_pen_type){
         last_pen_type = drawing->penType;
@@ -452,6 +453,7 @@ static void setupPenSize(){
         drawing->penColor = newCol;
         set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
         penStyleEvent();
+        penSizeEvent();
         backgroundStyleEvent();
     });
     colorpicker->setStyleSheet(QString("background: none;"));
@@ -474,6 +476,7 @@ static void setupPenSize(){
             drawing->penColor = colors[i];
             set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
             penStyleEvent();
+            penSizeEvent();
             backgroundStyleEvent();
         });
         gridLayout->addWidget(button, (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
@@ -509,7 +512,6 @@ static void setupPenSize(){
     floatingSettings->addPage(penSettings);
     floatingWidget->setWidget(penSettingsButton);
 
-    penSizeEvent();
 
     floatingSettings->reload();
 }
@@ -530,8 +532,8 @@ static void setupPenType(){
         drawing->penStyle = SPLINE;
         thicknessSlider->setRange(1,50*scale);
         thicknessSlider->setValue(drawing->penSize[PEN]);
-        penSizeEvent();
         penStyleEvent();
+        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
@@ -539,6 +541,7 @@ static void setupPenType(){
     selectButton = create_button(":images/crop.svg", [=](){
         drawing->penMode = SELECTION;
         penStyleEvent();
+        penSizeEvent();
     });
     floatingWidget->setWidget(selectButton);
 
@@ -554,8 +557,8 @@ static void setupPenType(){
         drawing->penStyle = SPLINE;
         thicknessSlider->setRange(1,50*scale);
         thicknessSlider->setValue(drawing->penSize[MARKER]);
-        penSizeEvent();
         penStyleEvent();
+        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(markerButton);
@@ -570,9 +573,9 @@ static void setupPenType(){
         sliderLock = true;
         drawing->penType = ERASER;
         penStyleEvent();
+        penSizeEvent();
         thicknessSlider->setRange(10*scale,200*scale);
         thicknessSlider->setValue(drawing->penSize[ERASER]);
-        penSizeEvent();
         sliderLock = false;
     });
     floatingWidget->setWidget(eraserButton);
@@ -587,6 +590,7 @@ static void setupPenType(){
             drawing->penType = PEN;
         }
         penStyleEvent();
+        penSizeEvent();
     });
     typeButton->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(typeDialog);
@@ -604,6 +608,7 @@ static void setupPenType(){
         }
         drawing->penStyle = LINE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(lineButton, 0, 0);
 
@@ -614,6 +619,7 @@ static void setupPenType(){
         }
         drawing->penStyle = CIRCLE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(circleButton, 0, 1);
 
@@ -624,6 +630,7 @@ static void setupPenType(){
         }
         drawing->penStyle = TRIANGLE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(triangleButton, 1, 1);
 
@@ -634,6 +641,7 @@ static void setupPenType(){
         }
         drawing->penStyle = RECTANGLE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(rectButton, 1, 0);
 
@@ -644,24 +652,28 @@ static void setupPenType(){
         }
         drawing->penStyle = SPLINE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(splineButton, 0, 2);
 
     lineNormalButton = create_button(":images/line-normal.svg", [=](){
         drawing->lineStyle = NORMAL;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(lineNormalButton, 2, 0);
 
     lineDotLineButton = create_button(":images/line-dotline.svg", [=](){
         drawing->lineStyle = DOTLINE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(lineDotLineButton, 2, 1);
 
     lineLineLineButton = create_button(":images/line-lineline.svg", [=](){
         drawing->lineStyle = LINELINE;
         penStyleEvent();
+        penSizeEvent();
     });
     gridLayout->addWidget(lineLineLineButton, 2, 2);
 
