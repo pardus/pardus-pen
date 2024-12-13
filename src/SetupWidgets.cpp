@@ -535,7 +535,7 @@ static void setupPenType(){
         sliderLock = false;
     });
     floatingWidget->setWidget(penButton);
-    
+
     selectButton = create_button(":images/crop.svg", [=](){
         drawing->penMode = SELECTION;
         penStyleEvent();
@@ -583,6 +583,10 @@ static void setupPenType(){
     typeButton = create_button(":images/spline.svg", [=](){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(4);
+        if(drawing->penType == ERASER){
+            drawing->penType = PEN;
+        }
+        penStyleEvent();
     });
     typeButton->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(typeDialog);
@@ -598,9 +602,6 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        if(drawing->penType == ERASER){
-            drawing->penType = PEN;
-        }
         drawing->penStyle = LINE;
         penStyleEvent();
     });
@@ -610,9 +611,6 @@ static void setupPenType(){
         if(drawing->penStyle  == CIRCLE){
             floatingSettings->setHide();
             return;
-        }
-        if(drawing->penType == ERASER){
-            drawing->penType = PEN;
         }
         drawing->penStyle = CIRCLE;
         penStyleEvent();
@@ -624,9 +622,6 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        if(drawing->penType == ERASER){
-            drawing->penType = PEN;
-        }
         drawing->penStyle = TRIANGLE;
         penStyleEvent();
     });
@@ -637,9 +632,6 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        if(drawing->penType == ERASER){
-            drawing->penType = PEN;
-        }
         drawing->penStyle = RECTANGLE;
         penStyleEvent();
     });
@@ -649,9 +641,6 @@ static void setupPenType(){
         if(drawing->penStyle == SPLINE){
             floatingSettings->setHide();
             return;
-        }
-        if(drawing->penType == ERASER){
-            drawing->penType = PEN;
         }
         drawing->penStyle = SPLINE;
         penStyleEvent();
@@ -669,7 +658,7 @@ static void setupPenType(){
         penStyleEvent();
     });
     gridLayout->addWidget(lineDotLineButton, 2, 1);
-    
+
     lineLineLineButton = create_button(":images/line-lineline.svg", [=](){
         drawing->lineStyle = LINELINE;
         penStyleEvent();
