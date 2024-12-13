@@ -518,6 +518,7 @@ bool DrawingWidget::event(QEvent *ev) {
                     geo.clear(touchPoint.id());
                 }
                 else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
+                    geo.clear(touchPoint.id());
                     curs.hide(touchPoint.id());
                     continue;
                 }
