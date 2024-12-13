@@ -514,6 +514,8 @@ static void setupPenSize(){
 
 
     floatingSettings->reload();
+    penStyleEvent();
+    penSizeEvent();
 }
 
 static void setupPenType(){
