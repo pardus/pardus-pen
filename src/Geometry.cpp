@@ -74,6 +74,13 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
 
     switch(fpenStyle){
         case SPLINE:
+            if(lineStyle ==  NORMAL) {
+                it = values.constEnd() - 2;
+                if(it != values.constEnd()){
+                    painter.drawLine(it.value(), endPoint);
+                }
+                break;
+            }
             path.moveTo(it.value());
             while (nextIt != values.constEnd()) {
                 path.lineTo(nextIt.value());
