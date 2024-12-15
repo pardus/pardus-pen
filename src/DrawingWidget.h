@@ -130,6 +130,7 @@ public:
     bool isNextAvailable();
     void loadImage(int num);
     void mergeSelection();
+    void clearSelection();
     void addImage(QImage img);
 
 protected:

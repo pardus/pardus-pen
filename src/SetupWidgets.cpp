@@ -967,6 +967,10 @@ static void setupClear(){
     clearButtonLayout->addWidget(yesButton);
 
     QPushButton *clear = create_button(":images/clear.svg", [=](){
+        if(drawing->penMode == SELECTION) {
+            drawing->clearSelection();
+            return;
+        }
         floatingSettings->setPage(3);
         floatingWidget->setFloatingOffset(7);
     });
