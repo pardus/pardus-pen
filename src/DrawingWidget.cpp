@@ -303,7 +303,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::addPoint(int id, QPointF data) {
-    if(lineStyle ==  NORMAL && penStyle == SPLINE){
+    if((lineStyle ==  NORMAL && penStyle == SPLINE) || penType == ERASER){
         geo.saveValue(id, 1, geo.load(id).loadValue(0));
         geo.saveValue(id, 0, data);
     } else {
