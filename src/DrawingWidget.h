@@ -70,8 +70,15 @@ public:
 
 class GeometryStorage {
 public:
+    QPointF point;
+    QPointF point_last;
+
     void addValue(qint64 id, QPointF data) {
         values[id].saveValue(values[id].size(), data);
+    }
+    
+    void saveValue(qint64 id, qint64 id2, QPointF data) {
+        values[id].saveValue(id2, data);
     }
     
     QPointF last(qint64 id){
@@ -152,6 +159,7 @@ protected:
     void createSelection();
     void drawLineToFunc(qint64 id, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
+    void addPoint(int id, QPointF data);
     bool event(QEvent * ev);
     GeometryStorage geo;
     QPainter painter;

@@ -302,6 +302,15 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 
 DrawingWidget::~DrawingWidget() {}
 
+void DrawingWidget::addPoint(int id, QPointF data) {
+    if(lineStyle ==  NORMAL && penStyle == SPLINE){
+        geo.saveValue(id, 1, geo.load(id).loadValue(0));
+        geo.saveValue(id, 0, data);
+    } else {
+        geo.addValue(id, data);
+    }
+}
+
 void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     drawing = true;
     mergeSelection();
@@ -310,7 +319,7 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
         floatingSettings->setHide();
     }
     geo.clear(-1);
-    geo.addValue(-1,event->position());
+    addPoint(-1,event->position());
     if(penMode != DRAW) {
         return;
     }
@@ -348,7 +357,7 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
         switch(penMode) {
             case DRAW:
                 updateCursorMouse(-1, event->position());
-                geo.addValue(-1, event->position());
+                addPoint(-1, event->position());
                 drawLineToFunc(-1, 1.0);
                 break;
             case SELECTION:
@@ -367,14 +376,14 @@ void DrawingWidget::addImage(QImage img){
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
     if(curEventButtons & Qt::LeftButton && geo.size(-1) < 2) {
-        geo.addValue(-1, event->position()+QPointF(0,1));
+        addPoint(-1, event->position()+QPointF(0,1));
         drawLineToFunc(-1, 1.0);
     }
     if (drawing) {
        drawing = false;
     }
     if(penMode == SELECTION) {
-        geo.addValue(-1, event->position());
+        addPoint(-1, event->position());
         createSelection();
         update();
         return;
@@ -522,7 +531,7 @@ bool DrawingWidget::event(QEvent *ev) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
                     geo.clear(touchPoint.id());
-                    geo.addValue(touchPoint.id(), pos);
+                    addPoint(touchPoint.id(), pos);
                     curs.init(touchPoint.id());
                     curs.setCursor(touchPoint.id(), penSize[penType]);
                 }
@@ -532,7 +541,7 @@ bool DrawingWidget::event(QEvent *ev) {
                     update();
                     continue;
                 }
-                geo.addValue(touchPoint.id(), pos);
+                addPoint(touchPoint.id(), pos);
                 drawLineToFunc(touchPoint.id(), touchPoint.pressure());
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
             }
@@ -541,7 +550,7 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TabletPress: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             geo.clear(-1);
-            geo.addValue(-1, tabletEvent->position());
+            addPoint(-1, tabletEvent->position());
             imageBackup = image;
             tabletActive = true;
             break;
@@ -559,7 +568,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tabletEvent->buttons() & Qt::RightButton) {
                 penType = ERASER;
             }
-            geo.addValue(-1, tabletEvent->position());
+            addPoint(-1, tabletEvent->position());
             drawLineToFunc(-1, tabletEvent->pressure());
             penType = penTypeBak;
         }

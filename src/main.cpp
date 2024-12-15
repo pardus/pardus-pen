@@ -180,6 +180,7 @@ int main(int argc, char *argv[]) {
     drawing->penSize[MARKER] = get_int((char*)"marker-size");
     drawing->penType=PEN;
     drawing->penStyle=SPLINE;
+    drawing->lineStyle=NORMAL;
     drawing->penColor = QColor(get_string((char*)"color"));
 
     mainWindow->setCentralWidget(drawing);
