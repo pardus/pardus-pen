@@ -522,16 +522,19 @@ bool DrawingWidget::event(QEvent *ev) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
                     geo.clear(touchPoint.id());
+                    geo.addValue(touchPoint.id(), pos);
+                    curs.init(touchPoint.id());
+                    curs.setCursor(touchPoint.id(), penSize[penType]);
                 }
                 else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     geo.clear(touchPoint.id());
                     curs.hide(touchPoint.id());
+                    update();
                     continue;
                 }
                 geo.addValue(touchPoint.id(), pos);
                 drawLineToFunc(touchPoint.id(), touchPoint.pressure());
                 updateCursorMouse(touchPoint.id(), pos.toPoint());
-                curs.setCursor(touchPoint.id(), penSize[penType]);
             }
             break;
         }
