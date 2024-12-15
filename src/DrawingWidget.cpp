@@ -280,7 +280,6 @@ private:
 PageStorage pages;
 
 int curEventButtons = 0;
-bool isMoved = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
@@ -315,16 +314,19 @@ void DrawingWidget::mousePressEvent(QMouseEvent *event) {
     if(penMode != DRAW) {
         return;
     }
-    updateCursorMouse(-1, event->position());
     int ev_pen = penType;
     if(event->buttons() & Qt::RightButton) {
         ev_pen = ERASER;
     }else if(event->buttons() & Qt::MiddleButton) {
         ev_pen = MARKER;
     }
+    curs.init(-1);
     curs.setCursor(-1, penSize[ev_pen]);
+    updateCursorMouse(-1, event->position());
+    if(ev_pen != ERASER) {
+        curs.hide(-1);
+    }
     curEventButtons = event->buttons();
-    isMoved = false;
 
 }
 
@@ -332,11 +334,7 @@ void DrawingWidget::updateCursorMouse(qint64 i, QPointF pos){
     updateCursorMouse(i, pos.toPoint());
 }
 void DrawingWidget::updateCursorMouse(qint64 i, QPoint pos){
-    if(penType != ERASER){
-        curs.hide(i);
-    } else {
-        curs.setPosition(i, pos);
-    }
+    curs.setPosition(i, pos);
 }
 
 void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
@@ -357,10 +355,7 @@ void DrawingWidget::mouseMoveEvent(QMouseEvent *event) {
                 selectionDraw(geo.first(-1), event->position());
                 break;
         }
-    } else {
-        curs.hide(-1);
     }
-    isMoved = true;
     penType = penTypeBak;
 }
 
@@ -371,7 +366,7 @@ void DrawingWidget::addImage(QImage img){
 }
 
 void DrawingWidget::mouseReleaseEvent(QMouseEvent *event) {
-    if(curEventButtons & Qt::LeftButton && !isMoved) {
+    if(curEventButtons & Qt::LeftButton && geo.size(-1) < 2) {
         geo.addValue(-1, event->position()+QPointF(0,1));
         drawLineToFunc(-1, 1.0);
     }
@@ -419,6 +414,9 @@ void DrawingWidget::clear() {
 
 
 
+static QPointF last_end = QPointF(0,0);
+static QPointF last_begin = QPointF(0,0);
+
 void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     image = imageBackup;
     update();
@@ -427,8 +425,16 @@ void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     penColor.setAlpha(127);
     painter.setBrush(QBrush(penColor));
     painter.drawRect(QRectF(startPoint,endPoint));
-    update();
+
+    update(QRectF(
+        last_begin, last_end
+    ).toRect().normalized());
+    update(QRectF(
+        startPoint, endPoint
+    ).toRect().normalized());
     painter.end();
+    last_begin = startPoint;
+    last_end = endPoint;
 }
 
 #ifdef LIBARCHIVE

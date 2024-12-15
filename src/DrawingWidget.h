@@ -81,6 +81,10 @@ public:
     QPointF first(qint64 id){
         return load(id).first();
     }
+    
+    int size(qint64 id) {
+        return values[id].size();
+    } 
 
     ValueStorage load(qint64 id) {
         if (values.contains(id)) {

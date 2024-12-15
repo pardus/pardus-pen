@@ -45,10 +45,6 @@ void MovableWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 static bool hasSelection = false;
 
-static QPointF last_end = QPointF(0,0);
-static QPointF last_begin = QPointF(0,0);
-static int rad = 0;
-
 void DrawingWidget::createSelection() {
     hasSelection = true;
     //printf("%f %f %f %f\n", startPoint.x(), endPoint.x(), startPoint.y(), endPoint.y());
@@ -74,15 +70,7 @@ void DrawingWidget::createSelection() {
     cropWidget->raise();
     cropWidget->show();
 
-    rad = penSize[penType];
-    update(QRectF(
-        last_begin, last_end
-    ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-    update(QRectF(
-        startPoint, endPoint
-    ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-    last_begin = startPoint;
-    last_end = endPoint;
+    update();
 }
 
 void DrawingWidget::clearSelection() {
@@ -102,7 +90,6 @@ void DrawingWidget::mergeSelection() {
     if(!hasSelection){
         return;
     }
-    hasSelection = false;
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
     painter.drawImage(QPoint(cropWidget->x(), cropWidget->y()), cropWidget->image.scaled(cropWidget->width(), cropWidget->height()));
