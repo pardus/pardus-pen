@@ -518,6 +518,27 @@ static void setupPenSize(){
     penSizeEvent();
 }
 
+static void setPen(int type){
+    sliderLock = true;
+    drawing->penType = type;
+    penStyleEvent();
+    penSizeEvent();
+    switch(type){
+        case ERASER:
+            thicknessSlider->setRange(10*scale,200*scale);
+            break;
+        case MARKER:
+            thicknessSlider->setRange(1,50*scale);
+            break;
+        case PEN:
+            thicknessSlider->setRange(1,50*scale);
+            break;
+    
+    }
+    thicknessSlider->setValue(drawing->penSize[type]);
+    sliderLock = false;
+}
+
 static void setupPenType(){
 
     ov = new OverView();
@@ -529,14 +550,7 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        sliderLock = true;
-        drawing->penType = PEN;
-        drawing->penStyle = SPLINE;
-        thicknessSlider->setRange(1,50*scale);
-        thicknessSlider->setValue(drawing->penSize[PEN]);
-        penStyleEvent();
-        penSizeEvent();
-        sliderLock = false;
+        setPen(PEN);
     });
     floatingWidget->setWidget(penButton);
 
@@ -554,14 +568,7 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        sliderLock = true;
-        drawing->penType = MARKER;
-        drawing->penStyle = SPLINE;
-        thicknessSlider->setRange(1,50*scale);
-        thicknessSlider->setValue(drawing->penSize[MARKER]);
-        penStyleEvent();
-        penSizeEvent();
-        sliderLock = false;
+        setPen(MARKER);
     });
     floatingWidget->setWidget(markerButton);
 
@@ -572,13 +579,8 @@ static void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        sliderLock = true;
-        drawing->penType = ERASER;
-        penStyleEvent();
-        penSizeEvent();
-        thicknessSlider->setRange(10*scale,200*scale);
-        thicknessSlider->setValue(drawing->penSize[ERASER]);
-        sliderLock = false;
+        setPen(ERASER);
+        
     });
     floatingWidget->setWidget(eraserButton);
 
@@ -589,10 +591,8 @@ static void setupPenType(){
         floatingSettings->setPage(0);
         floatingWidget->setFloatingOffset(4);
         if(drawing->penType == ERASER){
-            drawing->penType = PEN;
+            setPen(PEN);
         }
-        penStyleEvent();
-        penSizeEvent();
     });
     typeButton->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(typeDialog);
