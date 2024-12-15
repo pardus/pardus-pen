@@ -43,7 +43,7 @@ void MovableWidget::mouseReleaseEvent(QMouseEvent *event) {
     (void)event;
 }
 
-static bool hasSelection = false;
+bool hasSelection = false;
 
 void DrawingWidget::createSelection() {
     hasSelection = true;

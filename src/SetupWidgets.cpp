@@ -36,7 +36,7 @@ extern WhiteBoard *board;
 extern QMainWindow* mainWindow;
 
 extern bool fuarMode;
-
+extern bool hasSelection;
 QPushButton *selectButton;
 
 QPushButton *penButton;
@@ -967,7 +967,7 @@ static void setupClear(){
     clearButtonLayout->addWidget(yesButton);
 
     QPushButton *clear = create_button(":images/clear.svg", [=](){
-        if(drawing->penMode == SELECTION) {
+        if(drawing->penMode == SELECTION && hasSelection) {
             drawing->clearSelection();
             return;
         }
