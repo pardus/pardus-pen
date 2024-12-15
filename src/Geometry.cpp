@@ -40,6 +40,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             break;
         case ERASER:
             painter.setCompositionMode(QPainter::CompositionMode_Clear);
+            pressure = 1.0;
             break;
         case MARKER:
             penColor.setAlpha(127);
