@@ -212,6 +212,7 @@ int main(int argc, char *argv[]) {
         tool->setAttribute(Qt::WA_NoSystemBackground, true);
         tool->setStyleSheet(
             "background: none;"
+            "color: black;"
             "font-size: "+QString::number(18*scale)+"px;"
         );
 
@@ -226,6 +227,7 @@ int main(int argc, char *argv[]) {
         tool2->setAttribute(Qt::WA_NoSystemBackground, true);
         tool2->setStyleSheet(
             "background: none;"
+            "color: black;"
             "font-size: "+QString::number(18*scale)+"px;"
         );
         tool2->hide();
@@ -239,6 +241,7 @@ int main(int argc, char *argv[]) {
     mainWindow->setAttribute(Qt::WA_AcceptTouchEvents, true);
     mainWindow->setStyleSheet(
         "background: none;"
+        "color: black;"
         "font-size: "+QString::number(18*scale)+"px;"
     );
 

@@ -75,7 +75,8 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     switch(fpenStyle){
         case SPLINE:
             if(lineStyle ==  NORMAL) {
-                it = values.constEnd() - 2;
+                // NULL terminate so double previous
+                it = std::prev(std::prev(values.constEnd()));
                 if(it != values.constEnd()){
                     painter.drawLine(it.value(), endPoint);
                 }
