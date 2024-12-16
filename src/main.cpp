@@ -188,6 +188,7 @@ int main(int argc, char *argv[]) {
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
 
 
+#ifndef ETAP19
     // detect x11
     if(!getenv("WAYLAND_DISPLAY")){
         tool = new QMainWindow();
@@ -195,10 +196,13 @@ int main(int argc, char *argv[]) {
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
     } else {
+#endif
         tool = nullptr;
         floatingSettings = new FloatingSettings(mainWindow);
         floatingWidget = new FloatingWidget(mainWindow);
+#ifndef ETAP19
     }
+#endif
     floatingWidget->setMainWindow(mainWindow);
     floatingWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
