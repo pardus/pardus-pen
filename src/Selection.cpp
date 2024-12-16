@@ -59,7 +59,6 @@ void DrawingWidget::createSelection() {
     painter.setCompositionMode(QPainter::CompositionMode_Clear);
     painter.setPen(Qt::NoPen);
     painter.drawRect(cropRect);
-    update();
     painter.end();
 
     //printf("%d %d\n", cropRect.width(), cropRect.height());
@@ -69,7 +68,6 @@ void DrawingWidget::createSelection() {
     cropWidget->move(topLeft);
     cropWidget->raise();
     cropWidget->show();
-
     update();
 }
 

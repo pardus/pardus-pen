@@ -72,10 +72,8 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     ++nextIt;
     QPainterPath path;
 
-    int size = values.size() % 100;
-    it = std::next(it, values.size() - size);
+    it = std::next(it, values.size() - values.size() % 100);
     nextIt = it;
-    printf("%d\n", size);
 
 
     switch(fpenStyle){

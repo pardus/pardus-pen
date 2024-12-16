@@ -428,20 +428,15 @@ static QPointF last_begin = QPointF(0,0);
 
 void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     image = imageBackup;
-    update();
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
     penColor.setAlpha(127);
     painter.setBrush(QBrush(penColor));
     painter.drawRect(QRectF(startPoint,endPoint));
-
-    update(QRectF(
-        last_begin, last_end
-    ).toRect().normalized());
-    update(QRectF(
-        startPoint, endPoint
-    ).toRect().normalized());
     painter.end();
+    update(QRectF(last_begin, last_end).toRect().normalized().adjusted(-1, -1, +1, +1));
+    update(QRectF(startPoint, endPoint).toRect().normalized().adjusted(-1, -1, +1, +1));
+
     last_begin = startPoint;
     last_end = endPoint;
 }
