@@ -32,7 +32,8 @@ QMainWindow* mainWindow;
 QMainWindow* tool;
 QMainWindow* tool2;
 
-QSlider *scrollSlider;
+QSlider *scrollHSlider;
+QSlider *scrollVSlider;
 
 QWidget *mainWidget;
 
@@ -68,6 +69,8 @@ public:
 
     }
 
+#define SCROLLSIZE 22*scale
+
 protected:
      void closeEvent(QCloseEvent *event){
         puts("Close event");
@@ -79,10 +82,16 @@ protected:
         mainWidget->setFixedSize(screen->size().width(), screen->size().height());
         drawing->setFixedSize(screen->size().width(), screen->size().height());
         board->setFixedSize(screen->size().width(), screen->size().height());
-        scrollSlider->setFixedSize(event->size().width(), 22);
-        scrollSlider->move(0, event->size().height() - 22);
-        scrollSlider->setRange(0, screen->size().width() - event->size().width() );
-        scrollSlider->setVisible(screen->size().width() > event->size().width());
+
+        scrollHSlider->setFixedSize(event->size().width() - SCROLLSIZE*2, SCROLLSIZE);
+        scrollHSlider->move(SCROLLSIZE, event->size().height() - SCROLLSIZE);
+        scrollHSlider->setRange(0, screen->size().width() - event->size().width() );
+        scrollHSlider->setVisible(screen->size().width() > event->size().width());
+
+        scrollVSlider->setFixedSize(SCROLLSIZE, event->size().height() - SCROLLSIZE*2);
+        scrollVSlider->move(event->size().width() - SCROLLSIZE, SCROLLSIZE);
+        scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
+        scrollVSlider->setVisible(screen->size().height() > event->size().height());
 
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
@@ -263,11 +272,19 @@ int main(int argc, char *argv[]) {
         "font-size: "+QString::number(18*scale)+"px;"
     );
 
-    scrollSlider = new QSlider(Qt::Horizontal, mainWindow);
-    QObject::connect(scrollSlider, &QSlider::valueChanged, [=](int value) {
-        mainWidget->move(-1*value, 0);
+    scrollHSlider = new QSlider(Qt::Horizontal, mainWindow);
+    scrollVSlider = new QSlider(Qt::Vertical, mainWindow);
+
+    QObject::connect(scrollHSlider, &QSlider::valueChanged, [=](int value) {
+        mainWidget->move(-1*value, mainWidget->y());
     });
 
+    QObject::connect(scrollVSlider, &QSlider::valueChanged, [=](int value) {
+        mainWidget->move(mainWidget->x(), value - scrollVSlider->maximum());
+    });
+
+    scrollVSlider->setValue(0);
+    scrollHSlider->setValue(0);
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
     mainWidget->setFixedSize(screen->size().width(), screen->size().height());
