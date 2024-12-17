@@ -77,7 +77,6 @@ protected:
         mainWidget->setFixedSize(screen->size().width(), screen->size().height());
         drawing->setFixedSize(screen->size().width(), screen->size().height());
         board->setFixedSize(screen->size().width(), screen->size().height());
-        board->setFixedSize(event->size().width(), event->size().height());
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
         new_y = get_int((char*)"cur-y");
