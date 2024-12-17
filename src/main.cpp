@@ -32,6 +32,8 @@ QMainWindow* mainWindow;
 QMainWindow* tool;
 QMainWindow* tool2;
 
+QWidget *mainWidget;
+
 #ifdef screenshot
 #include "ScreenShot.h"
 QPushButton *ssButton;
@@ -71,6 +73,10 @@ protected:
         event->ignore();
      }
      void resizeEvent(QResizeEvent *event) override {
+        QScreen *screen = QGuiApplication::primaryScreen();
+        mainWidget->setFixedSize(screen->size().width(), screen->size().height());
+        drawing->setFixedSize(screen->size().width(), screen->size().height());
+        board->setFixedSize(screen->size().width(), screen->size().height());
         board->setFixedSize(event->size().width(), event->size().height());
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
@@ -170,11 +176,13 @@ int main(int argc, char *argv[]) {
     mainWindow = new MainWindow();
     scale = QGuiApplication::primaryScreen()->geometry().height() / 1080.0;
 
-    drawing = new DrawingWidget();
-    board = new WhiteBoard(mainWindow);
+    mainWidget = new QWidget(mainWindow);
+
+    board = new WhiteBoard(mainWidget);
     board->setType(get_int((char*)"page"));
     board->setOverlayType(get_int((char*)"page-overlay"));
 
+    drawing = new DrawingWidget(mainWidget);
     drawing->penSize[PEN] = get_int((char*)"pen-size");
     drawing->penSize[ERASER] = get_int((char*)"eraser-size");
     drawing->penSize[MARKER] = get_int((char*)"marker-size");
@@ -183,7 +191,6 @@ int main(int argc, char *argv[]) {
     drawing->lineStyle=NORMAL;
     drawing->penColor = QColor(get_string((char*)"color"));
 
-    mainWindow->setCentralWidget(drawing);
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
 
@@ -252,6 +259,7 @@ int main(int argc, char *argv[]) {
 
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
+    mainWidget->setFixedSize(screen->size().width(), screen->size().height());
     mainWindow->showFullScreen();
     mainWindow->move(0,0);
 
