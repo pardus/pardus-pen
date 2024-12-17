@@ -439,10 +439,12 @@ void DrawingWidget::goNext(){
     loadImage(images.last_image_num);
 }
 
+static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     int ev_pen = penType;
     switch(type) {
         case PRESS:
+            num_of_press++;
             curs.drawing[id] = true;
             mergeSelection();
             imageBackup = image;
@@ -488,6 +490,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             penType = ev_pen;
             break;
         case RELEASE:
+            num_of_press--;
             if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
                 addPoint(-1, pos+QPointF(0,1));
                 drawLineToFunc(id, pressure);
@@ -504,7 +507,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 
             curEventButtons = 0;
             curs.hide(id);
-            addImage(image);
+            if(num_of_press == 0) {
+                addImage(image);
+            }
             break;
     }
 }
