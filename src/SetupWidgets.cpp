@@ -54,7 +54,7 @@ QPushButton *lineDotLineButton;
 QPushButton *lineLineLineButton;
 
 QPushButton *backgroundButton;
-
+QPushButton* minify;
 QPushButton* fullscreen;
 
 QPushButton* transparentButton;
@@ -851,6 +851,7 @@ static void setupBackground(){
             set_icon(":images/fullscreen-exit.svg", fullscreen);
             mainWindow->showFullScreen();
         }
+        minify->setEnabled(mainWindow->isFullScreen());
     });
     fullscreen->setStyleSheet(QString("background-color: none;"));
 
@@ -917,7 +918,7 @@ static void setupGoBackNext(){
 
 
 static void setupMinify(){
-    QPushButton *minify = create_button(":images/screen.svg", [=](){
+    minify = create_button(":images/screen.svg", [=](){
         mainWindow->showMinimized();
     });
     minify->setStyleSheet(QString("background-color: none;"));
