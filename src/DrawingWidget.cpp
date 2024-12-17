@@ -284,10 +284,16 @@ int curEventButtons = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
-    penType = PEN;
+    penSize[PEN] = get_int((char*)"pen-size");
+    penSize[ERASER] = get_int((char*)"eraser-size");
+    penSize[MARKER] = get_int((char*)"marker-size");
+    penType=PEN;
+    penStyle=SPLINE;
+    lineStyle=NORMAL;
+    penColor = QColor(get_string((char*)"color"));
     penMode = DRAW;
-    reset = true;
     setMouseTracking(true);
+    setAttribute(Qt::WA_AcceptTouchEvents);
     cropWidget = new MovableWidget(mainWindow);
     cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
@@ -300,8 +306,6 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
 }
-
-DrawingWidget::~DrawingWidget() {}
 
 void DrawingWidget::addPoint(int id, QPointF data) {
     if(geo.size(id) == 0) {

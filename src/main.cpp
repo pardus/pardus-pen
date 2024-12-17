@@ -192,19 +192,13 @@ int main(int argc, char *argv[]) {
     scale = QGuiApplication::primaryScreen()->geometry().height() / 1080.0;
 
     mainWidget = new QWidget(mainWindow);
+    mainWidget->setAttribute(Qt::WA_AcceptTouchEvents, true);
 
     board = new WhiteBoard(mainWidget);
     board->setType(get_int((char*)"page"));
     board->setOverlayType(get_int((char*)"page-overlay"));
 
     drawing = new DrawingWidget(mainWidget);
-    drawing->penSize[PEN] = get_int((char*)"pen-size");
-    drawing->penSize[ERASER] = get_int((char*)"eraser-size");
-    drawing->penSize[MARKER] = get_int((char*)"marker-size");
-    drawing->penType=PEN;
-    drawing->penStyle=SPLINE;
-    drawing->lineStyle=NORMAL;
-    drawing->penColor = QColor(get_string((char*)"color"));
 
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));

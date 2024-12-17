@@ -117,14 +117,12 @@ private:
 class DrawingWidget : public QWidget {
 public:
     explicit DrawingWidget(QWidget *parent = nullptr);
-    ~DrawingWidget(); // Destructor
 
     QImage image;
     QColor penColor;
     FloatingSettings* floatingSettings;
     MovableWidget* cropWidget;
     int penSize[3];
-    bool reset;
     void initializeImage(const QSize &size);
     void goPrevious();
     void goNext();
