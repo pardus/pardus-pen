@@ -444,6 +444,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     int ev_pen = penType;
     switch(type) {
         case PRESS:
+            if (curs.drawing[id] && curs.drawing.contains(id)) {
+                break;
+            }
             num_of_press++;
             curs.drawing[id] = true;
             mergeSelection();
@@ -490,13 +493,14 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             penType = ev_pen;
             break;
         case RELEASE:
+            if (!curs.drawing[id]) {
+                break;
+            }
             num_of_press--;
+            curs.drawing[id] = false;
             if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
                 addPoint(-1, pos+QPointF(0,1));
                 drawLineToFunc(id, pressure);
-            }
-            if (curs.drawing[id]) {
-               curs.drawing[id] = false;
             }
             if(penMode == SELECTION) {
                 addPoint(id, pos);
