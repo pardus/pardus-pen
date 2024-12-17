@@ -21,6 +21,7 @@ extern "C" {
 }
 
 extern WhiteBoard *board;
+extern QWidget * mainWidget;
 extern QMainWindow* mainWindow;
 extern DrawingWidget *drawing;
 
@@ -54,7 +55,7 @@ public:
         if(!images.contains(id)){
             labels[id] = new QLabel("");
             labels[id]->setStyleSheet(QString("background-color: none;"));
-            images[id] = new QWidget(mainWindow);
+            images[id] = new QWidget(mainWidget);
             images[id]->stackUnder(drawing);
             layouts[id] = new QVBoxLayout(images[id]);
             layouts[id]->addWidget(labels[id]);
