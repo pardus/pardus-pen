@@ -36,6 +36,10 @@
 #define DRAW 0
 #define SELECTION 1
 
+#define PRESS 0
+#define MOVE 1
+#define RELEASE 2
+
 class ValueStorage {
 public:
     int size() {
@@ -143,15 +147,12 @@ public:
     void mergeSelection();
     void clearSelection();
     void addImage(QImage img);
+    void eventHandler(int source, int type, int id, QPointF pos, float pressure);
 
 protected:
-    bool drawing = false;
     float fpressure;
     QImage imageBackup;
     bool eraser;
-    void mousePressEvent(QMouseEvent *event) override;
-    void mouseMoveEvent(QMouseEvent *event) override;
-    void mouseReleaseEvent(QMouseEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void updateCursorMouse(qint64 i, QPoint pos);
