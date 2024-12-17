@@ -538,17 +538,17 @@ bool DrawingWidget::event(QEvent *ev) {
         }
         case QEvent::TabletPress: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            eventHandler(Qt::RightButton, PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
+            eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
             break;
         }
         case QEvent::TabletRelease: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            eventHandler(Qt::RightButton, RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
+            eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
             break;
         }
         case QEvent::TabletMove: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
-            eventHandler(Qt::RightButton, MOVE, -2, tabletEvent->position(), tabletEvent->pressure());
+            eventHandler(tabletEvent->buttons(), MOVE, -2, tabletEvent->position(), tabletEvent->pressure());
             break;
         }
         case QEvent::MouseButtonPress: {
