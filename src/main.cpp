@@ -32,6 +32,8 @@ QMainWindow* mainWindow;
 QMainWindow* tool;
 QMainWindow* tool2;
 
+QSlider *scrollSlider;
+
 QWidget *mainWidget;
 
 #ifdef screenshot
@@ -77,6 +79,11 @@ protected:
         mainWidget->setFixedSize(screen->size().width(), screen->size().height());
         drawing->setFixedSize(screen->size().width(), screen->size().height());
         board->setFixedSize(screen->size().width(), screen->size().height());
+        scrollSlider->setFixedSize(event->size().width(), 22);
+        scrollSlider->move(0, event->size().height() - 22);
+        scrollSlider->setRange(0, screen->size().width() - event->size().width() );
+        scrollSlider->setVisible(screen->size().width() > event->size().width());
+
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
         new_y = get_int((char*)"cur-y");
@@ -255,6 +262,11 @@ int main(int argc, char *argv[]) {
         "color: black;"
         "font-size: "+QString::number(18*scale)+"px;"
     );
+
+    scrollSlider = new QSlider(Qt::Horizontal, mainWindow);
+    QObject::connect(scrollSlider, &QSlider::valueChanged, [=](int value) {
+        mainWidget->move(-1*value, 0);
+    });
 
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
