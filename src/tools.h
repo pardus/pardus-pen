@@ -88,6 +88,7 @@ extern QPushButton *nextButton;
 
 extern QPushButton *previousPage;
 extern QPushButton *nextPage;
+extern QLabel *pageLabel;
 
 extern QPushButton *clear;
 extern QPushButton *close;

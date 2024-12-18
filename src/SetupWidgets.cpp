@@ -6,15 +6,20 @@ QPushButton *toolMenu;
 QWidget *colorDialog;
 
 static QVBoxLayout *penSettingsLayout;
+static QVBoxLayout *toolSettingsLayout;
 
-void create_seperator(){
+void create_seperator(bool f){
     QLabel *hlina = new QLabel();
     hlina->setStyleSheet("background: black;");
     hlina->setFixedSize(
         colorDialog->size().width(),
         1
     );
-    penSettingsLayout->addWidget(hlina);
+    if(f){
+        penSettingsLayout->addWidget(hlina);
+    } else {
+        toolSettingsLayout->addWidget(hlina);
+    }
  
 }
 
@@ -30,36 +35,9 @@ void setupWidgets(){
     });
     floatingSettings->addPage(penSettings);
     
-    thicknessSlider->setStyleSheet(
-         "QSlider::groove:horizontal {"
-            "border: 1px solid #bbb;"
-            "background: white;"
-            "height: "+QString::number(22*scale)+"px;"
-            "border-radius: "+QString::number(11*scale)+"px;"
-        "}"
-        "QSlider::handle:horizontal {"
-            "background: #fff;"
-            "border: 1px solid #777;"
-            "width: "+QString::number(44*scale)+"px;"
-            "margin: -4px 0;"
-            "border-radius: "+QString::number(18*scale)+"px;"
-        "}"
-        "QSlider::handle:horizontal:hover {"
-            "background: #ccc;"
-        "}"
-        "QSlider::sub-page:horizontal {"
-            "background: #5FAEE3;"
-            "border-radius: 5px;"
-        "}"
-        "QSlider::add-page:horizontal {"
-            "background: #FBFBFB;"
-            "border-radius:5px;"
-        "}"
-    );
-
-    // Settings Menu
+        // tool Menu
     QWidget *toolSettings = new QWidget();
-    QVBoxLayout *toolSettingsLayout = new QVBoxLayout(toolSettings);
+    toolSettingsLayout = new QVBoxLayout(toolSettings);
     toolSettingsLayout->setSpacing(0);
     toolSettingsLayout->setContentsMargins(0, 0, 0, 0);
     toolMenu = create_button(":images/pen-settings.svg", [=](){
@@ -81,6 +59,10 @@ void setupWidgets(){
     floatingWidget->addWidget("minify", minify);
     
 
+/*********** main menu done *********/
+/************************************/
+/************ Pen Menu **************/
+
 /********** Pen Settings **********/
     // color dialog
     int num_of_color = sizeof(colors) / sizeof(QColor);
@@ -95,7 +77,7 @@ void setupWidgets(){
 /********** Overview **********/
 
     penSettingsLayout->addWidget(ov);
-    create_seperator();
+    create_seperator(true);
 
 /********** Color selection options **********/
     // color selection
@@ -131,7 +113,7 @@ void setupWidgets(){
         colorDialog->size().width()/2
     );
 
-    create_seperator();
+    create_seperator(true);
 
 
 /********** Thickness slider **********/
@@ -151,19 +133,46 @@ void setupWidgets(){
         butsize
     );
 
-    create_seperator();
+    thicknessSlider->setStyleSheet(
+         "QSlider::groove:horizontal {"
+            "border: 1px solid #bbb;"
+            "background: white;"
+            "height: "+QString::number(22*scale)+"px;"
+            "border-radius: "+QString::number(11*scale)+"px;"
+        "}"
+        "QSlider::handle:horizontal {"
+            "background: #fff;"
+            "border: 1px solid #777;"
+            "width: "+QString::number(44*scale)+"px;"
+            "margin: -4px 0;"
+            "border-radius: "+QString::number(18*scale)+"px;"
+        "}"
+        "QSlider::handle:horizontal:hover {"
+            "background: #ccc;"
+        "}"
+        "QSlider::sub-page:horizontal {"
+            "background: #5FAEE3;"
+            "border-radius: 5px;"
+        "}"
+        "QSlider::add-page:horizontal {"
+            "background: #FBFBFB;"
+            "border-radius:5px;"
+        "}"
+    );
+
+    create_seperator(true);
 
     
 /********** penModes **********/
     QWidget *modeDialog = new QWidget();
     QGridLayout *modeLayout = new QGridLayout(modeDialog);
     // spline
-    modeLayout->addWidget(splineButton, 0, 0);
-    modeLayout->addWidget(lineButton, 0, 1);
-    modeLayout->addWidget(circleButton, 0, 2);
-    modeLayout->addWidget(triangleButton, 1, 0);
-    modeLayout->addWidget(rectButton, 1, 1);
-    modeLayout->addWidget(selectButton, 1,2);
+    modeLayout->addWidget(splineButton,     0, 0);
+    modeLayout->addWidget(lineButton,       0, 1);
+    modeLayout->addWidget(circleButton,     0, 2);
+    modeLayout->addWidget(triangleButton,   1, 0);
+    modeLayout->addWidget(rectButton,       1, 1);
+    modeLayout->addWidget(selectButton,     1, 2);
     
     modeDialog->setFixedSize(
         colorDialog->size().width(),
@@ -171,13 +180,13 @@ void setupWidgets(){
     );
     penSettingsLayout->addWidget(modeDialog);
 
-    create_seperator();
+    create_seperator(true);
 
 /********** penTypes **********/
     QWidget *stylDialog = new QWidget();
     QGridLayout *styleLayout = new QGridLayout(stylDialog);
     // spline
-    styleLayout->addWidget(penButton, 0, 0);
+    styleLayout->addWidget(penButton,    0, 0);
     styleLayout->addWidget(eraserButton, 0, 1);
     styleLayout->addWidget(markerButton, 0, 2);
     
@@ -187,15 +196,76 @@ void setupWidgets(){
     );
     penSettingsLayout->addWidget(stylDialog);
 
-/********** Finish him **********/
-
+    // resize color dialog
     colorDialog->setFixedSize(
         colorDialog->size().width(),
         butsize*4+ padding*3
     );
+
+/*********** Pen menu done *********/
+/***********************************/
+/************ Tool Menu ************/
+
+/********** page type **********/ 
+
+    QLabel *bgLabel = new QLabel(_("Background:"));
+    bgLabel->setStyleSheet("background: none;");
+    bgLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    toolSettingsLayout->addWidget(bgLabel);
+
+    QWidget *pageDialog = new QWidget();
+    QGridLayout *pageLayout = new QGridLayout(pageDialog);
+    // spline
+    pageLayout->addWidget(overlayNone,      0, 0);
+    pageLayout->addWidget(overlaySquares,   0, 1);
+    pageLayout->addWidget(overlayLines,     0, 2);
+    pageLayout->addWidget(overlayMusic,     0, 3);
+    pageLayout->addWidget(overlayWorld,     1, 0);
+    pageLayout->addWidget(overlayTurkiye,   1, 1);
+    pageLayout->addWidget(overlayCustom,    1, 2);
+    pageLayout->addWidget(overlayIsometric, 1, 3);
+    
+    pageDialog->setFixedSize(
+        colorDialog->size().width(),
+        butsize*2+ padding*3
+    );
+    toolSettingsLayout->addWidget(pageDialog);
+
+    create_seperator(false);
+
+
+ /********** page number **********/    
+
+    QWidget *pageNumWidget = new QWidget();
+    QHBoxLayout *pageNumLayout = new QHBoxLayout(pageNumWidget);
+
+    pageNumLayout->addWidget(new QLabel(_("Page:")));
+    pageNumLayout->addWidget(pageLabel);    
+    pageNumLayout->addWidget(previousPage);
+    pageNumLayout->addWidget(nextPage);
+
+    QLabel *vsep1 = new QLabel();
+    vsep1->setStyleSheet("background: black;");
+    vsep1->setFixedSize(
+        1,
+        butsize
+    );
+    pageNumLayout->addWidget(vsep1);
+
+    pageNumLayout->addWidget(transparentButton);
+    pageNumLayout->addWidget(blackButton);
+    pageNumLayout->addWidget(whiteButton);
+
+    toolSettingsLayout->addWidget(pageNumWidget);
+
+
+/********** Finish him **********/
+
+
     penStyleEvent();
     penSizeEvent();
     backgroundStyleEvent();
+    updateGoBackButtons();
     ov->updateImage();
     
 

@@ -88,21 +88,10 @@ void penSizeEvent(){
 }
 
 void updateGoBackButtons(){
-    if(drawing->isBackAvailable()){
-        set_icon(":images/go-back.svg", backButton);
-    } else{
-        set_icon(":images/go-back-disabled.svg", backButton);
-    }
-    if(drawing->isNextAvailable()){
-        set_icon(":images/go-next.svg", nextButton);
-    } else{
-        set_icon(":images/go-next-disabled.svg", nextButton);
-    }
-    if(drawing->getPageNum() == 0){
-        set_icon(":images/go-page-previous-disabled.svg", previousPage);
-    } else {
-        set_icon(":images/go-page-previous.svg", previousPage);
-    }
+    backButton->setEnabled(drawing->isBackAvailable());
+    nextButton->setEnabled(drawing->isNextAvailable());
+    previousPage->setEnabled(drawing->getPageNum() > 0);
+    pageLabel->setText(QString::number(drawing->getPageNum()));
 }
 
 

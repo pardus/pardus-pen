@@ -4,6 +4,8 @@ QPushButton* transparentButton;
 QPushButton* blackButton;
 QPushButton* whiteButton;
 
+QLabel* pageLabel;
+
 QPushButton* overlayIsometric;
 QPushButton* overlayMusic;
 QPushButton* overlayCustom;
@@ -84,7 +86,7 @@ void setupBackground(){
         board->setOverlayType(WORLD);
         backgroundStyleEvent();
     });
-    
+    pageLabel = new QLabel("0");
     
     
     clear = create_button(":images/clear.svg", [=](){
