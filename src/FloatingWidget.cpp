@@ -9,6 +9,7 @@ int new_y = 0;
 extern float scale;
 
 extern QMainWindow* tool2;
+extern QMainWindow* tool;
 
 #define padding 8*scale
 
@@ -74,9 +75,6 @@ void FloatingWidget::addWidget(QString name, QWidget *widget) {
 static int new_xx = 0, new_yy = 0;
 
 void FloatingWidget::moveAction(){
-        if(tool2 == nullptr){
-            return;
-        }
         if (new_x < 0) {
             new_x = 0;
         }if (new_y < 0) {

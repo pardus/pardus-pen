@@ -155,9 +155,6 @@ void setupTools(){
         tool = nullptr;
         floatingSettings = new FloatingSettings(mainWindow);
         floatingWidget = new FloatingWidget(mainWindow);
-        floatingWidget->setParent(mainWindow);
-        floatingSettings->setParent(mainWindow);
-        floatingWidget->show();
 #ifndef ETAP19
     }
 #endif
@@ -198,5 +195,6 @@ void mainWindowInit(){
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     floatingWidget->setMainWindow(mainWindow);
     setupWidgets();
+    floatingWidget->moveAction();
     mainWindow->showFullScreen();
 }
