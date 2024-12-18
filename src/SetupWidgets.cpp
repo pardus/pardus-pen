@@ -5,10 +5,23 @@ QPushButton *penMenu;
 QPushButton *toolMenu;
 QWidget *colorDialog;
 
+static QVBoxLayout *penSettingsLayout;
+
+void create_seperator(){
+    QLabel *hlina = new QLabel();
+    hlina->setStyleSheet("background: black;");
+    hlina->setFixedSize(
+        colorDialog->size().width(),
+        1
+    );
+    penSettingsLayout->addWidget(hlina);
+ 
+}
+
 void setupWidgets(){
     // Pen Menu
     QWidget *penSettings = new QWidget();
-    QVBoxLayout *penSettingsLayout = new QVBoxLayout(penSettings);
+    penSettingsLayout = new QVBoxLayout(penSettings);
     penSettingsLayout->setSpacing(padding);
     penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
     penMenu = create_button(":images/pen.svg", [=](){
@@ -66,21 +79,31 @@ void setupWidgets(){
     floatingWidget->addWidget("back", backButton);
     floatingWidget->addWidget("tool-menu", toolMenu);
     floatingWidget->addWidget("minify", minify);
+    
 
 /********** Pen Settings **********/
+    // color dialog
+    int num_of_color = sizeof(colors) / sizeof(QColor);
+    int rowsize = 7;
+    colorDialog = new QWidget();
+    colorDialog->setFixedSize( // set height later
+        butsize*rowsize + padding*(rowsize),
+        0
+    );
+
 
 /********** Overview **********/
 
     penSettingsLayout->addWidget(ov);
+    create_seperator();
 
 /********** Color selection options **********/
     // color selection
-    colorDialog = new QWidget();
+    
     QGridLayout *gridLayout = new QGridLayout(colorDialog);
     
     // Create buttons for each color
-    int num_of_color = sizeof(colors) / sizeof(QColor);
-    int rowsize = 7;
+
     gridLayout->addWidget(colorpicker, 0, 0, Qt::AlignCenter);
     for (int i = 0; i < num_of_color; i++) {
         QPushButton *button = new QPushButton(colorDialog);
@@ -100,10 +123,6 @@ void setupWidgets(){
         gridLayout->addWidget(button, (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
     colorDialog->setLayout(gridLayout);
-    colorDialog->setFixedSize(
-        butsize*rowsize + padding*(rowsize),
-        butsize*(1+(num_of_color/rowsize))+ padding*((num_of_color / rowsize))
-    );
     penSettingsLayout->addWidget(colorDialog);
     
     // sync overview size with colordialog
@@ -111,7 +130,10 @@ void setupWidgets(){
         colorDialog->size().width(),
         colorDialog->size().width()/2
     );
-    
+
+    create_seperator();
+
+
 /********** Thickness slider **********/
     
     QLabel *thicknessLabel = new QLabel(_("Size:"));
@@ -129,8 +151,52 @@ void setupWidgets(){
         butsize
     );
 
+    create_seperator();
+
+    
+/********** penModes **********/
+    QWidget *modeDialog = new QWidget();
+    QGridLayout *modeLayout = new QGridLayout(modeDialog);
+    // spline
+    modeLayout->addWidget(splineButton, 0, 0);
+    modeLayout->addWidget(lineButton, 0, 1);
+    modeLayout->addWidget(circleButton, 0, 2);
+    modeLayout->addWidget(triangleButton, 1, 0);
+    modeLayout->addWidget(rectButton, 1, 1);
+    modeLayout->addWidget(selectButton, 1,2);
+    
+    modeDialog->setFixedSize(
+        colorDialog->size().width(),
+        butsize*2+ padding*3
+    );
+    penSettingsLayout->addWidget(modeDialog);
+
+    create_seperator();
+
+/********** penTypes **********/
+    QWidget *stylDialog = new QWidget();
+    QGridLayout *styleLayout = new QGridLayout(stylDialog);
+    // spline
+    styleLayout->addWidget(penButton, 0, 0);
+    styleLayout->addWidget(eraserButton, 0, 1);
+    styleLayout->addWidget(markerButton, 0, 2);
+    
+    stylDialog->setFixedSize(
+        colorDialog->size().width(),
+        butsize+ padding*2
+    );
+    penSettingsLayout->addWidget(stylDialog);
+
 /********** Finish him **********/
+
+    colorDialog->setFixedSize(
+        colorDialog->size().width(),
+        butsize*4+ padding*3
+    );
     penStyleEvent();
     penSizeEvent();
+    backgroundStyleEvent();
     ov->updateImage();
+    
+
 }

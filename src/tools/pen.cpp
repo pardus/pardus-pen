@@ -72,8 +72,6 @@ void setLineStyle(int style){
 
 void setupPenType(){
 
-    ov = new OverView();
-
     penButton = create_button(":images/pen.svg", [=](){
         drawing->mergeSelection();
         drawing->penMode = DRAW;

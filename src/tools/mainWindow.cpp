@@ -185,6 +185,7 @@ void setupTools(){
 void mainWindowInit(){
     mainWindow = new MainWindow();
     drawing = new DrawingWidget(mainWindow);
+    ov = new OverView();
     setupTools();
     setupPenType();
     setupBackground();
