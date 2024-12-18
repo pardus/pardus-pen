@@ -154,14 +154,17 @@ void setupTools(){
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
         tool->setCentralWidget(floatingWidget);
+        tool2->setCentralWidget(floatingSettings);
         
         tool->show();
         tool2->hide();
     } else {
 #endif
         tool = nullptr;
-        floatingSettings = new FloatingSettings(mainWindow);
-        floatingWidget = new FloatingWidget(mainWindow);
+        floatingSettings = new FloatingSettings();
+        floatingWidget = new FloatingWidget();
+        floatingWidget->setParent(mainWidget);
+        floatingSettings->setParent(mainWidget);
 #ifndef ETAP19
     }
 #endif

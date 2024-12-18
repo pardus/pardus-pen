@@ -61,6 +61,7 @@ void FloatingSettings::reload(){
     cur_width = settingsPages.getPage(current_page)->size().width();
     cur_height = settingsPages.getPage(current_page)->size().height();
     setFixedSize(cur_width, cur_height);
+    settingsPages.getPage(current_page)->adjustSize();
     if(tool2 != nullptr) {
         tool2->setFixedSize(cur_width, cur_height);
     }
@@ -79,6 +80,7 @@ void FloatingSettings::setPage(int num){
         return;
     }
     current_page = num;
+    settingsPages.getPage(current_page)->adjustSize();
     if(settingsPages.getPage(current_page)->isVisible()){
         settingsPages.getPage(current_page)->hide();
         setHide();

@@ -29,23 +29,18 @@ void penStyleEvent(){
     switch(drawing->penStyle){
         case LINE:
             lineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/line.svg", typeButton);
             break;
         case CIRCLE:
             circleButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/circle.svg", typeButton);
             break;
         case RECTANGLE:
             rectButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/rectangle.svg", typeButton);
             break;
         case TRIANGLE:
             triangleButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/triangle.svg", typeButton);
             break;
         default:
             splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/spline.svg", typeButton);
             break;
     }
     if(drawing->penMode == SELECTION) {
@@ -127,18 +122,15 @@ void backgroundStyleEvent(){
     drawing->cropWidget->setStyleSheet("border: 2px solid "+drawing->penColor.name()+";");
     switch(board->getType()){
         case BLACK:
-            set_icon(":images/paper-black.svg",backgroundButton);
             blackButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             ov->background = Qt::black;
             break;
         case WHITE:
             whiteButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/paper-white.svg",backgroundButton);
             ov->background = Qt::white;
             break;
         default:
             transparentButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            set_icon(":images/paper-transparent.svg",backgroundButton);
             ov->background = Qt::transparent;
             break;
     }

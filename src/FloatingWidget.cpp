@@ -22,7 +22,6 @@ extern "C" {
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
-    fparent = (QMainWindow*)parent;
     if(is_vertical){
         layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     } else {
@@ -75,7 +74,7 @@ void FloatingWidget::addWidget(QString name, QWidget *widget) {
 static int new_xx = 0, new_yy = 0;
 
 void FloatingWidget::moveAction(){
-        if(fparent == nullptr){
+        if(tool2 == nullptr){
             return;
         }
         if (new_x < 0) {
@@ -95,7 +94,7 @@ void FloatingWidget::moveAction(){
             new_y = max_height - cur_height;
         }
         if(tool2 != nullptr){
-            fparent->move(new_x, new_y);
+            tool2->move(new_x, new_y);
         } else {
             move(new_x, new_y);
         }
