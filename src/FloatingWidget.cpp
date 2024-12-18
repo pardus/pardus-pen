@@ -80,6 +80,9 @@ void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
 static int new_xx, new_yy;
 
 void FloatingWidget::moveAction(){
+        if(fparent == nullptr){
+            return;
+        }
         if (new_x < 0) {
             new_x = 0;
         }if (new_y < 0) {

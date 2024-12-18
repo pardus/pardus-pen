@@ -120,7 +120,6 @@ public:
 
     QImage image;
     QColor penColor;
-    FloatingSettings* floatingSettings;
     MovableWidget* cropWidget;
     int penSize[3];
     void initializeImage(const QSize &size);

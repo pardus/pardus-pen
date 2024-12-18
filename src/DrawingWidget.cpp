@@ -22,8 +22,8 @@ extern "C" {
 
 extern WhiteBoard *board;
 extern QWidget * mainWidget;
-extern QMainWindow* mainWindow;
 extern DrawingWidget *drawing;
+extern FloatingSettings *floatingSettings;
 
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
@@ -136,7 +136,7 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            QImage image = QImage(mainWindow->geometry().width(),mainWindow->geometry().height(), QImage::Format_ARGB32);
+            QImage image = QImage(mainWidget->geometry().width(),mainWidget->geometry().height(), QImage::Format_ARGB32);
             image.fill(QColor("transparent"));
             return image;
         }
@@ -177,7 +177,7 @@ public:
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(filename);
         printer.setFullPage(true);
-        QSizeF imageSize(mainWindow->geometry().width(),mainWindow->geometry().height());
+        QSizeF imageSize(mainWidget->geometry().width(),mainWidget->geometry().height());
         QPageSize pageSize(imageSize, QPageSize::Point);
         printer.setPageSize(pageSize);
         printer.setResolution(72); // TODO: replace this
@@ -198,8 +198,8 @@ public:
         images.pageType = board->getType();
         values[last_page_num] = images;
         QString cfg = "[main]\n";
-        cfg += "width="+QString::number(mainWindow->geometry().width())+"\n";
-        cfg += "height="+QString::number(mainWindow->geometry().height())+"\n";
+        cfg += "width="+QString::number(mainWidget->geometry().width())+"\n";
+        cfg += "height="+QString::number(mainWidget->geometry().height())+"\n";
         for(int i=0;i<=page_count;i++){
             cfg += "[page"+QString::number(i)+"]\n";
             cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
@@ -294,7 +294,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penMode = DRAW;
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
-    cropWidget = new MovableWidget(mainWindow);
+    cropWidget = new MovableWidget(mainWidget);
     cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
     cropLayout->addWidget(cropWidget->crop);
@@ -397,7 +397,7 @@ void DrawingWidget::loadImage(int num){
     if(img.isNull()){
         return;
     }
-    img = img.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
+    img = img.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
     QPainter p(&image);
     image.fill(QColor("transparent"));
     p.drawImage(QPointF(0,0), img);

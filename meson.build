@@ -12,6 +12,12 @@ src = [
     'src/SetupWidgets.cpp',
     'src/settings.c',
     'src/OverView.cpp',
+    'src/tools/update.cpp',
+    'src/tools/background.cpp',
+    'src/tools/mainWindow.cpp',
+    'src/tools/screenshot.cpp',
+    'src/tools/save-load.cpp',
+    'src/tools/pen.cpp',
     'src/which.c'
 ]
 

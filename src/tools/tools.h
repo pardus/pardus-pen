@@ -1,0 +1,130 @@
+
+#include "../DrawingWidget.h"
+#include "../FloatingWidget.h"
+#include "../FloatingSettings.h"
+#include "../WhiteBoard.h"
+#include "../Button.h"
+#include "../ScreenShot.h"
+#include "../OverView.h"
+
+#define butsize 48*scale
+#define padding 8*scale
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
+#include <stdlib.h>
+#include <locale.h>
+#include <libintl.h>
+
+#define _(String) gettext(String)
+
+extern "C" {
+#include "../settings.h"
+}
+
+extern DrawingWidget *drawing;
+extern FloatingWidget *floatingWidget;
+extern FloatingSettings *floatingSettings;
+extern WhiteBoard *board;
+extern QMainWindow* tool;
+extern QMainWindow* tool2;
+
+extern float scale;
+
+extern DrawingWidget *drawing;
+extern FloatingWidget *floatingWidget;
+extern FloatingSettings *floatingSettings;
+extern WhiteBoard *board;
+
+extern QSlider *scrollHSlider;
+extern QSlider *scrollVSlider;
+
+extern QWidget *mainWidget;
+
+extern void updateGoBackButtons();
+extern void backgroundStyleEvent();
+extern void penStyleEvent();
+extern void penSizeEvent();
+
+extern void setPen(int type);
+extern void setPenStyle(int style);
+extern void setLineStyle(int style);
+
+extern QPushButton *penButton;
+extern QPushButton *selectButton;
+extern QPushButton *typeButton;
+extern QPushButton *markerButton;
+extern QPushButton *eraserButton;
+extern QPushButton *splineButton;
+extern QPushButton *lineButton;
+extern QPushButton *circleButton;
+extern QPushButton *triangleButton;
+extern QPushButton *rectButton;
+
+extern OverView *ov;
+
+extern QPushButton *lineNormalButton;
+extern QPushButton *lineDotLineButton;
+extern QPushButton *lineLineLineButton;
+
+extern QPushButton *backgroundButton;
+extern QPushButton* minify;
+extern QPushButton* fullscreen;
+
+extern QPushButton* transparentButton;
+extern QPushButton* blackButton;
+extern QPushButton* whiteButton;
+extern QPushButton* colorpicker;
+
+extern QPushButton* overlayIsometric;
+extern QPushButton* overlayMusic;
+extern QPushButton* overlayCustom;
+extern QPushButton* overlayTurkiye;
+extern QPushButton* overlayWorld;
+extern QPushButton* overlayLines;
+extern QPushButton* overlaySquares;
+extern QPushButton* overlayNone;
+
+
+extern QPushButton *backButton;
+extern QPushButton *nextButton;
+
+extern QPushButton *previousPage;
+extern QPushButton *nextPage;
+
+extern QPushButton *clear;
+extern QPushButton *close;
+
+extern QWidget *penSettings;
+extern QWidget *colorDialog;
+extern QWidget *typeDialog;
+extern QSlider *thicknessSlider;
+extern QLabel *thicknessLabel;
+extern QLabel *colorLabel;
+
+
+extern QLabel *move;
+
+extern QPushButton *save;
+extern QPushButton *open;
+extern QPushButton *ssButton;
+
+extern "C" {
+    extern void *load_archive(void* arg);
+    extern QString archive_target;
+    extern void settings_init();
+}
+
+extern void penSizeEvent();
+extern void penStyleEvent();
+extern void setupWidgets();
+
+extern bool hasSelection;
+
+extern void setupBackground();
+extern void setupScreenShot();
+extern void setupPenType();
+extern void setupSaveLoad();
+extern void backgroundStyleEvent();
+
