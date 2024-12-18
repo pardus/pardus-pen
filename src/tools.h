@@ -1,11 +1,12 @@
 
-#include "../DrawingWidget.h"
-#include "../FloatingWidget.h"
-#include "../FloatingSettings.h"
-#include "../WhiteBoard.h"
-#include "../Button.h"
-#include "../ScreenShot.h"
-#include "../OverView.h"
+#include "widgets/DrawingWidget.h"
+#include "widgets/FloatingWidget.h"
+#include "widgets/FloatingSettings.h"
+#include "widgets/WhiteBoard.h"
+#include "widgets/Button.h"
+#include "widgets/OverView.h"
+
+#include "utils/ScreenShot.h"
 
 #define butsize 48*scale
 #define padding 8*scale
@@ -20,7 +21,7 @@
 #define _(String) gettext(String)
 
 extern "C" {
-#include "../settings.h"
+#include "utils/settings.h"
 }
 
 extern DrawingWidget *drawing;

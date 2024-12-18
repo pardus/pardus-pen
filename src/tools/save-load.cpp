@@ -1,4 +1,4 @@
-#include "tools.h"
+#include "../tools.h"
 
 QPushButton *save;
 QPushButton *open;

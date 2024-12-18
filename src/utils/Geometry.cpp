@@ -1,4 +1,4 @@
-#include "DrawingWidget.h"
+#include "../widgets/DrawingWidget.h"
 
 static QPointF last_end = QPointF(0,0);
 static QPointF last_begin = QPointF(0,0);

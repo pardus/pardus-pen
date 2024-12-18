@@ -3,7 +3,7 @@
 #include "WhiteBoard.h"
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 

@@ -1,4 +1,4 @@
-#include "tools/tools.h"
+#include "tools.h"
 #include "tools/color.h"
 
 QPushButton *penMenu;

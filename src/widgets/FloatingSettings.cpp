@@ -3,7 +3,7 @@
 #include <QMainWindow>
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 

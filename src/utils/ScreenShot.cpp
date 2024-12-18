@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-#include "ScreenShot.h"
-#include "DrawingWidget.h"
+#include "../utils/ScreenShot.h"
+#include "../widgets/DrawingWidget.h"
 
 extern DrawingWidget *drawing;
 

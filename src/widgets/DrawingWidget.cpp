@@ -5,7 +5,7 @@
 #include <QPrinter>
 #endif
 #ifdef LIBARCHIVE
-#include "Archive.h"
+#include "../utils/Archive.h"
 #endif
 #include <stdio.h>
 
@@ -17,7 +17,7 @@
 #define _(String) gettext(String)
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 extern WhiteBoard *board;

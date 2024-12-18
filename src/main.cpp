@@ -9,7 +9,7 @@
 #include <locale.h>
 #include <libintl.h>
 
-#include "tools/tools.h"
+#include "tools.h"
 
 extern void mainWindowInit();
 

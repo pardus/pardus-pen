@@ -24,7 +24,7 @@
 #define DOTLINE 1
 #define LINELINE 2
 
-#include "Selection.h"
+#include "../utils/Selection.h"
 #include "FloatingSettings.h"
 
 #define LINE 0

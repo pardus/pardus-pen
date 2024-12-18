@@ -1,4 +1,4 @@
-#include "tools.h"
+#include "../tools.h"
 
 DrawingWidget *drawing;
 FloatingWidget *floatingWidget;

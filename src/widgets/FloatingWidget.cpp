@@ -1,7 +1,7 @@
 #include "FloatingWidget.h"
 
 
-#include "tools/tools.h"
+#include "../tools.h"
 
 int new_x = 0;
 int new_y = 0;
@@ -15,7 +15,7 @@ extern QMainWindow* tool;
 
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 #ifdef QT5

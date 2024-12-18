@@ -2,23 +2,23 @@ project('pardus-pen', ['cpp', 'c'])
 # Source files
 src = [
     'src/main.cpp',
-    'src/DrawingWidget.cpp',
-    'src/Selection.cpp',
-    'src/FloatingWidget.cpp',
-    'src/FloatingSettings.cpp',
-    'src/WhiteBoard.cpp',
-    'src/Button.cpp',
-    'src/Geometry.cpp',
+    'src/widgets/DrawingWidget.cpp',
+    'src/utils/Selection.cpp',
+    'src/utils/Geometry.cpp',
     'src/SetupWidgets.cpp',
-    'src/settings.c',
-    'src/OverView.cpp',
+    'src/utils/settings.c',
+    'src/widgets/OverView.cpp',
+    'src/widgets/FloatingWidget.cpp',
+    'src/widgets/FloatingSettings.cpp',
+    'src/widgets/WhiteBoard.cpp',
+    'src/widgets/Button.cpp',
     'src/tools/update.cpp',
     'src/tools/background.cpp',
     'src/tools/mainWindow.cpp',
     'src/tools/screenshot.cpp',
     'src/tools/save-load.cpp',
     'src/tools/pen.cpp',
-    'src/which.c'
+    'src/utils/which.c'
 ]
 
 subdir('po')
@@ -37,7 +37,7 @@ add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
 
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
-    src += ['src/ScreenShot.cpp']
+    src += ['src/utils/ScreenShot.cpp']
 endif
 # Qt dependencies
 qt_dep = [
@@ -51,7 +51,7 @@ endif
 if get_option('save')
     qt_dep += dependency('libarchive')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')
-    src += 'src/Archive.cpp'
+    src += 'src/utils/Archive.cpp'
 endif
 
 if get_option('qt') == '5'
