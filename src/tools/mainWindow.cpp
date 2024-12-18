@@ -30,12 +30,12 @@ public:
         setAttribute(Qt::WA_NoSystemBackground, true);
         setAttribute(Qt::WA_AcceptTouchEvents, true);
 
-        board = new WhiteBoard(this);
-        board->setType(get_int((char*)"page"));
-        board->setOverlayType(get_int((char*)"page-overlay"));
-
         mainWidget = new QWidget(this);
         mainWidget->setAttribute(Qt::WA_AcceptTouchEvents, true);
+
+        board = new WhiteBoard(mainWidget);
+        board->setType(get_int((char*)"page"));
+        board->setOverlayType(get_int((char*)"page-overlay"));
 
         // scrolls
         scrollHSlider = new QSlider(Qt::Horizontal, this);
@@ -184,7 +184,7 @@ void setupTools(){
     
 void mainWindowInit(){
     mainWindow = new MainWindow();
-    drawing = new DrawingWidget(mainWindow);
+    drawing = new DrawingWidget(mainWidget);
     ov = new OverView();
     setupTools();
     setupPenType();

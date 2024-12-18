@@ -295,7 +295,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
     cropWidget = new MovableWidget(mainWidget);
-    cropWidget->stackUnder(this);
+    //cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
     cropLayout->addWidget(cropWidget->crop);
     cropLayout->setContentsMargins(0,0,0,0);
