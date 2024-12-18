@@ -62,6 +62,12 @@ void penStyleEvent(){
     ov->penType = drawing->penType;
     ov->color = drawing->penColor;
     ov->updateImage();
+    colorDialog->setVisible(drawing->penType != ERASER || drawing->penMode == SELECTION);
+    ov->setVisible(drawing->penMode == DRAW);
+    thicknessSlider->setVisible(drawing->penMode == DRAW);
+    thicknessLabel->setVisible(drawing->penMode == DRAW);
+    modeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
+    penTypeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
 
 }
 
@@ -85,6 +91,7 @@ void penSizeEvent(){
     ov->color = drawing->penColor;
     ov->updateImage();
     floatingSettings->reload();
+    thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
 }
 
 void updateGoBackButtons(){

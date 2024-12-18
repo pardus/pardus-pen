@@ -5,6 +5,11 @@ QPushButton *penMenu;
 QPushButton *toolMenu;
 QWidget *colorDialog;
 
+QLabel *thicknessLabel;
+
+QWidget *penTypeDialog;
+QWidget *modeDialog;
+
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *toolSettingsLayout;
 
@@ -79,6 +84,19 @@ void setupWidgets(){
     penSettingsLayout->addWidget(ov);
     create_seperator(true);
 
+/********** penTypes **********/
+    QWidget *stylDialog = new QWidget();
+    QGridLayout *styleLayout = new QGridLayout(stylDialog);
+    // spline
+    styleLayout->addWidget(penButton,    0, 0);
+    styleLayout->addWidget(eraserButton, 0, 1);
+    styleLayout->addWidget(markerButton, 0, 2);
+    styleLayout->addWidget(selectButton,  0, 3);
+    
+    penSettingsLayout->addWidget(stylDialog);
+
+    create_seperator(true);
+
 /********** Color selection options **********/
     // color selection
     
@@ -118,7 +136,7 @@ void setupWidgets(){
 
 /********** Thickness slider **********/
     
-    QLabel *thicknessLabel = new QLabel(_("Size:"));
+    thicknessLabel = new QLabel(_("Size: 10"));
     thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     penSettingsLayout->addWidget(thicknessLabel);
 
@@ -164,37 +182,30 @@ void setupWidgets(){
 
     
 /********** penModes **********/
-    QWidget *modeDialog = new QWidget();
+    modeDialog = new QWidget();
     QGridLayout *modeLayout = new QGridLayout(modeDialog);
     // spline
     modeLayout->addWidget(splineButton,     0, 0);
     modeLayout->addWidget(lineButton,       0, 1);
     modeLayout->addWidget(circleButton,     0, 2);
-    modeLayout->addWidget(triangleButton,   1, 0);
-    modeLayout->addWidget(rectButton,       1, 1);
-    modeLayout->addWidget(selectButton,     1, 2);
+    modeLayout->addWidget(triangleButton,   0, 3);
+    modeLayout->addWidget(rectButton,       0, 4);
     
-    modeDialog->setFixedSize(
-        colorDialog->size().width(),
-        butsize*2+ padding*3
-    );
     penSettingsLayout->addWidget(modeDialog);
 
     create_seperator(true);
 
-/********** penTypes **********/
-    QWidget *stylDialog = new QWidget();
-    QGridLayout *styleLayout = new QGridLayout(stylDialog);
-    // spline
-    styleLayout->addWidget(penButton,    0, 0);
-    styleLayout->addWidget(eraserButton, 0, 1);
-    styleLayout->addWidget(markerButton, 0, 2);
+/********** pen type **********/
+
+    penTypeDialog = new QWidget();
+    QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
+    penTypeLayout->addWidget(lineNormalButton,      0, 0);
+    penTypeLayout->addWidget(lineDotLineButton,      0, 1);
+    penTypeLayout->addWidget(lineLineLineButton,       0, 2);
     
-    stylDialog->setFixedSize(
-        colorDialog->size().width(),
-        butsize+ padding*2
-    );
-    penSettingsLayout->addWidget(stylDialog);
+    penSettingsLayout->addWidget(penTypeDialog);
+
+    create_seperator(true);
 
     // resize color dialog
     colorDialog->setFixedSize(
@@ -257,7 +268,21 @@ void setupWidgets(){
     pageNumLayout->addWidget(whiteButton);
 
     toolSettingsLayout->addWidget(pageNumWidget);
+    
+    create_seperator(false);
 
+/********** clear & screenshot **********/
+
+    QWidget *miscDialog = new QWidget();
+    QGridLayout *miscLayout = new QGridLayout(miscDialog);
+    miscLayout->addWidget(close,      0, 0);
+    miscLayout->addWidget(clear,      0, 1);
+    miscLayout->addWidget(save,       0, 2);
+    miscLayout->addWidget(open,       0, 3);
+    miscLayout->addWidget(fullscreen, 0, 4);
+    
+    toolSettingsLayout->addWidget(miscDialog);
+    
 
 /********** Finish him **********/
 

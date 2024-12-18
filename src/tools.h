@@ -100,6 +100,9 @@ extern QSlider *thicknessSlider;
 extern QLabel *thicknessLabel;
 extern QLabel *colorLabel;
 
+extern QWidget *penTypeDialog;
+extern QWidget *modeDialog;
+
 
 extern QLabel *move;
 
