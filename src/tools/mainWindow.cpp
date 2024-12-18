@@ -138,7 +138,6 @@ void setupTools(){
             "font-size: "+QString::number(18*scale)+"px;"
         );
 
-        tool->show();
         // second toolbar
         tool2 = new QMainWindow();
         tool2->setWindowFlags(Qt::WindowStaysOnTopHint
@@ -152,9 +151,12 @@ void setupTools(){
             "color: black;"
             "font-size: "+QString::number(18*scale)+"px;"
         );
-        tool2->hide();
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
+        tool->setCentralWidget(floatingWidget);
+        
+        tool->show();
+        tool2->hide();
     } else {
 #endif
         tool = nullptr;
@@ -200,5 +202,6 @@ void mainWindowInit(){
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     floatingWidget->setMainWindow(mainWindow);
+    setupWidgets();
     mainWindow->showFullScreen();
 }

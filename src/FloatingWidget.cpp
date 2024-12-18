@@ -1,8 +1,10 @@
 #include "FloatingWidget.h"
-#include "FloatingSettings.h"
 
-int new_x;
-int new_y;
+
+#include "tools/tools.h"
+
+int new_x = 0;
+int new_y = 0;
 
 extern float scale;
 
@@ -21,15 +23,16 @@ extern "C" {
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     fparent = (QMainWindow*)parent;
-    is_vertical = get_bool((char*)"is-vertical");
     if(is_vertical){
         layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     } else {
         layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
     }
-    setLayout(layout);
+    new_x = get_int((char*)"cur-x");
+    new_y = get_int((char*)"cur-y");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
+    setLayout(layout);
     QString style = QString(
     "QWidget {"
         "border-radius: 13px;"
@@ -37,6 +40,8 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     "}");
     setStyleSheet(style);
     cur_height = padding;
+    cur_width = padding;
+
 }
 
 void FloatingWidget::setMainWindow(QWidget *widget) {
@@ -47,7 +52,9 @@ void FloatingWidget::setSettings(QWidget *widget) {
     floatingSettings = (FloatingSettings*)widget;
 }
 
-void FloatingWidget::setWidget(QWidget *widget) {
+void FloatingWidget::addWidget(QString name, QWidget *widget) {
+    layout->addWidget(widget);
+    widgets.insert(name, widget);
     if(is_vertical){
         cur_height += widget->size().height() + padding;
         if (cur_width < widget->size().width()) {
@@ -61,23 +68,11 @@ void FloatingWidget::setWidget(QWidget *widget) {
     }
     num_of_item++;
     setFixedSize(cur_width, cur_height);
-    layout->addWidget(widget);
     moveAction();
 }
 
-void FloatingWidget::mousePressEvent(QMouseEvent *event) {
-    offset_x = abs(event->globalPosition().x() - new_x);
-    offset_y = abs(event->globalPosition().y() - new_y);
-}
 
-void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
-    (void)(event); // fix unused warning
-    offset_x =-1;
-    offset_y =-1;
-    set_int((char*)"cur-x", new_x);
-    set_int((char*)"cur-y", new_y);
-}
-static int new_xx, new_yy;
+static int new_xx = 0, new_yy = 0;
 
 void FloatingWidget::moveAction(){
         if(fparent == nullptr){
@@ -110,13 +105,13 @@ void FloatingWidget::moveAction(){
                 if(new_xx  > mainWindow->geometry().width() - floatingSettings->cur_width){
                     new_xx = new_x - padding - floatingSettings->cur_width;
                 }
-                new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
+                new_yy = new_y;
                 if (new_yy > mainWindow->geometry().height() - floatingSettings->cur_height) {
                     new_yy = mainWindow->geometry().height() - floatingSettings->cur_height;
                 }
 
             } else {
-                new_xx = new_x + (cur_width / num_of_item) * settingsOffset;
+                new_xx = new_x;
                 if (new_xx > mainWindow->geometry().width() - floatingSettings->cur_width) {
                     new_xx = mainWindow->geometry().width() - floatingSettings->cur_width;
                 }
@@ -132,10 +127,17 @@ void FloatingWidget::moveAction(){
             }
         }
 }
+void FloatingWidget::mousePressEvent(QMouseEvent *event) {
+    offset_x = abs(event->globalPosition().x() - new_x);
+    offset_y = abs(event->globalPosition().y() - new_y);
+}
 
-void FloatingWidget::setFloatingOffset(int offset){
-    settingsOffset = offset;
-    moveAction();
+void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
+    (void)(event); // fix unused warning
+    offset_x =-1;
+    offset_y =-1;
+    set_int((char*)"cur-x", new_x);
+    set_int((char*)"cur-y", new_y);
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {

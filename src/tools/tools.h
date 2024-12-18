@@ -128,3 +128,5 @@ extern void setupPenType();
 extern void setupSaveLoad();
 extern void backgroundStyleEvent();
 
+extern void setupWidgets();
+
