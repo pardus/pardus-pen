@@ -105,15 +105,7 @@ protected:
                 }
             }
         }
-        if(tool2 != nullptr){
-            if (event->type() == QEvent::WindowStateChange) {
-                if (isMinimized()) {
-                    tool2->hide();
-                } else {
-                    tool2->show();
-                }
-            }
-        }
+        floatingSettings->setHide();
         drawing->update();
     }
 };

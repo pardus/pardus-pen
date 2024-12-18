@@ -44,6 +44,7 @@ FloatingSettings::FloatingSettings(QWidget *parent) : QWidget(parent) {
     setStyleSheet(style);
     cur_height = 0;
     cur_width = 0;
+    setFixedSize(cur_width, cur_height);
 }
 
 void FloatingSettings::addPage(QWidget *widget) {
@@ -54,7 +55,7 @@ void FloatingSettings::addPage(QWidget *widget) {
 }
 
 void FloatingSettings::reload(){
-    if(num_of_item <= current_page){
+    if(num_of_item <= current_page || current_page < 0){
         return;
     }
     settingsPages.getPage(current_page)->show();
@@ -69,8 +70,10 @@ void FloatingSettings::reload(){
 }
 
 void FloatingSettings::setHide(){
+    current_page = -1;
     if(tool2 != nullptr) {
         tool2->hide();
+        return;
     }
     hide();
 }
@@ -81,17 +84,13 @@ void FloatingSettings::setPage(int num){
     }
     current_page = num;
     settingsPages.getPage(current_page)->adjustSize();
-    if(settingsPages.getPage(current_page)->isVisible()){
-        settingsPages.getPage(current_page)->hide();
-        setHide();
-        return;
-    }
     for(int i=0;i<num_of_item;i++){
         settingsPages.getPage(i)->hide();
     }
     reload();
     if(tool2 != nullptr) {
         tool2->show();
+        return;
     }
     show();
 }

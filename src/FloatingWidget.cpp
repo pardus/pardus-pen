@@ -93,8 +93,8 @@ void FloatingWidget::moveAction(){
         }if (new_y > max_height - cur_height) {
             new_y = max_height - cur_height;
         }
-        if(tool2 != nullptr){
-            tool2->move(new_x, new_y);
+        if(tool != nullptr){
+            tool->move(new_x, new_y);
         } else {
             move(new_x, new_y);
         }
