@@ -9,13 +9,40 @@ void setupWidgets(){
     // Pen Menu
     QWidget *penSettings = new QWidget();
     QVBoxLayout *penSettingsLayout = new QVBoxLayout(penSettings);
-    penSettingsLayout->setSpacing(0);
-    penSettingsLayout->setContentsMargins(0, 0, 0, 0);
+    penSettingsLayout->setSpacing(padding);
+    penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
     penMenu = create_button(":images/pen.svg", [=](){
            floatingSettings->setPage(0);
            floatingWidget->moveAction();
     });
     floatingSettings->addPage(penSettings);
+    
+    thicknessSlider->setStyleSheet(
+         "QSlider::groove:horizontal {"
+            "border: 1px solid #bbb;"
+            "background: white;"
+            "height: "+QString::number(22*scale)+"px;"
+            "border-radius: "+QString::number(11*scale)+"px;"
+        "}"
+        "QSlider::handle:horizontal {"
+            "background: #fff;"
+            "border: 1px solid #777;"
+            "width: "+QString::number(44*scale)+"px;"
+            "margin: -4px 0;"
+            "border-radius: "+QString::number(18*scale)+"px;"
+        "}"
+        "QSlider::handle:horizontal:hover {"
+            "background: #ccc;"
+        "}"
+        "QSlider::sub-page:horizontal {"
+            "background: #5FAEE3;"
+            "border-radius: 5px;"
+        "}"
+        "QSlider::add-page:horizontal {"
+            "background: #FBFBFB;"
+            "border-radius:5px;"
+        "}"
+    );
 
     // Settings Menu
     QWidget *toolSettings = new QWidget();
@@ -41,6 +68,10 @@ void setupWidgets(){
     floatingWidget->addWidget("minify", minify);
 
 /********** Pen Settings **********/
+
+/********** Overview **********/
+
+    penSettingsLayout->addWidget(ov);
 
 /********** Color selection options **********/
     // color selection
@@ -75,9 +106,31 @@ void setupWidgets(){
     );
     penSettingsLayout->addWidget(colorDialog);
     
-    // finish him
+    // sync overview size with colordialog
+    ov->setFixedSize(
+        colorDialog->size().width(),
+        colorDialog->size().width()/2
+    );
+    
+/********** Thickness slider **********/
+    
+    QLabel *thicknessLabel = new QLabel(_("Size:"));
+    thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    penSettingsLayout->addWidget(thicknessLabel);
+
+    thicknessLabel->setFixedSize(
+        colorDialog->size().width(),
+        butsize / 2
+    );
+
+    penSettingsLayout->addWidget(thicknessSlider);
+    thicknessSlider->setFixedSize(
+        colorDialog->size().width(),
+        butsize
+    );
+
+/********** Finish him **********/
     penStyleEvent();
     penSizeEvent();
-
-
+    ov->updateImage();
 }

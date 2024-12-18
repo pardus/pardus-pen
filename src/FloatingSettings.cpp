@@ -59,10 +59,10 @@ void FloatingSettings::reload(){
         return;
     }
     settingsPages.getPage(current_page)->show();
+    settingsPages.getPage(current_page)->adjustSize();
     cur_width = settingsPages.getPage(current_page)->size().width();
     cur_height = settingsPages.getPage(current_page)->size().height();
     setFixedSize(cur_width, cur_height);
-    settingsPages.getPage(current_page)->adjustSize();
     if(tool2 != nullptr) {
         tool2->setFixedSize(cur_width, cur_height);
     }
@@ -82,8 +82,12 @@ void FloatingSettings::setPage(int num){
     if(num_of_item < num){
         return;
     }
+    printf("%d %d\n", current_page, num);
+    if(current_page == num) {
+        setHide();
+        return;
+    }
     current_page = num;
-    settingsPages.getPage(current_page)->adjustSize();
     for(int i=0;i<num_of_item;i++){
         settingsPages.getPage(i)->hide();
     }
