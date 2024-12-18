@@ -32,11 +32,6 @@ extern QMainWindow* tool2;
 
 extern float scale;
 
-extern DrawingWidget *drawing;
-extern FloatingWidget *floatingWidget;
-extern FloatingSettings *floatingSettings;
-extern WhiteBoard *board;
-
 extern QSlider *scrollHSlider;
 extern QSlider *scrollVSlider;
 

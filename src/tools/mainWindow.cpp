@@ -153,10 +153,11 @@ void setupTools(){
     } else {
 #endif
         tool = nullptr;
-        floatingSettings = new FloatingSettings();
-        floatingWidget = new FloatingWidget();
-        floatingWidget->setParent(mainWidget);
-        floatingSettings->setParent(mainWidget);
+        floatingSettings = new FloatingSettings(mainWindow);
+        floatingWidget = new FloatingWidget(mainWindow);
+        floatingWidget->setParent(mainWindow);
+        floatingSettings->setParent(mainWindow);
+        floatingWidget->show();
 #ifndef ETAP19
     }
 #endif
@@ -185,10 +186,9 @@ void setupTools(){
 }
     
 void mainWindowInit(){
-    setupTools();
     mainWindow = new MainWindow();
     drawing = new DrawingWidget(mainWindow);
-
+    setupTools();
     setupPenType();
     setupBackground();
     setupScreenShot();
