@@ -75,6 +75,7 @@ public:
     }
 
     void setCursor(qint64 id, int size){
+        init(id);
         if(sizes[id] == size){
             return;
         }
@@ -446,6 +447,11 @@ void DrawingWidget::goNext(){
 static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     int ev_pen = penType;
+    if(source & Qt::RightButton) {
+        penType = ERASER;
+    } else if(source & Qt::MiddleButton) {
+        penType = MARKER;
+    }
     switch(type) {
         case PRESS:
             if (curs.drawing[id] && curs.drawing.contains(id)) {
@@ -460,32 +466,24 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             geo.clear(id);
             addPoint(id, pos);
-            if(penMode != DRAW) {
-                return;
+            if(penMode == SELECTION) {
+                break;
             }
-            if(source & Qt::RightButton) {
-                ev_pen = ERASER;
-            }else if(source & Qt::MiddleButton) {
-                ev_pen = MARKER;
-            }
-            curs.init(id);
-            curs.setCursor(id, penSize[ev_pen]);
-            curs.setPosition(id, pos);
-            if(ev_pen != ERASER) {
+            if(penType == ERASER) {
+                curs.setCursor(id, penSize[penType]);
+                curs.setPosition(id, pos);
+            } else {
                 curs.hide(id);
             }
             curEventButtons = source;
             break;
         case MOVE:
-            if(source & Qt::RightButton) {
-                penType = ERASER;
-            }else if(source & Qt::MiddleButton) {
-                penType = MARKER;
-            }
             if (curs.drawing[id]) {
                 switch(penMode) {
                     case DRAW:
-                        curs.setPosition(id, pos);
+                        if(penType == ERASER) {
+                            curs.setPosition(id, pos);
+                        }
                         addPoint(id, pos);
                         drawLineToFunc(id, pressure);
                         break;
@@ -520,6 +518,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
     }
+    penType = ev_pen;
 }
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
