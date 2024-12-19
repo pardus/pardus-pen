@@ -27,11 +27,13 @@ void setupSaveLoad(){
         filter += _("PDF Files (*.pdf);;");
         #endif
         filter += _("All Files (*.*)");
+        floatingWidget->hide();
+        floatingSettings->setHide();
         QString selectedFilter;
         QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), filter, &selectedFilter);
-        if(selectedFilter.contains("pen")){
+        if(selectedFilter.contains("pen") && !file.endsWith(".pen")){
             file += ".pen";
-        } else if(selectedFilter.contains("pdf")){
+        } else if(selectedFilter.contains("pdf") && !file.endsWith(".pdf")){
             file += ".pdf";
         }
         //drawing->saveAll(file);
@@ -39,17 +41,21 @@ void setupSaveLoad(){
         // Creating a new thread
         archive_target = file;
         pthread_create(&ptid, NULL, &save_all, NULL);
+        floatingWidget->show();
     });
 
     open = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
         filter += _("All Files (*.*)");
+        floatingWidget->hide();
+        floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
         if(!filename.isEmpty()){
             pthread_t ptid;
             archive_target = filename;
             pthread_create(&ptid, NULL, &load_archive, NULL);
         }
+        floatingWidget->show();
     });
 #endif
 }
