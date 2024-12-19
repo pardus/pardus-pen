@@ -8,6 +8,8 @@
 #include "../utils/ScreenShot.h"
 #include "../widgets/DrawingWidget.h"
 
+#include "../tools.h"
+
 extern DrawingWidget *drawing;
 
 
@@ -28,8 +30,13 @@ void takeScreenshot(){
     } else if(drawing->penMode == DRAW) {
         // detect X11
         if (!getenv("WAYLAND_DISPLAY")){
-            QScreen *screen = QGuiApplication::primaryScreen();
-            QPixmap pixmap = screen->grabWindow(0);
+            QPixmap pixmap;
+            if(board->getType() == TRANSPARENT){
+                QScreen *screen = QGuiApplication::primaryScreen();
+                pixmap = screen->grabWindow(0);
+            } else {
+                pixmap = mainWidget->grab();
+            }
             QFile file(imgname);
             file.open(QIODevice::WriteOnly);
             pixmap.save(&file, "PNG");
@@ -58,7 +65,6 @@ void takeScreenshot(){
     messageBox.setInformativeText(msg.c_str());
     messageBox.setIcon(QMessageBox::Information);
     messageBox.exec();
-
 }
 
 #endif
