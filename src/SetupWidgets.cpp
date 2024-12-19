@@ -245,13 +245,13 @@ void setupWidgets(){
     create_seperator(false);
 
 
- /********** page number **********/    
+ /********** page number **********/
 
     QWidget *pageNumWidget = new QWidget();
     QHBoxLayout *pageNumLayout = new QHBoxLayout(pageNumWidget);
 
     pageNumLayout->addWidget(new QLabel(_("Page:")));
-    pageNumLayout->addWidget(pageLabel);    
+    pageNumLayout->addWidget(pageLabel);
     pageNumLayout->addWidget(previousPage);
     pageNumLayout->addWidget(nextPage);
 
@@ -268,7 +268,7 @@ void setupWidgets(){
     pageNumLayout->addWidget(whiteButton);
 
     toolSettingsLayout->addWidget(pageNumWidget);
-    
+
     create_seperator(false);
 
 /********** clear & screenshot **********/
@@ -280,9 +280,10 @@ void setupWidgets(){
     miscLayout->addWidget(save,       0, 2);
     miscLayout->addWidget(open,       0, 3);
     miscLayout->addWidget(fullscreen, 0, 4);
-    
+    miscLayout->addWidget(ssButton,    0, 6);
+
     toolSettingsLayout->addWidget(miscDialog);
-    
+
 
 /********** Finish him **********/
 
@@ -292,6 +293,6 @@ void setupWidgets(){
     backgroundStyleEvent();
     updateGoBackButtons();
     ov->updateImage();
-    
+
 
 }
