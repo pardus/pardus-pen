@@ -531,6 +531,10 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
+                    if(touchEvent->points().count() == 1) {
+                        // block single touch event (It ıs actually mouse event)
+                        break;
+                    }
                     eventHandler(Qt::LeftButton, PRESS, touchPoint.id(), pos, touchPoint.pressure());
                 } else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     eventHandler(Qt::LeftButton, RELEASE, touchPoint.id(), pos, touchPoint.pressure());
