@@ -5,7 +5,7 @@
 #include <QPrinter>
 #endif
 #ifdef LIBARCHIVE
-#include "Archive.h"
+#include "../utils/Archive.h"
 #endif
 #include <stdio.h>
 
@@ -17,13 +17,13 @@
 #define _(String) gettext(String)
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 extern WhiteBoard *board;
 extern QWidget * mainWidget;
-extern QMainWindow* mainWindow;
 extern DrawingWidget *drawing;
+extern FloatingSettings *floatingSettings;
 
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
@@ -75,6 +75,7 @@ public:
     }
 
     void setCursor(qint64 id, int size){
+        init(id);
         if(sizes[id] == size){
             return;
         }
@@ -136,7 +137,7 @@ public:
         if (values.contains(id)) {
             return values[id];
         } else {
-            QImage image = QImage(mainWindow->geometry().width(),mainWindow->geometry().height(), QImage::Format_ARGB32);
+            QImage image = QImage(mainWidget->geometry().width(),mainWidget->geometry().height(), QImage::Format_ARGB32);
             image.fill(QColor("transparent"));
             return image;
         }
@@ -177,7 +178,7 @@ public:
         printer.setOutputFormat(QPrinter::PdfFormat);
         printer.setOutputFileName(filename);
         printer.setFullPage(true);
-        QSizeF imageSize(mainWindow->geometry().width(),mainWindow->geometry().height());
+        QSizeF imageSize(mainWidget->geometry().width(),mainWidget->geometry().height());
         QPageSize pageSize(imageSize, QPageSize::Point);
         printer.setPageSize(pageSize);
         printer.setResolution(72); // TODO: replace this
@@ -198,8 +199,8 @@ public:
         images.pageType = board->getType();
         values[last_page_num] = images;
         QString cfg = "[main]\n";
-        cfg += "width="+QString::number(mainWindow->geometry().width())+"\n";
-        cfg += "height="+QString::number(mainWindow->geometry().height())+"\n";
+        cfg += "width="+QString::number(mainWidget->geometry().width())+"\n";
+        cfg += "height="+QString::number(mainWidget->geometry().height())+"\n";
         for(int i=0;i<=page_count;i++){
             cfg += "[page"+QString::number(i)+"]\n";
             cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
@@ -294,8 +295,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penMode = DRAW;
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
-    cropWidget = new MovableWidget(mainWindow);
-    cropWidget->stackUnder(this);
+    cropWidget = new MovableWidget(mainWidget);
+    //cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
     cropLayout->addWidget(cropWidget->crop);
     cropLayout->setContentsMargins(0,0,0,0);
@@ -397,7 +398,7 @@ void DrawingWidget::loadImage(int num){
     if(img.isNull()){
         return;
     }
-    img = img.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
+    img = img.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
     QPainter p(&image);
     image.fill(QColor("transparent"));
     p.drawImage(QPointF(0,0), img);
@@ -446,6 +447,11 @@ void DrawingWidget::goNext(){
 static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     int ev_pen = penType;
+    if(source & Qt::RightButton) {
+        penType = ERASER;
+    } else if(source & Qt::MiddleButton) {
+        penType = MARKER;
+    }
     switch(type) {
         case PRESS:
             if (curs.drawing[id] && curs.drawing.contains(id)) {
@@ -460,32 +466,24 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             geo.clear(id);
             addPoint(id, pos);
-            if(penMode != DRAW) {
-                return;
+            if(penMode == SELECTION) {
+                break;
             }
-            if(source & Qt::RightButton) {
-                ev_pen = ERASER;
-            }else if(source & Qt::MiddleButton) {
-                ev_pen = MARKER;
-            }
-            curs.init(id);
-            curs.setCursor(id, penSize[ev_pen]);
-            curs.setPosition(id, pos);
-            if(ev_pen != ERASER) {
+            if(penType == ERASER) {
+                curs.setCursor(id, penSize[penType]);
+                curs.setPosition(id, pos);
+            } else {
                 curs.hide(id);
             }
             curEventButtons = source;
             break;
         case MOVE:
-            if(source & Qt::RightButton) {
-                penType = ERASER;
-            }else if(source & Qt::MiddleButton) {
-                penType = MARKER;
-            }
             if (curs.drawing[id]) {
                 switch(penMode) {
                     case DRAW:
-                        curs.setPosition(id, pos);
+                        if(penType == ERASER) {
+                            curs.setPosition(id, pos);
+                        }
                         addPoint(id, pos);
                         drawLineToFunc(id, pressure);
                         break;
@@ -520,6 +518,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
     }
+    penType = ev_pen;
 }
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
@@ -531,6 +530,10 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
+                    if(touchEvent->points().count() == 1) {
+                        // block single touch event (It ıs actually mouse event)
+                        break;
+                    }
                     eventHandler(Qt::LeftButton, PRESS, touchPoint.id(), pos, touchPoint.pressure());
                 } else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     eventHandler(Qt::LeftButton, RELEASE, touchPoint.id(), pos, touchPoint.pressure());
