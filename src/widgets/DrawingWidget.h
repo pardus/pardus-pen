@@ -124,6 +124,7 @@ public:
     int penSize[3];
     void initializeImage(const QSize &size);
     void goPrevious();
+    void goPage(int i);
     void goNext();
     void goPreviousPage();
     void goNextPage();

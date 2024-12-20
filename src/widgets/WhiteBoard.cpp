@@ -45,7 +45,7 @@ void WhiteBoard::setOverlayType(int page){
         set_int((char*)"page-overlay",page);
     }
     overlayType = page;
-    update();
+    repaint();
 }
 void WhiteBoard::setType(int page){
     set_int((char*)"page",page);
@@ -61,19 +61,23 @@ void WhiteBoard::setType(int page){
         lineColor = Qt::black;
     }
     lineColor.setAlpha(127);
-    update();
+    repaint();
 }
 
 void WhiteBoard::setImage(QImage image){
     backgroundImage = image;
-    update();
+    repaint();
 }
 
 void WhiteBoard::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event)
+    drawAction(this);
+}
+
+void WhiteBoard::drawAction(QWidget* widget) {
 
     gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count");
-    painter.begin(this);
+    painter.begin(widget);
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.fillRect(rect(), background);
@@ -150,7 +154,6 @@ void WhiteBoard::drawIsometricPaper() {
 }
 
 void WhiteBoard::drawMusicPaper() {
-    QPainter painter(this);
     painter.setPen(
         QPen(lineColor, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     );

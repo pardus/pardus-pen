@@ -182,7 +182,6 @@ public:
         QPageSize pageSize(imageSize, QPageSize::Point);
         printer.setPageSize(pageSize);
         printer.setResolution(72); // TODO: replace this
-            
         QPainter painter(&printer);
         for(int i=0;i<=page_count;i++){
             QImage im = loadValue(i).loadValue(loadValue(i).last_image_num);
@@ -190,7 +189,6 @@ public:
             printer.newPage();
         }
         painter.end();
-        
     }
 #endif
 #ifdef LIBARCHIVE
@@ -406,10 +404,14 @@ void DrawingWidget::loadImage(int num){
 }
 
 void DrawingWidget::goNextPage(){
+    goPage(pages.last_page_num-1);
+}
+
+void DrawingWidget::goPage(int num){
     images.overlayType = board->getOverlayType();
     images.pageType = board->getType();
     pages.saveValue(pages.last_page_num, images);
-    pages.last_page_num++;
+    pages.last_page_num = num;
     images = pages.loadValue(pages.last_page_num);
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
@@ -417,14 +419,7 @@ void DrawingWidget::goNextPage(){
 }
 
 void DrawingWidget::goPreviousPage(){
-    images.overlayType = board->getOverlayType();
-    images.pageType = board->getType();
-    pages.saveValue(pages.last_page_num, images);
-    pages.last_page_num--;
-    images = pages.loadValue(pages.last_page_num);
-    board->setType(images.pageType);
-    board->setOverlayType(images.overlayType);
-    loadImage(images.last_image_num);
+    goPage(pages.last_page_num-1);
 }
 
 void DrawingWidget::goPrevious(){
