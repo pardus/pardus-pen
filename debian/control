@@ -13,6 +13,7 @@ Homepage: https://pardus.org.tr
 
 Package: pardus-pen
 Architecture: any
+Recommends: qttranslations5-l10n
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          libqt5gui5,
