@@ -43,8 +43,12 @@ endif
 qt_dep = [
     dependency('gio-2.0'),
 ]
+
+link_args = []
+
 if get_option('etap19')
     add_project_arguments('-DETAP19', '-pthread',  language: 'cpp')
+    link_args += ['-lpthread']
 endif
 
 
@@ -93,7 +97,7 @@ icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'
 
 # executable file
-executable('pardus-pen', src, dependencies: qt_dep, install: true)
+executable('pardus-pen', src, dependencies: qt_dep, link_args: link_args, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
 install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
