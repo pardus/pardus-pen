@@ -61,8 +61,9 @@ void setupWidgets(){
     floatingWidget->addWidget("next", nextButton);
     floatingWidget->addWidget("back", backButton);
     floatingWidget->addWidget("tool-menu", toolMenu);
-    floatingWidget->addWidget("minify", minify);
-    
+    if(!get_bool((char*)"fuar")){
+        floatingWidget->addWidget("minify", minify);
+    }
 
 /*********** main menu done *********/
 /************************************/
@@ -275,13 +276,15 @@ void setupWidgets(){
 
     QWidget *miscDialog = new QWidget();
     QGridLayout *miscLayout = new QGridLayout(miscDialog);
-    miscLayout->addWidget(close,      0, 0);
-    miscLayout->addWidget(clear,      0, 1);
-    miscLayout->addWidget(save,       0, 2);
-    miscLayout->addWidget(open,       0, 3);
-    miscLayout->addWidget(fullscreen, 0, 4);
-    miscLayout->addWidget(rotate, 0, 5);
-    miscLayout->addWidget(ssButton,    0, 6);
+    miscLayout->addWidget(clear,      0, 0);
+    miscLayout->addWidget(ssButton,   0, 1);
+    if(!get_bool((char*)"fuar")){
+        miscLayout->addWidget(close,      0, 2);
+        miscLayout->addWidget(save,       0, 3);
+        miscLayout->addWidget(open,       0, 4);
+        miscLayout->addWidget(fullscreen, 0, 5);
+        miscLayout->addWidget(rotate,     0, 6);
+    }
 
     toolSettingsLayout->addWidget(miscDialog);
 

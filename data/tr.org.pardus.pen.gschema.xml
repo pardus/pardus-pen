@@ -44,6 +44,10 @@
       <default>true</default>
       <summary>Toolbar is vertical or horizontal</summary>
     </key>
+    <key type="b" name="fuar">
+      <default>false</default>
+      <summary>Fuar mode</summary>
+    </key>
     <key type="b" name="xwayland">
       <default>false</default>
       <summary>Force use Xwayland under X11</summary>

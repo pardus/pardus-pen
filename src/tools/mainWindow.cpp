@@ -16,7 +16,6 @@ extern int new_x;
 extern int new_y;
 
 float scale = 1.0;
-bool fuarMode;
 
 class MainWindow : public QMainWindow {
 
