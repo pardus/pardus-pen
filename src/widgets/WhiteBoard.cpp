@@ -29,7 +29,7 @@ int WhiteBoard::getOverlayType(){
 
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
-        backgroundImage.fill(QColor("transparent"));
+        // do nothing
     } else if (page == TURKIYE){
         backgroundImage = QImage(":images/turkiye-map.svg");
     } else if (page == WORLD){
