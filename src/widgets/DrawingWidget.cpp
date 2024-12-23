@@ -404,7 +404,7 @@ void DrawingWidget::loadImage(int num){
 }
 
 void DrawingWidget::goNextPage(){
-    goPage(pages.last_page_num-1);
+    goPage(pages.last_page_num+1);
 }
 
 void DrawingWidget::goPage(int num){
