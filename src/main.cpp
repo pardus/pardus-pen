@@ -60,8 +60,13 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
     QTranslator qtTranslator;
+    #ifdef QT5
+    (void)qtTranslator.load("qt_" + QLocale::system().name(),
+        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    #else
     (void)qtTranslator.load("qt_" + QLocale::system().name(),
         QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    #endif
     app.installTranslator(&qtTranslator);
 
     mainWindowInit();
