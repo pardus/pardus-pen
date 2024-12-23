@@ -66,6 +66,7 @@ extern QPushButton *lineLineLineButton;
 
 extern QPushButton *backgroundButton;
 extern QPushButton* minify;
+extern QPushButton* rotate;
 extern QPushButton* fullscreen;
 
 extern QPushButton* transparentButton;

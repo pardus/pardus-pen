@@ -147,7 +147,7 @@ void setupTools(){
         floatingWidget = new FloatingWidget(tool);
         tool->setCentralWidget(floatingWidget);
         tool2->setCentralWidget(floatingSettings);
-        
+
         tool->show();
         tool2->hide();
     } else {
@@ -160,11 +160,11 @@ void setupTools(){
 #endif
     floatingWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
-    
+
     minify = create_button(":images/screen.svg", [=](){
             mainWindow->showMinimized();
-        });
-    
+    });
+
         fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
             if(mainWindow->isFullScreen()){
                 set_icon(":images/fullscreen.svg", fullscreen);
@@ -180,8 +180,12 @@ void setupTools(){
             }
             minify->setEnabled(mainWindow->isFullScreen());
     });
+    rotate = create_button(":images/rotate.svg", [=](){
+        floatingWidget->setVertical(!floatingWidget->is_vertical);
+        floatingSettings->setHide();
+    });
 }
-    
+
 void mainWindowInit(){
     mainWindow = new MainWindow();
     drawing = new DrawingWidget(mainWidget);

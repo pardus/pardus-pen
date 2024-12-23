@@ -24,6 +24,7 @@ public:
     void setMainWindow(QWidget *widget);
     void moveAction();
     bool is_vertical;
+    void setVertical(bool state);
     QMainWindow *mainWindow;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;

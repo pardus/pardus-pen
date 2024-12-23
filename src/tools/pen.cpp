@@ -19,6 +19,7 @@ QPushButton *lineLineLineButton;
 QSlider *thicknessSlider;
 QPushButton *backgroundButton;
 QPushButton* minify;
+QPushButton* rotate;
 QPushButton* fullscreen;
 
 QPushButton *backButton;

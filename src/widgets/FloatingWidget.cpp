@@ -24,10 +24,9 @@ extern "C" {
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     is_vertical = get_bool((char*)"is-vertical");
+    layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
     if(is_vertical){
-        layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
-    } else {
-        layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
+        layout->setDirection(QBoxLayout::TopToBottom);
     }
     new_x = get_int((char*)"cur-x");
     new_y = get_int((char*)"cur-y");
@@ -43,6 +42,26 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     cur_height = padding;
     cur_width = padding;
 
+}
+
+void  FloatingWidget::setVertical(bool state){
+    set_bool((char*)"is-vertical", state);
+    int h = size().height();
+    int w = size().width();
+    if(state){
+        layout->setDirection(QBoxLayout::TopToBottom);
+        setFixedSize(MIN(h,w), MAX(h,w));
+    } else {
+        layout->setDirection(QBoxLayout::LeftToRight);
+        setFixedSize(MAX(h,w), MIN(h,w));
+    }
+    moveAction();
+    is_vertical = state;
+    cur_height = size().height();
+    cur_width = size().width();
+    if(tool != nullptr){
+        tool->resize(size().width(), size().height());
+    }
 }
 
 void FloatingWidget::setMainWindow(QWidget *widget) {
@@ -87,10 +106,10 @@ void FloatingWidget::moveAction(){
             max_width = QGuiApplication::primaryScreen()->size().width();
             max_height = QGuiApplication::primaryScreen()->size().height();
         }
-        if (new_x >  max_width- cur_width) {
-            new_x = max_width - cur_width;
-        }if (new_y > max_height - cur_height) {
-            new_y = max_height - cur_height;
+        if (new_x >  max_width- size().width()) {
+            new_x = max_width - size().width();
+        }if (new_y > max_height - size().height()) {
+            new_y = max_height - size().height();
         }
         if(tool != nullptr){
             tool->move(new_x, new_y);
@@ -99,7 +118,7 @@ void FloatingWidget::moveAction(){
         }
         if(floatingSettings != NULL){
             if(is_vertical){
-                new_xx = new_x+padding+cur_width;
+                new_xx = new_x+padding+size().width();
                 if(new_xx  > mainWindow->geometry().width() - floatingSettings->cur_width){
                     new_xx = new_x - padding - floatingSettings->cur_width;
                 }
@@ -113,7 +132,7 @@ void FloatingWidget::moveAction(){
                 if (new_xx > mainWindow->geometry().width() - floatingSettings->cur_width) {
                     new_xx = mainWindow->geometry().width() - floatingSettings->cur_width;
                 }
-                new_yy = new_y + cur_height + padding;
+                new_yy = new_y + size().height() + padding;
                 if(new_yy  > mainWindow->geometry().height() - floatingSettings->cur_height){
                     new_yy = new_y - padding - floatingSettings->cur_height;
                 }

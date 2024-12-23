@@ -280,6 +280,7 @@ void setupWidgets(){
     miscLayout->addWidget(save,       0, 2);
     miscLayout->addWidget(open,       0, 3);
     miscLayout->addWidget(fullscreen, 0, 4);
+    miscLayout->addWidget(rotate, 0, 5);
     miscLayout->addWidget(ssButton,    0, 6);
 
     toolSettingsLayout->addWidget(miscDialog);
