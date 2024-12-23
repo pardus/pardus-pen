@@ -410,19 +410,20 @@ void DrawingWidget::goNextPage(){
 }
 
 void DrawingWidget::goPage(int num){
+    int old = pages.last_page_num;
     images.overlayType = board->getOverlayType();
     images.pageType = board->getType();
 
-    pages.saveValue(pages.last_page_num, images);
-    pages.backgrounds[pages.last_page_num] = board->grab();
+    pages.saveValue(old, images);
     pages.last_page_num = num;
 
     images = pages.loadValue(pages.last_page_num);
+    loadImage(images.last_image_num);
+    pages.backgrounds[old] = board->grab();
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
 
-    loadImage(images.last_image_num);
 }
 
 void DrawingWidget::goPreviousPage(){

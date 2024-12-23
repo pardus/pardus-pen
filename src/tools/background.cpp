@@ -75,6 +75,11 @@ void setupBackground(){
     
     overlayCustom = create_button(":images/overlay-custom.svg", [=](){
         board->setOverlayType(CUSTOM);
+        QString fileName = QFileDialog::getOpenFileName(mainWidget, _("Open Image File"), "", QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)"));
+        if (!fileName.isEmpty()) {
+            QImage image(fileName);
+            board->setImage(image);
+        }
         backgroundStyleEvent();
     });
 

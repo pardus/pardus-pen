@@ -29,13 +29,7 @@ int WhiteBoard::getOverlayType(){
 
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
-        QString fileName = QFileDialog::getOpenFileName(this, _("Open Image File"), "", QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)"));
-        if (!fileName.isEmpty()) {
-            QImage image(fileName);
-            setImage(image);
-        } else {
-            backgroundImage.fill(QColor("transparent"));
-        }
+        backgroundImage.fill(QColor("transparent"));
     } else if (page == TURKIYE){
         backgroundImage = QImage(":images/turkiye-map.svg");
     } else if (page == WORLD){
