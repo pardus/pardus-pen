@@ -97,7 +97,7 @@ public:
                 if(strcmp(entryName, "config") == 0){
                     config = QString::fromUtf8(*imageData);
                     QStringList list = config.split("\n");
-                    for (const auto &str : std::as_const(list)) {
+                    for (const auto &str : list) {
                         if(str.startsWith("width=")){
                             width = str.split("=")[1].toInt();
                         } else if(str.startsWith("height=")){

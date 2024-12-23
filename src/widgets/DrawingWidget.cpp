@@ -238,7 +238,7 @@ public:
         QStringList list = cfg.split("\n");
         QString area = "main";
         int page = 0;
-        for (const auto &str : std::as_const(list)) {
+        for (const auto &str : list) {
             if(str.startsWith("[") && str.endsWith("]")) {
                 area = str.mid(1,str.length()-2);
                 if(area.startsWith("page")){
