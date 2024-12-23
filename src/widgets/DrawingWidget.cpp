@@ -185,6 +185,7 @@ public:
         QPainter painter(&printer);
         for(int i=0;i<=page_count;i++){
             QImage im = loadValue(i).loadValue(loadValue(i).last_image_num);
+            painter.drawPixmap(0,0, backgrounds[i]);
             painter.drawImage(0,0, im);
             printer.newPage();
         }
@@ -273,6 +274,7 @@ public:
             return imgs;
         }
     }
+    QMap<qint64, QPixmap> backgrounds;
 
 private:
     QMap<qint64, ImageStorage> values;
@@ -410,11 +412,16 @@ void DrawingWidget::goNextPage(){
 void DrawingWidget::goPage(int num){
     images.overlayType = board->getOverlayType();
     images.pageType = board->getType();
+
     pages.saveValue(pages.last_page_num, images);
+    pages.backgrounds[pages.last_page_num] = board->grab();
     pages.last_page_num = num;
+
     images = pages.loadValue(pages.last_page_num);
+
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
+
     loadImage(images.last_image_num);
 }
 

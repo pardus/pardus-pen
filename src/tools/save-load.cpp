@@ -36,7 +36,8 @@ void setupSaveLoad(){
         } else if(selectedFilter.contains("pdf") && !file.endsWith(".pdf")){
             file += ".pdf";
         }
-        //drawing->saveAll(file);
+        // save current page using goPage()
+        drawing->goPage(drawing->getPageNum());
         pthread_t ptid;
         // Creating a new thread
         archive_target = file;
