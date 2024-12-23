@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QColorDialog>
 #include <QProcess>
+#include <QTranslator>
 
 #include <stdlib.h>
 #include <locale.h>
@@ -36,7 +37,6 @@ int main(int argc, char *argv[]) {
     setenv("QT_AUTO_SCREEN_SCALE_FACTOR", "0", 1);
     setenv("QT_SCALE_FACTOR", "1", 1);
 
-    
 
     // translation part
     const char *systemLanguage = getenv("LANG");
@@ -58,6 +58,12 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationName("Pardus");
 
     QApplication app(argc, argv);
+
+    QTranslator qtTranslator;
+    (void)qtTranslator.load("qt_" + QLocale::system().name(),
+        QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    app.installTranslator(&qtTranslator);
+
     mainWindowInit();
 
 #ifdef LIBARCHIVE
