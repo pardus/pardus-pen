@@ -23,6 +23,7 @@ extern "C" {
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
+    is_vertical = get_bool((char*)"is-vertical");
     if(is_vertical){
         layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
     } else {
