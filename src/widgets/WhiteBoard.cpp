@@ -35,7 +35,7 @@ void WhiteBoard::setOverlayType(int page){
     } else if (page == WORLD){
         backgroundImage = QImage(":images/world-map.svg");
     } else {
-        backgroundImage.fill(QColor("transparent"));
+        backgroundImage.fill(QColor("transparent"));;
         set_int((char*)"page-overlay",page);
     }
     overlayType = page;

@@ -275,6 +275,7 @@ public:
         }
     }
     QMap<qint64, QPixmap> backgrounds;
+    QMap<qint64, QImage> overlays;
 
 private:
     QMap<qint64, ImageStorage> values;
@@ -420,6 +421,11 @@ void DrawingWidget::goPage(int num){
     images = pages.loadValue(pages.last_page_num);
     loadImage(images.last_image_num);
     pages.backgrounds[old] = board->grab();
+    pages.overlays[old] = board->backgroundImage;
+
+    if(pages.overlays.contains(num)){
+        board->backgroundImage = pages.overlays[num];
+    }
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
