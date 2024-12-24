@@ -89,8 +89,13 @@ void WhiteBoard::drawAction(QWidget* widget) {
         case CUSTOM:
         case TURKIYE:
         case WORLD:
-            // %10 padding
-            painter.drawImage(QPoint(w*0.1, h*0.1), backgroundImage.scaled(w*0.8, h*0.8));
+            if(backgroundImage.size().width() * backgroundImage.size().height() > 0){
+                w = backgroundImage.size().width() * h / backgroundImage.size().height();
+                painter.drawImage(
+                    QPoint((mainWindow->geometry().width() - w) / 2, 0),
+                    backgroundImage.scaled(w, h)
+                );
+            }
             break;
         case SQUARES:
             drawSquarePaper();
