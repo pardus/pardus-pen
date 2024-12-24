@@ -100,12 +100,12 @@ void setupBackground(){
     });
     pageLabel = new QLabel("0");
 
-    overlayScaleUp = create_button(":images/close.svg", [=](){
+    overlayScaleUp = create_button(":images/zoom-in.svg", [=](){
         board->ratios[drawing->getPageNum()] += 10;
         board->update();
     });
 
-    overlayScaleDown = create_button(":images/clear.svg", [=](){
+    overlayScaleDown = create_button(":images/zoom-out.svg", [=](){
         board->ratios[drawing->getPageNum()] -= 10;
         board->update();
     });

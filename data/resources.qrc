@@ -34,6 +34,8 @@
         <file>images/go-back.svg</file>
         <file>images/go-next.svg</file>
         <file>images/rotate.svg</file>
+        <file>images/zoom-in.svg</file>
+        <file>images/zoom-out.svg</file>
         <file>images/overlay-none.svg</file>
         <file>images/overlay-squares.svg</file>
         <file>images/overlay-lines.svg</file>
