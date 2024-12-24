@@ -356,6 +356,7 @@ void DrawingWidget::paintEvent(QPaintEvent *event) {
 void DrawingWidget::clear() {
     image.fill(QColor("transparent"));
     images.clear();
+    pages.saveValue(pages.last_page_num, images);
     update();
 }
 
