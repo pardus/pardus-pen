@@ -204,6 +204,7 @@ public:
             cfg += "[page"+QString::number(i)+"]\n";
             cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
             cfg += "page="+QString::number(loadValue(i).pageType)+"\n";
+            archive_add(QString::number(i)+"/background", overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
@@ -221,6 +222,10 @@ public:
             QStringList parts = path.split("/");
             QImage image = it.value();
             int page = parts[0].toInt();
+            if(path.endsWith("background")){
+                overlays[page] = image;
+                continue;
+            }
             int frame = parts[1].toInt();
             printf("Load: page: %d frame %d\n", page, frame);
             if(page > page_count){
@@ -256,6 +261,7 @@ public:
         images = values[0];
         board->setType(images.pageType);
         board->setOverlayType(images.overlayType);
+        board->backgroundImage = overlays[0];
         drawing->loadImage(images.last_image_num);
         drawing->update();
         updateGoBackButtons();
