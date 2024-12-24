@@ -6,6 +6,7 @@ extern "C" {
 #include "../utils/settings.h"
 }
 
+#include "../tools.h"
 
 #include <stdlib.h>
 #include <locale.h>
@@ -26,6 +27,7 @@ int WhiteBoard::getType(){
 int WhiteBoard::getOverlayType(){
     return overlayType;
 }
+#define backgroundImage overlays[drawing->getPageNum()]
 
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
@@ -70,7 +72,6 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
 void WhiteBoard::drawAction(QWidget* widget) {
 
-    gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count");
     painter.begin(widget);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -82,6 +83,12 @@ void WhiteBoard::drawAction(QWidget* widget) {
 
     int w = mainWindow->geometry().width();
     int h = mainWindow->geometry().height();
+    if (!ratios.contains(drawing->getPageNum())){
+        ratios[drawing->getPageNum()] = 80;
+    }
+    float ratio = ratios[drawing->getPageNum()] / 100.0;
+    int ow, oh;
+    gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
         case NONE:
@@ -92,18 +99,18 @@ void WhiteBoard::drawAction(QWidget* widget) {
             if(backgroundImage.size().width() * backgroundImage.size().height() > 0){
                 w = backgroundImage.size().width() * h / backgroundImage.size().height();
                 if(w <= mainWindow->geometry().width()) {
-                    painter.drawImage(
-                        QPoint((mainWindow->geometry().width() - w) / 2, 0),
-                        backgroundImage.scaled(w, h)
-                    );
                 } else {
                     w = mainWindow->geometry().width();
                     h = backgroundImage.size().height() * w / backgroundImage.size().width();
-                    painter.drawImage(
-                        QPoint(0, (mainWindow->geometry().height() - h) / 2),
-                        backgroundImage.scaled(w, h)
-                    );
                 }
+                w = w*ratio;
+                h = h*ratio;
+                ow = (mainWindow->geometry().width() - w) / 2;
+                oh = (mainWindow->geometry().height() - h) / 2;
+                painter.drawImage(
+                    QPoint(ow, oh),
+                    backgroundImage.scaled(w, h)
+                );
             }
             break;
         case SQUARES:

@@ -185,7 +185,7 @@ public:
         QPainter painter(&printer);
         for(int i=0;i<=page_count;i++){
             QImage im = loadValue(i).loadValue(loadValue(i).last_image_num);
-            painter.drawPixmap(0,0, backgrounds[i]);
+            painter.drawPixmap(0,0, board->backgrounds[i]);
             painter.drawImage(0,0, im);
             printer.newPage();
         }
@@ -204,7 +204,7 @@ public:
             cfg += "[page"+QString::number(i)+"]\n";
             cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
             cfg += "page="+QString::number(loadValue(i).pageType)+"\n";
-            archive_add(QString::number(i)+"/background", overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
+            archive_add(QString::number(i)+"/background", board->overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
@@ -223,7 +223,7 @@ public:
             QImage image = it.value();
             int page = parts[0].toInt();
             if(path.endsWith("background")){
-                overlays[page] = image;
+                board->overlays[page] = image;
                 continue;
             }
             int frame = parts[1].toInt();
@@ -261,7 +261,6 @@ public:
         images = values[0];
         board->setType(images.pageType);
         board->setOverlayType(images.overlayType);
-        board->backgroundImage = overlays[0];
         drawing->loadImage(images.last_image_num);
         drawing->update();
         updateGoBackButtons();
@@ -280,8 +279,6 @@ public:
             return imgs;
         }
     }
-    QMap<qint64, QPixmap> backgrounds;
-    QMap<qint64, QImage> overlays;
 
 private:
     QMap<qint64, ImageStorage> values;
@@ -426,12 +423,7 @@ void DrawingWidget::goPage(int num){
 
     images = pages.loadValue(pages.last_page_num);
     loadImage(images.last_image_num);
-    pages.backgrounds[old] = board->grab();
-    pages.overlays[old] = board->backgroundImage;
-
-    if(pages.overlays.contains(num)){
-        board->backgroundImage = pages.overlays[num];
-    }
+    board->backgrounds[old] = board->grab();
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);

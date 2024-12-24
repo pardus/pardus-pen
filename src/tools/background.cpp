@@ -80,7 +80,7 @@ void setupBackground(){
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open Image File"), QDir::homePath(), filter);
         if (!filename.isEmpty()) {
-            board->backgroundImage = QImage(filename);
+            board->overlays[drawing->getPageNum()] = QImage(filename);
         }
         floatingWidget->show();
         board->setOverlayType(CUSTOM);
