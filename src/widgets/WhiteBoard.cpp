@@ -91,10 +91,19 @@ void WhiteBoard::drawAction(QWidget* widget) {
         case WORLD:
             if(backgroundImage.size().width() * backgroundImage.size().height() > 0){
                 w = backgroundImage.size().width() * h / backgroundImage.size().height();
-                painter.drawImage(
-                    QPoint((mainWindow->geometry().width() - w) / 2, 0),
-                    backgroundImage.scaled(w, h)
-                );
+                if(w <= mainWindow->geometry().width()) {
+                    painter.drawImage(
+                        QPoint((mainWindow->geometry().width() - w) / 2, 0),
+                        backgroundImage.scaled(w, h)
+                    );
+                } else {
+                    w = mainWindow->geometry().width();
+                    h = backgroundImage.size().height() * w / backgroundImage.size().width();
+                    painter.drawImage(
+                        QPoint(0, (mainWindow->geometry().height() - h) / 2),
+                        backgroundImage.scaled(w, h)
+                    );
+                }
             }
             break;
         case SQUARES:
