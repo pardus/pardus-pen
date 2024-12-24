@@ -285,6 +285,8 @@ void setupWidgets(){
         miscLayout->addWidget(fullscreen, 0, 5);
         miscLayout->addWidget(rotate,     0, 6);
     }
+    miscLayout->addWidget(overlayScaleUp,     1, 0);
+    miscLayout->addWidget(overlayScaleDown,     1, 1);
 
     toolSettingsLayout->addWidget(miscDialog);
 

@@ -83,6 +83,9 @@ extern QPushButton* overlayLines;
 extern QPushButton* overlaySquares;
 extern QPushButton* overlayNone;
 
+extern QPushButton* overlayScaleUp;
+extern QPushButton* overlayScaleDown;
+
 
 extern QPushButton *backButton;
 extern QPushButton *nextButton;

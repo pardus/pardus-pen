@@ -15,6 +15,9 @@ QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
 
+QPushButton* overlayScaleUp;
+QPushButton* overlayScaleDown;
+
 QPushButton *clear;
 
 void setupBackground(){
@@ -96,8 +99,17 @@ void setupBackground(){
         backgroundStyleEvent();
     });
     pageLabel = new QLabel("0");
-    
-    
+
+    overlayScaleUp = create_button(":images/close.svg", [=](){
+        board->ratios[drawing->getPageNum()] += 10;
+        board->update();
+    });
+
+    overlayScaleDown = create_button(":images/clear.svg", [=](){
+        board->ratios[drawing->getPageNum()] -= 10;
+        board->update();
+    });
+
     clear = create_button(":images/clear.svg", [=](){
         if(drawing->penMode == SELECTION && hasSelection) {
             drawing->clearSelection();
