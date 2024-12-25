@@ -18,6 +18,9 @@ QPushButton* overlayNone;
 QPushButton* overlayScaleUp;
 QPushButton* overlayScaleDown;
 
+QPushButton* overlayRotateUp;
+QPushButton* overlayRotateDown;
+
 QPushButton *clear;
 
 void setupBackground(){
@@ -75,7 +78,7 @@ void setupBackground(){
         board->setOverlayType(MUSIC);
         backgroundStyleEvent();
     });
-    
+ 
     overlayCustom = create_button(":images/overlay-custom.svg", [=](){
         QString filter = QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
         filter += _("All Files (*.*)");
@@ -107,6 +110,16 @@ void setupBackground(){
 
     overlayScaleDown = create_button(":images/zoom-out.svg", [=](){
         board->ratios[drawing->getPageNum()] -= 10;
+        board->update();
+    });
+
+    overlayRotateUp = create_button(":images/bg-rotate-plus.svg", [=](){
+        board->rotates[drawing->getPageNum()] += 15;
+        board->update();
+    });
+
+    overlayRotateDown = create_button(":images/bg-rotate-minus.svg", [=](){
+        board->rotates[drawing->getPageNum()] -= 15;
         board->update();
     });
 

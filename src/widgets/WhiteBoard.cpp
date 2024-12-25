@@ -27,17 +27,16 @@ int WhiteBoard::getType(){
 int WhiteBoard::getOverlayType(){
     return overlayType;
 }
-#define backgroundImage overlays[drawing->getPageNum()]
 
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
         // do nothing
     } else if (page == TURKIYE){
-        backgroundImage = QImage(":images/turkiye-map.svg");
+        overlays[drawing->getPageNum()] = QImage(":images/turkiye-map.svg");
     } else if (page == WORLD){
-        backgroundImage = QImage(":images/world-map.svg");
+        overlays[drawing->getPageNum()] = QImage(":images/world-map.svg");
     } else {
-        backgroundImage.fill(QColor("transparent"));;
+        overlays[drawing->getPageNum()].fill(QColor("transparent"));;
         set_int((char*)"page-overlay",page);
     }
     overlayType = page;
@@ -61,7 +60,7 @@ void WhiteBoard::setType(int page){
 }
 
 void WhiteBoard::setImage(QImage image){
-    backgroundImage = image;
+    overlays[drawing->getPageNum()] = image;
     update();
 }
 
@@ -82,8 +81,14 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     if (!ratios.contains(drawing->getPageNum())){
         ratios[drawing->getPageNum()] = 80;
     }
+    if (!rotates.contains(drawing->getPageNum())){
+        rotates[drawing->getPageNum()] = 0;
+    }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
     int ow, oh;
+    QTransform transform;
+    transform.rotate(rotates[drawing->getPageNum()]);
+    QImage img = overlays[drawing->getPageNum()].transformed(transform);
     gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
@@ -92,12 +97,12 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case CUSTOM:
         case TURKIYE:
         case WORLD:
-            if(backgroundImage.size().width() * backgroundImage.size().height() > 0){
-                w = backgroundImage.size().width() * h / backgroundImage.size().height();
+            if(img.size().width() * img.size().height() > 0){
+                w = img.size().width() * h / img.size().height();
                 if(w <= mainWindow->geometry().width()) {
                 } else {
                     w = mainWindow->geometry().width();
-                    h = backgroundImage.size().height() * w / backgroundImage.size().width();
+                    h = img.size().height() * w / img.size().width();
                 }
                 w = w*ratio;
                 h = h*ratio;
@@ -105,7 +110,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
                 oh = (mainWindow->geometry().height() - h) / 2;
                 painter.drawImage(
                     QPoint(ow, oh),
-                    backgroundImage.scaled(w, h)
+                    img.scaled(w, h)
                 );
             }
             break;

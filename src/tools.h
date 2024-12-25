@@ -86,6 +86,8 @@ extern QPushButton* overlayNone;
 extern QPushButton* overlayScaleUp;
 extern QPushButton* overlayScaleDown;
 
+extern QPushButton* overlayRotateUp;
+extern QPushButton* overlayRotateDown;
 
 extern QPushButton *backButton;
 extern QPushButton *nextButton;

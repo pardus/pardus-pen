@@ -34,6 +34,7 @@ public:
     QMainWindow *mainWindow;
     void drawMusicPaper();
     QMap<qint64, int> ratios;
+    QMap<qint64, int> rotates;
     QMap<qint64, QPixmap> backgrounds;
     QMap<qint64, QImage> overlays;
 
