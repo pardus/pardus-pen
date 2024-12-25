@@ -27,7 +27,6 @@ public:
     int getOverlayType();
     void setType(int type);
     void setOverlayType(int type);
-    void drawAction(QWidget* widget);
     void setImage(QImage image);
     void drawSquarePaper();
     void drawLinePaper();

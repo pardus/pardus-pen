@@ -41,7 +41,7 @@ void WhiteBoard::setOverlayType(int page){
         set_int((char*)"page-overlay",page);
     }
     overlayType = page;
-    repaint();
+    update();
 }
 void WhiteBoard::setType(int page){
     set_int((char*)"page",page);
@@ -57,22 +57,18 @@ void WhiteBoard::setType(int page){
         lineColor = Qt::black;
     }
     lineColor.setAlpha(127);
-    repaint();
+    update();
 }
 
 void WhiteBoard::setImage(QImage image){
     backgroundImage = image;
-    repaint();
+    update();
 }
 
 void WhiteBoard::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event)
-    drawAction(this);
-}
 
-void WhiteBoard::drawAction(QWidget* widget) {
-
-    painter.begin(widget);
+    painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.fillRect(rect(), background);
