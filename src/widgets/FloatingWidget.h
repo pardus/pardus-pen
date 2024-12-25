@@ -31,13 +31,11 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
 private:
-    QMainWindow *fparent;
     int num_of_item = 0;
     int offset_x = -1;
     int offset_y = -1;
     FloatingSettings* floatingSettings;
     QPoint dragPosition;
-    QLabel *label;
     QBoxLayout *layout;
     QMap<QString, QWidget*> widgets;
 };

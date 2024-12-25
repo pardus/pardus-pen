@@ -159,7 +159,7 @@ protected:
     void drawLineToFunc(qint64 id, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);
-    bool event(QEvent * ev);
+    bool event(QEvent * ev) override;
     GeometryStorage geo;
     QPainter painter;
 };

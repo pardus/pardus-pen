@@ -55,7 +55,7 @@ public:
 #define SCROLLSIZE 22*scale
 
 protected:
-     void closeEvent(QCloseEvent *event){
+     void closeEvent(QCloseEvent *event) override {
         puts("Close event");
         event->ignore();
      }
