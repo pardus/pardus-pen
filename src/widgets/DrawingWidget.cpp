@@ -204,6 +204,7 @@ public:
             cfg += "[page"+QString::number(i)+"]\n";
             cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
             cfg += "ratio="+QString::number(board->ratios[i])+"\n";
+            cfg += "rotate="+QString::number(board->rotates[i])+"\n";
             cfg += "page="+QString::number(loadValue(i).pageType)+"\n";
             archive_add(QString::number(i)+"/background", board->overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
@@ -260,6 +261,9 @@ public:
             } else if(str.startsWith("ratio")){
                 board->ratios[page] = str.split("=")[1].toInt();
                 printf("Load: page: %d ratio %d\n", page, board->ratios[page]);
+            } else if(str.startsWith("rotate")){
+                board->rotates[page] = str.split("=")[1].toInt();
+                printf("Load: page: %d rotates %d\n", page, board->rotates[page]);
             }
         }
         images = values[0];
