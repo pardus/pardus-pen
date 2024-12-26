@@ -9,8 +9,6 @@ QLabel* pageLabel;
 QPushButton* overlayIsometric;
 QPushButton* overlayMusic;
 QPushButton* overlayCustom;
-QPushButton* overlayTurkiye;
-QPushButton* overlayWorld;
 QPushButton* overlayLines;
 QPushButton* overlaySquares;
 QPushButton* overlayNone;
@@ -93,14 +91,6 @@ void setupBackground(){
         backgroundStyleEvent();
     });
 
-    overlayTurkiye = create_button(":images/turkiye-map.svg", [=](){
-        board->setOverlayType(TURKIYE);
-        backgroundStyleEvent();
-    });
-    overlayWorld = create_button(":images/world-map.svg", [=](){
-        board->setOverlayType(WORLD);
-        backgroundStyleEvent();
-    });
     pageLabel = new QLabel("0");
 
     overlayScaleUp = create_button(":images/zoom-in.svg", [=](){

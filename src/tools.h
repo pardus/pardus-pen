@@ -8,6 +8,10 @@
 
 #include "utils/ScreenShot.h"
 
+#ifndef BGDIR
+#define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
+#endif
+
 #define butsize 48*scale
 #define padding 8*scale
 

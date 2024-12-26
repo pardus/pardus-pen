@@ -58,6 +58,15 @@ if get_option('save')
     src += 'src/utils/Archive.cpp'
 endif
 
+
+# background images
+add_project_arguments('-DBGDIR="' + get_option('backgrounds') + '"', language: 'cpp')
+foreach src : run_command('find', 'data/backgrounds','-type','f',check:true).stdout().strip().split('\n')
+    install_data(src, install_dir: get_option('backgrounds'))
+endforeach
+
+
+
 if get_option('qt') == '5'
     add_project_arguments('-DQT5', language: 'cpp')
     qt_dep += [

@@ -1,6 +1,8 @@
 #include "tools.h"
 #include "tools/color.h"
 
+#include <dirent.h>
+
 QPushButton *penMenu;
 QPushButton *toolMenu;
 QWidget *colorDialog;
@@ -232,11 +234,28 @@ void setupWidgets(){
     pageLayout->addWidget(overlaySquares,   0, 1);
     pageLayout->addWidget(overlayLines,     0, 2);
     pageLayout->addWidget(overlayMusic,     0, 3);
-    pageLayout->addWidget(overlayWorld,     1, 0);
-    pageLayout->addWidget(overlayTurkiye,   1, 1);
-    pageLayout->addWidget(overlayCustom,    1, 2);
-    pageLayout->addWidget(overlayIsometric, 1, 3);
-    
+    pageLayout->addWidget(overlayCustom,    1, 0);
+    pageLayout->addWidget(overlayIsometric, 1, 1);
+
+    struct dirent *ep;
+    DIR *dp = opendir (BGDIR);
+    int i = 6;
+    if (dp != NULL) {
+        while ((ep = readdir (dp)) != NULL) {
+            if ((ep->d_name)[0] == '.') {
+                continue;
+            }
+            QString path = QString(BGDIR) + QString("/") + QString(ep->d_name);
+            QPushButton* but = create_button(path.toStdString().c_str(), [=](){
+                board->overlays[drawing->getPageNum()] = QImage(path);
+                board->setOverlayType(CUSTOM);
+            });
+            pageLayout->addWidget(but, i / 4, i % 4);
+            i++;
+            printf ("%s\n", ep->d_name);
+        }
+    }
+    closedir(dp);
     pageDialog->setFixedSize(
         colorDialog->size().width(),
         butsize*2+ padding*3

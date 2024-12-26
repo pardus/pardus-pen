@@ -1,4 +1,5 @@
 option('qt', type: 'string', value: '5')
+option('backgrounds', type: 'string', value: '/usr/share/pardus/pardus-pen/backgrounds')
 option('resources', type : 'boolean', value : true)
 option('save', type : 'boolean', value : true)
 option('etap19', type : 'boolean', value : false)

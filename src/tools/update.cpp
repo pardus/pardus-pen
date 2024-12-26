@@ -113,8 +113,6 @@ void backgroundStyleEvent(){
     overlaySquares->setStyleSheet(QString("background-color: none;"));
     overlayNone->setStyleSheet(QString("background-color: none;"));
     overlayCustom->setStyleSheet(QString("background-color: none;"));
-    overlayTurkiye->setStyleSheet(QString("background-color: none;"));
-    overlayWorld->setStyleSheet(QString("background-color: none;"));
     drawing->cropWidget->setStyleSheet("border: 2px solid "+drawing->penColor.name()+";");
     switch(board->getType()){
         case BLACK:
@@ -146,12 +144,6 @@ void backgroundStyleEvent(){
             break;
        case CUSTOM:
             overlayCustom->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            break;
-        case TURKIYE:
-            overlayTurkiye->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-            break;
-        case WORLD:
-            overlayWorld->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
             overlayNone->setStyleSheet("background-color:"+drawing->penColor.name()+";");
