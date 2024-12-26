@@ -90,7 +90,7 @@ protected:
         }
         // Call the base class implementation
         QWidget::resizeEvent(event);
-        
+        floatingWidget->moveAction();
     }
     void changeEvent(QEvent *event) override {
         // Call the base class implementation
@@ -199,6 +199,5 @@ void mainWindowInit(){
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     floatingWidget->setMainWindow(mainWindow);
     setupWidgets();
-    floatingWidget->moveAction();
     mainWindow->showFullScreen();
 }
