@@ -25,7 +25,7 @@ subdir('po')
 
 if get_option('resources')
     # Build qrc
-    run_command('rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
+    run_command('rcc', '-threshold=0' ,'--compress=9', '--compress-algo=zlib', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
 
     src += [meson.current_build_dir()/'resources.cpp']
 
