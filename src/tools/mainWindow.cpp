@@ -110,7 +110,6 @@ protected:
 };
 static MainWindow *mainWindow;
 
-static bool ffist = false;
 void setupTools(){
 #ifndef ETAP19
     // detect x11
@@ -164,20 +163,17 @@ void setupTools(){
             mainWindow->showMinimized();
     });
 
-        fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
-            if(mainWindow->isFullScreen()){
-                set_icon(":images/fullscreen.svg", fullscreen);
-                mainWindow->showNormal();
-                if(!ffist){
-                    QScreen *screen = QGuiApplication::primaryScreen();
-                    mainWindow->resize(screen->size().width() * 0.9, screen->size().height() * 0.9);
-                    ffist = true;
-                }
-            } else {
-                set_icon(":images/fullscreen-exit.svg", fullscreen);
-                mainWindow->showFullScreen();
-            }
-            minify->setEnabled(mainWindow->isFullScreen());
+    fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
+        if(mainWindow->isFullScreen()){
+            set_icon(":images/fullscreen.svg", fullscreen);
+            mainWindow->showNormal();
+            QScreen *screen = QGuiApplication::primaryScreen();
+            mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
+        } else {
+            set_icon(":images/fullscreen-exit.svg", fullscreen);
+            mainWindow->showFullScreen();
+        }
+        minify->setEnabled(mainWindow->isFullScreen());
     });
     rotate = create_button(":images/rotate.svg", [=](){
         floatingWidget->setVertical(!floatingWidget->is_vertical);
