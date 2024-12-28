@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-12 23:42+0000\n"
-"PO-Revision-Date: 2024-10-12 16:31+0100\n"
+"PO-Revision-Date: 2024-12-28 23:34+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/ScreenShot.cpp:42
 msgid "Info"
@@ -32,13 +32,12 @@ msgid "Failed To save:"
 msgstr "Erro ao guardar:"
 
 #: src/WhiteBoard.cpp:32
-#, fuzzy
 msgid "Open Image File"
-msgstr "Abrir ficheiro"
+msgstr "Abrir ficheiro de imagem"
 
 #: src/WhiteBoard.cpp:32
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #: src/SetupWidgets.cpp:215
 msgid "Pen"
@@ -60,10 +59,10 @@ msgstr "Tamanho:"
 msgid "Color:"
 msgstr "Cor:"
 
+# Começa com um espaço?
 #: src/SetupWidgets.cpp:399
-#, fuzzy
 msgid " Color:"
-msgstr "Cor:"
+msgstr " Cor:"
 
 #: src/SetupWidgets.cpp:403
 msgid "Color Picker"
@@ -90,19 +89,16 @@ msgid "Yes"
 msgstr "Sim"
 
 #: src/SetupWidgets.cpp:997 src/SetupWidgets.cpp:1013
-#, fuzzy
 msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros de caneta (*.pen);;"
 
 #: src/SetupWidgets.cpp:999
-#, fuzzy
 msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros PDF (*.pdf);;"
 
 #: src/SetupWidgets.cpp:1001 src/SetupWidgets.cpp:1014
-#, fuzzy
 msgid "All Files (*.*)"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Todos os ficheiros (*.*)"
 
 #: src/SetupWidgets.cpp:1002
 msgid "Save File"
