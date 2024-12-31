@@ -33,7 +33,8 @@ int main(int argc, char *argv[]) {
     // Force prefer Xwayland for fix this issue.
     bool force_xwayland = false;
     if(getenv("XDG_CURRENT_DESKTOP")){
-        force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) == 0;
+        force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) || \
+            strncmp(getenv("XDG_CURRENT_DESKTOP"), "GNOME", 5);
     }
     // Force use X11 or Xwayland
     if(get_bool((char*)"xwayland") || force_xwayland){
