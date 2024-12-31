@@ -29,8 +29,14 @@ int main(int argc, char *argv[]) {
     p2.execute("gsettings", args2);
 #endif
 
+    // gnome wayland fullscreen compositor is buggy.
+    // Force prefer Xwayland for fix this issue.
+    bool force_xwayland = false;
+    if(getenv("XDG_CURRENT_DESKTOP")){
+        force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) == 0;
+    }
     // Force use X11 or Xwayland
-    if(get_bool((char*)"xwayland")){
+    if(get_bool((char*)"xwayland") || force_xwayland){
         setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
     }
     //Force ignore system dpi
