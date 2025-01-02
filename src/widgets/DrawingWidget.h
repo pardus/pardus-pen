@@ -160,6 +160,7 @@ protected:
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);
     bool event(QEvent * ev) override;
+    float normalizePressure(float pressure);
     GeometryStorage geo;
     QPainter painter;
 };

@@ -49,6 +49,8 @@ penType:
 #define HISTORY 15
 #endif
 
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
 class CursorStorage {
 public:
     void init(qint64 id){
@@ -486,7 +488,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 break;
             }
             if(penType == ERASER) {
-                curs.setCursor(id, penSize[penType]);
+                curs.setCursor(id, penSize[penType] * normalizePressure(pressure));
                 curs.setPosition(id, pos);
             } else {
                 curs.hide(id);
@@ -499,6 +501,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     case DRAW:
                         if(penType == ERASER) {
                             curs.setPosition(id, pos);
+                            curs.setCursor(id, penSize[penType] * normalizePressure(pressure));
                         }
                         addPoint(id, pos);
                         drawLineToFunc(id, pressure);
@@ -668,3 +671,18 @@ void qImageToFile(const QImage& image, const QString& filename) {
         }
 }
 
+
+// Process and normalize raw pressure input to improve user experience
+// returns float value between `1.0` and `base` (0.1)
+float DrawingWidget::normalizePressure(float pressure) {
+    float base = 0.1;
+    float multiplier = 1.5;
+    switch(penType){
+        case ERASER:
+            return MIN(1.0 , pressure * multiplier + base);
+            break;
+        default:
+            return pressure;
+            break;
+    }
+}
