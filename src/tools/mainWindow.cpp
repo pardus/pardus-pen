@@ -163,14 +163,15 @@ void setupTools(){
             mainWindow->showMinimized();
     });
 
+    QScreen *screen = QGuiApplication::primaryScreen();
     fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
         if(mainWindow->isFullScreen()){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->showNormal();
-            QScreen *screen = QGuiApplication::primaryScreen();
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
         } else {
             set_icon(":images/fullscreen-exit.svg", fullscreen);
+            mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
         minify->setEnabled(mainWindow->isFullScreen());
@@ -196,4 +197,6 @@ void mainWindowInit(){
     floatingWidget->setMainWindow(mainWindow);
     setupWidgets();
     mainWindow->showFullScreen();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    mainWindow->resize(screen->size().width(), screen->size().height());
 }
