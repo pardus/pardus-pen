@@ -536,11 +536,15 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     }
     penType = ev_pen;
 }
+static bool tablet_enabled = false;
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
         case QEvent::TouchBegin:
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
+            if(tablet_enabled) {
+                break;
+            }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
@@ -560,11 +564,13 @@ bool DrawingWidget::event(QEvent *ev) {
             break;
         }
         case QEvent::TabletPress: {
+            tablet_enabled = true;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
             break;
         }
         case QEvent::TabletRelease: {
+            tablet_enabled = false;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
             break;
@@ -575,16 +581,25 @@ bool DrawingWidget::event(QEvent *ev) {
             break;
         }
         case QEvent::MouseButtonPress: {
+            if(tablet_enabled) {
+                break;
+            }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
             break;
         }
         case QEvent::MouseButtonRelease: {
+            if(tablet_enabled) {
+                break;
+            }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
             break;
         }
         case QEvent::MouseMove: {
+            if(tablet_enabled) {
+                break;
+            }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), MOVE, -1, mouseEvent->position(), 1.0);
             break;
