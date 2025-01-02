@@ -46,7 +46,7 @@ penType:
 #endif
 
 #ifndef HISTORY
-#define HISTORY 15
+#define HISTORY 100
 #endif
 
 class CursorStorage {
