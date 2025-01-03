@@ -20,6 +20,8 @@ extern "C" {
 #include "../utils/settings.h"
 }
 
+#include "../tools.h"
+
 extern WhiteBoard *board;
 extern QWidget * mainWidget;
 extern DrawingWidget *drawing;
@@ -27,8 +29,6 @@ extern FloatingSettings *floatingSettings;
 
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
-
-#define padding 8
 
 /*
 penType:
