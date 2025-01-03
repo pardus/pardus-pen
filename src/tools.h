@@ -36,6 +36,7 @@ extern QMainWindow* tool;
 extern QMainWindow* tool2;
 
 extern float scale;
+extern int history;
 
 extern QSlider *scrollHSlider;
 extern QSlider *scrollVSlider;

@@ -45,9 +45,6 @@ penType:
 #define position pos
 #endif
 
-#ifndef HISTORY
-#define HISTORY 15
-#endif
 
 class CursorStorage {
 public:
@@ -116,8 +113,8 @@ public:
     void saveValue(qint64 id, QImage data) {
         values[id] = data;
         updateGoBackButtons();
-        if(id > HISTORY){
-            remove(id-HISTORY);
+        if(id > history){
+            remove(id - history);
             removed++;
         }
     }

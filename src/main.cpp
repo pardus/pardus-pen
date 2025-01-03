@@ -13,7 +13,7 @@
 #include "tools.h"
 
 extern void mainWindowInit();
-
+int history;
 
 int main(int argc, char *argv[]) {
     settings_init();
@@ -45,6 +45,11 @@ int main(int argc, char *argv[]) {
     setenv("QT_QT_ENABLE_HIGHDPI_SCALING", "0", 1);
     setenv("QT_SCALE_FACTOR", "1", 1);
 
+    // history size
+    history = get_int((char*)"history");
+    if(history < 0){
+        history = 50;
+    }
 
     // translation part
     const char *systemLanguage = getenv("LANG");

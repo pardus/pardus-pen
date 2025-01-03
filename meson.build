@@ -99,8 +99,6 @@ add_project_arguments('-fPIC', language: 'cpp')
 add_project_arguments('-fpermissive', language: 'cpp')
 add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cpp')
 
-add_project_arguments('-DHISTORY='+get_option('history'), language: 'cpp')
-
 glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
 icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'
