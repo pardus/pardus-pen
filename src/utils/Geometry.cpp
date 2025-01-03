@@ -29,6 +29,8 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case CIRCLE:
         case RECTANGLE:
         case TRIANGLE:
+            // ignore pressuse if not spline
+            pressure = 1.0;
             image = imageBackup;
             painter.begin(&image);
             break;
