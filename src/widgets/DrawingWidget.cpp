@@ -519,16 +519,16 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 addPoint(-1, pos+QPointF(0,1));
                 drawLineToFunc(id, pressure);
             }
-            if(penMode == SELECTION) {
-                addPoint(id, pos);
-                createSelection();
-                update();
-                return;
-            }
 
             curEventButtons = 0;
             curs.hide(id);
             if(num_of_press == 0) {
+                if(penMode == SELECTION) {
+                    addPoint(id, pos);
+                    createSelection();
+                    update();
+                    return;
+                }
                 addImage(image);
             }
             break;
