@@ -2,14 +2,14 @@
 # Copyright (C) 2024 tr.org.pardus.pen
 # This file is distributed under the same license as the tr.org.pardus.pen package.
 #
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-23 07:19+0000\n"
-"PO-Revision-Date: 2024-10-12 16:31+0100\n"
+"PO-Revision-Date: 2025-01-03 20:23+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -36,19 +36,16 @@ msgid "Pardus Pen"
 msgstr "Caneta Pardus"
 
 #: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
-#, fuzzy
 msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros de caneta (*.pen);;"
 
 #: src/tools/save-load.cpp:27
-#, fuzzy
 msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros PDF (*.pdf);;"
 
 #: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
-#, fuzzy
 msgid "All Files (*.*)"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Todos os ficheiros (*.*)"
 
 #: src/tools/save-load.cpp:33
 msgid "Save File"
@@ -67,26 +64,24 @@ msgid "Size:"
 msgstr "Tamanho:"
 
 #: src/SetupWidgets.cpp:139
-#, fuzzy
 msgid "Size: 10"
-msgstr "Tamanho:"
+msgstr "Tamanho: 10"
 
 #: src/SetupWidgets.cpp:222
 msgid "Background:"
-msgstr ""
+msgstr "Fundo:"
 
 #: src/SetupWidgets.cpp:253
 msgid "Page:"
-msgstr ""
+msgstr "Página:"
 
 #: src/widgets/WhiteBoard.cpp:32
-#, fuzzy
 msgid "Open Image File"
-msgstr "Abrir ficheiro"
+msgstr "Abrir imagem"
 
 #: src/widgets/WhiteBoard.cpp:32
 msgid "Images"
-msgstr ""
+msgstr "Imagens"
 
 #~ msgid "Pen"
 #~ msgstr "Caneta"
