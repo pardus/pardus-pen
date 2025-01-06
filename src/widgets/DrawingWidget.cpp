@@ -472,8 +472,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             num_of_press++;
             curs.drawing[id] = true;
-            mergeSelection();
-            imageBackup = image;
+            if (num_of_press == 1){
+                mergeSelection();
+                imageBackup = image;
+            }
             if(floatingSettings->isVisible()){
                 floatingSettings->setHide();
             }
