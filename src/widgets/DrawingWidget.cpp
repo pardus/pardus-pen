@@ -493,21 +493,21 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curEventButtons = source;
             break;
         case MOVE:
-            if (curs.drawing[id]) {
-                switch(penMode) {
-                    case DRAW:
-                        if(penType == ERASER) {
-                            curs.setPosition(id, pos);
-                        }
-                        addPoint(id, pos);
-                        drawLineToFunc(id, pressure);
-                        break;
-                    case SELECTION:
-                        selectionDraw(geo.first(id), pos);
-                        break;
-                }
+            if (! curs.drawing[id]) {
+                break;
             }
-            penType = ev_pen;
+            switch(penMode) {
+                case DRAW:
+                    if(penType == ERASER) {
+                        curs.setPosition(id, pos);
+                    }
+                    addPoint(id, pos);
+                    drawLineToFunc(id, pressure);
+                    break;
+                case SELECTION:
+                    selectionDraw(geo.first(id), pos);
+                    break;
+            }
             break;
         case RELEASE:
             if (!curs.drawing[id]) {
@@ -527,7 +527,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     addPoint(id, pos);
                     createSelection();
                     update();
-                    return;
+                    break;
                 }
                 addImage(image);
             }
