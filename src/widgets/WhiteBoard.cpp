@@ -29,12 +29,10 @@ int WhiteBoard::getOverlayType(){
 }
 
 void WhiteBoard::setOverlayType(int page){
-    if(page == CUSTOM) {
-        // do nothing
-    } else {
+    if(page != CUSTOM) {
         overlays[drawing->getPageNum()].fill(QColor("transparent"));;
-        set_int((char*)"page-overlay",page);
     }
+    set_int((char*)"page-overlay",page);
     overlayType = page;
     update();
 }
