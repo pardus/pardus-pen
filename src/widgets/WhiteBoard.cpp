@@ -31,10 +31,6 @@ int WhiteBoard::getOverlayType(){
 void WhiteBoard::setOverlayType(int page){
     if(page == CUSTOM) {
         // do nothing
-    } else if (page == TURKIYE){
-        overlays[drawing->getPageNum()] = QImage(":images/turkiye-map.svg");
-    } else if (page == WORLD){
-        overlays[drawing->getPageNum()] = QImage(":images/world-map.svg");
     } else {
         overlays[drawing->getPageNum()].fill(QColor("transparent"));;
         set_int((char*)"page-overlay",page);
@@ -95,8 +91,6 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case NONE:
             break;
         case CUSTOM:
-        case TURKIYE:
-        case WORLD:
             if(img.size().width() * img.size().height() > 0){
                 w = img.size().width() * h / img.size().height();
                 if(w <= mainWindow->geometry().width()) {

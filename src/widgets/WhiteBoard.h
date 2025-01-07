@@ -16,8 +16,6 @@
 #define LINES 2
 #define ISOMETRIC 3
 #define MUSIC 4
-#define TURKIYE 90
-#define WORLD 23
 #define CUSTOM 31
 
 class WhiteBoard : public QWidget {
