@@ -531,6 +531,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 }
                 addImage(image);
             }
+            update();
             break;
     }
     penType = ev_pen;
@@ -541,7 +542,7 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TouchBegin:
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
-            if(tablet_enabled) {
+            if(tablet_enabled || penMode != DRAW) {
                 break;
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
