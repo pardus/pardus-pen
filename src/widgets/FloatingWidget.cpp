@@ -49,18 +49,19 @@ void  FloatingWidget::setVertical(bool state){
     int h = size().height();
     int w = size().width();
     if(state){
+        cur_width = MIN(h,w);
+        cur_height = MAX(h,w);
         layout->setDirection(QBoxLayout::TopToBottom);
-        setFixedSize(MIN(h,w), MAX(h,w));
     } else {
         layout->setDirection(QBoxLayout::LeftToRight);
-        setFixedSize(MAX(h,w), MIN(h,w));
+        cur_width = MAX(h,w);
+        cur_height = MIN(h,w);
     }
+    setFixedSize(cur_width, cur_height);
     moveAction();
     is_vertical = state;
-    cur_height = size().height();
-    cur_width = size().width();
     if(tool != nullptr){
-        tool->resize(cur_width, cur_height);
+        tool->setFixedSize(cur_width, cur_height);
     }
 }
 
