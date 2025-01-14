@@ -183,7 +183,6 @@ void setupWidgets(){
 
     create_seperator(true);
 
-    
 /********** penModes **********/
     modeDialog = new QWidget();
     QGridLayout *modeLayout = new QGridLayout(modeDialog);

@@ -167,6 +167,7 @@ void setupTools(){
 
     QScreen *screen = QGuiApplication::primaryScreen();
     fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
+        mainWidget->move(0,0);
         if(mainWindow->isFullScreen()){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->showNormal();
