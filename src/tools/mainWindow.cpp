@@ -118,6 +118,7 @@ void setupTools(){
         tool = new QMainWindow();
         tool->setWindowFlags(Qt::WindowStaysOnTopHint
                               | Qt::Tool
+                              | Qt::X11BypassWindowManagerHint
                               | Qt::WindowSystemMenuHint
                               | Qt::WindowStaysOnTopHint
                               | Qt::FramelessWindowHint);
@@ -133,6 +134,7 @@ void setupTools(){
         tool2 = new QMainWindow();
         tool2->setWindowFlags(Qt::WindowStaysOnTopHint
                               | Qt::Tool
+                              | Qt::X11BypassWindowManagerHint
                               | Qt::WindowStaysOnTopHint
                               | Qt::WindowSystemMenuHint
                               | Qt::FramelessWindowHint);
