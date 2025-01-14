@@ -119,6 +119,7 @@ void setupTools(){
         tool->setWindowFlags(Qt::WindowStaysOnTopHint
                               | Qt::Tool
                               | Qt::WindowSystemMenuHint
+                              | Qt::WindowStaysOnTopHint
                               | Qt::FramelessWindowHint);
         tool->setAttribute(Qt::WA_TranslucentBackground, true);
         tool->setAttribute(Qt::WA_NoSystemBackground, true);
@@ -132,6 +133,7 @@ void setupTools(){
         tool2 = new QMainWindow();
         tool2->setWindowFlags(Qt::WindowStaysOnTopHint
                               | Qt::Tool
+                              | Qt::WindowStaysOnTopHint
                               | Qt::WindowSystemMenuHint
                               | Qt::FramelessWindowHint);
         tool2->setAttribute(Qt::WA_TranslucentBackground, true);

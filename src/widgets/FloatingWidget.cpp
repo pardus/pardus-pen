@@ -60,7 +60,7 @@ void  FloatingWidget::setVertical(bool state){
     cur_height = size().height();
     cur_width = size().width();
     if(tool != nullptr){
-        tool->resize(size().width(), size().height());
+        tool->resize(cur_width, cur_height);
     }
 }
 
@@ -106,10 +106,10 @@ void FloatingWidget::moveAction(){
             max_width = QGuiApplication::primaryScreen()->size().width();
             max_height = QGuiApplication::primaryScreen()->size().height();
         }
-        if (new_x >  max_width- size().width()) {
-            new_x = max_width - size().width();
-        }if (new_y > max_height - size().height()) {
-            new_y = max_height - size().height();
+        if (new_x >  max_width- cur_width) {
+            new_x = max_width - cur_width;
+        }if (new_y > max_height - cur_height) {
+            new_y = max_height - cur_height;
         }
         if(tool != nullptr){
             tool->move(new_x, new_y);
