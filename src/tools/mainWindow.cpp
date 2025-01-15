@@ -182,9 +182,9 @@ void setupTools(){
             tool2->show();
         }
         mainWindow->hide();
+        mainWindow->showNormal();
         if(isFullScreen){
             set_icon(":images/fullscreen.svg", fullscreen);
-            mainWindow->showNormal();
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
             flags = flags & ~Qt::X11BypassWindowManagerHint;
         } else {
