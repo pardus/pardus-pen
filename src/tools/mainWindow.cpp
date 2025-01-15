@@ -171,13 +171,9 @@ void setupTools(){
     QScreen *screen = QGuiApplication::primaryScreen();
     fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
         mainWidget->move(0,0);
-        Qt::WindowFlags flags;
         if ((tool != nullptr) && (tool2 != nullptr)){
-            flags = tool->windowFlags();
             tool->hide();
             tool2->hide();
-            tool->setWindowFlags(flags);
-            tool2->setWindowFlags(flags);
             tool->show();
             tool2->show();
         }
@@ -186,12 +182,10 @@ void setupTools(){
         if(isFullScreen){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
-            flags = flags & ~Qt::X11BypassWindowManagerHint;
         } else {
             set_icon(":images/fullscreen-exit.svg", fullscreen);
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
-            flags = flags | Qt::X11BypassWindowManagerHint;
         }
         isFullScreen = !isFullScreen;
         minify->setEnabled(isFullScreen);
