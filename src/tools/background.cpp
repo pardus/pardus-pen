@@ -76,10 +76,11 @@ void setupBackground(){
         board->setOverlayType(MUSIC);
         backgroundStyleEvent();
     });
- 
+
     overlayCustom = create_button(":images/overlay-custom.svg", [=](){
         QString filter = QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
         filter += _("All Files (*.*)");
+        setHideMainWindow(true);
         floatingWidget->hide();
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open Image File"), QDir::homePath(), filter);
@@ -87,6 +88,7 @@ void setupBackground(){
             board->overlays[drawing->getPageNum()] = QImage(filename);
         }
         floatingWidget->show();
+        setHideMainWindow(false);
         board->setOverlayType(CUSTOM);
         backgroundStyleEvent();
     });

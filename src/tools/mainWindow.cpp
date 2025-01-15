@@ -109,6 +109,7 @@ protected:
     }
 };
 static MainWindow *mainWindow;
+static bool isFullScreen = true;
 
 void setupTools(){
 #ifndef ETAP19
@@ -174,7 +175,7 @@ void setupTools(){
         if ((tool != nullptr) && (tool2 != nullptr)){
             flags = tool->windowFlags();
         }
-        if(mainWindow->isFullScreen()){
+        if(isFullScreen){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->showNormal();
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
@@ -193,12 +194,25 @@ void setupTools(){
             tool->show();
             tool2->show();
         }
-        minify->setEnabled(mainWindow->isFullScreen());
+        isFullScreen = !isFullScreen;
+        minify->setEnabled(isFullScreen);
     });
     rotate = create_button(":images/rotate.svg", [=](){
         floatingWidget->setVertical(!floatingWidget->is_vertical);
         floatingSettings->setHide();
     });
+}
+
+void setHideMainWindow(bool status){
+    if(status){
+        mainWindow->hide();
+    } else{
+        if(isFullScreen){
+            mainWindow->showFullScreen();
+        } else {
+            mainWindow->showNormal();
+        }
+    }
 }
 
 void mainWindowInit(){

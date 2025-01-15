@@ -1,13 +1,21 @@
 #include "../tools.h"
+#include <QTimer>
 QPushButton *ssButton;
 
 void setupScreenShot(){
     #ifdef screenshot
+    QTimer *ssTimer = new QTimer();
+    QObject::connect(ssTimer, &QTimer::timeout, [=](){
+        takeScreenshot();
+        floatingWidget->show();
+        ssTimer->stop();
+    
+    });
     ssButton = create_button(":images/screenshot.svg", [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
-        takeScreenshot();
-        floatingWidget->show();
+        ssTimer->start(500);
+        
     });
     #endif
 }

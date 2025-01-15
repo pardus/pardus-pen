@@ -27,6 +27,7 @@ void setupSaveLoad(){
         filter += _("PDF Files (*.pdf);;");
         #endif
         filter += _("All Files (*.*)");
+        setHideMainWindow(true);
         floatingWidget->hide();
         floatingSettings->setHide();
         QString selectedFilter;
@@ -43,11 +44,13 @@ void setupSaveLoad(){
         archive_target = file;
         pthread_create(&ptid, NULL, &save_all, NULL);
         floatingWidget->show();
+        setHideMainWindow(false);
     });
 
     open = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
         filter += _("All Files (*.*)");
+        setHideMainWindow(true);
         floatingWidget->hide();
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
@@ -57,6 +60,7 @@ void setupSaveLoad(){
             pthread_create(&ptid, NULL, &load_archive, NULL);
         }
         floatingWidget->show();
+        setHideMainWindow(false);
     });
 #endif
 }

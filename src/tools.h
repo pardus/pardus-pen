@@ -143,3 +143,4 @@ extern void setupWidgets();
 
 extern QPushButton *penMenu;
 
+void setHideMainWindow(bool status);
