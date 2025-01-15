@@ -120,21 +120,21 @@ void FloatingWidget::moveAction(){
         if(floatingSettings != NULL){
             if(is_vertical){
                 new_xx = new_x+padding+size().width();
-                if(new_xx  > mainWindow->geometry().width() - floatingSettings->cur_width){
+                if(new_xx  > max_width - floatingSettings->cur_width){
                     new_xx = new_x - padding - floatingSettings->cur_width;
                 }
                 new_yy = new_y;
-                if (new_yy > mainWindow->geometry().height() - floatingSettings->cur_height) {
-                    new_yy = mainWindow->geometry().height() - floatingSettings->cur_height;
+                if (new_yy > max_height - floatingSettings->cur_height) {
+                    new_yy = max_height - floatingSettings->cur_height;
                 }
 
             } else {
                 new_xx = new_x;
-                if (new_xx > mainWindow->geometry().width() - floatingSettings->cur_width) {
-                    new_xx = mainWindow->geometry().width() - floatingSettings->cur_width;
+                if (new_xx > max_width - floatingSettings->cur_width) {
+                    new_xx = max_width - floatingSettings->cur_width;
                 }
                 new_yy = new_y + size().height() + padding;
-                if(new_yy  > mainWindow->geometry().height() - floatingSettings->cur_height){
+                if(new_yy  > max_height - floatingSettings->cur_height){
                     new_yy = new_y - padding - floatingSettings->cur_height;
                 }
             }
