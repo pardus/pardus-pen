@@ -181,6 +181,7 @@ void setupTools(){
             tool->show();
             tool2->show();
         }
+        mainWindow->hide();
         if(isFullScreen){
             set_icon(":images/fullscreen.svg", fullscreen);
             mainWindow->showNormal();
