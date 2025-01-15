@@ -174,6 +174,12 @@ void setupTools(){
         Qt::WindowFlags flags;
         if ((tool != nullptr) && (tool2 != nullptr)){
             flags = tool->windowFlags();
+            tool->hide();
+            tool2->hide();
+            tool->setWindowFlags(flags);
+            tool2->setWindowFlags(flags);
+            tool->show();
+            tool2->show();
         }
         if(isFullScreen){
             set_icon(":images/fullscreen.svg", fullscreen);
@@ -185,14 +191,6 @@ void setupTools(){
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
             flags = flags | Qt::X11BypassWindowManagerHint;
-        }
-        if ((tool != nullptr) && (tool2 != nullptr)){
-            tool->hide();
-            tool2->hide();
-            tool->setWindowFlags(flags);
-            tool2->setWindowFlags(flags);
-            tool->show();
-            tool2->show();
         }
         isFullScreen = !isFullScreen;
         minify->setEnabled(isFullScreen);
