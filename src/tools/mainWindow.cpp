@@ -49,6 +49,9 @@ public:
         scrollVSlider->setValue(0);
         scrollHSlider->setValue(0);
 
+        scrollVSlider->setVisible(false);
+        scrollHSlider->setVisible(false);
+
     }
 
 
