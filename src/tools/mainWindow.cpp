@@ -68,12 +68,10 @@ protected:
         scrollHSlider->setFixedSize(event->size().width() - SCROLLSIZE*2, SCROLLSIZE);
         scrollHSlider->move(SCROLLSIZE, event->size().height() - SCROLLSIZE);
         scrollHSlider->setRange(0, screen->size().width() - event->size().width() );
-        scrollHSlider->setVisible(screen->size().width() > event->size().width());
 
         scrollVSlider->setFixedSize(SCROLLSIZE, event->size().height() - SCROLLSIZE*2);
         scrollVSlider->move(event->size().width() - SCROLLSIZE, SCROLLSIZE);
         scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
-        scrollVSlider->setVisible(screen->size().height() > event->size().height());
 
         printf("%d %d\n",event->size().width(), event->size().height());
         new_x = get_int((char*)"cur-x");
@@ -187,6 +185,8 @@ void setupTools(){
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
+        scrollVSlider->setVisible(isFullScreen);
+        scrollHSlider->setVisible(isFullScreen);
         isFullScreen = !isFullScreen;
         minify->setEnabled(isFullScreen);
     });
