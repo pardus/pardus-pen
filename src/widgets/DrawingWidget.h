@@ -155,7 +155,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
     void updateCursorMouse(qint64 i, QPoint pos);
     void updateCursorMouse(qint64 i, QPointF pos);
-    void createSelection();
+    void createSelection(int source);
     void drawLineToFunc(qint64 id, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);

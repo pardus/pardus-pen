@@ -8,9 +8,6 @@ MovableWidget::MovableWidget(QWidget *parent) : QWidget(parent) {
 extern float scale;
 #define nearEdge 10*scale
 
-#define startPoint geo.first(-1)
-#define endPoint geo.last(-1)
-
 void MovableWidget::mousePressEvent(QMouseEvent *event) {
     lastMousePosition = event->pos();
     int xx = width() - event->pos().x();
@@ -45,8 +42,10 @@ void MovableWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 bool hasSelection = false;
 
-void DrawingWidget::createSelection() {
+void DrawingWidget::createSelection(int source) {
     hasSelection = true;
+    QPointF startPoint = geo.first(source);
+    QPointF endPoint = geo.last(source);
     //printf("%f %f %f %f\n", startPoint.x(), endPoint.x(), startPoint.y(), endPoint.y());
     QPoint topLeft(qMin(startPoint.x(), endPoint.x()), qMin(startPoint.y(), endPoint.y()));
     QPoint bottomRight(qMax(startPoint.x(), endPoint.x()), qMax(startPoint.y(), endPoint.y()));

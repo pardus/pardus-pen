@@ -525,7 +525,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if(num_of_press == 0) {
                 if(penMode == SELECTION) {
                     addPoint(id, pos);
-                    createSelection();
+                    createSelection(id);
                     update();
                     break;
                 }
