@@ -614,6 +614,7 @@ bool DrawingWidget::event(QEvent *ev) {
     }
     return QWidget::event(ev);
 }
+extern void setPen(int mode);
 void DrawingWidget::keyPressEvent(QKeyEvent *event) {
     // https://doc.qt.io/qt-6/qt.html#Key-enum
     // color switch
@@ -627,6 +628,14 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
     } else if (event->key() == Qt::Key_9){
         penColor = colors[5];
         update = true;
+    } else if (event->key() == Qt::Key_M){
+        if(penType == ERASER){
+            setPen(PEN);
+        } else {
+            setPen(ERASER);
+        }
+    } else if (event->key() == Qt::Key_E){
+        setHideMainWindow(true);
     }
     if(update){
         penStyleEvent();
