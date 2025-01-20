@@ -22,6 +22,8 @@ extern "C" {
 
 #include "../tools.h"
 
+
+extern QColor colors[];
 extern WhiteBoard *board;
 extern QWidget * mainWidget;
 extern DrawingWidget *drawing;
@@ -315,6 +317,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 
     //QScreen *screen = QGuiApplication::primaryScreen();
     fpressure = get_int((char*)"pressure") / 100.0;
+
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 void DrawingWidget::addPoint(int id, QPointF data) {
@@ -610,7 +614,26 @@ bool DrawingWidget::event(QEvent *ev) {
     }
     return QWidget::event(ev);
 }
-
+void DrawingWidget::keyPressEvent(QKeyEvent *event) {
+    // https://doc.qt.io/qt-6/qt.html#Key-enum
+    // color switch
+    bool update = false;
+    if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
+        penColor = colors[20 + Qt::Key_1 - event->key()];
+        update = true;
+    } else if (event->key() == Qt::Key_8){
+        penColor = colors[0];
+        update = true;
+    } else if (event->key() == Qt::Key_9){
+        penColor = colors[5];
+        update = true;
+    }
+    if(update){
+        penStyleEvent();
+        penSizeEvent();
+        backgroundStyleEvent();
+    }
+}
 int DrawingWidget::getPageNum(){
     return pages.last_page_num;
 }

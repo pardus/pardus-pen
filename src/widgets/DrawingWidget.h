@@ -160,6 +160,7 @@ protected:
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);
     bool event(QEvent * ev) override;
+    void keyPressEvent(QKeyEvent *event) override;
     GeometryStorage geo;
     QPainter painter;
 };
