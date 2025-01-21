@@ -157,7 +157,9 @@ void setupPenType(){
     });
     
     colorpicker = create_button(":images/color-picker.svg", [=](){
+        setHideMainWindow(true);
         QColor newCol = QColorDialog::getColor(drawing->penColor, NULL, _("Select Color"));
+        setHideMainWindow(false);
         if(! newCol.isValid()){
             return;
         }
