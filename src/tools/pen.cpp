@@ -85,6 +85,9 @@ void setupPenType(){
             floatingSettings->setHide();
             return;
         }
+        drawing->penMode = DRAW;
+        drawing->penStyle = SPLINE;
+        drawing->lineStyle = NORMAL;
         if(drawing->penType != PEN || drawing->penMode == SELECTION){
             setPen(PEN);
         } else {
