@@ -620,7 +620,7 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
     // color switch
     bool update = false;
     if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
-        penColor = colors[20 + Qt::Key_1 - event->key()];
+        penColor = colors[20 + event->key() - Qt::Key_1];
         update = true;
     } else if (event->key() == Qt::Key_8){
         penColor = colors[0];
