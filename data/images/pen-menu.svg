@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 92.211 92.211"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="pen-menu.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="0.641875"
+     inkscape:cx="339.62999"
+     inkscape:cy="446.34859"
+     inkscape:window-width="1499"
+     inkscape:window-height="1236"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg20" />
+  <defs
+     id="defs8">
+    <linearGradient
+       id="linear-gradient"
+       x1="0.386"
+       y1="0.356"
+       x2="0.59"
+       y2="0.614"
+       gradientUnits="objectBoundingBox">
+      <stop
+         offset="0"
+         stop-color="#face00"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#f68600"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-2"
+       x1="481.19023"
+       y1="243.45332"
+       x2="513.01981"
+       y2="270.56314"
+       xlink:href="#linear-gradient"
+       gradientTransform="scale(1.0001042,0.99989576)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linear-gradient"
+       id="linearGradient1222"
+       gradientUnits="userSpaceOnUse"
+       x1="479.49543"
+       y1="238.59224"
+       x2="493.31775"
+       y2="256.07341"
+       gradientTransform="scale(0.99994835,1.0000517)" />
+  </defs>
+  <g
+     id="pencil_ruler"
+     data-name="pencil ruler"
+     transform="matrix(0.79482783,0,0,0.79482783,-344.90052,-147.52524)">
+    <path
+       id="Path_109"
+       data-name="Path 109"
+       d="m 447,212.212 a 3.989,3.989 0 0 0 0,5.631 l 70.714,70.716 a 3.993,3.993 0 0 0 5.628,0 l 6.772,-6.774 -76.342,-76.344 z"
+       fill="#e1e5f5" />
+    <path
+       id="Path_110"
+       data-name="Path 110"
+       d="m 460.54,198.668 -6.772,6.773 76.342,76.344 6.773,-6.773 a 3.992,3.992 0 0 0 0,-5.629 l -70.716,-70.715 a 3.993,3.993 0 0 0 -5.627,0 z"
+       fill="#f2f3f7" />
+    <path
+       id="Path_111"
+       data-name="Path 111"
+       d="m 483.187,254.034 8.091,-8.093 -1.67,-1.67 -8.093,8.093 z m -5.231,-13.676 -4.225,4.222 1.673,1.671 4.221,-4.222 z m -27.575,-19.128 1.672,1.67 8.093,-8.093 -1.672,-1.671 z m 19.79,11.347 -4.223,4.222 1.67,1.67 4.223,-4.223 z m -7.784,-7.787 -4.222,4.222 1.668,1.67 4.226,-4.221 z m 31.135,31.133 -4.224,4.223 1.67,1.674 4.224,-4.221 z m 15.569,15.572 -4.225,4.22 1.67,1.669 4.223,-4.221 z m 5.23,13.677 8.1,-8.1 -1.672,-1.67 -8.1,8.091 z m -13.013,-21.464 -4.227,4.226 1.673,1.664 4.223,-4.218 z"
+       fill="#61688d" />
+    <path
+       id="Path_112"
+       data-name="Path 112"
+       d="m 453.318,263.411 5.513,3.754 3.328,6.2 6.2,3.331 3.755,5.512 v 0.034 h 0.024 l 48.933,-48.93 -18.821,-18.83 z"
+       fill="url(#linear-gradient)"
+       style="fill:url(#linearGradient1222)" />
+    <path
+       id="Path_113"
+       data-name="Path 113"
+       d="m 533.006,215.738 -13.2,-13.189 a 3.989,3.989 0 0 0 -5.625,0 l -8.737,8.735 18.821,18.823 8.737,-8.736 a 4,4 0 0 0 0.004,-5.633 z"
+       fill="#f27a74" />
+    <path
+       id="Path_114"
+       data-name="Path 114"
+       d="m 472.115,282.238 v -0.034 l -3.755,-5.512 -6.2,-3.331 -3.328,-6.2 -5.513,-3.754 -3.607,22.429 z"
+       fill="#f2f3f7" />
+    <path
+       id="Path_115"
+       data-name="Path 115"
+       d="m 459.714,284.233 -8.394,-8.393 -1.609,10 z"
+       fill="#555c84" />
+    <rect
+       id="Rectangle_7"
+       data-name="Rectangle 7"
+       width="4.5219998"
+       height="26.618999"
+       transform="rotate(-44.995,510.05963,-499.10321)"
+       fill="#f2f3f7"
+       x="0"
+       y="0" />
+    <path
+       id="Path_116"
+       data-name="Path 116"
+       d="m 458.848,267.205 3.311,6.157 6.2,3.331 48.053,-48.052 -9.5,-9.5 z"
+       fill="url(#linear-gradient-2)"
+       style="fill:url(#linear-gradient-2)" />
+  </g>
+</svg>

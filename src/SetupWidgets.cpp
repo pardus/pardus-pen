@@ -36,13 +36,13 @@ void setupWidgets(){
     penSettingsLayout = new QVBoxLayout(penSettings);
     penSettingsLayout->setSpacing(padding);
     penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
-    penMenu = create_button(":images/pen.svg", [=](){
+    penMenu = create_button(":images/pen-menu.svg", [=](){
            floatingSettings->setPage(0);
            floatingWidget->moveAction();
     });
     floatingSettings->addPage(penSettings);
-    
-        // tool Menu
+
+    // tool Menu
     QWidget *toolSettings = new QWidget();
     toolSettingsLayout = new QVBoxLayout(toolSettings);
     toolSettingsLayout->setSpacing(0);
@@ -52,7 +52,7 @@ void setupWidgets(){
            floatingWidget->moveAction();
     });
     floatingSettings->addPage(toolSettings);
-    
+
     floatingSettings->setHide();
 
 
@@ -60,6 +60,7 @@ void setupWidgets(){
 
     floatingWidget->addWidget("move", move);
     floatingWidget->addWidget("pen-menu", penMenu);
+    floatingWidget->addWidget("pen-switch", penSwitch);
     floatingWidget->addWidget("next", nextButton);
     floatingWidget->addWidget("back", backButton);
     floatingWidget->addWidget("tool-menu", toolMenu);

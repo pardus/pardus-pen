@@ -142,5 +142,6 @@ extern void backgroundStyleEvent();
 extern void setupWidgets();
 
 extern QPushButton *penMenu;
+extern QPushButton *penSwitch;
 
 void setHideMainWindow(bool status);

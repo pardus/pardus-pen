@@ -68,7 +68,14 @@ void penStyleEvent(){
     thicknessLabel->setVisible(drawing->penMode == DRAW);
     modeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
     penTypeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
-
+    penSwitch->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    if (drawing->penType == ERASER){
+        set_icon(":images/eraser.svg", penSwitch);
+    } else if(drawing->penType == MARKER){
+        set_icon(":images/marker.svg", penSwitch);
+    } else {
+        set_icon(":images/pen.svg", penSwitch);
+    }
 }
 
 

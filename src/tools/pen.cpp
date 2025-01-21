@@ -15,6 +15,7 @@ QPushButton *lineNormalButton;
 QPushButton *lineDotLineButton;
 QPushButton *lineLineLineButton;
 
+QPushButton *penSwitch;
 
 QSlider *thicknessSlider;
 QPushButton *backgroundButton;
@@ -79,6 +80,17 @@ void setupPenType(){
         setPen(PEN);
     });
 
+    penSwitch = create_button(":images/pen.svg", [=](){
+        drawing->mergeSelection();
+        drawing->penMode = DRAW;
+        if(drawing->penType == ERASER){
+            setPen(PEN);
+        } else {
+            setPen(ERASER);
+        }
+        floatingSettings->setHide();
+    });
+
     selectButton = create_button(":images/crop.svg", [=](){
         drawing->penMode = SELECTION;
         penStyleEvent();
@@ -95,7 +107,6 @@ void setupPenType(){
         drawing->mergeSelection();
         drawing->penMode = DRAW;
         setPen(ERASER);
-        
     });
 
     lineButton = create_button(":images/line.svg", [=](){

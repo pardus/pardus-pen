@@ -634,8 +634,6 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
         } else {
             setPen(ERASER);
         }
-    } else if (event->key() == Qt::Key_E){
-        setHideMainWindow(true);
     }
     if(update){
         penStyleEvent();
