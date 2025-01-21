@@ -19,9 +19,9 @@ public:
     void setPage(int num);
     void reload();
     void setHide();
+    int current_page = -1;
 private:
     int num_of_item = 0;
-    int current_page = -1;
     QPoint dragPosition;
     QVBoxLayout *layout;
 };

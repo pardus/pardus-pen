@@ -629,7 +629,7 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
         penColor = colors[5];
         update = true;
     } else if (event->key() == Qt::Key_M){
-        if(penType == ERASER){
+        if(penType != PEN || penMode == SELECTION){
             setPen(PEN);
         } else {
             setPen(ERASER);

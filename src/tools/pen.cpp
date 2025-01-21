@@ -50,8 +50,10 @@ void setPen(int type){
         case PEN:
             thicknessSlider->setRange(1,50*scale);
             break;
-    
+
     }
+    drawing->mergeSelection();
+    drawing->penMode = DRAW;
     thicknessSlider->setValue(drawing->penSize[type]);
     sliderLock = false;
     if(pen_init){
@@ -75,20 +77,19 @@ void setLineStyle(int style){
 void setupPenType(){
 
     penButton = create_button(":images/pen.svg", [=](){
-        drawing->mergeSelection();
-        drawing->penMode = DRAW;
         setPen(PEN);
     });
 
     penSwitch = create_button(":images/pen.svg", [=](){
-        drawing->mergeSelection();
-        drawing->penMode = DRAW;
-        if(drawing->penType == ERASER){
+        if(floatingSettings->current_page >= 0){
+            floatingSettings->setHide();
+            return;
+        }
+        if(drawing->penType != PEN || drawing->penMode == SELECTION){
             setPen(PEN);
         } else {
             setPen(ERASER);
         }
-        floatingSettings->setHide();
     });
 
     selectButton = create_button(":images/crop.svg", [=](){
@@ -98,14 +99,10 @@ void setupPenType(){
     });
 
     markerButton = create_button(":images/marker.svg", [=](){
-        drawing->mergeSelection();
-        drawing->penMode = DRAW;
         setPen(MARKER);
     });
 
     eraserButton = create_button(":images/eraser.svg", [=](){
-        drawing->mergeSelection();
-        drawing->penMode = DRAW;
         setPen(ERASER);
     });
 
