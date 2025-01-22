@@ -111,6 +111,7 @@ protected:
 };
 static MainWindow *mainWindow;
 static bool isFullScreen = true;
+static bool hideState = true;
 
 void setupTools(){
 #ifndef ETAP19
@@ -201,6 +202,18 @@ void setupTools(){
         floatingWidget->setVertical(!floatingWidget->is_vertical);
         floatingSettings->setHide();
     });
+
+    // non-gui button for hide / show floatingWidget
+    QPushButton* hideUi = create_button("", [=](){
+        if(hideState){
+            floatingWidget->hide();
+            floatingSettings->setHide();
+        } else {
+            floatingWidget->show();
+        }
+        hideState = ! hideState;
+    });
+    set_shortcut(hideUi, Qt::Key_F1, Qt::AltModifier);
 }
 
 void setHideMainWindow(bool status){
