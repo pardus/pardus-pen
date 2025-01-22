@@ -628,9 +628,8 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
     } else if (event->key() == Qt::Key_9){
         penColor = colors[5];
         update = true;
-    } else if (event->key() == Qt::Key_M){
-        do_shortcut(event->key(), 0);
-
+    } else {
+        do_shortcut(event->key(), event->modifiers());
     }
     if(update){
         penStyleEvent();

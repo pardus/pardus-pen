@@ -26,15 +26,21 @@ void setupBackground(){
         board->setType(TRANSPARENT);
         backgroundStyleEvent();
     });
+    set_shortcut(transparentButton, Qt::Key_Q, Qt::AltModifier);
+
+
     blackButton = create_button(":images/paper-black.svg", [=](){
         board->setType(BLACK);
         backgroundStyleEvent();
     });
+    set_shortcut(blackButton, Qt::Key_W, Qt::AltModifier);
+
     whiteButton = create_button(":images/paper-white.svg", [=](){
         board->setType(WHITE);
         backgroundStyleEvent();
     });
-    
+    set_shortcut(whiteButton, Qt::Key_E, Qt::AltModifier);
+
     // page buttons
     previousPage = create_button(":images/go-page-previous.svg", [=](){
         if(drawing->getPageNum() == 0){
@@ -44,12 +50,14 @@ void setupBackground(){
         backgroundStyleEvent();
         updateGoBackButtons();
     });
+    set_shortcut(previousPage, Qt::Key_PageDown, Qt::ControlModifier);
 
     nextPage = create_button(":images/go-page-next.svg", [=](){
         drawing->goNextPage();
         backgroundStyleEvent();
         updateGoBackButtons();
     });
+    set_shortcut(nextPage, Qt::Key_PageUp, Qt::ControlModifier);
 
     // overlay buttons
     overlayNone = create_button(":images/overlay-none.svg", [=](){
@@ -92,6 +100,7 @@ void setupBackground(){
         board->setOverlayType(CUSTOM);
         backgroundStyleEvent();
     });
+    set_shortcut(overlayCustom, Qt::Key_O, Qt::AltModifier);
 
     pageLabel = new QLabel("0");
 
@@ -122,4 +131,6 @@ void setupBackground(){
             drawing->clear();
         }
     });
+    set_shortcut(clear, Qt::Key_Delete, Qt::ControlModifier);
+
 }

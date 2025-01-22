@@ -46,6 +46,7 @@ void setupSaveLoad(){
         floatingWidget->show();
         setHideMainWindow(false);
     });
+    set_shortcut(save, Qt::Key_S, Qt::ControlModifier);
 
     open = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
@@ -62,5 +63,6 @@ void setupSaveLoad(){
         floatingWidget->show();
         setHideMainWindow(false);
     });
+    set_shortcut(open, Qt::Key_O, Qt::ControlModifier);
 #endif
 }

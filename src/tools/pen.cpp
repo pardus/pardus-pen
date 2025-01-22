@@ -101,6 +101,7 @@ void setupPenType(){
         penStyleEvent();
         penSizeEvent();
     });
+    set_shortcut(selectButton, Qt::Key_X, Qt::ControlModifier);
 
     markerButton = create_button(":images/marker.svg", [=](){
         setPen(MARKER);
@@ -113,23 +114,29 @@ void setupPenType(){
     lineButton = create_button(":images/line.svg", [=](){
         setPenStyle(LINE);
     });
+    set_shortcut(lineButton, Qt::Key_L, Qt::AltModifier);
 
     circleButton = create_button(":images/circle.svg", [=](){
         setPenStyle(CIRCLE);
     });
+    set_shortcut(circleButton, Qt::Key_C, Qt::AltModifier);
 
     triangleButton = create_button(":images/triangle.svg", [=](){
         setPenStyle(TRIANGLE);
     });
+    set_shortcut(triangleButton, Qt::Key_T, Qt::AltModifier);
 
     rectButton = create_button(":images/rectangle.svg", [=](){
         setPenStyle(RECTANGLE);
     });
+    set_shortcut(rectButton, Qt::Key_R, Qt::AltModifier);
+
 
     splineButton = create_button(":images/spline.svg", [=](){
         setPenStyle(SPLINE);
 
     });
+    set_shortcut(splineButton, Qt::Key_S, Qt::AltModifier);
 
     lineNormalButton = create_button(":images/line-normal.svg", [=](){
         setLineStyle(NORMAL);
@@ -145,18 +152,18 @@ void setupPenType(){
         setLineStyle(LINELINE);
 
     });
-    
+
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setSingleStep(1);
     setPen(PEN);
-    
+
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
         if(!sliderLock){
             drawing->penSize[drawing->penType] = value;
         }
         penSizeEvent();
     });
-    
+
     colorpicker = create_button(":images/color-picker.svg", [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
@@ -173,17 +180,21 @@ void setupPenType(){
         penSizeEvent();
         backgroundStyleEvent();
     });
-    
+    set_shortcut(colorpicker, Qt::Key_0, 0);
+
     backButton = create_button(":images/go-back.svg", [=](){
         drawing->goPrevious();
         updateGoBackButtons();
     });
-    
+    set_shortcut(backButton, Qt::Key_Z, Qt::ControlModifier);
+
+
     nextButton = create_button(":images/go-next.svg", [=](){
         drawing->goNext();
         updateGoBackButtons();
     });
-    
+    set_shortcut(nextButton, Qt::Key_Y, Qt::ControlModifier);
+
     close = create_button(":images/close.svg", [=](){
 #ifdef ETAP19
     QStringList args3;
@@ -199,7 +210,7 @@ void setupPenType(){
         QApplication::quit();
         exit(0);
     });
-    
+
     move = new QLabel("");
     QIcon icon = QIcon(":images/move-icon.svg");
     QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(butsize, butsize)));

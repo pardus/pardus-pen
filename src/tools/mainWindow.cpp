@@ -168,6 +168,7 @@ void setupTools(){
     minify = create_button(":images/screen.svg", [=](){
             mainWindow->showMinimized();
     });
+    set_shortcut(minify, Qt::Key_D, Qt::MetaModifier);
 
     QScreen *screen = QGuiApplication::primaryScreen();
     fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
@@ -193,6 +194,9 @@ void setupTools(){
         isFullScreen = !isFullScreen;
         minify->setEnabled(isFullScreen);
     });
+
+    set_shortcut(fullscreen, Qt::Key_F11, 0);
+
     rotate = create_button(":images/rotate.svg", [=](){
         floatingWidget->setVertical(!floatingWidget->is_vertical);
         floatingSettings->setHide();

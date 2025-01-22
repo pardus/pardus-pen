@@ -9,8 +9,8 @@ extern float scale;
 #define butsize 48*scale
 
 typedef struct {
-    int key;
-    int modifier;
+    qint64 key;
+    qint64 modifier;
 } Shortcut;
 
 static QMap<QPushButton*, ButtonEvent> events;
@@ -41,13 +41,13 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     return button;
 }
 
-void set_shortcut(QPushButton *button, int key, int modifier){
+void set_shortcut(QPushButton *button, qint64 key, qint64 modifier){
     Shortcut s;
     s.key = key;
     s.modifier = modifier;
     shortcuts[button] = s;
 }
-void do_shortcut(int key, int modifier){
+void do_shortcut(qint64 key, qint64 modifier){
     QPushButton *button;
     for (auto i = shortcuts.cbegin(), end = shortcuts.cend(); i != end; ++i){
         Shortcut s = i.value();

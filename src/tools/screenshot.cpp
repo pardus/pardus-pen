@@ -9,13 +9,14 @@ void setupScreenShot(){
         takeScreenshot();
         floatingWidget->show();
         ssTimer->stop();
-    
+
     });
     ssButton = create_button(":images/screenshot.svg", [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
         ssTimer->start(500);
-        
+
     });
+    set_shortcut(ssButton, Qt::Key_F2, 0);
     #endif
 }
