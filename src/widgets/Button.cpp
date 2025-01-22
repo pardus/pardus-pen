@@ -48,7 +48,7 @@ void set_shortcut(QPushButton *button, qint64 key, qint64 modifier){
     shortcuts[button] = s;
 }
 void do_shortcut(qint64 key, qint64 modifier){
-    QPushButton *button;
+    QPushButton *button = NULL;
     for (auto i = shortcuts.cbegin(), end = shortcuts.cend(); i != end; ++i){
         Shortcut s = i.value();
         if(s.key == key && s.modifier == modifier){
