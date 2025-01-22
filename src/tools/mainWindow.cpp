@@ -16,6 +16,8 @@ extern int new_x;
 extern int new_y;
 
 float scale = 1.0;
+extern void setPen(int mode);
+extern QColor colors[];
 
 class MainWindow : public QMainWindow {
 
@@ -54,6 +56,29 @@ public:
 
     }
 
+
+    void keyPressEvent(QKeyEvent *event) {
+		// https://doc.qt.io/qt-6/qt.html#Key-enum
+		// color switch
+		bool update = false;
+		if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
+		    drawing->penColor = colors[20 + event->key() - Qt::Key_1];
+		    update = true;
+		} else if (event->key() == Qt::Key_8){
+		    drawing->penColor = colors[0];
+		    update = true;
+		} else if (event->key() == Qt::Key_9){
+		    drawing->penColor = colors[5];
+		    update = true;
+		} else {
+		    do_shortcut(event->key(), event->modifiers());
+		}
+		if(update){
+		    penStyleEvent();
+		    penSizeEvent();
+		    backgroundStyleEvent();
+		}
+}
 
 #define SCROLLSIZE 22*scale
 
