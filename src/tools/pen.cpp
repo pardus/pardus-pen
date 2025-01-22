@@ -94,6 +94,7 @@ void setupPenType(){
             setPen(ERASER);
         }
     });
+    set_shortcut(penSwitch, Qt::Key_M, 0);
 
     selectButton = create_button(":images/crop.svg", [=](){
         drawing->penMode = SELECTION;

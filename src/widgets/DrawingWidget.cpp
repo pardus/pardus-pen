@@ -629,14 +629,8 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
         penColor = colors[5];
         update = true;
     } else if (event->key() == Qt::Key_M){
-        penMode = DRAW;
-        penStyle = SPLINE;
-        lineStyle = NORMAL;
-        if(penType != PEN || penMode == SELECTION){
-            setPen(PEN);
-        } else {
-            setPen(ERASER);
-        }
+        do_shortcut(event->key(), 0);
+
     }
     if(update){
         penStyleEvent();
