@@ -13,61 +13,51 @@ typedef struct {
     int modifier;
 } Shortcut;
 
-static QMap<const char*, QPushButton*> buttons;
-static QMap<const char*, ButtonEvent> events;
-static QMap<const char*, Shortcut> shortcuts;
+static QMap<QPushButton*, ButtonEvent> events;
+static QMap<QPushButton*, Shortcut> shortcuts;
 
 QPushButton* create_button_text(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton(name);
     if(event) {
         QObject::connect(button, &QPushButton::clicked, event);
-        events[name] = event;
+        events[button] = event;
     }
     QFont font = button->font();
     font.setPointSize(18*scale);
     button->setFont(font);
-    buttons[name] = button;
     return button;
 }
 QPushButton* create_button(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
     if(event) {
         QObject::connect(button, &QPushButton::clicked, event);
-        events[name] = event;
+        events[button] = event;
     }
     set_icon(name, button);
     QFont font = button->font();
     font.setPointSize(18*scale);
     button->setFixedSize(butsize+padding, butsize+padding);
     button->setFont(font);
-    buttons[name] = button;
     return button;
 }
 
 void set_shortcut(QPushButton *button, int key, int modifier){
-    char* name;
-    for (auto i = buttons.cbegin(), end = buttons.cend(); i != end; ++i){
-        if(i.value() == button){
-            name = (char*) i.key();
-            break;
-        }
-    }
     Shortcut s;
     s.key = key;
     s.modifier = modifier;
-    shortcuts[name] = s;
+    shortcuts[button] = s;
 }
 void do_shortcut(int key, int modifier){
-    char* name;
+    QPushButton *button;
     for (auto i = shortcuts.cbegin(), end = shortcuts.cend(); i != end; ++i){
         Shortcut s = i.value();
         if(s.key == key && s.modifier == modifier){
-            name = (char*)i.key();
+            button = i.key();
             break;
         }
     }
-    if(events.contains(name)){
-        ButtonEvent ev = events[name];
+    if(events.contains(button)){
+        ButtonEvent ev = events[button];
         ev();
     }
 
