@@ -3,9 +3,10 @@
 #include "WhiteBoard.h"
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
+#include "../tools.h"
 
 #include <stdlib.h>
 #include <locale.h>
@@ -28,22 +29,10 @@ int WhiteBoard::getOverlayType(){
 }
 
 void WhiteBoard::setOverlayType(int page){
-    if(page == CUSTOM) {
-        QString fileName = QFileDialog::getOpenFileName(this, _("Open Image File"), "", QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)"));
-        if (!fileName.isEmpty()) {
-            QImage image(fileName);
-            setImage(image);
-        } else {
-            backgroundImage.fill(QColor("transparent"));
-        }
-    } else if (page == TURKIYE){
-        backgroundImage = QImage(":images/turkiye-map.svg");
-    } else if (page == WORLD){
-        backgroundImage = QImage(":images/world-map.svg");
-    } else {
-        backgroundImage.fill(QColor("transparent"));
-        set_int((char*)"page-overlay",page);
+    if(page != CUSTOM) {
+        overlays[drawing->getPageNum()].fill(QColor("transparent"));;
     }
+    set_int((char*)"page-overlay",page);
     overlayType = page;
     update();
 }
@@ -65,14 +54,13 @@ void WhiteBoard::setType(int page){
 }
 
 void WhiteBoard::setImage(QImage image){
-    backgroundImage = image;
+    overlays[drawing->getPageNum()] = image;
     update();
 }
 
 void WhiteBoard::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event)
 
-    gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count");
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
@@ -84,15 +72,39 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
 
     int w = mainWindow->geometry().width();
     int h = mainWindow->geometry().height();
+    if (!ratios.contains(drawing->getPageNum())){
+        ratios[drawing->getPageNum()] = 80;
+    }
+    if (!rotates.contains(drawing->getPageNum())){
+        rotates[drawing->getPageNum()] = 0;
+    }
+    float ratio = ratios[drawing->getPageNum()] / 100.0;
+    int ow, oh;
+    QTransform transform;
+    transform.rotate(rotates[drawing->getPageNum()]);
+    QImage img = overlays[drawing->getPageNum()].transformed(transform);
+    gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
         case NONE:
             break;
         case CUSTOM:
-        case TURKIYE:
-        case WORLD:
-            // %10 padding
-            painter.drawImage(QPoint(w*0.1, h*0.1), backgroundImage.scaled(w*0.8, h*0.8));
+            if(img.size().width() * img.size().height() > 0){
+                w = img.size().width() * h / img.size().height();
+                if(w <= mainWindow->geometry().width()) {
+                } else {
+                    w = mainWindow->geometry().width();
+                    h = img.size().height() * w / img.size().width();
+                }
+                w = w*ratio;
+                h = h*ratio;
+                ow = (mainWindow->geometry().width() - w) / 2;
+                oh = (mainWindow->geometry().height() - h) / 2;
+                painter.drawImage(
+                    QPoint(ow, oh),
+                    img.scaled(w, h)
+                );
+            }
             break;
         case SQUARES:
             drawSquarePaper();
@@ -150,7 +162,6 @@ void WhiteBoard::drawIsometricPaper() {
 }
 
 void WhiteBoard::drawMusicPaper() {
-    QPainter painter(this);
     painter.setPen(
         QPen(lineColor, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
     );

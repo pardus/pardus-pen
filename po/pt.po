@@ -2,14 +2,14 @@
 # Copyright (C) 2024 tr.org.pardus.pen
 # This file is distributed under the same license as the tr.org.pardus.pen package.
 #
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-12 23:42+0000\n"
-"PO-Revision-Date: 2024-10-12 16:31+0100\n"
+"POT-Creation-Date: 2024-12-23 07:19+0000\n"
+"PO-Revision-Date: 2025-01-03 20:23+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -19,106 +19,103 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: src/ScreenShot.cpp:42
+#: src/utils/ScreenShot.cpp:58
 msgid "Info"
 msgstr "Informação"
 
-#: src/ScreenShot.cpp:45
+#: src/utils/ScreenShot.cpp:61
 msgid "Screenshot saved:"
 msgstr "Captura de ecrã guardada:"
 
-#: src/ScreenShot.cpp:47
+#: src/utils/ScreenShot.cpp:63
 msgid "Failed To save:"
 msgstr "Erro ao guardar:"
 
-#: src/WhiteBoard.cpp:32
-#, fuzzy
-msgid "Open Image File"
-msgstr "Abrir ficheiro"
+#: src/main.cpp:57 src/tools/mainWindow.cpp:195
+msgid "Pardus Pen"
+msgstr "Caneta Pardus"
 
-#: src/WhiteBoard.cpp:32
-msgid "Images"
-msgstr ""
-
-#: src/SetupWidgets.cpp:215
-msgid "Pen"
-msgstr "Caneta"
-
-#: src/SetupWidgets.cpp:219
-msgid "Marker"
-msgstr "Marcador"
-
-#: src/SetupWidgets.cpp:223
-msgid "Eraser"
-msgstr "Borracha"
-
-#: src/SetupWidgets.cpp:228
-msgid "Size:"
-msgstr "Tamanho:"
-
-#: src/SetupWidgets.cpp:229
-msgid "Color:"
-msgstr "Cor:"
-
-#: src/SetupWidgets.cpp:399
-#, fuzzy
-msgid " Color:"
-msgstr "Cor:"
-
-#: src/SetupWidgets.cpp:403
-msgid "Color Picker"
-msgstr "Seletor de cor"
-
-#: src/SetupWidgets.cpp:448
-msgid "Select Color"
-msgstr "Selecionar cor"
-
-#: src/SetupWidgets.cpp:581
-msgid "Pen Style"
-msgstr "Estilo de caneta"
-
-#: src/SetupWidgets.cpp:945
-msgid "Do you want to clear screen?"
-msgstr "Limpar o ecrã?"
-
-#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1048
-msgid "No"
-msgstr "Não"
-
-#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1051
-msgid "Yes"
-msgstr "Sim"
-
-#: src/SetupWidgets.cpp:997 src/SetupWidgets.cpp:1013
-#, fuzzy
+#: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
 msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros de caneta (*.pen);;"
 
-#: src/SetupWidgets.cpp:999
-#, fuzzy
+#: src/tools/save-load.cpp:27
 msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Ficheiros PDF (*.pdf);;"
 
-#: src/SetupWidgets.cpp:1001 src/SetupWidgets.cpp:1014
-#, fuzzy
+#: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
 msgid "All Files (*.*)"
-msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
+msgstr "Todos os ficheiros (*.*)"
 
-#: src/SetupWidgets.cpp:1002
+#: src/tools/save-load.cpp:33
 msgid "Save File"
 msgstr "Guardar ficheiro"
 
-#: src/SetupWidgets.cpp:1015
+#: src/tools/save-load.cpp:52
 msgid "Open File"
 msgstr "Abrir ficheiro"
 
-#: src/SetupWidgets.cpp:1035
-msgid "Do you want to quit Pardus pen?"
-msgstr "Sair da caneta Pardus?"
+#: src/tools/pen.cpp:148
+msgid "Select Color"
+msgstr "Selecionar cor"
 
-#: src/main.cpp:165 src/main.cpp:187
-msgid "Pardus Pen"
-msgstr "Caneta Pardus"
+#: src/tools/update.cpp:94
+msgid "Size:"
+msgstr "Tamanho:"
+
+#: src/SetupWidgets.cpp:139
+msgid "Size: 10"
+msgstr "Tamanho: 10"
+
+#: src/SetupWidgets.cpp:222
+msgid "Background:"
+msgstr "Fundo:"
+
+#: src/SetupWidgets.cpp:253
+msgid "Page:"
+msgstr "Página:"
+
+#: src/widgets/WhiteBoard.cpp:32
+msgid "Open Image File"
+msgstr "Abrir imagem"
+
+#: src/widgets/WhiteBoard.cpp:32
+msgid "Images"
+msgstr "Imagens"
+
+#~ msgid "Pen"
+#~ msgstr "Caneta"
+
+#~ msgid "Marker"
+#~ msgstr "Marcador"
+
+#~ msgid "Eraser"
+#~ msgstr "Borracha"
+
+#~ msgid "Color:"
+#~ msgstr "Cor:"
+
+#, fuzzy
+#~ msgid " Color:"
+#~ msgstr "Cor:"
+
+#~ msgid "Color Picker"
+#~ msgstr "Seletor de cor"
+
+#~ msgid "Pen Style"
+#~ msgstr "Estilo de caneta"
+
+#~ msgid "Do you want to clear screen?"
+#~ msgstr "Limpar o ecrã?"
+
+#~ msgid "No"
+#~ msgstr "Não"
+
+#~ msgid "Yes"
+#~ msgstr "Sim"
+
+#~ msgid "Do you want to quit Pardus pen?"
+#~ msgstr "Sair da caneta Pardus?"
 
 #~ msgid "Pen Files (*.pen);;All Files (*.*)"
 #~ msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"

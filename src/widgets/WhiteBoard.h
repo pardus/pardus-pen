@@ -16,8 +16,6 @@
 #define LINES 2
 #define ISOMETRIC 3
 #define MUSIC 4
-#define TURKIYE 90
-#define WORLD 23
 #define CUSTOM 31
 
 class WhiteBoard : public QWidget {
@@ -33,7 +31,11 @@ public:
     void drawIsometricPaper();
     QMainWindow *mainWindow;
     void drawMusicPaper();
-    QImage backgroundImage;
+    QMap<qint64, int> ratios;
+    QMap<qint64, int> rotates;
+    QMap<qint64, QPixmap> backgrounds;
+    QMap<qint64, QImage> overlays;
+
 private:
     QColor background;
     QColor lineColor;

@@ -4,6 +4,10 @@
       <default>"#3498DB"</default>
       <summary>Pen color</summary>
     </key>
+    <key type="i" name="history">
+      <default>50</default>
+      <summary>History Size</summary>
+    </key>
     <key type="i" name="pen-size">
       <default>3</default>
       <summary>Pen size</summary>
@@ -43,6 +47,10 @@
     <key type="b" name="is-vertical">
       <default>true</default>
       <summary>Toolbar is vertical or horizontal</summary>
+    </key>
+    <key type="b" name="fuar">
+      <default>false</default>
+      <summary>Fuar mode</summary>
     </key>
     <key type="b" name="xwayland">
       <default>false</default>

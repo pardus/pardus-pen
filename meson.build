@@ -2,24 +2,35 @@ project('pardus-pen', ['cpp', 'c'])
 # Source files
 src = [
     'src/main.cpp',
-    'src/DrawingWidget.cpp',
-    'src/Selection.cpp',
-    'src/FloatingWidget.cpp',
-    'src/FloatingSettings.cpp',
-    'src/WhiteBoard.cpp',
-    'src/Button.cpp',
-    'src/Geometry.cpp',
+    'src/widgets/DrawingWidget.cpp',
+    'src/utils/Selection.cpp',
+    'src/utils/Geometry.cpp',
     'src/SetupWidgets.cpp',
-    'src/settings.c',
-    'src/OverView.cpp',
-    'src/which.c'
+    'src/utils/settings.c',
+    'src/widgets/OverView.cpp',
+    'src/widgets/FloatingWidget.cpp',
+    'src/widgets/FloatingSettings.cpp',
+    'src/widgets/WhiteBoard.cpp',
+    'src/widgets/Background.cpp',
+    'src/widgets/Button.cpp',
+    'src/tools/update.cpp',
+    'src/tools/background.cpp',
+    'src/tools/mainWindow.cpp',
+    'src/tools/screenshot.cpp',
+    'src/tools/save-load.cpp',
+    'src/tools/pen.cpp',
+    'src/utils/which.c'
 ]
 
 subdir('po')
 
 if get_option('resources')
     # Build qrc
-    run_command('rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp', check:true)
+    rcc_args = ['rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp']
+    if not get_option('etap19')
+        rcc_args += ['-threshold=0' ,'--compress=9', '--compress-algo=zlib']
+    endif
+    run_command(rcc_args, check:true)
 
     src += [meson.current_build_dir()/'resources.cpp']
 
@@ -31,22 +42,35 @@ add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
 
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
-    src += ['src/ScreenShot.cpp']
+    src += ['src/utils/ScreenShot.cpp']
 endif
 # Qt dependencies
 qt_dep = [
     dependency('gio-2.0'),
 ]
+
+link_args = []
+
 if get_option('etap19')
     add_project_arguments('-DETAP19', '-pthread',  language: 'cpp')
+    link_args += ['-lpthread']
 endif
 
 
 if get_option('save')
     qt_dep += dependency('libarchive')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')
-    src += 'src/Archive.cpp'
+    src += 'src/utils/Archive.cpp'
 endif
+
+
+# background images
+add_project_arguments('-DBGDIR="' + get_option('backgrounds') + '"', language: 'cpp')
+foreach bg_src : run_command('find', 'data/backgrounds','-type','f',check:true).stdout().strip().split('\n')
+    install_data(bg_src, install_dir: get_option('backgrounds'))
+endforeach
+
+
 
 if get_option('qt') == '5'
     add_project_arguments('-DQT5', language: 'cpp')
@@ -80,14 +104,12 @@ add_project_arguments('-fPIC', language: 'cpp')
 add_project_arguments('-fpermissive', language: 'cpp')
 add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cpp')
 
-add_project_arguments('-DHISTORY='+get_option('history'), language: 'cpp')
-
 glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
 icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'
 
 # executable file
-executable('pardus-pen', src, dependencies: qt_dep, install: true)
+executable('pardus-pen', src, dependencies: qt_dep, link_args: link_args, install: true)
 install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
 install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)

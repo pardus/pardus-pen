@@ -1,18 +1,21 @@
 #include "FloatingWidget.h"
-#include "FloatingSettings.h"
 
-int new_x;
-int new_y;
+
+#include "../tools.h"
+
+int new_x = 0;
+int new_y = 0;
 
 extern float scale;
 
 extern QMainWindow* tool2;
+extern QMainWindow* tool;
 
 #define padding 8*scale
 
 
 extern "C" {
-#include "settings.h"
+#include "../utils/settings.h"
 }
 
 #ifdef QT5
@@ -20,16 +23,16 @@ extern "C" {
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
-    fparent = (QMainWindow*)parent;
     is_vertical = get_bool((char*)"is-vertical");
+    layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
     if(is_vertical){
-        layout = new QBoxLayout(QBoxLayout::TopToBottom, this);
-    } else {
-        layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
+        layout->setDirection(QBoxLayout::TopToBottom);
     }
-    setLayout(layout);
+    new_x = get_int((char*)"cur-x");
+    new_y = get_int((char*)"cur-y");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
+    setLayout(layout);
     QString style = QString(
     "QWidget {"
         "border-radius: 13px;"
@@ -37,6 +40,29 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     "}");
     setStyleSheet(style);
     cur_height = padding;
+    cur_width = padding;
+
+}
+
+void  FloatingWidget::setVertical(bool state){
+    set_bool((char*)"is-vertical", state);
+    int h = size().height();
+    int w = size().width();
+    if(state){
+        cur_width = MIN(h,w);
+        cur_height = MAX(h,w);
+        layout->setDirection(QBoxLayout::TopToBottom);
+    } else {
+        layout->setDirection(QBoxLayout::LeftToRight);
+        cur_width = MAX(h,w);
+        cur_height = MIN(h,w);
+    }
+    setFixedSize(cur_width, cur_height);
+    moveAction();
+    is_vertical = state;
+    if(tool != nullptr){
+        tool->setFixedSize(cur_width, cur_height);
+    }
 }
 
 void FloatingWidget::setMainWindow(QWidget *widget) {
@@ -47,7 +73,9 @@ void FloatingWidget::setSettings(QWidget *widget) {
     floatingSettings = (FloatingSettings*)widget;
 }
 
-void FloatingWidget::setWidget(QWidget *widget) {
+void FloatingWidget::addWidget(QString name, QWidget *widget) {
+    layout->addWidget(widget);
+    widgets.insert(name, widget);
     if(is_vertical){
         cur_height += widget->size().height() + padding;
         if (cur_width < widget->size().width()) {
@@ -61,23 +89,11 @@ void FloatingWidget::setWidget(QWidget *widget) {
     }
     num_of_item++;
     setFixedSize(cur_width, cur_height);
-    layout->addWidget(widget);
     moveAction();
 }
 
-void FloatingWidget::mousePressEvent(QMouseEvent *event) {
-    offset_x = abs(event->globalPosition().x() - new_x);
-    offset_y = abs(event->globalPosition().y() - new_y);
-}
 
-void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
-    (void)(event); // fix unused warning
-    offset_x =-1;
-    offset_y =-1;
-    set_int((char*)"cur-x", new_x);
-    set_int((char*)"cur-y", new_y);
-}
-static int new_xx, new_yy;
+static int new_xx = 0, new_yy = 0;
 
 void FloatingWidget::moveAction(){
         if (new_x < 0) {
@@ -96,29 +112,29 @@ void FloatingWidget::moveAction(){
         }if (new_y > max_height - cur_height) {
             new_y = max_height - cur_height;
         }
-        if(tool2 != nullptr){
-            fparent->move(new_x, new_y);
+        if(tool != nullptr){
+            tool->move(new_x, new_y);
         } else {
             move(new_x, new_y);
         }
         if(floatingSettings != NULL){
             if(is_vertical){
-                new_xx = new_x+padding+cur_width;
-                if(new_xx  > mainWindow->geometry().width() - floatingSettings->cur_width){
+                new_xx = new_x+padding+size().width();
+                if(new_xx  > max_width - floatingSettings->cur_width){
                     new_xx = new_x - padding - floatingSettings->cur_width;
                 }
-                new_yy = new_y + (cur_height / num_of_item) * settingsOffset;
-                if (new_yy > mainWindow->geometry().height() - floatingSettings->cur_height) {
-                    new_yy = mainWindow->geometry().height() - floatingSettings->cur_height;
+                new_yy = new_y;
+                if (new_yy > max_height - floatingSettings->cur_height) {
+                    new_yy = max_height - floatingSettings->cur_height;
                 }
 
             } else {
-                new_xx = new_x + (cur_width / num_of_item) * settingsOffset;
-                if (new_xx > mainWindow->geometry().width() - floatingSettings->cur_width) {
-                    new_xx = mainWindow->geometry().width() - floatingSettings->cur_width;
+                new_xx = new_x;
+                if (new_xx > max_width - floatingSettings->cur_width) {
+                    new_xx = max_width - floatingSettings->cur_width;
                 }
-                new_yy = new_y + cur_height + padding;
-                if(new_yy  > mainWindow->geometry().height() - floatingSettings->cur_height){
+                new_yy = new_y + size().height() + padding;
+                if(new_yy  > max_height - floatingSettings->cur_height){
                     new_yy = new_y - padding - floatingSettings->cur_height;
                 }
             }
@@ -129,10 +145,17 @@ void FloatingWidget::moveAction(){
             }
         }
 }
+void FloatingWidget::mousePressEvent(QMouseEvent *event) {
+    offset_x = abs(event->globalPosition().x() - new_x);
+    offset_y = abs(event->globalPosition().y() - new_y);
+}
 
-void FloatingWidget::setFloatingOffset(int offset){
-    settingsOffset = offset;
-    moveAction();
+void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
+    (void)(event); // fix unused warning
+    offset_x =-1;
+    offset_y =-1;
+    set_int((char*)"cur-x", new_x);
+    set_int((char*)"cur-y", new_y);
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {

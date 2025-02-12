@@ -6,9 +6,9 @@
 #include <QDebug>
 #include <archive.h>
 #include <archive_entry.h>
-#include <QMainWindow>
+#include <QWidget>
 
-extern QMainWindow* mainWindow;
+extern QWidget* mainWidget;
 
 class ArchiveStorage {
 public:
@@ -73,8 +73,8 @@ public:
             qDebug() << "Failed to open archive: " << archive_error_string(ar);
             return values;
         }
-        int width = mainWindow->geometry().width();
-        int height = mainWindow->geometry().height();
+        int width = mainWidget->geometry().width();
+        int height = mainWidget->geometry().height();
         while (archive_read_next_header(ar, &entry) == ARCHIVE_OK) {
             // Get entry name
             const char* entryName = archive_entry_pathname(entry);
@@ -97,7 +97,7 @@ public:
                 if(strcmp(entryName, "config") == 0){
                     config = QString::fromUtf8(*imageData);
                     QStringList list = config.split("\n");
-                    for (const auto &str : std::as_const(list)) {
+                    for (const auto &str : list) {
                         if(str.startsWith("width=")){
                             width = str.split("=")[1].toInt();
                         } else if(str.startsWith("height=")){
@@ -112,7 +112,7 @@ public:
                     puts("Image load fail");
                     continue;
                 }
-                image = image.scaled(mainWindow->geometry().width(), mainWindow->geometry().height());
+                image = image.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
                 values.insert(QString(entryName), image);
             } else {
                 break;

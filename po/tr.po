@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-12 23:42+0000\n"
+"POT-Creation-Date: 2024-12-23 07:19+0000\n"
 "PO-Revision-Date: 2024-08-07 00:19+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -19,99 +19,67 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.3\n"
 
-#: src/ScreenShot.cpp:42
+#: src/utils/ScreenShot.cpp:58
 msgid "Info"
 msgstr "Bilgi"
 
-#: src/ScreenShot.cpp:45
+#: src/utils/ScreenShot.cpp:61
 msgid "Screenshot saved:"
 msgstr "Ekran görüntüsü kaydedildi:"
 
-#: src/ScreenShot.cpp:47
+#: src/utils/ScreenShot.cpp:63
 msgid "Failed To save:"
 msgstr "Kaydedilemedi:"
 
-#: src/WhiteBoard.cpp:32
-msgid "Open Image File"
-msgstr "Resim Aç"
+#: src/main.cpp:57 src/tools/mainWindow.cpp:195
+msgid "Pardus Pen"
+msgstr "Pardus Kalem"
 
-#: src/WhiteBoard.cpp:32
-msgid "Images"
-msgstr "Resimler"
-
-#: src/SetupWidgets.cpp:215
-msgid "Pen"
-msgstr "Kalem"
-
-#: src/SetupWidgets.cpp:219
-msgid "Marker"
-msgstr "İşaretleyici"
-
-#: src/SetupWidgets.cpp:223
-msgid "Eraser"
-msgstr "Silgi"
-
-#: src/SetupWidgets.cpp:228
-msgid "Size:"
-msgstr "Boyutu:"
-
-#: src/SetupWidgets.cpp:229
-msgid "Color:"
-msgstr "Rengi:"
-
-#: src/SetupWidgets.cpp:399
-msgid " Color:"
-msgstr "Renk:"
-
-#: src/SetupWidgets.cpp:403
-msgid "Color Picker"
-msgstr "Renk Seçici"
-
-#: src/SetupWidgets.cpp:448
-msgid "Select Color"
-msgstr "Renk Seçin"
-
-#: src/SetupWidgets.cpp:581
-msgid "Pen Style"
-msgstr "Kalem Biçemi"
-
-#: src/SetupWidgets.cpp:945
-msgid "Do you want to clear screen?"
-msgstr "Ekranı temizlemek istiyor musunuz?"
-
-#: src/SetupWidgets.cpp:956 src/SetupWidgets.cpp:1048
-msgid "No"
-msgstr "Hayır"
-
-#: src/SetupWidgets.cpp:959 src/SetupWidgets.cpp:1051
-msgid "Yes"
-msgstr "Evet"
-
-#: src/SetupWidgets.cpp:997 src/SetupWidgets.cpp:1013
+#: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
 msgid "Pen Files (*.pen);;"
 msgstr "Kalem Dosyaları (*.pen);;"
 
-#: src/SetupWidgets.cpp:999
+#: src/tools/save-load.cpp:27
 msgid "PDF Files (*.pdf);;"
 msgstr "PDF  Dosyaları (*.pdf);;"
 
-#: src/SetupWidgets.cpp:1001 src/SetupWidgets.cpp:1014
+#: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
 msgid "All Files (*.*)"
 msgstr "Tüm Dosyalar (*.*)"
 
-#: src/SetupWidgets.cpp:1002
+#: src/tools/save-load.cpp:33
 msgid "Save File"
 msgstr "Dosya Kaydet"
 
-#: src/SetupWidgets.cpp:1015
+#: src/tools/save-load.cpp:52
 msgid "Open File"
 msgstr "Dosya Aç"
 
-#: src/SetupWidgets.cpp:1035
-msgid "Do you want to quit Pardus pen?"
-msgstr "Pardus kalem'i kapatmak istiyor musunuz?"
+#: src/tools/pen.cpp:148
+msgid "Select Color"
+msgstr "Renk Seçin"
 
-#: src/main.cpp:165 src/main.cpp:187
-msgid "Pardus Pen"
-msgstr "Pardus Kalem"
+#: src/tools/update.cpp:94
+msgid "Size:"
+msgstr "Boyutu:"
+
+#: src/SetupWidgets.cpp:139
+msgid "Size: 10"
+msgstr "Boyut: 10"
+
+#: src/SetupWidgets.cpp:222
+msgid "Background:"
+msgstr "Arka Plan"
+
+#: src/SetupWidgets.cpp:253
+msgid "Page:"
+msgstr "Sayfa:"
+
+#: src/widgets/WhiteBoard.cpp:32
+msgid "Open Image File"
+msgstr "Resim Aç"
+
+#: src/widgets/WhiteBoard.cpp:32
+msgid "Images"
+msgstr "Resimler"
 

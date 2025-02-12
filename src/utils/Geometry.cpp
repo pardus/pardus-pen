@@ -1,4 +1,5 @@
-#include "DrawingWidget.h"
+#include "../widgets/DrawingWidget.h"
+#include "../tools.h"
 
 static QPointF last_end = QPointF(0,0);
 static QPointF last_begin = QPointF(0,0);
@@ -29,7 +30,9 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case CIRCLE:
         case RECTANGLE:
         case TRIANGLE:
-            image = imageBackup;
+            // ignore pressuse if not spline
+            pressure = 1.0;
+            image.fill(QColor("transparent"));
             painter.begin(&image);
             break;
     }
@@ -45,6 +48,9 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case MARKER:
             penColor.setAlpha(127);
             break;
+    }
+    if(lineStyle != NORMAL) {
+        pressure = 1.0;
     }
 
     QPen pen = QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
@@ -78,6 +84,10 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
 
     switch(fpenStyle){
         case SPLINE:
+            if(lineStyle == NORMAL) {
+                painter.drawLine(startPoint, endPoint);
+                break;
+            }
             path.moveTo(it.value());
             while (nextIt != values.constEnd()) {
                 path.lineTo(nextIt.value());
@@ -104,7 +114,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     }
     switch(fpenStyle){
         case SPLINE:
-            rad = penSize[penType];
+            rad = penSize[penType]*2;
             update(QRectF(
                 last_end, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
