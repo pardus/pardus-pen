@@ -52,9 +52,12 @@ void DrawingWidget::createSelection(int source) {
     QPoint bottomRight(qMax(startPoint.x(), endPoint.x()), qMax(startPoint.y(), endPoint.y()));
     QRect cropRect(topLeft, bottomRight);
 
+
+    image.fill(QColor("transparent"));
+
     cropWidget->image = background->image.copy(cropRect);
 
-    painter.begin(&image);
+    painter.begin(&(background->image));
     painter.setBrush(QBrush(penColor));
     painter.setCompositionMode(QPainter::CompositionMode_Clear);
     painter.setPen(Qt::NoPen);
