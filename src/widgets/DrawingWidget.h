@@ -19,6 +19,7 @@
 #define ERASER 0
 #define PEN 1
 #define MARKER 2
+#define SELECTION 3
 
 #define NORMAL 0
 #define DOTLINE 1
@@ -33,8 +34,6 @@
 #define RECTANGLE 3
 #define TRIANGLE 4
 
-#define DRAW 0
-#define SELECTION 1
 
 #define PRESS 0
 #define MOVE 1
@@ -136,7 +135,6 @@ public:
     int penType;
     int penStyle;
     int lineStyle;
-    int penMode;
     void syncPageType(int type);
     int getPageNum();
     bool isBackAvailable();

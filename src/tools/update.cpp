@@ -43,33 +43,32 @@ void penStyleEvent(){
             splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
     }
-    if(drawing->penMode == SELECTION) {
-        selectButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    } else if(drawing->penMode == DRAW) {
-        switch(drawing->penType){
-            case PEN:
-                penButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-                break;
-            case MARKER:
-                markerButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-                break;
-            default:
-                eraserButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-                break;
-        }
+    switch(drawing->penType){
+        case SELECTION:
+            selectButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case PEN:
+            penButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case MARKER:
+            markerButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        default:
+            eraserButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
     }
     ov->penSize = drawing->penSize[drawing->penType];
     ov->penType = drawing->penType;
     ov->color = drawing->penColor;
     ov->updateImage();
-    colorDialog->setVisible(drawing->penType != ERASER || drawing->penMode == SELECTION);
-    ov->setVisible(drawing->penMode == DRAW);
-    thicknessSlider->setVisible(drawing->penMode == DRAW);
-    thicknessLabel->setVisible(drawing->penMode == DRAW);
-    modeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
-    penTypeDialog->setVisible(drawing->penType != ERASER && drawing->penMode == DRAW);
+    colorDialog->setVisible(drawing->penType != ERASER || drawing->penType == SELECTION);
+    ov->setVisible(drawing->penType != SELECTION);
+    thicknessSlider->setVisible(drawing->penType != SELECTION);
+    thicknessLabel->setVisible(drawing->penType != SELECTION);
+    modeDialog->setVisible(drawing->penType != ERASER && drawing->penType != SELECTION);
+    penTypeDialog->setVisible(drawing->penType != ERASER && drawing->penType != SELECTION);
     penSwitch->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    if(drawing->penMode == SELECTION){
+    if(drawing->penType == SELECTION){
         set_icon(":images/crop.svg", penSwitch);
     } else if (drawing->penType == ERASER){
         set_icon(":images/eraser.svg", penSwitch);

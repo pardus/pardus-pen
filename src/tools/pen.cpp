@@ -53,7 +53,6 @@ void setPen(int type){
 
     }
     drawing->mergeSelection();
-    drawing->penMode = DRAW;
     thicknessSlider->setValue(drawing->penSize[type]);
     sliderLock = false;
     if(pen_init){
@@ -85,10 +84,9 @@ void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        drawing->penMode = DRAW;
         drawing->penStyle = SPLINE;
         drawing->lineStyle = NORMAL;
-        if(drawing->penType != PEN || drawing->penMode == SELECTION){
+        if(drawing->penType != PEN){
             setPen(PEN);
         } else {
             setPen(ERASER);
@@ -97,7 +95,7 @@ void setupPenType(){
     set_shortcut(penSwitch, Qt::Key_M, 0);
 
     selectButton = create_button(":images/crop.svg", [=](){
-        drawing->penMode = SELECTION;
+        drawing->penType = SELECTION;
         penStyleEvent();
         penSizeEvent();
     });

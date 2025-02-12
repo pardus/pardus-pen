@@ -301,7 +301,6 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penStyle=SPLINE;
     lineStyle=NORMAL;
     penColor = QColor(get_string((char*)"color"));
-    penMode = DRAW;
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
     cropWidget = new MovableWidget(mainWidget);
@@ -487,7 +486,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             geo.clear(id);
             addPoint(id, pos);
-            if(penMode == SELECTION) {
+            if(penType == SELECTION) {
                 break;
             }
             if(penType == ERASER) {
@@ -502,16 +501,16 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (! curs.drawing[id]) {
                 break;
             }
-            switch(penMode) {
-                case DRAW:
+            switch(penType) {
+                case SELECTION:
+                    selectionDraw(geo.first(id), pos);
+                    break;
+                default:
                     if(penType == ERASER) {
                         curs.setPosition(id, pos);
                     }
                     addPoint(id, pos);
                     drawLineToFunc(id, pressure);
-                    break;
-                case SELECTION:
-                    selectionDraw(geo.first(id), pos);
                     break;
             }
             break;
@@ -529,7 +528,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curEventButtons = 0;
             curs.hide(id);
             if(num_of_press == 0) {
-                if(penMode == SELECTION) {
+                if(penType == SELECTION) {
                     addPoint(id, pos);
                     createSelection(id);
                     update();
@@ -539,7 +538,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     image = background->image;
                     background->image.fill(QColor("transparent"));
                 }
-                if(penMode == SELECTION) {
+                if(penType == SELECTION) {
                     break;
                 }
                 addImage(image);
@@ -555,7 +554,7 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TouchBegin:
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
-            if(tablet_enabled || penMode != DRAW) {
+            if(tablet_enabled || penType == SELECTION) {
                 break;
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);

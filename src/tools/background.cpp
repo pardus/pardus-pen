@@ -125,7 +125,7 @@ void setupBackground(){
     });
 
     clear = create_button(":images/clear.svg", [=](){
-        if(drawing->penMode == SELECTION && hasSelection) {
+        if(drawing->penType == SELECTION && hasSelection) {
             drawing->clearSelection();
         } else {
             drawing->clear();
