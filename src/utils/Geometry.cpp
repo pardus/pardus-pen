@@ -1,4 +1,5 @@
 #include "../widgets/DrawingWidget.h"
+#include "../tools.h"
 
 static QPointF last_end = QPointF(0,0);
 static QPointF last_begin = QPointF(0,0);
@@ -31,7 +32,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case TRIANGLE:
             // ignore pressuse if not spline
             pressure = 1.0;
-            image = imageBackup;
+            image.fill(QColor("transparent"));
             painter.begin(&image);
             break;
     }

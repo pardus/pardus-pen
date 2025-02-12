@@ -1,6 +1,7 @@
 #include "../tools.h"
 
 DrawingWidget *drawing;
+Background *background;
 FloatingWidget *floatingWidget;
 FloatingSettings *floatingSettings;
 WhiteBoard *board;
@@ -37,7 +38,7 @@ public:
         board = new WhiteBoard(mainWidget);
         board->setType(get_int((char*)"page"));
         board->setOverlayType(get_int((char*)"page-overlay"));
-
+        
         // scrolls
         scrollHSlider = new QSlider(Qt::Horizontal, this);
         scrollVSlider = new QSlider(Qt::Vertical, this);
@@ -91,6 +92,7 @@ protected:
         screen = QGuiApplication::primaryScreen();
         mainWidget->setFixedSize(screen->size().width(), screen->size().height());
         drawing->setFixedSize(screen->size().width(), screen->size().height());
+        background->setFixedSize(screen->size().width(), screen->size().height());
         board->setFixedSize(screen->size().width(), screen->size().height());
 
         scrollHSlider->setFixedSize(event->size().width() - SCROLLSIZE*2, SCROLLSIZE);
@@ -255,6 +257,7 @@ void setHideMainWindow(bool status){
 
 void mainWindowInit(){
     mainWindow = new MainWindow();
+    background = new Background(mainWidget);
     drawing = new DrawingWidget(mainWidget);
     ov = new OverView();
     setupTools();

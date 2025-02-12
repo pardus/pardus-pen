@@ -149,7 +149,6 @@ public:
 
 protected:
     float fpressure;
-    QImage imageBackup;
     bool eraser;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;

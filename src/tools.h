@@ -3,6 +3,7 @@
 #include "widgets/FloatingWidget.h"
 #include "widgets/FloatingSettings.h"
 #include "widgets/WhiteBoard.h"
+#include "widgets/Background.h"
 #include "widgets/Button.h"
 #include "widgets/OverView.h"
 
@@ -31,6 +32,8 @@ extern "C" {
 extern DrawingWidget *drawing;
 extern FloatingWidget *floatingWidget;
 extern FloatingSettings *floatingSettings;
+extern Background *background;
+
 extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;

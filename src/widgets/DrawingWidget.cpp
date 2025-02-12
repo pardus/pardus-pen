@@ -373,7 +373,8 @@ static QPointF last_end = QPointF(0,0);
 static QPointF last_begin = QPointF(0,0);
 
 void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
-    image = imageBackup;
+    image = background->image;
+    background->update();
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
     penColor.setAlpha(127);
@@ -476,7 +477,11 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curs.drawing[id] = true;
             if (num_of_press == 1){
                 mergeSelection();
-                imageBackup = image;
+                if(penType != ERASER){
+                    background->image = image;
+                    background->update();
+                    image.fill(QColor("transparent"));
+                }
             }
             if(floatingSettings->isVisible()){
                 floatingSettings->setHide();
@@ -525,6 +530,11 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curEventButtons = 0;
             curs.hide(id);
             if(num_of_press == 0) {
+                if(penType != ERASER){
+                    background->applyImage(image);
+                    image = background->image;
+                    background->image.fill(QColor("transparent"));
+                }
                 if(penMode == SELECTION) {
                     addPoint(id, pos);
                     createSelection(id);
