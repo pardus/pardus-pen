@@ -94,6 +94,7 @@ public:
         images[id]->hide();
     }
     QMap<qint64, bool> drawing;
+    QMap<qint64, int> penType;
 
 private:
     QMap<qint64, QWidget*> images;
@@ -461,16 +462,26 @@ void DrawingWidget::goNext(){
 static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     int ev_pen = penType;
-    if(source & Qt::RightButton) {
-        penType = ERASER;
-    } else if(source & Qt::MiddleButton) {
+    if(source & Qt::MiddleButton) {
         penType = MARKER;
+    } else if(source & Qt::RightButton) {
+        penType = ERASER;
     }
     switch(type) {
         case PRESS:
             if (curs.drawing[id] && curs.drawing.contains(id)) {
-                break;
+                // pen type change during press
+                // so release pen then repress
+                if(curs.penType[id] != penType){
+                    int new_pen = penType;
+                    penType = curs.penType[id];
+                    eventHandler(0, RELEASE, id, pos, pressure);
+                    penType = new_pen;
+                } else {
+                    break;
+                }
             }
+            curs.penType[id] = penType;
             num_of_press++;
             curs.drawing[id] = true;
             if (num_of_press == 1){
