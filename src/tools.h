@@ -46,6 +46,7 @@ extern QSlider *scrollVSlider;
 
 extern QWidget *mainWidget;
 
+extern void updateRatioButtons();
 extern void updateGoBackButtons();
 extern void backgroundStyleEvent();
 extern void penStyleEvent();
