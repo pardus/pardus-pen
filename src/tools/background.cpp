@@ -94,6 +94,8 @@ void setupBackground(){
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open Image File"), QDir::homePath(), filter);
         if (!filename.isEmpty()) {
             board->overlays[drawing->getPageNum()] = QImage(filename);
+            board->ratios[drawing->getPageNum()] = 100;
+            updateGoBackButtons();
         }
         floatingWidget->show();
         setHideMainWindow(false);
@@ -106,11 +108,13 @@ void setupBackground(){
 
     overlayScaleUp = create_button(":images/zoom-in.svg", [=](){
         board->ratios[drawing->getPageNum()] += 10;
+        updateGoBackButtons();
         board->update();
     });
 
     overlayScaleDown = create_button(":images/zoom-out.svg", [=](){
         board->ratios[drawing->getPageNum()] -= 10;
+        updateGoBackButtons();
         board->update();
     });
 

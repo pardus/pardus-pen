@@ -107,6 +107,8 @@ void updateGoBackButtons(){
     nextButton->setEnabled(drawing->isNextAvailable());
     previousPage->setEnabled(drawing->getPageNum() > 0);
     pageLabel->setText(QString::number(drawing->getPageNum()));
+    overlayScaleDown->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
+    overlayScaleUp->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
 }
 
 
@@ -114,7 +116,7 @@ void backgroundStyleEvent(){
     transparentButton->setStyleSheet(QString("background-color: none;"));
     blackButton->setStyleSheet(QString("background-color: none;"));
     whiteButton->setStyleSheet(QString("background-color: none;"));
-    
+
     overlayIsometric->setStyleSheet(QString("background-color: none;"));
     overlayMusic->setStyleSheet(QString("background-color: none;"));
     overlayLines->setStyleSheet(QString("background-color: none;"));
