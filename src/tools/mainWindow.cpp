@@ -58,7 +58,7 @@ public:
     }
 
 
-    void keyPressEvent(QKeyEvent *event) {
+    void keyPressEvent(QKeyEvent *event) override {
 		// https://doc.qt.io/qt-6/qt.html#Key-enum
 		// color switch
 		bool update = false;
