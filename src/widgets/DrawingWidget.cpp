@@ -521,7 +521,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         curs.setPosition(id, pos);
                     }
                     addPoint(id, pos);
-                    drawLineToFunc(id, pressure);
+                    drawFunc(id, pressure);
                     break;
             }
             break;
