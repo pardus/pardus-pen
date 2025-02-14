@@ -108,6 +108,12 @@ public:
     void clear(qint64 id) {
         return values[id].clear();
     }
+    void clearAll() {
+        for (auto it = values.begin(); it != values.end(); ++it) {
+            values[it.key()].clear();
+        }
+        values.clear();
+    }
     QMap<qint64, ValueStorage> values;
 
 };

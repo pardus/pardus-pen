@@ -552,6 +552,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 if(penType == SELECTION) {
                     break;
                 }
+                geo.clearAll();
                 addImage(image);
             }
             update();
