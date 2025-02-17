@@ -115,6 +115,8 @@ public:
         values.clear();
     }
     QMap<qint64, ValueStorage> values;
+    QMap<qint64, QPointF> last_begin;
+    QMap<qint64, QPointF> last_end;
 
 };
 

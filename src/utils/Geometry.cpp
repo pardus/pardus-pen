@@ -1,11 +1,10 @@
 #include "../widgets/DrawingWidget.h"
 #include "../tools.h"
 
-static QPointF last_end = QPointF(0,0);
-static QPointF last_begin = QPointF(0,0);
+#define last_end  geo.last_end[id]
+#define last_begin  geo.last_begin[id]
 
 static int rad = 0;
-static int frad = 0;
 
 #define startPoint geo.first(id)
 #define endPoint geo.last(id)
@@ -129,14 +128,12 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case CIRCLE:
-            rad = QLineF(startPoint, endPoint).length() + penSize[penType];
-            frad = QLineF(last_begin, last_end).length() + penSize[penType];
+            rad = QLineF(startPoint, endPoint).length();
+            #define frad QLineF(last_begin, last_end).length()
+            rad = MAX(rad, frad) + penSize[penType];
             update(QRectF(
                 startPoint,startPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            update(QRectF(
-                startPoint,startPoint
-            ).toRect().normalized().adjusted(-frad, -frad, +frad, +frad));
             break;
      }
 
