@@ -6,7 +6,8 @@ Build-Depends: meson, ninja-build,
          qtbase5-dev,
          qtchooser,
          libqt5svg5-dev,
-         libarchive-dev
+         libarchive-dev,
+         pkgconf
 Standards-Version: 4.3.0
 Homepage: https://pardus.org.tr
 
