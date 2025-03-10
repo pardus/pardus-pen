@@ -5,7 +5,6 @@ Maintainer: Ali Rıza KESKİN <ali.riza.keskin@pardus.org.tr>
 Build-Depends: meson, ninja-build,
          qtbase5-dev,
          qtchooser,
-         libglib2.0-dev,
          libqt5svg5-dev,
          libarchive-dev
 Standards-Version: 4.3.0
@@ -19,7 +18,6 @@ Depends: ${shlibs:Depends},
          libqt5gui5,
          libqt5svg5,
          libqt5widgets5,
-         libqt5core5a,
-         libglib2.0-0
+         libqt5core5a
 Description: Pen for pardus.
  Fast, usefull tool for drawing on screen.
