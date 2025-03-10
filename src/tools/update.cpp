@@ -11,6 +11,7 @@ void penStyleEvent(){
     circleButton->setStyleSheet(QString("background-color: none;"));
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
+    vectorButton->setStyleSheet(QString("background-color: none;"));
 
     lineDotLineButton->setStyleSheet(QString("background-color: none;"));
     lineNormalButton->setStyleSheet(QString("background-color: none;"));
@@ -38,6 +39,9 @@ void penStyleEvent(){
             break;
         case TRIANGLE:
             triangleButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case VECTOR:
+            vectorButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
             splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
