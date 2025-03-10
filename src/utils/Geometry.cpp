@@ -100,9 +100,6 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     it = std::next(it, values.size() - values.size() % 100);
     nextIt = it;
 
-    QLineF line;
-    QLineF lineOrig;
-
     switch(penStyle){
         case SPLINE:
             if(lineStyle == NORMAL) {
