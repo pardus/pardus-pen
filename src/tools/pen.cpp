@@ -158,6 +158,21 @@ void setupPenType(){
         }
         penSizeEvent();
     });
+    
+    QObject::connect(thicknessSlider, &QSlider::sliderReleased, [=]() {
+        int value = drawing->penSize[drawing->penType];
+        switch(drawing->penType){
+            case PEN:
+                set_int((char*)"pen-size",value);
+                break;
+            case MARKER:
+                set_int((char*)"marker-size",value);
+                break;
+            case ERASER:
+                set_int((char*)"eraser-size",value);
+                break;
+         }
+    });
 
     colorpicker = create_button(":images/color-picker.svg", [=](){
         floatingWidget->hide();

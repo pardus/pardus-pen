@@ -14,10 +14,6 @@ extern QMainWindow* tool;
 #define padding 8*scale
 
 
-extern "C" {
-#include "../utils/settings.h"
-}
-
 #ifdef QT5
 #define globalPosition globalPos
 #endif

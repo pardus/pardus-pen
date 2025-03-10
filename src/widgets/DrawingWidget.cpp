@@ -16,10 +16,6 @@
 
 #define _(String) gettext(String)
 
-extern "C" {
-#include "../utils/settings.h"
-}
-
 #include "../tools.h"
 
 extern WhiteBoard *board;

@@ -50,5 +50,6 @@
         <file>images/save.svg</file>
         <file>images/open.svg</file>
         <file>tr.org.pardus.pen.svg</file>
+        <file>tr.org.pardus.pen.default.conf</file>
     </qresource>
 </RCC>

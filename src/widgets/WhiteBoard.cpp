@@ -2,10 +2,6 @@
 #include <QPainter>
 #include "WhiteBoard.h"
 
-extern "C" {
-#include "../utils/settings.h"
-}
-
 #include "../tools.h"
 
 #include <stdlib.h>
@@ -173,3 +169,4 @@ void WhiteBoard::drawMusicPaper() {
     }
 
 }
+

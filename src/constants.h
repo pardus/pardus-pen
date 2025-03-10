@@ -1,7 +1,7 @@
-#define ERASER 0
-#define PEN 1
-#define MARKER 2
-#define SELECTION 3
+#define ERASER 1
+#define PEN 2
+#define MARKER 3
+#define SELECTION 4
 
 #define LINE 10
 #define CIRCLE 11

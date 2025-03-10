@@ -28,7 +28,7 @@
 #define _(String) gettext(String)
 
 extern "C" {
-#include "utils/settings.h"
+    #include "utils/Settings.h"
 }
 extern QPushButton **penButtons;
 
@@ -108,9 +108,7 @@ extern QPushButton *ssButton;
 extern "C" {
     extern void *load_archive(void* arg);
     extern QString archive_target;
-    extern void settings_init();
 }
-
 extern void penSizeEvent();
 extern void penStyleEvent();
 extern void setupWidgets();

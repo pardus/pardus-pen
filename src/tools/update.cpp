@@ -26,18 +26,6 @@ void penStyleEvent(){
 int last_pen_type = 0;
 void penSizeEvent(){
     int value = drawing->penSize[drawing->penType];
-    switch(drawing->penType){
-        case PEN:
-            set_int((char*)"pen-size",value);
-            break;
-        case MARKER:
-            set_int((char*)"marker-size",value);
-            break;
-        case ERASER:
-            set_int((char*)"eraser-size",value);
-            break;
-    }
-
     ov->updateImage();
     floatingSettings->reload();
     thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
@@ -62,11 +50,16 @@ void backgroundStyleEvent(){
             penButtons[i]->setStyleSheet(QString("background-color: none;"));
         }
     }
-    penButtons[drawing->penType]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    penButtons[drawing->lineStyle]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    penButtons[drawing->penStyle]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    penButtons[board->getType()]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    penButtons[board->getOverlayType()]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    int btns[] = {
+        drawing->penType, drawing->lineStyle,
+        drawing->penStyle, board->getType(),
+        board->getOverlayType()
+    };
+    for(int btn:btns){
+        if(penButtons[btn] != nullptr){
+            penButtons[btn]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+        }
+    }
     ov->updateImage();
 }
 

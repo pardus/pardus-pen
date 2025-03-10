@@ -2,10 +2,7 @@
 
 #include <QMainWindow>
 
-extern "C" {
-#include "../utils/settings.h"
-}
-
+#include "../tools.h"
 
 extern QMainWindow* tool2;
 

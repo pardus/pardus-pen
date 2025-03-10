@@ -6,7 +6,7 @@ src = [
     'src/utils/Selection.cpp',
     'src/utils/Geometry.cpp',
     'src/SetupWidgets.cpp',
-    'src/utils/settings.c',
+    'src/utils/Settings.cpp',
     'src/widgets/OverView.cpp',
     'src/widgets/FloatingWidget.cpp',
     'src/widgets/FloatingSettings.cpp',
@@ -45,9 +45,7 @@ if get_option('screenshot')
     src += ['src/utils/ScreenShot.cpp']
 endif
 # Qt dependencies
-qt_dep = [
-    dependency('gio-2.0'),
-]
+qt_dep = []
 
 link_args = []
 
@@ -104,13 +102,11 @@ add_project_arguments('-fPIC', language: 'cpp')
 add_project_arguments('-fpermissive', language: 'cpp')
 add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cpp')
 
-glibdir = get_option('prefix')/'share/glib-2.0/schemas/'
 icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'
 
 # executable file
 executable('pardus-pen', src, dependencies: qt_dep, link_args: link_args, install: true)
-install_data('data/tr.org.pardus.pen.gschema.xml', install_dir : glibdir)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
 install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
 install_data('data/tr.org.pardus.pen.appdata.xml', install_dir : get_option('prefix') / 'share/metainfo')
