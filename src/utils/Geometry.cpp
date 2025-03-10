@@ -1,6 +1,8 @@
 #include "../widgets/DrawingWidget.h"
 #include "../tools.h"
 
+#include <math.h>
+
 #define last_end  geo.last_end[id]
 #define last_begin  geo.last_begin[id]
 
@@ -78,6 +80,8 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     it = std::next(it, values.size() - values.size() % 100);
     nextIt = it;
 
+    QLineF line;
+    QLineF lineOrig;
 
     switch(penStyle){
         case SPLINE:
@@ -95,6 +99,10 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             break;
         case LINE:
             painter.drawLine(startPoint, endPoint);
+            break;
+        case VECTOR:
+            painter.drawLine(startPoint, endPoint);
+            //TODO Draw head
             break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
@@ -114,6 +122,12 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             rad = penSize[penType]*2;
             update(QRectF(
                 last_end, endPoint
+            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
+            break;
+        case VECTOR:
+            rad = penSize[penType] + butsize / 3;
+            update(QRectF(
+                startPoint, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case LINE:

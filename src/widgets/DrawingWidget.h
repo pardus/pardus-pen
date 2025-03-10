@@ -33,6 +33,7 @@
 #define SPLINE 2
 #define RECTANGLE 3
 #define TRIANGLE 4
+#define VECTOR 5
 
 
 #define PRESS 0

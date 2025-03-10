@@ -63,6 +63,7 @@ extern QPushButton *markerButton;
 extern QPushButton *eraserButton;
 extern QPushButton *splineButton;
 extern QPushButton *lineButton;
+extern QPushButton *vectorButton;
 extern QPushButton *circleButton;
 extern QPushButton *triangleButton;
 extern QPushButton *rectButton;

@@ -7,6 +7,7 @@ QPushButton *markerButton;
 QPushButton *eraserButton;
 QPushButton *splineButton;
 QPushButton *lineButton;
+QPushButton *vectorButton;
 QPushButton *circleButton;
 QPushButton *triangleButton;
 QPushButton *rectButton;
@@ -112,7 +113,11 @@ void setupPenType(){
     lineButton = create_button(":images/line.svg", [=](){
         setPenStyle(LINE);
     });
-    set_shortcut(lineButton, Qt::Key_L, Qt::AltModifier);
+
+    vectorButton = create_button(":images/vector.svg", [=](){
+        setPenStyle(VECTOR);
+    });
+    set_shortcut(vectorButton, Qt::Key_V, Qt::AltModifier);
 
     circleButton = create_button(":images/circle.svg", [=](){
         setPenStyle(CIRCLE);
