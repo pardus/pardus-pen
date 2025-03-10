@@ -193,7 +193,8 @@ void setupWidgets(){
     modeLayout->addWidget(circleButton,     0, 2);
     modeLayout->addWidget(triangleButton,   0, 3);
     modeLayout->addWidget(rectButton,       0, 4);
-    modeLayout->addWidget(vectorButton,       0, 5);
+    modeLayout->addWidget(vectorButton,     1, 0);
+    modeLayout->addWidget(vector2Button,    1, 1);
 
     penSettingsLayout->addWidget(modeDialog);
 

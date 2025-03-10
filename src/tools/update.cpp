@@ -12,6 +12,7 @@ void penStyleEvent(){
     rectButton->setStyleSheet(QString("background-color: none;"));
     triangleButton->setStyleSheet(QString("background-color: none;"));
     vectorButton->setStyleSheet(QString("background-color: none;"));
+    vector2Button->setStyleSheet(QString("background-color: none;"));
 
     lineDotLineButton->setStyleSheet(QString("background-color: none;"));
     lineNormalButton->setStyleSheet(QString("background-color: none;"));
@@ -42,6 +43,9 @@ void penStyleEvent(){
             break;
         case VECTOR:
             vectorButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            break;
+        case VECTOR2:
+            vector2Button->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;
         default:
             splineButton->setStyleSheet("background-color:"+drawing->penColor.name()+";");
@@ -145,7 +149,6 @@ void backgroundStyleEvent(){
             break;
     }
     switch(board->getOverlayType()){
-        
         case LINES:
             overlayLines->setStyleSheet("background-color:"+drawing->penColor.name()+";");
             break;

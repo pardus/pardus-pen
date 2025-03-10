@@ -34,6 +34,7 @@
 #define RECTANGLE 3
 #define TRIANGLE 4
 #define VECTOR 5
+#define VECTOR2 6
 
 
 #define PRESS 0
@@ -45,7 +46,7 @@ public:
     int size() {
         return values.size();
     }
-    
+
     void clear() {
         return values.clear();
     }
@@ -80,22 +81,22 @@ public:
     void addValue(qint64 id, QPointF data) {
         values[id].saveValue(values[id].size(), data);
     }
-    
+
     void saveValue(qint64 id, qint64 id2, QPointF data) {
         values[id].saveValue(id2, data);
     }
-    
+
     QPointF last(qint64 id){
         return load(id).last();
     }
-    
+
     QPointF first(qint64 id){
         return load(id).first();
     }
-    
+
     int size(qint64 id) {
         return values[id].size();
-    } 
+    }
 
     ValueStorage load(qint64 id) {
         if (values.contains(id)) {

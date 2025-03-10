@@ -123,6 +123,11 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             painter.drawLine(startPoint, endPoint);
             drawArrow(painter, startPoint, endPoint);
             break;
+        case VECTOR2:
+            painter.drawLine(startPoint, endPoint);
+            drawArrow(painter, startPoint, endPoint);
+            drawArrow(painter, endPoint, startPoint);
+            break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
             painter.drawEllipse(startPoint, rad, rad);
