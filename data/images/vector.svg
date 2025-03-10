@@ -4,7 +4,7 @@
    data-name="katman 2"
    viewBox="0 0 434.99 421.82"
    version="1.1"
-   sodipodi:docname="victor.svg"
+   sodipodi:docname="vector.svg"
    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,8 +21,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="0.52451285"
-     inkscape:cx="244.98923"
-     inkscape:cy="283.11985"
+     inkscape:cx="246.89576"
+     inkscape:cy="285.02638"
      inkscape:window-width="1276"
      inkscape:window-height="1390"
      inkscape:window-x="0"
@@ -76,7 +76,7 @@
   </defs>
   <path
      id="rect1"
-     style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
      d="M 259.82722 287.50382 C 258.69743 286.37404 257.41599 285.41088 256.05966 284.55109 C 254.74398 283.3801 253.07184 282.31029 251.04224 281.38983 L 86.340224 206.69477 C 75.46504 201.76268 58.629375 202.99849 48.591494 209.46657 C 38.553614 215.93465 39.22858 225.11378 50.103764 230.04587 L 162.75057 281.13295 L -235.08815 281.13295 C -247.16259 281.13295 -256.88416 290.85452 -256.88416 302.92896 C -256.88416 315.00341 -247.16397 324.7236 -235.08953 324.7236 L 161.04633 324.72222 L 51.516596 374.39647 C 40.641412 379.32856 39.967827 388.5063 50.005708 394.97438 C 60.043588 401.44246 76.880635 402.67965 87.755819 397.74756 L 251.74935 323.37153 C 260.16841 320.35897 266.1967 312.4078 266.1967 302.92758 C 266.1967 296.89036 263.76667 291.44327 259.82722 287.50382 z "
      transform="rotate(-45)" />
 </svg>
