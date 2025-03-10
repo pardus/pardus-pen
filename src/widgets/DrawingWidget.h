@@ -110,7 +110,7 @@ public:
     QImage image;
     QColor penColor;
     MovableWidget* cropWidget;
-    int penSize[3];
+    int penSize[10];
     void initializeImage(const QSize &size);
     void goPrevious();
     void goPage(int i);
@@ -122,9 +122,6 @@ public:
     void saveAll(QString filename);
     void loadArchive(const QString& filename);
 #endif
-    int penType;
-    int penStyle;
-    int lineStyle;
     void syncPageType(int type);
     int getPageNum();
     bool isBackAvailable();
@@ -133,6 +130,12 @@ public:
     void mergeSelection();
     void clearSelection();
     void addImage(QImage img);
+    void setPen(int type);
+    int getPen();
+    void setPenStyle(int type);
+    int getPenStyle();
+    void setLineStyle(int type);
+    int getLineStyle();
     void drawArrow(QPainter& painter, QPointF start, QPointF end);
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
 
@@ -149,6 +152,9 @@ protected:
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);
     bool event(QEvent * ev) override;
+    int penType;
+    int penStyle;
+    int lineStyle;
     GeometryStorage geo;
     QPainter painter;
 };

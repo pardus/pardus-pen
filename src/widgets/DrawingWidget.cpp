@@ -455,6 +455,29 @@ void DrawingWidget::goNext(){
     loadImage(images.last_image_num);
 }
 
+void DrawingWidget::setPen(int type){
+    penType = type;
+}
+
+int DrawingWidget::getPen(){
+    return penType;
+}
+void DrawingWidget::setPenStyle(int type){
+    penStyle = type;
+}
+
+int DrawingWidget::getPenStyle(){
+    return penStyle;
+}
+
+void DrawingWidget::setLineStyle(int type){
+    lineStyle = type;
+}
+
+int DrawingWidget::getLineStyle(){
+    return lineStyle;
+}
+
 static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     int ev_pen = penType;

@@ -26,7 +26,7 @@ static bool sliderLock = false;
 static bool pen_init = false;
 void setPen(int type){
     sliderLock = true;
-    drawing->penType = type;
+    drawing->setPen(type);
     switch(type){
         case ERASER:
             thicknessSlider->setRange(10*scale,200*scale);
@@ -48,14 +48,18 @@ void setPen(int type){
     }
 }
 
+int getPen(){
+    return drawing->getPen();
+}
+
 void setPenStyle(int style){
-    drawing->penStyle = style;
+    drawing->setPenStyle(style);
     penStyleEvent();
     penSizeEvent();
 }
 
 void setLineStyle(int style){
-    drawing->lineStyle = style;
+    drawing->setLineStyle(style);
     penStyleEvent();
     penSizeEvent();
 }
@@ -72,9 +76,9 @@ void setupPenType(){
             floatingSettings->setHide();
             return;
         }
-        drawing->penStyle = SPLINE;
-        drawing->lineStyle = NORMAL;
-        if(drawing->penType != PEN){
+        drawing->setPenStyle(SPLINE);
+        drawing->setLineStyle(NORMAL);
+        if(getPen() != PEN){
             setPen(PEN);
         } else {
             setPen(ERASER);
@@ -83,9 +87,7 @@ void setupPenType(){
     set_shortcut(penSwitch, Qt::Key_M, 0);
 
     penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
-        drawing->penType = SELECTION;
-        penStyleEvent();
-        penSizeEvent();
+        setPen(SELECTION);
     });
     set_shortcut(penButtons[SELECTION], Qt::Key_X, Qt::ControlModifier);
 
@@ -154,14 +156,14 @@ void setupPenType(){
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
         if(!sliderLock){
-            drawing->penSize[drawing->penType] = value;
+            drawing->penSize[getPen()] = value;
         }
         penSizeEvent();
     });
     
     QObject::connect(thicknessSlider, &QSlider::sliderReleased, [=]() {
-        int value = drawing->penSize[drawing->penType];
-        switch(drawing->penType){
+        int value = drawing->penSize[getPen()];
+        switch(getPen()){
             case PEN:
                 set_int((char*)"pen-size",value);
                 break;

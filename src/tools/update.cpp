@@ -3,18 +3,18 @@
 
 void penStyleEvent(){
     backgroundStyleEvent();
-    colorDialog->setVisible(drawing->penType != ERASER || drawing->penType == SELECTION);
-    ov->setVisible(drawing->penType != SELECTION);
-    thicknessSlider->setVisible(drawing->penType != SELECTION);
-    thicknessLabel->setVisible(drawing->penType != SELECTION);
-    modeDialog->setVisible(drawing->penType != ERASER && drawing->penType != SELECTION);
-    penTypeDialog->setVisible(drawing->penType != ERASER && drawing->penType != SELECTION);
+    colorDialog->setVisible(getPen() != ERASER || getPen() == SELECTION);
+    ov->setVisible(getPen() != SELECTION);
+    thicknessSlider->setVisible(getPen() != SELECTION);
+    thicknessLabel->setVisible(getPen() != SELECTION);
+    modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
+    penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     penSwitch->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    if(drawing->penType == SELECTION){
+    if(getPen() == SELECTION){
         set_icon(":images/crop.svg", penSwitch);
-    } else if (drawing->penType == ERASER){
+    } else if (getPen() == ERASER){
         set_icon(":images/eraser.svg", penSwitch);
-    } else if(drawing->penType == MARKER){
+    } else if(getPen() == MARKER){
         set_icon(":images/marker.svg", penSwitch);
     } else {
         set_icon(":images/pen.svg", penSwitch);
@@ -25,7 +25,7 @@ void penStyleEvent(){
 
 int last_pen_type = 0;
 void penSizeEvent(){
-    int value = drawing->penSize[drawing->penType];
+    int value = drawing->penSize[getPen()];
     ov->updateImage();
     floatingSettings->reload();
     thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
@@ -51,8 +51,8 @@ void backgroundStyleEvent(){
         }
     }
     int btns[] = {
-        drawing->penType, drawing->lineStyle,
-        drawing->penStyle, board->getType(),
+        getPen(), drawing->getLineStyle(),
+        drawing->getPenStyle(), board->getType(),
         board->getOverlayType()
     };
     for(int btn:btns){

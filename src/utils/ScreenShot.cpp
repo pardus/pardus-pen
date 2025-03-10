@@ -24,10 +24,10 @@ void takeScreenshot(){
     QDateTime time = QDateTime::currentDateTime();
     QString imgname = pics + "/" + time.toString("yyyy-MM-dd_hh-mm-ss") + ".png";
     int status = 1;
-    if (drawing->penType == SELECTION) {
+    if (getPen() == SELECTION) {
         drawing->cropWidget->image.save(imgname);
         status = 0;
-    } else if(drawing->penType != SELECTION) {
+    } else if(getPen() != SELECTION) {
         // detect X11
         if (!getenv("WAYLAND_DISPLAY")){
             QPixmap pixmap;

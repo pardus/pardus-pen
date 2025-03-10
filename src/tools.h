@@ -56,6 +56,7 @@ extern void penStyleEvent();
 extern void penSizeEvent();
 
 extern void setPen(int type);
+extern int getPen();
 extern void setPenStyle(int style);
 extern void setLineStyle(int style);
 

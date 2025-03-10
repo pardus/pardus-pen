@@ -20,8 +20,8 @@ void OverView::updateImage(){
 void OverView::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
     QPainter painter(this);
-    int penSize = drawing->penSize[drawing->penType];
-    int penType = drawing->penType;
+    int penSize = drawing->penSize[getPen()];
+    int penType = getPen();
     QPen pen(drawing->penColor, penSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
