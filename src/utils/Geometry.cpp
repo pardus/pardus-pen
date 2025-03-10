@@ -149,7 +149,8 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
             break;
         case VECTOR:
-            rad = penSize[penType] + butsize / 3;
+        case VECTOR2:
+            rad = penSize[penType] *2;
             update(QRectF(
                 startPoint, endPoint
             ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
