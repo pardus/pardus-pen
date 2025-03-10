@@ -151,6 +151,7 @@ public:
     void mergeSelection();
     void clearSelection();
     void addImage(QImage img);
+    void drawArrow(QPainter& painter, QPointF start, QPointF end);
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
 
 protected:

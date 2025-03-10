@@ -33,6 +33,25 @@ void DrawingWidget::drawFunc(qint64 id, qreal pressure) {
     penStyle = fpenStyle;
 }
 
+void DrawingWidget::drawArrow(QPainter& painter, QPointF start, QPointF end) {
+
+  painter.setRenderHint(QPainter::Antialiasing, true);
+
+  qreal arrowSize = penSize[penType] * 2;
+
+  QLineF line(end, start);
+
+  double angle = std::atan2(-line.dy(), line.dx());
+  QPointF arrowP1 = line.p1() + QPointF(sin(angle + M_PI / 3) * arrowSize,
+                                        cos(angle + M_PI / 3) * arrowSize);
+  QPointF arrowP2 = line.p1() + QPointF(sin(angle + M_PI - M_PI / 3) * arrowSize,
+                                        cos(angle + M_PI - M_PI / 3) * arrowSize);
+
+  painter.drawLine(line.p1(), arrowP1);
+  painter.drawLine(line.p1(), arrowP2);
+
+}
+
 void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
@@ -102,7 +121,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             break;
         case VECTOR:
             painter.drawLine(startPoint, endPoint);
-            //TODO Draw head
+            drawArrow(painter, startPoint, endPoint);
             break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
