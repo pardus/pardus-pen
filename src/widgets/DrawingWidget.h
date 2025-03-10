@@ -15,27 +15,8 @@
 #include <QImage>
 #include <QPainter>
 
-
-#define ERASER 0
-#define PEN 1
-#define MARKER 2
-#define SELECTION 3
-
-#define NORMAL 0
-#define DOTLINE 1
-#define LINELINE 2
-
 #include "../utils/Selection.h"
 #include "FloatingSettings.h"
-
-#define LINE 0
-#define CIRCLE 1
-#define SPLINE 2
-#define RECTANGLE 3
-#define TRIANGLE 4
-#define VECTOR 5
-#define VECTOR2 6
-
 
 #define PRESS 0
 #define MOVE 1

@@ -92,10 +92,10 @@ void setupWidgets(){
     QWidget *stylDialog = new QWidget();
     QGridLayout *styleLayout = new QGridLayout(stylDialog);
     // spline
-    styleLayout->addWidget(penButton,    0, 0);
-    styleLayout->addWidget(eraserButton, 0, 1);
-    styleLayout->addWidget(markerButton, 0, 2);
-    styleLayout->addWidget(selectButton,  0, 3);
+    styleLayout->addWidget(penButtons[PEN],    0, 0);
+    styleLayout->addWidget(penButtons[ERASER], 0, 1);
+    styleLayout->addWidget(penButtons[MARKER], 0, 2);
+    styleLayout->addWidget(penButtons[SELECTION],  0, 3);
     
     penSettingsLayout->addWidget(stylDialog);
 
@@ -188,13 +188,13 @@ void setupWidgets(){
     modeDialog = new QWidget();
     QGridLayout *modeLayout = new QGridLayout(modeDialog);
     // spline
-    modeLayout->addWidget(splineButton,     0, 0);
-    modeLayout->addWidget(lineButton,       0, 1);
-    modeLayout->addWidget(circleButton,     0, 2);
-    modeLayout->addWidget(triangleButton,   0, 3);
-    modeLayout->addWidget(rectButton,       0, 4);
-    modeLayout->addWidget(vectorButton,     1, 0);
-    modeLayout->addWidget(vector2Button,    1, 1);
+    modeLayout->addWidget(penButtons[SPLINE],     0, 0);
+    modeLayout->addWidget(penButtons[LINE],       0, 1);
+    modeLayout->addWidget(penButtons[CIRCLE],     0, 2);
+    modeLayout->addWidget(penButtons[TRIANGLE],   0, 3);
+    modeLayout->addWidget(penButtons[RECTANGLE],       0, 4);
+    modeLayout->addWidget(penButtons[VECTOR],     1, 0);
+    modeLayout->addWidget(penButtons[VECTOR2],    1, 1);
 
     penSettingsLayout->addWidget(modeDialog);
 
@@ -204,9 +204,9 @@ void setupWidgets(){
 
     penTypeDialog = new QWidget();
     QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
-    penTypeLayout->addWidget(lineNormalButton,      0, 0);
-    penTypeLayout->addWidget(lineDotLineButton,      0, 1);
-    penTypeLayout->addWidget(lineLineLineButton,       0, 2);
+    penTypeLayout->addWidget(penButtons[NORMAL],      0, 0);
+    penTypeLayout->addWidget(penButtons[DOTLINE],      0, 1);
+    penTypeLayout->addWidget(penButtons[LINELINE],       0, 2);
     
     penSettingsLayout->addWidget(penTypeDialog);
 
@@ -232,12 +232,12 @@ void setupWidgets(){
     QWidget *pageDialog = new QWidget();
     QGridLayout *pageLayout = new QGridLayout(pageDialog);
     // spline
-    pageLayout->addWidget(overlayNone,      0, 0);
-    pageLayout->addWidget(overlaySquares,   0, 1);
-    pageLayout->addWidget(overlayLines,     0, 2);
-    pageLayout->addWidget(overlayMusic,     0, 3);
-    pageLayout->addWidget(overlayCustom,    1, 0);
-    pageLayout->addWidget(overlayIsometric, 1, 1);
+    pageLayout->addWidget(penButtons[BLANK],      0, 0);
+    pageLayout->addWidget(penButtons[SQUARES],   0, 1);
+    pageLayout->addWidget(penButtons[LINES],     0, 2);
+    pageLayout->addWidget(penButtons[MUSIC],     0, 3);
+    pageLayout->addWidget(penButtons[CUSTOM],    1, 0);
+    pageLayout->addWidget(penButtons[ISOMETRIC], 1, 1);
 
     struct dirent *ep;
     DIR *dp = opendir (BGDIR);
@@ -285,9 +285,9 @@ void setupWidgets(){
     );
     pageNumLayout->addWidget(vsep1);
 
-    pageNumLayout->addWidget(transparentButton);
-    pageNumLayout->addWidget(blackButton);
-    pageNumLayout->addWidget(whiteButton);
+    pageNumLayout->addWidget(penButtons[TRANSPARENT]);
+    pageNumLayout->addWidget(penButtons[BLACK]);
+    pageNumLayout->addWidget(penButtons[WHITE]);
 
     toolSettingsLayout->addWidget(pageNumWidget);
 

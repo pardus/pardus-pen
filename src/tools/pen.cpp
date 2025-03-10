@@ -1,21 +1,6 @@
 #include "../tools.h"
 
-QPushButton *penButton;
-QPushButton *selectButton;
-QPushButton *typeButton;
-QPushButton *markerButton;
-QPushButton *eraserButton;
-QPushButton *splineButton;
-QPushButton *lineButton;
-QPushButton *vectorButton;
-QPushButton *vector2Button;
-QPushButton *circleButton;
-QPushButton *triangleButton;
-QPushButton *rectButton;
-
-QPushButton *lineNormalButton;
-QPushButton *lineDotLineButton;
-QPushButton *lineLineLineButton;
+QPushButton **penButtons;
 
 QPushButton *penSwitch;
 
@@ -76,8 +61,9 @@ void setLineStyle(int style){
 }
 
 void setupPenType(){
+    penButtons = (QPushButton**)calloc(1024, sizeof(QPushButton*));
 
-    penButton = create_button(":images/pen.svg", [=](){
+    penButtons[PEN] = create_button(":images/pen.svg", [=](){
         setPen(PEN);
     });
 
@@ -96,68 +82,68 @@ void setupPenType(){
     });
     set_shortcut(penSwitch, Qt::Key_M, 0);
 
-    selectButton = create_button(":images/crop.svg", [=](){
+    penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
         drawing->penType = SELECTION;
         penStyleEvent();
         penSizeEvent();
     });
-    set_shortcut(selectButton, Qt::Key_X, Qt::ControlModifier);
+    set_shortcut(penButtons[SELECTION], Qt::Key_X, Qt::ControlModifier);
 
-    markerButton = create_button(":images/marker.svg", [=](){
+    penButtons[MARKER] = create_button(":images/marker.svg", [=](){
         setPen(MARKER);
     });
 
-    eraserButton = create_button(":images/eraser.svg", [=](){
+    penButtons[ERASER] = create_button(":images/eraser.svg", [=](){
         setPen(ERASER);
     });
 
-    lineButton = create_button(":images/line.svg", [=](){
+    penButtons[LINE] = create_button(":images/line.svg", [=](){
         setPenStyle(LINE);
     });
 
-    vectorButton = create_button(":images/vector.svg", [=](){
+    penButtons[VECTOR] = create_button(":images/vector.svg", [=](){
         setPenStyle(VECTOR);
     });
-    set_shortcut(vectorButton, Qt::Key_V, Qt::AltModifier);
+    set_shortcut(penButtons[VECTOR], Qt::Key_V, Qt::AltModifier);
 
-    vector2Button = create_button(":images/vector2.svg", [=](){
+    penButtons[VECTOR2] = create_button(":images/vector2.svg", [=](){
         setPenStyle(VECTOR2);
     });
-    set_shortcut(vectorButton, Qt::Key_W, Qt::AltModifier);
+    set_shortcut(penButtons[VECTOR2], Qt::Key_W, Qt::AltModifier);
 
-    circleButton = create_button(":images/circle.svg", [=](){
+    penButtons[CIRCLE] = create_button(":images/circle.svg", [=](){
         setPenStyle(CIRCLE);
     });
-    set_shortcut(circleButton, Qt::Key_C, Qt::AltModifier);
+    set_shortcut(penButtons[CIRCLE], Qt::Key_C, Qt::AltModifier);
 
-    triangleButton = create_button(":images/triangle.svg", [=](){
+    penButtons[TRIANGLE] = create_button(":images/triangle.svg", [=](){
         setPenStyle(TRIANGLE);
     });
-    set_shortcut(triangleButton, Qt::Key_T, Qt::AltModifier);
+    set_shortcut(penButtons[TRIANGLE], Qt::Key_T, Qt::AltModifier);
 
-    rectButton = create_button(":images/rectangle.svg", [=](){
+    penButtons[RECTANGLE] = create_button(":images/rectangle.svg", [=](){
         setPenStyle(RECTANGLE);
     });
-    set_shortcut(rectButton, Qt::Key_R, Qt::AltModifier);
+    set_shortcut(penButtons[TRIANGLE], Qt::Key_R, Qt::AltModifier);
 
 
-    splineButton = create_button(":images/spline.svg", [=](){
+    penButtons[SPLINE] = create_button(":images/spline.svg", [=](){
         setPenStyle(SPLINE);
 
     });
-    set_shortcut(splineButton, Qt::Key_S, Qt::AltModifier);
+    set_shortcut(penButtons[SPLINE], Qt::Key_S, Qt::AltModifier);
 
-    lineNormalButton = create_button(":images/line-normal.svg", [=](){
+    penButtons[NORMAL] = create_button(":images/line-normal.svg", [=](){
         setLineStyle(NORMAL);
 
     });
 
-    lineDotLineButton = create_button(":images/line-dotline.svg", [=](){
+    penButtons[DOTLINE] = create_button(":images/line-dotline.svg", [=](){
         setLineStyle(DOTLINE);
 
     });
 
-    lineLineLineButton = create_button(":images/line-lineline.svg", [=](){
+    penButtons[LINELINE] = create_button(":images/line-lineline.svg", [=](){
         setLineStyle(LINELINE);
 
     });

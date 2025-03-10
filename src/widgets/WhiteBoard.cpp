@@ -86,7 +86,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     gridSize = (float)mainWindow->geometry().height() / (float)get_int((char*)"grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
-        case NONE:
+        case BLANK:
             break;
         case CUSTOM:
             if(img.size().width() * img.size().height() > 0){

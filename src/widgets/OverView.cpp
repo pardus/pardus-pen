@@ -7,6 +7,8 @@
 
 #include <math.h>
 
+#include "../tools.h"
+
 #include "OverView.h"
 #include "DrawingWidget.h"
 
@@ -18,8 +20,9 @@ void OverView::updateImage(){
 void OverView::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
     QPainter painter(this);
-    int padding = 8;
-    QPen pen(color, penSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    int penSize = drawing->penSize[drawing->penType];
+    int penType = drawing->penType;
+    QPen pen(drawing->penColor, penSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
     painter.setPen(pen);
@@ -27,7 +30,7 @@ void OverView::paintEvent(QPaintEvent *event) {
     int h = height() - 2*padding - penSize;
 
 
-    painter.fillRect(rect(), background);
+    painter.fillRect(rect(), board->background);
 
     if(penType == ERASER){
         QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));

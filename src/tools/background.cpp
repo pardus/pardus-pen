@@ -1,17 +1,6 @@
 #include "../tools.h"
 
-QPushButton* transparentButton;
-QPushButton* blackButton;
-QPushButton* whiteButton;
-
 QLabel* pageLabel;
-
-QPushButton* overlayIsometric;
-QPushButton* overlayMusic;
-QPushButton* overlayCustom;
-QPushButton* overlayLines;
-QPushButton* overlaySquares;
-QPushButton* overlayNone;
 
 QPushButton* overlayScaleUp;
 QPushButton* overlayScaleDown;
@@ -22,24 +11,24 @@ QPushButton* overlayRotateDown;
 QPushButton *clear;
 
 void setupBackground(){
-    transparentButton = create_button(":images/paper-transparent.svg", [=](){
+    penButtons[TRANSPARENT] = create_button(":images/paper-transparent.svg", [=](){
         board->setType(TRANSPARENT);
         backgroundStyleEvent();
     });
-    set_shortcut(transparentButton, Qt::Key_Q, Qt::AltModifier);
+    set_shortcut(penButtons[TRANSPARENT], Qt::Key_Q, Qt::AltModifier);
 
 
-    blackButton = create_button(":images/paper-black.svg", [=](){
+    penButtons[BLACK] = create_button(":images/paper-black.svg", [=](){
         board->setType(BLACK);
         backgroundStyleEvent();
     });
-    set_shortcut(blackButton, Qt::Key_W, Qt::AltModifier);
+    set_shortcut(penButtons[BLACK], Qt::Key_W, Qt::AltModifier);
 
-    whiteButton = create_button(":images/paper-white.svg", [=](){
+    penButtons[WHITE] = create_button(":images/paper-white.svg", [=](){
         board->setType(WHITE);
         backgroundStyleEvent();
     });
-    set_shortcut(whiteButton, Qt::Key_E, Qt::AltModifier);
+    set_shortcut(penButtons[WHITE], Qt::Key_E, Qt::AltModifier);
 
     // page buttons
     previousPage = create_button(":images/go-page-previous.svg", [=](){
@@ -60,32 +49,32 @@ void setupBackground(){
     set_shortcut(nextPage, Qt::Key_PageUp, Qt::ControlModifier);
 
     // overlay buttons
-    overlayNone = create_button(":images/overlay-none.svg", [=](){
-        board->setOverlayType(NONE);
+    penButtons[BLANK] = create_button(":images/overlay-none.svg", [=](){
+        board->setOverlayType(BLANK);
         backgroundStyleEvent();
     });
 
-    overlaySquares = create_button(":images/overlay-squares.svg", [=](){
+    penButtons[SQUARES] = create_button(":images/overlay-squares.svg", [=](){
         board->setOverlayType(SQUARES);
         backgroundStyleEvent();
     });
 
-    overlayLines = create_button(":images/overlay-lines.svg", [=](){
+    penButtons[LINES] = create_button(":images/overlay-lines.svg", [=](){
         board->setOverlayType(LINES);
         backgroundStyleEvent();
     });
 
-    overlayIsometric = create_button(":images/overlay-isometric.svg", [=](){
+    penButtons[ISOMETRIC] = create_button(":images/overlay-isometric.svg", [=](){
         board->setOverlayType(ISOMETRIC);
         backgroundStyleEvent();
     });
 
-    overlayMusic = create_button(":images/overlay-music.svg", [=](){
+    penButtons[MUSIC] = create_button(":images/overlay-music.svg", [=](){
         board->setOverlayType(MUSIC);
         backgroundStyleEvent();
     });
 
-    overlayCustom = create_button(":images/overlay-custom.svg", [=](){
+    penButtons[CUSTOM] = create_button(":images/overlay-custom.svg", [=](){
         QString filter = QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
         filter += _("All Files (*.*)");
         setHideMainWindow(true);
@@ -102,7 +91,7 @@ void setupBackground(){
         board->setOverlayType(CUSTOM);
         backgroundStyleEvent();
     });
-    set_shortcut(overlayCustom, Qt::Key_O, Qt::AltModifier);
+    set_shortcut(penButtons[CUSTOM], Qt::Key_O, Qt::AltModifier);
 
     pageLabel = new QLabel("0");
 

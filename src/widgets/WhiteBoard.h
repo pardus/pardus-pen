@@ -7,17 +7,6 @@
 #include <QApplication>
 #include <QMainWindow>
 
-#define TRANSPARENT 0
-#define WHITE 1
-#define BLACK 2
-
-#define NONE 0
-#define SQUARES 1
-#define LINES 2
-#define ISOMETRIC 3
-#define MUSIC 4
-#define CUSTOM 31
-
 class WhiteBoard : public QWidget {
 public:
     WhiteBoard(QWidget *parent = nullptr);
@@ -35,10 +24,9 @@ public:
     QMap<qint64, int> rotates;
     QMap<qint64, QPixmap> backgrounds;
     QMap<qint64, QImage> overlays;
-
-private:
     QColor background;
     QColor lineColor;
+private:
     int overlayType = 0;
     int type = 0;
     QPainter painter;
