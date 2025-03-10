@@ -20,11 +20,11 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="1.0490257"
-     inkscape:cx="-61.962257"
-     inkscape:cy="290.26934"
-     inkscape:window-width="2556"
-     inkscape:window-height="1293"
+     inkscape:zoom="0.52451285"
+     inkscape:cx="-143.94309"
+     inkscape:cy="145.84962"
+     inkscape:window-width="1276"
+     inkscape:window-height="1390"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -153,31 +153,8 @@
       .cls-9 {
         fill: #2a4551;
       }
-    </style></defs><g
-     id="g883"><g
-       id="g877"
-       transform="translate(0,-2.2966003)"><rect
-         style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:7.9818;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-         id="rect1"
-         width="523.0813"
-         height="43.590107"
-         x="-251.38278"
-         y="281.53574"
-         ry="21.795053"
-         transform="rotate(-45)" /><rect
-         style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:7.00027;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-         id="rect853"
-         width="393.48315"
-         height="44.57164"
-         x="-408.98932"
-         y="368.8967"
-         ry="22.28582"
-         transform="rotate(-90)" /></g><rect
-       style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:7.00027;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       id="rect855"
-       width="393.48315"
-       height="44.57164"
-       x="-414.23657"
-       y="-406.69272"
-       ry="22.28582"
-       transform="scale(-1)" /></g></svg>
+    </style></defs><path
+     id="rect1"
+     style="fill:#f9f9f9;fill-opacity:1;stroke:#000000;stroke-width:8;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+     d="M 267.26703 285.94735 C 261.70168 280.382 253.97576 278.38179 246.84103 279.91209 L -227.9646 279.91209 C -230.28435 279.91209 -232.47235 280.36817 -234.5661 281.03351 C -242.26035 278.55506 -251.01107 280.36153 -257.14104 286.49149 C -265.87121 295.22167 -265.87259 309.27867 -257.14242 318.00885 L -10.424301 564.72696 C -1.6941257 573.45714 12.362875 573.45576 21.093051 564.72558 C 22.500229 563.3184 23.655705 561.7632 24.609249 560.12386 L 267.26703 317.46609 C 275.9972 308.73591 275.9972 294.67753 267.26703 285.94735 z M 198.19568 323.50273 L 4.7909247 516.90749 L -188.61521 323.50135 L 198.19568 323.50273 z "
+     transform="rotate(-45)" /></svg>
