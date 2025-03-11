@@ -30,7 +30,7 @@
 extern "C" {
     #include "utils/Settings.h"
 }
-extern QPushButton **penButtons;
+extern QMap<qint64, QPushButton*> penButtons;
 
 extern DrawingWidget *drawing;
 extern FloatingWidget *floatingWidget;
@@ -59,8 +59,6 @@ extern void setPen(int type);
 extern int getPen();
 extern void setPenStyle(int style);
 extern void setLineStyle(int style);
-
-extern QPushButton **penButtons;
 
 extern QPushButton *typeButton;
 

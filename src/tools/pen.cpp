@@ -1,6 +1,6 @@
 #include "../tools.h"
 
-QPushButton **penButtons;
+QMap<qint64, QPushButton*> penButtons;
 
 QPushButton *penSwitch;
 
@@ -65,8 +65,6 @@ void setLineStyle(int style){
 }
 
 void setupPenType(){
-    penButtons = (QPushButton**)calloc(1024, sizeof(QPushButton*));
-
     penButtons[PEN] = create_button(":images/pen.svg", [=](){
         setPen(PEN);
     });

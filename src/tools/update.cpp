@@ -44,11 +44,8 @@ void updateGoBackButtons(){
 }
 
 void backgroundStyleEvent(){
-    for(int i=0; i<1024; i++){
-        if(penButtons[i] != nullptr){
-            //printf("%d\n", i);
-            penButtons[i]->setStyleSheet(QString("background-color: none;"));
-        }
+    for (auto it = penButtons.begin(); it != penButtons.end(); ++it) {
+        it.value()->setStyleSheet(QString("background-color: none;"));
     }
     int btns[] = {
         getPen(), drawing->getLineStyle(),
