@@ -13,7 +13,7 @@ void settings_init() {
     settingsDefault = new QSettings("://tr.org.pardus.pen.default.conf", QSettings::NativeFormat);
 }
 
-char* get_string(char* name) {
+QString get_string(const char* name) {
     QString value;
     if(settings->contains(QString::fromUtf8(name))){
         value = settings->value(QString::fromUtf8(name)).toString();
@@ -21,10 +21,10 @@ char* get_string(char* name) {
         value = settingsDefault->value(QString::fromUtf8(name)).toString();
     }
     //printf("GETSTRING %s:%s\n", name, value.toUtf8().constData());
-    return strdup(value.toUtf8().constData());
+    return value;
 }
 
-bool get_bool(char* name) {
+bool get_bool(const char* name) {
     bool value;
     if(settings->contains(QString::fromUtf8(name))){
         value = settings->value(QString::fromUtf8(name)).toBool();
@@ -35,19 +35,19 @@ bool get_bool(char* name) {
     return value;
 }
 
-void set_bool(char* name, bool value) {
+void set_bool(const char* name, bool value) {
     settings->setValue(QString::fromUtf8(name), value);
     //printf("SETBOOL %s:%d\n", name, value);
     settings->sync();
 }
 
-void set_string(char* name, char* value) {
-    settings->setValue(QString::fromUtf8(name), QString::fromUtf8(value));
+void set_string(const char* name, QString value) {
+    settings->setValue(QString::fromUtf8(name), value);
     //printf("SETSTRING %s:%s\n", name, value);
     settings->sync();
 }
 
-int get_int(char* name) {
+int get_int(const char* name) {
     int value;
     if(settings->contains(QString::fromUtf8(name))){
         value = settings->value(QString::fromUtf8(name)).toInt();
@@ -58,7 +58,7 @@ int get_int(char* name) {
     return value;
 }
 
-void set_int(char* name, int value) {
+void set_int(const char* name, int value) {
     settings->setValue(QString::fromUtf8(name), value);
     //printf("SETINT %s:%d\n", name, value);
     settings->sync();

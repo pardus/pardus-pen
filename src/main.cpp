@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
             strncmp(getenv("XDG_CURRENT_DESKTOP"), "GNOME", 5);
     }
     // Force use X11 or Xwayland
-    if(get_bool((char*)"xwayland") || force_xwayland){
+    if(get_bool("xwayland") || force_xwayland){
         setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
     }
     //Force ignore system dpi
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     setenv("QT_SCALE_FACTOR", "1", 1);
 
     // history size
-    history = get_int((char*)"history");
+    history = get_int("history");
     if(history < 0){
         history = 50;
     }

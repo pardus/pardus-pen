@@ -291,13 +291,13 @@ int curEventButtons = 0;
 
 DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     initializeImage(size());
-    penSize[PEN] = get_int((char*)"pen-size");
-    penSize[ERASER] = get_int((char*)"eraser-size");
-    penSize[MARKER] = get_int((char*)"marker-size");
+    penSize[PEN] = get_int("pen-size");
+    penSize[ERASER] = get_int("eraser-size");
+    penSize[MARKER] = get_int("marker-size");
     penType=PEN;
     penStyle=SPLINE;
     lineStyle=NORMAL;
-    penColor = QColor(get_string((char*)"color"));
+    penColor = QColor(get_string("color"));
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
     cropWidget = new MovableWidget(mainWidget);

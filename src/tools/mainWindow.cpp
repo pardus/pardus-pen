@@ -36,9 +36,9 @@ public:
         mainWidget->setAttribute(Qt::WA_AcceptTouchEvents, true);
 
         board = new WhiteBoard(mainWidget);
-        board->setType(get_int((char*)"page"));
-        board->setOverlayType(get_int((char*)"page-overlay"));
-        
+        board->setType(get_int("page"));
+        board->setOverlayType(get_int("page-overlay"));
+
         // scrolls
         scrollHSlider = new QSlider(Qt::Horizontal, this);
         scrollVSlider = new QSlider(Qt::Vertical, this);
@@ -104,8 +104,8 @@ protected:
         scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
 
         printf("%d %d\n",event->size().width(), event->size().height());
-        new_x = get_int((char*)"cur-x");
-        new_y = get_int((char*)"cur-y");
+        new_x = get_int("cur-x");
+        new_y = get_int("cur-y");
         // tool is not set under wayland
         if(floatingWidget != nullptr) {
             if(tool != nullptr){

@@ -19,13 +19,13 @@ extern QMainWindow* tool;
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
-    is_vertical = get_bool((char*)"is-vertical");
+    is_vertical = get_bool("is-vertical");
     layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
     if(is_vertical){
         layout->setDirection(QBoxLayout::TopToBottom);
     }
-    new_x = get_int((char*)"cur-x");
-    new_y = get_int((char*)"cur-y");
+    new_x = get_int("cur-x");
+    new_y = get_int("cur-y");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
     setLayout(layout);
@@ -41,7 +41,7 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
 }
 
 void  FloatingWidget::setVertical(bool state){
-    set_bool((char*)"is-vertical", state);
+    set_bool("is-vertical", state);
     int h = size().height();
     int w = size().width();
     if(state){
@@ -150,8 +150,8 @@ void FloatingWidget::mouseReleaseEvent(QMouseEvent *event) {
     (void)(event); // fix unused warning
     offset_x =-1;
     offset_y =-1;
-    set_int((char*)"cur-x", new_x);
-    set_int((char*)"cur-y", new_y);
+    set_int("cur-x", new_x);
+    set_int("cur-y", new_y);
 }
 
 void FloatingWidget::mouseMoveEvent(QMouseEvent *event) {

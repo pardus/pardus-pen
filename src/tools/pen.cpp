@@ -160,18 +160,18 @@ void setupPenType(){
         }
         penSizeEvent();
     });
-    
+
     QObject::connect(thicknessSlider, &QSlider::sliderReleased, [=]() {
         int value = drawing->penSize[getPen()];
         switch(getPen()){
             case PEN:
-                set_int((char*)"pen-size",value);
+                set_int("pen-size",value);
                 break;
             case MARKER:
-                set_int((char*)"marker-size",value);
+                set_int("marker-size",value);
                 break;
             case ERASER:
-                set_int((char*)"eraser-size",value);
+                set_int("eraser-size",value);
                 break;
          }
     });
@@ -187,7 +187,7 @@ void setupPenType(){
             return;
         }
         drawing->penColor = newCol;
-        set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
+        set_string("color", drawing->penColor.name());
         penStyleEvent();
         penSizeEvent();
         backgroundStyleEvent();

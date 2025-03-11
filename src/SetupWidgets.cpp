@@ -64,7 +64,7 @@ void setupWidgets(){
     floatingWidget->addWidget("next", nextButton);
     floatingWidget->addWidget("back", backButton);
     floatingWidget->addWidget("tool-menu", toolMenu);
-    if(!get_bool((char*)"fuar")){
+    if(!get_bool("fuar")){
         floatingWidget->addWidget("minify", minify);
     }
 
@@ -119,7 +119,7 @@ void setupWidgets(){
         ).arg(colors[i].name()));
         QObject::connect(button, &QPushButton::clicked, [=]() {
             drawing->penColor = colors[i];
-            set_string((char*)"color", (char*)drawing->penColor.name().toStdString().c_str());
+            set_string("color", drawing->penColor.name());
             penStyleEvent();
             penSizeEvent();
             backgroundStyleEvent();
@@ -299,7 +299,7 @@ void setupWidgets(){
     QGridLayout *miscLayout = new QGridLayout(miscDialog);
     miscLayout->addWidget(clear,      0, 0);
     miscLayout->addWidget(ssButton,   0, 1);
-    if(!get_bool((char*)"fuar")){
+    if(!get_bool("fuar")){
         miscLayout->addWidget(close,      0, 2);
         miscLayout->addWidget(save,       0, 3);
         miscLayout->addWidget(open,       0, 4);
