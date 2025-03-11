@@ -22,8 +22,3 @@ modules:
         url: https://gitlab.com/sulincix/pardus-pen-new.git
         branch: master
 
-  - name: glib-compile-schemas
-    buildsystem: simple
-    build-commands:
-      - glib-compile-schemas /app/share/glib-2.0/schemas
-

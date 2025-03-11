@@ -3,7 +3,6 @@ SELF=$(readlink -f "$0")
 HERE=${SELF%/*}
 export QT_QPA_PLATFORM_PLUGIN_PATH="$HERE/plugins/platforms"
 export QT_PLUGIN_PATH="$HERE/plugins"
-export GSETTINGS_SCHEMA_DIR="${HERE}"
 exec "${HERE}/@interpreter@" \
      --library-path "${HERE}/lib" \
      "${HERE}/pardus-pen"

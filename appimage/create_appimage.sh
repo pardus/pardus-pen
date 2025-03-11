@@ -13,7 +13,6 @@ mkdir -p build/appimage/{lib,plugins}
 # install base files
 install build/pardus-pen build/appimage/pardus-pen
 install appimage/AppRun build/appimage/AppRun
-install data/tr.org.pardus.pen.gschema.xml build/appimage/
 install data/tr.org.pardus.pen.svg build/appimage/
 install data/tr.org.pardus.pen.desktop build/appimage/
 # install interpreter
@@ -28,8 +27,6 @@ ldd $(find build/appimage -type f) build/pardus-pen | cut -f3 -d" " | sort -V | 
         install "$line" build/appimage/lib/$(basename "$line")
     fi
 done
-# glib compile
-glib-compile-schemas build/appimage/
 # create appimage
 wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-$(uname -m).AppImage -O build/appimagetool
 chmod 755 build/appimagetool
