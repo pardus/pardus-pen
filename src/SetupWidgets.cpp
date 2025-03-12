@@ -256,8 +256,8 @@ void setupWidgets(){
             i++;
             printf ("%s\n", ep->d_name);
         }
+        closedir(dp);
     }
-    closedir(dp);
     pageDialog->setFixedSize(
         colorDialog->size().width(),
         butsize*2+ padding*3
