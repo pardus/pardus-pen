@@ -3,8 +3,6 @@
 
 #include <dirent.h>
 
-QPushButton *penMenu;
-QPushButton *toolMenu;
 QWidget *colorDialog;
 
 QLabel *thicknessLabel;
@@ -109,22 +107,23 @@ void setupWidgets(){
     // Create buttons for each color
 
     gridLayout->addWidget(toolButtons[COLORPICKER], 0, 0, Qt::AlignCenter);
+    // Color button offset is 100
     for (int i = 0; i < num_of_color; i++) {
-        QPushButton *button = new QPushButton(colorDialog);
-        button->setFixedSize(butsize, butsize);
-        button->setStyleSheet(QString(
+        toolButtons[i+100] = new QPushButton(colorDialog);
+        toolButtons[i+100]->setFixedSize(butsize, butsize);
+        toolButtons[i+100]->setStyleSheet(QString(
              "background-color: %1;"
              "border-radius: 12px;"
              "border: 1px solid "+convertColor(colors[i]).name()+";"
         ).arg(colors[i].name()));
-        QObject::connect(button, &QPushButton::clicked, [=]() {
+        QObject::connect(toolButtons[i+100], &QPushButton::clicked, [=]() {
             drawing->penColor = colors[i];
             set_string("color", drawing->penColor.name());
             penStyleEvent();
             penSizeEvent();
             backgroundStyleEvent();
         });
-        gridLayout->addWidget(button, (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
+        gridLayout->addWidget(toolButtons[i+100], (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
     colorDialog->setLayout(gridLayout);
     penSettingsLayout->addWidget(colorDialog);
@@ -242,17 +241,18 @@ void setupWidgets(){
     struct dirent *ep;
     DIR *dp = opendir (BGDIR);
     int i = 6;
+    // custom overlay button offset is 200
     if (dp != NULL) {
         while ((ep = readdir (dp)) != NULL) {
             if ((ep->d_name)[0] == '.') {
                 continue;
             }
             QString path = QString(BGDIR) + QString("/") + QString(ep->d_name);
-            QPushButton* but = create_button(path.toStdString().c_str(), [=](){
+            toolButtons[i+200] = create_button(path.toStdString().c_str(), [=](){
                 board->overlays[drawing->getPageNum()] = QImage(path);
                 board->setOverlayType(CUSTOM);
             });
-            pageLayout->addWidget(but, i / 4, i % 4);
+            pageLayout->addWidget(toolButtons[i+200], i / 4, i % 4);
             i++;
             printf ("%s\n", ep->d_name);
         }

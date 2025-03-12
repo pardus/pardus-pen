@@ -2,14 +2,6 @@
 
 QLabel* pageLabel;
 
-QPushButton* overlayScaleUp;
-QPushButton* overlayScaleDown;
-
-QPushButton* overlayRotateUp;
-QPushButton* overlayRotateDown;
-
-QPushButton *clear;
-
 void setupBackground(){
     penButtons[TRANSPARENT] = create_button(":images/paper-transparent.svg", [=](){
         board->setType(TRANSPARENT);
