@@ -25,3 +25,26 @@
 #define ISOMETRIC 43
 #define MUSIC 44
 #define CUSTOM 45
+
+#define SWITCH 0
+#define COLORPICKER 1
+#define BACK 2
+#define NEXT 3
+#define MINIFY 4
+#define FULLSCREEN 5
+#define ROTATE 6
+#define HIDEUI 7
+#define OVERLAYSCALEUP 8
+#define OVERLAYSCALEDOWN 9
+#define OVERLAYROTATEUP 10
+#define OVERLAYROTATEDOWN 11
+#define CLEAR 12
+#define PREVPAGE 13
+#define NEXTPAGE 14
+#define CLOSE 15
+#define PENMENU 16
+#define TOOLMENU 17
+#define SAVE 18
+#define OPEN 19
+#define SCREENSHOT 20
+

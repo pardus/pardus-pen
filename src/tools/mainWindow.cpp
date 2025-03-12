@@ -193,13 +193,13 @@ void setupTools(){
     floatingWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
 
-    minify = create_button(":images/screen.svg", [=](){
+    toolButtons[MINIFY] = create_button(":images/screen.svg", [=](){
             mainWindow->showMinimized();
     });
-    set_shortcut(minify, Qt::Key_D, Qt::MetaModifier);
+    set_shortcut(toolButtons[MINIFY], Qt::Key_D, Qt::MetaModifier);
 
     QScreen *screen = QGuiApplication::primaryScreen();
-    fullscreen = create_button(":images/fullscreen-exit.svg", [=](){
+    toolButtons[FULLSCREEN] = create_button(":images/fullscreen-exit.svg", [=](){
         mainWidget->move(0,0);
         if ((tool != nullptr) && (tool2 != nullptr)){
             tool->hide();
@@ -210,28 +210,28 @@ void setupTools(){
         mainWindow->hide();
         mainWindow->showNormal();
         if(isFullScreen){
-            set_icon(":images/fullscreen.svg", fullscreen);
+            set_icon(":images/fullscreen.svg", toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
         } else {
-            set_icon(":images/fullscreen-exit.svg", fullscreen);
+            set_icon(":images/fullscreen-exit.svg", toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
         scrollVSlider->setVisible(isFullScreen);
         scrollHSlider->setVisible(isFullScreen);
         isFullScreen = !isFullScreen;
-        minify->setEnabled(isFullScreen);
+        toolButtons[MINIFY]->setEnabled(isFullScreen);
     });
 
-    set_shortcut(fullscreen, Qt::Key_F11, 0);
+    set_shortcut(toolButtons[FULLSCREEN], Qt::Key_F11, 0);
 
-    rotate = create_button(":images/rotate.svg", [=](){
+    toolButtons[ROTATE] = create_button(":images/rotate.svg", [=](){
         floatingWidget->setVertical(!floatingWidget->is_vertical);
         floatingSettings->setHide();
     });
 
     // non-gui button for hide / show floatingWidget
-    QPushButton* hideUi = create_button("", [=](){
+    toolButtons[HIDEUI] = create_button("", [=](){
         if(hideState){
             floatingWidget->hide();
             floatingSettings->setHide();
@@ -240,7 +240,7 @@ void setupTools(){
         }
         hideState = ! hideState;
     });
-    set_shortcut(hideUi, Qt::Key_F1, Qt::AltModifier);
+    set_shortcut(toolButtons[HIDEUI], Qt::Key_F1, Qt::AltModifier);
 }
 
 void setHideMainWindow(bool status){

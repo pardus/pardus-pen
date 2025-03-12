@@ -1,7 +1,5 @@
 #include "../tools.h"
 
-QPushButton *save;
-QPushButton *open;
 
 #ifdef LIBARCHIVE
 extern "C" {
@@ -21,7 +19,7 @@ extern "C" {
 
 void setupSaveLoad(){
 #ifdef LIBARCHIVE
-    save = create_button(":images/save.svg", [=](){
+    toolButtons[SAVE] = create_button(":images/save.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
         #ifdef QPRINTER
         filter += _("PDF Files (*.pdf);;");
@@ -46,9 +44,9 @@ void setupSaveLoad(){
         floatingWidget->show();
         setHideMainWindow(false);
     });
-    set_shortcut(save, Qt::Key_S, Qt::ControlModifier);
+    set_shortcut(toolButtons[SAVE], Qt::Key_S, Qt::ControlModifier);
 
-    open = create_button(":images/open.svg", [=](){
+    toolButtons[OPEN] = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
         filter += _("All Files (*.*)");
         setHideMainWindow(true);
@@ -63,6 +61,6 @@ void setupSaveLoad(){
         floatingWidget->show();
         setHideMainWindow(false);
     });
-    set_shortcut(open, Qt::Key_O, Qt::ControlModifier);
+    set_shortcut(toolButtons[OPEN], Qt::Key_O, Qt::ControlModifier);
 #endif
 }

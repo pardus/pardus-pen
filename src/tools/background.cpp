@@ -31,7 +31,7 @@ void setupBackground(){
     set_shortcut(penButtons[WHITE], Qt::Key_E, Qt::AltModifier);
 
     // page buttons
-    previousPage = create_button(":images/go-page-previous.svg", [=](){
+    toolButtons[PREVPAGE] = create_button(":images/go-page-previous.svg", [=](){
         if(drawing->getPageNum() == 0){
             return;
         }
@@ -39,14 +39,14 @@ void setupBackground(){
         backgroundStyleEvent();
         updateGoBackButtons();
     });
-    set_shortcut(previousPage, Qt::Key_PageDown, Qt::ControlModifier);
+    set_shortcut(toolButtons[PREVPAGE], Qt::Key_PageDown, Qt::ControlModifier);
 
-    nextPage = create_button(":images/go-page-next.svg", [=](){
+    toolButtons[NEXTPAGE] = create_button(":images/go-page-next.svg", [=](){
         drawing->goNextPage();
         backgroundStyleEvent();
         updateGoBackButtons();
     });
-    set_shortcut(nextPage, Qt::Key_PageUp, Qt::ControlModifier);
+    set_shortcut(toolButtons[NEXTPAGE], Qt::Key_PageUp, Qt::ControlModifier);
 
     // overlay buttons
     penButtons[BLANK] = create_button(":images/overlay-none.svg", [=](){
@@ -95,35 +95,35 @@ void setupBackground(){
 
     pageLabel = new QLabel("0");
 
-    overlayScaleUp = create_button(":images/zoom-in.svg", [=](){
+    toolButtons[OVERLAYSCALEUP] = create_button(":images/zoom-in.svg", [=](){
         board->ratios[drawing->getPageNum()] += 10;
         updateRatioButtons();
         board->update();
     });
 
-    overlayScaleDown = create_button(":images/zoom-out.svg", [=](){
+    toolButtons[OVERLAYSCALEDOWN] = create_button(":images/zoom-out.svg", [=](){
         board->ratios[drawing->getPageNum()] -= 10;
         updateRatioButtons();
         board->update();
     });
 
-    overlayRotateUp = create_button(":images/bg-rotate-plus.svg", [=](){
+    toolButtons[OVERLAYROTATEUP] = create_button(":images/bg-rotate-plus.svg", [=](){
         board->rotates[drawing->getPageNum()] += 15;
         board->update();
     });
 
-    overlayRotateDown = create_button(":images/bg-rotate-minus.svg", [=](){
+    toolButtons[OVERLAYROTATEDOWN] = create_button(":images/bg-rotate-minus.svg", [=](){
         board->rotates[drawing->getPageNum()] -= 15;
         board->update();
     });
 
-    clear = create_button(":images/clear.svg", [=](){
+    toolButtons[CLEAR] = create_button(":images/clear.svg", [=](){
         if(getPen() == SELECTION && hasSelection) {
             drawing->clearSelection();
         } else {
             drawing->clear();
         }
     });
-    set_shortcut(clear, Qt::Key_Delete, Qt::ControlModifier);
+    set_shortcut(toolButtons[CLEAR], Qt::Key_Delete, Qt::ControlModifier);
 
 }

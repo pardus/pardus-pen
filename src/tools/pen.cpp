@@ -1,24 +1,11 @@
 #include "../tools.h"
 
 QMap<qint64, QPushButton*> penButtons;
-
-QPushButton *penSwitch;
+QMap<qint64, QPushButton*> toolButtons;
 
 QSlider *thicknessSlider;
-QPushButton *backgroundButton;
-QPushButton* minify;
-QPushButton* rotate;
-QPushButton* fullscreen;
-
-QPushButton *backButton;
-QPushButton *nextButton;
-
-QPushButton *previousPage;
-QPushButton *nextPage;
 
 QLabel *move;
-QPushButton *close;
-QPushButton* colorpicker;
 
 OverView *ov;
 
@@ -69,7 +56,7 @@ void setupPenType(){
         setPen(PEN);
     });
 
-    penSwitch = create_button(":images/pen.svg", [=](){
+    toolButtons[SWITCH] = create_button(":images/pen.svg", [=](){
         if(floatingSettings->current_page >= 0){
             floatingSettings->setHide();
             return;
@@ -82,7 +69,7 @@ void setupPenType(){
             setPen(ERASER);
         }
     });
-    set_shortcut(penSwitch, Qt::Key_M, 0);
+    set_shortcut(toolButtons[SWITCH], Qt::Key_M, 0);
 
     penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
         setPen(SELECTION);
@@ -174,7 +161,7 @@ void setupPenType(){
          }
     });
 
-    colorpicker = create_button(":images/color-picker.svg", [=](){
+    toolButtons[COLORPICKER] = create_button(":images/color-picker.svg", [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
         setHideMainWindow(true);
@@ -190,22 +177,22 @@ void setupPenType(){
         penSizeEvent();
         backgroundStyleEvent();
     });
-    set_shortcut(colorpicker, Qt::Key_0, 0);
+    set_shortcut(toolButtons[COLORPICKER], Qt::Key_0, 0);
 
-    backButton = create_button(":images/go-back.svg", [=](){
+    toolButtons[BACK] = create_button(":images/go-back.svg", [=](){
         drawing->goPrevious();
         updateGoBackButtons();
     });
-    set_shortcut(backButton, Qt::Key_Z, Qt::ControlModifier);
+    set_shortcut(toolButtons[BACK], Qt::Key_Z, Qt::ControlModifier);
 
 
-    nextButton = create_button(":images/go-next.svg", [=](){
+    toolButtons[NEXT] = create_button(":images/go-next.svg", [=](){
         drawing->goNext();
         updateGoBackButtons();
     });
-    set_shortcut(nextButton, Qt::Key_Y, Qt::ControlModifier);
+    set_shortcut(toolButtons[NEXT], Qt::Key_Y, Qt::ControlModifier);
 
-    close = create_button(":images/close.svg", [=](){
+    toolButtons[CLOSE] = create_button(":images/close.svg", [=](){
 #ifdef ETAP19
     QStringList args3;
     QProcess p3;

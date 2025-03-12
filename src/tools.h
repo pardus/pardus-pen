@@ -31,6 +31,7 @@ extern "C" {
     #include "utils/Settings.h"
 }
 extern QMap<qint64, QPushButton*> penButtons;
+extern QMap<qint64, QPushButton*> toolButtons;
 
 extern DrawingWidget *drawing;
 extern FloatingWidget *floatingWidget;
@@ -60,32 +61,9 @@ extern int getPen();
 extern void setPenStyle(int style);
 extern void setLineStyle(int style);
 
-extern QPushButton *typeButton;
-
 extern OverView *ov;
 
-extern QPushButton *backgroundButton;
-extern QPushButton* minify;
-extern QPushButton* rotate;
-extern QPushButton* fullscreen;
-
-extern QPushButton* colorpicker;
-
-extern QPushButton* overlayScaleUp;
-extern QPushButton* overlayScaleDown;
-
-extern QPushButton* overlayRotateUp;
-extern QPushButton* overlayRotateDown;
-
-extern QPushButton *backButton;
-extern QPushButton *nextButton;
-
-extern QPushButton *previousPage;
-extern QPushButton *nextPage;
 extern QLabel *pageLabel;
-
-extern QPushButton *clear;
-extern QPushButton *close;
 
 extern QWidget *penSettings;
 extern QWidget *colorDialog;
@@ -97,12 +75,7 @@ extern QLabel *colorLabel;
 extern QWidget *penTypeDialog;
 extern QWidget *modeDialog;
 
-
 extern QLabel *move;
-
-extern QPushButton *save;
-extern QPushButton *open;
-extern QPushButton *ssButton;
 
 extern "C" {
     extern void *load_archive(void* arg);
@@ -121,8 +94,5 @@ extern void setupSaveLoad();
 extern void backgroundStyleEvent();
 
 extern void setupWidgets();
-
-extern QPushButton *penMenu;
-extern QPushButton *penSwitch;
 
 void setHideMainWindow(bool status);

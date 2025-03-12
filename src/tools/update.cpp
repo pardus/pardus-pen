@@ -9,15 +9,15 @@ void penStyleEvent(){
     thicknessLabel->setVisible(getPen() != SELECTION);
     modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
-    penSwitch->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    toolButtons[SWITCH]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     if(getPen() == SELECTION){
-        set_icon(":images/crop.svg", penSwitch);
+        set_icon(":images/crop.svg", toolButtons[SWITCH]);
     } else if (getPen() == ERASER){
-        set_icon(":images/eraser.svg", penSwitch);
+        set_icon(":images/eraser.svg", toolButtons[SWITCH]);
     } else if(getPen() == MARKER){
-        set_icon(":images/marker.svg", penSwitch);
+        set_icon(":images/marker.svg", toolButtons[SWITCH]);
     } else {
-        set_icon(":images/pen.svg", penSwitch);
+        set_icon(":images/pen.svg", toolButtons[SWITCH]);
     }
 
 }
@@ -32,14 +32,14 @@ void penSizeEvent(){
 }
 
 void updateRatioButtons(){
-    overlayScaleDown->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
-    overlayScaleUp->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
+    toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
+    toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
 }
 
 void updateGoBackButtons(){
-    backButton->setEnabled(drawing->isBackAvailable());
-    nextButton->setEnabled(drawing->isNextAvailable());
-    previousPage->setEnabled(drawing->getPageNum() > 0);
+    toolButtons[BACK]->setEnabled(drawing->isBackAvailable());
+    toolButtons[NEXT]->setEnabled(drawing->isNextAvailable());
+    toolButtons[PREVPAGE]->setEnabled(drawing->getPageNum() > 0);
     pageLabel->setText(QString::number(drawing->getPageNum()));
 }
 
