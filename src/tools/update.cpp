@@ -32,8 +32,8 @@ void penSizeEvent(){
 }
 
 void updateRatioButtons(){
-    toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
-    toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
+    toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
+    toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
 }
 
 void updateGoBackButtons(){
