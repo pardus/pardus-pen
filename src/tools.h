@@ -29,9 +29,8 @@ extern bool PDFMODE;
 
 #define _(String) gettext(String)
 
-extern "C" {
-    #include "utils/Settings.h"
-}
+#include "utils/Settings.h"
+
 extern QMap<qint64, QPushButton*> penButtons;
 extern QMap<qint64, QPushButton*> toolButtons;
 
