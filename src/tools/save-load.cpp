@@ -55,8 +55,10 @@ void setupSaveLoad(){
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
         if(!filename.isEmpty()){
+            drawing->clearAll();
             if(filename.endsWith(".pdf")){
                 loadPdf(filename);
+                drawing->goPage(0);
             } else {
                 pthread_t ptid;
                 archive_target = filename;

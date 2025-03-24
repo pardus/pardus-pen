@@ -363,6 +363,13 @@ void DrawingWidget::clear() {
     update();
 }
 
+void DrawingWidget::clearAll() {
+    images.clear();
+    pages.clear();
+    goPage(0);
+    update();
+}
+
 
 
 static QPointF last_end = QPointF(0,0);
@@ -431,6 +438,9 @@ void DrawingWidget::goPage(int num){
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
+    if(PDFMODE){
+        board->staticImage = getPdfImage(num);
+    }
 
 }
 

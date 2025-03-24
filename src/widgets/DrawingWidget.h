@@ -118,6 +118,7 @@ public:
     void goPreviousPage();
     void goNextPage();
     void clear();
+    void clearAll();
 #ifdef LIBARCHIVE
     void saveAll(QString filename);
     void loadArchive(const QString& filename);

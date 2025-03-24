@@ -26,6 +26,7 @@ public:
     QMap<qint64, QImage> overlays;
     QColor background;
     QColor lineColor;
+    QImage staticImage;
 private:
     int overlayType = 0;
     int type = 0;

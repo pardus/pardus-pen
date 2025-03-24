@@ -80,8 +80,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     transform.rotate(rotates[drawing->getPageNum()]);
     QImage img;
     if(PDFMODE){
-        img = getPdfImage(drawing->getPageNum());
-        //img = img.transformed(transform);
+        img = staticImage;
         overlayType = CUSTOM;
     } else {
         img = overlays[drawing->getPageNum()].transformed(transform);
