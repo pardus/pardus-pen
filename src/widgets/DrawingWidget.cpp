@@ -393,10 +393,12 @@ void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
 #ifdef LIBARCHIVE
 void DrawingWidget::saveAll(QString file){
     if (!file.isEmpty()) {
+        #ifdef QPRINTER
         if(file.endsWith(".pdf")){
             pages.savePdf(file);
             return;
         }
+        #endif
         if(!file.endsWith(".pen")){
             file += ".pen";
         }
@@ -438,9 +440,11 @@ void DrawingWidget::goPage(int num){
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
+    #ifdef QPRINTER
     if(PDFMODE){
         board->staticImage = getPdfImage(num);
     }
+    #endif
 
 }
 

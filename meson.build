@@ -20,7 +20,6 @@ src = [
     'src/tools/save-load.cpp',
     'src/tools/pen.cpp',
     'src/utils/which.c',
-    'src/utils/pdf.cpp'
 ]
 
 subdir('po')
@@ -71,7 +70,9 @@ foreach bg_src : run_command('find', 'data/backgrounds','-type','f',check:true).
     install_data(bg_src, install_dir: get_option('backgrounds'))
 endforeach
 
-
+if get_option('pdf')
+    src += 'src/utils/pdf.cpp'
+endif
 
 if get_option('qt') == '5'
     add_project_arguments('-DQT5', language: 'cpp')
@@ -80,11 +81,11 @@ if get_option('qt') == '5'
         dependency('Qt5Gui'),
         dependency('Qt5Widgets'),
         dependency('Qt5Svg'),
-        dependency('poppler-qt5'),
     ]
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')
         qt_dep += dependency('Qt5PrintSupport')
+        qt_dep += dependency('poppler-qt5')
     endif
 elif get_option('qt') == '6'
     add_project_arguments('-DQT6', language: 'cpp')
@@ -93,11 +94,11 @@ elif get_option('qt') == '6'
         dependency('Qt6Gui'),
         dependency('Qt6Widgets'),
         dependency('Qt6Svg'),
-        dependency('poppler-qt6'),
     ]
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')
         qt_dep += dependency('Qt6PrintSupport')
+        qt_dep += dependency('poppler-qt6')
     endif
 else
     error('Your qt version is ont supperted')

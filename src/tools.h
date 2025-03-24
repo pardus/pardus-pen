@@ -25,7 +25,6 @@
 #include <locale.h>
 #include <libintl.h>
 
-extern bool PDFMODE;
 
 #define _(String) gettext(String)
 
@@ -97,7 +96,9 @@ extern void backgroundStyleEvent();
 extern void setupWidgets();
 
 void setHideMainWindow(bool status);
-
+#ifdef QPRINTER
+extern bool PDFMODE;
 QImage getPdfImage(int num);
 void loadPdf(QString path);
+#endif
 void openFile(QString filename);

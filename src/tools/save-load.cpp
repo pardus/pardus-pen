@@ -20,14 +20,18 @@ extern "C" {
 void openFile(QString filename){
     if(!filename.isEmpty()){
         drawing->clearAll();
+        #ifdef QPRINTER
         if(filename.endsWith(".pdf")){
             loadPdf(filename);
             drawing->goPage(0);
         } else {
+        #endif
             pthread_t ptid;
             archive_target = filename;
             pthread_create(&ptid, NULL, &load_archive, NULL);
+        #ifdef QPRINTER
         }
+        #endif
     }
 }
 
@@ -46,8 +50,10 @@ void setupSaveLoad(){
         QString file = QFileDialog::getSaveFileName(drawing, _("Save File"), QDir::homePath(), filter, &selectedFilter);
         if(selectedFilter.contains("pen") && !file.endsWith(".pen")){
             file += ".pen";
+        #ifdef QPRINTER
         } else if(selectedFilter.contains("pdf") && !file.endsWith(".pdf")){
             file += ".pdf";
+        #endif
         }
         // save current page using goPage()
         drawing->goPage(drawing->getPageNum());
@@ -62,7 +68,9 @@ void setupSaveLoad(){
 
     toolButtons[OPEN] = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
+        #ifdef QPRINTER
         filter += _("PDF Files (*.pdf);;");
+        #endif
         filter += _("All Files (*.*)");
         setHideMainWindow(true);
         floatingWidget->hide();
