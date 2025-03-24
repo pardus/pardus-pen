@@ -101,3 +101,4 @@ void setHideMainWindow(bool status);
 
 QImage getPdfImage(int num);
 void loadPdf(QString path);
+void openFile(QString filename);

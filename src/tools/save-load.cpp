@@ -17,6 +17,20 @@ extern "C" {
 }
 #endif
 
+void openFile(QString filename){
+    if(!filename.isEmpty()){
+        drawing->clearAll();
+        if(filename.endsWith(".pdf")){
+            loadPdf(filename);
+            drawing->goPage(0);
+        } else {
+            pthread_t ptid;
+            archive_target = filename;
+            pthread_create(&ptid, NULL, &load_archive, NULL);
+        }
+    }
+}
+
 void setupSaveLoad(){
 #ifdef LIBARCHIVE
     toolButtons[SAVE] = create_button(":images/save.svg", [=](){
@@ -54,17 +68,7 @@ void setupSaveLoad(){
         floatingWidget->hide();
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
-        if(!filename.isEmpty()){
-            drawing->clearAll();
-            if(filename.endsWith(".pdf")){
-                loadPdf(filename);
-                drawing->goPage(0);
-            } else {
-                pthread_t ptid;
-                archive_target = filename;
-                pthread_create(&ptid, NULL, &load_archive, NULL);
-            }
-        }
+        openFile(filename);
         floatingWidget->show();
         setHideMainWindow(false);
     });

@@ -87,9 +87,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef LIBARCHIVE
     if (argc > 1) {
-        pthread_t ptid;
-        archive_target = QString(argv[1]);
-        pthread_create(&ptid, NULL, &load_archive, NULL);
+        openFile( QString(argv[1]));
     }
 #endif
     return app.exec();
