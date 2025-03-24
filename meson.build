@@ -19,7 +19,8 @@ src = [
     'src/tools/screenshot.cpp',
     'src/tools/save-load.cpp',
     'src/tools/pen.cpp',
-    'src/utils/which.c'
+    'src/utils/which.c',
+    'src/utils/pdf.cpp'
 ]
 
 subdir('po')
@@ -39,6 +40,8 @@ if get_option('fix1')
     add_project_arguments(['-Wno-error=template-id-cdtor' ], language: 'cpp')
 endif
 add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
+
+add_project_arguments(['-Wno-error=deprecated-declarations'], language: 'cpp')
 
 if get_option('screenshot')
     add_project_arguments('-Dscreenshot', language: 'cpp')
@@ -77,6 +80,7 @@ if get_option('qt') == '5'
         dependency('Qt5Gui'),
         dependency('Qt5Widgets'),
         dependency('Qt5Svg'),
+        dependency('poppler-qt5'),
     ]
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')
@@ -89,6 +93,7 @@ elif get_option('qt') == '6'
         dependency('Qt6Gui'),
         dependency('Qt6Widgets'),
         dependency('Qt6Svg'),
+        dependency('poppler-qt6'),
     ]
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')

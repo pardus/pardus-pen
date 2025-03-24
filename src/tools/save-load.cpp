@@ -48,15 +48,20 @@ void setupSaveLoad(){
 
     toolButtons[OPEN] = create_button(":images/open.svg", [=](){
         QString filter = _("Pen Files (*.pen);;");
+        filter += _("PDF Files (*.pdf);;");
         filter += _("All Files (*.*)");
         setHideMainWindow(true);
         floatingWidget->hide();
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open File"), QDir::homePath(), filter);
         if(!filename.isEmpty()){
-            pthread_t ptid;
-            archive_target = filename;
-            pthread_create(&ptid, NULL, &load_archive, NULL);
+            if(filename.endsWith(".pdf")){
+                loadPdf(filename);
+            } else {
+                pthread_t ptid;
+                archive_target = filename;
+                pthread_create(&ptid, NULL, &load_archive, NULL);
+            }
         }
         floatingWidget->show();
         setHideMainWindow(false);

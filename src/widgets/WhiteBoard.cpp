@@ -78,7 +78,14 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     int ow, oh;
     QTransform transform;
     transform.rotate(rotates[drawing->getPageNum()]);
-    QImage img = overlays[drawing->getPageNum()].transformed(transform);
+    QImage img;
+    if(PDFMODE){
+        img = getPdfImage(drawing->getPageNum());
+        //img = img.transformed(transform);
+        overlayType = CUSTOM;
+    } else {
+        img = overlays[drawing->getPageNum()].transformed(transform);
+    }
     gridSize = (float)mainWindow->geometry().height() / (float)get_int("grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
