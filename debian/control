@@ -7,6 +7,7 @@ Build-Depends: meson, ninja-build,
          qtchooser,
          libqt5svg5-dev,
          libarchive-dev,
+         libpoppler-qt5-dev,
          pkgconf
 Standards-Version: 4.3.0
 Homepage: https://pardus.org.tr
@@ -19,6 +20,7 @@ Depends: ${shlibs:Depends},
          libqt5gui5,
          libqt5svg5,
          libqt5widgets5,
-         libqt5core5a
+         libqt5core5a,
+         libpoppler-qt5-1
 Description: Pen for pardus.
  Fast, usefull tool for drawing on screen.
