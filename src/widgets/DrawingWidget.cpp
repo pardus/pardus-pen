@@ -22,6 +22,7 @@ extern WhiteBoard *board;
 extern QWidget * mainWidget;
 extern DrawingWidget *drawing;
 extern FloatingSettings *floatingSettings;
+QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
 
 extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
@@ -108,7 +109,9 @@ public:
     int overlayType = BLANK;
     int removed = 0;
     void saveValue(qint64 id, QImage data) {
-        values[id] = data;
+        QDir dir;
+        dir.mkpath(cache_path);
+        saveImageToFile(data, cache_path+QString::number(id));
         updateGoBackButtons();
         if(id > history){
             remove(id - history);
@@ -117,19 +120,21 @@ public:
     }
 
     void clear(){
-        values.clear();
         image_count = 0;
         last_image_num = 1;
         removed = 0;
         updateGoBackButtons();
+        removeDirectory(cache_path);
     }
 
     QImage loadValue(qint64 id) {
         if(removed >= id) {
             id =  removed +1;
         }
-        if (values.contains(id)) {
-            return values[id];
+        QString filePath = cache_path+QString::number(id);
+        QFile file(filePath);
+        if(file.exists()){
+            return loadImageFromFile(cache_path+QString::number(id));
         } else {
             QImage image = QImage(mainWidget->geometry().width(),mainWidget->geometry().height(), QImage::Format_ARGB32);
             image.fill(QColor("transparent"));
@@ -138,16 +143,15 @@ public:
     }
 
     void remove(qint64 id){
-        for (auto it = values.begin(); it != values.end(); ++it) {
-            if (it.key() == id) {
-                values.erase(it);
-                break;
-            }
+        QString filePath = cache_path+QString::number(id);
+        QFile file(filePath);
+        if(file.exists()){
+            file.remove();
         }
     }
 
 private:
-    QMap<qint64, QImage> values;
+    QString cache_path = cache + generateRandomString(10)+"/";
 };
 ImageStorage images;
 
@@ -313,6 +317,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     fpressure = get_int((char*)"pressure") / 100.0;
 
     setFocusPolicy(Qt::StrongFocus);
+    removeDirectory(cache);
 }
 
 void DrawingWidget::addPoint(int id, QPointF data) {
@@ -723,5 +728,18 @@ void qImageToFile(const QImage& image, const QString& filename) {
         } else {
             qDebug() << "Failed to save image at" << filename;
         }
+}
+
+QString generateRandomString(int length) {
+    const QString characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    QString randomString;
+
+    QRandomGenerator *generator = QRandomGenerator::global();
+    for (int i = 0; i < length; ++i) {
+        int index = generator->bounded(characters.length());
+        randomString.append(characters[index]);
+    }
+
+    return randomString;
 }
 

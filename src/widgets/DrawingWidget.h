@@ -8,6 +8,7 @@
 #include <QMouseEvent>
 #include <QApplication>
 #include <QScreen>
+#include <QRandomGenerator>
 #include <iostream>
 
 #include <QtWidgets>
@@ -162,6 +163,7 @@ protected:
 
 QColor convertColor(QColor color);
 void qImageToFile(const QImage& image, const QString& filename);
+QString generateRandomString(int length);
 
 #endif // DRAWINGWIDGET_H
 

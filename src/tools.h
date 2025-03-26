@@ -87,6 +87,9 @@ extern void setupWidgets();
 
 extern bool hasSelection;
 
+bool saveImageToFile(const QImage &image, const QString &imageFilePath);
+QImage loadImageFromFile(const QString &imageFilePath);
+
 extern void setupBackground();
 extern void setupScreenShot();
 extern void setupPenType();

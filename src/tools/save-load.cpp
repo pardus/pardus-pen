@@ -1,5 +1,8 @@
-#include "../tools.h"
+#include <QImage>
+#include <QByteArray>
+#include <QFile>
 
+#include "../tools.h"
 
 #ifdef LIBARCHIVE
 extern "C" {
@@ -83,3 +86,55 @@ void setupSaveLoad(){
     set_shortcut(toolButtons[OPEN], Qt::Key_O, Qt::ControlModifier);
 #endif
 }
+
+
+
+bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
+    if (image.isNull()) {
+        return false;
+    }
+
+    QFile imageFile(imageFilePath);
+    if (!imageFile.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+
+    QByteArray imageData(reinterpret_cast<const char*>(image.constBits()), image.sizeInBytes());
+    imageFile.write(imageData);
+    imageFile.close();
+
+    QFile dimensionsFile(imageFilePath+".dim");
+    if (!dimensionsFile.open(QIODevice::WriteOnly)) {
+        return false;
+    }
+
+    QDataStream out(&dimensionsFile);
+    out << image.width() << image.height() << static_cast<int>(image.format());
+    dimensionsFile.close();
+
+    return true;
+}
+QImage loadImageFromFile(const QString &imageFilePath) {
+    QFile dimensionsFile(imageFilePath+".dim");
+    if (!dimensionsFile.open(QIODevice::ReadOnly)) {
+        return QImage();
+    }
+
+    QDataStream in(&dimensionsFile);
+    int width, height, format;
+    in >> width >> height >> format;
+    dimensionsFile.close();
+
+    QFile imageFile(imageFilePath);
+    if (!imageFile.open(QIODevice::ReadOnly)) {
+        return QImage();
+    }
+
+    QByteArray loadedData = imageFile.readAll();
+    imageFile.close();
+
+    QImage loadedImage(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
+    return loadedImage.copy();
+}
+
+
