@@ -27,11 +27,14 @@ public:
     QColor background;
     QColor lineColor;
     QImage staticImage;
+    void updateTransform();
 private:
     int overlayType = 0;
     int type = 0;
     QPainter painter;
     float gridSize;
+    QImage transformImage;
+    int ow, oh;
     void paintEvent(QPaintEvent *event) override ;
 };
 

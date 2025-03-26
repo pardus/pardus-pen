@@ -450,6 +450,8 @@ void DrawingWidget::goPage(int num){
         board->staticImage = getPdfImage(num);
     }
     #endif
+    board->updateTransform();
+    board->update();
 
 }
 

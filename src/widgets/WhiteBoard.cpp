@@ -51,7 +51,31 @@ void WhiteBoard::setType(int page){
 
 void WhiteBoard::setImage(QImage image){
     overlays[drawing->getPageNum()] = image;
+    updateTransform();
     update();
+}
+
+void WhiteBoard::updateTransform(){
+    QImage img = overlays[drawing->getPageNum()];
+    if(img.isNull()){
+        return;
+    }
+    int w = mainWindow->geometry().width();
+    int h = mainWindow->geometry().height();
+    float ratio = ratios[drawing->getPageNum()] / 100.0;
+    QTransform transform;
+    transform.rotate(rotates[drawing->getPageNum()]);
+    img = img.transformed(transform);
+    if(img.size().width() * img.size().height() > 0){
+        w = img.size().width() * h / img.size().height();
+        if(w > mainWindow->geometry().width()) {
+            w = mainWindow->geometry().width();
+            h = img.size().height() * w / img.size().width();
+        }
+        w = w*ratio;
+        h = h*ratio;
+    }
+    transformImage = img.scaled(w,h);
 }
 
 void WhiteBoard::paintEvent(QPaintEvent *event) {
@@ -66,8 +90,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         QPen(lineColor, 1, Qt::DashLine, Qt::RoundCap, Qt::RoundJoin)
     );
 
-    int w = mainWindow->geometry().width();
-    int h = mainWindow->geometry().height();
+
     if (!ratios.contains(drawing->getPageNum())){
         ratios[drawing->getPageNum()] = 80;
     }
@@ -75,10 +98,8 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         rotates[drawing->getPageNum()] = 0;
     }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
-    int ow, oh;
-    QTransform transform;
-    transform.rotate(rotates[drawing->getPageNum()]);
-    QImage img;
+
+
     #ifdef QPRINTER
     if(PDFMODE){
         overlayType = CUSTOM;
@@ -92,28 +113,21 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case CUSTOM:
             #ifdef QPRINTER
             if(PDFMODE){
-                img = staticImage;
+                if(staticImage.isNull()){
+                    break;
+                }
+                transformImage = staticImage.scaled(
+                    staticImage.size().width()*ratio,
+                    staticImage.size().height()*ratio
+                );
             } else {
             #endif
-                img = overlays[drawing->getPageNum()].transformed(transform);
             #ifdef QPRINTER
             }
             #endif
-            if(img.size().width() * img.size().height() > 0){
-                w = img.size().width() * h / img.size().height();
-                if(w > mainWindow->geometry().width()) {
-                    w = mainWindow->geometry().width();
-                    h = img.size().height() * w / img.size().width();
-                }
-                w = w*ratio;
-                h = h*ratio;
-                ow = (mainWindow->geometry().width() - w) / 2;
-                oh = (mainWindow->geometry().height() - h) / 2;
-                painter.drawImage(
-                    QPoint(ow, oh),
-                    img.scaled(w, h)
-                );
-            }
+            ow = (mainWindow->geometry().width() - transformImage.size().width()) / 2;
+            oh = (mainWindow->geometry().height() - transformImage.size().height()) / 2;
+            painter.drawImage(QPoint(ow, oh),transformImage);
             break;
         case SQUARES:
             drawSquarePaper();
