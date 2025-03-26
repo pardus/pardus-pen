@@ -251,6 +251,8 @@ void setupWidgets(){
             toolButtons[i+200] = create_button(path.toStdString().c_str(), [=](){
                 board->overlays[drawing->getPageNum()] = QImage(path);
                 board->setOverlayType(CUSTOM);
+                board->rotates[drawing->getPageNum()] = 0;
+                board->ratios[drawing->getPageNum()] = 100;
                 board->updateTransform();
             });
             pageLayout->addWidget(toolButtons[i+200], i / 4, i % 4);

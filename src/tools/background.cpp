@@ -76,6 +76,7 @@ void setupBackground(){
         if (!filename.isEmpty()) {
             board->overlays[drawing->getPageNum()] = QImage(filename);
             board->ratios[drawing->getPageNum()] = 100;
+            board->rotates[drawing->getPageNum()] = 0;
             updateRatioButtons();
             board->updateTransform();
         }

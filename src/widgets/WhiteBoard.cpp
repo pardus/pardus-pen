@@ -65,7 +65,6 @@ void WhiteBoard::updateTransform(){
     float ratio = ratios[drawing->getPageNum()] / 100.0;
     QTransform transform;
     transform.rotate(rotates[drawing->getPageNum()]);
-    img = img.transformed(transform);
     if(img.size().width() * img.size().height() > 0){
         w = img.size().width() * h / img.size().height();
         if(w > mainWindow->geometry().width()) {
@@ -75,7 +74,7 @@ void WhiteBoard::updateTransform(){
         w = w*ratio;
         h = h*ratio;
     }
-    transformImage = img.scaled(w,h);
+    transformImage = img.scaled(w,h).transformed(transform);
 }
 
 void WhiteBoard::paintEvent(QPaintEvent *event) {
