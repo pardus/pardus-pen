@@ -496,6 +496,7 @@ int DrawingWidget::getLineStyle(){
 
 static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
+    //printf("%d %d %d\n", source, type, id);
     int ev_pen = penType;
     if(source & Qt::MiddleButton) {
         penType = MARKER;

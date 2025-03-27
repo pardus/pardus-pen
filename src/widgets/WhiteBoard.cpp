@@ -111,6 +111,10 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     );
 
 
+    if (!ratios.contains(drawing->getPageNum())
+        || ratios[drawing->getPageNum()] <= 0){
+        ratios[drawing->getPageNum()] = 100.0;
+    }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
 
 
