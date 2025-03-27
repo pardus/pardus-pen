@@ -101,7 +101,7 @@ extern void setupWidgets();
 void setHideMainWindow(bool status);
 #ifdef QPRINTER
 extern bool PDFMODE;
-QImage getPdfImage(int num);
+QImage getPdfImage(int num, float ratio);
 void loadPdf(QString path);
 #endif
 void openFile(QString filename);

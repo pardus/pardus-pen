@@ -445,11 +445,6 @@ void DrawingWidget::goPage(int num){
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
-    #ifdef QPRINTER
-    if(PDFMODE){
-        board->staticImage = getPdfImage(num);
-    }
-    #endif
     board->updateTransform();
     board->update();
 

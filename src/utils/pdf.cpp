@@ -25,10 +25,14 @@ void loadPdf(QString path){
     doc->setRenderHint(Poppler::Document::TextAntialiasing, true);
 }
 
-QImage getPdfImage(int num){
+QImage getPdfImage(int num, float ratio){
     if(doc->numPages() <= num){
         return QImage(0,0);
     }
     page = doc->page(num);
-    return page->renderToImage(72*scale, 72*scale, 0, 0, page->pageSize().width()*scale, page->pageSize().height()*scale);
+    return page->renderToImage(
+        72*scale*ratio, 72*scale*ratio, 0, 0,
+        page->pageSize().width()*scale*ratio,
+        page->pageSize().height()*scale*ratio
+    );
 }

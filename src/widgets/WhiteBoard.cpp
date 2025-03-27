@@ -56,15 +56,30 @@ void WhiteBoard::setImage(QImage image){
 }
 
 void WhiteBoard::updateTransform(){
-    QImage img = overlays[drawing->getPageNum()];
-    if(img.isNull()){
-        return;
-    }
     int w = mainWindow->geometry().width();
     int h = mainWindow->geometry().height();
     float ratio = ratios[drawing->getPageNum()] / 100.0;
+    QImage img;
+    #ifdef QPRINTER
+    if(PDFMODE){
+       img = getPdfImage(drawing->getPageNum(), ratio);
+    } else {
+    #endif
+        img = overlays[drawing->getPageNum()];
+    #ifdef QPRINTER
+    }
+    #endif
+    if(img.isNull()){
+        return;
+    }
     QTransform transform;
     transform.rotate(rotates[drawing->getPageNum()]);
+    #ifdef QPRINTER
+    if(PDFMODE){
+        transformImage = img.transformed(transform);
+        return;
+    }
+    #endif
     if(img.size().width() * img.size().height() > 0){
         w = img.size().width() * h / img.size().height();
         if(w > mainWindow->geometry().width()) {
@@ -110,20 +125,6 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         case BLANK:
             break;
         case CUSTOM:
-            #ifdef QPRINTER
-            if(PDFMODE){
-                if(staticImage.isNull()){
-                    break;
-                }
-                transformImage = staticImage.scaled(
-                    staticImage.size().width()*ratio,
-                    staticImage.size().height()*ratio
-                );
-            } else {
-            #endif
-            #ifdef QPRINTER
-            }
-            #endif
             ow = (mainWindow->geometry().width() - transformImage.size().width()) / 2;
             oh = (mainWindow->geometry().height() - transformImage.size().height()) / 2;
             painter.drawImage(QPoint(ow, oh),transformImage);
