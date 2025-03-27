@@ -61,7 +61,7 @@ void WhiteBoard::updateTransform(){
     int h = mainWindow->geometry().height();
     if (!ratios.contains(drawing->getPageNum())
         || ratios[drawing->getPageNum()] <= 0){
-        ratios[drawing->getPageNum()] = 90;
+        ratios[drawing->getPageNum()] = 100.0;
     }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
     QImage img;
@@ -75,6 +75,7 @@ void WhiteBoard::updateTransform(){
     }
     #endif
     if(img.isNull()){
+        transformImage = QImage();
         return;
     }
     QTransform transform;
