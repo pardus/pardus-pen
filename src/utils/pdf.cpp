@@ -30,9 +30,12 @@ QImage getPdfImage(int num, float ratio){
         return QImage(0,0);
     }
     page = doc->page(num);
+    float wrat =  (float) board->geometry().width() / (float) page->pageSize().width();
+    float hrat =  (float) board->geometry().height() / (float) page->pageSize().height();
+    float rat = MIN(wrat, hrat);
     return page->renderToImage(
-        72*scale*ratio, 72*scale*ratio, 0, 0,
-        page->pageSize().width()*scale*ratio,
-        page->pageSize().height()*scale*ratio
+        72*rat*ratio, 72*rat*ratio, 0, 0,
+        page->pageSize().width()*rat*ratio,
+        page->pageSize().height()*rat*ratio
     );
 }

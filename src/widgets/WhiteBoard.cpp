@@ -2,6 +2,7 @@
 #include <QPainter>
 #include "WhiteBoard.h"
 
+
 #include "../tools.h"
 
 #include <stdlib.h>
@@ -58,6 +59,10 @@ void WhiteBoard::setImage(QImage image){
 void WhiteBoard::updateTransform(){
     int w = mainWindow->geometry().width();
     int h = mainWindow->geometry().height();
+    if (!ratios.contains(drawing->getPageNum())
+        || ratios[drawing->getPageNum()] <= 0){
+        ratios[drawing->getPageNum()] = 90;
+    }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
     QImage img;
     #ifdef QPRINTER
@@ -105,12 +110,6 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     );
 
 
-    if (!ratios.contains(drawing->getPageNum())){
-        ratios[drawing->getPageNum()] = 80;
-    }
-    if (!rotates.contains(drawing->getPageNum())){
-        rotates[drawing->getPageNum()] = 0;
-    }
     float ratio = ratios[drawing->getPageNum()] / 100.0;
 
 
