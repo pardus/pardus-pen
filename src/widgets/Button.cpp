@@ -23,6 +23,8 @@ QPushButton* create_button_text(const char* name, ButtonEvent event) {
     QFont font = button->font();
     font.setPointSize(18*scale);
     button->setFont(font);
+    button->setStyleSheet(QString("background-color: none;"));
+
     return button;
 }
 QPushButton* create_button(const char* name, ButtonEvent event) {
@@ -34,13 +36,14 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     set_icon(name, button);
     QFont font = button->font();
     font.setPointSize(18*scale);
-    button->setFixedSize(butsize+padding, butsize+padding);
+    button->setFixedSize(butsize, butsize);
     button->setFont(font);
+    button->setStyleSheet(QString("background-color: none;"));
     return button;
 }
 QPushButton* create_color_button(QColor color){
     QPushButton* button = new QPushButton();
-    button->setFixedSize(butsize+padding, butsize+padding);
+    button->setFixedSize(butsize, butsize);
     button->setStyleSheet(QString(
         "background-color: "+color.name()+";"
         "border-radius: 12px;"

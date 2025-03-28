@@ -87,7 +87,7 @@ void FloatingWidget::setVertical(bool state) {
                 tool->setFixedSize(width, height);
             }
             } else {
-            layout->addWidget(widgets[i], column, row);
+            layout->addWidget(widgets[i], column, row, Qt::AlignCenter);
             setFixedSize(height, width);
             if(tool != nullptr){
                 tool->setFixedSize(height, width);

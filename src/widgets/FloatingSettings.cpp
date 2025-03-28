@@ -32,10 +32,11 @@ FloatingSettings::FloatingSettings(QWidget *parent) : QWidget(parent) {
     layout = new QVBoxLayout(this);
     setLayout(layout);
     QString style = QString(
-    "QWidget {"
+        "QWidget {"
         "border-radius:13px;"
         "background-color: #cc939393;"
-    "}");
+        "}"
+    );
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     setStyleSheet(style);
