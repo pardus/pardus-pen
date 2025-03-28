@@ -40,7 +40,7 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
 }
 QPushButton* create_color_button(QColor color){
     QPushButton* button = new QPushButton();
-    button->setFixedSize(butsize, butsize);
+    button->setFixedSize(butsize+padding, butsize+padding);
     button->setStyleSheet(QString(
         "background-color: "+color.name()+";"
         "border-radius: 12px;"

@@ -74,8 +74,8 @@ void FloatingWidget::setVertical(bool state) {
     }
     // add items
     int item = 0;
-    int height = ((1+num_of_rows +num_of_item) / num_of_rows)*(butsize+padding) + padding - butsize / 2;
-    int width = num_of_rows*(butsize+padding) + padding;
+    int height = ((1+num_of_rows +num_of_item) / num_of_rows)*(butsize+padding) + 2*padding - butsize / 2;
+    int width = num_of_rows*(butsize+padding) + 2*padding;
     for (qint64 i=0;i<num_of_item + num_of_rows;i++) {
         int row = (int)item / num_of_rows;
         int column = (int)item % num_of_rows;

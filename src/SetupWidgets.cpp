@@ -97,6 +97,10 @@ void setupWidgets(){
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[CLEAR]);
     floatingWidget->addWidget(toolButtons[MINIFY]);
+    floatingWidget->addWidget(create_color_button(QColor("#ff0000")));
+    floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
+    floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
+    floatingWidget->addWidget(create_color_button(QColor("#ffc000")));
     // disable minify if fual enabled
     toolButtons[MINIFY]->setEnabled(!get_bool("fuar"));
 
@@ -112,7 +116,7 @@ void setupWidgets(){
     int rowsize = 7;
     colorDialog = new QWidget();
     colorDialog->setFixedSize( // set height later
-        butsize*rowsize + padding*(rowsize),
+        butsize*rowsize + padding*(rowsize+1),
         0
     );
 
@@ -235,7 +239,7 @@ void setupWidgets(){
     // resize color dialog
     colorDialog->setFixedSize(
         colorDialog->size().width(),
-        butsize*4+ padding*3
+        butsize*4+ padding*5
     );
 
 /*********** Shape menu done *********/
