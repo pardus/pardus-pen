@@ -3,13 +3,16 @@
 
 #include <QPushButton>
 #include <QWindow>
+#include <QColor>
 #include <functional>
 
+#include "../tools.h"
 
 typedef std::function<void()> ButtonEvent;
 
 QPushButton* create_button(const char* icon, ButtonEvent event);
 QPushButton* create_button_text(const char* icon, ButtonEvent event);
+QPushButton* create_color_button(QColor color);
 
 void set_icon(const char* name, QPushButton* button);
 

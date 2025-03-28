@@ -2,11 +2,9 @@
 
 #include "Button.h"
 #include <stdio.h>
+#include <QColor>
 
 extern float scale;
-
-#define padding 3*scale
-#define butsize 48*scale
 
 typedef struct {
     qint64 key;
@@ -38,6 +36,23 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
     font.setPointSize(18*scale);
     button->setFixedSize(butsize+padding, butsize+padding);
     button->setFont(font);
+    return button;
+}
+QPushButton* create_color_button(QColor color){
+    QPushButton* button = new QPushButton();
+    button->setFixedSize(butsize, butsize);
+    button->setStyleSheet(QString(
+        "background-color: "+color.name()+";"
+        "border-radius: 12px;"
+        "border: 1px solid "+convertColor(color).name()+";"
+    ));
+    QObject::connect(button, &QPushButton::clicked, [=]() {
+    drawing->penColor = color;
+        set_string("color", drawing->penColor.name());
+        penStyleEvent();
+        penSizeEvent();
+        backgroundStyleEvent();
+    });
     return button;
 }
 

@@ -26,7 +26,6 @@
 #define MUSIC 44
 #define CUSTOM 45
 
-#define SWITCH 0
 #define COLORPICKER 1
 #define BACK 2
 #define NEXT 3
@@ -43,8 +42,10 @@
 #define NEXTPAGE 14
 #define CLOSE 15
 #define PENMENU 16
-#define TOOLMENU 17
-#define SAVE 18
-#define OPEN 19
-#define SCREENSHOT 20
+#define ERASERMENU 17
+#define PAGEMENU 18
+#define SHAPEMENU 19
+#define SAVE 20
+#define OPEN 21
+#define SCREENSHOT 22
 

@@ -55,21 +55,6 @@ void setupPenType(){
         setPen(PEN);
     });
 
-    toolButtons[SWITCH] = create_button(":images/pen.svg", [=](){
-        if(floatingSettings->current_page >= 0){
-            floatingSettings->setHide();
-            return;
-        }
-        drawing->setPenStyle(SPLINE);
-        drawing->setLineStyle(NORMAL);
-        if(getPen() != PEN){
-            setPen(PEN);
-        } else {
-            setPen(ERASER);
-        }
-    });
-    set_shortcut(toolButtons[SWITCH], Qt::Key_M, 0);
-
     penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
         setPen(SELECTION);
     });

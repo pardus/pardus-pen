@@ -83,9 +83,15 @@ void FloatingWidget::setVertical(bool state) {
         if(state) {
             layout->addWidget(widgets[i], row, column);
             setFixedSize(width, height);
-        } else {
+            if(tool != nullptr){
+                tool->setFixedSize(width, height);
+            }
+            } else {
             layout->addWidget(widgets[i], column, row);
             setFixedSize(height, width);
+            if(tool != nullptr){
+                tool->setFixedSize(height, width);
+            }
         }
     }
 }

@@ -9,15 +9,35 @@ void penStyleEvent(){
     thicknessLabel->setVisible(getPen() != SELECTION);
     modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
-    toolButtons[SWITCH]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
-    if(getPen() == SELECTION){
-        set_icon(":images/crop.svg", toolButtons[SWITCH]);
-    } else if (getPen() == ERASER){
-        set_icon(":images/eraser.svg", toolButtons[SWITCH]);
-    } else if(getPen() == MARKER){
-        set_icon(":images/marker.svg", toolButtons[SWITCH]);
-    } else {
-        set_icon(":images/pen.svg", toolButtons[SWITCH]);
+    toolButtons[PENMENU]->setStyleSheet("background-color: none;");
+    toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
+    if(drawing->getPen() == PEN){
+        toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    } else if (drawing->getPen() == ERASER){
+        toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+    }
+    switch(drawing->getPenStyle()){
+        case LINE:
+            set_icon(":images/line.svg", toolButtons[SHAPEMENU]);
+            break;
+        case CIRCLE:
+            set_icon(":images/circle.svg", toolButtons[SHAPEMENU]);
+            break;
+        case RECTANGLE:
+            set_icon(":images/rectangle.svg", toolButtons[SHAPEMENU]);
+            break;
+        case TRIANGLE:
+            set_icon(":images/triangle.svg", toolButtons[SHAPEMENU]);
+            break;
+        case VECTOR:
+            set_icon(":images/vector.svg", toolButtons[SHAPEMENU]);
+            break;
+        case VECTOR2:
+            set_icon(":images/vector2.svg", toolButtons[SHAPEMENU]);
+            break;
+        default:
+            set_icon(":images/spline.svg", toolButtons[SHAPEMENU]);
+            break;
     }
 
 }
