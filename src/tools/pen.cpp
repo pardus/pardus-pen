@@ -5,7 +5,6 @@ QMap<qint64, QPushButton*> toolButtons;
 
 QSlider *thicknessSlider;
 
-QLabel *move;
 
 OverView *ov;
 
@@ -208,11 +207,5 @@ void setupPenType(){
         exit(0);
     });
 
-    move = new QLabel("");
-    QIcon icon = QIcon(":images/move-icon.svg");
-    QPixmap pixmap = icon.pixmap(icon.actualSize(QSize(butsize, butsize)));
-    move->setPixmap(pixmap);
-    move->setStyleSheet(QString("background-color: none;"));
-    move->setFixedSize(butsize, butsize);
     pen_init = true;
 }

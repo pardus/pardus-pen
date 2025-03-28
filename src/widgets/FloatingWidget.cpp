@@ -1,3 +1,4 @@
+#include <QLabel>
 #include "FloatingWidget.h"
 
 
@@ -19,47 +20,29 @@ extern QMainWindow* tool;
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
-    is_vertical = get_bool("is-vertical");
-    layout = new QBoxLayout(QBoxLayout::LeftToRight, this);
-    if(is_vertical){
-        layout->setDirection(QBoxLayout::TopToBottom);
-    }
+    layout = new QGridLayout();
     new_x = get_int("cur-x");
     new_y = get_int("cur-y");
     layout->setSpacing(padding);
     layout->setContentsMargins(padding, padding, padding, padding);
-    setLayout(layout);
     QString style = QString(
     "QWidget {"
         "border-radius: 13px;"
         "background-color: #cc939393;"
     "}");
+    setLayout(layout);
     setStyleSheet(style);
     cur_height = padding;
     cur_width = padding;
+    for(int i=0;i<num_of_rows;i++){
+        QLabel *label = new QLabel();
+        label->setFixedSize(butsize/2, butsize/2);
+        label->setStyleSheet(QString("background-color: none;"));
+        widgets.insert(i, label);
+    }
 
 }
 
-void  FloatingWidget::setVertical(bool state){
-    set_bool("is-vertical", state);
-    int h = size().height();
-    int w = size().width();
-    if(state){
-        cur_width = MIN(h,w);
-        cur_height = MAX(h,w);
-        layout->setDirection(QBoxLayout::TopToBottom);
-    } else {
-        layout->setDirection(QBoxLayout::LeftToRight);
-        cur_width = MAX(h,w);
-        cur_height = MIN(h,w);
-    }
-    setFixedSize(cur_width, cur_height);
-    moveAction();
-    is_vertical = state;
-    if(tool != nullptr){
-        tool->setFixedSize(cur_width, cur_height);
-    }
-}
 
 void FloatingWidget::setMainWindow(QWidget *widget) {
     mainWindow = (QMainWindow*)widget;
@@ -69,23 +52,42 @@ void FloatingWidget::setSettings(QWidget *widget) {
     floatingSettings = (FloatingSettings*)widget;
 }
 
-void FloatingWidget::addWidget(QString name, QWidget *widget) {
-    layout->addWidget(widget);
-    widgets.insert(name, widget);
-    if(is_vertical){
-        cur_height += widget->size().height() + padding;
-        if (cur_width < widget->size().width()) {
-            cur_width = widget->size().width() + padding*2;
-        }
-    } else {
-        cur_width += widget->size().width() + padding;
-        if (cur_height < widget->size().height()) {
-            cur_height = widget->size().height() + padding*2;
+void FloatingWidget::addWidget(QWidget *widget) {
+    widgets.insert(num_of_rows + num_of_item, widget);
+    num_of_item++;
+    setVertical(is_vertical);
+    moveAction();
+}
+void FloatingWidget::setVertical(bool state) {
+    // remove all items
+    for(int i=0;i<layout->rowCount();i++){
+        for(int j=0;j<layout->rowCount();j++){
+            QLayoutItem* item = layout->itemAtPosition(i, j);
+            if (!item) continue;
+
+            if (item->widget()) {
+                layout->removeWidget(item->widget());
+            } else {
+                layout->removeItem(item);
+            }
         }
     }
-    num_of_item++;
-    setFixedSize(cur_width, cur_height);
-    moveAction();
+    // add items
+    int item = 0;
+    int height = ((1+num_of_rows +num_of_item) / num_of_rows)*(butsize+padding) + padding - butsize / 2;
+    int width = num_of_rows*(butsize+padding) + padding;
+    for (qint64 i=0;i<num_of_item + num_of_rows;i++) {
+        int row = (int)item / num_of_rows;
+        int column = (int)item % num_of_rows;
+        item++;
+        if(state) {
+            layout->addWidget(widgets[i], row, column);
+            setFixedSize(width, height);
+        } else {
+            layout->addWidget(widgets[i], column, row);
+            setFixedSize(height, width);
+        }
+    }
 }
 
 
@@ -114,27 +116,15 @@ void FloatingWidget::moveAction(){
             move(new_x, new_y);
         }
         if(floatingSettings != NULL){
-            if(is_vertical){
-                new_xx = new_x+padding+size().width();
-                if(new_xx  > max_width - floatingSettings->cur_width){
-                    new_xx = new_x - padding - floatingSettings->cur_width;
-                }
-                new_yy = new_y;
-                if (new_yy > max_height - floatingSettings->cur_height) {
-                    new_yy = max_height - floatingSettings->cur_height;
-                }
-
-            } else {
-                new_xx = new_x;
-                if (new_xx > max_width - floatingSettings->cur_width) {
-                    new_xx = max_width - floatingSettings->cur_width;
-                }
-                new_yy = new_y + size().height() + padding;
-                if(new_yy  > max_height - floatingSettings->cur_height){
-                    new_yy = new_y - padding - floatingSettings->cur_height;
-                }
+            new_xx = new_x+padding+size().width();
+            if(new_xx  > max_width - floatingSettings->cur_width){
+                new_xx = new_x - padding - floatingSettings->cur_width;
             }
-            if(tool2 != nullptr){
+            new_yy = new_y;
+            if (new_yy > max_height - floatingSettings->cur_height) {
+                new_yy = max_height - floatingSettings->cur_height;
+            }
+             if(tool2 != nullptr){
                 tool2->move(new_xx, new_yy + padding);
             } else {
                 floatingSettings->move(new_xx, new_yy + padding);

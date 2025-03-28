@@ -75,7 +75,6 @@ extern QLabel *colorLabel;
 extern QWidget *penTypeDialog;
 extern QWidget *modeDialog;
 
-extern QLabel *move;
 
 extern "C" {
     extern void *load_archive(void* arg);

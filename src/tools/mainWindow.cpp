@@ -226,9 +226,11 @@ void setupTools(){
     set_shortcut(toolButtons[FULLSCREEN], Qt::Key_F11, 0);
 
     toolButtons[ROTATE] = create_button(":images/rotate.svg", [=](){
-        floatingWidget->setVertical(!floatingWidget->is_vertical);
+        floatingWidget->is_vertical = !floatingWidget->is_vertical;
+        floatingWidget->setVertical(floatingWidget->is_vertical);
         floatingSettings->setHide();
     });
+
 
     // non-gui button for hide / show floatingWidget
     toolButtons[HIDEUI] = create_button("", [=](){

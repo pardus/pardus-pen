@@ -56,15 +56,14 @@ void setupWidgets(){
 
 /********** Main toolbar **********/
 
-    floatingWidget->addWidget("move", move);
-    floatingWidget->addWidget("pen-menu", toolButtons[PENMENU]);
-    floatingWidget->addWidget("pen-switch", toolButtons[SWITCH]);
-    floatingWidget->addWidget("next", toolButtons[NEXT]);
-    floatingWidget->addWidget("back", toolButtons[BACK]);
-    floatingWidget->addWidget("tool-menu", toolButtons[TOOLMENU]);
-    if(!get_bool("fuar")){
-        floatingWidget->addWidget("minify", toolButtons[MINIFY]);
-    }
+    floatingWidget->addWidget(toolButtons[PENMENU]);
+    floatingWidget->addWidget(toolButtons[SWITCH]);
+    floatingWidget->addWidget(toolButtons[NEXT]);
+    floatingWidget->addWidget(toolButtons[BACK]);
+    floatingWidget->addWidget(toolButtons[TOOLMENU]);
+    floatingWidget->addWidget(toolButtons[MINIFY]);
+    // disable minify if fual enabled
+    toolButtons[MINIFY]->setEnabled(!get_bool("fuar"));
 
 /*********** main menu done *********/
 /************************************/
@@ -307,7 +306,7 @@ void setupWidgets(){
         miscLayout->addWidget(toolButtons[SAVE],         0, 3);
         miscLayout->addWidget(toolButtons[OPEN],         0, 4);
         miscLayout->addWidget(toolButtons[FULLSCREEN],   0, 5);
-        miscLayout->addWidget(toolButtons[ROTATE],       0, 6);
+        miscLayout->addWidget(toolButtons[ROTATE],   0, 6);
     }
     miscLayout->addWidget(toolButtons[OVERLAYSCALEUP],     1, 0);
     miscLayout->addWidget(toolButtons[OVERLAYSCALEDOWN],   1, 1);

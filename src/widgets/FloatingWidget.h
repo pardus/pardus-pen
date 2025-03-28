@@ -19,13 +19,14 @@ public:
     int cur_height = -1;
     int cur_width = -1;
     FloatingWidget(QWidget *parent = nullptr);
-    void addWidget(QString name, QWidget *widget);
+    void addWidget(QWidget *widget);
     void setSettings(QWidget *widget);
     void setMainWindow(QWidget *widget);
     void moveAction();
-    bool is_vertical;
-    void setVertical(bool state);
     QMainWindow *mainWindow;
+    void setVertical(bool state);
+    bool is_vertical = true;
+    int num_of_rows = 2;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
@@ -36,8 +37,8 @@ private:
     int offset_y = -1;
     FloatingSettings* floatingSettings;
     QPoint dragPosition;
-    QBoxLayout *layout;
-    QMap<QString, QWidget*> widgets;
+    QGridLayout *layout;
+    QMap<qint64, QWidget*> widgets;
 };
 
 #endif // FLOATINGWIDGET_H
