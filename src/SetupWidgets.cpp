@@ -35,10 +35,7 @@ void setupWidgets(){
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
         if(drawing->getPen() != PEN){
-            drawing->setPen(PEN);
-            drawing->setPenStyle(SPLINE);
-            drawing->setLineStyle(NORMAL);
-            penStyleEvent();
+            setPen(PEN);
             return;
         }
         floatingSettings->setPage(0);
@@ -48,10 +45,7 @@ void setupWidgets(){
     // Eraser button with menu
     toolButtons[ERASERMENU] = create_button(":images/eraser.svg", [=](){
         if(drawing->getPen() != ERASER){
-            drawing->setPen(ERASER);
-            drawing->setPenStyle(SPLINE);
-            drawing->setLineStyle(NORMAL);
-            penStyleEvent();
+            setPen(ERASER);
             return;
         }
         floatingSettings->setPage(0);
