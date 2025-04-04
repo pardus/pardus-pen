@@ -44,6 +44,8 @@ int main(int argc, char *argv[]) {
     setenv("QT_AUTO_SCREEN_SCALE_FACTOR", "0", 1);
     setenv("QT_QT_ENABLE_HIGHDPI_SCALING", "0", 1);
     setenv("QT_SCALE_FACTOR", "1", 1);
+    //unset qt style override, there's a bug with input when using qt6 build and kvantum
+    setenv("QT_STYLE_OVERRIDE", "", 1);
 
     // history size
     history = get_int("history");
