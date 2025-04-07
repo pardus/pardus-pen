@@ -79,11 +79,13 @@ void setupBackground(){
             board->rotates[drawing->getPageNum()] = 0;
             updateRatioButtons();
             board->updateTransform();
+            board->setOverlayType(CUSTOM);
+        } else {
+            board->setOverlayType(BLANK);
         }
+        backgroundStyleEvent();
         floatingWidget->show();
         setHideMainWindow(false);
-        board->setOverlayType(CUSTOM);
-        backgroundStyleEvent();
     });
     set_shortcut(penButtons[CUSTOM], Qt::Key_O, Qt::AltModifier);
 
