@@ -26,6 +26,7 @@ subdir('po')
 
 if get_option('resources')
     # Build qrc
+    run_command(['/bin/sh', './data/genresource.sh'], check:true)
     rcc_args = ['rcc', './data/resources.qrc', '-o', meson.current_build_dir()/'resources.cpp']
     if not get_option('etap19')
         rcc_args += ['-threshold=0' ,'--compress=9', '--compress-algo=zlib']

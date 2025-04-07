@@ -1,4 +1,5 @@
 build
+data/resources.qrc
 data/gschemas.compiled
 debian/.debhelper
 debian/pardus-pen
