@@ -103,7 +103,7 @@ CursorStorage curs;
 
 class ImageStorage {
 public:
-    int last_image_num = 1;
+    int last_image_num = 0;
     int image_count = 0;
     int pageType = TRANSPARENT;
     int overlayType = BLANK;
@@ -121,7 +121,7 @@ public:
 
     void clear(){
         image_count = 0;
-        last_image_num = 1;
+        last_image_num = 0;
         removed = 0;
         updateGoBackButtons();
         removeDirectory(cache_path);

@@ -100,37 +100,25 @@ bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
     }
 
     QByteArray imageData(reinterpret_cast<const char*>(image.constBits()), image.sizeInBytes());
-    imageFile.write(imageData);
+
+    QDataStream out(&imageFile);
+    out << image.width() << image.height() << static_cast<int>(image.format()) << imageData;
     imageFile.close();
-
-    QFile dimensionsFile(imageFilePath+".dim");
-    if (!dimensionsFile.open(QIODevice::WriteOnly)) {
-        return false;
-    }
-
-    QDataStream out(&dimensionsFile);
-    out << image.width() << image.height() << static_cast<int>(image.format());
-    dimensionsFile.close();
 
     return true;
 }
 QImage loadImageFromFile(const QString &imageFilePath) {
-    QFile dimensionsFile(imageFilePath+".dim");
-    if (!dimensionsFile.open(QIODevice::ReadOnly)) {
-        return QImage();
-    }
-
-    QDataStream in(&dimensionsFile);
-    int width, height, format;
-    in >> width >> height >> format;
-    dimensionsFile.close();
-
     QFile imageFile(imageFilePath);
     if (!imageFile.open(QIODevice::ReadOnly)) {
         return QImage();
     }
 
-    QByteArray loadedData = imageFile.readAll();
+    QDataStream in(&imageFile);
+    int width, height, format;
+    QByteArray loadedData;
+
+    in >> width >> height >> format >> loadedData;
+
     imageFile.close();
 
     QImage loadedImage(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
