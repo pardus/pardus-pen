@@ -25,6 +25,10 @@ void setupWidgets(){
 
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
+        if(floatingSettings->current_page >= 0){
+           floatingSettings->setHide();
+           return;
+        }
         if(drawing->getPen() != PEN){
             setPen(PEN);
             return;
@@ -35,6 +39,10 @@ void setupWidgets(){
 
     // Eraser button with menu
     toolButtons[ERASERMENU] = create_button(":images/eraser.svg", [=](){
+        if(floatingSettings->current_page >= 0){
+           floatingSettings->setHide();
+           return;
+        }
         if(drawing->getPen() != ERASER){
             setPen(ERASER);
             return;
