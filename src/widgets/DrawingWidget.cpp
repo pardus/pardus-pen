@@ -610,10 +610,6 @@ bool DrawingWidget::event(QEvent *ev) {
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
-                    if(touchEvent->points().count() == 1) {
-                        // block single touch event (It ıs actually mouse event)
-                        break;
-                    }
                     eventHandler(Qt::LeftButton, PRESS, touchPoint.id(), pos, touchPoint.pressure());
                 } else if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointReleased) {
                     eventHandler(Qt::LeftButton, RELEASE, touchPoint.id(), pos, touchPoint.pressure());
@@ -621,24 +617,24 @@ bool DrawingWidget::event(QEvent *ev) {
                     eventHandler(Qt::LeftButton, MOVE, touchPoint.id(), pos, touchPoint.pressure());
                 }
             }
-            break;
+            return true;
         }
         case QEvent::TabletPress: {
             tablet_enabled = true;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
-            break;
+            return true;
         }
         case QEvent::TabletRelease: {
             tablet_enabled = false;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
-            break;
+            return true;
         }
         case QEvent::TabletMove: {
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), MOVE, -2, tabletEvent->position(), tabletEvent->pressure());
-            break;
+            return true;
         }
         case QEvent::MouseButtonPress: {
             if(tablet_enabled) {
@@ -646,7 +642,7 @@ bool DrawingWidget::event(QEvent *ev) {
             }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
-            break;
+            return true;
         }
         case QEvent::MouseButtonRelease: {
             if(tablet_enabled) {
@@ -654,7 +650,7 @@ bool DrawingWidget::event(QEvent *ev) {
             }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
-            break;
+            return true;
         }
         case QEvent::MouseMove: {
             if(tablet_enabled) {
@@ -662,7 +658,7 @@ bool DrawingWidget::event(QEvent *ev) {
             }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), MOVE, -1, mouseEvent->position(), 1.0);
-            break;
+            return true;
         }
 
         default:
