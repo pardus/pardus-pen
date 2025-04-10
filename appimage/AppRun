@@ -1,8 +1,0 @@
-#!/bin/bash
-SELF=$(readlink -f "$0")
-HERE=${SELF%/*}
-export QT_QPA_PLATFORM_PLUGIN_PATH="$HERE/plugins/platforms"
-export QT_PLUGIN_PATH="$HERE/plugins"
-exec "${HERE}/@interpreter@" \
-     --library-path "${HERE}/lib" \
-     "${HERE}/pardus-pen"
