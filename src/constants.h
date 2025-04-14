@@ -44,8 +44,7 @@
 #define PENMENU 16
 #define ERASERMENU 17
 #define PAGEMENU 18
-#define SHAPEMENU 19
-#define SAVE 20
-#define OPEN 21
-#define SCREENSHOT 22
+#define SAVE 19
+#define OPEN 20
+#define SCREENSHOT 21
 

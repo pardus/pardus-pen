@@ -263,8 +263,8 @@ void mainWindowInit(){
     drawing = new DrawingWidget(mainWidget);
     ov = new OverView();
     setupTools();
-    setupPenType();
     setupBackground();
+    setupPenType();
     setupScreenShot();
     setupSaveLoad();
 
@@ -275,4 +275,6 @@ void mainWindowInit(){
     mainWindow->showFullScreen();
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
+
+    setPen(PEN);
 }

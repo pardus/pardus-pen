@@ -11,35 +11,16 @@ void penStyleEvent(){
     penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
-    if(drawing->getPen() == PEN){
+    if(drawing->getPen() != ERASER){
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     } else if (drawing->getPen() == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     }
-    switch(drawing->getPenStyle()){
-        case LINE:
-            set_icon(":images/line.svg", toolButtons[SHAPEMENU]);
-            break;
-        case CIRCLE:
-            set_icon(":images/circle.svg", toolButtons[SHAPEMENU]);
-            break;
-        case RECTANGLE:
-            set_icon(":images/rectangle.svg", toolButtons[SHAPEMENU]);
-            break;
-        case TRIANGLE:
-            set_icon(":images/triangle.svg", toolButtons[SHAPEMENU]);
-            break;
-        case VECTOR:
-            set_icon(":images/vector.svg", toolButtons[SHAPEMENU]);
-            break;
-        case VECTOR2:
-            set_icon(":images/vector2.svg", toolButtons[SHAPEMENU]);
-            break;
-        default:
-            set_icon(":images/spline.svg", toolButtons[SHAPEMENU]);
-            break;
+    if(drawing->getPen() == MARKER){
+        set_icon(":images/marker.svg", toolButtons[PENMENU]);
+    } else {
+        set_icon(":images/pen.svg", toolButtons[PENMENU]);
     }
-
 }
 
 

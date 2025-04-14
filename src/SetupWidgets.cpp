@@ -12,7 +12,6 @@ QWidget *modeDialog;
 
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
-static QVBoxLayout *shapeSettingsLayout;
 
 void setupWidgets(){
     // Pen Settings Menu
@@ -25,12 +24,9 @@ void setupWidgets(){
 
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
-        if(floatingSettings->current_page >= 0){
-           floatingSettings->setHide();
-           return;
-        }
         if(drawing->getPen() != PEN){
             setPen(PEN);
+            setPenStyle(SPLINE);
             return;
         }
         floatingSettings->setPage(0);
@@ -39,12 +35,9 @@ void setupWidgets(){
 
     // Eraser button with menu
     toolButtons[ERASERMENU] = create_button(":images/eraser.svg", [=](){
-        if(floatingSettings->current_page >= 0){
-           floatingSettings->setHide();
-           return;
-        }
         if(drawing->getPen() != ERASER){
             setPen(ERASER);
+            setPenStyle(SPLINE);
             return;
         }
         floatingSettings->setPage(0);
@@ -65,19 +58,6 @@ void setupWidgets(){
            floatingWidget->moveAction();
     });
 
-    // Shape settings menu
-    QWidget *shapeSettings = new QWidget();
-    shapeSettings->setStyleSheet(QString("background-color: none;"));
-    shapeSettingsLayout = new QVBoxLayout(shapeSettings);
-    shapeSettingsLayout->setSpacing(0);
-    shapeSettingsLayout->setContentsMargins(0, 0, 0, 0);
-    floatingSettings->addPage(shapeSettings);
-
-    // Page menu button
-    toolButtons[SHAPEMENU] = create_button(":images/spline.svg", [=](){
-           floatingSettings->setPage(2);
-           floatingWidget->moveAction();
-    });
 
     floatingSettings->setHide();
 
@@ -86,11 +66,9 @@ void setupWidgets(){
 
     floatingWidget->addWidget(toolButtons[PENMENU]);
     floatingWidget->addWidget(toolButtons[ERASERMENU]);
-    floatingWidget->addWidget(toolButtons[SHAPEMENU]);
-    floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
-    floatingWidget->addWidget(toolButtons[CLEAR]);
+    floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(toolButtons[MINIFY]);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
@@ -167,16 +145,44 @@ void setupWidgets(){
 
 
 /********** penTypes **********/
-    QWidget *stylDialog = new QWidget();
-    QGridLayout *styleLayout = new QGridLayout(stylDialog);
-    // spline
-    styleLayout->addWidget(penButtons[PEN],          0, 0, Qt::AlignCenter);
-    styleLayout->addWidget(penButtons[ERASER],       0, 1, Qt::AlignCenter);
-    styleLayout->addWidget(penButtons[MARKER],       0, 2, Qt::AlignCenter);
-    styleLayout->addWidget(penButtons[SELECTION],    0, 3, Qt::AlignCenter);
-    styleLayout->addWidget(toolButtons[COLORPICKER], 0, 4, Qt::AlignCenter);
+    QWidget *penTypeMainWidget = new QWidget();
+    QHBoxLayout *penTypeMainLayout = new QHBoxLayout(penTypeMainWidget);
 
-    penSettingsLayout->addWidget(stylDialog);
+    QWidget *styleDialog = new QWidget();
+    QGridLayout *styleLayout = new QGridLayout(styleDialog);
+
+    styleLayout->addWidget(penButtons[PEN],           0, 0, Qt::AlignCenter);
+    styleLayout->addWidget(penButtons[MARKER],        0, 1, Qt::AlignCenter);
+    styleLayout->addWidget(penButtons[ERASER],        0, 2, Qt::AlignCenter);
+    styleLayout->addWidget(toolButtons[CLEAR],        0, 3, Qt::AlignCenter);
+
+    penSettingsLayout->addWidget(styleDialog);
+
+    penTypeDialog = new QWidget();
+    QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
+    penTypeLayout->addWidget(penButtons[NORMAL],   0, 0, Qt::AlignCenter);
+    penTypeLayout->addWidget(penButtons[DOTLINE],  0, 1, Qt::AlignCenter);
+    penTypeLayout->addWidget(penButtons[LINELINE], 0, 2, Qt::AlignCenter);
+
+
+    penTypeMainLayout->addWidget(styleDialog);
+    penTypeMainLayout->addWidget(penTypeDialog);
+
+    penSettingsLayout->addWidget(penTypeMainWidget);
+
+/********** penModes **********/
+    modeDialog = new QWidget();
+    QGridLayout *modeLayout = new QGridLayout(modeDialog);
+    // spline
+    modeLayout->addWidget(penButtons[SPLINE],     0, 0);
+    modeLayout->addWidget(penButtons[LINE],       0, 1);
+    modeLayout->addWidget(penButtons[CIRCLE],     0, 2);
+    modeLayout->addWidget(penButtons[TRIANGLE],   0, 3);
+    modeLayout->addWidget(penButtons[RECTANGLE],  0, 4);
+    modeLayout->addWidget(penButtons[VECTOR],     0, 5);
+    modeLayout->addWidget(penButtons[VECTOR2],    0, 6);
+
+    penSettingsLayout->addWidget(modeDialog);
 
 
 /********** Color selection options **********/
@@ -185,11 +191,12 @@ void setupWidgets(){
     QGridLayout *gridLayout = new QGridLayout(colorDialog);
 
     // Create buttons for each color
+    gridLayout->addWidget(toolButtons[COLORPICKER], 0, 0, Qt::AlignCenter);
 
     // Color button offset is 100
     for (int i = 0; i < num_of_color; i++) {
         toolButtons[i+100] = create_color_button(colors[i]);
-        gridLayout->addWidget(toolButtons[i+100], i / rowsize, i % rowsize, Qt::AlignCenter);
+        gridLayout->addWidget(toolButtons[i+100], (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
     colorDialog->setLayout(gridLayout);
     penSettingsLayout->addWidget(colorDialog);
@@ -200,34 +207,8 @@ void setupWidgets(){
         colorDialog->size().width()/2
     );
 
-/*********** Pen menu done *********/
-/***********************************/
-/*********** Shape menu  ***********/
-
-/********** penModes **********/
-    modeDialog = new QWidget();
-    QGridLayout *modeLayout = new QGridLayout(modeDialog);
-    // spline
-    modeLayout->addWidget(penButtons[SPLINE],     0, 0, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[LINE],       0, 1, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[CIRCLE],     0, 2, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[TRIANGLE],   0, 3, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[RECTANGLE],  0, 4, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[VECTOR],     1, 0, Qt::AlignCenter);
-    modeLayout->addWidget(penButtons[VECTOR2],    1, 1);
-
-    shapeSettingsLayout->addWidget(modeDialog);
-
 
 /********** pen type **********/
-
-    penTypeDialog = new QWidget();
-    QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
-    penTypeLayout->addWidget(penButtons[NORMAL],   0, 0, Qt::AlignCenter);
-    penTypeLayout->addWidget(penButtons[DOTLINE],  0, 1, Qt::AlignCenter);
-    penTypeLayout->addWidget(penButtons[LINELINE], 0, 2, Qt::AlignCenter);
-
-    shapeSettingsLayout->addWidget(penTypeDialog);
 
 
     // resize color dialog
@@ -236,8 +217,6 @@ void setupWidgets(){
         butsize*4+ padding*5
     );
 
-/*********** Shape menu done *********/
-/***********************************/
 /************ Page Menu ************/
 
  /********** page number **********/
@@ -327,6 +306,7 @@ void setupWidgets(){
     miscLayout->addWidget(toolButtons[SCREENSHOT],   1, 1, Qt::AlignCenter);
     miscLayout->addWidget(toolButtons[FULLSCREEN],   1, 2, Qt::AlignCenter);
     miscLayout->addWidget(toolButtons[ROTATE],       1, 3, Qt::AlignCenter);
+    miscLayout->addWidget(penButtons[SELECTION],     1, 4, Qt::AlignCenter);
     if(get_bool("fuar")){
         toolButtons[SAVE]->setEnabled(false);
         toolButtons[OPEN]->setEnabled(false);

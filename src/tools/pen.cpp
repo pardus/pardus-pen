@@ -13,14 +13,25 @@ static bool pen_init = false;
 void setPen(int type){
     sliderLock = true;
     drawing->setPen(type);
+
+    penButtons[PEN]->show();
+    penButtons[MARKER]->show();
+    penButtons[ERASER]->show();
+    toolButtons[CLEAR]->show();
+
     switch(type){
         case ERASER:
+            penButtons[type]->hide();
             thicknessSlider->setRange(10*scale,200*scale);
             break;
         case MARKER:
+            penButtons[type]->hide();
+            toolButtons[CLEAR]->hide();
             thicknessSlider->setRange(1,50*scale);
             break;
         case PEN:
+            penButtons[type]->hide();
+            toolButtons[CLEAR]->hide();
             thicknessSlider->setRange(1,50*scale);
             break;
 
@@ -121,7 +132,6 @@ void setupPenType(){
 
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setSingleStep(1);
-    setPen(PEN);
 
     QObject::connect(thicknessSlider, &QSlider::valueChanged, [=](int value) {
         if(!sliderLock){
