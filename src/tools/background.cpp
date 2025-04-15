@@ -124,6 +124,8 @@ void setupBackground(){
             drawing->clear();
         }
         floatingSettings->setHide();
+        setPen(PEN);
+        setPenStyle(SPLINE);
     });
     set_shortcut(toolButtons[CLEAR], Qt::Key_Delete, Qt::ControlModifier);
 
