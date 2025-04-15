@@ -18,7 +18,7 @@ void setPen(int type){
     switch(type){
         case ERASER:
             penButtons[ERASER]->hide();
-            penButtons[MARKER]->hide();
+            penButtons[MARKER]->show();
             penButtons[PEN]->show();
             toolButtons[CLEAR]->show();
             thicknessSlider->setRange(10*scale,200*scale);

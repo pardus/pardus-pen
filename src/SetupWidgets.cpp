@@ -23,9 +23,6 @@ void setupWidgets(){
     penSettings->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(penSettings);
 
-    QWidget *utilSettings = new QWidget();
-    utilSettingsLayout = new QVBoxLayout(utilSettings);
-    floatingSettings->addPage(utilSettings);
 
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
@@ -64,7 +61,7 @@ void setupWidgets(){
     });
 
     // Page menu button
-    toolButtons[UTILMENU] = create_button(":images/page-settings.svg", [=](){
+    toolButtons[UTILMENU] = create_button(":images/misc-settings.svg", [=](){
            floatingSettings->setPage(2);
            floatingWidget->moveAction();
     });
@@ -77,11 +74,11 @@ void setupWidgets(){
 
     floatingWidget->addWidget(toolButtons[PENMENU]);
     floatingWidget->addWidget(toolButtons[ERASERMENU]);
-    floatingWidget->addWidget(toolButtons[PAGEMENU]);
+    floatingWidget->addWidget(toolButtons[MINIFY]);
     floatingWidget->addWidget(penButtons[SELECTION]);
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
-    floatingWidget->addWidget(toolButtons[MINIFY]);
+    floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(toolButtons[UTILMENU]);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
@@ -316,6 +313,11 @@ void setupWidgets(){
     pageSettingsLayout->addWidget(miscDialog);
 
 /********** Util Settings **********/
+
+    QWidget *utilSettings = new QWidget();
+    utilSettingsLayout = new QVBoxLayout(utilSettings);
+    floatingSettings->addPage(utilSettings);
+
 
     utilSettingsLayout->addWidget(toolButtons[SAVE],  Qt::AlignCenter);
     utilSettingsLayout->addWidget(toolButtons[OPEN],  Qt::AlignCenter);

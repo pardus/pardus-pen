@@ -11,7 +11,7 @@ void penStyleEvent(){
     penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
-    if(drawing->getPen() != ERASER){
+    if(drawing->getPen() == PEN || drawing->getPen() == MARKER){
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     } else if (drawing->getPen() == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
