@@ -96,21 +96,21 @@ void setupWidgets(){
 
 /********** Overview **********/
 
-    penSettingsLayout->addWidget(ov);
+    penSettingsLayout->addWidget(ov, Qt::AlignCenter, Qt::AlignCenter);
 
 
 /********** Thickness slider **********/
     
     thicknessLabel = new QLabel(_("Size: 10"));
     thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    penSettingsLayout->addWidget(thicknessLabel);
+    penSettingsLayout->addWidget(thicknessLabel, Qt::AlignCenter);
 
     thicknessLabel->setFixedSize(
         colorDialog->size().width(),
         butsize / 2
     );
 
-    penSettingsLayout->addWidget(thicknessSlider);
+    penSettingsLayout->addWidget(thicknessSlider, Qt::AlignCenter);
     thicknessSlider->setFixedSize(
         colorDialog->size().width(),
         butsize
@@ -156,7 +156,7 @@ void setupWidgets(){
     styleLayout->addWidget(penButtons[ERASER],        0, 2, Qt::AlignCenter);
     styleLayout->addWidget(toolButtons[CLEAR],        0, 3, Qt::AlignCenter);
 
-    penSettingsLayout->addWidget(styleDialog);
+    penSettingsLayout->addWidget(styleDialog, Qt::AlignCenter);
 
     penTypeDialog = new QWidget();
     QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
@@ -168,7 +168,7 @@ void setupWidgets(){
     penTypeMainLayout->addWidget(styleDialog);
     penTypeMainLayout->addWidget(penTypeDialog);
 
-    penSettingsLayout->addWidget(penTypeMainWidget);
+    penSettingsLayout->addWidget(penTypeMainWidget, Qt::AlignCenter);
 
 /********** penModes **********/
     modeDialog = new QWidget();
@@ -182,7 +182,7 @@ void setupWidgets(){
     modeLayout->addWidget(penButtons[VECTOR],     0, 5);
     modeLayout->addWidget(penButtons[VECTOR2],    0, 6);
 
-    penSettingsLayout->addWidget(modeDialog);
+    penSettingsLayout->addWidget(modeDialog, Qt::AlignCenter);
 
 
 /********** Color selection options **********/
@@ -199,7 +199,7 @@ void setupWidgets(){
         gridLayout->addWidget(toolButtons[i+100], (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
     colorDialog->setLayout(gridLayout);
-    penSettingsLayout->addWidget(colorDialog);
+    penSettingsLayout->addWidget(colorDialog, Qt::AlignCenter);
 
     // sync overview size with colordialog
     ov->setFixedSize(
