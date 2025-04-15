@@ -123,6 +123,7 @@ void setupBackground(){
         } else {
             drawing->clear();
         }
+        floatingSettings->setHide();
     });
     set_shortcut(toolButtons[CLEAR], Qt::Key_Delete, Qt::ControlModifier);
 

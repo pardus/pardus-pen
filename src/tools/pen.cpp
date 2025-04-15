@@ -14,24 +14,27 @@ void setPen(int type){
     sliderLock = true;
     drawing->setPen(type);
 
-    penButtons[PEN]->show();
-    penButtons[MARKER]->show();
-    penButtons[ERASER]->show();
-    toolButtons[CLEAR]->show();
 
     switch(type){
         case ERASER:
-            penButtons[type]->hide();
+            penButtons[ERASER]->hide();
+            penButtons[MARKER]->hide();
+            penButtons[PEN]->show();
+            toolButtons[CLEAR]->show();
             thicknessSlider->setRange(10*scale,200*scale);
             break;
         case MARKER:
-            penButtons[type]->hide();
-            toolButtons[CLEAR]->hide();
+            penButtons[MARKER]->hide();
+            toolButtons[CLEAR]->show();
+            penButtons[ERASER]->show();
+            penButtons[PEN]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
         case PEN:
-            penButtons[type]->hide();
-            toolButtons[CLEAR]->hide();
+            penButtons[PEN]->hide();
+            toolButtons[CLEAR]->show();
+            penButtons[ERASER]->show();
+            penButtons[MARKER]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
 
