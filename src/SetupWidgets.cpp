@@ -12,6 +12,7 @@ QWidget *modeDialog;
 
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
+static QVBoxLayout *utilSettingsLayout;
 
 void setupWidgets(){
     // Pen Settings Menu
@@ -21,6 +22,10 @@ void setupWidgets(){
     penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
     penSettings->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(penSettings);
+
+    QWidget *utilSettings = new QWidget();
+    utilSettingsLayout = new QVBoxLayout(utilSettings);
+    floatingSettings->addPage(utilSettings);
 
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
@@ -58,6 +63,12 @@ void setupWidgets(){
            floatingWidget->moveAction();
     });
 
+    // Page menu button
+    toolButtons[UTILMENU] = create_button(":images/page-settings.svg", [=](){
+           floatingSettings->setPage(2);
+           floatingWidget->moveAction();
+    });
+
 
     floatingSettings->setHide();
 
@@ -66,10 +77,12 @@ void setupWidgets(){
 
     floatingWidget->addWidget(toolButtons[PENMENU]);
     floatingWidget->addWidget(toolButtons[ERASERMENU]);
+    floatingWidget->addWidget(toolButtons[PAGEMENU]);
+    floatingWidget->addWidget(penButtons[SELECTION]);
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
-    floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(toolButtons[MINIFY]);
+    floatingWidget->addWidget(toolButtons[UTILMENU]);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
     floatingWidget->addWidget(create_color_button(QColor("#ffc000")));
@@ -299,23 +312,24 @@ void setupWidgets(){
     miscLayout->addWidget(toolButtons[OVERLAYSCALEUP],     0, 1, Qt::AlignCenter);
     miscLayout->addWidget(toolButtons[OVERLAYSCALEDOWN],   0, 2, Qt::AlignCenter);
     miscLayout->addWidget(toolButtons[OVERLAYROTATEDOWN],  0, 3, Qt::AlignCenter);
-    miscLayout->addWidget(toolButtons[SAVE],               0, 4, Qt::AlignCenter);
-    miscLayout->addWidget(toolButtons[OPEN],               0, 5, Qt::AlignCenter);
 
-    miscLayout->addWidget(toolButtons[CLOSE],        1, 0, Qt::AlignCenter);
-    miscLayout->addWidget(toolButtons[SCREENSHOT],   1, 1, Qt::AlignCenter);
-    miscLayout->addWidget(toolButtons[FULLSCREEN],   1, 2, Qt::AlignCenter);
-    miscLayout->addWidget(toolButtons[ROTATE],       1, 3, Qt::AlignCenter);
-    miscLayout->addWidget(penButtons[SELECTION],     1, 4, Qt::AlignCenter);
+    pageSettingsLayout->addWidget(miscDialog);
+
+/********** Util Settings **********/
+
+    utilSettingsLayout->addWidget(toolButtons[SAVE],  Qt::AlignCenter);
+    utilSettingsLayout->addWidget(toolButtons[OPEN],  Qt::AlignCenter);
+    utilSettingsLayout->addWidget(toolButtons[CLOSE],  Qt::AlignCenter);
+    utilSettingsLayout->addWidget(toolButtons[SCREENSHOT],  Qt::AlignCenter);
+    utilSettingsLayout->addWidget(toolButtons[FULLSCREEN],  Qt::AlignCenter);
+    utilSettingsLayout->addWidget(toolButtons[ROTATE],  Qt::AlignCenter);
+
     if(get_bool("fuar")){
         toolButtons[SAVE]->setEnabled(false);
         toolButtons[OPEN]->setEnabled(false);
         toolButtons[CLOSE]->setEnabled(false);
         toolButtons[SAVE]->setEnabled(false);
     }
-
-    pageSettingsLayout->addWidget(miscDialog);
-
 
 /********** Finish him **********/
 
