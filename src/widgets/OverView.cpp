@@ -22,6 +22,7 @@ void OverView::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     int penSize = drawing->penSize[getPen()];
     int penType = getPen();
+    
     QPen pen(drawing->penColor, penSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
@@ -48,14 +49,17 @@ void OverView::paintEvent(QPaintEvent *event) {
         painter.drawPixmap(QRect(w1, h1, penSize, penSize), pixmap);
     } else {
         // Draw the sine wave
+        QPainterPath path;
         int xPrev, yPrev;
         for (int x = 0; x <= w; x++) {
             double y = (h / 2) * sin(2 * M_PI * x / w) + h / 2;
             if (x > 0) {
-                painter.drawLine(xPrev+padding, yPrev+padding+(penSize/2), x+padding, y+padding+(penSize/2));
+                path.moveTo(QPointF(xPrev+padding, yPrev+padding));
+                path.lineTo(QPointF(x+padding, y+padding+(penSize/2)));
             }
             xPrev = x;
             yPrev = y;
         }
+        painter.drawPath(path);
     }
 }
