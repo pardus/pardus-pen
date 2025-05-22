@@ -125,14 +125,19 @@ void setupWidgets(){
 
 
     thicknessLabel = new QLabel(_("Size: 10"));
-    thicknessLabel->setStyleSheet("background: none; color: #9e9e9e");
-    thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    penSizeSettingsLayout->addWidget(thicknessLabel, Qt::AlignCenter);
-
-    thicknessLabel->setFixedSize(
-        colorDialog->size().width(),
-        butsize / 2
+    thicknessLabel->setStyleSheet(
+        "background: none;"
+        "color: #9e9e9e;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
     );
+    thicknessLabel->setAlignment(Qt::AlignLeft);
+    penSizeSettingsLayout->addWidget(thicknessLabel, Qt::AlignLeft);
+
+    //thicknessLabel->setFixedSize(
+    //    colorDialog->size().width(),
+    //    butsize / 2
+    //);
 
     thicknessSlider->setFixedSize(
         colorDialog->size().width() - 2*padding,
@@ -152,10 +157,9 @@ void setupWidgets(){
         "}"
         "QSlider::handle:horizontal {"
             "background: #fff;"
-            "border: 1px solid #777;"
             "width: "+QString::number(44*scale)+"px;"
+            "border-radius: "+QString::number(8*scale)+"px;"
             "margin: -4px 0;"
-            "border-radius: "+QString::number(18*scale)+"px;"
         "}"
         "QSlider::handle:horizontal:hover {"
             "background: #ccc;"
@@ -165,7 +169,7 @@ void setupWidgets(){
             "border-radius: 5px;"
         "}"
         "QSlider::add-page:horizontal {"
-            "background: #f4f4f4;"
+            "background: #4a4a4a;"
             "border-radius:5px;"
         "}"
     );
