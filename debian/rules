@@ -1,12 +1,12 @@
 #!/usr/bin/make -f
-
+QT=6
 %:
 	dh $@ --buildsystem=meson
 
 override_dh_auto_configure:
-	dh_auto_configure -- \
+	PATH=/usr/lib/qt$(QT)/libexec/:$(PATH) dh_auto_configure -- \
 		-Dsave=true \
 		-Detap19=false \
 		-Dresources=true \
 		-Dscreenshot=true \
-		-Dqt=5
+		-Dqt=$(QT)
