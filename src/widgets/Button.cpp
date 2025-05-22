@@ -62,6 +62,9 @@ QPushButton* create_color_button(QColor color){
     QObject::connect(button, &QPushButton::clicked, [=]() {
     drawing->penColor = color;
         set_string("color", drawing->penColor.name());
+        if(drawing->getPen() == ERASER){
+            drawing->setPen(PEN);
+        }
         penStyleEvent();
         penSizeEvent();
         backgroundStyleEvent();

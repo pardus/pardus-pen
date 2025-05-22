@@ -336,6 +336,7 @@ void setupWidgets(){
 /********** clear & screenshot **********/
 
     QWidget *miscDialog = new QWidget();
+
     QGridLayout *miscLayout = new QGridLayout(miscDialog);
     miscLayout->addWidget(toolButtons[OVERLAYROTATEUP],    0, 0, Qt::AlignCenter);
     miscLayout->addWidget(toolButtons[OVERLAYSCALEUP],     0, 1, Qt::AlignCenter);
@@ -347,6 +348,14 @@ void setupWidgets(){
 /********** Util Settings **********/
 
     QWidget *utilSettings = new QWidget();
+
+    utilSettings->setStyleSheet(
+    "QWidget {"
+    "background-color: #f3232323;"
+    "}"
+    );
+
+
     utilSettingsLayout = new QVBoxLayout(utilSettings);
     floatingSettings->addPage(utilSettings);
 
