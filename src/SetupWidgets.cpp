@@ -50,7 +50,7 @@ void setupWidgets(){
     QWidget *pageSettings = new QWidget();
     pageSettings->setStyleSheet(QString("background-color: none;"));
     pageSettingsLayout = new QVBoxLayout(pageSettings);
-    pageSettingsLayout->setSpacing(0);
+    pageSettingsLayout->setSpacing(padding);
     pageSettingsLayout->setContentsMargins(0, 0, 0, 0);
     floatingSettings->addPage(pageSettings);
 
@@ -263,32 +263,57 @@ void setupWidgets(){
 
  /********** page number **********/
 
+    QWidget *pageMenu = new QWidget();
+    QVBoxLayout *pageMenuLayout = new QVBoxLayout(pageMenu);
+
+    pageMenu->setStyleSheet(
+        "QWidget {"
+          "background-color: #f3232323;"
+        "}"
+    );
+
+
     QWidget *pageNumWidget = new QWidget();
     QHBoxLayout *pageNumLayout = new QHBoxLayout(pageNumWidget);
 
-    pageNumLayout->addWidget(new QLabel(_("Page:")));
-    pageNumLayout->addWidget(pageLabel);
-    pageNumLayout->addWidget(toolButtons[PREVPAGE]);
-    pageNumLayout->addWidget(toolButtons[NEXTPAGE]);
 
-    QLabel *vsep1 = new QLabel();
-    vsep1->setStyleSheet("background: black;");
-    vsep1->setFixedSize(
-        1,
-        butsize
+    pageNumWidget->setStyleSheet("background: none;");
+
+    QLabel* pgLabel = new QLabel(_("Page:"));
+    pgLabel->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0"
     );
-    pageNumLayout->addWidget(vsep1);
 
-    pageNumLayout->addWidget(penButtons[TRANSPARENT]);
-    pageNumLayout->addWidget(penButtons[BLACK]);
-    pageNumLayout->addWidget(penButtons[WHITE]);
+    pageMenuLayout->addWidget(pgLabel);
 
-    pageSettingsLayout->addWidget(pageNumWidget);
+    pageNumLayout->addWidget(toolButtons[PREVPAGE], Qt::AlignLeft);
+    pageNumLayout->addWidget(pageLabel, Qt::AlignLeft);
+    pageNumLayout->addWidget(toolButtons[NEXTPAGE], Qt::AlignLeft);
+
+    pageLabel->setFixedSize(butsize, butsize);
+
+    pageLabel->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0"
+    );
+
+
+
+    pageNumLayout->addWidget(penButtons[TRANSPARENT], Qt::AlignRight);
+    pageNumLayout->addWidget(penButtons[BLACK], Qt::AlignRight);
+    pageNumLayout->addWidget(penButtons[WHITE], Qt::AlignRight);
+
+    pageMenuLayout->addWidget(pageNumWidget);
+    pageSettingsLayout->addWidget(pageMenu);
 
 /********** page type **********/
 
     QLabel *bgLabel = new QLabel(_("Background:"));
-    bgLabel->setStyleSheet("background: none;");
+    bgLabel->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0"
+    );
     bgLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     pageSettingsLayout->addWidget(bgLabel);
 
