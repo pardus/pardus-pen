@@ -33,10 +33,11 @@ FloatingSettings::FloatingSettings(QWidget *parent) : QWidget(parent) {
     setLayout(layout);
     QString style = QString(
         "QWidget {"
-        "border-radius: 13px;"
+        "border-radius: "+QString::number(13*scale)+"px;"
         "color: #000000;"
         "font: "+QString::number(18*scale)+"px;"
-        "background-color: #cc939393;"
+//        "background-color: #f3232323;"
+        "background: none;"
         "}"
     );
     layout->setSpacing(0);

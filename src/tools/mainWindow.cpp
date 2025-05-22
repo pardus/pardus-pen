@@ -276,5 +276,6 @@ void mainWindowInit(){
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
 
+
     setPen(PEN);
 }

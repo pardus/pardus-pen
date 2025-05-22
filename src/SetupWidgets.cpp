@@ -106,32 +106,49 @@ void setupWidgets(){
 
 /********** Overview **********/
 
-    penSettingsLayout->addWidget(ov, Qt::AlignCenter, Qt::AlignCenter);
+    penSettingsLayout->addWidget(ov, Qt::AlignCenter);
 
 
 /********** Thickness slider **********/
-    
+
+    QWidget *penSizeSettings = new QWidget();
+    QVBoxLayout *penSizeSettingsLayout = new QVBoxLayout(penSizeSettings);
+    penSizeSettingsLayout->addWidget(penSizeSettings, Qt::AlignCenter);
+    penSettingsLayout->addWidget(penSizeSettings, Qt::AlignCenter);
+
+
+    penSizeSettings->setStyleSheet(
+    "QWidget {"
+    "background-color: #f3232323;"
+    "}"
+    );
+
+
     thicknessLabel = new QLabel(_("Size: 10"));
+    thicknessLabel->setStyleSheet("background: none; color: #9e9e9e");
     thicknessLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    penSettingsLayout->addWidget(thicknessLabel, Qt::AlignCenter);
+    penSizeSettingsLayout->addWidget(thicknessLabel, Qt::AlignCenter);
 
     thicknessLabel->setFixedSize(
         colorDialog->size().width(),
         butsize / 2
     );
 
-    penSettingsLayout->addWidget(thicknessSlider, Qt::AlignCenter);
     thicknessSlider->setFixedSize(
-        colorDialog->size().width(),
+        colorDialog->size().width() - 2*padding,
         butsize
     );
+    penSizeSettingsLayout->addWidget(thicknessSlider, Qt::AlignHCenter | Qt::AlignVCenter);
 
     thicknessSlider->setStyleSheet(
+         "QWidget {"
+         "background: none;"
+         "}"
          "QSlider::groove:horizontal {"
             "border: 1px solid #bbb;"
             "background: white;"
-            "height: "+QString::number(22*scale)+"px;"
-            "border-radius: "+QString::number(11*scale)+"px;"
+            "height: "+QString::number(16*scale)+"px;"
+            "border-radius: "+QString::number(8*scale)+"px;"
         "}"
         "QSlider::handle:horizontal {"
             "background: #fff;"
@@ -144,11 +161,11 @@ void setupWidgets(){
             "background: #ccc;"
         "}"
         "QSlider::sub-page:horizontal {"
-            "background: #5FAEE3;"
+            "background: #4a90e2;"
             "border-radius: 5px;"
         "}"
         "QSlider::add-page:horizontal {"
-            "background: #FBFBFB;"
+            "background: #f4f4f4;"
             "border-radius:5px;"
         "}"
     );
@@ -157,6 +174,7 @@ void setupWidgets(){
 /********** penTypes **********/
     QWidget *penTypeMainWidget = new QWidget();
     QHBoxLayout *penTypeMainLayout = new QHBoxLayout(penTypeMainWidget);
+    penTypeMainWidget->setStyleSheet("background: none;");
 
     QWidget *styleDialog = new QWidget();
     QGridLayout *styleLayout = new QGridLayout(styleDialog);
@@ -178,7 +196,7 @@ void setupWidgets(){
     penTypeMainLayout->addWidget(styleDialog);
     penTypeMainLayout->addWidget(penTypeDialog);
 
-    penSettingsLayout->addWidget(penTypeMainWidget, Qt::AlignCenter);
+    penSizeSettingsLayout->addWidget(penTypeMainWidget, Qt::AlignCenter);
 
 /********** penModes **********/
     modeDialog = new QWidget();
@@ -216,16 +234,17 @@ void setupWidgets(){
         colorDialog->size().width(),
         colorDialog->size().width()/2
     );
+    // sync all other widget widths
+    penSizeSettings->setFixedWidth(colorDialog->size().width());
 
 
 /********** pen type **********/
 
-
     // resize color dialog
-    colorDialog->setFixedSize(
-        colorDialog->size().width(),
+    colorDialog->setFixedHeight(
         butsize*4+ padding*5
     );
+
 
 /************ Page Menu ************/
 

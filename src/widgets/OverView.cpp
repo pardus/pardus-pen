@@ -13,25 +13,34 @@
 #include "DrawingWidget.h"
 
 
+OverView::OverView(QWidget *parent) : QWidget(parent) {
+    setStyleSheet(
+    "background: none;");
+}
+
 void OverView::updateImage(){
     update();
 }
-
 void OverView::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
     QPainter painter(this);
     int penSize = drawing->penSize[getPen()];
     int penType = getPen();
-    
-    QPen pen(drawing->penColor, penSize, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    QPen pen(QColor("#f3232323"),12*scale,  Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    painter.setBrush(QBrush(board->background));
+    painter.setPen(pen);
+    painter.drawRoundedRect(rect().adjusted(6*scale, 6*scale, -6*scale, -6*scale), 12*scale, 13*scale);
+    int w = width() - 2*padding ;
+    int h = height() - 2*padding ;
+    painter.end();
+
+    painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    pen.setColor(drawing->penColor);
+    pen.setWidth(penSize);
     painter.setPen(pen);
-    int w = width() - 2*padding;
-    int h = height() - 2*padding - penSize;
 
-
-    painter.fillRect(rect(), board->background);
 
     if(penType == ERASER){
         QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));
@@ -43,7 +52,7 @@ void OverView::paintEvent(QPaintEvent *event) {
         QPainter pp(&pixmap);
         svgRenderer.render(&pp);
         pp.end();
-        
+
         int w1 = (geometry().width() - penSize) / 2;
         int h1 = (geometry().height() - penSize) / 2;
         painter.drawPixmap(QRect(w1, h1, penSize, penSize), pixmap);
@@ -51,9 +60,9 @@ void OverView::paintEvent(QPaintEvent *event) {
         // Draw the sine wave
         QPainterPath path;
         int xPrev, yPrev;
-        for (int x = 0; x <= w; x++) {
-            double y = (h / 2) * sin(2 * M_PI * x / w) + h / 2;
-            if (x > 0) {
+        for (int x = padding; x <= w - padding ; x+=scale) {
+            double y = ((h -2*penSize) / 2) * sin(2 * M_PI * x / w) + h  / 2;
+            if (x > padding) {
                 path.moveTo(QPointF(xPrev+padding, yPrev+padding));
                 path.lineTo(QPointF(x+padding, y+padding+(penSize/2)));
             }
