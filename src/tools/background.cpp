@@ -90,7 +90,10 @@ void setupBackground(){
     set_shortcut(penButtons[CUSTOM], Qt::Key_O, Qt::AltModifier);
 
     pageLabel = create_button_text("0", [=](){
-        bool ok;
+        bool ok = false;
+        setHideMainWindow(true);
+        floatingWidget->hide();
+        floatingSettings->setHide();
         int number = QInputDialog::getInt(mainWidget, _("Go page"),
                                            _("Page:"), 0, 0, drawing->max, 1, &ok);
         if (ok) {
@@ -98,6 +101,8 @@ void setupBackground(){
             backgroundStyleEvent();
             updateGoBackButtons();
         }
+        setHideMainWindow(false);
+        floatingWidget->show();
     });
 
     toolButtons[OVERLAYSCALEUP] = create_button(":images/zoom-in.svg", [=](){
