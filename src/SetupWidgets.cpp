@@ -282,7 +282,9 @@ void setupWidgets(){
     QLabel* pgLabel = new QLabel(_("Page:"));
     pgLabel->setStyleSheet(
         "background: none;"
-        "color: #c0c0c0"
+        "color: #c0c0c0;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
     );
 
     pageMenuLayout->addWidget(pgLabel);
@@ -295,7 +297,7 @@ void setupWidgets(){
 
     pageLabel->setStyleSheet(
         "background: none;"
-        "color: #c0c0c0"
+        "color: #c0c0c0;"
     );
 
 
@@ -309,16 +311,36 @@ void setupWidgets(){
 
 /********** page type **********/
 
+    QWidget *bgMenu = new QWidget();
+    QVBoxLayout *bgMenuLayout = new QVBoxLayout(bgMenu);
+
+    bgMenu->setStyleSheet(
+        "QWidget {"
+          "background-color: #f3232323;"
+        "}"
+    );
+
+
+
     QLabel *bgLabel = new QLabel(_("Background:"));
     bgLabel->setStyleSheet(
         "background: none;"
-        "color: #c0c0c0"
+        "color: #c0c0c0;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
     );
-    bgLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    pageSettingsLayout->addWidget(bgLabel);
+    bgLabel->setAlignment(Qt::AlignLeft);
+    bgMenuLayout->addWidget(bgLabel);
 
     QWidget *pageDialog = new QWidget();
     QGridLayout *pageLayout = new QGridLayout(pageDialog);
+
+    pageDialog->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0"
+    );
+
+
     // spline
     pageLayout->addWidget(penButtons[BLANK],     0, 0, Qt::AlignCenter);
     pageLayout->addWidget(penButtons[SQUARES],   0, 1, Qt::AlignCenter);
@@ -355,12 +377,20 @@ void setupWidgets(){
         colorDialog->size().width(),
         butsize*2+ padding*3
     );
-    pageSettingsLayout->addWidget(pageDialog);
+    bgMenuLayout->addWidget(pageDialog);
+
+    pageSettingsLayout->addWidget(bgMenu);
 
 
 /********** clear & screenshot **********/
 
     QWidget *miscDialog = new QWidget();
+
+    miscDialog->setStyleSheet(
+    "QWidget {"
+    "background-color: #f3232323;"
+    "}"
+    );
 
     QGridLayout *miscLayout = new QGridLayout(miscDialog);
     miscLayout->addWidget(toolButtons[OVERLAYROTATEUP],    0, 0, Qt::AlignCenter);

@@ -131,9 +131,9 @@ void FloatingWidget::moveAction(){
                 new_yy = max_height - floatingSettings->cur_height;
             }
              if(tool2 != nullptr){
-                tool2->move(new_xx, new_yy + padding);
+                tool2->move(new_xx, new_yy);
             } else {
-                floatingSettings->move(new_xx, new_yy + padding);
+                floatingSettings->move(new_xx, new_yy);
             }
         }
 }
