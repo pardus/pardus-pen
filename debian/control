@@ -17,18 +17,9 @@ Homepage: https://pardus.org.tr
 
 Package: pardus-pen
 Architecture: any
-Recommends: qttranslations5-l10n
+Recommends: qt6-translations-l10n
+#Recommends: qttranslations5-l10n
 Depends: ${shlibs:Depends},
-         ${misc:Depends},
-         libqt6gui6,
-         libqt6svg6,
-         libqt6widgets6,
-         libqt6core6a,
-         libpoppler-qt6-1
-#libqt5gui5,
-#        libqt5svg5,
-#        libqt5widgets5,
-#        libqt5core5a,
-#        libpoppler-qt5-1
+         ${misc:Depends}
 Description: Pen for pardus.
  Fast, usefull tool for drawing on screen.
