@@ -112,6 +112,7 @@ public:
     QColor penColor;
     MovableWidget* cropWidget;
     int penSize[10];
+    int max = 99;
     void initializeImage(const QSize &size);
     void goPrevious();
     void goPage(int i);

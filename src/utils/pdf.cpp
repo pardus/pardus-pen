@@ -23,6 +23,11 @@ void loadPdf(QString path){
     doc = Poppler::Document::load(path);
     doc->setRenderHint(Poppler::Document::Antialiasing, true);
     doc->setRenderHint(Poppler::Document::TextAntialiasing, true);
+    drawing->max = doc->numPages()-1;
+    drawing->goPage(0);
+    backgroundStyleEvent();
+    updateGoBackButtons();
+
 }
 
 QImage getPdfImage(int num, float ratio){

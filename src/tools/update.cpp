@@ -41,6 +41,7 @@ void updateGoBackButtons(){
     toolButtons[BACK]->setEnabled(drawing->isBackAvailable());
     toolButtons[NEXT]->setEnabled(drawing->isNextAvailable());
     toolButtons[PREVPAGE]->setEnabled(drawing->getPageNum() > 0);
+    toolButtons[NEXTPAGE]->setEnabled(drawing->getPageNum() < drawing->max);
     pageLabel->setText(QString::number(drawing->getPageNum()));
 }
 

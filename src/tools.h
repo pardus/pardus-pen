@@ -63,7 +63,7 @@ extern void setLineStyle(int style);
 
 extern OverView *ov;
 
-extern QLabel *pageLabel;
+extern QPushButton *pageLabel;
 
 extern QWidget *penSettings;
 extern QWidget *colorDialog;

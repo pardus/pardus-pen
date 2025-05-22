@@ -1,6 +1,6 @@
 #include "../tools.h"
 
-QLabel* pageLabel;
+QPushButton* pageLabel;
 
 void setupBackground(){
     penButtons[TRANSPARENT] = create_button(":images/paper-transparent.svg", [=](){
@@ -89,7 +89,16 @@ void setupBackground(){
     });
     set_shortcut(penButtons[CUSTOM], Qt::Key_O, Qt::AltModifier);
 
-    pageLabel = new QLabel("0");
+    pageLabel = create_button_text("0", [=](){
+        bool ok;
+        int number = QInputDialog::getInt(mainWidget, _("Go page"),
+                                           _("Page:"), 0, 0, drawing->max, 1, &ok);
+        if (ok) {
+            drawing->goPage(number);
+            backgroundStyleEvent();
+            updateGoBackButtons();
+        }
+    });
 
     toolButtons[OVERLAYSCALEUP] = create_button(":images/zoom-in.svg", [=](){
         board->ratios[drawing->getPageNum()] += 10;
