@@ -214,11 +214,20 @@ void setupWidgets(){
     modeLayout->addWidget(penButtons[VECTOR],     0, 5);
     modeLayout->addWidget(penButtons[VECTOR2],    0, 6);
 
-    penSettingsLayout->addWidget(modeDialog, Qt::AlignCenter);
+    modeDialog->setStyleSheet("background-color: #f4141414;");
+
+    penSizeSettingsLayout->addWidget(modeDialog, Qt::AlignCenter);
 
 
 /********** Color selection options **********/
     // color selection
+
+    colorDialog->setStyleSheet(
+    "QWidget {"
+    "background-color: #f3232323;"
+    "}"
+    );
+
 
     QGridLayout *gridLayout = new QGridLayout(colorDialog);
 
@@ -246,7 +255,7 @@ void setupWidgets(){
 
     // resize color dialog
     colorDialog->setFixedHeight(
-        butsize*4+ padding*5
+        butsize*3+ padding*4
     );
 
 

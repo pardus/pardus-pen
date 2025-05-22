@@ -57,7 +57,7 @@ QPushButton* create_color_button(QColor color){
     button->setStyleSheet(QString(
         "background-color: "+color.name()+";"
         "border-radius: 12px;"
-        "border: 1px solid "+convertColor(color).name()+";"
+//        "border: 1px solid "+convertColor(color).name()+";"
     ));
     QObject::connect(button, &QPushButton::clicked, [=]() {
     drawing->penColor = color;
