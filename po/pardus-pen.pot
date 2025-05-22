@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 07:19+0000\n"
+"POT-Creation-Date: 2025-05-22 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,55 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: src/tools/pen.cpp:165
+msgid "Select Color"
+msgstr ""
+
+#: src/tools/mainWindow.cpp:271 src/main.cpp:73
+msgid "Pardus Pen"
+msgstr ""
+
+#: src/tools/save-load.cpp:44 src/tools/save-load.cpp:73
+msgid "Pen Files (*.pen);;"
+msgstr ""
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+msgid "PDF Files (*.pdf);;"
+msgstr ""
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+#: src/tools/background.cpp:71
+msgid "All Files (*.*)"
+msgstr ""
+
+#: src/tools/save-load.cpp:53
+msgid "Save File"
+msgstr ""
+
+#: src/tools/save-load.cpp:81
+msgid "Open File"
+msgstr ""
+
+#: src/tools/background.cpp:70
+msgid "Images"
+msgstr ""
+
+#: src/tools/background.cpp:75
+msgid "Open Image File"
+msgstr ""
+
+#: src/tools/background.cpp:94
+msgid "Go page"
+msgstr ""
+
+#: src/tools/background.cpp:95 src/SetupWidgets.cpp:237
+msgid "Page:"
+msgstr ""
+
+#: src/tools/update.cpp:32
+msgid "Size:"
+msgstr ""
 
 #: src/utils/ScreenShot.cpp:58
 msgid "Info"
@@ -29,54 +78,10 @@ msgstr ""
 msgid "Failed To save:"
 msgstr ""
 
-#: src/main.cpp:57 src/tools/mainWindow.cpp:195
-msgid "Pardus Pen"
-msgstr ""
-
-#: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
-msgid "Pen Files (*.pen);;"
-msgstr ""
-
-#: src/tools/save-load.cpp:27
-msgid "PDF Files (*.pdf);;"
-msgstr ""
-
-#: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
-msgid "All Files (*.*)"
-msgstr ""
-
-#: src/tools/save-load.cpp:33
-msgid "Save File"
-msgstr ""
-
-#: src/tools/save-load.cpp:52
-msgid "Open File"
-msgstr ""
-
-#: src/tools/pen.cpp:148
-msgid "Select Color"
-msgstr ""
-
-#: src/tools/update.cpp:94
-msgid "Size:"
-msgstr ""
-
-#: src/SetupWidgets.cpp:139
+#: src/SetupWidgets.cpp:114
 msgid "Size: 10"
 msgstr ""
 
-#: src/SetupWidgets.cpp:222
+#: src/SetupWidgets.cpp:258
 msgid "Background:"
-msgstr ""
-
-#: src/SetupWidgets.cpp:253
-msgid "Page:"
-msgstr ""
-
-#: src/widgets/WhiteBoard.cpp:32
-msgid "Open Image File"
-msgstr ""
-
-#: src/widgets/WhiteBoard.cpp:32
-msgid "Images"
 msgstr ""

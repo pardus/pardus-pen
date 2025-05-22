@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 07:19+0000\n"
+"POT-Creation-Date: 2025-05-22 11:19+0000\n"
 "PO-Revision-Date: 2025-01-03 20:23+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
@@ -18,6 +18,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
+
+#: src/tools/pen.cpp:165
+msgid "Select Color"
+msgstr "Selecionar cor"
+
+#: src/tools/mainWindow.cpp:271 src/main.cpp:73
+msgid "Pardus Pen"
+msgstr "Caneta Pardus"
+
+#: src/tools/save-load.cpp:44 src/tools/save-load.cpp:73
+msgid "Pen Files (*.pen);;"
+msgstr "Ficheiros de caneta (*.pen);;"
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+msgid "PDF Files (*.pdf);;"
+msgstr "Ficheiros PDF (*.pdf);;"
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+#: src/tools/background.cpp:71
+msgid "All Files (*.*)"
+msgstr "Todos os ficheiros (*.*)"
+
+#: src/tools/save-load.cpp:53
+msgid "Save File"
+msgstr "Guardar ficheiro"
+
+#: src/tools/save-load.cpp:81
+msgid "Open File"
+msgstr "Abrir ficheiro"
+
+#: src/tools/background.cpp:70
+msgid "Images"
+msgstr "Imagens"
+
+#: src/tools/background.cpp:75
+msgid "Open Image File"
+msgstr "Abrir imagem"
+
+#: src/tools/background.cpp:94
+msgid "Go page"
+msgstr ""
+
+#: src/tools/background.cpp:95 src/SetupWidgets.cpp:237
+msgid "Page:"
+msgstr "Página:"
+
+#: src/tools/update.cpp:32
+msgid "Size:"
+msgstr "Tamanho:"
 
 #: src/utils/ScreenShot.cpp:58
 msgid "Info"
@@ -31,57 +80,13 @@ msgstr "Captura de ecrã guardada:"
 msgid "Failed To save:"
 msgstr "Erro ao guardar:"
 
-#: src/main.cpp:57 src/tools/mainWindow.cpp:195
-msgid "Pardus Pen"
-msgstr "Caneta Pardus"
-
-#: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
-msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;"
-
-#: src/tools/save-load.cpp:27
-msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros PDF (*.pdf);;"
-
-#: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
-msgid "All Files (*.*)"
-msgstr "Todos os ficheiros (*.*)"
-
-#: src/tools/save-load.cpp:33
-msgid "Save File"
-msgstr "Guardar ficheiro"
-
-#: src/tools/save-load.cpp:52
-msgid "Open File"
-msgstr "Abrir ficheiro"
-
-#: src/tools/pen.cpp:148
-msgid "Select Color"
-msgstr "Selecionar cor"
-
-#: src/tools/update.cpp:94
-msgid "Size:"
-msgstr "Tamanho:"
-
-#: src/SetupWidgets.cpp:139
+#: src/SetupWidgets.cpp:114
 msgid "Size: 10"
 msgstr "Tamanho: 10"
 
-#: src/SetupWidgets.cpp:222
+#: src/SetupWidgets.cpp:258
 msgid "Background:"
 msgstr "Fundo:"
-
-#: src/SetupWidgets.cpp:253
-msgid "Page:"
-msgstr "Página:"
-
-#: src/widgets/WhiteBoard.cpp:32
-msgid "Open Image File"
-msgstr "Abrir imagem"
-
-#: src/widgets/WhiteBoard.cpp:32
-msgid "Images"
-msgstr "Imagens"
 
 #~ msgid "Pen"
 #~ msgstr "Caneta"

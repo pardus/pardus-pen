@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 07:19+0000\n"
+"POT-Creation-Date: 2025-05-22 11:19+0000\n"
 "PO-Revision-Date: 2024-10-26 15:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,6 +16,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
+
+#: src/tools/pen.cpp:165
+msgid "Select Color"
+msgstr "Seleccione el color"
+
+#: src/tools/mainWindow.cpp:271 src/main.cpp:73
+msgid "Pardus Pen"
+msgstr "Lápiz Pardus"
+
+#: src/tools/save-load.cpp:44 src/tools/save-load.cpp:73
+#, fuzzy
+msgid "Pen Files (*.pen);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+#, fuzzy
+msgid "PDF Files (*.pdf);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+#: src/tools/background.cpp:71
+#, fuzzy
+msgid "All Files (*.*)"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:53
+msgid "Save File"
+msgstr "Guardar archivo"
+
+#: src/tools/save-load.cpp:81
+msgid "Open File"
+msgstr "Abrir archivo"
+
+#: src/tools/background.cpp:70
+msgid "Images"
+msgstr ""
+
+#: src/tools/background.cpp:75
+#, fuzzy
+msgid "Open Image File"
+msgstr "Abrir archivo"
+
+#: src/tools/background.cpp:94
+msgid "Go page"
+msgstr ""
+
+#: src/tools/background.cpp:95 src/SetupWidgets.cpp:237
+msgid "Page:"
+msgstr ""
+
+#: src/tools/update.cpp:32
+msgid "Size:"
+msgstr "Tamaño:"
 
 #: src/utils/ScreenShot.cpp:58
 msgid "Info"
@@ -29,61 +82,13 @@ msgstr "Captura de pantalla guardada:"
 msgid "Failed To save:"
 msgstr "Error al guardar:"
 
-#: src/main.cpp:57 src/tools/mainWindow.cpp:195
-msgid "Pardus Pen"
-msgstr "Lápiz Pardus"
-
-#: src/tools/save-load.cpp:25 src/tools/save-load.cpp:48
-#, fuzzy
-msgid "Pen Files (*.pen);;"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/tools/save-load.cpp:27
-#, fuzzy
-msgid "PDF Files (*.pdf);;"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/tools/save-load.cpp:29 src/tools/save-load.cpp:49
-#, fuzzy
-msgid "All Files (*.*)"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/tools/save-load.cpp:33
-msgid "Save File"
-msgstr "Guardar archivo"
-
-#: src/tools/save-load.cpp:52
-msgid "Open File"
-msgstr "Abrir archivo"
-
-#: src/tools/pen.cpp:148
-msgid "Select Color"
-msgstr "Seleccione el color"
-
-#: src/tools/update.cpp:94
-msgid "Size:"
-msgstr "Tamaño:"
-
-#: src/SetupWidgets.cpp:139
+#: src/SetupWidgets.cpp:114
 #, fuzzy
 msgid "Size: 10"
 msgstr "Tamaño:"
 
-#: src/SetupWidgets.cpp:222
+#: src/SetupWidgets.cpp:258
 msgid "Background:"
-msgstr ""
-
-#: src/SetupWidgets.cpp:253
-msgid "Page:"
-msgstr ""
-
-#: src/widgets/WhiteBoard.cpp:32
-#, fuzzy
-msgid "Open Image File"
-msgstr "Abrir archivo"
-
-#: src/widgets/WhiteBoard.cpp:32
-msgid "Images"
 msgstr ""
 
 #~ msgid "Pen"
