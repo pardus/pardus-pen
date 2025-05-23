@@ -86,6 +86,10 @@ public:
         labels[id]->setPixmap(pixmap);
     }
 
+    void clear(){
+        images.clear();
+    }
+
     void hide(qint64 id){
         init(id);
         images[id]->hide();
@@ -575,6 +579,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curEventButtons = 0;
             curs.hide(id);
             if(num_of_press == 0) {
+                curs.clear();
                 if(penType == SELECTION) {
                     addPoint(id, pos);
                     createSelection(id);

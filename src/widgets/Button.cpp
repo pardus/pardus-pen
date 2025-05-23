@@ -60,11 +60,12 @@ QPushButton* create_color_button(QColor color){
 //        "border: 1px solid "+convertColor(color).name()+";"
     ));
     QObject::connect(button, &QPushButton::clicked, [=]() {
-    drawing->penColor = color;
+        drawing->penColor = color;
         set_string("color", drawing->penColor.name());
         if(drawing->getPen() == ERASER){
             drawing->setPen(PEN);
         }
+        floatingSettings->setHide();
         penStyleEvent();
         penSizeEvent();
         backgroundStyleEvent();
