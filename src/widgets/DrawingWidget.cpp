@@ -520,7 +520,6 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 }
             }
             curs.penType[id] = penType;
-            num_of_press++;
             curs.drawing[id] = true;
             if (num_of_press == 1){
                 mergeSelection();
@@ -566,7 +565,6 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing[id]) {
                 break;
             }
-            num_of_press--;
             curs.drawing[id] = false;
             curs.hide(id);
             if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
@@ -614,6 +612,7 @@ bool DrawingWidget::event(QEvent *ev) {
             for(auto it = curs.images.begin(); it != curs.images.end(); it++){
                 curs.hide(it.key());
             }
+            num_of_press=touchPoints.size();
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
@@ -628,12 +627,14 @@ bool DrawingWidget::event(QEvent *ev) {
         }
         case QEvent::TabletPress: {
             tablet_enabled = true;
+            num_of_press=1;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
         }
         case QEvent::TabletRelease: {
             tablet_enabled = false;
+            num_of_press=0;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
@@ -647,6 +648,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
+            num_of_press=1;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
             return true;
@@ -655,6 +657,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
+            num_of_press=0;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
             return true;
