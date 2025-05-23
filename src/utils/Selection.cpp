@@ -71,7 +71,7 @@ void DrawingWidget::createSelection(int source) {
     cropWidget->move(topLeft);
     cropWidget->raise();
     cropWidget->show();
-    update();
+    update(cropRect);
 }
 
 void DrawingWidget::clearSelection() {
@@ -94,7 +94,12 @@ void DrawingWidget::mergeSelection() {
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
     painter.drawImage(QPoint(cropWidget->x(), cropWidget->y()), cropWidget->image.scaled(cropWidget->width(), cropWidget->height()));
-    update();
+    update(
+        cropWidget->x(),
+        cropWidget->y(),
+        cropWidget->x()+cropWidget->width(),
+        cropWidget->y()+cropWidget->height()
+    );
     painter.end();
     clearSelection();
 }

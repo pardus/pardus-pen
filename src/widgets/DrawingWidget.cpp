@@ -526,7 +526,6 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 mergeSelection();
                 if(penType != ERASER){
                     background->image = image;
-                    background->update();
                     image.fill(QColor("transparent"));
                 }
             }
@@ -594,7 +593,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 geo.clearAll();
                 addImage(image);
             }
-            update();
+            if(penType != ERASER && penStyle != SPLINE){
+                update();
+            }
             break;
     }
     penType = ev_pen;
