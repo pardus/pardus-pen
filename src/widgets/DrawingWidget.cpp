@@ -306,6 +306,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penColor = QColor(get_string("color"));
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
+    num_of_press = 0;
     cropWidget = new MovableWidget(mainWidget);
     //cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
@@ -496,7 +497,6 @@ int DrawingWidget::getLineStyle(){
     return lineStyle;
 }
 
-static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     //printf("%d %d %d\n", source, type, id);
     int ev_pen = penType;
@@ -613,7 +613,13 @@ bool DrawingWidget::event(QEvent *ev) {
             for(auto it = curs.images.begin(); it != curs.images.end(); it++){
                 curs.hide(it.key());
             }
-            num_of_press=touchPoints.size();
+            int touch_cnt=0;
+            foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
+                if ((Qt::TouchPointState)touchPoint.state() != Qt::TouchPointReleased) {
+                    touch_cnt++;
+                }
+            }
+            num_of_press = touch_cnt;
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
