@@ -113,7 +113,6 @@ void setupWidgets(){
 
     QWidget *penSizeSettings = new QWidget();
     QVBoxLayout *penSizeSettingsLayout = new QVBoxLayout(penSizeSettings);
-    penSizeSettingsLayout->addWidget(penSizeSettings, Qt::AlignCenter);
     penSettingsLayout->addWidget(penSizeSettings, Qt::AlignCenter);
 
 
