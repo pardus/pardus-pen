@@ -569,13 +569,13 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             num_of_press--;
             curs.drawing[id] = false;
+            curs.hide(id);
             if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
                 addPoint(-1, pos+QPointF(0,1));
                 drawLineToFunc(id, pressure);
             }
-
             curEventButtons = 0;
-            curs.hide(id);
+
             if(num_of_press == 0) {
                 curs.clear();
                 if(penType == SELECTION) {

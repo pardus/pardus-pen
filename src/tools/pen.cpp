@@ -71,6 +71,7 @@ void setupPenType(){
 
     penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
         setPen(SELECTION);
+        floatingSettings->setHide();
     });
     set_shortcut(penButtons[SELECTION], Qt::Key_X, Qt::ControlModifier);
 
