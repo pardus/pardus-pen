@@ -96,8 +96,6 @@ public:
     }
     QMap<qint64, bool> drawing;
     QMap<qint64, int> penType;
-
-private:
     QMap<qint64, QWidget*> images;
     QMap<qint64, QLabel*> labels;
     QMap<qint64, QVBoxLayout*> layouts;
@@ -612,6 +610,9 @@ bool DrawingWidget::event(QEvent *ev) {
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
+            for(auto it = curs.images.begin(); it != curs.images.end(); it++){
+                curs.hide(it.key());
+            }
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
