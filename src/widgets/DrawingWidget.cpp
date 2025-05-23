@@ -525,6 +525,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 mergeSelection();
                 if(penType != ERASER){
                     background->image = image;
+                    background->update();
                     image.fill(QColor("transparent"));
                 }
             }
