@@ -1,86 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="100"
-   height="100"
-   version="1"
-   id="svg40"
-   sodipodi:docname="close.svg"
-   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
-  <metadata
-     id="metadata46">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs44" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="2560"
-     inkscape:window-height="1440"
-     id="namedview42"
-     showgrid="false"
-     inkscape:zoom="4.9166667"
-     inkscape:cx="-4.6779661"
-     inkscape:cy="24"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg40"
-     inkscape:showpageshadow="2"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1" />
-  <g
-     id="g4528"
-     transform="matrix(4.2857143,0,0,4.2857143,-104.02857,-106.42857)">
-    <circle
-       id="circle30"
-       style="fill:#db3c30"
-       r="10"
-       cy="36"
-       cx="36" />
-    <path
-       id="path32"
-       style="opacity:0.2"
-       d="M 45.979,36.414 A 10,10 0 0 1 36,46 10,10 0 0 1 26.021,36.586 10,10 0 0 0 26,37 10,10 0 0 0 36,47 10,10 0 0 0 46,37 10,10 0 0 0 45.979,36.414 Z"
-       inkscape:connector-curvature="0" />
-    <g
-       id="g38"
-       style="fill:#ffffff"
-       transform="matrix(0.70711,-0.70711,0.70711,0.70711,-13.497,34.846)">
-      <rect
-         id="rect34"
-         y="35"
-         x="28"
-         height="2"
-         width="12" />
-      <rect
-         id="rect36"
-         transform="rotate(-90)"
-         y="33"
-         x="-42"
-         height="2"
-         width="12" />
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#C0C0C0;}
+	.st1{fill:#FF4D4D;}
+</style>
+<g>
+	<g>
+		<path class="st0" d="M24,48C10.77,48,0,37.23,0,24S10.77,0,24,0s24,10.77,24,24S37.23,48,24,48z M24,4.36
+			C13.17,4.36,4.36,13.17,4.36,24S13.17,43.64,24,43.64S43.64,34.83,43.64,24S34.83,4.36,24,4.36z"/>
+	</g>
+	<g>
+		<g>
+			<g>
+				<path class="st1" d="M17.45,32.73c-0.56,0-1.12-0.21-1.54-0.64c-0.85-0.85-0.85-2.23,0-3.09L29,15.91
+					c0.85-0.85,2.23-0.85,3.09,0c0.85,0.85,0.85,2.23,0,3.09L19,32.09C18.57,32.51,18.01,32.73,17.45,32.73z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path class="st1" d="M30.55,32.73c-0.56,0-1.12-0.21-1.54-0.64L15.91,19c-0.85-0.85-0.85-2.23,0-3.09
+					c0.85-0.85,2.23-0.85,3.09,0L32.09,29c0.85,0.85,0.85,2.23,0,3.09C31.66,32.51,31.1,32.73,30.55,32.73z"/>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>

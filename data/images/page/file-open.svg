@@ -1,2 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="import" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><polyline id="secondary" points="13 9 13 13 9 13" style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></polyline><line id="secondary-2" data-name="secondary" x1="3" y1="3" x2="13" y2="13" style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></line><path id="primary" d="M13.89,5H20a1,1,0,0,1,1,1V20a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1V13.89" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#C0C0C0;}
+</style>
+<g>
+	<path class="st0" d="M38.1,44.72c-0.01,0-0.03,0-0.04,0H6.54C2.94,44.72,0,41.79,0,38.18V9.82c0-3.61,2.94-6.54,6.54-6.54h8.51
+		c2.22-0.01,4.28,1.08,5.51,2.94l1.75,2.6c0.42,0.64,1.1,1,1.83,1h12.94c3.61,0,6.54,2.94,6.54,6.54v2.55
+		c2.54,0.89,4.37,3.32,4.37,6.16c0,0.55-0.07,1.11-0.21,1.64l-3.36,13.09C43.68,42.71,41.08,44.72,38.1,44.72z M15.1,7.64
+		c-0.01,0-0.01,0-0.02,0H6.54c-1.2,0-2.18,0.98-2.18,2.18v28.36c0,1.2,0.98,2.18,2.18,2.18h31.52c0,0,0.01,0,0.01,0
+		c1.01,0,1.88-0.67,2.13-1.64l3.36-13.09c0.05-0.18,0.07-0.37,0.07-0.56c0-1.2-0.98-2.17-2.18-2.17c0,0,0,0,0,0H17.98
+		c-0.76,0.02-1.48,0.48-1.85,1.2l-3.28,6.35c-0.55,1.07-1.87,1.48-2.94,0.94c-1.07-0.55-1.49-1.87-0.94-2.94l3.27-6.33
+		c1.08-2.15,3.26-3.52,5.68-3.58h21.34v-2.18c0-1.2-0.98-2.18-2.18-2.18H24.15c-2.21,0-4.25-1.1-5.47-2.95l-1.75-2.6
+		C16.51,8.01,15.83,7.64,15.1,7.64z"/>
+</g>
+</svg>

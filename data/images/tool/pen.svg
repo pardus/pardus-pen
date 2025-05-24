@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 28.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.0" id="katman_2_00000015328674555090814690000013762126697356173469_"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-	 style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#F7A833;}
-	.st1{fill:#2A4551;}
-	.st2{fill:#F2908B;}
-	.st3{fill:#C8A184;}
-	.st4{fill:#D3AF94;}
-	.st5{fill:#E0BEA2;}
-	.st6{fill:#1A2E34;}
-	.st7{fill:#EE9828;}
-	.st8{fill:#E88916;}
+	.st0{fill:url(#SVGID_1_);}
 </style>
-<polygon class="st0" points="45.5,460.1 78.6,316.4 319.6,83 433.6,200 192.9,434.6 "/>
-<polygon class="st1" points="391.8,240.8 433.6,200 319.6,83 277.7,123.6 "/>
-<path class="st2" d="M434.1,200.2l16.6-16.4c20.7-20.5,21.1-53.9,0.7-74.8l-40-41.1c-20.5-21.1-54.2-21.4-75.2-0.8l-16.2,16
-	L434.1,200.2L434.1,200.2z"/>
-<path class="st3" d="M45.5,460.1l33.1-143.7c0,0,15.1-0.5,23.9,8.4c14.5,14.7,14.7,31.5,14.7,31.5s15.1-1.2,27.2,11.6
-	c14.1,14.9,10.4,27.3,10.4,27.3s16.8-0.3,28.9,14.5c11.4,14,9.1,24.8,9.1,24.8L45.5,460.1z"/>
-<path class="st4" d="M45.5,460.1l71.7-103.8c0,0,15.1-1.2,27.2,11.6c14.1,14.9,10.4,27.3,10.4,27.3L45.5,460.1z"/>
-<path class="st5" d="M45.5,460.1l33.1-143.7c0,0,15.1-0.5,23.9,8.4c14.5,14.7,14.7,31.5,14.7,31.5L45.5,460.1z"/>
-<polygon class="st6" points="45.5,460.1 59.4,399.7 107.5,449.4 "/>
-<path class="st7" d="M315.9,162.8L117.5,356.3c2-0.1,15.8-0.2,26.9,11.6c14.1,14.9,10.4,27.3,10.4,27.3s0,0,0.1,0l199.5-192.8
-	L315.9,162.8L315.9,162.8z"/>
-<path class="st8" d="M391.8,240.8l-37.3-38.3L154.9,395.3c1.2,0,17.2,0.3,28.8,14.5c10.1,12.4,9.5,22.3,9.1,24.8L391.8,240.8
-	L391.8,240.8z"/>
+<g>
+	<radialGradient id="SVGID_1_" cx="24" cy="24" r="41.7964" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FFF68F"/>
+		<stop  offset="1" style="stop-color:#FF4D4D"/>
+	</radialGradient>
+	<path class="st0" d="M3.27,48c-0.31,0-0.62-0.04-0.92-0.13c-1.74-0.52-2.73-2.35-2.21-4.08l2.88-9.5c0.32-1.03,0.88-1.97,1.64-2.73
+		L33.78,2.44c3.25-3.25,8.53-3.25,11.78,0c3.25,3.25,3.25,8.54,0,11.78L16.44,43.35c-0.76,0.76-1.7,1.32-2.72,1.63l-9.5,2.88
+		C3.91,47.95,3.59,48,3.27,48z M39.67,4.36c-1.02,0-2.03,0.39-2.81,1.16L7.74,34.65C7.49,34.9,7.3,35.22,7.2,35.56l-2.29,7.53
+		l7.54-2.29c0.34-0.1,0.65-0.29,0.91-0.54l29.12-29.13l0,0c1.55-1.55,1.55-4.07,0-5.61C41.7,4.75,40.69,4.36,39.67,4.36z"/>
+</g>
 </svg>

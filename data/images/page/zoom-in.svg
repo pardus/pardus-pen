@@ -1,7 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M28.27 47.948C39.1705 47.948 48.007 39.1114 48.007 28.211C48.007 17.3106 39.1705 8.474 28.27 8.474C17.3696 8.474 8.53302 17.3106 8.53302 28.211C8.53302 39.1114 17.3696 47.948 28.27 47.948Z" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M42.245 42.1479L56.23 56.287" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M18.401 28.2109H38.138" stroke="#426AB2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M28.27 38.08V18.343" stroke="#426AB2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F4F4F4;}
+	.st1{fill:#8CB6E0;}
+</style>
+<g>
+	<g>
+		<g>
+			<path class="st0" d="M21.6,43.2C9.69,43.2,0,33.51,0,21.6S9.69,0,21.6,0s21.6,9.69,21.6,21.6S33.51,43.2,21.6,43.2z M21.6,4.8
+				c-9.26,0-16.8,7.54-16.8,16.8s7.54,16.8,16.8,16.8s16.8-7.54,16.8-16.8S30.86,4.8,21.6,4.8z"/>
+		</g>
+		<g>
+			<path class="st0" d="M45.6,48c-0.61,0-1.23-0.23-1.7-0.7L33.46,36.86c-0.94-0.94-0.94-2.46,0-3.39s2.46-0.94,3.39,0L47.3,43.9
+				c0.94,0.94,0.94,2.46,0,3.39C46.83,47.77,46.21,48,45.6,48z"/>
+		</g>
+	</g>
+	<g>
+		<path class="st1" d="M21.6,31.2c-1.33,0-2.4-1.07-2.4-2.4V14.4c0-1.33,1.07-2.4,2.4-2.4c1.33,0,2.4,1.07,2.4,2.4v14.4
+			C24,30.13,22.93,31.2,21.6,31.2z"/>
+	</g>
+	<g>
+		<path class="st1" d="M28.8,24H14.4c-1.33,0-2.4-1.07-2.4-2.4c0-1.33,1.07-2.4,2.4-2.4h14.4c1.33,0,2.4,1.07,2.4,2.4
+			C31.2,22.93,30.13,24,28.8,24z"/>
+	</g>
+</g>
 </svg>
