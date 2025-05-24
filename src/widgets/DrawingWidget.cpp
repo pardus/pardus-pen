@@ -24,7 +24,6 @@ extern DrawingWidget *drawing;
 extern FloatingSettings *floatingSettings;
 QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
 
-extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
 
 /*
@@ -34,7 +33,6 @@ penType:
  - 2 marker
 */
 
-#include <QDebug>
 #include <QMap>
 
 #ifdef QT5
@@ -74,7 +72,7 @@ public:
             return;
         }
         sizes[id] = size;
-        QIcon icon = QIcon(":images/cursor.svg");
+        QIcon icon = QIcon(get_icon_by_id(CURSOR));
         QPixmap pixmap = icon.pixmap(
             icon.actualSize(
                 QSize(size, size)
@@ -86,14 +84,16 @@ public:
         labels[id]->setPixmap(pixmap);
     }
 
+    void clear(){
+        images.clear();
+    }
+
     void hide(qint64 id){
         init(id);
         images[id]->hide();
     }
     QMap<qint64, bool> drawing;
     QMap<qint64, int> penType;
-
-private:
     QMap<qint64, QWidget*> images;
     QMap<qint64, QLabel*> labels;
     QMap<qint64, QVBoxLayout*> layouts;
@@ -112,7 +112,7 @@ public:
         QDir dir;
         dir.mkpath(cache_path);
         saveImageToFile(data, cache_path+QString::number(id));
-        updateGoBackButtons();
+        updateGui();
         if(id > history){
             remove(id - history);
             removed++;
@@ -123,7 +123,7 @@ public:
         image_count = 0;
         last_image_num = 1;
         removed = 0;
-        updateGoBackButtons();
+        updateGui();
         removeDirectory(cache_path);
     }
 
@@ -252,16 +252,16 @@ public:
                 }
             } else if(str.startsWith("overlay")){
                 values[page].overlayType = str.split("=")[1].toInt();
-                printf("Load: page: %d overlay %d\n", page, values[page].overlayType);
+                debug("Load: page: %d overlay %d\n", page, values[page].overlayType);
             } else if(str.startsWith("page")){
                 values[page].pageType = str.split("=")[1].toInt();
-                printf("Load: page: %d page %d\n", page, values[page].pageType);
+                debug("Load: page: %d page %d\n", page, values[page].pageType);
             } else if(str.startsWith("ratio")){
                 board->ratios[page] = str.split("=")[1].toInt();
-                printf("Load: page: %d ratio %d\n", page, board->ratios[page]);
+                debug("Load: page: %d ratio %d\n", page, board->ratios[page]);
             } else if(str.startsWith("rotate")){
                 board->rotates[page] = str.split("=")[1].toInt();
-                printf("Load: page: %d rotates %d\n", page, board->rotates[page]);
+                debug("Load: page: %d rotates %d\n", page, board->rotates[page]);
             }
         }
         images = values[0];
@@ -269,7 +269,7 @@ public:
         board->setOverlayType(images.overlayType);
         drawing->loadImage(images.last_image_num);
         drawing->update();
-        updateGoBackButtons();
+        updateGui();
     }
 #endif
 
@@ -304,6 +304,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penColor = QColor(get_string("color"));
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
+    num_of_press = 0;
     cropWidget = new MovableWidget(mainWidget);
     //cropWidget->stackUnder(this);
     QBoxLayout* cropLayout = new QVBoxLayout(cropWidget);
@@ -494,9 +495,8 @@ int DrawingWidget::getLineStyle(){
     return lineStyle;
 }
 
-static int num_of_press = 0;
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
-    //printf("%d %d %d\n", source, type, id);
+    debug("source: %d type: %d id:%d\n", source, type, id);
     int ev_pen = penType;
     if(source & Qt::MiddleButton) {
         penType = MARKER;
@@ -518,7 +518,6 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 }
             }
             curs.penType[id] = penType;
-            num_of_press++;
             curs.drawing[id] = true;
             if (num_of_press == 1){
                 mergeSelection();
@@ -557,7 +556,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         curs.setPosition(id, pos);
                     }
                     addPoint(id, pos);
+                    painter.begin(&image);
                     drawFunc(id, pressure);
+                    painter.end();
                     break;
             }
             break;
@@ -565,16 +566,16 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing[id]) {
                 break;
             }
-            num_of_press--;
             curs.drawing[id] = false;
+            curs.hide(id);
             if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
                 addPoint(-1, pos+QPointF(0,1));
                 drawLineToFunc(id, pressure);
             }
-
             curEventButtons = 0;
-            curs.hide(id);
+
             if(num_of_press == 0) {
+                curs.clear();
                 if(penType == SELECTION) {
                     addPoint(id, pos);
                     createSelection(id);
@@ -591,7 +592,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 geo.clearAll();
                 addImage(image);
             }
-            update();
+            if(penType != ERASER && penStyle != SPLINE){
+                update();
+            }
             break;
     }
     penType = ev_pen;
@@ -607,6 +610,16 @@ bool DrawingWidget::event(QEvent *ev) {
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
             QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->points();
+            for(auto it = curs.images.begin(); it != curs.images.end(); it++){
+                curs.hide(it.key());
+            }
+            int touch_cnt=0;
+            foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
+                if ((Qt::TouchPointState)touchPoint.state() != Qt::TouchPointReleased) {
+                    touch_cnt++;
+                }
+            }
+            num_of_press = touch_cnt;
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
@@ -621,12 +634,14 @@ bool DrawingWidget::event(QEvent *ev) {
         }
         case QEvent::TabletPress: {
             tablet_enabled = true;
+            num_of_press=1;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
         }
         case QEvent::TabletRelease: {
             tablet_enabled = false;
+            num_of_press=0;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
@@ -640,6 +655,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
+            num_of_press=1;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
             return true;
@@ -648,6 +664,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
+            num_of_press=0;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
             return true;
@@ -672,12 +689,12 @@ int DrawingWidget::getPageNum(){
 }
 
 bool DrawingWidget::isBackAvailable(){
-    //printf("%d %d\n", images.last_image_num, images.image_count );
+    debug("last_page_num: %d image_count: %d\n", images.last_image_num, images.image_count );
     return images.last_image_num > images.removed +1;
 }
 
 bool DrawingWidget::isNextAvailable(){
-    //printf("%d %d\n", images.last_image_num, images.image_count );
+    debug("last_page_num: %d image_count: %d\n", images.last_image_num, images.image_count );
     return images.last_image_num < images.image_count;
 }
 
@@ -718,9 +735,9 @@ void qImageToFile(const QImage& image, const QString& filename) {
     }
     QPixmap pixmap = QPixmap::fromImage(image);
       if (pixmap.save(filename, "PNG")) {
-            qDebug() << "Image saved successfully as" << filename;
+            debug("Image saved successfully as %s\n", filename.toStdString().c_str());
         } else {
-            qDebug() << "Failed to save image at" << filename;
+            debug("Failed to save image at %s\n",filename.toStdString().c_str());
         }
 }
 

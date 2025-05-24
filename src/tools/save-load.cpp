@@ -23,10 +23,12 @@ extern "C" {
 void openFile(QString filename){
     if(!filename.isEmpty()){
         drawing->clearAll();
+        bgMenu->show();
         #ifdef QPRINTER
         if(filename.endsWith(".pdf")){
             loadPdf(filename);
             drawing->goPage(0);
+            bgMenu->hide();
         } else {
         #endif
             pthread_t ptid;
@@ -40,7 +42,7 @@ void openFile(QString filename){
 
 void setupSaveLoad(){
 #ifdef LIBARCHIVE
-    toolButtons[SAVE] = create_button(":images/save.svg", [=](){
+    toolButtons[SAVE] = create_button(SAVE, [=](){
         QString filter = _("Pen Files (*.pen);;");
         #ifdef QPRINTER
         filter += _("PDF Files (*.pdf);;");
@@ -69,7 +71,7 @@ void setupSaveLoad(){
     });
     set_shortcut(toolButtons[SAVE], Qt::Key_S, Qt::ControlModifier);
 
-    toolButtons[OPEN] = create_button(":images/open.svg", [=](){
+    toolButtons[OPEN] = create_button(OPEN, [=](){
         QString filter = _("Pen Files (*.pen);;");
         #ifdef QPRINTER
         filter += _("PDF Files (*.pdf);;");

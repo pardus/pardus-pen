@@ -15,8 +15,9 @@
 #define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
 #endif
 
-#define butsize 48*scale
 #define padding 8*scale
+
+#define butsize (48*scale + padding)
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
@@ -25,6 +26,12 @@
 #include <locale.h>
 #include <libintl.h>
 
+
+#ifndef DEBUG
+#define debug(...)
+#else
+#define debug (void)printf("[%s]:", __func__); (void)printf
+#endif
 
 #define _(String) gettext(String)
 
@@ -42,6 +49,8 @@ extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;
 
+extern QWidget *bgMenu;
+
 extern float scale;
 extern int history;
 
@@ -50,11 +59,8 @@ extern QSlider *scrollVSlider;
 
 extern QWidget *mainWidget;
 
-extern void updateRatioButtons();
-extern void updateGoBackButtons();
-extern void backgroundStyleEvent();
-extern void penStyleEvent();
-extern void penSizeEvent();
+extern void updateGui();
+
 
 extern void setPen(int type);
 extern int getPen();
@@ -80,8 +86,7 @@ extern "C" {
     extern void *load_archive(void* arg);
     extern QString archive_target;
 }
-extern void penSizeEvent();
-extern void penStyleEvent();
+
 extern void setupWidgets();
 
 extern bool hasSelection;
@@ -93,9 +98,9 @@ extern void setupBackground();
 extern void setupScreenShot();
 extern void setupPenType();
 extern void setupSaveLoad();
-extern void backgroundStyleEvent();
 
 extern void setupWidgets();
+extern char* get_icon_by_id(int id);
 
 void setHideMainWindow(bool status);
 #ifdef QPRINTER

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+</style>
+<radialGradient id="SVGID_1_" cx="24" cy="24" r="48.7528" gradientUnits="userSpaceOnUse">
+	<stop  offset="0" style="stop-color:#C0C0C0"/>
+	<stop  offset="0.9762" style="stop-color:#FFFFFF"/>
+</radialGradient>
+<path class="st0" d="M45.82,34.91h-6.55V15.27c0-3.61-2.94-6.55-6.55-6.55H13.09V2.18c0-1.21-0.98-2.18-2.18-2.18
+	S8.73,0.98,8.73,2.18v6.55H2.18C0.98,8.73,0,9.7,0,10.91s0.98,2.18,2.18,2.18h6.55v19.64c0,3.61,2.94,6.55,6.55,6.55h19.64v6.55
+	c0,1.21,0.98,2.18,2.18,2.18c1.21,0,2.18-0.98,2.18-2.18v-6.55h6.55c1.21,0,2.18-0.98,2.18-2.18S47.02,34.91,45.82,34.91z
+	 M15.27,34.91c-1.2,0-2.18-0.98-2.18-2.18V13.09h19.64c1.2,0,2.18,0.98,2.18,2.18v19.64H15.27z"/>
+</svg>

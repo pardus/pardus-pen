@@ -14,6 +14,7 @@ src = [
     'src/widgets/Background.cpp',
     'src/widgets/Button.cpp',
     'src/tools/update.cpp',
+    'src/tools/icon.cpp',
     'src/tools/background.cpp',
     'src/tools/mainWindow.cpp',
     'src/tools/screenshot.cpp',
@@ -62,6 +63,9 @@ if get_option('save')
     qt_dep += dependency('libarchive')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')
     src += 'src/utils/Archive.cpp'
+endif
+if get_option('debug')
+    add_project_arguments('-DDEBUG', language: 'cpp')
 endif
 
 

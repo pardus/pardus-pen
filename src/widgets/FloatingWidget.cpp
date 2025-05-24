@@ -27,8 +27,8 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout->setContentsMargins(padding, padding, padding, padding);
     QString style = QString(
     "QWidget {"
-        "border-radius: 13px;"
-        "background-color: #cc939393;"
+        "border-radius: "+QString::number(13*scale)+"px;"
+        "background-color: #f3232323;"
     "}");
     setLayout(layout);
     setStyleSheet(style);
@@ -131,9 +131,9 @@ void FloatingWidget::moveAction(){
                 new_yy = max_height - floatingSettings->cur_height;
             }
              if(tool2 != nullptr){
-                tool2->move(new_xx, new_yy + padding);
+                tool2->move(new_xx, new_yy);
             } else {
-                floatingSettings->move(new_xx, new_yy + padding);
+                floatingSettings->move(new_xx, new_yy);
             }
         }
 }

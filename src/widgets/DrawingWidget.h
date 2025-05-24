@@ -144,6 +144,7 @@ public:
 
 protected:
     float fpressure;
+    int num_of_press;
     bool eraser;
     void resizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;

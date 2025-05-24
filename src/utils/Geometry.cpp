@@ -57,7 +57,6 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
-    painter.begin(&image);
     penColor.setAlpha(255);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
     switch(penType){
@@ -176,7 +175,5 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
 
     last_begin = startPoint;
     last_end = endPoint;
-
-    painter.end();
 
 }

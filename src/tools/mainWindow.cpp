@@ -27,6 +27,9 @@ public:
     MainWindow() {
         screen = QGuiApplication::primaryScreen();
         scale = screen->size().height() / 1080.0;
+        if(scale < 1){
+            scale = 1.0;
+        }
         // set attributes
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_NoSystemBackground, true);
@@ -63,7 +66,7 @@ public:
 		// color switch
 		bool update = false;
 		if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
-		    drawing->penColor = colors[20 + event->key() - Qt::Key_1];
+		    drawing->penColor = colors[13 + event->key() - Qt::Key_1];
 		    update = true;
 		} else if (event->key() == Qt::Key_8){
 		    drawing->penColor = colors[0];
@@ -75,9 +78,7 @@ public:
 		    do_shortcut(event->key(), event->modifiers());
 		}
 		if(update){
-		    penStyleEvent();
-		    penSizeEvent();
-		    backgroundStyleEvent();
+		    updateGui();
 		}
 }
 
@@ -103,7 +104,7 @@ protected:
         scrollVSlider->move(event->size().width() - SCROLLSIZE, SCROLLSIZE);
         scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
 
-        printf("%d %d\n",event->size().width(), event->size().height());
+        debug("width:%d height:%d \n",event->size().width(), event->size().height());
         new_x = get_int("cur-x");
         new_y = get_int("cur-y");
         // tool is not set under wayland
@@ -156,8 +157,6 @@ void setupTools(){
         tool->setAttribute(Qt::WA_NoSystemBackground, true);
         tool->setStyleSheet(
             "background: none;"
-            "color: black;"
-            "font-size: "+QString::number(18*scale)+"px;"
         );
 
         // second toolbar
@@ -172,8 +171,6 @@ void setupTools(){
         tool2->setAttribute(Qt::WA_NoSystemBackground, true);
         tool2->setStyleSheet(
             "background: none;"
-            "color: black;"
-            "font-size: "+QString::number(18*scale)+"px;"
         );
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
@@ -193,13 +190,13 @@ void setupTools(){
     floatingWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
 
-    toolButtons[MINIFY] = create_button(":images/screen.svg", [=](){
+    toolButtons[MINIFY] = create_button(MINIFY, [=](){
             mainWindow->showMinimized();
     });
     set_shortcut(toolButtons[MINIFY], Qt::Key_D, Qt::MetaModifier);
 
     QScreen *screen = QGuiApplication::primaryScreen();
-    toolButtons[FULLSCREEN] = create_button(":images/fullscreen-exit.svg", [=](){
+    toolButtons[FULLSCREEN] = create_button(FULLSCREEN_EXIT, [=](){
         mainWidget->move(0,0);
         if ((tool != nullptr) && (tool2 != nullptr)){
             tool->hide();
@@ -210,10 +207,10 @@ void setupTools(){
         mainWindow->hide();
         mainWindow->showNormal();
         if(isFullScreen){
-            set_icon(":images/fullscreen.svg", toolButtons[FULLSCREEN]);
+            set_icon(get_icon_by_id(FULLSCREEN_EXIT), toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
         } else {
-            set_icon(":images/fullscreen-exit.svg", toolButtons[FULLSCREEN]);
+            set_icon(get_icon_by_id(FULLSCREEN), toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
@@ -225,7 +222,7 @@ void setupTools(){
 
     set_shortcut(toolButtons[FULLSCREEN], Qt::Key_F11, 0);
 
-    toolButtons[ROTATE] = create_button(":images/rotate.svg", [=](){
+    toolButtons[ROTATE] = create_button(ROTATE, [=](){
         floatingWidget->is_vertical = !floatingWidget->is_vertical;
         floatingWidget->setVertical(floatingWidget->is_vertical);
         floatingSettings->setHide();
@@ -233,7 +230,7 @@ void setupTools(){
 
 
     // non-gui button for hide / show floatingWidget
-    toolButtons[HIDEUI] = create_button("", [=](){
+    toolButtons[HIDEUI] = create_button(0, [=](){
         if(hideState){
             floatingWidget->hide();
             floatingSettings->setHide();
@@ -275,6 +272,7 @@ void mainWindowInit(){
     mainWindow->showFullScreen();
     QScreen *screen = QGuiApplication::primaryScreen();
     mainWindow->resize(screen->size().width(), screen->size().height());
+
 
     setPen(PEN);
 }

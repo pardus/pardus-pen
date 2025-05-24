@@ -3,33 +3,28 @@
 #include <QColor>
 QColor colors[] = {
 
-    QColor("#00FF00"),  // Green
-    QColor("#00FFFF"),  // Cyan
-    QColor("#0000FF"),   // Blue
-    QColor("#000000"),  // Black
-    QColor("#008B8B"),  // Dark Cyan
-    QColor("#40E0D0"),  // Turquoise
-    QColor("#000080"),  // Navy
-    QColor("#90EE90"),  // Light Green
-    QColor("#008000"),  // Dark Green
-    QColor("#008080"),   // Dark Cyan
-    QColor("#800000"),  // Maroon
-    QColor("#800080"),  // Purple
-    QColor("#808080"),  // Gray
-    QColor("#A52A2A"),   // Brown
-    QColor("#B22222"),  // Firebrick
-    QColor("#C0C0C0"),  // Silver
-    QColor("#D3D3D3"),  // Light Gray
-    QColor("#D2691E"),  // Chocolate
-    QColor("#F0E68C"),  // Khaki
-    QColor("#FF00FF"),  // Magenta
-    QColor("#FF00FF"),  // Magenta
-    QColor("#FF0000"),  // Red
-    QColor("#FF6347"),  // Tomato
-    QColor("#FFA500"),  // Orange
-    QColor("#FFFF00"),  // Yellow
-    QColor("#FFFF00"),  // Yellow
-    QColor("#FFFFFF"),   // White
+QColor("#ff4d4d"),  // Light Coral
+QColor("#ffae42"),  // Soft Orange
+QColor("#fff68f"),  // Light Yellow
+QColor("#66dd88"),  // Pastel Green
+QColor("#66b3ff"),  // Light Sky Blue
+QColor("#b57edc"),  // Lavender
+
+QColor("#FFD700"),  // Gold
+QColor("#ADFF2F"),  // Green Yellow
+QColor("#008000"),  // Green
+QColor("#40E0D0"),  // Turquoise
+QColor("#808080"),  // Gray
+QColor("#000000"),  // Black
+QColor("#FFFFFF"),  // White
+
+    QColor("#ff0000"),  // Ren
+    QColor("#ff7f00"),  // Orange
+    QColor("#ffff00"),  // Yellow
+    QColor("#00bc3f"),  // Green
+    QColor("#0068ff"),  // Blue
+    QColor("#7a00e5"),  // Purple
+    QColor("#d300c9"),  // Pink
 };
 
 #endif
