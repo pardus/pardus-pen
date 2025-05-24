@@ -15,8 +15,9 @@
 #define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
 #endif
 
-#define butsize 48*scale
 #define padding 8*scale
+
+#define butsize (48*scale + padding)
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))

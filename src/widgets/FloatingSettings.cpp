@@ -35,7 +35,7 @@ FloatingSettings::FloatingSettings(QWidget *parent) : QWidget(parent) {
         "QWidget {"
         "border-radius: "+QString::number(13*scale)+"px;"
         "color: #000000;"
-        "font: "+QString::number(18*scale)+"px;"
+        "font-size: "+QString::number(22*scale)+"px;"
 //        "background-color: #f3232323;"
         "background: none;"
         "}"

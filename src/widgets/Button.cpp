@@ -23,10 +23,9 @@ QPushButton* create_button_text(const char* name, ButtonEvent event) {
         };
         QObject::connect(button, &QPushButton::clicked, events[button]);
     }
-    QFont font = button->font();
-    font.setPointSize(18*scale);
-    button->setFont(font);
-    button->setStyleSheet(QString("background-color: none;"));
+    button->setStyleSheet(
+        "background-color: none;"
+    );
 
     return button;
 }
@@ -40,10 +39,7 @@ QPushButton* create_button(int id, ButtonEvent event) {
         QObject::connect(button, &QPushButton::clicked, events[button]);
     }
     set_icon(get_icon_by_id(id), button);
-    QFont font = button->font();
-    font.setPointSize(18*scale);
     button->setFixedSize(butsize, butsize);
-    button->setFont(font);
     button->setStyleSheet(QString("background-color: none;"));
     return button;
 }
@@ -113,7 +109,7 @@ void set_icon(const char* name, QPushButton * button) {
     QIcon icon = QIcon(name);
     QPixmap pixmap = icon.pixmap(QSize(butsize, butsize));
     button->setIcon(icon);
-    button->setIconSize(QSize(butsize, butsize));
+    button->setIconSize(QSize(butsize - padding, butsize - padding));
     button->setFlat(true);
 }
 
@@ -121,7 +117,7 @@ void set_icon_combined(const char* name, const char* subname, QPushButton * butt
     QIcon icon = combineIcons(QIcon(name), QIcon(subname));
     QPixmap pixmap = icon.pixmap(QSize(butsize, butsize));
     button->setIcon(icon);
-    button->setIconSize(QSize(butsize, butsize));
+    button->setIconSize(QSize(butsize - padding, butsize - padding));
     button->setFlat(true);
 }
 

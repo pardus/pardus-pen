@@ -157,8 +157,6 @@ void setupTools(){
         tool->setAttribute(Qt::WA_NoSystemBackground, true);
         tool->setStyleSheet(
             "background: none;"
-            "color: black;"
-            "font-size: "+QString::number(18*scale)+"px;"
         );
 
         // second toolbar
@@ -173,8 +171,6 @@ void setupTools(){
         tool2->setAttribute(Qt::WA_NoSystemBackground, true);
         tool2->setStyleSheet(
             "background: none;"
-            "color: black;"
-            "font-size: "+QString::number(18*scale)+"px;"
         );
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
