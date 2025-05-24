@@ -371,9 +371,9 @@ void setupWidgets(){
     pageLayout->addWidget(penButtons[BLANK],     0, 0, Qt::AlignCenter);
     pageLayout->addWidget(penButtons[SQUARES],   0, 1, Qt::AlignCenter);
     pageLayout->addWidget(penButtons[LINES],     0, 2, Qt::AlignCenter);
-    pageLayout->addWidget(penButtons[MUSIC],     0, 3, Qt::AlignCenter);
-    pageLayout->addWidget(penButtons[CUSTOM],    0, 4, Qt::AlignCenter);
-    pageLayout->addWidget(penButtons[ISOMETRIC], 0, 5, Qt::AlignCenter);
+    pageLayout->addWidget(penButtons[ISOMETRIC], 0, 3, Qt::AlignCenter);
+    pageLayout->addWidget(penButtons[MUSIC],     0, 4, Qt::AlignCenter);
+    pageLayout->addWidget(penButtons[CUSTOM],    0, 5, Qt::AlignCenter);
 
     struct dirent *ep;
     DIR *dp = opendir (BGDIR);
@@ -457,5 +457,8 @@ void setupWidgets(){
 
 /********** Finish him **********/
     updateGui();
-
+    pageLabel->setStyleSheet(
+    "color: #c0c0c0;"
+    "font-size: "+QString::number(31*scale)+"px;"
+    );
 }
