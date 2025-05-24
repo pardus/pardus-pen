@@ -59,7 +59,7 @@ void OverView::paintEvent(QPaintEvent *event) {
     } else {
         // Draw the sine wave
         QPainterPath path;
-        int xPrev, yPrev;
+        int xPrev = 0, yPrev = 0;
         for (int x = padding; x <= w - padding ; x+=scale) {
             double y = ((h -2*penSize) / 2) * sin(2 * M_PI * x / w) + h  / 2;
             if (x > padding) {
