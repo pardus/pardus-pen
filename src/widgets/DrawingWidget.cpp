@@ -33,7 +33,6 @@ penType:
  - 2 marker
 */
 
-#include <QDebug>
 #include <QMap>
 
 #ifdef QT5
@@ -253,16 +252,16 @@ public:
                 }
             } else if(str.startsWith("overlay")){
                 values[page].overlayType = str.split("=")[1].toInt();
-                printf("Load: page: %d overlay %d\n", page, values[page].overlayType);
+                debug("Load: page: %d overlay %d\n", page, values[page].overlayType);
             } else if(str.startsWith("page")){
                 values[page].pageType = str.split("=")[1].toInt();
-                printf("Load: page: %d page %d\n", page, values[page].pageType);
+                debug("Load: page: %d page %d\n", page, values[page].pageType);
             } else if(str.startsWith("ratio")){
                 board->ratios[page] = str.split("=")[1].toInt();
-                printf("Load: page: %d ratio %d\n", page, board->ratios[page]);
+                debug("Load: page: %d ratio %d\n", page, board->ratios[page]);
             } else if(str.startsWith("rotate")){
                 board->rotates[page] = str.split("=")[1].toInt();
-                printf("Load: page: %d rotates %d\n", page, board->rotates[page]);
+                debug("Load: page: %d rotates %d\n", page, board->rotates[page]);
             }
         }
         images = values[0];
@@ -497,7 +496,7 @@ int DrawingWidget::getLineStyle(){
 }
 
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
-    //printf("%d %d %d\n", source, type, id);
+    debug("source: %d type: %d id:%d\n", source, type, id);
     int ev_pen = penType;
     if(source & Qt::MiddleButton) {
         penType = MARKER;
@@ -688,12 +687,12 @@ int DrawingWidget::getPageNum(){
 }
 
 bool DrawingWidget::isBackAvailable(){
-    //printf("%d %d\n", images.last_image_num, images.image_count );
+    debug("last_page_num: %d image_count: %d\n", images.last_image_num, images.image_count );
     return images.last_image_num > images.removed +1;
 }
 
 bool DrawingWidget::isNextAvailable(){
-    //printf("%d %d\n", images.last_image_num, images.image_count );
+    debug("last_page_num: %d image_count: %d\n", images.last_image_num, images.image_count );
     return images.last_image_num < images.image_count;
 }
 
@@ -734,9 +733,9 @@ void qImageToFile(const QImage& image, const QString& filename) {
     }
     QPixmap pixmap = QPixmap::fromImage(image);
       if (pixmap.save(filename, "PNG")) {
-            qDebug() << "Image saved successfully as" << filename;
+            debug("Image saved successfully as %s\n", filename.toStdString().c_str());
         } else {
-            qDebug() << "Failed to save image at" << filename;
+            debug("Failed to save image at %s\n",filename.toStdString().c_str());
         }
 }
 

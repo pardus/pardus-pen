@@ -17,11 +17,11 @@ static QMap<QPushButton*, Shortcut> shortcuts;
 QPushButton* create_button_text(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton(name);
     if(event) {
-        QObject::connect(button, &QPushButton::clicked, event);
         events[button] = [=]() {
             event();
             updateGui();
         };
+        QObject::connect(button, &QPushButton::clicked, events[button]);
     }
     QFont font = button->font();
     font.setPointSize(18*scale);
@@ -33,11 +33,11 @@ QPushButton* create_button_text(const char* name, ButtonEvent event) {
 QPushButton* create_button(const char* name, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
     if(event) {
-        QObject::connect(button, &QPushButton::clicked, event);
         events[button] = [=]() {
             event();
             updateGui();
         };
+        QObject::connect(button, &QPushButton::clicked, events[button]);
     }
     set_icon(name, button);
     QFont font = button->font();
@@ -53,7 +53,6 @@ QPushButton* create_color_button(QColor color){
     button->setStyleSheet(QString(
         "background-color: "+color.name()+";"
         "border-radius: 12px;"
-//        "border: 1px solid "+convertColor(color).name()+";"
     ));
     QObject::connect(button, &QPushButton::clicked, [=]() {
         drawing->penColor = color;

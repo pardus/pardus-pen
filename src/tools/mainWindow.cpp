@@ -104,7 +104,7 @@ protected:
         scrollVSlider->move(event->size().width() - SCROLLSIZE, SCROLLSIZE);
         scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
 
-        printf("%d %d\n",event->size().width(), event->size().height());
+        debug("width:%d height:%d \n",event->size().width(), event->size().height());
         new_x = get_int("cur-x");
         new_y = get_int("cur-y");
         // tool is not set under wayland

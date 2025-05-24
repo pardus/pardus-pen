@@ -63,6 +63,9 @@ if get_option('save')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')
     src += 'src/utils/Archive.cpp'
 endif
+if get_option('debug')
+    add_project_arguments('-DDEBUG', language: 'cpp')
+endif
 
 
 # background images

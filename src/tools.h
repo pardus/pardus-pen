@@ -26,6 +26,12 @@
 #include <libintl.h>
 
 
+#ifndef DEBUG
+#define debug(...)
+#else
+#define debug (void)printf("[%s]:", __func__); (void)printf
+#endif
+
 #define _(String) gettext(String)
 
 #include "utils/Settings.h"
