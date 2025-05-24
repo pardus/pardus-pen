@@ -3,93 +3,93 @@
 char* get_icon_by_id(int id){
     switch(id){
         case MARKER:
-            return (char*)":images/marker.svg";
+            return (char*)":images/tool/marker.svg";
         case PEN:
-            return (char*)":images/pen.svg";
+            return (char*)":images/tool/pen.svg";
         case ERASER:
-            return (char*)":images/eraser.svg";
+            return (char*)":images/tool/eraser.svg";
         case CIRCLE:
-            return (char*)":images/circle.svg";
+            return (char*)":images/shape/circle.svg";
         case SPLINE:
-            return (char*)":images/spline.svg";
+            return (char*)":images/shape/spline.svg";
         case LINE:
-            return (char*)":images/line.svg";
+            return (char*)":images/shape/line.svg";
         case TRIANGLE:
-            return (char*)":images/triangle.svg";
+            return (char*)":images/shape/triangle.svg";
         case RECTANGLE:
-            return (char*)":images/rectangle.svg";
+            return (char*)":images/shape/rectangle.svg";
         case VECTOR:
-            return (char*)":images/vector.svg";
+            return (char*)":images/shape/vector.svg";
         case VECTOR2:
-            return (char*)":images/vector2.svg";
+            return (char*)":images/shape/vector2.svg";
         case TRANSPARENT:
-            return (char*)":images/paper-transparent.svg";
+            return (char*)":images/shape/paper-transparent.svg";
         case BLACK:
-            return (char*)":images/paper-black.svg";
+            return (char*)":images/shape/paper-black.svg";
         case WHITE:
-            return (char*)":images/paper-white.svg";
+            return (char*)":images/shape/paper-white.svg";
         case PREVPAGE:
-            return (char*)":images/go-page-previous.svg";
+            return (char*)":images/page/go-back.svg";
         case NEXTPAGE:
-            return (char*)":images/go-page-next.svg";
+            return (char*)":images/page/go-next.svg";
         case BLANK:
-            return (char*)":images/overlay-none.svg";
+            return (char*)":images/overlay/none.svg";
         case SQUARES:
-            return (char*)":images/overlay-squares.svg";
+            return (char*)":images/overlay/squares.svg";
         case LINES:
-            return (char*)":images/overlay-lines.svg";
+            return (char*)":images/overlay/lines.svg";
         case ISOMETRIC:
-            return (char*)":images/overlay-isometric.svg";
+            return (char*)":images/overlay/isometric.svg";
         case MUSIC:
-            return (char*)":images/overlay-music.svg";
+            return (char*)":images/overlay/music.svg";
         case CUSTOM:
-            return (char*)":images/overlay-custom.svg";
+            return (char*)":images/overlay/custom.svg";
         case OVERLAYSCALEUP:
-            return (char*)":images/zoom-in.svg";
+            return (char*)":images/page/zoom-in.svg";
         case OVERLAYSCALEDOWN:
-            return (char*)":images/zoom-out.svg";
+            return (char*)":images/page/zoom-out.svg";
         case OVERLAYROTATEUP:
-            return (char*)":images/bg-rotate-plus.svg";
+            return (char*)":images/page/rotate-plus.svg";
         case OVERLAYROTATEDOWN:
-            return (char*)":images/bg-rotate-minus.svg";
+            return (char*)":images/page/rotate-minus.svg";
         case CLEAR:
-            return (char*)":images/clear.svg";
+            return (char*)":images/page/clear.svg";
         case SELECTION:
-            return (char*)":images/crop.svg";
+            return (char*)":images/tool/crop.svg";
         case NORMAL:
-            return (char*)":images/line-normal.svg";
+            return (char*)":images/shape/line-normal.svg";
         case DOTLINE:
-            return (char*)":images/line-dotline.svg";
+            return (char*)":images/shape/line-dots.svg";
         case LINELINE:
-            return (char*)":images/line-lineline.svg";
+            return (char*)":images/shape/line-lines.svg";
         case COLORPICKER:
-            return (char*)":images/color-picker.svg";
+            return (char*)":images/tool/color-picker.svg";
         case BACK:
-            return (char*)":images/go-back.svg";
+            return (char*)":images/tool/go-back.svg";
         case NEXT:
-            return (char*)":images/go-next.svg";
+            return (char*)":images/tool/go-next.svg";
         case CLOSE:
-            return (char*)":images/close.svg";
+            return (char*)":images/page/close.svg";
         case SCREENSHOT:
-            return (char*)":images/screenshot.svg";
+            return (char*)":images/page/screenshot.svg";
         case CURSOR:
             return (char*)":images/cursor.svg";
         case MINIFY:
-            return (char*)":images/screen.svg";
+            return (char*)":images/tool/minify.svg";
         case FULLSCREEN:
-            return (char*)":images/fullscreen.svg";
+            return (char*)":images/page/fullscreen.svg";
         case FULLSCREEN_EXIT:
-            return (char*)":images/fullscreen-exit.svg";
+            return (char*)":images/page/fullscreen-exit.svg";
         case ROTATE:
-            return (char*)":images/rotate.svg";
+            return (char*)":images/tool/rotate.svg";
         case PAGEMENU:
-            return (char*)":images/page-settings.svg";
+            return (char*)":images/page/settings.svg";
         case UTILMENU:
-            return (char*)":images/misc-settings.svg";
+            return (char*)":images/page/misc-settings.svg";
         case SAVE:
-            return (char*)":images/save.svg";
+            return (char*)":images/page/file-save.svg";
         case OPEN:
-            return (char*)":images/open.svg";
+            return (char*)":images/page/file-open.svg";
     }
     return (char*)"";
 }
