@@ -43,8 +43,7 @@ void setPen(int type){
     thicknessSlider->setValue(drawing->penSize[type]);
     sliderLock = false;
     if(pen_init){
-        penStyleEvent();
-        penSizeEvent();
+        updateGui();
     }
 }
 
@@ -54,14 +53,10 @@ int getPen(){
 
 void setPenStyle(int style){
     drawing->setPenStyle(style);
-    penStyleEvent();
-    penSizeEvent();
 }
 
 void setLineStyle(int style){
     drawing->setLineStyle(style);
-    penStyleEvent();
-    penSizeEvent();
 }
 
 void setupPenType(){
@@ -141,7 +136,8 @@ void setupPenType(){
         if(!sliderLock){
             drawing->penSize[getPen()] = value;
         }
-        penSizeEvent();
+        thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
+        ov->updateImage();
     });
 
     QObject::connect(thicknessSlider, &QSlider::sliderReleased, [=]() {
@@ -171,22 +167,17 @@ void setupPenType(){
         }
         drawing->penColor = newCol;
         set_string("color", drawing->penColor.name());
-        penStyleEvent();
-        penSizeEvent();
-        backgroundStyleEvent();
     });
     set_shortcut(toolButtons[COLORPICKER], Qt::Key_0, 0);
 
     toolButtons[BACK] = create_button(":images/go-back.svg", [=](){
         drawing->goPrevious();
-        updateGoBackButtons();
     });
     set_shortcut(toolButtons[BACK], Qt::Key_Z, Qt::ControlModifier);
 
 
     toolButtons[NEXT] = create_button(":images/go-next.svg", [=](){
         drawing->goNext();
-        updateGoBackButtons();
     });
     set_shortcut(toolButtons[NEXT], Qt::Key_Y, Qt::ControlModifier);
 

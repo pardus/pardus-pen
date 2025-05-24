@@ -5,20 +5,17 @@ QPushButton* pageLabel;
 void setupBackground(){
     penButtons[TRANSPARENT] = create_button(":images/paper-transparent.svg", [=](){
         board->setType(TRANSPARENT);
-        backgroundStyleEvent();
     });
     set_shortcut(penButtons[TRANSPARENT], Qt::Key_Q, Qt::AltModifier);
 
 
     penButtons[BLACK] = create_button(":images/paper-black.svg", [=](){
         board->setType(BLACK);
-        backgroundStyleEvent();
     });
     set_shortcut(penButtons[BLACK], Qt::Key_W, Qt::AltModifier);
 
     penButtons[WHITE] = create_button(":images/paper-white.svg", [=](){
         board->setType(WHITE);
-        backgroundStyleEvent();
     });
     set_shortcut(penButtons[WHITE], Qt::Key_E, Qt::AltModifier);
 
@@ -28,42 +25,35 @@ void setupBackground(){
             return;
         }
         drawing->goPreviousPage();
-        backgroundStyleEvent();
-        updateGoBackButtons();
     });
     set_shortcut(toolButtons[PREVPAGE], Qt::Key_PageDown, Qt::ControlModifier);
 
     toolButtons[NEXTPAGE] = create_button(":images/go-page-next.svg", [=](){
         drawing->goNextPage();
-        backgroundStyleEvent();
-        updateGoBackButtons();
     });
     set_shortcut(toolButtons[NEXTPAGE], Qt::Key_PageUp, Qt::ControlModifier);
 
     // overlay buttons
     penButtons[BLANK] = create_button(":images/overlay-none.svg", [=](){
         board->setOverlayType(BLANK);
-        backgroundStyleEvent();
     });
 
     penButtons[SQUARES] = create_button(":images/overlay-squares.svg", [=](){
         board->setOverlayType(SQUARES);
-        backgroundStyleEvent();
+
     });
 
     penButtons[LINES] = create_button(":images/overlay-lines.svg", [=](){
         board->setOverlayType(LINES);
-        backgroundStyleEvent();
+
     });
 
     penButtons[ISOMETRIC] = create_button(":images/overlay-isometric.svg", [=](){
         board->setOverlayType(ISOMETRIC);
-        backgroundStyleEvent();
     });
 
     penButtons[MUSIC] = create_button(":images/overlay-music.svg", [=](){
         board->setOverlayType(MUSIC);
-        backgroundStyleEvent();
     });
 
     penButtons[CUSTOM] = create_button(":images/overlay-custom.svg", [=](){
@@ -77,13 +67,11 @@ void setupBackground(){
             board->overlays[drawing->getPageNum()] = QImage(filename);
             board->ratios[drawing->getPageNum()] = 100;
             board->rotates[drawing->getPageNum()] = 0;
-            updateRatioButtons();
             board->updateTransform();
             board->setOverlayType(CUSTOM);
         } else {
             board->setOverlayType(BLANK);
         }
-        backgroundStyleEvent();
         floatingWidget->show();
         setHideMainWindow(false);
     });
@@ -98,8 +86,6 @@ void setupBackground(){
                                            _("Page:"), 0, 0, drawing->max, 1, &ok);
         if (ok) {
             drawing->goPage(number);
-            backgroundStyleEvent();
-            updateGoBackButtons();
         }
         setHideMainWindow(false);
         floatingWidget->show();
@@ -107,14 +93,12 @@ void setupBackground(){
 
     toolButtons[OVERLAYSCALEUP] = create_button(":images/zoom-in.svg", [=](){
         board->ratios[drawing->getPageNum()] += 10;
-        updateRatioButtons();
         board->updateTransform();
         board->update();
     });
 
     toolButtons[OVERLAYSCALEDOWN] = create_button(":images/zoom-out.svg", [=](){
         board->ratios[drawing->getPageNum()] -= 10;
-        updateRatioButtons();
         board->updateTransform();
         board->update();
     });

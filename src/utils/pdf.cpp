@@ -25,8 +25,7 @@ void loadPdf(QString path){
     doc->setRenderHint(Poppler::Document::TextAntialiasing, true);
     drawing->max = doc->numPages()-1;
     drawing->goPage(0);
-    backgroundStyleEvent();
-    updateGoBackButtons();
+    updateGui();
 
 }
 

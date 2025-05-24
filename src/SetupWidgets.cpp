@@ -364,7 +364,6 @@ void setupWidgets(){
                 board->rotates[drawing->getPageNum()] = 0;
                 board->ratios[drawing->getPageNum()] = 100;
                 board->updateTransform();
-                backgroundStyleEvent();
             });
             pageLayout->addWidget(toolButtons[i+200], i / 6, i % 6, Qt::AlignCenter);
             i++;
@@ -429,13 +428,6 @@ void setupWidgets(){
     }
 
 /********** Finish him **********/
-
-
-    penStyleEvent();
-    penSizeEvent();
-    backgroundStyleEvent();
-    updateGoBackButtons();
-    ov->updateImage();
-
+    updateGui();
 
 }

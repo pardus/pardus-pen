@@ -78,9 +78,7 @@ public:
 		    do_shortcut(event->key(), event->modifiers());
 		}
 		if(update){
-		    penStyleEvent();
-		    penSizeEvent();
-		    backgroundStyleEvent();
+		    updateGui();
 		}
 }
 

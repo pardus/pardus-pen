@@ -1,51 +1,39 @@
 #include "../tools.h"
 
+char* get_icon_by_id(int id){
+    switch(id){
+        case MARKER:
+            return (char*)":images/marker.svg";
+        case PEN:
+            return (char*)":images/pen.svg";
+        case ERASER:
+            return (char*)":images/eraser.svg";
+    }
+    return (char*)"";
+}
+int last_pen_type = 0;
 
-void penStyleEvent(){
-    backgroundStyleEvent();
+
+void updateGui(){
+    // hide or show elements
     colorDialog->setVisible(getPen() != ERASER || getPen() == SELECTION);
     ov->setVisible(getPen() != SELECTION);
     thicknessSlider->setVisible(getPen() != SELECTION);
     thicknessLabel->setVisible(getPen() != SELECTION);
     modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
     penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION);
+
+    // pen and eraser menu
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
-    if(drawing->getPen() == PEN || drawing->getPen() == MARKER){
+    
+    if(drawing->getPen() == MARKER || drawing->getPen() == PEN){
+        set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     } else if (drawing->getPen() == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     }
-    if(drawing->getPen() == MARKER){
-        set_icon(":images/marker.svg", toolButtons[PENMENU]);
-    } else {
-        set_icon(":images/pen.svg", toolButtons[PENMENU]);
-    }
-}
-
-
-int last_pen_type = 0;
-void penSizeEvent(){
-    int value = drawing->penSize[getPen()];
-    ov->updateImage();
-    floatingSettings->reload();
-    thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
-}
-
-void updateRatioButtons(){
-    toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
-    toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
-}
-
-void updateGoBackButtons(){
-    toolButtons[BACK]->setEnabled(drawing->isBackAvailable());
-    toolButtons[NEXT]->setEnabled(drawing->isNextAvailable());
-    toolButtons[PREVPAGE]->setEnabled(drawing->getPageNum() > 0);
-    toolButtons[NEXTPAGE]->setEnabled(drawing->getPageNum() < drawing->max);
-    pageLabel->setText(QString::number(drawing->getPageNum()));
-}
-
-void backgroundStyleEvent(){
+    // Update button backgrounds
     for (auto it = penButtons.begin(); it != penButtons.end(); ++it) {
         it.value()->setStyleSheet(QString("background-color: none;"));
     }
@@ -59,7 +47,25 @@ void backgroundStyleEvent(){
             penButtons[btn]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
         }
     }
+    // Update pen size
+    int value = drawing->penSize[getPen()];
+    thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
+
+
+    // update go back buttons
+    toolButtons[BACK]->setEnabled(drawing->isBackAvailable());
+    toolButtons[NEXT]->setEnabled(drawing->isNextAvailable());
+    toolButtons[PREVPAGE]->setEnabled(drawing->getPageNum() > 0);
+    toolButtons[NEXTPAGE]->setEnabled(drawing->getPageNum() < drawing->max);
+    pageLabel->setText(QString::number(drawing->getPageNum()));
+
+    // update scale buttons
+    toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
+    toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
+    // update overview
     ov->updateImage();
+    floatingSettings->reload();
 }
+
 
 

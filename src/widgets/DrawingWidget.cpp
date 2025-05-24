@@ -24,7 +24,6 @@ extern DrawingWidget *drawing;
 extern FloatingSettings *floatingSettings;
 QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
 
-extern void updateGoBackButtons();
 void removeDirectory(const QString &path);
 
 /*
@@ -114,7 +113,7 @@ public:
         QDir dir;
         dir.mkpath(cache_path);
         saveImageToFile(data, cache_path+QString::number(id));
-        updateGoBackButtons();
+        updateGui();
         if(id > history){
             remove(id - history);
             removed++;
@@ -125,7 +124,7 @@ public:
         image_count = 0;
         last_image_num = 1;
         removed = 0;
-        updateGoBackButtons();
+        updateGui();
         removeDirectory(cache_path);
     }
 
@@ -271,7 +270,7 @@ public:
         board->setOverlayType(images.overlayType);
         drawing->loadImage(images.last_image_num);
         drawing->update();
-        updateGoBackButtons();
+        updateGui();
     }
 #endif
 

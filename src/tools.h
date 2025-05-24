@@ -50,11 +50,8 @@ extern QSlider *scrollVSlider;
 
 extern QWidget *mainWidget;
 
-extern void updateRatioButtons();
-extern void updateGoBackButtons();
-extern void backgroundStyleEvent();
-extern void penStyleEvent();
-extern void penSizeEvent();
+extern void updateGui();
+
 
 extern void setPen(int type);
 extern int getPen();
@@ -80,8 +77,7 @@ extern "C" {
     extern void *load_archive(void* arg);
     extern QString archive_target;
 }
-extern void penSizeEvent();
-extern void penStyleEvent();
+
 extern void setupWidgets();
 
 extern bool hasSelection;
@@ -93,7 +89,6 @@ extern void setupBackground();
 extern void setupScreenShot();
 extern void setupPenType();
 extern void setupSaveLoad();
-extern void backgroundStyleEvent();
 
 extern void setupWidgets();
 
