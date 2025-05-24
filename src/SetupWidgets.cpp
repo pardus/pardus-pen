@@ -25,7 +25,7 @@ void setupWidgets(){
 
 
     // Pen button with menu
-    toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
+    toolButtons[PENMENU] = create_button(PEN, [=](){
         if(floatingSettings->current_page == 0 && drawing->getPen() != ERASER){
             floatingSettings->setHide();
             return;
@@ -47,7 +47,7 @@ void setupWidgets(){
     });
 
     // Eraser button with menu
-    toolButtons[ERASERMENU] = create_button(":images/eraser.svg", [=](){
+    toolButtons[ERASERMENU] = create_button(ERASER, [=](){
         if(floatingSettings->current_page == 0 && drawing->getPen() == ERASER){
             floatingSettings->setHide();
             return;
@@ -71,7 +71,7 @@ void setupWidgets(){
     floatingSettings->addPage(pageSettings);
 
     // Page menu button
-    toolButtons[PAGEMENU] = create_button(":images/page-settings.svg", [=](){
+    toolButtons[PAGEMENU] = create_button(PAGEMENU, [=](){
         if(floatingSettings->current_page == 1){
             floatingSettings->setHide();
             return;
@@ -81,7 +81,7 @@ void setupWidgets(){
     });
 
     // Page menu button
-    toolButtons[UTILMENU] = create_button(":images/misc-settings.svg", [=](){
+    toolButtons[UTILMENU] = create_button(UTILMENU, [=](){
         if(floatingSettings->current_page == 2){
             floatingSettings->setHide();
             return;
@@ -382,13 +382,14 @@ void setupWidgets(){
                 continue;
             }
             QString path = QString(BGDIR) + QString("/") + QString(ep->d_name);
-            toolButtons[i+200] = create_button(path.toStdString().c_str(), [=](){
+            toolButtons[i+200] = create_button(0, [=](){
                 board->overlays[drawing->getPageNum()] = QImage(path);
                 board->setOverlayType(CUSTOM);
                 board->rotates[drawing->getPageNum()] = 0;
                 board->ratios[drawing->getPageNum()] = 100;
                 board->updateTransform();
             });
+            set_icon(path.toStdString().c_str(), toolButtons[i+200]);
             pageLayout->addWidget(toolButtons[i+200], i / 6, i % 6, Qt::AlignCenter);
             i++;
             printf ("%s\n", ep->d_name);

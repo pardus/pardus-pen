@@ -1,18 +1,6 @@
 #include "../tools.h"
 
-char* get_icon_by_id(int id){
-    switch(id){
-        case MARKER:
-            return (char*)":images/marker.svg";
-        case PEN:
-            return (char*)":images/pen.svg";
-        case ERASER:
-            return (char*)":images/eraser.svg";
-    }
-    return (char*)"";
-}
 int last_pen_type = 0;
-
 
 void updateGui(){
     // hide or show elements
@@ -26,9 +14,9 @@ void updateGui(){
     // pen and eraser menu
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
-    
+
     if(drawing->getPen() == MARKER || drawing->getPen() == PEN){
-        set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
+        set_icon_combined(get_icon_by_id(drawing->getPen()), get_icon_by_id(drawing->getPenStyle()), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     } else if (drawing->getPen() == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");

@@ -10,7 +10,7 @@
 
 typedef std::function<void()> ButtonEvent;
 
-QPushButton* create_button(const char* icon, ButtonEvent event);
+QPushButton* create_button(int id, ButtonEvent event);
 QPushButton* create_button_text(const char* icon, ButtonEvent event);
 QPushButton* create_color_button(QColor color);
 

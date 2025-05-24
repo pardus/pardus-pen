@@ -194,13 +194,13 @@ void setupTools(){
     floatingWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
 
-    toolButtons[MINIFY] = create_button(":images/screen.svg", [=](){
+    toolButtons[MINIFY] = create_button(MINIFY, [=](){
             mainWindow->showMinimized();
     });
     set_shortcut(toolButtons[MINIFY], Qt::Key_D, Qt::MetaModifier);
 
     QScreen *screen = QGuiApplication::primaryScreen();
-    toolButtons[FULLSCREEN] = create_button(":images/fullscreen-exit.svg", [=](){
+    toolButtons[FULLSCREEN] = create_button(FULLSCREEN_EXIT, [=](){
         mainWidget->move(0,0);
         if ((tool != nullptr) && (tool2 != nullptr)){
             tool->hide();
@@ -211,10 +211,10 @@ void setupTools(){
         mainWindow->hide();
         mainWindow->showNormal();
         if(isFullScreen){
-            set_icon(":images/fullscreen.svg", toolButtons[FULLSCREEN]);
+            set_icon(get_icon_by_id(FULLSCREEN_EXIT), toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
         } else {
-            set_icon(":images/fullscreen-exit.svg", toolButtons[FULLSCREEN]);
+            set_icon(get_icon_by_id(FULLSCREEN), toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
@@ -226,7 +226,7 @@ void setupTools(){
 
     set_shortcut(toolButtons[FULLSCREEN], Qt::Key_F11, 0);
 
-    toolButtons[ROTATE] = create_button(":images/rotate.svg", [=](){
+    toolButtons[ROTATE] = create_button(ROTATE, [=](){
         floatingWidget->is_vertical = !floatingWidget->is_vertical;
         floatingWidget->setVertical(floatingWidget->is_vertical);
         floatingSettings->setHide();
@@ -234,7 +234,7 @@ void setupTools(){
 
 
     // non-gui button for hide / show floatingWidget
-    toolButtons[HIDEUI] = create_button("", [=](){
+    toolButtons[HIDEUI] = create_button(0, [=](){
         if(hideState){
             floatingWidget->hide();
             floatingSettings->setHide();

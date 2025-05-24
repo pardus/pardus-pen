@@ -72,7 +72,7 @@ public:
             return;
         }
         sizes[id] = size;
-        QIcon icon = QIcon(":images/cursor.svg");
+        QIcon icon = QIcon(get_icon_by_id(CURSOR));
         QPixmap pixmap = icon.pixmap(
             icon.actualSize(
                 QSize(size, size)

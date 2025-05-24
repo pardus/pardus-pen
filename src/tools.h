@@ -97,6 +97,7 @@ extern void setupPenType();
 extern void setupSaveLoad();
 
 extern void setupWidgets();
+extern char* get_icon_by_id(int id);
 
 void setHideMainWindow(bool status);
 #ifdef QPRINTER

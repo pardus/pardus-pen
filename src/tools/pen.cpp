@@ -60,71 +60,71 @@ void setLineStyle(int style){
 }
 
 void setupPenType(){
-    penButtons[PEN] = create_button(":images/pen.svg", [=](){
+    penButtons[PEN] = create_button(PEN, [=](){
         setPen(PEN);
     });
 
-    penButtons[SELECTION] = create_button(":images/crop.svg", [=](){
+    penButtons[SELECTION] = create_button(SELECTION, [=](){
         setPen(SELECTION);
         floatingSettings->setHide();
     });
     set_shortcut(penButtons[SELECTION], Qt::Key_X, Qt::ControlModifier);
 
-    penButtons[MARKER] = create_button(":images/marker.svg", [=](){
+    penButtons[MARKER] = create_button(MARKER, [=](){
         setPen(MARKER);
     });
 
-    penButtons[ERASER] = create_button(":images/eraser.svg", [=](){
+    penButtons[ERASER] = create_button(ERASER, [=](){
         setPen(ERASER);
     });
 
-    penButtons[LINE] = create_button(":images/line.svg", [=](){
+    penButtons[LINE] = create_button(LINE, [=](){
         setPenStyle(LINE);
     });
 
-    penButtons[VECTOR] = create_button(":images/vector.svg", [=](){
+    penButtons[VECTOR] = create_button(VECTOR, [=](){
         setPenStyle(VECTOR);
     });
     set_shortcut(penButtons[VECTOR], Qt::Key_V, Qt::AltModifier);
 
-    penButtons[VECTOR2] = create_button(":images/vector2.svg", [=](){
+    penButtons[VECTOR2] = create_button(VECTOR2, [=](){
         setPenStyle(VECTOR2);
     });
     set_shortcut(penButtons[VECTOR2], Qt::Key_W, Qt::AltModifier);
 
-    penButtons[CIRCLE] = create_button(":images/circle.svg", [=](){
+    penButtons[CIRCLE] = create_button(CIRCLE, [=](){
         setPenStyle(CIRCLE);
     });
     set_shortcut(penButtons[CIRCLE], Qt::Key_C, Qt::AltModifier);
 
-    penButtons[TRIANGLE] = create_button(":images/triangle.svg", [=](){
+    penButtons[TRIANGLE] = create_button(TRIANGLE, [=](){
         setPenStyle(TRIANGLE);
     });
     set_shortcut(penButtons[TRIANGLE], Qt::Key_T, Qt::AltModifier);
 
-    penButtons[RECTANGLE] = create_button(":images/rectangle.svg", [=](){
+    penButtons[RECTANGLE] = create_button(RECTANGLE, [=](){
         setPenStyle(RECTANGLE);
     });
     set_shortcut(penButtons[TRIANGLE], Qt::Key_R, Qt::AltModifier);
 
 
-    penButtons[SPLINE] = create_button(":images/spline.svg", [=](){
+    penButtons[SPLINE] = create_button(SPLINE, [=](){
         setPenStyle(SPLINE);
 
     });
     set_shortcut(penButtons[SPLINE], Qt::Key_S, Qt::AltModifier);
 
-    penButtons[NORMAL] = create_button(":images/line-normal.svg", [=](){
+    penButtons[NORMAL] = create_button(NORMAL, [=](){
         setLineStyle(NORMAL);
 
     });
 
-    penButtons[DOTLINE] = create_button(":images/line-dotline.svg", [=](){
+    penButtons[DOTLINE] = create_button(DOTLINE, [=](){
         setLineStyle(DOTLINE);
 
     });
 
-    penButtons[LINELINE] = create_button(":images/line-lineline.svg", [=](){
+    penButtons[LINELINE] = create_button(LINELINE, [=](){
         setLineStyle(LINELINE);
 
     });
@@ -155,7 +155,7 @@ void setupPenType(){
          }
     });
 
-    toolButtons[COLORPICKER] = create_button(":images/color-picker.svg", [=](){
+    toolButtons[COLORPICKER] = create_button(COLORPICKER, [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
         setHideMainWindow(true);
@@ -170,18 +170,18 @@ void setupPenType(){
     });
     set_shortcut(toolButtons[COLORPICKER], Qt::Key_0, 0);
 
-    toolButtons[BACK] = create_button(":images/go-back.svg", [=](){
+    toolButtons[BACK] = create_button(BACK, [=](){
         drawing->goPrevious();
     });
     set_shortcut(toolButtons[BACK], Qt::Key_Z, Qt::ControlModifier);
 
 
-    toolButtons[NEXT] = create_button(":images/go-next.svg", [=](){
+    toolButtons[NEXT] = create_button(NEXT, [=](){
         drawing->goNext();
     });
     set_shortcut(toolButtons[NEXT], Qt::Key_Y, Qt::ControlModifier);
 
-    toolButtons[CLOSE] = create_button(":images/close.svg", [=](){
+    toolButtons[CLOSE] = create_button(CLOSE, [=](){
 #ifdef ETAP19
     QStringList args3;
     QProcess p3;

@@ -10,7 +10,7 @@ void setupScreenShot(){
         ssTimer->stop();
 
     });
-    toolButtons[SCREENSHOT] = create_button(":images/screenshot.svg", [=](){
+    toolButtons[SCREENSHOT] = create_button(SCREENSHOT, [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
         ssTimer->start(500);

@@ -30,7 +30,7 @@ QPushButton* create_button_text(const char* name, ButtonEvent event) {
 
     return button;
 }
-QPushButton* create_button(const char* name, ButtonEvent event) {
+QPushButton* create_button(int id, ButtonEvent event) {
     QPushButton* button = new QPushButton("");
     if(event) {
         events[button] = [=]() {
@@ -39,7 +39,7 @@ QPushButton* create_button(const char* name, ButtonEvent event) {
         };
         QObject::connect(button, &QPushButton::clicked, events[button]);
     }
-    set_icon(name, button);
+    set_icon(get_icon_by_id(id), button);
     QFont font = button->font();
     font.setPointSize(18*scale);
     button->setFixedSize(butsize, butsize);

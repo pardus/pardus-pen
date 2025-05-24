@@ -14,6 +14,7 @@ src = [
     'src/widgets/Background.cpp',
     'src/widgets/Button.cpp',
     'src/tools/update.cpp',
+    'src/tools/icon.cpp',
     'src/tools/background.cpp',
     'src/tools/mainWindow.cpp',
     'src/tools/screenshot.cpp',
