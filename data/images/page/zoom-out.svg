@@ -1,6 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg width="800px" height="800px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M27.555 47.948C38.4554 47.948 47.292 39.1114 47.292 28.211C47.292 17.3106 38.4554 8.474 27.555 8.474C16.6545 8.474 7.81799 17.3106 7.81799 28.211C7.81799 39.1114 16.6545 47.948 27.555 47.948Z" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M41.53 42.1479L55.515 56.287" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M17.686 28.2109H37.423" stroke="#426AB2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
+<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F4F4F4;}
+	.st1{fill:#FF7878;}
+</style>
+<g>
+	<g>
+		<g>
+			<path class="st0" d="M2.4,48c0.61,0,1.23-0.23,1.7-0.7l10.44-10.44c0.94-0.94,0.94-2.46,0-3.39s-2.46-0.94-3.39,0L0.7,43.9
+				c-0.94,0.94-0.94,2.46,0,3.39C1.17,47.77,1.79,48,2.4,48z"/>
+		</g>
+		<g>
+			<path class="st0" d="M4.8,21.6C4.8,9.69,14.49,0,26.4,0C38.31,0,48,9.69,48,21.6s-9.69,21.6-21.6,21.6S4.8,33.51,4.8,21.6z
+				 M9.6,21.6c0,9.26,7.54,16.8,16.8,16.8s16.8-7.54,16.8-16.8S35.66,4.8,26.4,4.8S9.6,12.34,9.6,21.6z"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<path class="st1" d="M19.2,24h14.4c1.33,0,2.4-1.07,2.4-2.4s-1.07-2.4-2.4-2.4H19.2c-1.33,0-2.4,1.07-2.4,2.4S17.87,24,19.2,24z"
+				/>
+		</g>
+	</g>
+</g>
 </svg>
