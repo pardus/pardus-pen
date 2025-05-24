@@ -26,9 +26,20 @@ void setupWidgets(){
 
     // Pen button with menu
     toolButtons[PENMENU] = create_button(":images/pen.svg", [=](){
+        if(floatingSettings->current_page == 0 && drawing->getPen() != ERASER){
+            floatingSettings->setHide();
+            return;
+        }
+        if(drawing->getPenStyle() != SPLINE){
+            setPen(PEN);
+            setPenStyle(SPLINE);
+            floatingSettings->setHide();
+            return;
+        }
         if(drawing->getPen() != PEN){
             setPen(PEN);
             setPenStyle(SPLINE);
+            floatingSettings->setHide();
             return;
         }
         floatingSettings->setPage(0);
@@ -37,9 +48,14 @@ void setupWidgets(){
 
     // Eraser button with menu
     toolButtons[ERASERMENU] = create_button(":images/eraser.svg", [=](){
+        if(floatingSettings->current_page == 0 && drawing->getPen() == ERASER){
+            floatingSettings->setHide();
+            return;
+        }
         if(drawing->getPen() != ERASER){
             setPen(ERASER);
             setPenStyle(SPLINE);
+            floatingSettings->setHide();
             return;
         }
         floatingSettings->setPage(0);
@@ -56,14 +72,22 @@ void setupWidgets(){
 
     // Page menu button
     toolButtons[PAGEMENU] = create_button(":images/page-settings.svg", [=](){
-           floatingSettings->setPage(1);
-           floatingWidget->moveAction();
+        if(floatingSettings->current_page == 1){
+            floatingSettings->setHide();
+            return;
+        }
+        floatingSettings->setPage(1);
+        floatingWidget->moveAction();
     });
 
     // Page menu button
     toolButtons[UTILMENU] = create_button(":images/misc-settings.svg", [=](){
-           floatingSettings->setPage(2);
-           floatingWidget->moveAction();
+        if(floatingSettings->current_page == 2){
+            floatingSettings->setHide();
+            return;
+        }
+        floatingSettings->setPage(2);
+        floatingWidget->moveAction();
     });
 
 

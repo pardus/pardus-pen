@@ -34,12 +34,20 @@ void OverView::paintEvent(QPaintEvent *event) {
     int h = height() - 2*padding ;
     painter.end();
 
+    QColor penColor = drawing->penColor;
+    if (penType == MARKER){
+        penColor.setAlpha(127);
+    }
+
+
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    pen.setColor(drawing->penColor);
+    pen.setColor(penColor);
     pen.setWidth(penSize);
     painter.setPen(pen);
+
+
 
 
     if(penType == ERASER){
