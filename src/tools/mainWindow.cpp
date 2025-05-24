@@ -66,7 +66,7 @@ public:
 		// color switch
 		bool update = false;
 		if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
-		    drawing->penColor = colors[20 + event->key() - Qt::Key_1];
+		    drawing->penColor = colors[13 + event->key() - Qt::Key_1];
 		    update = true;
 		} else if (event->key() == Qt::Key_8){
 		    drawing->penColor = colors[0];

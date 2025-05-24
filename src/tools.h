@@ -48,6 +48,8 @@ extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;
 
+extern QWidget *bgMenu;
+
 extern float scale;
 extern int history;
 

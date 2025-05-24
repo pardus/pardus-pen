@@ -10,6 +10,9 @@ QLabel *thicknessLabel;
 QWidget *penTypeDialog;
 QWidget *modeDialog;
 
+QWidget *bgMenu;
+
+
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
 static QVBoxLayout *utilSettingsLayout;
@@ -334,7 +337,7 @@ void setupWidgets(){
 
 /********** page type **********/
 
-    QWidget *bgMenu = new QWidget();
+    bgMenu = new QWidget();
     QVBoxLayout *bgMenuLayout = new QVBoxLayout(bgMenu);
 
     bgMenu->setStyleSheet(

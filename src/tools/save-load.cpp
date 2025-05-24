@@ -23,10 +23,12 @@ extern "C" {
 void openFile(QString filename){
     if(!filename.isEmpty()){
         drawing->clearAll();
+        bgMenu->show();
         #ifdef QPRINTER
         if(filename.endsWith(".pdf")){
             loadPdf(filename);
             drawing->goPage(0);
+            bgMenu->hide();
         } else {
         #endif
             pthread_t ptid;
