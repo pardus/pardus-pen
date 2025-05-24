@@ -556,7 +556,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         curs.setPosition(id, pos);
                     }
                     addPoint(id, pos);
+                    painter.begin(&image);
                     drawFunc(id, pressure);
+                    painter.end();
                     break;
             }
             break;
