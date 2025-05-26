@@ -136,9 +136,10 @@ public:
         if(file.exists()){
             return loadImageFromFile(cache_path+QString::number(id));
         } else {
-            QImage image = QImage(mainWidget->geometry().width(),mainWidget->geometry().height(), QImage::Format_ARGB32);
-            image.fill(QColor("transparent"));
-            return image;
+            QPixmap pix = QPixmap(mainWidget->size()*mainWidget->devicePixelRatio());
+            pix.fill(QColor("transparent"));
+            pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
+            return pix.toImage();
         }
     }
 
@@ -342,8 +343,10 @@ void DrawingWidget::addImage(QImage img){
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
-    image = QImage(size, QImage::Format_ARGB32);
-    image.fill(QColor("transparent"));
+    QPixmap pix = QPixmap(size*mainWidget->devicePixelRatio());
+    pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
+    pix.fill(QColor("transparent"));
+    image = pix.toImage();
 }
 
 void DrawingWidget::resizeEvent(QResizeEvent *event) {
