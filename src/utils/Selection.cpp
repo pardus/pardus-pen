@@ -55,7 +55,15 @@ void DrawingWidget::createSelection(int source) {
 
     image.fill(QColor("transparent"));
 
-    cropWidget->image = background->image.copy(cropRect);
+    QPixmap pix = QPixmap(cropRect.size()*mainWidget->devicePixelRatio());
+    pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
+    cropWidget->image = pix.toImage();
+    painter.begin(&(cropWidget->image));
+    painter.drawImage(
+        topLeft.x()*mainWidget->devicePixelRatio()*-1,
+        topLeft.y()*mainWidget->devicePixelRatio()*-1,
+        background->image);
+    painter.end();
 
     painter.begin(&(background->image));
     painter.setBrush(QBrush(penColor));
@@ -93,7 +101,10 @@ void DrawingWidget::mergeSelection() {
     }
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
-    painter.drawImage(QPoint(cropWidget->x(), cropWidget->y()), cropWidget->image.scaled(cropWidget->width(), cropWidget->height()));
+    painter.drawImage(
+        QPoint(cropWidget->x(), cropWidget->y()),
+         cropWidget->image
+    );
     update(
         cropWidget->x(),
         cropWidget->y(),
