@@ -59,9 +59,10 @@ void DrawingWidget::createSelection(int source) {
     pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
     cropWidget->image = pix.toImage();
     painter.begin(&(cropWidget->image));
+    painter.setPen(Qt::NoPen);
     painter.drawImage(
-        topLeft.x()*mainWidget->devicePixelRatio()*-1,
-        topLeft.y()*mainWidget->devicePixelRatio()*-1,
+        topLeft.x()*-1,
+        topLeft.y()*-1,
         background->image);
     painter.end();
 
