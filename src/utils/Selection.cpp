@@ -28,7 +28,8 @@ void MovableWidget::mouseMoveEvent(QMouseEvent *event) {
             abs((mapToParent(event->pos()).x() - center.x())*2),
             abs((mapToParent(event->pos()).y() - center.y())*2)
         );
-        QPixmap pixmap = QPixmap::fromImage(image.scaled(width(), height()));
+        QPixmap pixmap = QPixmap::fromImage(image.scaled(width()*mainWidget->devicePixelRatio(), height()*mainWidget->devicePixelRatio()));
+        pixmap.setDevicePixelRatio(mainWidget->devicePixelRatio());
         crop->setPixmap(pixmap);
         newPos = QPoint(center.x() - (width()/2), center.y() - (height()/2));
     } else if (mode == DRAG) {
@@ -57,9 +58,11 @@ void DrawingWidget::createSelection(int source) {
 
     QPixmap pix = QPixmap(cropRect.size()*mainWidget->devicePixelRatio());
     pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
+    pix.fill(QColor("transparent"));
     cropWidget->image = pix.toImage();
     painter.begin(&(cropWidget->image));
     painter.setPen(Qt::NoPen);
+    painter.drawRect(cropRect);
     painter.drawImage(
         topLeft.x()*-1,
         topLeft.y()*-1,
@@ -104,7 +107,10 @@ void DrawingWidget::mergeSelection() {
     painter.setPen(Qt::NoPen);
     painter.drawImage(
         QPoint(cropWidget->x(), cropWidget->y()),
-         cropWidget->image
+         cropWidget->image.scaled(
+             cropWidget->width()*mainWidget->devicePixelRatio(),
+             cropWidget->height()*mainWidget->devicePixelRatio()
+         )
     );
     update(
         cropWidget->x(),
