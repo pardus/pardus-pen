@@ -184,6 +184,7 @@ public:
         QPainter painter(&printer);
         for(int i=0;i<=page_count;i++){
             QImage im = loadValue(i).loadValue(loadValue(i).last_image_num);
+            im.setDevicePixelRatio(mainWidget->devicePixelRatio());
             painter.drawPixmap(0,0, board->backgrounds[i]);
             painter.drawImage(0,0, im);
             printer.newPage();
@@ -446,6 +447,7 @@ void DrawingWidget::goPage(int num){
     images = pages.loadValue(pages.last_page_num);
     loadImage(images.last_image_num);
     board->backgrounds[old] = board->grab();
+    board->backgrounds[old].setDevicePixelRatio(mainWidget->devicePixelRatio());
 
     board->setType(images.pageType);
     board->setOverlayType(images.overlayType);
