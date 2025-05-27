@@ -40,17 +40,21 @@ public:
         for (auto it = values.begin(); it != values.end(); ++it) {
             QString path = it.key();
             QImage image = it.value();
-            // Convert QImage to a QByteArray
+            // Convert QImage to a QByteArrayn
             QByteArray imageData(reinterpret_cast<const char*>(image.constBits()), image.sizeInBytes());
+            QByteArray byteArray;
+            QDataStream out(&byteArray, QIODevice::WriteOnly);
+            out << image.width() << image.height() << static_cast<int>(image.format()) << imageData;
+
             // Create an entry and write image data to the archive
             struct archive_entry* entry = archive_entry_new();
             printf("Compress:%s\n", path.toStdString().c_str());
             archive_entry_set_pathname(entry, path.toStdString().c_str());
             archive_entry_set_filetype(entry, AE_IFREG);
             archive_entry_set_perm(entry, 0644);
-            archive_entry_set_size(entry, imageData.size());
+            archive_entry_set_size(entry, byteArray.size());
             archive_write_header(ar, entry);
-            archive_write_data(ar, imageData.data(), imageData.size());
+            archive_write_data(ar, byteArray.data(), byteArray.size());
             archive_entry_free(entry);
         }
         // Clean up
@@ -73,49 +77,48 @@ public:
             qDebug() << "Failed to open archive: " << archive_error_string(ar);
             return values;
         }
-        int width = mainWidget->geometry().width();
-        int height = mainWidget->geometry().height();
+
+        int width, height, format;
         while (archive_read_next_header(ar, &entry) == ARCHIVE_OK) {
             // Get entry name
             const char* entryName = archive_entry_pathname(entry);
-            // Check if it's an image file (you may need to modify this condition)
+            // Check if it's an image file
             if (entryName) {
                 // Extract the image data
-                QByteArray *imageData = new QByteArray();
+                QByteArray input;
                 char buff[10240];
                 size_t size;
-                size_t total_size = 0;
                 while ((size = archive_read_data(ar, buff, sizeof(buff))) > 0) {
-                    if(size > 10240){
-                        break;
-                    }
-                    // printf("Read: %ld bytes\n", size);
-                    imageData->append(buff, size);
-                    total_size+= size;
+                    input.append(buff, size);
                 }
-                printf("Decompress:%s %ld\n", entryName, total_size);
-                if(strcmp(entryName, "config") == 0){
-                    config = QString::fromUtf8(*imageData);
+
+                if (strcmp(entryName, "config") == 0) {
+                    config = QString::fromUtf8(input);
                     QStringList list = config.split("\n");
                     for (const auto &str : list) {
-                        if(str.startsWith("width=")){
+                        if (str.startsWith("width=")) {
                             width = str.split("=")[1].toInt();
-                        } else if(str.startsWith("height=")){
+                        } else if (str.startsWith("height=")) {
                             height = str.split("=")[1].toInt();
                         }
-
                     }
                     continue;
                 }
-                QImage image = QImage(reinterpret_cast<const uchar*>(imageData->data()), width, height, QImage::Format_ARGB32);
+
+                // Read image data from QByteArray
+                QDataStream inputStream(&input, QIODevice::ReadOnly);
+                inputStream >> width >> height >> format;
+
+                QByteArray loadedData;
+                loadedData = input.mid(inputStream.device()->pos()); // Get the remaining data after reading width, height, and format
+
+                QImage image(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
                 if (image.isNull()) {
                     puts("Image load fail");
                     continue;
                 }
                 image = image.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
                 values.insert(QString(entryName), image);
-            } else {
-                break;
             }
         }
         // Close the archive
