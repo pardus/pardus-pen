@@ -56,7 +56,6 @@ QPushButton* create_color_button(QColor color){
         if(drawing->getPen() == ERASER){
             drawing->setPen(PEN);
         }
-        floatingSettings->setHide();
         updateGui();
     });
     return button;

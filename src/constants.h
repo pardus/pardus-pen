@@ -50,3 +50,4 @@
 #define SCREENSHOT 72
 #define UTILMENU 73
 #define CURSOR 74
+#define SHAPEMENU 75

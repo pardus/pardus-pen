@@ -93,3 +93,51 @@ char* get_icon_by_id(int id){
     }
     return (char*)"";
 }
+
+QString get_overlay_by_id(int id){
+    switch(id){
+        case TRANSPARENT:
+            return "transparent";
+        case WHITE:
+            return "white";
+        case BLACK:
+            return "black";
+        case BLANK:
+            return "blank";
+        case SQUARES:
+            return "squares";
+        case LINES:
+            return "lines";
+        case ISOMETRIC:
+            return "isometric";
+        case MUSIC:
+            return "music";
+        case CUSTOM:
+            return "custom";
+    }
+    return (char*)"";
+}
+
+int get_id_by_overlay(QString foverlay){
+    const char* overlay = foverlay.toStdString().c_str();
+    if(strcmp(overlay, "transparent") == 0) {
+        return TRANSPARENT;
+    } else if(strcmp(overlay, "white") == 0) {
+        return WHITE;
+    } else if(strcmp(overlay, "black") == 0) {
+        return BLACK;
+    } else if(strcmp(overlay, "blank") == 0) {
+        return BLANK;
+    } else if(strcmp(overlay, "squares") == 0) {
+        return SQUARES;
+    } else if(strcmp(overlay, "lines") == 0) {
+        return LINES;
+    } else if(strcmp(overlay, "isometric") == 0) {
+        return ISOMETRIC;
+    } else if(strcmp(overlay, "music") == 0) {
+        return MUSIC;
+    } else if(strcmp(overlay, "music") == 0) {
+        return CUSTOM;
+    }
+    return 0;
+}

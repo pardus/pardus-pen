@@ -30,7 +30,7 @@
 #ifndef DEBUG
 #define debug(...)
 #else
-#define debug (void)printf("[%s]:", __func__); (void)printf
+#define debug printf("[%s]:", __func__); printf
 #endif
 
 #define _(String) gettext(String)
@@ -101,6 +101,8 @@ extern void setupSaveLoad();
 
 extern void setupWidgets();
 extern char* get_icon_by_id(int id);
+extern QString get_overlay_by_id(int id);
+extern int get_id_by_overlay(QString foverlay);
 
 void setHideMainWindow(bool status);
 #ifdef QPRINTER

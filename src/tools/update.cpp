@@ -16,11 +16,13 @@ void updateGui(){
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
 
     if(drawing->getPen() == MARKER || drawing->getPen() == PEN){
-        set_icon_combined(get_icon_by_id(drawing->getPen()), get_icon_by_id(drawing->getPenStyle()), toolButtons[PENMENU]);
+        set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     } else if (drawing->getPen() == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
     }
+    toolButtons[SHAPEMENU]->setEnabled(drawing->getPen() != ERASER);
+    set_icon(get_icon_by_id(drawing->getPenStyle()), toolButtons[SHAPEMENU]);
     // Update button backgrounds
     for (auto it = penButtons.begin(); it != penButtons.end(); ++it) {
         it.value()->setStyleSheet(QString("background-color: none;"));

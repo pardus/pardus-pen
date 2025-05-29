@@ -33,12 +33,6 @@ void setupWidgets(){
             floatingSettings->setHide();
             return;
         }
-        if(drawing->getPenStyle() != SPLINE){
-            setPen(PEN);
-            setPenStyle(SPLINE);
-            floatingSettings->setHide();
-            return;
-        }
         if(drawing->getPen() != PEN){
             setPen(PEN);
             setPenStyle(SPLINE);
@@ -62,6 +56,15 @@ void setupWidgets(){
             return;
         }
         floatingSettings->setPage(0);
+        floatingWidget->moveAction();
+    });
+
+    toolButtons[SHAPEMENU] = create_button(SPLINE, [=](){
+        if(floatingSettings->current_page == 0){
+            floatingSettings->setHide();
+            return;
+        }
+	      floatingSettings->setPage(0);
         floatingWidget->moveAction();
     });
 
@@ -101,8 +104,10 @@ void setupWidgets(){
 
     floatingWidget->addWidget(toolButtons[PENMENU]);
     floatingWidget->addWidget(toolButtons[ERASERMENU]);
-    floatingWidget->addWidget(toolButtons[MINIFY]);
+    floatingWidget->addWidget(toolButtons[SHAPEMENU]);
     floatingWidget->addWidget(penButtons[SELECTION]);
+    floatingWidget->addWidget(toolButtons[MINIFY]);
+    floatingWidget->addWidget(toolButtons[CLEAR]);
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[PAGEMENU]);
@@ -212,7 +217,7 @@ void setupWidgets(){
     styleLayout->addWidget(penButtons[PEN],           0, 0, Qt::AlignCenter);
     styleLayout->addWidget(penButtons[MARKER],        0, 1, Qt::AlignCenter);
     styleLayout->addWidget(penButtons[ERASER],        0, 2, Qt::AlignCenter);
-    styleLayout->addWidget(toolButtons[CLEAR],        0, 3, Qt::AlignCenter);
+    //styleLayout->addWidget(toolButtons[CLEAR],        0, 3, Qt::AlignCenter);
 
     penSettingsLayout->addWidget(styleDialog, Qt::AlignCenter);
 

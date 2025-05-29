@@ -202,10 +202,10 @@ public:
         cfg += "height="+QString::number(mainWidget->geometry().height())+"\n";
         for(int i=0;i<=page_count;i++){
             cfg += "[page"+QString::number(i)+"]\n";
-            cfg += "overlay="+QString::number(loadValue(i).overlayType)+"\n";
+            cfg += "overlay="+get_overlay_by_id(loadValue(i).overlayType)+"\n";
             cfg += "ratio="+QString::number(board->ratios[i])+"\n";
             cfg += "rotate="+QString::number(board->rotates[i])+"\n";
-            cfg += "page="+QString::number(loadValue(i).pageType)+"\n";
+            cfg += "page="+get_overlay_by_id(loadValue(i).pageType)+"\n";
             archive_add(QString::number(i)+"/background", board->overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
@@ -253,10 +253,10 @@ public:
                     page = area.mid(4,str.length()-1).toInt();
                 }
             } else if(str.startsWith("overlay")){
-                values[page].overlayType = str.split("=")[1].toInt();
+                values[page].overlayType = get_id_by_overlay(str.split("=")[1]);
                 debug("Load: page: %d overlay %d\n", page, values[page].overlayType);
             } else if(str.startsWith("page")){
-                values[page].pageType = str.split("=")[1].toInt();
+                values[page].pageType = get_id_by_overlay(str.split("=")[1]);
                 debug("Load: page: %d page %d\n", page, values[page].pageType);
             } else if(str.startsWith("ratio")){
                 board->ratios[page] = str.split("=")[1].toInt();
