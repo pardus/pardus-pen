@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-22 11:19+0000\n"
+"POT-Creation-Date: 2025-05-30 20:16+0300\n"
 "PO-Revision-Date: 2024-08-07 00:19+0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -19,71 +19,85 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.4.3\n"
 
-#: src/tools/pen.cpp:165
-msgid "Select Color"
-msgstr "Renk Seçin"
-
-#: src/tools/mainWindow.cpp:271 src/main.cpp:73
-msgid "Pardus Pen"
-msgstr "Pardus Kalem"
-
-#: src/tools/save-load.cpp:44 src/tools/save-load.cpp:73
-msgid "Pen Files (*.pen);;"
-msgstr "Kalem Dosyaları (*.pen);;"
-
-#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
-msgid "PDF Files (*.pdf);;"
-msgstr "PDF  Dosyaları (*.pdf);;"
-
-#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
-#: src/tools/background.cpp:71
-msgid "All Files (*.*)"
-msgstr "Tüm Dosyalar (*.*)"
-
-#: src/tools/save-load.cpp:53
-msgid "Save File"
-msgstr "Dosya Kaydet"
-
-#: src/tools/save-load.cpp:81
-msgid "Open File"
-msgstr "Dosya Aç"
-
-#: src/tools/background.cpp:70
+#: src/tools/background.cpp:60
 msgid "Images"
 msgstr "Resimler"
 
-#: src/tools/background.cpp:75
+#: src/tools/background.cpp:61 src/tools/save-load.cpp:50
+#: src/tools/save-load.cpp:79
+msgid "All Files (*.*)"
+msgstr "Tüm Dosyalar (*.*)"
+
+#: src/tools/background.cpp:65
 msgid "Open Image File"
 msgstr "Resim Aç"
 
-#: src/tools/background.cpp:94
+#: src/tools/background.cpp:85
 msgid "Go page"
 msgstr "Sayfaya git"
 
-#: src/tools/background.cpp:95 src/SetupWidgets.cpp:237
+#: src/tools/background.cpp:86 src/SetupWidgets.cpp:313
 msgid "Page:"
 msgstr "Sayfa:"
 
-#: src/tools/update.cpp:32
+#: src/tools/mainWindow.cpp:268 src/main.cpp:73
+msgid "Pardus Pen"
+msgstr "Pardus Kalem"
+
+#: src/tools/pen.cpp:139 src/tools/update.cpp:42
 msgid "Size:"
 msgstr "Boyutu:"
 
-#: src/utils/ScreenShot.cpp:58
-msgid "Info"
-msgstr "Bilgi"
+#: src/tools/pen.cpp:162
+msgid "Select Color"
+msgstr "Renk Seçin"
 
-#: src/utils/ScreenShot.cpp:61
-msgid "Screenshot saved:"
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+msgid "Pen Files (*.pen);;"
+msgstr "Kalem Dosyaları (*.pen);;"
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+msgid "PDF Files (*.pdf);;"
+msgstr "PDF  Dosyaları (*.pdf);;"
+
+#: src/tools/save-load.cpp:55
+msgid "Save File"
+msgstr "Dosya Kaydet"
+
+#: src/tools/save-load.cpp:83 src/utils/ScreenShot.cpp:68
+msgid "Open File"
+msgstr "Dosya Aç"
+
+#: src/utils/ScreenShot.cpp:65
+#, fuzzy
+msgid "Screenshot Saved"
 msgstr "Ekran görüntüsü kaydedildi:"
 
-#: src/utils/ScreenShot.cpp:63
-msgid "Failed To save:"
+#: src/utils/ScreenShot.cpp:66
+#, fuzzy
+msgid "Screenshot saved to:"
+msgstr "Ekran görüntüsü kaydedildi:"
+
+#: src/utils/ScreenShot.cpp:69
+msgid "Open Containing Folder"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:84
+msgid "Error Saving Screenshot"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:85
+#, fuzzy
+msgid "Failed to save screenshot to:"
 msgstr "Kaydedilemedi:"
 
-#: src/SetupWidgets.cpp:114
+#: src/SetupWidgets.cpp:158
 msgid "Size: 10"
 msgstr "Boyut: 10"
 
-#: src/SetupWidgets.cpp:258
+#: src/SetupWidgets.cpp:356
 msgid "Background:"
 msgstr "Arka Plan"
+
+#~ msgid "Info"
+#~ msgstr "Bilgi"
