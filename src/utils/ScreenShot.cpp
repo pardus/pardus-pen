@@ -5,6 +5,10 @@
 
 #include <iostream>
 
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFileInfo>
+
 #include "../utils/ScreenShot.h"
 #include "../widgets/DrawingWidget.h"
 
@@ -55,16 +59,34 @@ void takeScreenshot(){
     QMessageBox messageBox;
     Qt::WindowFlags flags =  Qt::Dialog | Qt::X11BypassWindowManagerHint;
     messageBox.setWindowFlags(flags);
-    messageBox.setText(_("Info"));
-    std::string msg;
+    
     if (status == 0){
-        msg = _("Screenshot saved:") + imgname.toStdString() + "\n";
+        messageBox.setIcon(QMessageBox::Information);
+        messageBox.setText(_("Screenshot Saved"));
+        messageBox.setInformativeText(_("Screenshot saved to:") + imgname);
+
+        QPushButton *openFileButton = messageBox.addButton(_("Open File"), QMessageBox::ActionRole);
+        QPushButton *openFolderButton = messageBox.addButton(_("Open Containing Folder"), QMessageBox::ActionRole);
+        messageBox.addButton(QMessageBox::Ok);
+
+        messageBox.exec();
+
+        if (messageBox.clickedButton() == openFileButton) {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(imgname));
+        } else if (messageBox.clickedButton() == openFolderButton) {
+            QFileInfo fileInfo(imgname);
+            QDesktopServices::openUrl(QUrl::fromLocalFile(fileInfo.absolutePath()));
+        }
+        delete openFileButton;
+        delete openFolderButton;
     } else {
-        msg = _("Failed To save:") + imgname.toStdString() + "\n";
+        messageBox.setIcon(QMessageBox::Warning);
+        messageBox.setText(_("Error Saving Screenshot"));
+        std::string fail_msg_str = _("Failed to save screenshot to:") + imgname.toStdString();
+        messageBox.setInformativeText(QString::fromStdString(fail_msg_str));
+        messageBox.addButton(QMessageBox::Ok);
+        messageBox.exec();
     }
-    messageBox.setInformativeText(msg.c_str());
-    messageBox.setIcon(QMessageBox::Information);
-    messageBox.exec();
 }
 
 #endif
