@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-30 20:16+0300\n"
-"PO-Revision-Date: 2024-08-07 00:19+0300\n"
-"Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
+"PO-Revision-Date: 2025-05-30 20:21+0300\n"
+"Last-Translator: Edip Hazuri <edip@medip.dev>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.3\n"
+"X-Generator: Poedit 3.6\n"
 
 #: src/tools/background.cpp:60
 msgid "Images"
@@ -69,14 +69,12 @@ msgid "Open File"
 msgstr "Dosya Aç"
 
 #: src/utils/ScreenShot.cpp:65
-#, fuzzy
 msgid "Screenshot Saved"
-msgstr "Ekran görüntüsü kaydedildi:"
+msgstr "Ekran görüntüsü kaydedildi"
 
 #: src/utils/ScreenShot.cpp:66
-#, fuzzy
 msgid "Screenshot saved to:"
-msgstr "Ekran görüntüsü kaydedildi:"
+msgstr "Ekran görüntüsü şuraya kaydedildi:"
 
 #: src/utils/ScreenShot.cpp:69
 msgid "Open Containing Folder"
@@ -84,12 +82,11 @@ msgstr ""
 
 #: src/utils/ScreenShot.cpp:84
 msgid "Error Saving Screenshot"
-msgstr ""
+msgstr "Ekran görüntüsü kaydedilemedi"
 
 #: src/utils/ScreenShot.cpp:85
-#, fuzzy
 msgid "Failed to save screenshot to:"
-msgstr "Kaydedilemedi:"
+msgstr "Ekran görüntüsü şuraya kaydedilemedi:"
 
 #: src/SetupWidgets.cpp:158
 msgid "Size: 10"
@@ -97,7 +94,7 @@ msgstr "Boyut: 10"
 
 #: src/SetupWidgets.cpp:356
 msgid "Background:"
-msgstr "Arka Plan"
+msgstr "Arka Plan:"
 
 #~ msgid "Info"
 #~ msgstr "Bilgi"
