@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-22 11:19+0000\n"
-"PO-Revision-Date: 2025-01-03 20:23+0000\n"
+"PO-Revision-Date: 2025-05-31 17:31+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/tools/pen.cpp:165
 msgid "Select Color"
@@ -58,7 +58,7 @@ msgstr "Abrir imagem"
 
 #: src/tools/background.cpp:94
 msgid "Go page"
-msgstr ""
+msgstr "Ir para página"
 
 #: src/tools/background.cpp:95 src/SetupWidgets.cpp:237
 msgid "Page:"
@@ -87,40 +87,3 @@ msgstr "Tamanho: 10"
 #: src/SetupWidgets.cpp:258
 msgid "Background:"
 msgstr "Fundo:"
-
-#~ msgid "Pen"
-#~ msgstr "Caneta"
-
-#~ msgid "Marker"
-#~ msgstr "Marcador"
-
-#~ msgid "Eraser"
-#~ msgstr "Borracha"
-
-#~ msgid "Color:"
-#~ msgstr "Cor:"
-
-#, fuzzy
-#~ msgid " Color:"
-#~ msgstr "Cor:"
-
-#~ msgid "Color Picker"
-#~ msgstr "Seletor de cor"
-
-#~ msgid "Pen Style"
-#~ msgstr "Estilo de caneta"
-
-#~ msgid "Do you want to clear screen?"
-#~ msgstr "Limpar o ecrã?"
-
-#~ msgid "No"
-#~ msgstr "Não"
-
-#~ msgid "Yes"
-#~ msgstr "Sim"
-
-#~ msgid "Do you want to quit Pardus pen?"
-#~ msgstr "Sair da caneta Pardus?"
-
-#~ msgid "Pen Files (*.pen);;All Files (*.*)"
-#~ msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
