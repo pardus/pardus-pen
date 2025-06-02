@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-30 20:16+0300\n"
+"POT-Creation-Date: 2025-06-02 13:35+0000\n"
 "PO-Revision-Date: 2025-01-03 20:23+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
@@ -19,55 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: src/tools/background.cpp:60
-msgid "Images"
-msgstr "Imagens"
-
-#: src/tools/background.cpp:61 src/tools/save-load.cpp:50
-#: src/tools/save-load.cpp:79
-msgid "All Files (*.*)"
-msgstr "Todos os ficheiros (*.*)"
-
-#: src/tools/background.cpp:65
-msgid "Open Image File"
-msgstr "Abrir imagem"
-
-#: src/tools/background.cpp:85
-msgid "Go page"
-msgstr ""
-
-#: src/tools/background.cpp:86 src/SetupWidgets.cpp:313
-msgid "Page:"
-msgstr "Página:"
-
-#: src/tools/mainWindow.cpp:268 src/main.cpp:73
-msgid "Pardus Pen"
-msgstr "Caneta Pardus"
-
-#: src/tools/pen.cpp:139 src/tools/update.cpp:42
-msgid "Size:"
-msgstr "Tamanho:"
-
-#: src/tools/pen.cpp:162
-msgid "Select Color"
-msgstr "Selecionar cor"
-
-#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
-msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;"
-
-#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
-msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros PDF (*.pdf);;"
-
-#: src/tools/save-load.cpp:55
-msgid "Save File"
-msgstr "Guardar ficheiro"
-
-#: src/tools/save-load.cpp:83 src/utils/ScreenShot.cpp:68
-msgid "Open File"
-msgstr "Abrir ficheiro"
-
 #: src/utils/ScreenShot.cpp:65
 #, fuzzy
 msgid "Screenshot Saved"
@@ -77,6 +28,10 @@ msgstr "Captura de ecrã guardada:"
 #, fuzzy
 msgid "Screenshot saved to:"
 msgstr "Captura de ecrã guardada:"
+
+#: src/utils/ScreenShot.cpp:68 src/tools/save-load.cpp:83
+msgid "Open File"
+msgstr "Abrir ficheiro"
 
 #: src/utils/ScreenShot.cpp:69
 msgid "Open Containing Folder"
@@ -90,6 +45,59 @@ msgstr ""
 #, fuzzy
 msgid "Failed to save screenshot to:"
 msgstr "Erro ao guardar:"
+
+#: src/main.cpp:73 src/tools/mainWindow.cpp:67 src/tools/mainWindow.cpp:284
+msgid "Pardus Pen"
+msgstr "Caneta Pardus"
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+msgid "Pen Files (*.pen);;"
+msgstr "Ficheiros de caneta (*.pen);;"
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+msgid "PDF Files (*.pdf);;"
+msgstr "Ficheiros PDF (*.pdf);;"
+
+#: src/tools/save-load.cpp:50 src/tools/save-load.cpp:79
+#: src/tools/background.cpp:61
+msgid "All Files (*.*)"
+msgstr "Todos os ficheiros (*.*)"
+
+#: src/tools/save-load.cpp:55
+msgid "Save File"
+msgstr "Guardar ficheiro"
+
+#: src/tools/background.cpp:60
+msgid "Images"
+msgstr "Imagens"
+
+#: src/tools/background.cpp:65
+msgid "Open Image File"
+msgstr "Abrir imagem"
+
+#: src/tools/background.cpp:85
+msgid "Go page"
+msgstr ""
+
+#: src/tools/background.cpp:86 src/SetupWidgets.cpp:313
+msgid "Page:"
+msgstr "Página:"
+
+#: src/tools/pen.cpp:139 src/tools/update.cpp:42
+msgid "Size:"
+msgstr "Tamanho:"
+
+#: src/tools/pen.cpp:162
+msgid "Select Color"
+msgstr "Selecionar cor"
+
+#: src/tools/mainWindow.cpp:68
+msgid "Exit"
+msgstr ""
+
+#: src/tools/mainWindow.cpp:69
+msgid "Are you sure you want to exit?"
+msgstr ""
 
 #: src/SetupWidgets.cpp:158
 msgid "Size: 10"

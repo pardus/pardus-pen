@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-30 20:16+0300\n"
+"POT-Creation-Date: 2025-06-02 13:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,53 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/tools/background.cpp:60
-msgid "Images"
+#: src/utils/ScreenShot.cpp:65
+msgid "Screenshot Saved"
 msgstr ""
 
-#: src/tools/background.cpp:61 src/tools/save-load.cpp:50
-#: src/tools/save-load.cpp:79
+#: src/utils/ScreenShot.cpp:66
+msgid "Screenshot saved to:"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:68 src/tools/save-load.cpp:83
+msgid "Open File"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:69
+msgid "Open Containing Folder"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:84
+msgid "Error Saving Screenshot"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:85
+msgid "Failed to save screenshot to:"
+msgstr ""
+
+#: src/main.cpp:73 src/tools/mainWindow.cpp:67 src/tools/mainWindow.cpp:284
+msgid "Pardus Pen"
+msgstr ""
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+msgid "Pen Files (*.pen);;"
+msgstr ""
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+msgid "PDF Files (*.pdf);;"
+msgstr ""
+
+#: src/tools/save-load.cpp:50 src/tools/save-load.cpp:79
+#: src/tools/background.cpp:61
 msgid "All Files (*.*)"
+msgstr ""
+
+#: src/tools/save-load.cpp:55
+msgid "Save File"
+msgstr ""
+
+#: src/tools/background.cpp:60
+msgid "Images"
 msgstr ""
 
 #: src/tools/background.cpp:65
@@ -38,10 +78,6 @@ msgstr ""
 msgid "Page:"
 msgstr ""
 
-#: src/tools/mainWindow.cpp:268 src/main.cpp:73
-msgid "Pardus Pen"
-msgstr ""
-
 #: src/tools/pen.cpp:139 src/tools/update.cpp:42
 msgid "Size:"
 msgstr ""
@@ -50,40 +86,12 @@ msgstr ""
 msgid "Select Color"
 msgstr ""
 
-#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
-msgid "Pen Files (*.pen);;"
+#: src/tools/mainWindow.cpp:68
+msgid "Exit"
 msgstr ""
 
-#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
-msgid "PDF Files (*.pdf);;"
-msgstr ""
-
-#: src/tools/save-load.cpp:55
-msgid "Save File"
-msgstr ""
-
-#: src/tools/save-load.cpp:83 src/utils/ScreenShot.cpp:68
-msgid "Open File"
-msgstr ""
-
-#: src/utils/ScreenShot.cpp:65
-msgid "Screenshot Saved"
-msgstr ""
-
-#: src/utils/ScreenShot.cpp:66
-msgid "Screenshot saved to:"
-msgstr ""
-
-#: src/utils/ScreenShot.cpp:69
-msgid "Open Containing Folder"
-msgstr ""
-
-#: src/utils/ScreenShot.cpp:84
-msgid "Error Saving Screenshot"
-msgstr ""
-
-#: src/utils/ScreenShot.cpp:85
-msgid "Failed to save screenshot to:"
+#: src/tools/mainWindow.cpp:69
+msgid "Are you sure you want to exit?"
 msgstr ""
 
 #: src/SetupWidgets.cpp:158

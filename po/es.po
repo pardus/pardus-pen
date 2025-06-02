@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-30 20:16+0300\n"
+"POT-Creation-Date: 2025-06-02 13:35+0000\n"
 "PO-Revision-Date: 2024-10-26 15:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,15 +17,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.4.4\n"
 
-#: src/tools/background.cpp:60
-msgid "Images"
+#: src/utils/ScreenShot.cpp:65
+#, fuzzy
+msgid "Screenshot Saved"
+msgstr "Captura de pantalla guardada:"
+
+#: src/utils/ScreenShot.cpp:66
+#, fuzzy
+msgid "Screenshot saved to:"
+msgstr "Captura de pantalla guardada:"
+
+#: src/utils/ScreenShot.cpp:68 src/tools/save-load.cpp:83
+msgid "Open File"
+msgstr "Abrir archivo"
+
+#: src/utils/ScreenShot.cpp:69
+msgid "Open Containing Folder"
 msgstr ""
 
-#: src/tools/background.cpp:61 src/tools/save-load.cpp:50
-#: src/tools/save-load.cpp:79
+#: src/utils/ScreenShot.cpp:84
+msgid "Error Saving Screenshot"
+msgstr ""
+
+#: src/utils/ScreenShot.cpp:85
+#, fuzzy
+msgid "Failed to save screenshot to:"
+msgstr "Error al guardar:"
+
+#: src/main.cpp:73 src/tools/mainWindow.cpp:67 src/tools/mainWindow.cpp:284
+msgid "Pardus Pen"
+msgstr "Lápiz Pardus"
+
+#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
+#, fuzzy
+msgid "Pen Files (*.pen);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
+#, fuzzy
+msgid "PDF Files (*.pdf);;"
+msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:50 src/tools/save-load.cpp:79
+#: src/tools/background.cpp:61
 #, fuzzy
 msgid "All Files (*.*)"
 msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
+
+#: src/tools/save-load.cpp:55
+msgid "Save File"
+msgstr "Guardar archivo"
+
+#: src/tools/background.cpp:60
+msgid "Images"
+msgstr ""
 
 #: src/tools/background.cpp:65
 #, fuzzy
@@ -40,10 +85,6 @@ msgstr ""
 msgid "Page:"
 msgstr ""
 
-#: src/tools/mainWindow.cpp:268 src/main.cpp:73
-msgid "Pardus Pen"
-msgstr "Lápiz Pardus"
-
 #: src/tools/pen.cpp:139 src/tools/update.cpp:42
 msgid "Size:"
 msgstr "Tamaño:"
@@ -52,46 +93,13 @@ msgstr "Tamaño:"
 msgid "Select Color"
 msgstr "Seleccione el color"
 
-#: src/tools/save-load.cpp:46 src/tools/save-load.cpp:75
-#, fuzzy
-msgid "Pen Files (*.pen);;"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/tools/save-load.cpp:48 src/tools/save-load.cpp:77
-#, fuzzy
-msgid "PDF Files (*.pdf);;"
-msgstr "Archivos de lápiz (*.pen);;Todos los archivos (*.*)"
-
-#: src/tools/save-load.cpp:55
-msgid "Save File"
-msgstr "Guardar archivo"
-
-#: src/tools/save-load.cpp:83 src/utils/ScreenShot.cpp:68
-msgid "Open File"
-msgstr "Abrir archivo"
-
-#: src/utils/ScreenShot.cpp:65
-#, fuzzy
-msgid "Screenshot Saved"
-msgstr "Captura de pantalla guardada:"
-
-#: src/utils/ScreenShot.cpp:66
-#, fuzzy
-msgid "Screenshot saved to:"
-msgstr "Captura de pantalla guardada:"
-
-#: src/utils/ScreenShot.cpp:69
-msgid "Open Containing Folder"
+#: src/tools/mainWindow.cpp:68
+msgid "Exit"
 msgstr ""
 
-#: src/utils/ScreenShot.cpp:84
-msgid "Error Saving Screenshot"
+#: src/tools/mainWindow.cpp:69
+msgid "Are you sure you want to exit?"
 msgstr ""
-
-#: src/utils/ScreenShot.cpp:85
-#, fuzzy
-msgid "Failed to save screenshot to:"
-msgstr "Error al guardar:"
 
 #: src/SetupWidgets.cpp:158
 #, fuzzy
