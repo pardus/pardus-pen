@@ -22,6 +22,8 @@ extern QColor colors[];
 
 class MainWindow : public QMainWindow {
 
+#define SCROLLSIZE 22*scale
+
 public:
     QScreen *screen;
     MainWindow() {
@@ -60,37 +62,49 @@ public:
 
     }
 
-
-    void keyPressEvent(QKeyEvent *event) override {
-		// https://doc.qt.io/qt-6/qt.html#Key-enum
-		// color switch
-		bool update = false;
-		if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
-		    drawing->penColor = colors[13 + event->key() - Qt::Key_1];
-		    update = true;
-		} else if (event->key() == Qt::Key_8){
-		    drawing->penColor = colors[0];
-		    update = true;
-		} else if (event->key() == Qt::Key_9){
-		    drawing->penColor = colors[5];
-		    update = true;
-		} else {
-		    do_shortcut(event->key(), event->modifiers());
-		}
-		if(update){
-		    updateGui();
-		}
-}
-
-#define SCROLLSIZE 22*scale
+    void showCloseDialog(){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle(_("Pardus Pen"));
+        msgBox.setText(_("Exit"));
+        msgBox.setInformativeText(_("Are you sure you want to exit?"));
+        msgBox.setStandardButtons(QMessageBox::Yes);
+        msgBox.addButton(QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        if(msgBox.exec() == QMessageBox::Yes){
+            exit(0);
+        }
+    }
 
 protected:
-     void closeEvent(QCloseEvent *event) override {
+
+    void keyPressEvent(QKeyEvent *event) override {
+        // https://doc.qt.io/qt-6/qt.html#Key-enum
+        // color switch
+        bool update = false;
+        if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
+            drawing->penColor = colors[13 + event->key() - Qt::Key_1];
+            update = true;
+        } else if (event->key() == Qt::Key_8){
+            drawing->penColor = colors[0];
+            update = true;
+        } else if (event->key() == Qt::Key_9){
+             drawing->penColor = colors[5];
+             update = true;
+        } else {
+             do_shortcut(event->key(), event->modifiers());
+        }
+        if(update){
+            updateGui();
+        }
+    }
+
+
+    void closeEvent(QCloseEvent *event) override {
         puts("Close event");
-        setWindowState(Qt::WindowActive);
+        showCloseDialog();
         event->ignore();
-     }
-     void resizeEvent(QResizeEvent *event) override {
+    }
+    void resizeEvent(QResizeEvent *event) override {
         screen = QGuiApplication::primaryScreen();
         mainWidget->setFixedSize(screen->size().width(), screen->size().height());
         drawing->setFixedSize(screen->size().width(), screen->size().height());
@@ -138,6 +152,7 @@ protected:
         drawing->update();
     }
 };
+
 static MainWindow *mainWindow;
 static bool isFullScreen = true;
 static bool hideState = true;

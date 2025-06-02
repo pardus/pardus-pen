@@ -182,18 +182,17 @@ void setupPenType(){
     set_shortcut(toolButtons[NEXT], Qt::Key_Y, Qt::ControlModifier);
 
     toolButtons[CLOSE] = create_button(CLOSE, [=](){
-#ifdef ETAP19
-    QStringList args3;
-    QProcess p3;
-    args3 << "-d" << "eta-disable-gestures@pardus.org.tr";
-    p3.execute("gnome-shell-extension-tool", args3);
+    #ifdef ETAP19
+        QStringList args3;
+        QProcess p3;
+        args3 << "-d" << "eta-disable-gestures@pardus.org.tr";
+        p3.execute("gnome-shell-extension-tool", args3);
 
-    QStringList args4;
-    QProcess p4;
-    args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
-    p4.execute("gsettings", args4);
-#endif
-        QApplication::quit();
+        QStringList args4;
+        QProcess p4;
+        args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
+        p4.execute("gsettings", args4);
+    #endif
         exit(0);
     });
 
