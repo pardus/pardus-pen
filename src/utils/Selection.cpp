@@ -95,7 +95,7 @@ void DrawingWidget::clearSelection() {
     cropWidget->move(QPoint(-1,-1));
     cropWidget->image = QImage(QSize(0,0), QImage::Format_ARGB32);
     cropWidget->image.fill(QColor("transparent"));
-    addImage(image);
+    addImage(image.toImage());
 
 }
 

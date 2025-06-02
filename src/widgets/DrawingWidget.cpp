@@ -347,7 +347,7 @@ void DrawingWidget::initializeImage(const QSize &size) {
     QPixmap pix = QPixmap(size*mainWidget->devicePixelRatio());
     pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
     pix.fill(QColor("transparent"));
-    image = pix.toImage();
+    image = pix;
 }
 
 void DrawingWidget::resizeEvent(QResizeEvent *event) {
@@ -358,11 +358,12 @@ void DrawingWidget::resizeEvent(QResizeEvent *event) {
 
 void DrawingWidget::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
-    painter.begin(this);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-    painter.drawImage(0, 0, image);
-    painter.end();
+    QPainter p;
+    p.begin(this);
+    p.setRenderHint(QPainter::Antialiasing, true);
+    p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    p.drawPixmap(0, 0, image);
+    p.end();
 }
 
 
@@ -527,7 +528,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (num_of_press == 1){
                 mergeSelection();
                 if(penType != ERASER){
-                    background->image = image;
+                    background->image = image.toImage();
                     background->update();
                     image.fill(QColor("transparent"));
                 }
@@ -587,15 +588,15 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     update();
                 }
                 if(penType != ERASER){
-                    background->applyImage(image);
-                    image = background->image;
+                    background->applyImage(image.toImage());
+                    image = QPixmap::fromImage(background->image);
                     background->image.fill(QColor("transparent"));
                 }
                 if(penType == SELECTION) {
                     break;
                 }
                 geo.clearAll();
-                addImage(image);
+                addImage(image.toImage());
             }
             if(penType != ERASER && penStyle != SPLINE){
                 update();

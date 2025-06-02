@@ -108,7 +108,7 @@ class DrawingWidget : public QWidget {
 public:
     explicit DrawingWidget(QWidget *parent = nullptr);
 
-    QImage image;
+    QPixmap image;
     QColor penColor;
     MovableWidget* cropWidget;
     int penSize[10];
