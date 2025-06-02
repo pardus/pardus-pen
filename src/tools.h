@@ -17,7 +17,7 @@
 
 #define padding 8*scale
 
-#define butsize (48*scale + padding)
+#define butsize (40*scale + padding)
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))

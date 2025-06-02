@@ -33,7 +33,6 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     setLayout(layout);
     setStyleSheet(style);
     cur_height = padding;
-    cur_width = padding;
     for(int i=0;i<num_of_rows;i++){
         QLabel *label = new QLabel();
         label->setFixedSize(butsize/2, butsize/2);
@@ -111,10 +110,10 @@ void FloatingWidget::moveAction(){
             max_width = QGuiApplication::primaryScreen()->size().width();
             max_height = QGuiApplication::primaryScreen()->size().height();
         }
-        if (new_x >  max_width- cur_width) {
-            new_x = max_width - cur_width;
-        }if (new_y > max_height - cur_height) {
-            new_y = max_height - cur_height;
+        if (new_x >  max_width- size().width()) {
+            new_x = max_width - size().width();
+        }if (new_y > max_height - size().height()) {
+            new_y = max_height - size().height();
         }
         if(tool != nullptr){
             tool->move(new_x, new_y);

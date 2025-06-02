@@ -87,6 +87,7 @@ public:
 protected:
      void closeEvent(QCloseEvent *event) override {
         puts("Close event");
+        setWindowState(Qt::WindowActive);
         event->ignore();
      }
      void resizeEvent(QResizeEvent *event) override {

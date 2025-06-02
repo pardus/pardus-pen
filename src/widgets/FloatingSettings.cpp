@@ -83,7 +83,7 @@ void FloatingSettings::setPage(int num){
     if(num_of_item < num){
         return;
     }
-    printf("%d %d\n", current_page, num);
+    //printf("%d %d\n", current_page, num);
     if(current_page == num) {
         setHide();
         return;

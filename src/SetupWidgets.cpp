@@ -400,7 +400,7 @@ void setupWidgets(){
             set_icon(path.toStdString().c_str(), toolButtons[i+200]);
             pageLayout->addWidget(toolButtons[i+200], i / 6, i % 6, Qt::AlignCenter);
             i++;
-            printf ("%s\n", ep->d_name);
+            //printf ("%s\n", ep->d_name);
         }
         closedir(dp);
     }
