@@ -75,6 +75,7 @@ void setupPenType(){
     });
 
     penButtons[ERASER] = create_button(ERASER, [=](){
+        setPenStyle(SPLINE);
         setPen(ERASER);
     });
 

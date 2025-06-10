@@ -20,7 +20,7 @@ src = [
     'src/tools/screenshot.cpp',
     'src/tools/save-load.cpp',
     'src/tools/pen.cpp',
-    'src/utils/which.c',
+    'src/utils/misc.c',
 ]
 
 subdir('po')

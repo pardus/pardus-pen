@@ -19,9 +19,6 @@ extern DrawingWidget *drawing;
 
 #define _(String) gettext(String)
 
-extern "C" {
-#include "which.h"
-}
 
 void takeScreenshot(){
     QString pics = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);

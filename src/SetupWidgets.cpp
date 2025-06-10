@@ -64,6 +64,9 @@ void setupWidgets(){
             floatingSettings->setHide();
             return;
         }
+        if(drawing->getPen() != PEN && drawing->getPen() != MARKER){
+            setPen(PEN);
+        }
 	      floatingSettings->setPage(0);
         floatingWidget->moveAction();
     });

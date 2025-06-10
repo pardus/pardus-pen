@@ -27,11 +27,19 @@
 #include <libintl.h>
 
 
+extern "C" {
+    extern size_t _cur_time;
+    size_t get_epoch();
+    char* which(const char* cmd);
+}
+
+
 #ifndef DEBUG
 #define debug(...)
 #else
-#define debug printf("[%s]:", __func__); printf
+#define debug printf("[%s:%ld]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
 #endif
+
 
 #define _(String) gettext(String)
 
