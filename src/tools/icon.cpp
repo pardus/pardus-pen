@@ -115,7 +115,8 @@ QString get_overlay_by_id(int id){
         case CUSTOM:
             return "custom";
     }
-    return (char*)"";
+    // Unknown overlay
+    return (char*)"blank";
 }
 
 int get_id_by_overlay(QString foverlay){
@@ -139,5 +140,6 @@ int get_id_by_overlay(QString foverlay){
     } else if(strcmp(overlay, "music") == 0) {
         return CUSTOM;
     }
-    return 0;
+    // Unknown overlay
+    return BLANK;
 }

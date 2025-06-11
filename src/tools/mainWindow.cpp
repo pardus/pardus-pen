@@ -41,8 +41,8 @@ public:
         mainWidget->setAttribute(Qt::WA_AcceptTouchEvents, true);
 
         board = new WhiteBoard(mainWidget);
-        board->setType(get_int("page"));
-        board->setOverlayType(get_int("page-overlay"));
+        board->setType(get_id_by_overlay(get_string("page")));
+        board->setOverlayType(get_id_by_overlay(get_string("page-overlay")));
 
         // scrolls
         scrollHSlider = new QSlider(Qt::Horizontal, this);
