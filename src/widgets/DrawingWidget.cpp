@@ -206,7 +206,7 @@ public:
             cfg += "ratio="+QString::number(board->ratios[i])+"\n";
             cfg += "rotate="+QString::number(board->rotates[i])+"\n";
             cfg += "page="+get_overlay_by_id(loadValue(i).pageType)+"\n";
-            archive_add(QString::number(i)+"/background", board->overlays[i].scaled(mainWidget->geometry().width(), mainWidget->geometry().height()));
+            archive_add(QString::number(i)+"/background", board->overlays[i]);
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
@@ -226,6 +226,7 @@ public:
             int page = parts[0].toInt();
             if(path.endsWith("background")){
                 board->overlays[page] = image;
+                board->overlayType = CUSTOM;
                 continue;
             }
             int frame = parts[1].toInt();

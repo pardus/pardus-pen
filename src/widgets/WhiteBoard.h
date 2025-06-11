@@ -1,6 +1,8 @@
 #ifndef WHITEBOARD_H
 #define WHITEBOARD_H
 
+#include "../constants.h"
+
 #include <QWidget>
 #include <QResizeEvent>
 #include <QScreen>
@@ -27,14 +29,14 @@ public:
     QColor background;
     QColor lineColor;
     void updateTransform();
+    int overlayType = BLANK;
+    int type = WHITE;
 private:
-    int overlayType = 0;
-    int type = 0;
     QPainter painter;
     float gridSize;
     QImage transformImage;
     int ow, oh;
-    void paintEvent(QPaintEvent *event) override ;
+    void paintEvent(QPaintEvent *event) override;
 };
 
 #endif // FLOATINGWIDGET_H
