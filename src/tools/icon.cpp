@@ -40,6 +40,7 @@ char* get_icon_by_id(int id){
             return (char*)":images/overlay/lines.svg";
         case ISOMETRIC:
             return (char*)":images/overlay/isometric.svg";
+
         case MUSIC:
             return (char*)":images/overlay/music.svg";
         case CUSTOM:
@@ -120,7 +121,8 @@ QString get_overlay_by_id(int id){
 }
 
 int get_id_by_overlay(QString foverlay){
-    const char* overlay = foverlay.toStdString().c_str();
+    std::string overlayString = foverlay.toStdString();
+    const char* overlay = overlayString.c_str();
     if(strcmp(overlay, "transparent") == 0) {
         return TRANSPARENT;
     } else if(strcmp(overlay, "white") == 0) {
