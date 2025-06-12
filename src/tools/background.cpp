@@ -64,7 +64,7 @@ void setupBackground(){
         floatingSettings->setHide();
         QString filename = QFileDialog::getOpenFileName(drawing, _("Open Image File"), QDir::homePath(), filter);
         if (!filename.isEmpty()) {
-            board->overlays[drawing->getPageNum()] = QImage(filename);
+            drawing->setOverlay(QImage(filename), drawing->getPageNum());
             board->ratios[drawing->getPageNum()] = 100;
             board->rotates[drawing->getPageNum()] = 0;
             board->updateTransform();

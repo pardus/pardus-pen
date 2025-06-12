@@ -141,7 +141,8 @@ public:
     int getLineStyle();
     void drawArrow(QPainter& painter, QPointF start, QPointF end);
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
-
+    void setOverlay(QImage img, int page);
+    QImage getOverlay(int page);
 protected:
     float fpressure;
     int num_of_press;

@@ -206,7 +206,7 @@ public:
             cfg += "ratio="+QString::number(board->ratios[i])+"\n";
             cfg += "rotate="+QString::number(board->rotates[i])+"\n";
             cfg += "page="+get_overlay_by_id(loadValue(i).pageType)+"\n";
-            archive_add(QString::number(i)+"/background", board->overlays[i]);
+            archive_add(QString::number(i)+"/background", values[i].loadValue(-1));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
@@ -225,8 +225,8 @@ public:
             QImage image = it.value();
             int page = parts[0].toInt();
             if(path.endsWith("background")){
-                board->overlays[page] = image;
-                board->overlayType = CUSTOM;
+                values[page].saveValue(-1, image);
+                printf("Load: page bg: %d\n", page);
                 continue;
             }
             int frame = parts[1].toInt();
@@ -337,6 +337,14 @@ void DrawingWidget::addPoint(int id, QPointF data) {
     }
 }
 
+
+void DrawingWidget::setOverlay(QImage img, int page){
+    saveImageToFile(img, cache+QString::number(page));
+}
+
+QImage DrawingWidget::getOverlay(int page){
+    return loadImageFromFile(cache+QString::number(page));
+}
 
 void DrawingWidget::addImage(QImage img){
     images.last_image_num++;

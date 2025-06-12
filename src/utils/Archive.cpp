@@ -106,13 +106,12 @@ public:
                 }
 
                 // Read image data from QByteArray
-                QDataStream inputStream(&input, QIODevice::ReadOnly);
-                inputStream >> width >> height >> format;
-
                 QByteArray loadedData;
-                loadedData = input.mid(inputStream.device()->pos()); // Get the remaining data after reading width, height, and format
+                QDataStream inputStream(&input, QIODevice::ReadOnly);
+                inputStream >> width >> height >> format >> loadedData;
 
                 QImage image(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
+
                 if (image.isNull()) {
                     printf("Image load fail: %s\n", entryName);
                     continue;

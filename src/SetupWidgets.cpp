@@ -394,7 +394,7 @@ void setupWidgets(){
             }
             QString path = QString(BGDIR) + QString("/") + QString(ep->d_name);
             toolButtons[i+200] = create_button(0, [=](){
-                board->overlays[drawing->getPageNum()] = QImage(path);
+                drawing->setOverlay(QImage(path), drawing->getPageNum());
                 board->setOverlayType(CUSTOM);
                 board->rotates[drawing->getPageNum()] = 0;
                 board->ratios[drawing->getPageNum()] = 100;

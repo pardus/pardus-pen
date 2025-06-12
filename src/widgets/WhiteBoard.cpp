@@ -26,9 +26,6 @@ int WhiteBoard::getOverlayType(){
 }
 
 void WhiteBoard::setOverlayType(int page){
-    if(page != CUSTOM) {
-        overlays[drawing->getPageNum()].fill(QColor("transparent"));;
-    }
     set_string("page-overlay",get_overlay_by_id(page));
     overlayType = page;
     update();
@@ -51,7 +48,7 @@ void WhiteBoard::setType(int page){
 }
 
 void WhiteBoard::setImage(QImage image){
-    overlays[drawing->getPageNum()] = image;
+    drawing->setOverlay(image, drawing->getPageNum());
     updateTransform();
     update();
 }
@@ -70,7 +67,7 @@ void WhiteBoard::updateTransform(){
        img = getPdfImage(drawing->getPageNum(), ratio);
     } else {
     #endif
-        img = overlays[drawing->getPageNum()];
+        img = drawing->getOverlay(drawing->getPageNum());
     #ifdef QPRINTER
     }
     #endif
@@ -123,6 +120,7 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
         overlayType = CUSTOM;
     }
     #endif
+
     gridSize = (float)mainWindow->geometry().height() / (float)get_int("grid-count") * ratio;
     // Draw the square paper background
     switch(overlayType){
