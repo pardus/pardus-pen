@@ -272,6 +272,7 @@ public:
         board->setOverlayType(images.overlayType);
         drawing->loadImage(images.last_image_num);
         drawing->update();
+        drawing->goPage(0);
         updateGui();
     }
 #endif
