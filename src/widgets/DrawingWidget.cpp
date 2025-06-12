@@ -206,7 +206,7 @@ public:
             cfg += "ratio="+QString::number(board->ratios[i])+"\n";
             cfg += "rotate="+QString::number(board->rotates[i])+"\n";
             cfg += "page="+get_overlay_by_id(loadValue(i).pageType)+"\n";
-            archive_add(QString::number(i)+"/background", values[i].loadValue(-1));
+            archive_add(QString::number(i)+"/background", drawing->getOverlay(i));
             for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
                 archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
             }
@@ -225,7 +225,7 @@ public:
             QImage image = it.value();
             int page = parts[0].toInt();
             if(path.endsWith("background")){
-                values[page].saveValue(-1, image);
+                drawing->setOverlay(image, page);
                 printf("Load: page bg: %d\n", page);
                 continue;
             }

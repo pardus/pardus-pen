@@ -137,7 +137,7 @@ int get_id_by_overlay(QString foverlay){
         return ISOMETRIC;
     } else if(strcmp(overlay, "music") == 0) {
         return MUSIC;
-    } else if(strcmp(overlay, "music") == 0) {
+    } else if(strcmp(overlay, "custom") == 0) {
         return CUSTOM;
     }
     // Unknown overlay
