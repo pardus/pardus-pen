@@ -31,9 +31,10 @@ void openFile(QString filename){
             bgMenu->hide();
         } else {
         #endif
-            pthread_t ptid;
+            //pthread_t ptid;
             archive_target = filename;
-            pthread_create(&ptid, NULL, &load_archive, NULL);
+            load_archive(NULL);
+            //pthread_create(&ptid, NULL, &load_archive, NULL);
         #ifdef QPRINTER
         }
         #endif

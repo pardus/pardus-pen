@@ -114,11 +114,10 @@ public:
 
                 QImage image(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
                 if (image.isNull()) {
-                    puts("Image load fail");
+                    printf("Image load fail: %s\n", entryName);
                     continue;
                 }
-                image = image.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
-                values.insert(QString(entryName), image);
+                values.insert(QString(entryName), image.copy());
             }
         }
         // Close the archive
