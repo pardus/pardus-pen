@@ -240,6 +240,7 @@ public:
                 values[page].image_count = 0;
                 values[page].last_image_num = 1;
             }
+            image.setDevicePixelRatio(mainWidget->devicePixelRatio());
             values[page].saveValue(frame+1, image);
             values[page].image_count++;
             values[page].last_image_num = values[page].image_count;

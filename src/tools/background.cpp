@@ -57,7 +57,7 @@ void setupBackground(){
     });
 
     penButtons[CUSTOM] = create_button(CUSTOM, [=](){
-        QString filter = QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg)");
+        QString filter = QString(_("Images")) + QString("(*.png *.xpm *.jpg *.jpeg *.bmp *.gif *.svg);;");
         filter += _("All Files (*.*)");
         setHideMainWindow(true);
         floatingWidget->hide();
