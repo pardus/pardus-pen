@@ -67,6 +67,7 @@ void setupSaveLoad(){
         pthread_create(&ptid, NULL, &save_all, NULL);
         floatingWidget->show();
         setHideMainWindow(false);
+        drawing->setPen(PEN);
     });
     set_shortcut(toolButtons[SAVE], Qt::Key_S, Qt::ControlModifier);
 
@@ -83,6 +84,7 @@ void setupSaveLoad(){
         openFile(filename);
         floatingWidget->show();
         setHideMainWindow(false);
+        drawing->setPen(PEN);
     });
     set_shortcut(toolButtons[OPEN], Qt::Key_O, Qt::ControlModifier);
 #endif

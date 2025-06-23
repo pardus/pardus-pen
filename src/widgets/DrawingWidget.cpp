@@ -491,6 +491,9 @@ void DrawingWidget::goNext(){
 
 void DrawingWidget::setPen(int type){
     penType = type;
+    if(type != SELECTION){
+        cropWidget->hide();
+    }
 }
 
 int DrawingWidget::getPen(){
