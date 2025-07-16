@@ -33,7 +33,7 @@ void setupWidgets(){
             floatingSettings->setHide();
             return;
         }
-        if(drawing->getPen() != PEN){
+        if(drawing->getPen() != PEN || drawing->getPenStyle() != SPLINE){
             setPen(PEN);
             setPenStyle(SPLINE);
             floatingSettings->setHide();

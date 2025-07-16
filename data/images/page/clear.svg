@@ -1,20 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
-<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="katman_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   style="enable-background:new 0 0 48 48;"
+   xml:space="preserve"
+   sodipodi:docname="clear.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2"><linearGradient
+     id="linearGradient4"
+     inkscape:collect="always"><stop
+       style="stop-color:#a6e78b;stop-opacity:1;"
+       offset="0"
+       id="stop4" /><stop
+       style="stop-color:#f5f48f;stop-opacity:1;"
+       offset="1"
+       id="stop5" /></linearGradient><linearGradient
+     inkscape:collect="always"
+     xlink:href="#linearGradient4"
+     id="linearGradient5"
+     x1="11.915705"
+     y1="2.5805733"
+     x2="11.810904"
+     y2="20.52195"
+     gradientUnits="userSpaceOnUse" /></defs><sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="11.829307"
+   inkscape:cx="46.579228"
+   inkscape:cy="24.219508"
+   inkscape:window-width="1920"
+   inkscape:window-height="1011"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="katman_1" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill:url(#SVGID_1_);}
 </style>
-<radialGradient id="SVGID_1_" cx="24.447" cy="53.2464" r="93.0735" gradientUnits="userSpaceOnUse">
-	<stop  offset="0" style="stop-color:#FFF68F"/>
-	<stop  offset="0.9762" style="stop-color:#66DD88"/>
+<radialGradient
+   id="SVGID_1_"
+   cx="24.447"
+   cy="53.2464"
+   r="93.0735"
+   gradientUnits="userSpaceOnUse"
+   gradientTransform="translate(46.579228,0.25360741)">
+	<stop
+   offset="0"
+   style="stop-color:#FFF68F"
+   id="stop1" />
+	<stop
+   offset="0.9762"
+   style="stop-color:#66DD88"
+   id="stop2" />
 </radialGradient>
-<path class="st0" d="M45.68,42.52l-3.76-12.9c1.04-0.8,1.73-2.04,1.73-3.45V24c0-3.61-2.94-6.55-6.55-6.55h-6.55V6.55
-	c0-3.61-2.94-6.55-6.55-6.55s-6.55,2.94-6.55,6.55v10.91h-6.55c-3.61,0-6.55,2.94-6.55,6.55v2.16c0,1.41,0.68,2.65,1.73,3.45
-	l-3.79,13c-0.08,0.33-0.12,0.68-0.12,1.02c0,1.17,0.45,2.26,1.28,3.09C4.29,47.55,5.39,48,6.54,48c0,0,0.01,0,0.01,0h34.91
-	c0.35,0,0.69-0.04,1.02-0.12C44.82,47.32,46.26,44.96,45.68,42.52z M8.73,24c0-1.2,0.98-2.18,2.18-2.18h6.55
-	c2.41,0,4.36-1.96,4.36-4.36V6.55c0-1.2,0.98-2.18,2.18-2.18c1.2,0,2.18,0.98,2.18,2.18v10.91c0,2.41,1.96,4.36,4.36,4.36h6.55
-	c1.2,0,2.18,0.98,2.18,2.18l0,2.16h0c-0.07,0-0.14,0.01-0.21,0.02H8.95c-0.07-0.01-0.14-0.02-0.21-0.02V24z M34.44,43.66l-1.77-7.09
-	c-0.29-1.17-1.48-1.88-2.64-1.59c-1.17,0.29-1.88,1.48-1.59,2.64l1.51,6.05l-11.89,0.04l1.52-6.09c0.29-1.17-0.42-2.35-1.59-2.64
-	c-1.17-0.3-2.35,0.42-2.64,1.59l-1.79,7.16l-7.03,0.02l3.85-13.2h27.27l3.82,13.09L34.44,43.66z"/>
-</svg>
+
+<g
+   style="fill:none;stroke-width:1.00012766;stroke-dasharray:none;stroke:url(#linearGradient5);stroke-opacity:1"
+   id="g2"
+   transform="matrix(2.4736842,0,0,2.4736842,-5.6842104,-4.4473683)"><path
+     d="m 6,7 v 11 c 0,1.1046 0.89543,2 2,2 h 8 c 1.1046,0 2,-0.8954 2,-2 V 7 M 6,7 H 5 m 1,0 h 2 m 10,0 h 1 m -1,0 h -2 m -6,4 v 5 m 4,-5 v 5 M 8,7 V 5 C 8,3.89543 8.89543,3 10,3 h 4 c 1.1046,0 2,0.89543 2,2 V 7 M 8,7 h 8"
+     stroke="#000000"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path1"
+     style="stroke-width:1.81914894;stroke-dasharray:none;stroke:url(#linearGradient5);stroke-opacity:1" /></g></svg>
