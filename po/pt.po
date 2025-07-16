@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-02 13:35+0000\n"
-"PO-Revision-Date: 2025-01-03 20:23+0000\n"
+"PO-Revision-Date: 2025-06-06 00:33+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,17 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: src/utils/ScreenShot.cpp:65
-#, fuzzy
 msgid "Screenshot Saved"
-msgstr "Captura de ecrã guardada:"
+msgstr "Captura de ecrã guardada"
 
 #: src/utils/ScreenShot.cpp:66
-#, fuzzy
 msgid "Screenshot saved to:"
-msgstr "Captura de ecrã guardada:"
+msgstr "Captura de ecrã guardada em:"
 
 #: src/utils/ScreenShot.cpp:68 src/tools/save-load.cpp:83
 msgid "Open File"
@@ -35,16 +33,15 @@ msgstr "Abrir ficheiro"
 
 #: src/utils/ScreenShot.cpp:69
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Abrir a pasta respetiva"
 
 #: src/utils/ScreenShot.cpp:84
 msgid "Error Saving Screenshot"
-msgstr ""
+msgstr "Erro ao guardar a captura de ecrã"
 
 #: src/utils/ScreenShot.cpp:85
-#, fuzzy
 msgid "Failed to save screenshot to:"
-msgstr "Erro ao guardar:"
+msgstr "Falha ao guardar a captura de ecrã em:"
 
 #: src/main.cpp:73 src/tools/mainWindow.cpp:67 src/tools/mainWindow.cpp:284
 msgid "Pardus Pen"
@@ -77,7 +74,7 @@ msgstr "Abrir imagem"
 
 #: src/tools/background.cpp:85
 msgid "Go page"
-msgstr ""
+msgstr "Ir para página"
 
 #: src/tools/background.cpp:86 src/SetupWidgets.cpp:313
 msgid "Page:"
@@ -93,11 +90,11 @@ msgstr "Selecionar cor"
 
 #: src/tools/mainWindow.cpp:68
 msgid "Exit"
-msgstr ""
+msgstr "Sair"
 
 #: src/tools/mainWindow.cpp:69
 msgid "Are you sure you want to exit?"
-msgstr ""
+msgstr "Tem a certeza que pretende sair?"
 
 #: src/SetupWidgets.cpp:158
 msgid "Size: 10"
@@ -106,43 +103,3 @@ msgstr "Tamanho: 10"
 #: src/SetupWidgets.cpp:356
 msgid "Background:"
 msgstr "Fundo:"
-
-#~ msgid "Info"
-#~ msgstr "Informação"
-
-#~ msgid "Pen"
-#~ msgstr "Caneta"
-
-#~ msgid "Marker"
-#~ msgstr "Marcador"
-
-#~ msgid "Eraser"
-#~ msgstr "Borracha"
-
-#~ msgid "Color:"
-#~ msgstr "Cor:"
-
-#, fuzzy
-#~ msgid " Color:"
-#~ msgstr "Cor:"
-
-#~ msgid "Color Picker"
-#~ msgstr "Seletor de cor"
-
-#~ msgid "Pen Style"
-#~ msgstr "Estilo de caneta"
-
-#~ msgid "Do you want to clear screen?"
-#~ msgstr "Limpar o ecrã?"
-
-#~ msgid "No"
-#~ msgstr "Não"
-
-#~ msgid "Yes"
-#~ msgstr "Sim"
-
-#~ msgid "Do you want to quit Pardus pen?"
-#~ msgstr "Sair da caneta Pardus?"
-
-#~ msgid "Pen Files (*.pen);;All Files (*.*)"
-#~ msgstr "Ficheiros de caneta (*.pen);;Todos os ficheiros (*.*)"
