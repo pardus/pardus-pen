@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 if [ "$QT_PATH" == "" ] ; then
-    export QT_PATH="/usr/lib64/qt5"
+    export QT_PATH="/usr/lib64/qt6"
 fi
 # cleanup
 rm -rf build || true
@@ -28,7 +28,7 @@ ldd $(find build/appimage -type f) build/pardus-pen | cut -f3 -d" " | sort -V | 
     fi
 done
 # create appimage
-wget https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-$(uname -m).AppImage -O build/appimagetool
+wget https://github.com/AppImage/appimagetool/releases/download/latest/appimagetool-$(uname -m).AppImage -O build/appimagetool
 chmod 755 build/appimagetool
 export ARCH=$(uname -m)
 cd build ; ./appimagetool ./appimage
