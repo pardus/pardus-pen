@@ -2,6 +2,8 @@
 #include <QByteArray>
 #include <QFile>
 
+#include <libgen.h>
+
 #include "../tools.h"
 
 #ifdef LIBARCHIVE
@@ -93,6 +95,11 @@ void setupSaveLoad(){
 
 
 bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
+    QDir dir;
+    char* fname = strdup(imageFilePath.toStdString().c_str());
+    char* basedir = dirname(fname);
+    dir.mkpath(QString::fromUtf8(basedir));
+    free(fname);
     if (image.isNull()) {
         return false;
     }
