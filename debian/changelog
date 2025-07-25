@@ -1,9 +1,352 @@
 pardus-pen (4.0.0) unstable; urgency=medium
 
-  [ sulincix ]
-  * Update
+  [ Ali Riza KESKIN ]
+  * penstyle button switch to pen if eraser
+  * pensize event fix
+  * eraser linetype forced
+  * fix initial size event
+  * screenshot selection added
 
- -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 28 Nov 2024 19:21:38 +0300
+  [ sulincix ]
+  * optimize normal linestyle
+  * selection clear added
+  * optimize move event
+  * fix qt6 build
+  * touch optimize
+  * optimize for linestyle normal spline
+  * fix eraser pressure bug
+  * fix eraser size bug
+  * fix eraser lineMode bug
+  * check selection on clear button
+
+  [ Ali Riza KESKIN ]
+  * limit last 150 point draw for penstyle
+  * selection partical update
+  * addPoint for first time bug fix
+  * etap19 fix
+  * add mainWidget
+  * add mainWidget
+  * add horizontal scroll slider
+  * scroll slider improvements
+  * cursor fix
+  * minify disabled when windowed mode
+  * event handler added
+  * addImage fix
+  * counter fix
+  * fix gfx tablet buttons
+  * simply definition
+
+  [ sulincix ]
+  * split setupwidgets and main
+  * Better FloatingWidget
+  * main toolbar
+  * floatingsettings improvements
+  * floatingsettings improvements
+  * fix move issue
+  * thickness added
+  * add more tools
+  * fix selection issue
+  * seperate tools utils and widgets
+  * add more item
+  * add more buttons
+
+  [ Ali Riza KESKIN ]
+  * block single touch press event for fix double event
+  * cursor fix and improvements
+  * dont use native dialogs and filename suffix selection is automatic
+  * hide toolbars during save
+  * add missing ss button
+  * improve screenshot
+  * gopage
+  * translation standard dialogs
+  * qt5 build fix
+  * fix etap19 build
+  * etap19 libarchive port
+  * add translation as recommends
+  * fix missing definition
+  * rotate button added
+  * typo fix
+  * fuar mode
+  * savepdf with background
+  * custom overlay selection fix
+  * custom overlay fix
+  * custom overlay page change fix
+  * save-load overlay background
+  * keep overlay ration and fit to height
+  * fit page width and height
+  * fix image select freeze issue
+  * overlay scale ratio
+  * zoomin zoomout overlay added
+  * zoom in/out icons
+  * clear button erase current page storage
+
+  [ aliriza ]
+  * fix crash on open pen file
+  * save restore ratio
+  * overlay rotate added
+  * save load rotation
+
+  [ sulincix ]
+  * fix clang++ build
+
+  [ Ali Riza KESKIN ]
+  * background overlays will not embed into qrc
+  * typo fix
+  * floatingWidget fix initial position on wayland or etap19
+  * compress resources
+  * disable scale for qt6
+  * remove useless static bool
+  * force use xwayland for gnome
+  * fix gnome detection with gdm
+
+  [ sulincix ]
+  * fix non normal linestyle draw
+  * block other events if gfx tablet event detected
+
+  [ Ali Riza KESKIN ]
+  * history size from gsettings
+  * minor fix
+  * disable pressure for non spline
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Ali Riza KESKIN ]
+  * selection feature improvement
+  * release event improvement
+  * minor fixes
+  * update on release event added
+  * remove unused lines
+  * set overlay type fix
+  * stay on top toolbar
+  * fix toolbar move issue
+  * fix fullscreen event
+  * fix move toolbar issue
+
+  [ sulincix ]
+  * fix unfullscreen flag issue and gnome window manager related bug
+  * hide board when select a file.
+  * fix toolbar window manager bug for xfce
+  * fix xfwm related bug 2
+  * fix window manager related bug 3
+  * remove flag setting for tools because of buggy
+
+  [ Ali Riza KESKIN ]
+  * etap19 build fix and slider hide on fullscreen always
+  * page sliders disabled on start
+  * gfx tablet selection fix
+  * color selection with keyboard button
+  * more shortcuts
+  * pen switch button added
+  * hide main window during color selection
+  * fix hide window during color picker
+  * penSwitch improvements
+  * fix pen color shortcut
+  * penswitch will reset penmode and linestyle
+
+  [ aliriza ]
+  * shortcut improvements
+  * shortcut improvements
+
+  [ sulincix ]
+  * add more shotcuts
+  * hide/show ui shortcut
+  * shortcuts are now global
+  * fix etap19 build
+  * Background image for better performance and fixing marker bug
+  * fix crop widget
+  * remove penMode feature and selection is now pen type
+
+  [ Ali Riza KESKIN ]
+  * penType switch during press issue fix
+  * limit zoom-in zoom-out level
+  * Update github action script
+  * fix infinitive call bug
+  * fix clang++ build
+  * geometry util improvement
+  * clear geometry storage after release event
+  * minor fixes and improvements
+  * vector init
+  * fix icon issue
+  * fix triangle icon
+  * add vector head
+  * fix vector button update
+  * vector2 added
+  * fix update vector2
+
+  [ sulincix ]
+  * penButtons array for better code
+  * replace GSettings with QSettings
+  * remove glib-2.0 dependency
+  * fix memory issue
+  * add pkgconf as build dep
+  * fix clang build
+
+  [ Ali Riza KESKIN ]
+  * settings parameters replaced with const char and QString
+  * remove glib from build /test scripts
+  * penButtons as qmap
+
+  [ sulincix ]
+  * refactor button definition
+  * colorbutton and overlaybutton definition improvement
+  * minor fix
+
+  [ Ali Riza KESKIN ]
+  * minor fix about zoom buttons
+  * pdf open feature added
+  * add poppler dependency
+  * optimize issue fix
+  * dont get overlay image is not required
+  * pdf file mimetype added
+  * fix clang build
+  * fix qt6 build
+  * pdf support fix
+
+  [ sulincix ]
+  * save/load qimage buffer using cache directory
+  * performance improvement for custom overlay image scale issue
+  * reset rotation and ratio after overlay selection
+
+  [ Ali Riza KESKIN ]
+  * make code simple and pdf quality
+  * pdf size: fit page
+  * minor fixes
+  * fix zero ratio issue
+  * floatingwidget refactor layout
+  * redesign toolbar
+  * color button improvement
+  * minor fix
+  * visual bug fixes
+
+  [ Edip Hazuri ]
+  * fix: unset QT_STYLE_OVERRIDE on startup
+
+  [ Ali Riza KESKIN ]
+  * hide floatingsettings fix
+  * ui/ux improvements
+  * merge .dim and image data
+  * fix last page num bug
+  * auto generate resources.qrc file
+  * fix multi touch qt6 and qt5
+  * ui improvement
+  * resize floatinSettings after button event
+  * resize bug fix
+  * misc settings menu
+  * misc menu
+  * clear button will reset pen mode
+
+  [ sulincix ]
+  * update colors
+
+  [ Ali Riza KESKIN ]
+  * sort colors
+
+  [ sulincix ]
+  * improvements
+
+  [ Ali Riza KESKIN ]
+  * qt6 build set default
+
+  [ sulincix ]
+  * page selector added
+  * update translation
+  * deb package dependency fixes
+  * hide mainWindow before page selector then show again
+  * redesign 1
+  * redesign 2
+  * redesign 3
+  * redesign 4
+  * redesign 5
+  * redesign 6
+
+  [ Ali Riza KESKIN ]
+  * fixes about drawing
+
+  [ aliriza.keskin ]
+  * fix ghost cursor
+  * scale fix for 720p displays
+
+  [ Ali Riza KESKIN ]
+  * selection menu fix
+  * update function optimize
+  * calculate num_of_press value from event
+  * minor fix
+
+  [ aliriza.keskin ]
+  * dont count release event
+
+  [ sulincix ]
+  * update functions improvements and merge
+  * debug function
+  * fix debug build
+  * tool button open/close fix
+  * get icon by id added
+  * icon load logic changed
+  * hide background menu if pdf selected.
+  * painter open end optimize
+
+  [ suleymanfatih ]
+  * added new minimal icons
+
+  [ sulincix ]
+  * button padding fix
+  * fix font size
+
+  [ Ali Riza KESKIN ]
+  * initialize QImage from QPixmap
+
+  [ sulincix ]
+  * fix mergeselection
+  * fix crop widget
+
+  [ Ali Riza KESKIN ]
+  * fix crop widget resize and merge issue
+  * fix pdf save
+
+  [ sulincix ]
+  * .pen file format changed: fix save-load size
+  * add shape menu
+
+  [ Edip Hazuri ]
+  * Enhance screenshot dialogs
+  * Regenerate pot files
+  * Update turkish translations
+
+  [ Ali Riza KESKIN ]
+  * reduce icon size and fix floatingwidget move
+  * exit yes/no dialog added
+  * use QPixmap instead of QImage for draw action
+  * translation update
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+
+  [ Ali Riza KESKIN ]
+  * minor fixes and debug improvements
+  * config page and page-overlay fix
+  * overlay load fix
+
+  [ sulincix ]
+  * error message improvements
+  * overlay images now store in cache
+  * fix custom overlay id
+  * fix go first page issue
+  * fix clang build
+
+  [ Ali Riza KESKIN ]
+  * minor fixes
+  * penPen after save button event
+
+  [ Edip Hazuri ]
+  * fix appimage qt path and appimage tool link
+
+  [ sulincix ]
+  * minor fix about pen menu and replace 2 icons
+  * fix icon for qt5 build
+  * create missing cache directory before save
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 25 Jul 2025 15:15:29 +0300
 
 pardus-pen (3.3.0) unstable; urgency=medium
 
