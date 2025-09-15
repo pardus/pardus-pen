@@ -588,9 +588,11 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             curs.drawing[id] = false;
             curs.hide(id);
-            if(curEventButtons & Qt::LeftButton && geo.size(id) < 2) {
-                addPoint(-1, pos+QPointF(0,1));
-                drawLineToFunc(id, pressure);
+            if(penType != ERASER && geo.size(id) < 2) {
+                painter.begin(&image);
+                addPoint(id, pos+QPointF(0,1));
+                drawFunc(id, pressure);
+                painter.end();
             }
             curEventButtons = 0;
 
