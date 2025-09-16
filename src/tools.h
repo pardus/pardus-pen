@@ -62,6 +62,7 @@ extern QWidget *bgMenu;
 
 extern float scale;
 extern int history;
+extern bool is_wayland;
 
 extern QSlider *scrollHSlider;
 extern QSlider *scrollVSlider;

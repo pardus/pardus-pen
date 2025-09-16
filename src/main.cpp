@@ -12,6 +12,7 @@
 
 #include "tools.h"
 
+bool is_wayland;
 extern void mainWindowInit();
 int history;
 
@@ -29,6 +30,7 @@ int main(int argc, char *argv[]) {
     p2.execute("gsettings", args2);
 #endif
 
+    is_wayland = (getenv("WAYLAND_DISPLAY") != NULL);
     // gnome wayland fullscreen compositor is buggy.
     // Force prefer Xwayland for fix this issue.
     bool force_xwayland = false;
@@ -39,6 +41,7 @@ int main(int argc, char *argv[]) {
     // Force use X11 or Xwayland
     if(get_bool("xwayland") || force_xwayland){
         setenv("QT_QPA_PLATFORM", "xcb;wayland",1);
+        is_wayland = false;
     }
     //Force ignore system dpi
     setenv("QT_AUTO_SCREEN_SCALE_FACTOR", "0", 1);

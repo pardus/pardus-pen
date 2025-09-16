@@ -123,22 +123,22 @@ protected:
         floatingWidget->new_y = get_int("cur-y");
         // tool is not set under wayland
         if(floatingWidget != nullptr) {
-            if(tool != nullptr){
+            if(!is_wayland){
                 tool->resize(floatingWidget->geometry().width(), floatingWidget->geometry().height());
             }
-            if(tool2 != nullptr){
+            if(!is_wayland){
                 tool2->resize(floatingSettings->geometry().width(), floatingSettings->geometry().height());
             }
             drawing->update();
         }
+        floatingWidget->moveAction();
         // Call the base class implementation
         QWidget::resizeEvent(event);
-        floatingWidget->moveAction();
     }
     void changeEvent(QEvent *event) override {
         // Call the base class implementation
         QMainWindow::changeEvent(event);
-        if(tool != nullptr){
+        if(!is_wayland){
             if (event->type() == QEvent::WindowStateChange) {
                 tool2->hide();
                 if (isMinimized()) {
@@ -162,7 +162,7 @@ static bool hideState = true;
 void setupTools(){
 #ifndef ETAP19
     // detect x11
-    if(!getenv("WAYLAND_DISPLAY")){
+    if(!is_wayland){
         // main toolbar
         tool = new QMainWindow();
         tool->setWindowFlags(Qt::WindowStaysOnTopHint
@@ -247,7 +247,7 @@ void setupTools(){
     QScreen *screen = QGuiApplication::primaryScreen();
     toolButtons[FULLSCREEN] = create_button(FULLSCREEN_EXIT, [=](){
         mainWidget->move(0,0);
-        if ((tool != nullptr) && (tool2 != nullptr)){
+        if (!is_wayland){
             tool->hide();
             tool2->hide();
             tool->show();

@@ -80,13 +80,13 @@ void FloatingWidget::setVertical(bool state) {
         if(state) {
             layout->addWidget(widgets[i], row, column);
             setFixedSize(width, height);
-            if(tool != nullptr){
+            if(!is_wayland){
                 tool->setFixedSize(width, height);
             }
-            } else {
+        } else {
             layout->addWidget(widgets[i], column, row, Qt::AlignCenter);
             setFixedSize(height, width);
-            if(tool != nullptr){
+            if(!is_wayland){
                 tool->setFixedSize(height, width);
             }
         }
@@ -95,6 +95,7 @@ void FloatingWidget::setVertical(bool state) {
 
 
 void FloatingWidget::moveAction(){
+        debug("Move Action %d %d\n", new_x, new_y);
         if (new_x < 0) {
             new_x = 0;
         }if (new_y < 0) {
@@ -102,7 +103,7 @@ void FloatingWidget::moveAction(){
         }
         int max_width = mainWindow->geometry().width();
         int max_height = mainWindow->geometry().height();
-        if(tool2 != nullptr){
+        if(!is_wayland){
             max_width = QGuiApplication::primaryScreen()->size().width();
             max_height = QGuiApplication::primaryScreen()->size().height();
         }
@@ -111,7 +112,7 @@ void FloatingWidget::moveAction(){
         }if (new_y > max_height - size().height()) {
             new_y = max_height - size().height();
         }
-        if(tool != nullptr){
+        if(!is_wayland){
             tool->move(new_x, new_y);
         } else {
             move(new_x, new_y);
@@ -125,7 +126,7 @@ void FloatingWidget::moveAction(){
             if (new_yy > max_height - floatingSettings->cur_height) {
                 new_yy = max_height - floatingSettings->cur_height;
             }
-             if(tool2 != nullptr){
+             if(!is_wayland){
                 tool2->move(new_xx, new_yy);
             } else {
                 floatingSettings->move(new_xx, new_yy);
