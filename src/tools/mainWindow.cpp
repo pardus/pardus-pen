@@ -218,14 +218,18 @@ void setupTools(){
     } else {
 #endif
         tool = nullptr;
+        tool2 = nullptr;
+        tool3 = nullptr;
         floatingSettings = new FloatingSettings(mainWindow);
         floatingWidget = new FloatingWidget(mainWindow);
+        desktopWidget = new FloatingWidget(mainWindow);
 #ifndef ETAP19
     }
 #endif
     floatingWidget->setSettings(floatingSettings);
     desktopWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
+    desktopWidget->hide();
 
     toolButtons[MINIFY] = create_button(MINIFY, [=](){
         if(!mainWindow->isMinimized()){
