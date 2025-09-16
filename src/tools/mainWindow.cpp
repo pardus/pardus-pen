@@ -229,7 +229,6 @@ void setupTools(){
     floatingWidget->setSettings(floatingSettings);
     desktopWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
-    desktopWidget->hide();
 
     toolButtons[MINIFY] = create_button(MINIFY, [=](){
         if(!mainWindow->isMinimized()){
