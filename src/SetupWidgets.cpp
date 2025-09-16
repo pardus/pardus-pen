@@ -115,6 +115,8 @@ void setupWidgets(){
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(toolButtons[UTILMENU]);
+    floatingWidget->addWidget(toolButtons[SCREENSHOT]);
+    floatingWidget->addWidget(toolButtons[CLOSE]);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
     floatingWidget->addWidget(create_color_button(QColor("#ffc000")));
@@ -458,8 +460,6 @@ void setupWidgets(){
 
     utilSettingsLayout->addWidget(toolButtons[SAVE],  Qt::AlignCenter);
     utilSettingsLayout->addWidget(toolButtons[OPEN],  Qt::AlignCenter);
-    utilSettingsLayout->addWidget(toolButtons[CLOSE],  Qt::AlignCenter);
-    utilSettingsLayout->addWidget(toolButtons[SCREENSHOT],  Qt::AlignCenter);
     utilSettingsLayout->addWidget(toolButtons[FULLSCREEN],  Qt::AlignCenter);
     utilSettingsLayout->addWidget(toolButtons[ROTATE],  Qt::AlignCenter);
 

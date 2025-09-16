@@ -253,12 +253,12 @@ void setupTools(){
             tool2->show();
         }
         mainWindow->hide();
-        mainWindow->showNormal();
         if(isFullScreen){
-            set_icon(get_icon_by_id(FULLSCREEN_EXIT), toolButtons[FULLSCREEN]);
-            mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
-        } else {
             set_icon(get_icon_by_id(FULLSCREEN), toolButtons[FULLSCREEN]);
+            mainWindow->resize(screen->size().width() * 0.8, screen->size().height() * 0.8);
+            mainWindow->showNormal();
+        } else {
+            set_icon(get_icon_by_id(FULLSCREEN_EXIT), toolButtons[FULLSCREEN]);
             mainWindow->resize(screen->size().width(), screen->size().height());
             mainWindow->showFullScreen();
         }
