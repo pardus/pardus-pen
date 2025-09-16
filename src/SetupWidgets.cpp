@@ -15,7 +15,6 @@ QWidget *bgMenu;
 
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
-static QVBoxLayout *utilSettingsLayout;
 
 void setupWidgets(){
     // Pen Settings Menu
@@ -89,17 +88,6 @@ void setupWidgets(){
         floatingWidget->moveAction();
     });
 
-    // Page menu button
-    toolButtons[UTILMENU] = create_button(UTILMENU, [=](){
-        if(floatingSettings->current_page == 2){
-            floatingSettings->setHide();
-            return;
-        }
-        floatingSettings->setPage(2);
-        floatingWidget->moveAction();
-    });
-
-
     floatingSettings->setHide();
 
 
@@ -114,8 +102,6 @@ void setupWidgets(){
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[PAGEMENU]);
-    floatingWidget->addWidget(toolButtons[UTILMENU]);
-    floatingWidget->addWidget(toolButtons[SCREENSHOT]);
     floatingWidget->addWidget(toolButtons[CLOSE]);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
@@ -428,8 +414,16 @@ void setupWidgets(){
 /********** clear & screenshot **********/
 
     QWidget *miscDialog = new QWidget();
+    QWidget *utilDialog = new QWidget();
 
     miscDialog->setStyleSheet(
+    "QWidget {"
+    "background-color: #f3232323;"
+    "}"
+    );
+
+
+    utilDialog->setStyleSheet(
     "QWidget {"
     "background-color: #f3232323;"
     "}"
@@ -443,25 +437,14 @@ void setupWidgets(){
 
     pageSettingsLayout->addWidget(miscDialog);
 
-/********** Util Settings **********/
+    QGridLayout *utilLayout = new QGridLayout(utilDialog);
+    utilLayout->addWidget(toolButtons[SAVE],       0, 0, Qt::AlignCenter);
+    utilLayout->addWidget(toolButtons[OPEN],       0, 1, Qt::AlignCenter);
+    utilLayout->addWidget(toolButtons[FULLSCREEN], 0, 2, Qt::AlignCenter);
+    utilLayout->addWidget(toolButtons[ROTATE],     0, 3, Qt::AlignCenter);
+    utilLayout->addWidget(toolButtons[SCREENSHOT],  0, 4, Qt::AlignCenter);
 
-    QWidget *utilSettings = new QWidget();
-
-    utilSettings->setStyleSheet(
-    "QWidget {"
-    "background-color: #f3232323;"
-    "}"
-    );
-
-
-    utilSettingsLayout = new QVBoxLayout(utilSettings);
-    floatingSettings->addPage(utilSettings);
-
-
-    utilSettingsLayout->addWidget(toolButtons[SAVE],  Qt::AlignCenter);
-    utilSettingsLayout->addWidget(toolButtons[OPEN],  Qt::AlignCenter);
-    utilSettingsLayout->addWidget(toolButtons[FULLSCREEN],  Qt::AlignCenter);
-    utilSettingsLayout->addWidget(toolButtons[ROTATE],  Qt::AlignCenter);
+    pageSettingsLayout->addWidget(utilDialog);
 
     if(get_bool("fuar")){
         toolButtons[SAVE]->setEnabled(false);
