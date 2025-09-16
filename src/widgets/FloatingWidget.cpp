@@ -4,13 +4,10 @@
 
 #include "../tools.h"
 
-int new_x = 0;
-int new_y = 0;
 
 extern float scale;
 
 extern QMainWindow* tool2;
-extern QMainWindow* tool;
 
 #define padding 8*scale
 
@@ -20,6 +17,7 @@ extern QMainWindow* tool;
 #endif
 
 FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
+    tool = (QMainWindow*)parent;
     layout = new QGridLayout();
     new_x = get_int("cur-x");
     new_y = get_int("cur-y");
@@ -73,7 +71,7 @@ void FloatingWidget::setVertical(bool state) {
     }
     // add items
     int item = 0;
-    int height = ((1+num_of_rows +num_of_item) / num_of_rows)*(butsize+padding) + 2*padding - butsize / 2;
+    int height = (num_of_item / num_of_rows)*(butsize+padding) + 2*padding + butsize / 2;
     int width = num_of_rows*(butsize+padding) + 2*padding;
     for (qint64 i=0;i<num_of_item + num_of_rows;i++) {
         int row = (int)item / num_of_rows;
@@ -95,8 +93,6 @@ void FloatingWidget::setVertical(bool state) {
     }
 }
 
-
-static int new_xx = 0, new_yy = 0;
 
 void FloatingWidget::moveAction(){
         if (new_x < 0) {

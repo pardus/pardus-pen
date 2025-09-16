@@ -3,18 +3,17 @@
 DrawingWidget *drawing;
 Background *background;
 FloatingWidget *floatingWidget;
+FloatingWidget *desktopWidget;
 FloatingSettings *floatingSettings;
 WhiteBoard *board;
+
 QMainWindow* tool;
 QMainWindow* tool2;
-
+QMainWindow* tool3;
 
 QSlider *scrollHSlider;
 QSlider *scrollVSlider;
 QWidget *mainWidget;
-
-extern int new_x;
-extern int new_y;
 
 float scale = 1.0;
 extern void setPen(int mode);
@@ -120,8 +119,8 @@ protected:
         scrollVSlider->setRange(0, screen->size().height() - event->size().height() );
 
         debug("width:%d height:%d \n",event->size().width(), event->size().height());
-        new_x = get_int("cur-x");
-        new_y = get_int("cur-y");
+        floatingWidget->new_x = get_int("cur-x");
+        floatingWidget->new_y = get_int("cur-y");
         // tool is not set under wayland
         if(floatingWidget != nullptr) {
             if(tool != nullptr){
@@ -141,10 +140,13 @@ protected:
         QMainWindow::changeEvent(event);
         if(tool != nullptr){
             if (event->type() == QEvent::WindowStateChange) {
+                tool2->hide();
                 if (isMinimized()) {
                     tool->hide();
+                    tool3->show();
                 } else {
                     tool->show();
+                    tool3->hide();
                 }
             }
         }
@@ -188,12 +190,30 @@ void setupTools(){
         tool2->setStyleSheet(
             "background: none;"
         );
+
+        // third toolbar
+        tool3 = new QMainWindow();
+        tool3->setWindowFlags(Qt::WindowStaysOnTopHint
+                              | Qt::Tool
+                              | Qt::X11BypassWindowManagerHint
+                              | Qt::WindowSystemMenuHint
+                              | Qt::WindowStaysOnTopHint
+                              | Qt::FramelessWindowHint);
+        tool3->setAttribute(Qt::WA_TranslucentBackground, true);
+        tool3->setAttribute(Qt::WA_NoSystemBackground, true);
+        tool3->setStyleSheet(
+            "background: none;"
+        );
+
         floatingSettings = new FloatingSettings(tool2);
         floatingWidget = new FloatingWidget(tool);
+        desktopWidget = new FloatingWidget(tool3);
         tool->setCentralWidget(floatingWidget);
         tool2->setCentralWidget(floatingSettings);
+        tool3->setCentralWidget(desktopWidget);
 
         tool->show();
+        tool3->show();
         tool2->hide();
     } else {
 #endif
@@ -204,12 +224,21 @@ void setupTools(){
     }
 #endif
     floatingWidget->setSettings(floatingSettings);
+    desktopWidget->setSettings(floatingSettings);
     floatingSettings->setHide();
 
     toolButtons[MINIFY] = create_button(MINIFY, [=](){
+        if(!mainWindow->isMinimized()){
             mainWindow->showMinimized();
+        } else {
+             mainWindow->showFullScreen();
+        }
     });
     set_shortcut(toolButtons[MINIFY], Qt::Key_D, Qt::MetaModifier);
+
+    toolButtons[UNMINIFY] = create_button(ICON, [=](){
+         mainWindow->showFullScreen();
+    });
 
     QScreen *screen = QGuiApplication::primaryScreen();
     toolButtons[FULLSCREEN] = create_button(FULLSCREEN_EXIT, [=](){
@@ -284,6 +313,7 @@ void mainWindowInit(){
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     floatingWidget->setMainWindow(mainWindow);
+    desktopWidget->setMainWindow(mainWindow);
     setupWidgets();
     mainWindow->showFullScreen();
     QScreen *screen = QGuiApplication::primaryScreen();

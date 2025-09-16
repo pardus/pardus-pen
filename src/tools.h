@@ -50,6 +50,7 @@ extern QMap<qint64, QPushButton*> toolButtons;
 
 extern DrawingWidget *drawing;
 extern FloatingWidget *floatingWidget;
+extern FloatingWidget *desktopWidget;
 extern FloatingSettings *floatingSettings;
 extern Background *background;
 

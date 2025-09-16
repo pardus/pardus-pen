@@ -2,6 +2,8 @@
 
 char* get_icon_by_id(int id){
     switch(id){
+        case ICON:
+            return (char*)":tr.org.pardus.pen.svg";
         case MARKER:
             return (char*)":images/tool/marker.svg";
         case PEN:
@@ -40,7 +42,6 @@ char* get_icon_by_id(int id){
             return (char*)":images/overlay/lines.svg";
         case ISOMETRIC:
             return (char*)":images/overlay/isometric.svg";
-
         case MUSIC:
             return (char*)":images/overlay/music.svg";
         case CUSTOM:

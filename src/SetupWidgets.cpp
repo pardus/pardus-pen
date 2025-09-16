@@ -124,6 +124,13 @@ void setupWidgets(){
 
 /*********** main menu done *********/
 
+/********** desktop toolbar **********/
+
+    desktopWidget->num_of_rows = 1;
+    desktopWidget->addWidget(toolButtons[UNMINIFY]);
+
+/********** desktop menu done **********/
+
 
 /************************************/
 /************ Pen Menu **************/

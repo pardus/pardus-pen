@@ -1,3 +1,4 @@
+#define ICON 0
 #define ERASER 1
 #define PEN 2
 #define MARKER 3
@@ -51,3 +52,4 @@
 #define UTILMENU 73
 #define CURSOR 74
 #define SHAPEMENU 75
+#define UNMINIFY 76
