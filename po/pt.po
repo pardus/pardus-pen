@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-17 08:47+0000\n"
+"POT-Creation-Date: 2025-09-17 09:37+0000\n"
 "PO-Revision-Date: 2025-06-06 00:33+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
@@ -113,5 +113,9 @@ msgid "Background:"
 msgstr "Fundo:"
 
 #: src/SetupWidgets.cpp:513
-msgid "Are you want to exit?"
+#, fuzzy
+msgid "Are you sure you want to quit?"
 msgstr "Tem a certeza que pretende sair?"
+
+#~ msgid "Are you want to exit?"
+#~ msgstr "Tem a certeza que pretende sair?"

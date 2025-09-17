@@ -510,7 +510,7 @@ void setupWidgets(){
     );
 
     QLabel *closeIcon = new QLabel();
-    QLabel *closeLabel = new QLabel(_("Are you want to exit?"));
+    QLabel *closeLabel = new QLabel(_("Are you sure you want to quit?"));
 
     closeIcon->setPixmap(QIcon(get_icon_by_id(CLOSE)).pixmap(QSize(butsize*2, butsize*2)));
 

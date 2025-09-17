@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-17 08:47+0000\n"
+"POT-Creation-Date: 2025-09-17 09:37+0000\n"
 "PO-Revision-Date: 2024-10-26 15:14-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -119,7 +119,8 @@ msgid "Background:"
 msgstr ""
 
 #: src/SetupWidgets.cpp:513
-msgid "Are you want to exit?"
+#, fuzzy
+msgid "Are you sure you want to quit?"
 msgstr "¿Quiere salir de Lápiz Pardus?"
 
 #~ msgid "Info"
