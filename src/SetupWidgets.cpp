@@ -518,6 +518,7 @@ void setupWidgets(){
 
 
     closeIcon->setStyleSheet(
+        "background: none;"
         "padding-top: "+QString::number(butsize/2)+"px;"
         "padding-bottom: "+QString::number(butsize/2)+"px;"
     );
@@ -526,28 +527,33 @@ void setupWidgets(){
         "background: none;"
         "color: #c0c0c0;"
         "padding-left: "+QString::number(8*scale)+"px;"
-        "padding-top: "+QString::number(4*scale)+"px;"
+        "padding-right: "+QString::number(8*scale)+"px;"
     );
     closeLabel->setAlignment(Qt::AlignLeft);
     closeMenuMainLayout->addWidget(closeLabel);
 
     closeNo->setStyleSheet(
-        "background: none;"
+        "background: #f4141414;"
         "color: #c0c0c0;"
         "padding-top: "+QString::number(butsize/3)+"px;"
         "padding-bottom: "+QString::number(butsize/3)+"px;"
     );
 
     toolButtons[CLOSE]->setStyleSheet(
-        "background: none;"
+        "background: #f4141414;"
         "color: #c0c0c0;"
         "padding-top: "+QString::number(butsize/3)+"px;"
         "padding-bottom: "+QString::number(butsize/3)+"px;"
     );
 
-
-    closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
-    closeMenuConfirmLayout->addWidget(closeNo);
+    srand(time(NULL));
+    if(rand() % 2 == 0) {
+        closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
+        closeMenuConfirmLayout->addWidget(closeNo);
+    } else {
+        closeMenuConfirmLayout->addWidget(closeNo);
+        closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
+    }
 
 /********** Finish him **********/
     updateGui();
