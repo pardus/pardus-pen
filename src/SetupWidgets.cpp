@@ -534,23 +534,20 @@ void setupWidgets(){
     closeNo->setStyleSheet(
         "background: none;"
         "color: #c0c0c0;"
-        "padding-left: "+QString::number(8*scale)+"px;"
-        "padding-top: "+QString::number(4*scale)+"px;"
+        "padding-top: "+QString::number(butsize/3)+"px;"
+        "padding-bottom: "+QString::number(butsize/3)+"px;"
     );
 
     toolButtons[CLOSE]->setStyleSheet(
         "background: none;"
         "color: #c0c0c0;"
-        "padding-left: "+QString::number(8*scale)+"px;"
-        "padding-top: "+QString::number(4*scale)+"px;"
+        "padding-top: "+QString::number(butsize/3)+"px;"
+        "padding-bottom: "+QString::number(butsize/3)+"px;"
     );
 
 
     closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
     closeMenuConfirmLayout->addWidget(closeNo);
-
-    closeNo->setFixedSize(butsize, butsize);
-    toolButtons[CLOSE]->setFixedSize(butsize, butsize);
 
 /********** Finish him **********/
     updateGui();
