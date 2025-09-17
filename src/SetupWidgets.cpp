@@ -4,12 +4,13 @@
 #include <dirent.h>
 
 QWidget *colorDialog;
+QWidget *closeMenu;
 
 QLabel *thicknessLabel;
 
 QWidget *penTypeDialog;
 QWidget *modeDialog;
-
+QVBoxLayout *closeMenuLayout;
 QWidget *bgMenu;
 
 
@@ -91,6 +92,42 @@ void setupWidgets(){
     floatingSettings->setHide();
 
 
+    // Close Menu
+    closeMenu = new QWidget();
+    closeMenu->setStyleSheet(QString("background-color: #f3232323;"));
+    closeMenuLayout = new QVBoxLayout(closeMenu);
+    closeMenuLayout->setSpacing(padding);
+    closeMenuLayout->setContentsMargins(0, 0, 0, 0);
+
+    floatingSettings->addPage(closeMenu);
+    QPushButton * closeButton = create_button(CLOSE, [=](){
+        floatingSettings->setPage(2);
+        floatingWidget->moveAction();
+    });
+
+
+    // Close Menu Buttons
+    QPushButton *closeNo = create_button_text(_("No"), [=](){
+        floatingSettings->setHide();
+    });
+
+
+    toolButtons[CLOSE] = create_button_text(_("Yes"), [=](){
+    #ifdef ETAP19
+        QStringList args3;
+        QProcess p3;
+        args3 << "-d" << "eta-disable-gestures@pardus.org.tr";
+        p3.execute("gnome-shell-extension-tool", args3);
+
+        QStringList args4;
+        QProcess p4;
+        args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
+        p4.execute("gsettings", args4);
+    #endif
+        exit(0);
+    });
+
+
 /********** Main toolbar **********/
 
     floatingWidget->addWidget(toolButtons[PENMENU]);
@@ -102,7 +139,7 @@ void setupWidgets(){
     floatingWidget->addWidget(toolButtons[BACK]);
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[PAGEMENU]);
-    floatingWidget->addWidget(toolButtons[CLOSE]);
+    floatingWidget->addWidget(closeButton);
     floatingWidget->addWidget(create_color_button(QColor("#0078d7")));
     floatingWidget->addWidget(create_color_button(QColor("#00ae4d")));
     floatingWidget->addWidget(create_color_button(QColor("#ffc000")));
@@ -452,6 +489,68 @@ void setupWidgets(){
         toolButtons[CLOSE]->setEnabled(false);
         toolButtons[SAVE]->setEnabled(false);
     }
+
+/********** Close Menu **********/
+
+    QWidget *closeMenuMain = new QWidget();
+    QVBoxLayout *closeMenuMainLayout = new QVBoxLayout(closeMenuMain);
+
+    QWidget *closeMenuConfirm = new QWidget();
+    QHBoxLayout *closeMenuConfirmLayout = new QHBoxLayout(closeMenuConfirm);
+
+    closeMenuLayout->addWidget(closeMenuMain);
+    closeMenuLayout->addWidget(closeMenuConfirm);
+
+    closeMenuMain->setStyleSheet(
+        "background: none;"
+    );
+
+    closeMenuConfirm->setStyleSheet(
+        "background: none;"
+    );
+
+    QLabel *closeIcon = new QLabel();
+    QLabel *closeLabel = new QLabel(_("Are you want to exit?"));
+
+    closeIcon->setPixmap(QIcon(get_icon_by_id(CLOSE)).pixmap(QSize(butsize*2, butsize*2)));
+
+    closeMenuMainLayout->addWidget(closeIcon, 0, Qt::AlignCenter);
+
+
+    closeIcon->setStyleSheet(
+        "padding-top: "+QString::number(butsize/2)+"px;"
+        "padding-bottom: "+QString::number(butsize/2)+"px;"
+    );
+
+    closeLabel->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
+    );
+    closeLabel->setAlignment(Qt::AlignLeft);
+    closeMenuMainLayout->addWidget(closeLabel);
+
+    closeNo->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
+    );
+
+    toolButtons[CLOSE]->setStyleSheet(
+        "background: none;"
+        "color: #c0c0c0;"
+        "padding-left: "+QString::number(8*scale)+"px;"
+        "padding-top: "+QString::number(4*scale)+"px;"
+    );
+
+
+    closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
+    closeMenuConfirmLayout->addWidget(closeNo);
+
+    closeNo->setFixedSize(butsize, butsize);
+    toolButtons[CLOSE]->setFixedSize(butsize, butsize);
 
 /********** Finish him **********/
     updateGui();
