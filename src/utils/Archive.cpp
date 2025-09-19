@@ -128,7 +128,7 @@ public:
                 while ((size = archive_read_data(ar, buff, sizeof(buff))) > 0) {
                     input.append(buff, size);
                 }
-
+#ifdef QPRINTER
                 if (strcmp(entryName, "overlay.pdf") == 0) {
                     QDir dir;
                     dir.mkpath(cache);
@@ -140,7 +140,9 @@ public:
                     loadPdf(cache+"/overlay.pdf");
                     drawing->pdfPath = cache+"/overlay.pdf";
                     continue;
-                } else if (strcmp(entryName, "config") == 0) {
+                }
+#endif
+                if (strcmp(entryName, "config") == 0) {
                     config = QString::fromUtf8(input);
                     QStringList list = config.split("\n");
                     for (const auto &str : list) {
