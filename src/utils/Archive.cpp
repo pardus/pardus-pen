@@ -2,15 +2,19 @@
 #include <QByteArray>
 #include <QMap>
 #include <QString>
+#include <QFile>
 #include <QIODevice>
-#include <QDebug>
 #include <archive.h>
 #include <archive_entry.h>
 #include <QWidget>
 
 #include <fcntl.h>
 
+#include "../tools.h"
+
 extern QWidget* mainWidget;
+
+extern QString cache;
 
 class ArchiveStorage {
 public:
@@ -107,7 +111,7 @@ public:
         archive_read_support_format_all(ar);
         int r = archive_read_open_filename(ar, archiveFileName.toStdString().c_str(), 10240); // 10240 is the block size
         if (r != ARCHIVE_OK) {
-            qDebug() << "Failed to open archive: " << archive_error_string(ar);
+            printf("Failed to open archive: %s", archive_error_string(ar));
             return values;
         }
 
@@ -125,7 +129,18 @@ public:
                     input.append(buff, size);
                 }
 
-                if (strcmp(entryName, "config") == 0) {
+                if (strcmp(entryName, "overlay.pdf") == 0) {
+                    QDir dir;
+                    dir.mkpath(cache);
+                    QFile newDoc(cache+"/overlay.pdf");
+                    if(newDoc.open(QIODevice::WriteOnly)){
+                        newDoc.write(input);
+                    }
+                    newDoc.close();
+                    loadPdf(cache+"/overlay.pdf");
+                    drawing->pdfPath = cache+"/overlay.pdf";
+                    continue;
+                } else if (strcmp(entryName, "config") == 0) {
                     config = QString::fromUtf8(input);
                     QStringList list = config.split("\n");
                     for (const auto &str : list) {
