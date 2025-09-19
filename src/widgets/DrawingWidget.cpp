@@ -212,6 +212,11 @@ public:
             }
         }
         archive_set_config(cfg);
+#ifdef QPRINTER
+        if(PDFMODE){
+            archive_add_file("overlay.pdf", drawing->pdfPath);
+        }
+#endif
         archive_create(filename);
     }
 

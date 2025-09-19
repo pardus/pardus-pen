@@ -54,6 +54,7 @@ public:
             QString path = it.key();
             QString file = it.value();
             stat(file.toStdString().c_str(), &st);
+            printf("Compress:%s => %s\n", path.toStdString().c_str(), file.toStdString().c_str());
             archive_entry_set_pathname(entry, path.toStdString().c_str());
             archive_entry_set_filetype(entry, AE_IFREG);
             archive_entry_set_perm(entry, 0644);
