@@ -544,7 +544,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             curs.penType[id] = penType;
             curs.drawing[id] = true;
-            if (num_of_press == 1){
+            if (num_of_press == 1 || id == -1){
                 mergeSelection();
                 if(penType != ERASER){
                     background->image = image.toImage();
@@ -601,7 +601,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             curEventButtons = 0;
 
-            if(num_of_press == 0) {
+            if(num_of_press == 0 || id == -1) {
                 curs.clear();
                 if(penType == SELECTION) {
                     addPoint(id, pos);
@@ -682,7 +682,9 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
-            num_of_press=1;
+            if(num_of_press > 0){
+                break;
+            }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
             return true;
@@ -691,7 +693,9 @@ bool DrawingWidget::event(QEvent *ev) {
             if(tablet_enabled) {
                 break;
             }
-            num_of_press=0;
+            if(num_of_press > 0){
+                break;
+            }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
             return true;
