@@ -30,6 +30,7 @@ void openFile(QString filename){
         if(filename.endsWith(".pdf")){
             loadPdf(filename);
             drawing->goPage(0);
+            drawing->pdfPath = filename;
             bgMenu->hide();
         } else {
         #endif

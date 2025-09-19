@@ -8,6 +8,8 @@
 #include <archive_entry.h>
 #include <QWidget>
 
+#include <fcntl.h>
+
 extern QWidget* mainWidget;
 
 class ArchiveStorage {
@@ -15,6 +17,10 @@ public:
     QString config = "";
     void add(const QString& path, const QImage& image) {
         values[path] = image;
+    }
+
+    void add_file(const QString& path, const QString& file) {
+        files[path] = file;
     }
 
     void setConfig(QString cfg){
@@ -36,6 +42,32 @@ public:
         archive_write_header(ar, entry);
         archive_write_data(ar, config.toStdString().c_str(), config.size());
         archive_entry_free(entry);
+
+        struct stat st;
+        char buff[8192];
+        int len;
+        int fd;
+
+
+        for (auto it = files.begin(); it != files.end(); ++it) {
+            struct archive_entry* entry = archive_entry_new();
+            QString path = it.key();
+            QString file = it.value();
+            stat(file.toStdString().c_str(), &st);
+            archive_entry_set_pathname(entry, path.toStdString().c_str());
+            archive_entry_set_filetype(entry, AE_IFREG);
+            archive_entry_set_perm(entry, 0644);
+            archive_entry_set_size(entry, st.st_size);
+            archive_write_header(ar, entry);
+            fd = open(file.toStdString().c_str(), O_RDONLY);
+            len = read(fd, buff, sizeof(buff));
+            while ( len > 0 ) {
+                archive_write_data(ar, buff, len);
+                len = read(fd, buff, sizeof(buff));
+            }
+            close(fd);
+            archive_entry_free(entry);
+        }
 
         for (auto it = values.begin(); it != values.end(); ++it) {
             QString path = it.key();
@@ -127,12 +159,16 @@ public:
 
 private:
     QMap<QString, QImage> values;
+    QMap<QString, QString> files;
 };
 
 ArchiveStorage archive;
 
 void archive_add(const QString& path, const QImage& image){
     archive.add(path, image);
+}
+void archive_add_file(const QString& path, const QString& file){
+    archive.add_file(path, file);
 }
 
 void archive_set_config(const QString& cfg){

@@ -143,6 +143,9 @@ public:
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
     void setOverlay(QImage img, int page);
     QImage getOverlay(int page);
+#ifdef QPRINTER
+    QString pdfPath;
+#endif
 protected:
     float fpressure;
     int num_of_press;
