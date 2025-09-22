@@ -119,5 +119,6 @@ void setHideMainWindow(bool status);
 extern bool PDFMODE;
 QImage getPdfImage(int num, float ratio);
 void loadPdf(QString path);
+void loadPdfFromData(QByteArray data);
 #endif
 void openFile(QString filename);

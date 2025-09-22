@@ -18,15 +18,22 @@ static std::unique_ptr<Poppler::Document> doc;
 static std::unique_ptr<Poppler::Page> page;
 #endif
 
-void loadPdf(QString path){
+static void set_pdf_mode(){
     PDFMODE = true;
-    doc = Poppler::Document::load(path);
     doc->setRenderHint(Poppler::Document::Antialiasing, true);
     doc->setRenderHint(Poppler::Document::TextAntialiasing, true);
     drawing->max = doc->numPages()-1;
     drawing->goPage(0);
     updateGui();
+}
 
+void loadPdfFromData(QByteArray data){
+    doc = Poppler::Document::loadFromData(data);
+    set_pdf_mode();
+}
+void loadPdf(QString path){
+    doc = Poppler::Document::load(path);
+    set_pdf_mode();
 }
 
 QImage getPdfImage(int num, float ratio){

@@ -22,7 +22,7 @@ extern WhiteBoard *board;
 extern QWidget * mainWidget;
 extern DrawingWidget *drawing;
 extern FloatingSettings *floatingSettings;
-QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
+QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/" + generateRandomString(5)+"/";
 
 void removeDirectory(const QString &path);
 

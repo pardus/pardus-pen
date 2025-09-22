@@ -130,15 +130,14 @@ public:
                 }
 #ifdef QPRINTER
                 if (strcmp(entryName, "overlay.pdf") == 0) {
-                    QDir dir;
-                    dir.mkpath(cache);
-                    QFile newDoc(cache+"/overlay.pdf");
+                    drawing->pdfPath = cache + generateRandomString(10);
+                    QDir dir; dir.mkpath(cache);
+                    QFile newDoc(drawing->pdfPath);
                     if(newDoc.open(QIODevice::WriteOnly)){
                         newDoc.write(input);
                     }
                     newDoc.close();
-                    loadPdf(cache+"/overlay.pdf");
-                    drawing->pdfPath = cache+"/overlay.pdf";
+                    loadPdfFromData(input);
                     continue;
                 }
 #endif
