@@ -626,13 +626,19 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     }
     penType = ev_pen;
 }
-static bool tablet_enabled = false;
+
+#define DEV_IDLE 0
+#define DEV_MOUSE 1
+#define DEV_TOUCH 2
+#define DEV_TABLET 3
+
+static int last_device = 0;
 bool DrawingWidget::event(QEvent *ev) {
     switch (ev->type()) {
         case QEvent::TouchBegin:
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
-            if(tablet_enabled || penType == SELECTION) {
+            if(last_device != DEV_TOUCH && last_device != DEV_IDLE) {
                 break;
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
@@ -647,6 +653,11 @@ bool DrawingWidget::event(QEvent *ev) {
                 }
             }
             num_of_press = touch_cnt;
+            if(num_of_press == 0){
+                last_device = DEV_IDLE;
+            } else {
+                last_device = DEV_TOUCH;
+            }
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
                 if ((Qt::TouchPointState)touchPoint.state() == Qt::TouchPointPressed) {
@@ -660,48 +671,53 @@ bool DrawingWidget::event(QEvent *ev) {
             return true;
         }
         case QEvent::TabletPress: {
-            tablet_enabled = true;
+            if(last_device != DEV_IDLE){
+                break;
+            }
+            last_device = DEV_TABLET;
             num_of_press=1;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), PRESS, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
         }
         case QEvent::TabletRelease: {
-            tablet_enabled = false;
+            if(last_device != DEV_TABLET){
+                break;
+            }
+            last_device = DEV_IDLE;
             num_of_press=0;
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), RELEASE, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
         }
         case QEvent::TabletMove: {
+            if(last_device != DEV_TABLET) {
+                break;
+            }
             QTabletEvent *tabletEvent = static_cast<QTabletEvent*>(ev);
             eventHandler(tabletEvent->buttons(), MOVE, -2, tabletEvent->position(), tabletEvent->pressure());
             return true;
         }
         case QEvent::MouseButtonPress: {
-            if(tablet_enabled) {
+            if(last_device != DEV_IDLE){
                 break;
             }
-            if(num_of_press > 0){
-                break;
-            }
+            last_device = DEV_MOUSE;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), PRESS, -1, mouseEvent->position(), 1.0);
             return true;
         }
         case QEvent::MouseButtonRelease: {
-            if(tablet_enabled) {
+            if(last_device != DEV_MOUSE){
                 break;
             }
-            if(num_of_press > 0){
-                break;
-            }
+            last_device = DEV_IDLE;
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
             eventHandler(mouseEvent->buttons(), RELEASE, -1, mouseEvent->position(), 1.0);
             return true;
         }
         case QEvent::MouseMove: {
-            if(tablet_enabled) {
+            if(last_device != DEV_MOUSE) {
                 break;
             }
             QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(ev);
