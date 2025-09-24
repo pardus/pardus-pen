@@ -5,12 +5,26 @@
 
 #include "../tools.h"
 
+#include <unistd.h>
+
 QSettings* settings;
 QSettings* settingsDefault;
 void settings_init() {
     QString settingsFile = QString(getenv("HOME"))+"/.config/pardus-pen.conf";
     settings = new QSettings(settingsFile, QSettings::NativeFormat);
     settingsDefault = new QSettings("://tr.org.pardus.pen.default.conf", QSettings::NativeFormat);
+    // version check
+    int ver = 0;
+    int ver_default = settingsDefault->value("version").toInt();
+    if(settings->contains("version")){
+        ver = settings->value("version").toInt();
+    }
+    if(ver < ver_default){
+        free(settings);
+        unlink(settingsFile.toStdString().c_str());
+        settings = new QSettings(settingsFile, QSettings::NativeFormat);
+        settings->setValue("version", ver_default);
+    }
 }
 
 QString get_string(const char* name) {
