@@ -13,8 +13,25 @@
 #include "tools.h"
 
 bool is_wayland;
+bool is_etap = false;
 extern void mainWindowInit();
 int history;
+
+static bool detect_etap(){
+    FILE *f = fopen("/etc/os-release", "r");
+    if(f == NULL){
+        return false;
+    }
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), f)) {
+        char needed[] = "VERSION_CODENAME=";
+        if(strncmp(needed, buffer, strlen(needed)) == 0){
+            return (strncmp(buffer+strlen(needed), "etap", 4) == 0);
+        }
+    }
+    fclose(f);
+    return false;
+}
 
 int main(int argc, char *argv[]) {
     settings_init();
@@ -30,6 +47,7 @@ int main(int argc, char *argv[]) {
     p2.execute("gsettings", args2);
 #endif
 
+    is_etap = detect_etap();
     is_wayland = (getenv("WAYLAND_DISPLAY") != NULL);
     // gnome wayland fullscreen compositor is buggy.
     // Force prefer Xwayland for fix this issue.

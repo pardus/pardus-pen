@@ -523,10 +523,12 @@ int DrawingWidget::getLineStyle(){
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     debug("source: %d type: %d id:%d\n", source, type, id);
     int ev_pen = penType;
-    if(source & Qt::MiddleButton) {
-        penType = MARKER;
-    } else if(source & Qt::RightButton) {
-        penType = ERASER;
+    if(get_bool("eraser-mode") && ! is_etap){
+        if(source & Qt::MiddleButton) {
+            penType = MARKER;
+        } else if(source & Qt::RightButton) {
+            penType = ERASER;
+        }
     }
     switch(type) {
         case PRESS:

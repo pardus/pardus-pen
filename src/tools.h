@@ -63,6 +63,7 @@ extern QWidget *bgMenu;
 extern float scale;
 extern int history;
 extern bool is_wayland;
+extern bool is_etap;
 
 extern QSlider *scrollHSlider;
 extern QSlider *scrollVSlider;
