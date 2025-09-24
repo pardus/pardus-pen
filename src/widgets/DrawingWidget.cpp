@@ -590,10 +590,13 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curs.drawing[id] = false;
             curs.hide(id);
             if(penType != ERASER && geo.size(id) < 2 && penType != SELECTION) {
-                painter.begin(&image);
+                int fpenStype = penStyle;
+                penStyle = LINE;
                 addPoint(id, pos+QPointF(0,1));
-                drawFunc(id, pressure);
+                painter.begin(&image);
+                drawLineToFunc(id, pressure);
                 painter.end();
+                penStyle = fpenStype;
             }
             curEventButtons = 0;
 
