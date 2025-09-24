@@ -560,12 +560,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if(penType == SELECTION) {
                 break;
             }
-            if(penType == ERASER) {
-                curs.setCursor(id, penSize[penType]);
-                curs.setPosition(id, pos);
-            } else {
-                curs.hide(id);
-            }
+            curs.setPosition(id, pos);
             curEventButtons = source;
             break;
         case MOVE:
@@ -579,6 +574,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 default:
                     if(penType == ERASER) {
                         curs.setPosition(id, pos);
+                        curs.setCursor(id, penSize[penType]);
                     }
                     addPoint(id, pos);
                     painter.begin(&image);
