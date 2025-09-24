@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-17 09:37+0000\n"
-"PO-Revision-Date: 2025-06-06 00:33+0100\n"
+"PO-Revision-Date: 2025-09-24 11:06+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: src/tools/pen.cpp:140 src/tools/update.cpp:42
 msgid "Size:"
@@ -98,11 +98,11 @@ msgstr "Falha ao guardar a captura de ecrã em:"
 
 #: src/SetupWidgets.cpp:110
 msgid "No"
-msgstr ""
+msgstr "Não"
 
 #: src/SetupWidgets.cpp:115
 msgid "Yes"
-msgstr ""
+msgstr "Sim"
 
 #: src/SetupWidgets.cpp:193
 msgid "Size: 10"
@@ -113,9 +113,5 @@ msgid "Background:"
 msgstr "Fundo:"
 
 #: src/SetupWidgets.cpp:513
-#, fuzzy
 msgid "Are you sure you want to quit?"
 msgstr "Tem a certeza que pretende sair?"
-
-#~ msgid "Are you want to exit?"
-#~ msgstr "Tem a certeza que pretende sair?"
