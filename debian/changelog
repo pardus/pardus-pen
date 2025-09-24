@@ -1,3 +1,40 @@
+pardus-pen (4.1.0) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * first start page mode changed to transparent
+  * fix tap to point feature
+  * desktop mode widget added
+  * fix for wayland
+  * fix wayland resize issue and better wayland check method
+  * remove unused line
+  * fix selection mode
+  * move screenshot and exit button to main toolbar
+  * ui/ux improvements
+
+  [ sulincix ]
+  * yes/no dialog on exit
+  * style fix
+  * fix exit confirm message
+  * yes no button background added
+
+  [ Ali Riza KESKIN ]
+  * pdf path
+  * add pdf file to pen file
+  * load overlay pdf if exists in .pen file
+  * fix non-pdf build
+  * block mouse event when touch event active
+  * check last device
+  * load .pen pdf overlay from memory instead of file
+
+  [ sulincix ]
+  * typo fix for environments
+  * Show cursor when moving instead of press
+  * fix tap to point function: force draw a 1px long line instead of shape
+  * config version added. if config version increased, current config removed.
+  * disable right click eraser mode feature by settings and force disable for etap
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Wed, 24 Sep 2025 22:13:09 +0300
+
 pardus-pen (4.0.0) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
