@@ -16,6 +16,10 @@
 #include <sys/file.h>
 #include <errno.h>
 
+#include <dirent.h>
+#include <unistd.h>
+#include <stdio.h>
+
 size_t _cur_time;
 size_t get_epoch(){
     struct timeval tv;
@@ -48,4 +52,31 @@ char* which(const char* cmd){
     free(fullPath); // Free the duplicated string
     free(fullfilename);
     return "";
+}
+
+// disable eta right click
+void disable_erc(){
+    DIR* dir = opendir("/run/etap/right-click/disable");
+    if(dir != NULL){
+        closedir(dir);
+        char path[PATH_MAX];
+        sprintf(path, "/run/etap/right-click/disable/%d", getpid());
+        FILE *f = fopen(path, "w");
+        if(f != NULL){
+            fprintf(f, "pardus-pen");
+            fclose(f);
+        }
+        fclose(f);
+    }
+}
+
+// disable eta right click
+void enable_erc(){
+    DIR* dir = opendir("/run/etap/right-click/disable");
+    if(dir != NULL){
+        closedir(dir);
+        char path[PATH_MAX];
+        sprintf(path, "/run/etap/right-click/disable/%d", getpid());
+        unlink(path);
+    }
 }

@@ -138,6 +138,13 @@ protected:
     void changeEvent(QEvent *event) override {
         // Call the base class implementation
         QMainWindow::changeEvent(event);
+        if (event->type() == QEvent::WindowStateChange) {
+            if (isMinimized()) {
+                enable_erc();
+            } else {
+                disable_erc();
+            }
+        }
         if(!is_wayland){
             if (event->type() == QEvent::WindowStateChange) {
                 tool2->hide();

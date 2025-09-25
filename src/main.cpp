@@ -34,6 +34,7 @@ static bool detect_etap(){
 }
 
 int main(int argc, char *argv[]) {
+    disable_erc();
     settings_init();
 #ifdef ETAP19
     QStringList args1;

@@ -31,6 +31,8 @@ extern "C" {
     extern size_t _cur_time;
     size_t get_epoch();
     char* which(const char* cmd);
+    void disable_erc();
+    void enable_erc();
 }
 
 
@@ -123,3 +125,4 @@ void loadPdf(QString path);
 void loadPdfFromData(QByteArray data);
 #endif
 void openFile(QString filename);
+
