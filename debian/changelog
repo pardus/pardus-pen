@@ -1,3 +1,13 @@
+pardus-pen (4.1.2) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * enable/disable eta-right-click event added
+  * fix double free issue and single pid
+  * enable erc on exit
+  * enable erc on exit
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 25 Sep 2025 12:46:14 +0300
+
 pardus-pen (4.1.1) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
