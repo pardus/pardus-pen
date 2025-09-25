@@ -70,6 +70,7 @@ public:
         msgBox.addButton(QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);
         if(msgBox.exec() == QMessageBox::Yes){
+            enable_erc();
             exit(0);
         }
     }
