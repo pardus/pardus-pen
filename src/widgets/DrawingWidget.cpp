@@ -630,8 +630,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 
 #define DEV_IDLE 0
 #define DEV_MOUSE 1
-#define DEV_TOUCH 2
-#define DEV_TABLET 3
+#define DEV_TABLET 2
 
 static int last_device = 0;
 bool DrawingWidget::event(QEvent *ev) {
@@ -639,7 +638,7 @@ bool DrawingWidget::event(QEvent *ev) {
         case QEvent::TouchBegin:
         case QEvent::TouchEnd:
         case QEvent::TouchUpdate: {
-            if(last_device != DEV_TOUCH && last_device != DEV_IDLE) {
+            if(last_device != DEV_MOUSE && last_device != DEV_IDLE) {
                 break;
             }
             QTouchEvent *touchEvent = static_cast<QTouchEvent*>(ev);
@@ -657,7 +656,7 @@ bool DrawingWidget::event(QEvent *ev) {
             if(num_of_press == 0){
                 last_device = DEV_IDLE;
             } else {
-                last_device = DEV_TOUCH;
+                last_device = DEV_MOUSE;
             }
             foreach(const QTouchEvent::TouchPoint &touchPoint, touchPoints) {
                 QPointF pos = touchPoint.position();
