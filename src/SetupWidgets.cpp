@@ -124,6 +124,7 @@ void setupWidgets(){
         args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
         p4.execute("gsettings", args4);
     #endif
+        enable_erc();
         exit(0);
     });
 
