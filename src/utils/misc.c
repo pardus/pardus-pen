@@ -54,29 +54,36 @@ char* which(const char* cmd){
     return "";
 }
 
+static int pid = 0;
+
 // disable eta right click
 void disable_erc(){
+    if(pid == 0){
+        pid = getpid();
+    }
     DIR* dir = opendir("/run/etap/right-click/disable");
     if(dir != NULL){
         closedir(dir);
         char path[PATH_MAX];
-        sprintf(path, "/run/etap/right-click/disable/%d", getpid());
+        sprintf(path, "/run/etap/right-click/disable/%d", pid);
         FILE *f = fopen(path, "w");
         if(f != NULL){
             fprintf(f, "pardus-pen");
             fclose(f);
         }
-        fclose(f);
     }
 }
 
 // disable eta right click
 void enable_erc(){
+    if(pid == 0){
+        pid = getpid();
+    }
     DIR* dir = opendir("/run/etap/right-click/disable");
     if(dir != NULL){
         closedir(dir);
         char path[PATH_MAX];
-        sprintf(path, "/run/etap/right-click/disable/%d", getpid());
+        sprintf(path, "/run/etap/right-click/disable/%d", pid);
         unlink(path);
     }
 }
