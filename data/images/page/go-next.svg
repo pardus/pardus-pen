@@ -1,21 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
-<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="katman_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   style="enable-background:new 0 0 48 48;"
+   xml:space="preserve"
+   sodipodi:docname="go-next.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs5" /><sodipodi:namedview
+   id="namedview5"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="10.166667"
+   inkscape:cx="23.95082"
+   inkscape:cy="24"
+   inkscape:window-width="1366"
+   inkscape:window-height="699"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="katman_1" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill:url(#SVGID_1_);}
 </style>
-<g>
+<g
+   id="g5">
 	
-		<radialGradient id="SVGID_1_" cx="-743.1945" cy="20.4471" r="156.9779" gradientTransform="matrix(-1 0 0 1 -644.6712 0)" gradientUnits="userSpaceOnUse">
-		<stop  offset="0" style="stop-color:#FFFFFF"/>
-		<stop  offset="0.2714" style="stop-color:#BFDAFF"/>
-		<stop  offset="0.6238" style="stop-color:#72AEFF"/>
-		<stop  offset="0.8755" style="stop-color:#4293FF"/>
-		<stop  offset="1" style="stop-color:#2F88FF"/>
+		<radialGradient
+   id="SVGID_1_"
+   cx="-743.19452"
+   cy="20.4471"
+   r="156.97791"
+   gradientTransform="matrix(-1,0,0,1,-644.6712,0)"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   offset="0"
+   style="stop-color:#FFFFFF"
+   id="stop1" />
+		<stop
+   offset="0.2714"
+   style="stop-color:#BFDAFF"
+   id="stop2" />
+		<stop
+   offset="0.6238"
+   style="stop-color:#72AEFF"
+   id="stop3" />
+		<stop
+   offset="0.8755"
+   style="stop-color:#4293FF"
+   id="stop4" />
+		<stop
+   offset="1"
+   style="stop-color:#2F88FF"
+   id="stop5" />
 	</radialGradient>
-	<path class="st0" d="M21.35,47.77c-1.12-0.46-1.85-1.56-1.85-2.77v-9h-15c-1.66,0-3-1.34-3-3V15c0-1.66,1.34-3,3-3h15V3
-		c0-1.21,0.73-2.31,1.85-2.77c1.13-0.47,2.41-0.21,3.27,0.65l21,21c1.17,1.17,1.17,3.07,0,4.24l-21,21C24.05,47.7,23.28,48,22.5,48
-		C22.11,48,21.72,47.93,21.35,47.77z M25.5,10.24V15c0,1.66-1.34,3-3,3h-15v12h15c1.66,0,3,1.34,3,3v4.76L39.26,24L25.5,10.24z"/>
+	<path
+   class="st0"
+   d="M 21.35,47.77 C 20.23,47.31 19.5,46.21 19.5,45 v -9 h -15 c -1.66,0 -3,-1.34 -3,-3 V 15 c 0,-1.66 1.34,-3 3,-3 h 15 V 3 c 0,-1.21 0.73,-2.31 1.85,-2.77 1.13,-0.47 2.41,-0.21 3.27,0.65 l 21,21 c 1.17,1.17 1.17,3.07 0,4.24 l -21,21 C 24.05,47.7 23.28,48 22.5,48 22.11,48 21.72,47.93 21.35,47.77 Z M 25.5,10.24 V 15 c 0,1.66 -1.34,3 -3,3 h -15 v 12 h 15 c 1.66,0 3,1.34 3,3 v 4.76 L 39.26,24 Z"
+   id="path5"
+   style="fill:url(#SVGID_1_)" />
 </g>
 </svg>

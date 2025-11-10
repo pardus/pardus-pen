@@ -1,20 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
-<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="katman_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   style="enable-background:new 0 0 48 48;"
+   xml:space="preserve"
+   sodipodi:docname="eraser.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2" /><sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="10.166667"
+   inkscape:cx="24"
+   inkscape:cy="24"
+   inkscape:window-width="1366"
+   inkscape:window-height="699"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="katman_1" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill:url(#SVGID_1_);}
 </style>
-<radialGradient id="SVGID_1_" cx="-12.5959" cy="46.8966" r="61.8217" gradientUnits="userSpaceOnUse">
-	<stop  offset="0" style="stop-color:#2F88FF"/>
-	<stop  offset="0.9762" style="stop-color:#FF4D4D"/>
+<radialGradient
+   id="SVGID_1_"
+   cx="-12.5959"
+   cy="46.8966"
+   r="61.8217"
+   gradientUnits="userSpaceOnUse">
+	<stop
+   offset="0"
+   style="stop-color:#2F88FF"
+   id="stop1" />
+	<stop
+   offset="0.9762"
+   style="stop-color:#FF4D4D"
+   id="stop2" />
 </radialGradient>
-<path class="st0" d="M45.72,41.43H31.41l14.24-14.24c1.46-1.31,2.29-3.1,2.35-5.04c0.05-2.03-0.75-3.98-2.26-5.5L33.65,4.57
-	c-1.32-1.46-3.11-2.29-5.04-2.35c-2.03-0.05-3.98,0.75-5.49,2.26L7.28,20.33c-0.01,0.01-0.01,0.01-0.02,0.01s-0.01,0.01-0.01,0.02
-	l-4.9,4.9C0.89,26.58,0.05,28.37,0,30.3c-0.05,2.03,0.75,3.98,2.26,5.5l9.34,9.34c0.1,0.1,0.22,0.19,0.34,0.28
-	c0.05,0.03,0.1,0.05,0.14,0.08c0.08,0.04,0.15,0.09,0.23,0.12c0.07,0.03,0.14,0.04,0.21,0.07c0.06,0.02,0.13,0.04,0.19,0.06
-	c0.14,0.03,0.28,0.04,0.43,0.04h32.58c1.2,0,2.17-0.97,2.17-2.17C47.89,42.4,46.92,41.43,45.72,41.43z M26.19,7.56
-	c0.66-0.66,1.48-0.97,2.31-0.99c0.74,0.02,1.41,0.34,2,0.99l12.16,12.16c0.66,0.66,1.01,1.48,0.99,2.31c-0.02,0.74-0.33,1.41-0.99,2
-	L28.34,38.36L11.87,21.88L26.19,7.56z M4.35,30.42c0.02-0.74,0.33-1.41,0.99-2l3.46-3.46l16.48,16.48l0,0H14.04l-8.7-8.7
-	C4.68,32.06,4.32,31.24,4.35,30.42z"/>
+<path
+   class="st0"
+   d="M 45.72,41.43 H 31.41 L 45.65,27.19 c 1.46,-1.31 2.29,-3.1 2.35,-5.04 0.05,-2.03 -0.75,-3.98 -2.26,-5.5 L 33.65,4.57 C 32.33,3.11 30.54,2.28 28.61,2.22 26.58,2.17 24.63,2.97 23.12,4.48 L 7.28,20.33 c -0.01,0.01 -0.01,0.01 -0.02,0.01 -0.01,0 -0.01,0.01 -0.01,0.02 l -4.9,4.9 C 0.89,26.58 0.05,28.37 0,30.3 c -0.05,2.03 0.75,3.98 2.26,5.5 l 9.34,9.34 c 0.1,0.1 0.22,0.19 0.34,0.28 0.05,0.03 0.1,0.05 0.14,0.08 0.08,0.04 0.15,0.09 0.23,0.12 0.07,0.03 0.14,0.04 0.21,0.07 0.06,0.02 0.13,0.04 0.19,0.06 0.14,0.03 0.28,0.04 0.43,0.04 h 32.58 c 1.2,0 2.17,-0.97 2.17,-2.17 0,-1.22 -0.97,-2.19 -2.17,-2.19 z M 26.19,7.56 c 0.66,-0.66 1.48,-0.97 2.31,-0.99 0.74,0.02 1.41,0.34 2,0.99 l 12.16,12.16 c 0.66,0.66 1.01,1.48 0.99,2.31 -0.02,0.74 -0.33,1.41 -0.99,2 L 28.34,38.36 11.87,21.88 Z M 4.35,30.42 c 0.02,-0.74 0.33,-1.41 0.99,-2 L 8.8,24.96 25.28,41.44 v 0 H 14.04 l -8.7,-8.7 C 4.68,32.06 4.32,31.24 4.35,30.42 Z"
+   id="path2"
+   style="fill:url(#SVGID_1_)" />
 </svg>

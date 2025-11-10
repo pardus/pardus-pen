@@ -39,7 +39,7 @@ void takeScreenshot(){
                 pixmap = mainWidget->grab();
             }
             QFile file(imgname);
-            file.open(QIODevice::WriteOnly);
+            (void)file.open(QIODevice::WriteOnly);
             pixmap.save(&file, "PNG");
             status = 0;
         } else {

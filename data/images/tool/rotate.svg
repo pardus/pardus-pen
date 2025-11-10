@@ -1,25 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
-<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="katman_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   style="enable-background:new 0 0 48 48;"
+   xml:space="preserve"
+   sodipodi:docname="rotate.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs4" /><sodipodi:namedview
+   id="namedview4"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="10.166667"
+   inkscape:cx="23.95082"
+   inkscape:cy="24"
+   inkscape:window-width="1366"
+   inkscape:window-height="699"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="katman_1" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill:#C0C0C0;}
 	.st1{fill:#2F88FF;}
 </style>
-<g>
-	<g>
-		<path class="st0" d="M24,48C10.77,48,0,37.23,0,24c0-1.21,0.98-2.18,2.18-2.18S4.36,22.79,4.36,24c0,8.62,5.59,15.97,13.33,18.6
-			L17,41.91c-0.85-0.85-0.85-2.23,0-3.09c0.85-0.85,2.23-0.85,3.09,0l5.45,5.45c0.62,0.62,0.81,1.56,0.47,2.38
-			C25.68,47.47,24.88,48,24,48z"/>
+<g
+   id="g4">
+	<g
+   id="g1">
+		<path
+   class="st0"
+   d="M 24,48 C 10.77,48 0,37.23 0,24 c 0,-1.21 0.98,-2.18 2.18,-2.18 1.2,0 2.18,0.97 2.18,2.18 0,8.62 5.59,15.97 13.33,18.6 L 17,41.91 c -0.85,-0.85 -0.85,-2.23 0,-3.09 0.85,-0.85 2.23,-0.85 3.09,0 l 5.45,5.45 c 0.62,0.62 0.81,1.56 0.47,2.38 C 25.68,47.47 24.88,48 24,48 Z"
+   id="path1" />
 	</g>
-	<g>
-		<path class="st0" d="M45.82,26.18c-1.21,0-2.18-0.98-2.18-2.18c0-8.62-5.59-15.97-13.33-18.6L31,6.09c0.85,0.85,0.85,2.23,0,3.09
-			c-0.85,0.85-2.23,0.85-3.09,0l-5.45-5.45c-0.62-0.62-0.81-1.56-0.47-2.38C22.32,0.53,23.12,0,24,0c13.23,0,24,10.77,24,24
-			C48,25.21,47.02,26.18,45.82,26.18z"/>
+	<g
+   id="g2">
+		<path
+   class="st0"
+   d="M 45.82,26.18 C 44.61,26.18 43.64,25.2 43.64,24 43.64,15.38 38.05,8.03 30.31,5.4 L 31,6.09 c 0.85,0.85 0.85,2.23 0,3.09 -0.85,0.85 -2.23,0.85 -3.09,0 L 22.46,3.73 C 21.84,3.11 21.65,2.17 21.99,1.35 22.32,0.53 23.12,0 24,0 c 13.23,0 24,10.77 24,24 0,1.21 -0.98,2.18 -2.18,2.18 z"
+   id="path2" />
 	</g>
-	<path class="st1" d="M30.55,42.55L5.46,17.45l12-12l25.09,25.09L30.55,42.55z"/>
-	<path class="st0" d="M30.55,44.73c-0.56,0-1.12-0.21-1.54-0.64L3.91,19c-0.85-0.85-0.85-2.23,0-3.09l12-12
-		c0.85-0.85,2.23-0.85,3.09,0L44.09,29c0.85,0.85,0.85,2.23,0,3.09l-12,12C31.66,44.51,31.1,44.73,30.55,44.73z M8.54,17.45
-		l22.01,22.01l8.91-8.91L17.45,8.54L8.54,17.45z"/>
+	<path
+   class="st1"
+   d="m 30.55,42.55 -25.09,-25.1 12,-12 25.09,25.09 z"
+   id="path3" />
+	<path
+   class="st0"
+   d="m 30.55,44.73 c -0.56,0 -1.12,-0.21 -1.54,-0.64 L 3.91,19 c -0.85,-0.85 -0.85,-2.23 0,-3.09 l 12,-12 c 0.85,-0.85 2.23,-0.85 3.09,0 L 44.09,29 c 0.85,0.85 0.85,2.23 0,3.09 l -12,12 c -0.43,0.42 -0.99,0.64 -1.54,0.64 z M 8.54,17.45 30.55,39.46 39.46,30.55 17.45,8.54 Z"
+   id="path4" />
 </g>
 </svg>

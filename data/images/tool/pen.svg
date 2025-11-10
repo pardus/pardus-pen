@@ -1,18 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 27.9.6, SVG Export Plug-In . SVG Version: 9.03 Build 54986)  -->
-<svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
+
+<svg
+   version="1.1"
+   id="katman_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 48 48"
+   style="enable-background:new 0 0 48 48;"
+   xml:space="preserve"
+   sodipodi:docname="pen.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs2" /><sodipodi:namedview
+   id="namedview2"
+   pagecolor="#ffffff"
+   bordercolor="#000000"
+   borderopacity="0.25"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   inkscape:zoom="10.166667"
+   inkscape:cx="24"
+   inkscape:cy="24"
+   inkscape:window-width="1366"
+   inkscape:window-height="699"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="katman_1" />
+<style
+   type="text/css"
+   id="style1">
 	.st0{fill:url(#SVGID_1_);}
 </style>
-<g>
-	<radialGradient id="SVGID_1_" cx="24" cy="24" r="41.7964" gradientUnits="userSpaceOnUse">
-		<stop  offset="0" style="stop-color:#FFF68F"/>
-		<stop  offset="1" style="stop-color:#FF4D4D"/>
+<g
+   id="g2">
+	<radialGradient
+   id="SVGID_1_"
+   cx="24"
+   cy="24"
+   r="41.796398"
+   gradientUnits="userSpaceOnUse">
+		<stop
+   offset="0"
+   style="stop-color:#FFF68F"
+   id="stop1" />
+		<stop
+   offset="1"
+   style="stop-color:#FF4D4D"
+   id="stop2" />
 	</radialGradient>
-	<path class="st0" d="M3.27,48c-0.31,0-0.62-0.04-0.92-0.13c-1.74-0.52-2.73-2.35-2.21-4.08l2.88-9.5c0.32-1.03,0.88-1.97,1.64-2.73
-		L33.78,2.44c3.25-3.25,8.53-3.25,11.78,0c3.25,3.25,3.25,8.54,0,11.78L16.44,43.35c-0.76,0.76-1.7,1.32-2.72,1.63l-9.5,2.88
-		C3.91,47.95,3.59,48,3.27,48z M39.67,4.36c-1.02,0-2.03,0.39-2.81,1.16L7.74,34.65C7.49,34.9,7.3,35.22,7.2,35.56l-2.29,7.53
-		l7.54-2.29c0.34-0.1,0.65-0.29,0.91-0.54l29.12-29.13l0,0c1.55-1.55,1.55-4.07,0-5.61C41.7,4.75,40.69,4.36,39.67,4.36z"/>
+	<path
+   class="st0"
+   d="M 3.27,48 C 2.96,48 2.65,47.96 2.35,47.87 0.61,47.35 -0.38,45.52 0.14,43.79 l 2.88,-9.5 C 3.34,33.26 3.9,32.32 4.66,31.56 L 33.78,2.44 c 3.25,-3.25 8.53,-3.25 11.78,0 3.25,3.25 3.25,8.54 0,11.78 L 16.44,43.35 c -0.76,0.76 -1.7,1.32 -2.72,1.63 l -9.5,2.88 C 3.91,47.95 3.59,48 3.27,48 Z M 39.67,4.36 c -1.02,0 -2.03,0.39 -2.81,1.16 L 7.74,34.65 C 7.49,34.9 7.3,35.22 7.2,35.56 l -2.29,7.53 7.54,-2.29 c 0.34,-0.1 0.65,-0.29 0.91,-0.54 L 42.48,11.13 v 0 c 1.55,-1.55 1.55,-4.07 0,-5.61 C 41.7,4.75 40.69,4.36 39.67,4.36 Z"
+   id="path2"
+   style="fill:url(#SVGID_1_)" />
 </g>
 </svg>
