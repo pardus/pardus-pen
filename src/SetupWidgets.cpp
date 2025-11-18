@@ -17,6 +17,8 @@ QWidget *bgMenu;
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
 
+extern void clearCache();
+
 void setupWidgets(){
     // Pen Settings Menu
     QWidget *penSettings = new QWidget();
@@ -124,6 +126,7 @@ void setupWidgets(){
         args4 << "set" << "org.gnome.mutter" << "overlay-key" << "'SUPER_L'";
         p4.execute("gsettings", args4);
     #endif
+        clearCache();
         enable_erc();
         exit(0);
     });

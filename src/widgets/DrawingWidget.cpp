@@ -801,5 +801,7 @@ QString generateRandomString(int length) {
 }
 
 void clearCache(){
-    removeDirectory(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/");
+    QString cache_main = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
+    debug("Clear cache:%s\n", cache_main.toStdString().c_str());
+    removeDirectory(cache_main);
 }
