@@ -22,7 +22,8 @@ extern WhiteBoard *board;
 extern QWidget * mainWidget;
 extern DrawingWidget *drawing;
 extern FloatingSettings *floatingSettings;
-QString cache = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/" + generateRandomString(5)+"/";
+QString cache_main = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
+QString cache = cache_main + generateRandomString(5)+"/";
 
 void removeDirectory(const QString &path);
 
@@ -124,6 +125,7 @@ public:
         last_image_num = 1;
         removed = 0;
         updateGui();
+        removeDirectory(cache_path);
     }
 
     QImage loadValue(qint64 id) {
@@ -801,7 +803,6 @@ QString generateRandomString(int length) {
 }
 
 void clearCache(){
-    QString cache_main = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
     debug("Clear cache:%s\n", cache_main.toStdString().c_str());
     removeDirectory(cache_main);
 }
