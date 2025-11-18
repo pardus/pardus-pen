@@ -124,7 +124,6 @@ public:
         last_image_num = 1;
         removed = 0;
         updateGui();
-        removeDirectory(cache_path);
     }
 
     QImage loadValue(qint64 id) {
@@ -801,3 +800,6 @@ QString generateRandomString(int length) {
     return randomString;
 }
 
+void clearCache(){
+    removeDirectory(QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/");
+}

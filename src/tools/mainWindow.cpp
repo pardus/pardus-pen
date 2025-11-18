@@ -17,6 +17,7 @@ QWidget *mainWidget;
 
 float scale = 1.0;
 extern void setPen(int mode);
+extern void clearCache();
 extern QColor colors[];
 
 class MainWindow : public QMainWindow {
@@ -70,6 +71,7 @@ public:
         msgBox.addButton(QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);
         if(msgBox.exec() == QMessageBox::Yes){
+            clearCache();
             enable_erc();
             exit(0);
         }
