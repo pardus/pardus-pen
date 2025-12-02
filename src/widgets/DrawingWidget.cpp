@@ -597,7 +597,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 penStyle = LINE;
                 addPoint(id, pos+QPointF(0,1));
                 painter.begin(&image);
-                drawLineToFunc(id, pressure);
+                drawLineToFunc(id, 1.0);
                 painter.end();
                 penStyle = fpenStype;
             }
