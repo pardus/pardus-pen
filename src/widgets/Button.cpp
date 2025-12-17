@@ -43,14 +43,33 @@ QPushButton* create_button(int id, ButtonEvent event) {
     button->setStyleSheet(QString("background-color: none;"));
     return button;
 }
-QPushButton* create_color_button(QColor color){
+QPushButton* create_color_button(QColor fcolor, bool read_only){
     QPushButton* button = new QPushButton();
     button->setFixedSize(butsize, butsize);
+    QColor color = fcolor;
     button->setStyleSheet(QString(
         "background-color: "+color.name()+";"
         "border-radius: 12px;"
     ));
-    QObject::connect(button, &QPushButton::clicked, [=]() {
+    static size_t time = get_epoch();
+
+    QObject::connect(button, &QPushButton::pressed, [=]() mutable {
+        time = get_epoch();
+        printf("%ld %ld\n", get_epoch(), time);
+    });
+
+    QObject::connect(button, &QPushButton::released, [=]() mutable {
+        size_t diff = get_epoch() - time;
+        if(diff > 500000 && ! read_only){
+            QColor newColor =  QColorDialog::getColor(drawing->penColor, NULL, _("Select Color"));
+            if(newColor.isValid()) {
+                color = newColor;
+                button->setStyleSheet(QString(
+                    "background-color: "+color.name()+";"
+                    "border-radius: 12px;"
+                ));
+            }
+        }
         drawing->penColor = color;
         set_string("color", drawing->penColor.name());
         if(drawing->getPen() == ERASER){
