@@ -43,7 +43,7 @@ QPushButton* create_button(int id, ButtonEvent event) {
     button->setStyleSheet(QString("background-color: none;"));
     return button;
 }
-QPushButton* create_color_button(QColor fcolor, bool read_only){
+QPushButton* create_color_button(QColor fcolor, bool read_only, const char* name){
     QPushButton* button = new QPushButton();
     button->setFixedSize(butsize, butsize);
     QColor color = fcolor;
@@ -55,7 +55,6 @@ QPushButton* create_color_button(QColor fcolor, bool read_only){
 
     QObject::connect(button, &QPushButton::pressed, [=]() mutable {
         time = get_epoch();
-        printf("%ld %ld\n", get_epoch(), time);
     });
 
     QObject::connect(button, &QPushButton::released, [=]() mutable {
@@ -63,11 +62,16 @@ QPushButton* create_color_button(QColor fcolor, bool read_only){
         if(diff > 500000 && ! read_only){
             QColor newColor =  QColorDialog::getColor(drawing->penColor, NULL, _("Select Color"));
             if(newColor.isValid()) {
+                if(strlen(name) > 0){
+                    set_string(name, newColor.name());
+                }
                 color = newColor;
                 button->setStyleSheet(QString(
                     "background-color: "+color.name()+";"
                     "border-radius: 12px;"
                 ));
+            } else {
+                color = QColor(get_string(name));
             }
         }
         drawing->penColor = color;

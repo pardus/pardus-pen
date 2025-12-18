@@ -144,10 +144,10 @@ void setupWidgets(){
     floatingWidget->addWidget(toolButtons[NEXT]);
     floatingWidget->addWidget(toolButtons[PAGEMENU]);
     floatingWidget->addWidget(closeButton);
-    floatingWidget->addWidget(create_color_button(QColor("#0078d7"), false));
-    floatingWidget->addWidget(create_color_button(QColor("#00ae4d"), false));
-    floatingWidget->addWidget(create_color_button(QColor("#ffc000"), false));
-    floatingWidget->addWidget(create_color_button(QColor("#ff0000"), false));
+    floatingWidget->addWidget(create_color_button(QColor(get_string("color1")), false, "color1"));
+    floatingWidget->addWidget(create_color_button(QColor(get_string("color2")), false, "color2"));
+    floatingWidget->addWidget(create_color_button(QColor(get_string("color3")), false, "color3"));
+    floatingWidget->addWidget(create_color_button(QColor(get_string("color4")), false, "color4"));
     // disable minify if fual enabled
     toolButtons[MINIFY]->setEnabled(!get_bool("fuar"));
 
@@ -306,7 +306,7 @@ void setupWidgets(){
 
     // Color button offset is 100
     for (int i = 0; i < num_of_color; i++) {
-        toolButtons[i+100] = create_color_button(colors[i], true);
+        toolButtons[i+100] = create_color_button(colors[i], true, "");
         gridLayout->addWidget(toolButtons[i+100], (i+1) / rowsize, (i+1) % rowsize, Qt::AlignCenter);
     }
     colorDialog->setLayout(gridLayout);
