@@ -38,6 +38,13 @@ QString get_string(const char* name) {
     return value;
 }
 
+QString get_default_string(const char* name) {
+    QString value;
+    if(settingsDefault->contains(QString::fromUtf8(name))){
+        value = settingsDefault->value(QString::fromUtf8(name)).toString();
+    }
+    return value;
+}
 bool get_bool(const char* name) {
     bool value;
     if(settings->contains(QString::fromUtf8(name))){
