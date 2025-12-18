@@ -23,7 +23,10 @@ src = [
     'src/utils/misc.c',
 ]
 
+version = '0.0.0'
+
 subdir('po')
+subdir('debian')
 
 if get_option('resources')
     # Build qrc
@@ -120,5 +123,14 @@ desktopdir = get_option('prefix')/'share/applications'
 executable('pardus-pen', src, dependencies: qt_dep, link_args: link_args, install: true)
 install_data('data/tr.org.pardus.pen.svg', install_dir : icondir)
 install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
-install_data('data/tr.org.pardus.pen.appdata.xml', install_dir : get_option('prefix') / 'share/metainfo')
 install_data('data/tr.org.pardus.pen.mime.xml', install_dir : get_option('prefix') / 'share/mime/packages/')
+
+configure_file(
+    input: 'data/tr.org.pardus.pen.appdata.xml.in',
+    output: 'tr.org.pardus.pen.appdata.xml',
+    configuration: {
+         'VERSION': version,
+         'DATE': run_command(['date', '+%Y-%m-%d'], check: true).stdout().strip()
+         }
+)
+install_data(meson.current_build_dir()/'tr.org.pardus.pen.appdata.xml', install_dir : get_option('prefix') / 'share/metainfo')
