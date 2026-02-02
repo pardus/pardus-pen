@@ -22,7 +22,7 @@ Simple qt based pen application
 ### Installing Dependencies
 For debian:
 
-`apt install meson ninja-build qtbase5-dev qtchooser libglib2.0-dev`
+`apt install meson ninja-build qtbase5-dev qtchooser libglib2.0-dev libarchive-dev qt6-svg-dev libpoppler-qt6-dev`
 
 For archlinux:
 
