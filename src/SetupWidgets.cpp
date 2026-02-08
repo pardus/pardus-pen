@@ -158,7 +158,7 @@ void setupWidgets(){
     desktopWidget->num_of_rows = 1;
     desktopWidget->addWidget(toolButtons[UNMINIFY]);
 #ifdef screenshot
-    if(!is_wayland && !force_xwayland){ // X11 only feature (yet)
+    if(getenv("TEST") ||  (!is_wayland && !force_xwayland) ){ // X11 only feature (yet)
         desktopWidget->addWidget(toolButtons[SCREENSHOT_CROP]);
     }
 #endif

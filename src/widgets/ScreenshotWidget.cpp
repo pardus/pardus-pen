@@ -5,11 +5,13 @@
 #include <QRect>
 
 #include "ScreenshotWidget.h"
+#include "../tools.h"
 
 
 ScreenshotWidget::ScreenshotWidget(QWidget *parent)
     : QWidget(parent), selecting(false) {
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setAttribute(Qt::WA_TranslucentBackground);
     setCursor(Qt::CrossCursor);
     hide();
 }
@@ -33,8 +35,14 @@ void ScreenshotWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 void ScreenshotWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    painter.setPen(Qt::blue);
-    painter.setBrush(QColor(0, 0, 255, 50)); // Semi-transparent blue
+    painter.setPen(Qt::NoPen);
+    // background
+    painter.setBrush(QBrush(QColor(255, 255, 255, 13)));
+    painter.drawRect(QRect(0,0,geometry().width(), geometry().height()));
+    // selection
+    QColor color = drawing->penColor;
+    color.setAlpha(127);
+    painter.setBrush(QBrush(color));
     QRect rect(startPos, endPos);
     painter.drawRect(rect.normalized());
 }
