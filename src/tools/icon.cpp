@@ -80,6 +80,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/cursor.svg";
         case MINIFY:
             return (char*)":images/tool/minify.svg";
+        case UNMINIFY:
+            return (char*)":images/tool/unminify.svg";
         case FULLSCREEN:
             return (char*)":images/page/fullscreen.svg";
         case FULLSCREEN_EXIT:
