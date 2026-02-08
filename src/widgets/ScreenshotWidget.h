@@ -18,7 +18,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    void cropScreenshot();
+    void cropScreenshot(QPoint startPos, QPoint endPos);
 
     QPoint startPos;
     QPoint endPos;

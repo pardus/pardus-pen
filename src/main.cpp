@@ -54,8 +54,8 @@ int main(int argc, char *argv[]) {
     // gnome wayland fullscreen compositor is buggy.
     // Force prefer Xwayland for fix this issue.
     if(getenv("XDG_CURRENT_DESKTOP")){
-        force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) || \
-            strncmp(getenv("XDG_CURRENT_DESKTOP"), "GNOME", 5);
+        force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) == 0 || \
+            strncmp(getenv("XDG_CURRENT_DESKTOP"), "GNOME", 5) == 0;
     }
     // Force use X11 or Xwayland
     if(get_bool("xwayland") || force_xwayland){

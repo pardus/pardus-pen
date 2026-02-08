@@ -9,11 +9,11 @@ static void setCropScreenShot(QPixmap pix){
     board->setType(WHITE);
     board->setOverlayType(CUSTOM);
     board->rotates[drawing->getPageNum()] = 0;
-    board->ratios[drawing->getPageNum()] = pix.width() * 100 / board->geometry().width();
+    board->ratios[drawing->getPageNum()] = 100;
     board->updateTransform();
     setHideMainWindow(false);
+    floatingWidget->show();
 
-    printf("%s\n", "crop done");
 }
 #endif
 
@@ -36,17 +36,11 @@ void setupScreenShot(){
 
     ScreenshotWidget* widget = new ScreenshotWidget();
     widget->crop_signal = setCropScreenShot;
-    QTimer *sscTimer = new QTimer();
-    QObject::connect(sscTimer, &QTimer::timeout, [=](){
-        sscTimer->stop();
-        widget->showFullScreen();
-        floatingWidget->show();
 
-    });
     toolButtons[SCREENSHOT_CROP] = create_button(SCREENSHOT_CROP, [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
-        sscTimer->start(500);
+        widget->showFullScreen();
     });
     set_shortcut(toolButtons[SCREENSHOT_CROP], Qt::Key_F2, Qt::ControlModifier);
     #endif
