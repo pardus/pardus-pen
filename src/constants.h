@@ -53,3 +53,4 @@
 #define CURSOR 74
 #define SHAPEMENU 75
 #define UNMINIFY 76
+#define SCREENSHOT_CROP 77

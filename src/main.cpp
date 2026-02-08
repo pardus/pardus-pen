@@ -15,6 +15,7 @@
 bool is_wayland;
 bool is_etap = false;
 extern void mainWindowInit();
+bool force_xwayland = false;
 int history;
 
 static bool detect_etap(){
@@ -52,7 +53,6 @@ int main(int argc, char *argv[]) {
     is_wayland = (getenv("WAYLAND_DISPLAY") != NULL);
     // gnome wayland fullscreen compositor is buggy.
     // Force prefer Xwayland for fix this issue.
-    bool force_xwayland = false;
     if(getenv("XDG_CURRENT_DESKTOP")){
         force_xwayland = strncmp(getenv("XDG_CURRENT_DESKTOP"), "gnome", 5) || \
             strncmp(getenv("XDG_CURRENT_DESKTOP"), "GNOME", 5);

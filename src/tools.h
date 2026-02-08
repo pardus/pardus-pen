@@ -1,5 +1,6 @@
 
 #include "widgets/DrawingWidget.h"
+#include "widgets/ScreenshotWidget.h"
 #include "widgets/FloatingWidget.h"
 #include "widgets/FloatingSettings.h"
 #include "widgets/WhiteBoard.h"
@@ -65,6 +66,7 @@ extern QWidget *bgMenu;
 extern float scale;
 extern int history;
 extern bool is_wayland;
+extern bool force_xwayland;
 extern bool is_etap;
 
 extern QSlider *scrollHSlider;

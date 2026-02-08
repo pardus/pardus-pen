@@ -74,6 +74,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/page/close.svg";
         case SCREENSHOT:
             return (char*)":images/page/screenshot.svg";
+        case SCREENSHOT_CROP:
+            return (char*)":images/page/screenshot-crop.svg";
         case CURSOR:
             return (char*)":images/cursor.svg";
         case MINIFY:

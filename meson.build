@@ -12,6 +12,7 @@ src = [
     'src/widgets/FloatingSettings.cpp',
     'src/widgets/WhiteBoard.cpp',
     'src/widgets/Background.cpp',
+    'src/widgets/ScreenshotWidget.cpp',
     'src/widgets/Button.cpp',
     'src/tools/update.cpp',
     'src/tools/icon.cpp',
