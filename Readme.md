@@ -22,15 +22,15 @@ Simple qt based pen application
 ### Installing Dependencies
 For debian:
 
-`apt install meson ninja-build qtbase5-dev qtchooser libglib2.0-dev libarchive-dev qt6-svg-dev libpoppler-qt6-dev`
+`apt install meson ninja-build libarchive-dev pkgconf qt6-base-dev libqt6svg6-dev libpoppler-qt6-dev`
 
 For archlinux:
 
-`pacman -Syu meson ninja qt5-base qt5-tools glib2`
+`pacman -Syu meson ninja pkgconf libarchive qt6-base qt6-tools poppler-qt6`
 
 For alpine:
 
-`apk add qt5-qtbase-dev qt5-qttools-dev glib-dev`
+`apk add meson ninja-build qt6-qtbase-dev qt6-qttools-dev libarchive-dev poppler-qt6`
 
 ### Building
 ```
