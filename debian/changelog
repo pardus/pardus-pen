@@ -1,3 +1,45 @@
+pardus-pen (4.1.4) unstable; urgency=medium
+
+  [ aliriza ]
+  * add beatifull-writing.svg
+
+  [ Ali Riza KESKIN ]
+  * fix tap to point function
+  * if press color button, pen color will set. if long press color button, first change color then set.
+
+  [ Marcos Sánchez ]
+  * update es.po
+
+  [ Ali Riza KESKIN ]
+  * save custom color config
+  * fix version number in appdata file. Auto generated from debian/changelog file
+  * custom color selection reset added
+
+  [ Gregory-the-7771st ]
+  * Updated debian dependencies
+
+  [ Ali Riza KESKIN ]
+  * select to import button added. only X11 supported yet
+  * fix render screenshot widget
+  * fixes
+
+  [ suleymanfatih ]
+  * Update icons and logo
+  * Update icons and logo (revised)
+
+  [ Ali Riza KESKIN ]
+  * update icon locations
+  * fix sswidget and cancel if unminify button pressed
+  * update readme
+  * ignore too small crop area
+  * ignore read broken or invalid archive data
+  * fix file read done
+  * typo fix
+  * change desktop file icon name tr.org.pardus.pen -> pardus-pen
+  * change icon name in mime-info
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 09 Feb 2026 12:05:14 +0000
+
 pardus-pen (4.1.3) unstable; urgency=medium
 
   [ Hugo Carvalho ]
