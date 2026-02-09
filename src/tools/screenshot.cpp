@@ -5,12 +5,15 @@
 #ifdef screenshot
 
 static void setCropScreenShot(QPixmap pix){
-    drawing->setOverlay(pix.toImage(), drawing->getPageNum());
-    board->setType(WHITE);
-    board->setOverlayType(CUSTOM);
-    board->rotates[drawing->getPageNum()] = 0;
-    board->ratios[drawing->getPageNum()] = 100;
-    board->updateTransform();
+    if(pix.size().width() > 30 && pix.size().height() > 30){
+        drawing->goNext();
+        drawing->setOverlay(pix.toImage(), drawing->getPageNum());
+        board->setType(WHITE);
+        board->setOverlayType(CUSTOM);
+        board->rotates[drawing->getPageNum()] = 0;
+        board->ratios[drawing->getPageNum()] = 100;
+        board->updateTransform();
+    }
     setHideMainWindow(false);
     floatingWidget->show();
 
