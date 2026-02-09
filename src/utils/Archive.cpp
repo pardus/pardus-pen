@@ -131,9 +131,11 @@ public:
                     char buf[4096];
                     long int r = archive_read_data(ar, buf, sizeof(buf));
                     debug("%ld %ld %s\n", r, size, entryName);
-                    if (r > 0){
+                    if (r > 0){ // continue read
                         input.append(buf, r);
-                    } else {
+                    } else if (r == 0) { // done
+                        break;
+                    } else { // error
                         input.clear();
                         printf("Failed to read: %s\n", entryName);
                         break;
