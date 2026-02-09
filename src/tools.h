@@ -57,7 +57,9 @@ extern FloatingWidget *floatingWidget;
 extern FloatingWidget *desktopWidget;
 extern FloatingSettings *floatingSettings;
 extern Background *background;
+#ifdef screenshot
 extern ScreenshotWidget* ssWidget;
+#endif
 extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;
