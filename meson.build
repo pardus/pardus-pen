@@ -122,8 +122,7 @@ desktopdir = get_option('prefix')/'share/applications'
 
 # executable file
 executable('pardus-pen', src, dependencies: qt_dep, link_args: link_args, install: true)
-install_data('data/tr.org.pardus.pen.svg', install_dir : icondir, rename: 'pardus-pen.svg')
-install_data('data/tr.org.pardus.pen.desktop', install_dir : desktopdir)
+install_data('data/tr.org.pardus.pen.svg', install_dir : icondir, rename: get_option('icon-name') +'.svg')
 install_data('data/tr.org.pardus.pen.mime.xml', install_dir : get_option('prefix') / 'share/mime/packages/')
 
 configure_file(
@@ -135,3 +134,12 @@ configure_file(
          }
 )
 install_data(meson.current_build_dir()/'tr.org.pardus.pen.appdata.xml', install_dir : get_option('prefix') / 'share/metainfo')
+
+configure_file(
+    input: 'data/tr.org.pardus.pen.desktop.in',
+    output: 'tr.org.pardus.pen.desktop',
+    configuration: {
+         'ICON': get_option('icon-name'),
+         }
+)
+install_data(meson.current_build_dir()/'tr.org.pardus.pen.desktop', install_dir : desktopdir)
