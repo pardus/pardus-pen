@@ -2,7 +2,7 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-pardus-pen">
     <comment>Pardus pen save file</comment>
-    <icon name="tr.org.pardus.pen"/>
+    <icon name="pardus-pen"/>
     <glob-deleteall/>
     <glob pattern="*.pen"/>
   </mime-type>
