@@ -6,7 +6,7 @@
 
 static void setCropScreenShot(QPixmap pix){
     if(pix.size().width() > 30 && pix.size().height() > 30){
-        drawing->goNext();
+        drawing->goNextPage();
         drawing->setOverlay(pix.toImage(), drawing->getPageNum());
         board->setType(WHITE);
         board->setOverlayType(CUSTOM);
