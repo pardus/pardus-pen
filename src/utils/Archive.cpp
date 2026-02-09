@@ -122,11 +122,22 @@ public:
             // Check if it's an image file
             if (entryName) {
                 // Extract the image data
+                int64_t size = archive_entry_size(entry);
+                if(size <= 0){
+                    continue;
+                }
                 QByteArray input;
-                char buff[10240];
-                size_t size;
-                while ((size = archive_read_data(ar, buff, sizeof(buff))) > 0) {
-                    input.append(buff, size);
+                while (1) {
+                    char buf[4096];
+                    long int r = archive_read_data(ar, buf, sizeof(buf));
+                    debug("%ld %ld %s\n", r, size, entryName);
+                    if (r > 0){
+                        input.append(buf, r);
+                    } else {
+                        input.clear();
+                        printf("Failed to read: %s\n", entryName);
+                        break;
+                    }
                 }
 #ifdef QPRINTER
                 if (strcmp(entryName, "overlay.pdf") == 0) {
