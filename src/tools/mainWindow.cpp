@@ -250,6 +250,7 @@ void setupTools(){
     set_shortcut(toolButtons[MINIFY], Qt::Key_D, Qt::MetaModifier);
 
     toolButtons[UNMINIFY] = create_button(UNMINIFY, [=](){
+         ssWidget->hide();
          mainWindow->showFullScreen();
     });
 

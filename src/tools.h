@@ -3,6 +3,7 @@
 #include "widgets/ScreenshotWidget.h"
 #include "widgets/FloatingWidget.h"
 #include "widgets/FloatingSettings.h"
+#include "widgets/ScreenshotWidget.h"
 #include "widgets/WhiteBoard.h"
 #include "widgets/Background.h"
 #include "widgets/Button.h"
@@ -56,7 +57,7 @@ extern FloatingWidget *floatingWidget;
 extern FloatingWidget *desktopWidget;
 extern FloatingSettings *floatingSettings;
 extern Background *background;
-
+extern ScreenshotWidget* ssWidget;
 extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;

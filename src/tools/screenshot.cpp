@@ -15,6 +15,8 @@ static void setCropScreenShot(QPixmap pix){
     floatingWidget->show();
 
 }
+
+ScreenshotWidget* ssWidget;
 #endif
 
 void setupScreenShot(){
@@ -34,13 +36,13 @@ void setupScreenShot(){
     });
     set_shortcut(toolButtons[SCREENSHOT], Qt::Key_F2, 0);
 
-    ScreenshotWidget* widget = new ScreenshotWidget();
-    widget->crop_signal = setCropScreenShot;
+    ssWidget = new ScreenshotWidget();
+    ssWidget->crop_signal = setCropScreenShot;
 
     toolButtons[SCREENSHOT_CROP] = create_button(SCREENSHOT_CROP, [=](){
         floatingWidget->hide();
         floatingSettings->setHide();
-        widget->showFullScreen();
+        ssWidget->showFullScreen();
     });
     set_shortcut(toolButtons[SCREENSHOT_CROP], Qt::Key_F2, Qt::ControlModifier);
     #endif

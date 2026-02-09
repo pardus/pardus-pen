@@ -34,13 +34,13 @@ void ScreenshotWidget::mouseReleaseEvent(QMouseEvent *event) {
     QPoint pos1 = startPos;
     QPoint pos2 = endPos;
     hide();
-    QTimer::singleShot(50, this, [=]() { 
-        this->cropScreenshot(pos1, pos2); 
-    });
     // reset surface
     startPos = QPoint(-1, -1);
     endPos = QPoint(-1, -1);
-    update();
+    repaint();
+    QTimer::singleShot(300, this, [=]() {
+        cropScreenshot(pos1, pos2);
+    });
 }
 
 void ScreenshotWidget::paintEvent(QPaintEvent *) {
