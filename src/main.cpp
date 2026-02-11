@@ -18,6 +18,22 @@ extern void mainWindowInit();
 bool force_xwayland = false;
 int history;
 
+#ifdef DBUS
+static void accept_screenshot_permission(){
+    const char* cmd = "dbus-send --session \
+    --print-reply=literal \
+    --dest=org.freedesktop.impl.portal.PermissionStore \
+    /org/freedesktop/impl/portal/PermissionStore \
+    org.freedesktop.impl.portal.PermissionStore.SetPermission \
+    string:'screenshot' \
+    boolean:'true' \
+    string:'screenshot' \
+    string:'tr.org.pardus.pen' \
+    array:string:'yes'";
+    system(cmd);
+}
+#endif
+
 static bool detect_etap(){
     FILE *f = fopen("/etc/os-release", "r");
     if(f == NULL){
@@ -110,6 +126,13 @@ int main(int argc, char *argv[]) {
 
     mainWindowInit();
 
+    #ifdef DBUS
+    if(!get_bool("dbus_init")){
+        accept_screenshot_permission();
+        set_bool("dbus_init", true);
+    }
+    #endif
+
 #ifdef LIBARCHIVE
     if (argc > 1) {
         openFile( QString(argv[1]));
@@ -117,3 +140,5 @@ int main(int argc, char *argv[]) {
 #endif
     return app.exec();
 }
+
+
