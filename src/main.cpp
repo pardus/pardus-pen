@@ -30,7 +30,10 @@ static void accept_screenshot_permission(){
     string:'screenshot' \
     string:'tr.org.pardus.pen' \
     array:string:'yes'";
-    system(cmd);
+    int rc = system(cmd);
+    if(rc > 0){
+        printf("Failed to call dbus-send\n");
+    }
 }
 #endif
 
