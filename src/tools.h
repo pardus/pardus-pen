@@ -35,6 +35,11 @@ extern "C" {
     char* which(const char* cmd);
     void disable_erc();
     void enable_erc();
+    #ifdef DBUS
+    #ifdef screenshot
+    char* screenshot_xdg_portal();
+    #endif
+    #endif
 }
 
 

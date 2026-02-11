@@ -39,17 +39,33 @@ void takeScreenshot(){
                 pixmap = mainWidget->grab();
             }
             QFile file(imgname);
-            (void)file.open(QIODevice::WriteOnly);
-            pixmap.save(&file, "PNG");
-            status = 0;
-        } else {
-            std::string spectacle(which((char*)"spectacle"));
-            std::string grim(which((char*)"grim"));
-            if(strlen(spectacle.c_str()) != 0){
-                status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
-            } else if(strlen(grim.c_str()) != 0){
-                status = system((grim+" -t png "+imgname.toStdString()).c_str());
+            status = 1;
+            if(file.open(QIODevice::WriteOnly)){
+                pixmap.save(&file, "PNG");
+                status = 0;
             }
+        } else {
+            #ifdef DBUS
+            char* ss = screenshot_xdg_portal();
+            if(ss){
+                // ss = "file:///home/pingu/Pictures/Screenshot.png"
+                if(strncmp(ss, "file://", 6) == 0){
+                    rename(ss+6, imgname.toStdString().c_str());
+                    status = 0;
+                }
+                free(ss);
+            } else {
+            #endif
+                std::string spectacle(which((char*)"spectacle"));
+                std::string grim(which((char*)"grim"));
+                if(strlen(spectacle.c_str()) != 0){
+                    status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
+                } else if(strlen(grim.c_str()) != 0){
+                    status = system((grim+" -t png "+imgname.toStdString()).c_str());
+                }
+            #ifdef DBUS
+            }
+            #endif
         }
     }
     // show message

@@ -62,7 +62,13 @@ if get_option('etap19')
     link_args += ['-lpthread']
 endif
 
-
+if get_option('dbus')
+    qt_dep += dependency('dbus-1')
+    add_project_arguments('-DDBUS',  language: 'cpp')
+    if get_option('screenshot')
+        src += 'src/utils/ScreenShotXdg.c'
+    endif
+endif
 if get_option('save')
     qt_dep += dependency('libarchive')
     add_project_arguments('-DLIBARCHIVE', language: 'cpp')

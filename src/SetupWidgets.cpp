@@ -487,7 +487,9 @@ void setupWidgets(){
     utilLayout->addWidget(toolButtons[OPEN],       0, 1, Qt::AlignCenter);
     utilLayout->addWidget(toolButtons[FULLSCREEN], 0, 2, Qt::AlignCenter);
     utilLayout->addWidget(toolButtons[ROTATE],     0, 3, Qt::AlignCenter);
+    #ifdef screenshot
     utilLayout->addWidget(toolButtons[SCREENSHOT],  0, 4, Qt::AlignCenter);
+    #endif
 
     pageSettingsLayout->addWidget(utilDialog);
 
