@@ -232,12 +232,14 @@ void setupTools(){
         tool3 = nullptr;
         floatingSettings = new FloatingSettings(mainWindow);
         floatingWidget = new FloatingWidget(mainWindow);
-        desktopWidget = new FloatingWidget(mainWindow);
+        desktopWidget = nullptr;
 #ifndef ETAP19
     }
 #endif
     floatingWidget->setSettings(floatingSettings);
-    desktopWidget->setSettings(floatingSettings);
+    if(desktopWidget){
+        desktopWidget->setSettings(floatingSettings);
+    }
     floatingSettings->setHide();
 
     toolButtons[MINIFY] = create_button(MINIFY, [=](){
@@ -329,7 +331,9 @@ void mainWindowInit(){
     mainWindow->setWindowTitle(QString(_("Pardus Pen")));
     mainWindow->setWindowIcon(QIcon(":tr.org.pardus.pen.svg"));
     floatingWidget->setMainWindow(mainWindow);
-    desktopWidget->setMainWindow(mainWindow);
+    if(desktopWidget){
+        desktopWidget->setMainWindow(mainWindow);
+    }
     setupWidgets();
     mainWindow->showFullScreen();
     QScreen *screen = QGuiApplication::primaryScreen();

@@ -155,13 +155,15 @@ void setupWidgets(){
 
 /********** desktop toolbar **********/
 
-    desktopWidget->num_of_rows = 1;
-    desktopWidget->addWidget(toolButtons[UNMINIFY]);
+    if(desktopWidget){
+        desktopWidget->num_of_rows = 1;
+        desktopWidget->addWidget(toolButtons[UNMINIFY]);
 #ifdef screenshot
-    if(getenv("TEST") ||  (!is_wayland && !force_xwayland) ){ // X11 only feature (yet)
-        desktopWidget->addWidget(toolButtons[SCREENSHOT_CROP]);
-    }
+        if(getenv("TEST") ||  (!is_wayland && !force_xwayland) ){ // X11 only feature (yet)
+            desktopWidget->addWidget(toolButtons[SCREENSHOT_CROP]);
+        }
 #endif
+    }
 /********** desktop menu done **********/
 
 
