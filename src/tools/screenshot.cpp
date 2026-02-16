@@ -46,6 +46,9 @@ void setupScreenShot(){
         floatingWidget->hide();
         floatingSettings->setHide();
         ssWidget->showFullScreen();
+        if(tool3){
+            tool3->hide();
+        }
     });
     set_shortcut(toolButtons[SCREENSHOT_CROP], Qt::Key_F2, Qt::ControlModifier);
     #endif

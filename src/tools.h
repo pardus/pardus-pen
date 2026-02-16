@@ -68,6 +68,7 @@ extern ScreenshotWidget* ssWidget;
 extern WhiteBoard *board;
 extern QMainWindow* tool;
 extern QMainWindow* tool2;
+extern QMainWindow* tool3;
 
 extern QWidget *bgMenu;
 
