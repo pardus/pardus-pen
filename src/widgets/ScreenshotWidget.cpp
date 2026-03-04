@@ -48,7 +48,7 @@ void ScreenshotWidget::paintEvent(QPaintEvent *) {
     painter.setPen(Qt::NoPen);
 
     // background
-    QColor color = drawing->penColor;
+    QColor color = drawing->pen.color();
     color.setAlpha(69);
     painter.setBrush(QBrush(color));
     painter.setCompositionMode(QPainter::CompositionMode_Source);

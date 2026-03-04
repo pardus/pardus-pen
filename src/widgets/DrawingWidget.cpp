@@ -312,7 +312,6 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penType=PEN;
     penStyle=SPLINE;
     lineStyle=NORMAL;
-    penColor = QColor(get_string("color"));
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
     num_of_press = 0;
@@ -322,7 +321,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     cropLayout->addWidget(cropWidget->crop);
     cropLayout->setContentsMargins(0,0,0,0);
     cropLayout->setSpacing(0);
-    cropWidget->setStyleSheet("border: 2px solid "+penColor.name()+";");
+    cropWidget->setStyleSheet("border: 2px solid "+pen.color().name()+";");
     cropWidget->hide();
 
     //QScreen *screen = QGuiApplication::primaryScreen();
@@ -330,6 +329,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
 
     setFocusPolicy(Qt::StrongFocus);
     removeDirectory(cache);
+    pen = QPen(QColor(get_string("color")), 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 }
 
 void DrawingWidget::addPoint(int id, QPointF data) {
@@ -407,6 +407,7 @@ void DrawingWidget::selectionDraw(QPointF startPoint, QPointF endPoint) {
     image.fill(QColor("transparent"));
     painter.begin(&image);
     painter.setPen(Qt::NoPen);
+    QColor penColor = pen.color();
     penColor.setAlpha(127);
     painter.setBrush(QBrush(penColor));
     painter.drawRect(QRectF(startPoint,endPoint));
@@ -496,7 +497,15 @@ void DrawingWidget::goNext(){
 }
 
 void DrawingWidget::setPen(int type){
-    penType = type;
+    if(type != penType){
+        penType = type;
+        QColor penColor = pen.color();
+        penColor.setAlpha(255);
+        if(type == MARKER){
+            penColor.setAlpha(127);
+        }
+        pen.setColor(penColor);
+    }
     if(type != SELECTION){
         cropWidget->hide();
     }
@@ -514,7 +523,23 @@ int DrawingWidget::getPenStyle(){
 }
 
 void DrawingWidget::setLineStyle(int type){
-    lineStyle = type;
+    if(type != lineStyle){
+        lineStyle = type;
+        switch(lineStyle){
+            case NORMAL:
+                pen.setStyle(Qt::SolidLine);
+                break;
+            case DOTLINE:
+                pen.setStyle(Qt::DotLine);
+                break;
+            case LINELINE:
+                pen.setStyle(Qt::DashLine);
+                break;
+        }
+        if(penType == ERASER) {
+            pen.setStyle(Qt::SolidLine);
+        }
+    }
 }
 
 int DrawingWidget::getLineStyle(){
@@ -526,9 +551,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     int ev_pen = penType;
     if(get_bool("eraser-mode") && ! is_etap){
         if(source & Qt::MiddleButton) {
-            penType = MARKER;
+            setPen(MARKER);
         } else if(source & Qt::RightButton) {
-            penType = ERASER;
+            setPen(ERASER);
         }
     }
     switch(type) {
@@ -626,7 +651,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
     }
-    penType = ev_pen;
+    setPen(ev_pen);
 }
 
 #define DEV_IDLE 0

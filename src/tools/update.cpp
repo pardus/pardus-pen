@@ -18,9 +18,9 @@ void updateGui(){
     set_icon(get_icon_by_id(PEN), toolButtons[PENMENU]);
     if(drawing->getPen() == MARKER || drawing->getPen() == PEN){
         set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
-        toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+        toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
     } else if (drawing->getPen() == ERASER){
-        toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+        toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
     }
     set_icon(get_icon_by_id(drawing->getPenStyle()), toolButtons[SHAPEMENU]);
     // Update button backgrounds
@@ -34,7 +34,7 @@ void updateGui(){
     };
     for(int btn:btns){
         if(penButtons[btn] != nullptr){
-            penButtons[btn]->setStyleSheet("background-color:"+drawing->penColor.name()+";");
+            penButtons[btn]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
         }
     }
     // Update pen size

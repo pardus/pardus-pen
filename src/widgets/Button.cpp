@@ -60,7 +60,7 @@ QPushButton* create_color_button(QColor fcolor, bool read_only, const char* name
     QObject::connect(button, &QPushButton::released, [=]() mutable {
         size_t diff = get_epoch() - time;
         if(diff > 500000 && ! read_only){
-            color =  QColorDialog::getColor(drawing->penColor, NULL, _("Select Color"));
+            color =  QColorDialog::getColor(drawing->pen.color(), NULL, _("Select Color"));
             if(!color.isValid()) {
                 color = QColor(get_default_string(name));
             }
@@ -72,8 +72,8 @@ QPushButton* create_color_button(QColor fcolor, bool read_only, const char* name
                 "border-radius: 12px;"
             ));
         }
-        drawing->penColor = color;
-        set_string("color", drawing->penColor.name());
+        drawing->pen.setColor(color);
+        set_string("color", drawing->pen.color().name());
         if(drawing->getPen() == ERASER){
             drawing->setPen(PEN);
         }

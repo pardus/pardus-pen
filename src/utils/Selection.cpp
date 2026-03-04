@@ -71,7 +71,7 @@ void DrawingWidget::createSelection(int source) {
     painter.end();
 
     painter.begin(&(background->image));
-    painter.setBrush(QBrush(penColor));
+    painter.setBrush(QBrush(pen.color()));
     painter.setCompositionMode(QPainter::CompositionMode_Clear);
     painter.setPen(Qt::NoPen);
     painter.drawRect(cropRect);

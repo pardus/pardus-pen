@@ -84,13 +84,13 @@ protected:
         // color switch
         bool update = false;
         if (event->key() >= Qt::Key_1 && event->key() <= Qt::Key_7){
-            drawing->penColor = colors[13 + event->key() - Qt::Key_1];
+            drawing->pen.setColor(colors[13 + event->key() - Qt::Key_1]);
             update = true;
         } else if (event->key() == Qt::Key_8){
-            drawing->penColor = colors[0];
+            drawing->pen.setColor(colors[0]);
             update = true;
         } else if (event->key() == Qt::Key_9){
-             drawing->penColor = colors[5];
+            drawing->pen.setColor(colors[5]);
              update = true;
         } else {
              do_shortcut(event->key(), event->modifiers());

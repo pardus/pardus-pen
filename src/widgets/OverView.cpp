@@ -34,7 +34,7 @@ void OverView::paintEvent(QPaintEvent *event) {
     int h = height() - 2*padding ;
     painter.end();
 
-    QColor penColor = drawing->penColor;
+    QColor penColor = drawing->pen.color();
     if (penType == MARKER){
         penColor.setAlpha(127);
     }

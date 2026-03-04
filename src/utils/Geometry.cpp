@@ -57,35 +57,13 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     if(startPoint.x() < 0 || startPoint.y() < 0){
         return;
     }
-    penColor.setAlpha(255);
     painter.setCompositionMode(QPainter::CompositionMode_Source);
-    switch(penType){
-        case PEN:
-            break;
-        case ERASER:
-            painter.setCompositionMode(QPainter::CompositionMode_Clear);
-            pressure = 1.0;
-            break;
-        case MARKER:
-            penColor.setAlpha(127);
-            break;
+    if(penType == ERASER){
+        painter.setCompositionMode(QPainter::CompositionMode_Clear);
+        pressure = 1.0;
     }
 
-    QPen pen = QPen(penColor, penSize[penType]*pressure, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    switch(lineStyle){
-        case NORMAL:
-            pen.setStyle(Qt::SolidLine);
-            break;
-        case DOTLINE:
-            pen.setStyle(Qt::DotLine);
-            break;
-        case LINELINE:
-            pen.setStyle(Qt::DashLine);
-            break;
-    }
-    if(penType == ERASER) {
-        pen.setStyle(Qt::SolidLine);
-    }
+    pen.setWidth(penSize[penType]*pressure);
     painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);

@@ -160,14 +160,14 @@ void setupPenType(){
         floatingWidget->hide();
         floatingSettings->setHide();
         setHideMainWindow(true);
-        QColor newCol = QColorDialog::getColor(drawing->penColor, NULL, _("Select Color"));
+        QColor newCol = QColorDialog::getColor(drawing->pen.color(), NULL, _("Select Color"));
         setHideMainWindow(false);
         floatingWidget->show();
         if(! newCol.isValid()){
             return;
         }
-        drawing->penColor = newCol;
-        set_string("color", drawing->penColor.name());
+        drawing->pen.setColor(newCol);
+        set_string("color", newCol.name());
     });
     set_shortcut(toolButtons[COLORPICKER], Qt::Key_0, 0);
 
