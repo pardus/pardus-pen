@@ -14,7 +14,7 @@ jobs:
           - name: Check out the repo
             uses: actions/checkout@v2
           - name: Run the build process with Docker
-            uses: addnab/docker-run-action@v3
+            uses: my-garbage-stuff/docker-run-action@v1
             with:
                 image: debian:stable
                 options: -v ${{ github.workspace }}:/root -v /output:/output
