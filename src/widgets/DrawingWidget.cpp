@@ -484,6 +484,9 @@ void DrawingWidget::goPreviousPage(){
 }
 
 void DrawingWidget::goPrevious(){
+    if(penType == PENTYPE && textActive){
+        commitText();
+    }
     if(!isBackAvailable()){
         return;
     }
@@ -502,6 +505,9 @@ void DrawingWidget::goNext(){
 
 void DrawingWidget::setPen(int type){
     if(type != penType){
+        if(penType == PENTYPE && textActive){
+            commitText();
+        }
         penType = type;
         QColor penColor = pen.color();
         penColor.setAlpha(255);
@@ -643,6 +649,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if(penType == PENTYPE) {
                 curs.drawing[id] = false;
                 curs.hide(id);
+                commitText();
                 break;
             }
             curs.drawing[id] = false;
