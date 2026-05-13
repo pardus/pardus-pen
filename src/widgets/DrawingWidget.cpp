@@ -309,6 +309,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penSize[PEN] = get_int("pen-size");
     penSize[ERASER] = get_int("eraser-size");
     penSize[MARKER] = get_int("marker-size");
+    penSize[PENTYPE] = get_int("pentype-size");
+    if(penSize[PENTYPE] == 0) penSize[PENTYPE] = 24;
     penType=PEN;
     penStyle=SPLINE;
     lineStyle=NORMAL;
@@ -328,6 +330,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     fpressure = get_int((char*)"pressure") / 100.0;
 
     setFocusPolicy(Qt::StrongFocus);
+    textActive = false;
+
     removeDirectory(cache);
     pen = QPen(QColor(get_string("color")), 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 }
@@ -566,9 +570,28 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     penType = curs.penType[id];
                     eventHandler(0, RELEASE, id, pos, pressure);
                     penType = new_pen;
+                } else if(penType == PENTYPE) {
+                    // same pen type, set new position (commit previous text)
+                    commitText();
+                    textPos = pos;
+                    textBuffer.clear();
+                    textActive = true;
+                    curs.penType[id] = penType;
+                    curs.drawing[id] = true;
+                    break;
                 } else {
                     break;
                 }
+            }
+            if(penType == PENTYPE) {
+                commitText();
+                textPos = pos;
+                textBuffer.clear();
+                textSavedState = image.copy();
+                textActive = true;
+                curs.penType[id] = penType;
+                curs.drawing[id] = true;
+                break;
             }
             curs.penType[id] = penType;
             curs.drawing[id] = true;
@@ -599,6 +622,8 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 case SELECTION:
                     selectionDraw(geo.first(id), pos);
                     break;
+                case PENTYPE:
+                    break;
                 default:
                     if(penType == ERASER) {
                         curs.setPosition(id, pos);
@@ -613,6 +638,11 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             break;
         case RELEASE:
             if (!curs.drawing[id]) {
+                break;
+            }
+            if(penType == PENTYPE) {
+                curs.drawing[id] = false;
+                curs.hide(id);
                 break;
             }
             curs.drawing[id] = false;
@@ -825,6 +855,54 @@ QString generateRandomString(int length) {
     }
 
     return randomString;
+}
+
+void DrawingWidget::commitText() {
+    if(!textActive || textBuffer.isEmpty()) return;
+    textActive = false;
+    addImage(image.toImage());
+    textBuffer.clear();
+}
+
+void DrawingWidget::keyPressEvent(QKeyEvent *event) {
+    if(penType != PENTYPE || !textActive) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    QString text = event->text();
+    QFont font("sans-serif", penSize[PENTYPE]);
+    font.setStyleHint(QFont::SansSerif);
+
+    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+        textBuffer += '\n';
+    } else if(event->key() == Qt::Key_Backspace) {
+        if(textBuffer.isEmpty()) return;
+        textBuffer.chop(1);
+    } else if(event->key() == Qt::Key_Escape) {
+        commitText();
+        return;
+    } else if(text.isEmpty() || !text[0].isPrint()) {
+        return;
+    } else {
+        textBuffer += text;
+    }
+
+    image = textSavedState;
+    painter.begin(&image);
+    painter.setFont(font);
+    painter.setPen(pen);
+    painter.setRenderHint(QPainter::Antialiasing, true);
+    QStringList lines = textBuffer.split('\n');
+    QFontMetrics fm(font);
+    int lineHeight = fm.height();
+    int y = textPos.y() + fm.ascent();
+    for(const QString &line : lines) {
+        painter.drawText(QPointF(textPos.x(), y), line);
+        y += lineHeight;
+    }
+    painter.end();
+    update();
 }
 
 void clearCache(){

@@ -15,6 +15,7 @@
 
 #include <QImage>
 #include <QPainter>
+#include <QKeyEvent>
 
 #include "../utils/Selection.h"
 #include "FloatingSettings.h"
@@ -143,6 +144,7 @@ public:
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
     void setOverlay(QImage img, int page);
     QImage getOverlay(int page);
+    void commitText();
 #ifdef QPRINTER
     QString pdfPath;
 #endif
@@ -156,6 +158,7 @@ protected:
     void updateCursorMouse(qint64 i, QPointF pos);
     void createSelection(int source);
     void drawLineToFunc(qint64 id, qreal pressure);
+    void keyPressEvent(QKeyEvent *event) override;
     void drawFunc(qint64 id, qreal pressure);
     void selectionDraw(QPointF startPoint, QPointF endPoint);
     void addPoint(int id, QPointF data);
@@ -165,6 +168,10 @@ protected:
     int lineStyle;
     GeometryStorage geo;
     QPainter painter;
+    QPointF textPos;
+    QString textBuffer;
+    QPixmap textSavedState;
+    bool textActive;
 };
 
 QColor convertColor(QColor color);
