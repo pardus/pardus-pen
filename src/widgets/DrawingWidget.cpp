@@ -576,20 +576,14 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     penType = curs.penType[id];
                     eventHandler(0, RELEASE, id, pos, pressure);
                     penType = new_pen;
-                } else if(penType == PENTEXT) {
-                    // same pen type, set new position (commit previous text)
-                    commitText();
-                    textPos = pos;
-                    textBuffer.clear();
-                    textActive = true;
-                    curs.penType[id] = penType;
-                    curs.drawing[id] = true;
-                    break;
                 } else {
                     break;
                 }
             }
             if(penType == PENTEXT) {
+                if(floatingSettings->isVisible()){
+                    floatingSettings->setHide();
+                }
                 commitText();
                 textPos = pos;
                 textBuffer.clear();
@@ -646,14 +640,11 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing[id]) {
                 break;
             }
-            if(penType == PENTEXT) {
-                curs.drawing[id] = false;
-                curs.hide(id);
-                commitText();
-                break;
-            }
             curs.drawing[id] = false;
             curs.hide(id);
+            if(penType == PENTEXT) {
+                break;
+            }
             if(penType != ERASER && geo.size(id) < 2 && penType != SELECTION) {
                 int fpenStype = penStyle;
                 penStyle = LINE;
