@@ -54,4 +54,4 @@
 #define SHAPEMENU 75
 #define UNMINIFY 76
 #define SCREENSHOT_CROP 77
-#define PENTYPE 5
+#define PENTEXT 5

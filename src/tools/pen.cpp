@@ -20,25 +20,25 @@ void setPen(int type){
             penButtons[ERASER]->hide();
             penButtons[MARKER]->show();
             penButtons[PEN]->show();
-            penButtons[PENTYPE]->show();
+            penButtons[PENTEXT]->show();
             thicknessSlider->setRange(10*scale,200*scale);
             break;
         case MARKER:
             penButtons[MARKER]->hide();
-            penButtons[PENTYPE]->show();
+            penButtons[PENTEXT]->show();
             penButtons[ERASER]->show();
             penButtons[PEN]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
         case PEN:
             penButtons[PEN]->hide();
-            penButtons[PENTYPE]->show();
+            penButtons[PENTEXT]->show();
             penButtons[ERASER]->show();
             penButtons[MARKER]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
-        case PENTYPE:
-            penButtons[PENTYPE]->hide();
+        case PENTEXT:
+            penButtons[PENTEXT]->hide();
             penButtons[PEN]->show();
             penButtons[MARKER]->show();
             penButtons[ERASER]->show();
@@ -89,10 +89,10 @@ void setupPenType(){
         setPen(ERASER);
     });
 
-    penButtons[PENTYPE] = create_button(PENTYPE, [=](){
-        setPen(PENTYPE);
+    penButtons[PENTEXT] = create_button(PENTEXT, [=](){
+        setPen(PENTEXT);
     });
-    set_shortcut(penButtons[PENTYPE], Qt::Key_T, Qt::ControlModifier);
+    set_shortcut(penButtons[PENTEXT], Qt::Key_T, Qt::ControlModifier);
 
     penButtons[LINE] = create_button(LINE, [=](){
         setPenStyle(LINE);

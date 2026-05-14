@@ -309,8 +309,8 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penSize[PEN] = get_int("pen-size");
     penSize[ERASER] = get_int("eraser-size");
     penSize[MARKER] = get_int("marker-size");
-    penSize[PENTYPE] = get_int("pentype-size");
-    if(penSize[PENTYPE] == 0) penSize[PENTYPE] = 24;
+    penSize[PENTEXT] = get_int("pentype-size");
+    if(penSize[PENTEXT] == 0) penSize[PENTEXT] = 24;
     penType=PEN;
     penStyle=SPLINE;
     lineStyle=NORMAL;
@@ -484,7 +484,7 @@ void DrawingWidget::goPreviousPage(){
 }
 
 void DrawingWidget::goPrevious(){
-    if(penType == PENTYPE && textActive){
+    if(penType == PENTEXT && textActive){
         commitText();
     }
     if(!isBackAvailable()){
@@ -505,7 +505,7 @@ void DrawingWidget::goNext(){
 
 void DrawingWidget::setPen(int type){
     if(type != penType){
-        if(penType == PENTYPE && textActive){
+        if(penType == PENTEXT && textActive){
             commitText();
         }
         penType = type;
@@ -576,7 +576,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     penType = curs.penType[id];
                     eventHandler(0, RELEASE, id, pos, pressure);
                     penType = new_pen;
-                } else if(penType == PENTYPE) {
+                } else if(penType == PENTEXT) {
                     // same pen type, set new position (commit previous text)
                     commitText();
                     textPos = pos;
@@ -589,7 +589,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     break;
                 }
             }
-            if(penType == PENTYPE) {
+            if(penType == PENTEXT) {
                 commitText();
                 textPos = pos;
                 textBuffer.clear();
@@ -628,7 +628,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 case SELECTION:
                     selectionDraw(geo.first(id), pos);
                     break;
-                case PENTYPE:
+                case PENTEXT:
                     break;
                 default:
                     if(penType == ERASER) {
@@ -646,7 +646,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing[id]) {
                 break;
             }
-            if(penType == PENTYPE) {
+            if(penType == PENTEXT) {
                 curs.drawing[id] = false;
                 curs.hide(id);
                 commitText();
@@ -872,13 +872,13 @@ void DrawingWidget::commitText() {
 }
 
 void DrawingWidget::keyPressEvent(QKeyEvent *event) {
-    if(penType != PENTYPE || !textActive) {
+    if(penType != PENTEXT || !textActive) {
         QWidget::keyPressEvent(event);
         return;
     }
 
     QString text = event->text();
-    QFont font("sans-serif", penSize[PENTYPE]);
+    QFont font("sans-serif", penSize[PENTEXT]);
     font.setStyleHint(QFont::SansSerif);
 
     if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {

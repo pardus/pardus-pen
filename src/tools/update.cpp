@@ -5,18 +5,18 @@ int last_pen_type = 0;
 void updateGui(){
     // hide or show elements
     colorDialog->setVisible(getPen() != ERASER || getPen() == SELECTION);
-    ov->setVisible(getPen() != SELECTION && getPen() != PENTYPE);
+    ov->setVisible(getPen() != SELECTION && getPen() != PENTEXT);
     thicknessSlider->setVisible(getPen() != SELECTION);
     thicknessLabel->setVisible(getPen() != SELECTION);
-    modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTYPE);
-    penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTYPE);
+    modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTEXT);
+    penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTEXT);
 
     // pen and eraser menu
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
 
     set_icon(get_icon_by_id(PEN), toolButtons[PENMENU]);
-    if(drawing->getPen() == MARKER || drawing->getPen() == PEN || drawing->getPen() == PENTYPE){
+    if(drawing->getPen() == MARKER || drawing->getPen() == PEN || drawing->getPen() == PENTEXT){
         set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
     } else if (drawing->getPen() == ERASER){
