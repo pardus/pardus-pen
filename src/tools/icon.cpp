@@ -76,11 +76,11 @@ char* get_icon_by_id(int id){
             return (char*)":images/page/screenshot.svg";
         case SCREENSHOT_CROP:
             return (char*)":images/page/screenshot-crop.svg";
-    case PENTEXT:
-        return (char*)":images/tool/pentype.svg";
-    case CURSOR:
-        return (char*)":images/cursor.svg";
-    case MINIFY:
+        case PENTEXT:
+            return (char*)":images/tool/pentext.svg";
+        case CURSOR:
+            return (char*)":images/cursor.svg";
+        case MINIFY:
             return (char*)":images/tool/minify.svg";
         case UNMINIFY:
             return (char*)":images/tool/unminify.svg";
