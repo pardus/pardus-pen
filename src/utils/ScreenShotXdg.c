@@ -62,6 +62,10 @@ static char* listen_for_response(DBusConnection *conn, const char *request_path)
                             dbus_message_iter_get_basic(&variant, &uri);
 
                             ret = calloc(sizeof(char), strlen(uri));
+                            if(!ret){
+                                perror("memory allocation failed!");
+                                exit(EXIT_FAILURE);
+                            }
                             strncpy(ret, uri, strlen(uri));
                         }
 
