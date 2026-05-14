@@ -50,6 +50,8 @@ void OverView::paintEvent(QPaintEvent *event) {
 
 
 
+    int w1 = (geometry().width() - penSize) / 2;
+    int h1 = (geometry().height() - penSize) / 2;
     if(penType == ERASER){
         QSvgRenderer svgRenderer(QStringLiteral(":/images/cursor.svg"));
 
@@ -61,9 +63,19 @@ void OverView::paintEvent(QPaintEvent *event) {
         svgRenderer.render(&pp);
         pp.end();
 
-        int w1 = (geometry().width() - penSize) / 2;
-        int h1 = (geometry().height() - penSize) / 2;
         painter.drawPixmap(QRect(w1, h1, penSize, penSize), pixmap);
+    } else if(penType == PENTEXT){
+        // font rect
+        QFont font("sans-serif", penSize);
+        painter.setFont(font);
+        QString text = "Ğğ";
+        QRect br = painter.boundingRect(0, 0, 150, 30, 0, text);
+        int pw = br.width();
+        int ph = br.height();
+        // draw font
+        w1 = (geometry().width() - pw) / 2;
+        h1 = ((geometry().height() + ph) / 2);
+        painter.drawText(QPointF(w1, h1), text);
     } else {
         // Draw the sine wave
         QPainterPath path;

@@ -5,7 +5,7 @@ int last_pen_type = 0;
 void updateGui(){
     // hide or show elements
     colorDialog->setVisible(getPen() != ERASER || getPen() == SELECTION);
-    ov->setVisible(getPen() != SELECTION && getPen() != PENTEXT);
+    ov->setVisible(getPen() != SELECTION);
     thicknessSlider->setVisible(getPen() != SELECTION);
     thicknessLabel->setVisible(getPen() != SELECTION);
     modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTEXT);
