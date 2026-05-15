@@ -894,7 +894,7 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
     QStringList lines = textBuffer.split('\n');
     QFontMetrics fm(font);
     int lineHeight = fm.height();
-    int y = textPos.y() + fm.ascent();
+    int y = textPos.y() + fm.ascent() - lineHeight / 2;
     for(const QString &line : lines) {
         painter.drawText(QPointF(textPos.x(), y), line);
         y += lineHeight;
