@@ -43,9 +43,7 @@ void setPen(int type){
             penButtons[MARKER]->show();
             penButtons[ERASER]->show();
             thicknessSlider->setRange(8,200*scale);
-            if(is_etap){
-                system("eta-keyboard show &");
-            }
+            QGuiApplication::inputMethod()->show();
             break;
 
     }
