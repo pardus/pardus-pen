@@ -12,6 +12,8 @@
 
 #include "tools.h"
 
+#include "utils/eta-keyboard.h"
+
 bool is_wayland;
 bool is_etap = false;
 extern void mainWindowInit();

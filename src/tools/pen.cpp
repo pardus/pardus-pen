@@ -1,4 +1,5 @@
 #include "../tools.h"
+#include "../utils/eta-keyboard.h"
 
 QMap<qint64, QPushButton*> penButtons;
 QMap<qint64, QPushButton*> toolButtons;
@@ -43,6 +44,7 @@ void setPen(int type){
             penButtons[MARKER]->show();
             penButtons[ERASER]->show();
             thicknessSlider->setRange(8,200*scale);
+            showEtaKeyboard();
             break;
 
     }
