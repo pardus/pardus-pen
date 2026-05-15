@@ -22,6 +22,7 @@ src = [
     'src/tools/save-load.cpp',
     'src/tools/pen.cpp',
     'src/utils/misc.c',
+    'src/utils/eta-keyboard.cpp',
 ]
 
 version = '0.0.0'
@@ -97,6 +98,9 @@ if get_option('qt') == '5'
         dependency('Qt5Widgets'),
         dependency('Qt5Svg'),
     ]
+    if get_option('dbus')
+        qt_dep += dependency('Qt5DBus')
+    endif
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')
         qt_dep += dependency('Qt5PrintSupport')
@@ -110,6 +114,9 @@ elif get_option('qt') == '6'
         dependency('Qt6Widgets'),
         dependency('Qt6Svg'),
     ]
+    if get_option('dbus')
+        qt_dep += dependency('Qt6DBus')
+    endif
     if get_option('pdf')
         add_project_arguments('-DQPRINTER', language: 'cpp')
         qt_dep += dependency('Qt6PrintSupport')
