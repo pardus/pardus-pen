@@ -72,6 +72,9 @@ QPushButton* create_color_button(QColor fcolor, bool read_only, const char* name
                 "border-radius: 12px;"
             ));
         }
+        if(drawing->getPen() == MARKER){
+            color.setAlpha(127);
+        }
         drawing->pen.setColor(color);
         set_string("color", drawing->pen.color().name());
         if(drawing->getPen() == ERASER){

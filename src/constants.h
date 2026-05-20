@@ -3,6 +3,7 @@
 #define PEN 2
 #define MARKER 3
 #define SELECTION 4
+#define PENTEXT 5
 
 #define LINE 10
 #define CIRCLE 11
@@ -15,6 +16,7 @@
 #define NORMAL 20
 #define DOTLINE 21
 #define LINELINE 22
+#define FILLED 23
 
 #define TRANSPARENT 30
 #define WHITE 31
@@ -54,4 +56,3 @@
 #define SHAPEMENU 75
 #define UNMINIFY 76
 #define SCREENSHOT_CROP 77
-#define PENTEXT 5

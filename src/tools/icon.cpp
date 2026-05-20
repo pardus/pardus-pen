@@ -64,6 +64,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/shape/line-dots.svg";
         case LINELINE:
             return (char*)":images/shape/line-lines.svg";
+        case FILLED:
+            return (char*)":images/shape/line-filled.svg";
         case COLORPICKER:
             return (char*)":images/tool/color-picker.svg";
         case BACK:

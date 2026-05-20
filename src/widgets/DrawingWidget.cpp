@@ -545,6 +545,9 @@ void DrawingWidget::setLineStyle(int type){
             case LINELINE:
                 pen.setStyle(Qt::DashLine);
                 break;
+            case FILLED:
+                pen.setStyle(Qt::SolidLine);
+                break;
         }
         if(penType == ERASER) {
             pen.setStyle(Qt::SolidLine);

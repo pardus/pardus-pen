@@ -120,7 +120,7 @@ void setupPenType(){
     penButtons[RECTANGLE] = create_button(RECTANGLE, [=](){
         setPenStyle(RECTANGLE);
     });
-    set_shortcut(penButtons[TRIANGLE], Qt::Key_R, Qt::AltModifier);
+    set_shortcut(penButtons[RECTANGLE], Qt::Key_R, Qt::AltModifier);
 
 
     penButtons[SPLINE] = create_button(SPLINE, [=](){
@@ -141,7 +141,10 @@ void setupPenType(){
 
     penButtons[LINELINE] = create_button(LINELINE, [=](){
         setLineStyle(LINELINE);
+    });
 
+    penButtons[FILLED] = create_button(FILLED, [=](){
+        setLineStyle(FILLED);
     });
 
     thicknessSlider = new QSlider(Qt::Horizontal);

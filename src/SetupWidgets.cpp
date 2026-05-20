@@ -262,17 +262,26 @@ void setupWidgets(){
     styleLayout->addWidget(penButtons[ERASER],        0, 3, Qt::AlignCenter);
     //styleLayout->addWidget(toolButtons[CLEAR],        0, 4, Qt::AlignCenter);
 
-    penSettingsLayout->addWidget(styleDialog, Qt::AlignCenter);
 
     penTypeDialog = new QWidget();
     QGridLayout *penTypeLayout = new QGridLayout(penTypeDialog);
     penTypeLayout->addWidget(penButtons[NORMAL],   0, 0, Qt::AlignCenter);
     penTypeLayout->addWidget(penButtons[DOTLINE],  0, 1, Qt::AlignCenter);
     penTypeLayout->addWidget(penButtons[LINELINE], 0, 2, Qt::AlignCenter);
+    penTypeLayout->addWidget(penButtons[FILLED],   0, 3, Qt::AlignCenter);
 
 
     penTypeMainLayout->addWidget(styleDialog);
     penTypeMainLayout->addWidget(penTypeDialog);
+
+    penTypeLayout->setContentsMargins(0, 0, 0, 0);
+    penTypeLayout->setSpacing(0);
+
+    styleLayout->setContentsMargins(0, 0, 0, 0);
+    styleLayout->setSpacing(0);
+
+    penSizeSettingsLayout->setSpacing(0);
+
 
     penSizeSettingsLayout->addWidget(penTypeMainWidget, Qt::AlignCenter);
 

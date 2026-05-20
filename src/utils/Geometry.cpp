@@ -63,10 +63,15 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         pressure = 1.0;
     }
 
+    if (lineStyle == FILLED && penStyle != SPLINE){
+        painter.setBrush(QBrush(pen.color()));
+    }
+
     pen.setWidth(penSize[penType]*pressure);
     painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+
 
     QMap<qint64, QPointF> values = geo.load(id).values;
     QMap<qint64, QPointF>::const_iterator it = values.constBegin();
@@ -107,9 +112,11 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             painter.drawRect(QRectF(startPoint,endPoint));
             break;
         case TRIANGLE:
-            painter.drawLine(startPoint, endPoint);
-            painter.drawLine(startPoint, QPointF(startPoint.x(), endPoint.y()));
-            painter.drawLine(QPointF(startPoint.x(), endPoint.y()), endPoint);
+            path.moveTo(startPoint);
+            path.lineTo(endPoint);
+            path.lineTo(QPointF(startPoint.x(), endPoint.y()));
+            path.lineTo(startPoint);
+            painter.drawPath(path);
             break;
     }
     switch(penStyle){
