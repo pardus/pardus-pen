@@ -69,9 +69,11 @@ void setLineStyle(int style){
 }
 
 void setupPenType(){
-    penButtons[PEN] = create_button(PEN, [=](){
-        setPen(PEN);
-    });
+    int penTypes[] = {PEN, MARKER, PENTEXT};
+    for (int t : penTypes) {
+        penButtons[t] = create_button(t, [=](){ setPen(t); });
+    }
+    set_shortcut(penButtons[PENTEXT], Qt::Key_T, Qt::ControlModifier);
 
     penButtons[SELECTION] = create_button(SELECTION, [=](){
         setPen(SELECTION);
@@ -79,73 +81,31 @@ void setupPenType(){
     });
     set_shortcut(penButtons[SELECTION], Qt::Key_X, Qt::ControlModifier);
 
-    penButtons[MARKER] = create_button(MARKER, [=](){
-        setPen(MARKER);
-    });
-
     penButtons[ERASER] = create_button(ERASER, [=](){
         setPenStyle(SPLINE);
         setPen(ERASER);
     });
 
-    penButtons[PENTEXT] = create_button(PENTEXT, [=](){
-        setPen(PENTEXT);
-    });
-    set_shortcut(penButtons[PENTEXT], Qt::Key_T, Qt::ControlModifier);
-
-    penButtons[LINE] = create_button(LINE, [=](){
-        setPenStyle(LINE);
-    });
-
-    penButtons[VECTOR] = create_button(VECTOR, [=](){
-        setPenStyle(VECTOR);
-    });
-    set_shortcut(penButtons[VECTOR], Qt::Key_V, Qt::AltModifier);
-
-    penButtons[VECTOR2] = create_button(VECTOR2, [=](){
-        setPenStyle(VECTOR2);
-    });
-    set_shortcut(penButtons[VECTOR2], Qt::Key_W, Qt::AltModifier);
-
-    penButtons[CIRCLE] = create_button(CIRCLE, [=](){
-        setPenStyle(CIRCLE);
-    });
-    set_shortcut(penButtons[CIRCLE], Qt::Key_C, Qt::AltModifier);
-
-    penButtons[TRIANGLE] = create_button(TRIANGLE, [=](){
-        setPenStyle(TRIANGLE);
-    });
-    set_shortcut(penButtons[TRIANGLE], Qt::Key_T, Qt::AltModifier);
-
-    penButtons[RECTANGLE] = create_button(RECTANGLE, [=](){
-        setPenStyle(RECTANGLE);
-    });
+    int penStyles[] = {LINE, VECTOR, VECTOR2, CIRCLE, TRIANGLE, RECTANGLE, SPLINE};
+    for (int s : penStyles) {
+        penButtons[s] = create_button(s, [=](){
+           setPenStyle(s);
+        });
+    }
+    set_shortcut(penButtons[VECTOR],    Qt::Key_V, Qt::AltModifier);
+    set_shortcut(penButtons[VECTOR2],   Qt::Key_W, Qt::AltModifier);
+    set_shortcut(penButtons[CIRCLE],    Qt::Key_C, Qt::AltModifier);
+    set_shortcut(penButtons[TRIANGLE],  Qt::Key_T, Qt::AltModifier);
+    set_shortcut(penButtons[LINE],      Qt::Key_L, Qt::AltModifier);
     set_shortcut(penButtons[RECTANGLE], Qt::Key_R, Qt::AltModifier);
+    set_shortcut(penButtons[SPLINE],    Qt::Key_S, Qt::AltModifier);
 
-
-    penButtons[SPLINE] = create_button(SPLINE, [=](){
-        setPenStyle(SPLINE);
-
-    });
-    set_shortcut(penButtons[SPLINE], Qt::Key_S, Qt::AltModifier);
-
-    penButtons[NORMAL] = create_button(NORMAL, [=](){
-        setLineStyle(NORMAL);
-
-    });
-
-    penButtons[DOTLINE] = create_button(DOTLINE, [=](){
-        setLineStyle(DOTLINE);
-
-    });
-
-    penButtons[LINELINE] = create_button(LINELINE, [=](){
-        setLineStyle(LINELINE);
-    });
-
-    penButtons[FILLED] = create_button(FILLED, [=](){
-        setLineStyle(FILLED);
-    });
+    int lineStyles[] = {NORMAL, DOTLINE, LINELINE, FILLED};
+    for (int l : lineStyles) {
+        penButtons[l] = create_button(l, [=](){
+            setLineStyle(l);
+        });
+    }
 
     thicknessSlider = new QSlider(Qt::Horizontal);
     thicknessSlider->setSingleStep(1);
