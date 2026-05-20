@@ -4,12 +4,12 @@ int last_pen_type = 0;
 
 void updateGui(){
     // hide or show elements
-    colorDialog->setVisible(getPen() != ERASER || getPen() == SELECTION);
+    colorDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION));
     ov->setVisible(getPen() != SELECTION);
     thicknessSlider->setVisible(getPen() != SELECTION);
     thicknessLabel->setVisible(getPen() != SELECTION);
-    modeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTEXT);
-    penTypeDialog->setVisible(getPen() != ERASER && getPen() != SELECTION && getPen() != PENTEXT);
+    modeDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION || getPen() == PENTEXT));
+    penTypeDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION || getPen() == PENTEXT));
 
     // pen and eraser menu
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
