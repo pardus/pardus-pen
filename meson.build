@@ -129,7 +129,8 @@ endif
 # -fPIC required
 add_project_arguments('-fPIC', language: 'cpp')
 add_project_arguments('-fpermissive', language: 'cpp')
-add_project_arguments('-I'+meson.current_source_dir()/'src/tools', language: 'cpp')
+add_project_arguments('-I'+meson.current_source_dir()/'include', language: 'cpp')
+add_project_arguments('-I'+meson.current_source_dir()/'include', language: 'c')
 
 icondir = get_option('prefix')/'share/icons/hicolor/scalable/apps'
 desktopdir = get_option('prefix')/'share/applications'

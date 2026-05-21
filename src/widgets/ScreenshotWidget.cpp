@@ -4,9 +4,9 @@
 #include <QDebug>
 #include <QRect>
 
-#include "ScreenshotWidget.h"
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
+#include <widgets/ScreenshotWidget.h>
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
 #include <QTimer>
 
 

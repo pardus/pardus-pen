@@ -3,7 +3,7 @@
 #include <QVariant>
 #include <cstring>
 
-#include "../constants.h"
+#include <constants.h>
 
 #include <unistd.h>
 

@@ -1,10 +1,10 @@
 #include <QLabel>
-#include "FloatingWidget.h"
+#include <widgets/FloatingWidget.h>
 
 
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
-#include "../utils/Settings.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
+#include <utils/Settings.h>
 
 
 

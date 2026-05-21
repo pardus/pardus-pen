@@ -1,5 +1,5 @@
-#include "../widgets/DrawingWidget.h"
-#include "../constants.h"
+#include <widgets/DrawingWidget.h>
+#include <constants.h>
 
 #include <math.h>
 

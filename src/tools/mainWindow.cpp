@@ -1,15 +1,15 @@
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
-#include "../widgets/Background.h"
-#include "../widgets/FloatingWidget.h"
-#include "../widgets/FloatingSettings.h"
-#include "../widgets/WhiteBoard.h"
-#include "../widgets/OverView.h"
-#include "../widgets/ScreenshotWidget.h"
-#include "../widgets/Button.h"
-#include "../utils/Settings.h"
-#include "../utils/Archive.h"
-#include "../utils/misc.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
+#include <widgets/Background.h>
+#include <widgets/FloatingWidget.h>
+#include <widgets/FloatingSettings.h>
+#include <widgets/WhiteBoard.h>
+#include <widgets/OverView.h>
+#include <widgets/ScreenshotWidget.h>
+#include <widgets/Button.h>
+#include <utils/Settings.h>
+#include <utils/Archive.h>
+#include <utils/misc.h>
 
 DrawingWidget *drawing;
 Background *background;

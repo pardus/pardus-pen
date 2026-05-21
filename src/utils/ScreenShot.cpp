@@ -9,11 +9,12 @@
 #include <QUrl>
 #include <QFileInfo>
 
-#include "../utils/ScreenShot.h"
-#include "../utils/misc.h"
-#include "../widgets/DrawingWidget.h"
-#include "../widgets/WhiteBoard.h"
-#include "../constants.h"
+#include <constants.h>
+
+#include <utils/ScreenShot.h>
+#include <utils/misc.h>
+#include <widgets/DrawingWidget.h>
+#include <widgets/WhiteBoard.h>
 
 
 void takeScreenshot(){

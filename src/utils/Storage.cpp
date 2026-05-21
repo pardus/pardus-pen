@@ -1,4 +1,4 @@
-#include "Storage.h"
+#include <utils/Storage.h>
 
 #include <QLabel>
 #include <QWidget>
@@ -11,17 +11,17 @@
 #include <QColor>
 #include <QStandardPaths>
 
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
-#include "../widgets/WhiteBoard.h"
-#include "../widgets/Button.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
+#include <widgets/WhiteBoard.h>
+#include <widgets/Button.h>
 
 #ifdef QPRINTER
 #include <QPrinter>
 #include <QPageSize>
 #endif
 #ifdef LIBARCHIVE
-#include "Archive.h"
+#include <utils/Archive.h>
 #endif
 
 extern int history;

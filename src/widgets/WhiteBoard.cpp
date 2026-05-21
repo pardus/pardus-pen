@@ -1,12 +1,12 @@
 #include <QtWidgets>
 #include <QPainter>
-#include "WhiteBoard.h"
+#include <widgets/WhiteBoard.h>
 
 
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
-#include "../widgets/Button.h"
-#include "../utils/Settings.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
+#include <widgets/Button.h>
+#include <utils/Settings.h>
 
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");

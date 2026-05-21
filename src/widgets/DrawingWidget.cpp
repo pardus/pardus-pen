@@ -1,17 +1,17 @@
-#include "DrawingWidget.h"
-#include "WhiteBoard.h"
-#include "Background.h"
-#include "../widgets/FloatingSettings.h"
-#include "../constants.h"
-#include "../utils/Storage.h"
-#include "../utils/Settings.h"
-#include "../utils/misc.h"
+#include <widgets/DrawingWidget.h>
+#include <widgets/WhiteBoard.h>
+#include <widgets/Background.h>
+#include <widgets/FloatingSettings.h>
+#include <constants.h>
+#include <utils/Storage.h>
+#include <utils/Settings.h>
+#include <utils/misc.h>
 
 #ifdef QPRINTER
 #include <QPrinter>
 #endif
 #ifdef LIBARCHIVE
-#include "../utils/Archive.h"
+#include <utils/Archive.h>
 #endif
 #include <stdio.h>
 

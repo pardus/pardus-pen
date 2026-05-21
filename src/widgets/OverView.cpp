@@ -7,12 +7,12 @@
 
 #include <math.h>
 
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
-#include "../widgets/WhiteBoard.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
+#include <widgets/WhiteBoard.h>
 
-#include "OverView.h"
-#include "DrawingWidget.h"
+#include <widgets/OverView.h>
+#include <widgets/DrawingWidget.h>
 
 
 OverView::OverView(QWidget *parent) : QWidget(parent) {

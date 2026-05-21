@@ -1,8 +1,8 @@
 #include <QtWidgets>
 #include <QPainter>
-#include "Background.h"
+#include <widgets/Background.h>
 
-#include "../constants.h"
+#include <constants.h>
 
 Background::Background(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");

@@ -1,9 +1,9 @@
-#include "FloatingSettings.h"
+#include <widgets/FloatingSettings.h>
 
 #include <QMainWindow>
 
-#include "../constants.h"
-#include "../widgets/DrawingWidget.h"
+#include <constants.h>
+#include <widgets/DrawingWidget.h>
 
 
 #include <QMap>

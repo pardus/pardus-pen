@@ -1,5 +1,5 @@
-#include "../constants.h"
-#include "../widgets/Button.h"
+#include <constants.h>
+#include <widgets/Button.h>
 #include <QString>
 
 char* get_icon_by_id(int id){

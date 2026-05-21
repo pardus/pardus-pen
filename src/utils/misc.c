@@ -5,7 +5,7 @@
 
 #define _GNU_SOURCE
 
-#include "misc.h"
+#include <utils/misc.h>
 
 #include <stdio.h>
 #include <stdlib.h>

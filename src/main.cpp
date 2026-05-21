@@ -10,13 +10,13 @@
 #include <locale.h>
 #include <libintl.h>
 
-#include "constants.h"
-#include "utils/Settings.h"
-#include "utils/Archive.h"
-#include "widgets/DrawingWidget.h"
+#include <constants.h>
+#include <utils/Settings.h>
+#include <utils/Archive.h>
+#include <widgets/DrawingWidget.h>
 
-#include "utils/eta-keyboard.h"
-#include "utils/misc.h"
+#include <utils/eta-keyboard.h>
+#include <utils/misc.h>
 
 
 bool is_wayland;
