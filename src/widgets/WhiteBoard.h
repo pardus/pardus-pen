@@ -33,6 +33,7 @@ public:
 private:
     QPainter painter;
     float gridSize;
+    int gridCount = 40;
     QImage transformImage;
     int ow, oh;
     void paintEvent(QPaintEvent *event) override;

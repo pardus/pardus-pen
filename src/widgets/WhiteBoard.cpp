@@ -14,6 +14,8 @@
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");
     mainWindow = (QMainWindow*)parent;
+    int gc = get_int("grid-count");
+    gridCount = (gc > 0) ? gc : 40;
     show();
 }
 
@@ -121,10 +123,6 @@ void WhiteBoard::paintEvent(QPaintEvent *event) {
     }
     #endif
 
-    int gridCount = get_int("grid-count");
-    if (gridCount <= 0) {
-        gridCount = 40;
-    }
     gridSize = (float)mainWindow->geometry().height() / (float)gridCount * ratio;
     // Draw the square paper background
     switch(overlayType){

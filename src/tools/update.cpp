@@ -1,58 +1,61 @@
 #include "../tools.h"
 
-int last_pen_type = 0;
+static int prev_active[5] = {-1, -1, -1, -1, -1};
 
 void updateGui(){
-    // hide or show elements
-    colorDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION));
-    ov->setVisible(getPen() != SELECTION);
-    thicknessSlider->setVisible(getPen() != SELECTION);
-    thicknessLabel->setVisible(getPen() != SELECTION);
-    modeDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION || getPen() == PENTEXT));
-    penTypeDialog->setVisible(!(getPen() == ERASER || getPen() == SELECTION || getPen() == PENTEXT));
+    int pen = getPen();
+    int lineStyle = drawing->getLineStyle();
+    int penStyle = drawing->getPenStyle();
+    int pageType = board->getType();
+    int overlayType = board->getOverlayType();
+    int active[5] = { pen, lineStyle, penStyle, pageType, overlayType };
 
-    // pen and eraser menu
+    colorDialog->setVisible(!(pen == ERASER || pen == SELECTION));
+    ov->setVisible(pen != SELECTION);
+    thicknessSlider->setVisible(pen != SELECTION);
+    thicknessLabel->setVisible(pen != SELECTION);
+    modeDialog->setVisible(!(pen == ERASER || pen == SELECTION || pen == PENTEXT));
+    penTypeDialog->setVisible(!(pen == ERASER || pen == SELECTION || pen == PENTEXT));
+
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
 
-    set_icon(get_icon_by_id(PEN), toolButtons[PENMENU]);
-    if(drawing->getPen() == MARKER || drawing->getPen() == PEN || drawing->getPen() == PENTEXT){
-        set_icon(get_icon_by_id(drawing->getPen()), toolButtons[PENMENU]);
+    if(pen == MARKER || pen == PEN || pen == PENTEXT){
+        set_icon(get_icon_by_id(pen), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
-    } else if (drawing->getPen() == ERASER){
+    } else if (pen == ERASER){
         toolButtons[ERASERMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
+    } else {
+        set_icon(get_icon_by_id(PEN), toolButtons[PENMENU]);
     }
-    set_icon(get_icon_by_id(drawing->getPenStyle()), toolButtons[SHAPEMENU]);
-    // Update button backgrounds
-    for (auto it = penButtons.begin(); it != penButtons.end(); ++it) {
-        it.value()->setStyleSheet(QString("background-color: none;"));
-    }
-    int btns[] = {
-        getPen(), drawing->getLineStyle(),
-        drawing->getPenStyle(), board->getType(),
-        board->getOverlayType()
-    };
-    for(int btn:btns){
-        if(penButtons[btn] != nullptr){
-            penButtons[btn]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
+
+    // clear only previously-active buttons instead of all penButtons
+    for (int i = 0; i < 5; i++) {
+        if (prev_active[i] >= 0 && penButtons.contains(prev_active[i]) && penButtons[prev_active[i]] != nullptr) {
+            penButtons[prev_active[i]]->setStyleSheet(QString("background-color: none;"));
         }
     }
-    // Update pen size
-    int value = drawing->penSize[getPen()];
-    thicknessLabel->setText(QString(_("Size:"))+QString(" ")+QString::number(value));
 
+    for(int i = 0; i < 5; i++){
+        int btn = active[i];
+        if(penButtons.contains(btn) && penButtons[btn] != nullptr){
+            penButtons[btn]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
+        }
+        prev_active[i] = btn;
+    }
 
-    // update go back buttons
+    int value = drawing->penSize[pen];
+    thicknessLabel->setText(QString(_("Size:")) + " " + QString::number(value));
+
     toolButtons[BACK]->setEnabled(drawing->isBackAvailable());
     toolButtons[NEXT]->setEnabled(drawing->isNextAvailable());
     toolButtons[PREVPAGE]->setEnabled(drawing->getPageNum() > 0);
     toolButtons[NEXTPAGE]->setEnabled(drawing->getPageNum() < drawing->max);
     pageLabel->setText(QString::number(drawing->getPageNum()));
 
-    // update scale buttons
     toolButtons[OVERLAYSCALEDOWN]->setEnabled(board->ratios[drawing->getPageNum()] >= 30);
     toolButtons[OVERLAYSCALEUP]->setEnabled(board->ratios[drawing->getPageNum()] <= 200);
-    // update overview
+
     ov->updateImage();
     floatingSettings->reload();
 }

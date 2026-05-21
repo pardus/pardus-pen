@@ -73,13 +73,12 @@ public:
             return;
         }
         sizes[id] = size;
-        QIcon icon = QIcon(get_icon_by_id(CURSOR));
-        QPixmap pixmap = icon.pixmap(
-            icon.actualSize(
+        static QIcon cursorIcon = QIcon(get_icon_by_id(CURSOR));
+        QPixmap pixmap = cursorIcon.pixmap(
+            cursorIcon.actualSize(
                 QSize(size, size)
             )
         );
-        //printf("%lld resize %d\n", id, size);
         labels[id]->setFixedSize(size, size);
         images[id]->setFixedSize(size, size);
         labels[id]->setPixmap(pixmap);
@@ -456,7 +455,11 @@ void DrawingWidget::loadImage(int num){
     if(img.isNull()){
         return;
     }
-    img = img.scaled(mainWidget->geometry().width(), mainWidget->geometry().height());
+    int targetW = mainWidget->geometry().width();
+    int targetH = mainWidget->geometry().height();
+    if (img.size() != QSize(targetW, targetH)) {
+        img = img.scaled(targetW, targetH);
+    }
     QPainter p(&image);
     image.fill(QColor("transparent"));
     p.drawImage(QPointF(0,0), img);
@@ -570,7 +573,13 @@ int DrawingWidget::getLineStyle(){
 void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, float pressure){
     debug("source: %d type: %d id:%d pressure:%f\n", source, type, id, pressure);
     int ev_pen = penType;
-    if(get_bool("eraser-mode") && ! is_etap){
+    static bool eraserModeCached = false;
+    static bool eraserMode = false;
+    if (!eraserModeCached) {
+        eraserMode = get_bool("eraser-mode");
+        eraserModeCached = true;
+    }
+    if(eraserMode && ! is_etap){
         if(source & Qt::MiddleButton) {
             setPen(MARKER);
         } else if(source & Qt::RightButton) {
@@ -811,7 +820,7 @@ bool DrawingWidget::isNextAvailable(){
 }
 
 
-QColor convertColor(QColor color) {
+QColor convertColor(const QColor& color) {
     int tot =  color.red() + color.blue() + color.green();
     if (tot > 382) {
         return QColor(0,0,0, color.alpha());

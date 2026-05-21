@@ -174,7 +174,7 @@ protected:
     bool textActive;
 };
 
-QColor convertColor(QColor color);
+QColor convertColor(const QColor& color);
 void qImageToFile(const QImage& image, const QString& filename);
 QString generateRandomString(int length);
 
