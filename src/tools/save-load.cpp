@@ -1,6 +1,7 @@
 #include <QImage>
 #include <QByteArray>
 #include <QFile>
+#include <QMutex>
 
 #include <libgen.h>
 
@@ -10,8 +11,10 @@
 extern "C" {
     QString archive_target;
     void *save_all(void* arg) {
-        (void)arg;
-        drawing->saveAll(archive_target);
+        if (!arg) return NULL;
+        QString* filename = static_cast<QString*>(arg);
+        drawing->saveAll(*filename);
+        delete filename;
         return NULL;
     }
     void *load_archive(void* arg) {
@@ -67,7 +70,9 @@ void setupSaveLoad(){
         pthread_t ptid;
         // Creating a new thread
         archive_target = file;
-        pthread_create(&ptid, NULL, &save_all, NULL);
+        QString* thread_file = new QString(file);
+        pthread_create(&ptid, NULL, &save_all, thread_file);
+        pthread_detach(ptid);
         floatingWidget->show();
         setHideMainWindow(false);
         drawing->setPen(PEN);

@@ -29,29 +29,36 @@ size_t get_epoch(){
 
 
 char* which(const char* cmd){
-    char* fullPath = strdup(getenv("PATH")); // Duplicate the PATH string
+    const char* path = getenv("PATH");
+    if (path == NULL) {
+        return strdup("");
+    }
+    char* fullPath = strdup(path);
 
     struct stat buffer;
     int exists;
     char* fileOrDirectory = (char*)cmd;
-    char *fullfilename = calloc(1024, sizeof(char));
+    char *fullfilename = calloc(4096, sizeof(char));
 
     char *token = strtok(fullPath, ":");
 
-    /* walk through other tokens */
     while( token != NULL ){
-        sprintf(fullfilename, "%s/%s", token, fileOrDirectory);
+        int n = snprintf(fullfilename, 4096, "%s/%s", token, fileOrDirectory);
+        if (n < 0 || n >= 4096) {
+            token = strtok(NULL, ":");
+            continue;
+        }
         exists = stat( fullfilename, &buffer);
         if ( exists == 0 ) {
-            free(fullPath); // Free the duplicated string
+            free(fullPath);
             return fullfilename;
         }
 
-      token = strtok(NULL, ":"); /* next token */
+      token = strtok(NULL, ":");
     }
-    free(fullPath); // Free the duplicated string
+    free(fullPath);
     free(fullfilename);
-    return "";
+    return strdup("");
 }
 
 static int pid = 0;

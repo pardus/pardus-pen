@@ -20,7 +20,7 @@ void settings_init() {
         ver = settings->value("version").toInt();
     }
     if(ver < ver_default){
-        free(settings);
+        delete settings;
         unlink(settingsFile.toStdString().c_str());
         settings = new QSettings(settingsFile, QSettings::NativeFormat);
         settings->setValue("version", ver_default);

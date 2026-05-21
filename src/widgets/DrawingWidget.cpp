@@ -86,7 +86,15 @@ public:
     }
 
     void clear(){
+        for (auto it = images.begin(); it != images.end(); ++it) {
+            delete it.value();
+        }
         images.clear();
+        labels.clear();
+        layouts.clear();
+        sizes.clear();
+        drawing.clear();
+        penType.clear();
     }
 
     void hide(qint64 id){
@@ -571,7 +579,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     }
     switch(type) {
         case PRESS:
-            if (curs.drawing[id] && curs.drawing.contains(id)) {
+            if (curs.drawing.contains(id) && curs.drawing[id]) {
                 // pen type change during press
                 // so release pen then repress
                 if(curs.penType[id] != penType){
@@ -618,7 +626,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             curEventButtons = source;
             break;
         case MOVE:
-            if (! curs.drawing[id]) {
+            if (!curs.drawing.contains(id) || !curs.drawing[id]) {
                 break;
             }
             switch(penType) {
@@ -640,7 +648,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
         case RELEASE:
-            if (!curs.drawing[id]) {
+            if (!curs.drawing.contains(id) || !curs.drawing[id]) {
                 break;
             }
             curs.drawing[id] = false;

@@ -59,10 +59,14 @@ void FloatingSettings::reload(){
     if(num_of_item <= current_page || current_page < 0){
         return;
     }
-    settingsPages.getPage(current_page)->show();
-    settingsPages.getPage(current_page)->adjustSize();
-    cur_width = settingsPages.getPage(current_page)->size().width();
-    cur_height = settingsPages.getPage(current_page)->size().height();
+    QWidget* page = settingsPages.getPage(current_page);
+    if (page == NULL) {
+        return;
+    }
+    page->show();
+    page->adjustSize();
+    cur_width = page->size().width();
+    cur_height = page->size().height();
     setFixedSize(cur_width, cur_height);
     if(tool2 != nullptr) {
         tool2->setFixedSize(cur_width, cur_height);

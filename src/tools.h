@@ -99,7 +99,6 @@ extern OverView *ov;
 
 extern QPushButton *pageLabel;
 
-extern QWidget *penSettings;
 extern QWidget *colorDialog;
 extern QWidget *typeDialog;
 extern QSlider *thicknessSlider;

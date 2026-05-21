@@ -21,12 +21,12 @@ extern void clearCache();
 
 void setupWidgets(){
     // Pen Settings Menu
-    QWidget *penSettings = new QWidget();
-    penSettingsLayout = new QVBoxLayout(penSettings);
+    QWidget *penSettingsWidget = new QWidget();
+    penSettingsLayout = new QVBoxLayout(penSettingsWidget);
     penSettingsLayout->setSpacing(padding);
     penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
-    penSettings->setStyleSheet(QString("background-color: none;"));
-    floatingSettings->addPage(penSettings);
+    penSettingsWidget->setStyleSheet(QString("background-color: none;"));
+    floatingSettings->addPage(penSettingsWidget);
 
 
     // Pen button with menu

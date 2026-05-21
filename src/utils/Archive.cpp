@@ -65,6 +65,10 @@ public:
             archive_entry_set_size(entry, st.st_size);
             archive_write_header(ar, entry);
             fd = open(file.toStdString().c_str(), O_RDONLY);
+            if (fd < 0) {
+                archive_entry_free(entry);
+                continue;
+            }
             len = read(fd, buff, sizeof(buff));
             while ( len > 0 ) {
                 archive_write_data(ar, buff, len);
