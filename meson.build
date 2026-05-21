@@ -23,6 +23,7 @@ src = [
     'src/tools/pen.cpp',
     'src/utils/misc.c',
     'src/utils/eta-keyboard.cpp',
+    'src/utils/Storage.cpp',
 ]
 
 version = '0.0.0'

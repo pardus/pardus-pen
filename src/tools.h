@@ -139,4 +139,6 @@ void loadPdf(QString path);
 void loadPdfFromData(QByteArray data);
 #endif
 void openFile(QString filename);
+extern QString cache;
+void removeDirectory(const QString &path);
 
