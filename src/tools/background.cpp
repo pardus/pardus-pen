@@ -1,4 +1,11 @@
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/WhiteBoard.h"
+#include "../widgets/FloatingWidget.h"
+#include "../widgets/FloatingSettings.h"
+#include "../widgets/Button.h"
+#include "../widgets/Background.h"
+#include "../utils/Settings.h"
 
 QPushButton* pageLabel;
 

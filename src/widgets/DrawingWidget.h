@@ -17,6 +17,16 @@
 #include <QPainter>
 #include <QKeyEvent>
 
+#ifndef DEBUG
+#define debug(...)
+#else
+#include <cstdio>
+#define debug printf("[%s:%ld]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
+#endif
+
+#define padding 8*scale
+#define butsize (40*scale + padding)
+
 #include "../utils/Selection.h"
 #include "../utils/Storage.h"
 #include "FloatingSettings.h"
@@ -24,6 +34,41 @@
 #define PRESS 0
 #define MOVE 1
 #define RELEASE 2
+
+class DrawingWidget;
+
+extern DrawingWidget *drawing;
+extern QString cache;
+extern int history;
+extern QWidget *mainWidget;
+extern QMainWindow *tool;
+extern QMainWindow *tool2;
+extern QMainWindow *tool3;
+extern QSlider *scrollHSlider;
+extern QSlider *scrollVSlider;
+extern bool is_wayland;
+extern bool force_xwayland;
+extern bool is_etap;
+
+void updateGui();
+void setPen(int type);
+int getPen();
+void setPenStyle(int style);
+void setLineStyle(int style);
+void openFile(QString filename);
+bool saveImageToFile(const QImage &image, const QString &imageFilePath);
+QImage loadImageFromFile(const QString &imageFilePath);
+void removeDirectory(const QString &path);
+void setupWidgets();
+void setupPenType();
+void setupSaveLoad();
+
+#ifdef QPRINTER
+extern bool PDFMODE;
+QImage getPdfImage(int num, float ratio);
+void loadPdf(QString path);
+void loadPdfFromData(QByteArray data);
+#endif
 
 class DrawingWidget : public QWidget {
 public:

@@ -5,7 +5,9 @@
 #include <QRect>
 
 #include "ScreenshotWidget.h"
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include <QTimer>
 
 
 

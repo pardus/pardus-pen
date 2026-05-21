@@ -5,6 +5,13 @@
 #include <QPixmap>
 #include <QMouseEvent>
 
+class ScreenshotWidget;
+
+#ifdef screenshot
+extern ScreenshotWidget* ssWidget;
+#endif
+void setupScreenShot();
+
 class ScreenshotWidget : public QWidget {
 
 public:

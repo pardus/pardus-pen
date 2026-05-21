@@ -4,6 +4,9 @@
 #include <QPainter>
 #include <QWidget>
 
+class OverView;
+
+extern OverView *ov;
 
 class OverView : public QWidget {
 public:

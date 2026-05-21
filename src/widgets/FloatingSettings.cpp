@@ -2,9 +2,9 @@
 
 #include <QMainWindow>
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
 
-extern QMainWindow* tool2;
 
 #include <QMap>
 

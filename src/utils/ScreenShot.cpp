@@ -11,13 +11,8 @@
 
 #include "../utils/ScreenShot.h"
 #include "../widgets/DrawingWidget.h"
-
-#include "../tools.h"
-
-extern DrawingWidget *drawing;
-
-
-#define _(String) gettext(String)
+#include "../widgets/WhiteBoard.h"
+#include "../constants.h"
 
 
 void takeScreenshot(){

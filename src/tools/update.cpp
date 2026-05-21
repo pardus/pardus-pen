@@ -1,4 +1,10 @@
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/WhiteBoard.h"
+#include "../widgets/OverView.h"
+#include "../widgets/Button.h"
+#include "../widgets/FloatingSettings.h"
+#include "../widgets/Background.h"
 
 static int prev_active[5] = {-1, -1, -1, -1, -1};
 

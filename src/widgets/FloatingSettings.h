@@ -10,6 +10,16 @@
 
 class QLabel;
 
+class FloatingSettings;
+
+extern FloatingSettings *floatingSettings;
+extern QWidget *colorDialog;
+extern QWidget *typeDialog;
+extern QLabel *thicknessLabel;
+extern QLabel *colorLabel;
+extern QWidget *penTypeDialog;
+extern QWidget *modeDialog;
+
 class FloatingSettings : public QWidget {
 public:
     int cur_width = 0;

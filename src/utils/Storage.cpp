@@ -11,7 +11,10 @@
 #include <QColor>
 #include <QStandardPaths>
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/WhiteBoard.h"
+#include "../widgets/Button.h"
 
 #ifdef QPRINTER
 #include <QPrinter>

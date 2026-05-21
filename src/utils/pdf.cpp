@@ -5,7 +5,9 @@
 #endif
 #include <QImage>
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/WhiteBoard.h"
 
 
 bool PDFMODE = false;

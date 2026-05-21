@@ -1,6 +1,8 @@
 #include "../widgets/DrawingWidget.h"
 #include "../utils/Selection.h"
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/Background.h"
 
 MovableWidget::MovableWidget(QWidget *parent) : QWidget(parent) {
     crop = new QLabel("");

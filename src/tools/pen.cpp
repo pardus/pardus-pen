@@ -1,4 +1,12 @@
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/Button.h"
+#include "../widgets/FloatingSettings.h"
+#include "../widgets/WhiteBoard.h"
+#include "../widgets/FloatingWidget.h"
+#include "../widgets/Background.h"
+#include "../widgets/OverView.h"
+#include "../utils/Settings.h"
 #include "../utils/eta-keyboard.h"
 
 QMap<qint64, QPushButton*> penButtons;

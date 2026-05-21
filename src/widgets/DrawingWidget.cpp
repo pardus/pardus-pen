@@ -1,5 +1,10 @@
 #include "DrawingWidget.h"
 #include "WhiteBoard.h"
+#include "Background.h"
+#include "../widgets/FloatingSettings.h"
+#include "../constants.h"
+#include "../utils/Storage.h"
+#include "../utils/Settings.h"
 
 #ifdef QPRINTER
 #include <QPrinter>
@@ -9,20 +14,6 @@
 #endif
 #include <stdio.h>
 
-
-#include <stdlib.h>
-#include <locale.h>
-#include <libintl.h>
-
-#define _(String) gettext(String)
-
-#include "../tools.h"
-#include "../utils/Storage.h"
-
-extern WhiteBoard *board;
-extern QWidget * mainWidget;
-extern DrawingWidget *drawing;
-extern FloatingSettings *floatingSettings;
 QString cache_main = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + "/pardus-pen/";
 QString cache = cache_main + generateRandomString(5)+"/";
 

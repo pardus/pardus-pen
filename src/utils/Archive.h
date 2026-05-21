@@ -1,4 +1,11 @@
 #ifndef _ARCHIVE_H
+
+#ifdef LIBARCHIVE
+extern "C" {
+    extern void *load_archive(void* arg);
+    extern QString archive_target;
+}
+#endif
 #define _ARCHIVE_H
 #include <QImage>
 #include <QString>

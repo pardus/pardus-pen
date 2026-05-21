@@ -2,13 +2,7 @@
 #include <QPainter>
 #include "Background.h"
 
-#include "../tools.h"
-
-#include <stdlib.h>
-#include <locale.h>
-#include <libintl.h>
-
-#define _(String) gettext(String)
+#include "../constants.h"
 
 Background::Background(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");

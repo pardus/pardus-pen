@@ -1,10 +1,11 @@
 #include <QMap>
 
 #include "Button.h"
+#include "../constants.h"
+#include "DrawingWidget.h"
+#include "../utils/Settings.h"
 #include <stdio.h>
 #include <QColor>
-
-extern float scale;
 
 typedef struct {
     qint64 key;

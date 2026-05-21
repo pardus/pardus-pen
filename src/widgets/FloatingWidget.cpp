@@ -2,14 +2,12 @@
 #include "FloatingWidget.h"
 
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../utils/Settings.h"
 
 
-extern float scale;
 
-extern QMainWindow* tool2;
-
-#define padding 8*scale
 
 
 #ifdef QT5

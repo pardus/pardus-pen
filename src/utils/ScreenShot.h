@@ -12,6 +12,10 @@
 #include <QPixmap>
 #include <QFile>
 
+#ifdef DBUS
+extern "C" char* screenshot_xdg_portal();
+#endif
+
 void takeScreenshot();
 #endif
 #endif

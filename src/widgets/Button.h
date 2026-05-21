@@ -4,9 +4,19 @@
 #include <QPushButton>
 #include <QWindow>
 #include <QColor>
+#include <QMap>
 #include <functional>
 
-#include "../tools.h"
+#include "../constants.h"
+
+class QSlider;
+
+extern QMap<qint64, QPushButton*> penButtons;
+extern QMap<qint64, QPushButton*> toolButtons;
+extern QSlider *thicknessSlider;
+extern char* get_icon_by_id(int id);
+extern QString get_overlay_by_id(int id);
+extern int get_id_by_overlay(QString foverlay);
 
 typedef std::function<void()> ButtonEvent;
 

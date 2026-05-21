@@ -10,7 +10,10 @@
 #include <locale.h>
 #include <libintl.h>
 
-#include "tools.h"
+#include "constants.h"
+#include "utils/Settings.h"
+#include "utils/Archive.h"
+#include "widgets/DrawingWidget.h"
 
 #include "utils/eta-keyboard.h"
 

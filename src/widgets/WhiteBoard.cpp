@@ -3,13 +3,10 @@
 #include "WhiteBoard.h"
 
 
-#include "../tools.h"
-
-#include <stdlib.h>
-#include <locale.h>
-#include <libintl.h>
-
-#define _(String) gettext(String)
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/Button.h"
+#include "../utils/Settings.h"
 
 WhiteBoard::WhiteBoard(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");

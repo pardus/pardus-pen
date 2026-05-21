@@ -9,6 +9,10 @@
 #include <QApplication>
 #include <QMainWindow>
 
+class WhiteBoard;
+
+extern WhiteBoard *board;
+
 class WhiteBoard : public QWidget {
 public:
     WhiteBoard(QWidget *parent = nullptr);

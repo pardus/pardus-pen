@@ -7,6 +7,8 @@
 #define DRAG 0
 #define RESIZE 1
 
+extern bool hasSelection;
+
 class MovableWidget : public QWidget {
 
 public:

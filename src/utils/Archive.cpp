@@ -10,7 +10,8 @@
 
 #include <fcntl.h>
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
 
 extern QWidget* mainWidget;
 

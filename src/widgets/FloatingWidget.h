@@ -14,6 +14,11 @@
 
 class QLabel;
 
+class FloatingWidget;
+
+extern FloatingWidget *floatingWidget;
+extern FloatingWidget *desktopWidget;
+
 class FloatingWidget : public QWidget {
 public:
     int new_x = 0;

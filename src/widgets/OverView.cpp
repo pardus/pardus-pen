@@ -7,7 +7,9 @@
 
 #include <math.h>
 
-#include "../tools.h"
+#include "../constants.h"
+#include "../widgets/DrawingWidget.h"
+#include "../widgets/WhiteBoard.h"
 
 #include "OverView.h"
 #include "DrawingWidget.h"

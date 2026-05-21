@@ -1,3 +1,32 @@
+#include <stdlib.h>
+#include <locale.h>
+#include <libintl.h>
+
+#ifndef QUNUSED
+    #define Q_UNUSED(x) (void)x;
+#endif
+
+#ifndef BGDIR
+#define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
+#endif
+
+extern float scale;
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
+extern "C" {
+    extern size_t _cur_time;
+    size_t get_epoch();
+    char* which(const char* cmd);
+    void disable_erc();
+    void enable_erc();
+}
+
+#define _(String) gettext(String)
+
+/********** Enums **********/
+
 #define ICON 0
 #define ERASER 1
 #define PEN 2

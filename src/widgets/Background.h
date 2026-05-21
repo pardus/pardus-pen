@@ -7,6 +7,15 @@
 #include <QApplication>
 #include <QMainWindow>
 
+class Background;
+
+extern Background *background;
+extern QPushButton* pageLabel;
+extern QWidget *bgMenu;
+
+void setupBackground();
+void setHideMainWindow(bool status);
+
 class Background : public QWidget {
 public:
     Background(QWidget *parent = nullptr);
