@@ -1,9 +1,10 @@
 #include <QMap>
 
 #include "Button.h"
-#include "../constants.h"
 #include "DrawingWidget.h"
+#include "../constants.h"
 #include "../utils/Settings.h"
+#include "../utils/misc.h"
 #include <stdio.h>
 #include <QColor>
 

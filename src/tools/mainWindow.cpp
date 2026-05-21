@@ -9,6 +9,7 @@
 #include "../widgets/Button.h"
 #include "../utils/Settings.h"
 #include "../utils/Archive.h"
+#include "../utils/misc.h"
 
 DrawingWidget *drawing;
 Background *background;
