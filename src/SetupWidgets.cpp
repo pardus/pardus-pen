@@ -7,6 +7,7 @@
 #include "widgets/OverView.h"
 #include "widgets/Button.h"
 #include "utils/Settings.h"
+#include "utils/misc.h"
 #include "tools/color.h"
 
 #include <dirent.h>

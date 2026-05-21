@@ -10,18 +10,8 @@
 #define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
 #endif
 
-extern float scale;
-
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
-
-extern "C" {
-    extern size_t _cur_time;
-    size_t get_epoch();
-    char* which(const char* cmd);
-    void disable_erc();
-    void enable_erc();
-}
 
 #define _(String) gettext(String)
 

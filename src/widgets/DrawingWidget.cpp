@@ -5,6 +5,7 @@
 #include "../constants.h"
 #include "../utils/Storage.h"
 #include "../utils/Settings.h"
+#include "../utils/misc.h"
 
 #ifdef QPRINTER
 #include <QPrinter>

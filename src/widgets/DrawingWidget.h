@@ -21,6 +21,7 @@
 #define debug(...)
 #else
 #include <cstdio>
+#include "../utils/misc.h"
 #define debug printf("[%s:%ld]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
 #endif
 
@@ -49,6 +50,7 @@ extern QSlider *scrollVSlider;
 extern bool is_wayland;
 extern bool force_xwayland;
 extern bool is_etap;
+extern float scale;
 
 void updateGui();
 void setPen(int type);

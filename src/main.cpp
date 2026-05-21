@@ -16,6 +16,8 @@
 #include "widgets/DrawingWidget.h"
 
 #include "utils/eta-keyboard.h"
+#include "utils/misc.h"
+
 
 bool is_wayland;
 bool is_etap = false;
