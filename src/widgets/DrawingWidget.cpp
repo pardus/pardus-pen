@@ -90,6 +90,7 @@ void DrawingWidget::addImage(QImage img){
     images.last_image_num++;
     images.image_count = images.last_image_num;
     images.saveValue(images.last_image_num, img.copy());
+    updateGui();
 }
 
 void DrawingWidget::initializeImage(const QSize &size) {
@@ -414,7 +415,6 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 }
                 geo.clearAll();
                 addImage(image.toImage());
-                updateGui();
             }
             if(penType != ERASER && penStyle != SPLINE){
                 update();
