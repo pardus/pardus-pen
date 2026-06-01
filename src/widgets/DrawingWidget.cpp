@@ -414,6 +414,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 }
                 geo.clearAll();
                 addImage(image.toImage());
+                updateGui();
             }
             if(penType != ERASER && penStyle != SPLINE){
                 update();
