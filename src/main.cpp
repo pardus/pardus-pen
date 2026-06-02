@@ -134,6 +134,11 @@ int main(int argc, char *argv[]) {
     #endif
     app.installTranslator(&qtTranslator);
 
+    const char* qpa = QGuiApplication::platformName().toStdString().c_str();
+    if(strcmp(qpa, "xcb") != 0){
+        is_wayland = true;
+    }
+
     mainWindowInit();
 
     #ifdef DBUS
