@@ -12,7 +12,7 @@
 
 
 ScreenshotWidget::ScreenshotWidget(QWidget *parent)
-    : QWidget(parent), selecting(false) {
+    : QWidget(parent) {
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setCursor(Qt::CrossCursor);
@@ -40,7 +40,7 @@ void ScreenshotWidget::mouseReleaseEvent(QMouseEvent *event) {
     startPos = QPoint(-1, -1);
     endPos = QPoint(-1, -1);
     repaint();
-    QTimer::singleShot(300, this, [=]() {
+    QTimer::singleShot(300, this, [&]() {
         cropScreenshot(pos1, pos2);
     });
 }

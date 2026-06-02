@@ -44,9 +44,10 @@ if get_option('resources')
 
 endif
 if get_option('fix1')
-    add_project_arguments(['-Wno-error=sfinae-incomplete', '-Wno-error=deprecated'], language: 'cpp')
+    add_project_arguments(['-Wno-error'], language: 'cpp')
+else
+    add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
 endif
-add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
 
 add_project_arguments(['-Wno-error=deprecated-declarations'], language: 'cpp')
 

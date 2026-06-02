@@ -29,7 +29,6 @@ private:
 
     QPoint startPos;
     QPoint endPos;
-    bool selecting;
 };
 
 #endif
