@@ -30,7 +30,7 @@ For archlinux:
 
 For alpine:
 
-`apk add meson ninja-build qt6-qtbase-dev qt6-qttools-dev libarchive-dev poppler-qt6`
+`apk add meson ninja-build qt6-qtbase-dev qt6-qttools-dev libarchive-dev poppler-qt6-dev g++ bash`
 
 ### Building
 ```

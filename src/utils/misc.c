@@ -22,6 +22,10 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#ifndef PATH_MAX
+#define PATH_MAX 1024
+#endif
+
 size_t _cur_time;
 size_t get_epoch(){
     struct timeval tv;
