@@ -63,11 +63,13 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         pressure = 1.0;
     }
 
-    if (lineStyle == FILLED && penStyle != SPLINE){
+    pen.setWidth(penSize[penType]*pressure);
+
+    if (lineStyle == FILLED && (penStyle == TRIANGLE || penStyle == CIRCLE || penStyle == RECTANGLE)){
         painter.setBrush(QBrush(pen.color()));
+        pen.setWidth(0);
     }
 
-    pen.setWidth(penSize[penType]*pressure);
     painter.setPen(pen);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::SmoothPixmapTransform, true);

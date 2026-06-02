@@ -44,7 +44,7 @@ if get_option('resources')
 
 endif
 if get_option('fix1')
-    add_project_arguments(['-Wno-error=template-id-cdtor' ], language: 'cpp')
+    add_project_arguments(['-Wno-error=sfinae-incomplete', '-Wno-error=deprecated'], language: 'cpp')
 endif
 add_project_arguments(['-Wextra', '-Wall', '-Werror', '-g3'], language: 'cpp')
 
