@@ -134,8 +134,8 @@ int main(int argc, char *argv[]) {
     #endif
     app.installTranslator(&qtTranslator);
 
-    const char* qpa = QGuiApplication::platformName().toStdString().c_str();
-    if(strcmp(qpa, "xcb") != 0){
+    QString qpa = QGuiApplication::platformName();
+    if(qpa != QString("xcb")){
         is_wayland = true;
     }
 

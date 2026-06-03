@@ -2,10 +2,6 @@
 #include <locale.h>
 #include <libintl.h>
 
-#ifndef QUNUSED
-    #define Q_UNUSED(x) (void)x;
-#endif
-
 #ifndef BGDIR
 #define BGDIR "/usr/share/pardus/pardus-pen/backgrounds"
 #endif

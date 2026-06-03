@@ -16,6 +16,21 @@
 #include <widgets/DrawingWidget.h>
 #include <widgets/WhiteBoard.h>
 
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+static int run_cmd(const char* args[]){
+    pid_t pid = fork();
+    int status = 0;
+    if (pid == 0){
+        execv(args[0], (char *const *)args);
+        exit(1);
+    } else {
+        waitpid(pid, &status, 0);
+    }
+    return status;
+}
 
 void takeScreenshot(){
     QString pics = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
@@ -53,13 +68,32 @@ void takeScreenshot(){
                 free(ss);
             } else {
             #endif
-                std::string spectacle(which((char*)"spectacle"));
-                std::string grim(which((char*)"grim"));
-                if(strlen(spectacle.c_str()) != 0){
-                    status = system(("QT_QPA_PLATFORM='wayland' "+spectacle+" -fbnmo "+imgname.toStdString()).c_str());
-                } else if(strlen(grim.c_str()) != 0){
-                    status = system((grim+" -t png "+imgname.toStdString()).c_str());
+                char* spectacle = which((char*)"spectacle");
+                std::string imgnamestr = imgname.toStdString();
+                if(strlen(spectacle) > 0){
+                    const char* cmd[] = {
+                        "/usr/bin/env",
+                        "QT_QPA_PLATFORM='wayland'",
+                        spectacle,
+                        "-fbnmo",
+                        imgnamestr.c_str(),
+                        NULL
+                    };
+                    status = run_cmd(cmd);
                 }
+                free(spectacle);
+                char* grim = which((char*)"grim");
+                if(status > 1 || strlen(grim) > 0){
+                    const char* cmd[] = {
+                        grim,
+                        "-t",
+                        "png",
+                        imgnamestr.c_str(),
+                        NULL
+                    };
+                    status = run_cmd(cmd);
+                }
+                free(grim);
             #ifdef DBUS
             }
             #endif
@@ -69,7 +103,7 @@ void takeScreenshot(){
     QMessageBox messageBox;
     Qt::WindowFlags flags =  Qt::Dialog | Qt::X11BypassWindowManagerHint;
     messageBox.setWindowFlags(flags);
-    
+
     if (status == 0){
         messageBox.setIcon(QMessageBox::Information);
         messageBox.setText(_("Screenshot Saved"));
