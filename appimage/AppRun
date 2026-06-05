@@ -5,4 +5,4 @@ export QT_QPA_PLATFORM_PLUGIN_PATH="$HERE/plugins/platforms"
 export QT_PLUGIN_PATH="$HERE/plugins"
 exec "${HERE}/@interpreter@" \
      --library-path "${HERE}/lib" \
-     "${HERE}/pardus-pen"
+     "${HERE}/bin/pardus-pen"
