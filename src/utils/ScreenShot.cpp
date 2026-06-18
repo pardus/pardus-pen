@@ -73,7 +73,7 @@ void takeScreenshot(){
                 if(strlen(spectacle) > 0){
                     const char* cmd[] = {
                         "/usr/bin/env",
-                        "QT_QPA_PLATFORM='wayland'",
+                        "QT_QPA_PLATFORM=wayland",
                         spectacle,
                         "-fbnmo",
                         imgnamestr.c_str(),

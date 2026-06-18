@@ -61,13 +61,7 @@ static char* listen_for_response(DBusConnection *conn, const char *request_path)
                             const char *uri;
                             dbus_message_iter_get_basic(&variant, &uri);
 
-                            size_t uri_len = strlen(uri);
-                            ret = calloc(sizeof(char), uri_len + 1);
-                            if(!ret){
-                                perror("memory allocation failed!");
-                                exit(EXIT_FAILURE);
-                            }
-                            memcpy(ret, uri, uri_len);
+                            ret = strdup(uri);
                         }
 
                         dbus_message_iter_next(&dict);
