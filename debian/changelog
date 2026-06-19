@@ -1,3 +1,46 @@
+pardus-pen (4.2.0) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * dont create QPen every events. Use drawingWidget.pen
+  * change deprecated CI/CD docker action runner
+  * initial PENTYPE
+  * fix commitText issues
+  * add type icon
+  * trigger keyboard if etap
+  * fix eta-keyboard open issue
+  * PENTYPE -> PENTEXT
+  * pentext overview added
+  * replace texttool icon
+  * cleanup code and hide floating settings after texttool press
+  * add minor check
+  * better way to open virtual keyboard
+  * remove virtual keyboard show
+  * add dbus for open eta-keyboard
+  * meson update for dbus
+  * fix text draw Y axis bug
+  * fix missing updateGui after release event
+  * updateGui for all addImage events
+  * fix appimage build
+  * minor fix about screenshot
+  * update update-translation.sh
+  * dont show color dialog on selection mode.
+  * add filled linestyle
+  * simply pen setup
+  * fix potential segfault issues
+  * performance improvements
+  * splt storage classes from drawing widget
+  * remove tools.h file and split definitions
+  * misc.h
+  * fix missing includes
+  * move header files
+  * pen width must be 0 if filled mode activated
+  * fix clang and g++ 16 build issues
+  * update readme for alpine nd build fix for musl
+  * fix detect wayland platform
+  * clang++ build fix and better screenshot command call
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 19 Jun 2026 16:48:10 +0300
+
 pardus-pen (4.1.5) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
