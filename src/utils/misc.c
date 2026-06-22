@@ -44,7 +44,7 @@ char* which(const char* cmd){
     struct stat buffer;
     int exists;
     char* fileOrDirectory = (char*)cmd;
-    char *fullfilename = calloc(4096, sizeof(char));
+    char fullfilename[4096];
 
     char *token = strtok(fullPath, ":");
 
@@ -57,13 +57,12 @@ char* which(const char* cmd){
         exists = stat( fullfilename, &buffer);
         if ( exists == 0 ) {
             free(fullPath);
-            return fullfilename;
+            return strdup(fullfilename);
         }
 
       token = strtok(NULL, ":");
     }
     free(fullPath);
-    free(fullfilename);
     return strdup("");
 }
 
@@ -78,7 +77,7 @@ void disable_erc(){
     if(dir != NULL){
         closedir(dir);
         char path[PATH_MAX];
-        sprintf(path, "/run/etap/right-click/disable/%d", pid);
+        snprintf(path, sizeof(path), "/run/etap/right-click/disable/%d", pid);
         FILE *f = fopen(path, "w");
         if(f != NULL){
             fprintf(f, "pardus-pen");
@@ -96,7 +95,7 @@ void enable_erc(){
     if(dir != NULL){
         closedir(dir);
         char path[PATH_MAX];
-        sprintf(path, "/run/etap/right-click/disable/%d", pid);
+        snprintf(path, sizeof(path), "/run/etap/right-click/disable/%d", pid);
         unlink(path);
     }
 }

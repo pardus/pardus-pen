@@ -4,6 +4,10 @@
 
 #include <constants.h>
 
+#ifndef Q_UNUSED
+    #define Q_UNUSED(A) (void)A
+#endif
+
 Background::Background(QWidget *parent) : QWidget(parent) {
     setStyleSheet("background: none");
     mainWindow = (QMainWindow*)parent;

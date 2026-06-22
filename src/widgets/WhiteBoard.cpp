@@ -3,6 +3,11 @@
 #include <widgets/WhiteBoard.h>
 
 
+#ifndef Q_UNUSED
+    #define Q_UNUSED(A) (void)A
+#endif
+
+
 #include <constants.h>
 #include <widgets/DrawingWidget.h>
 #include <widgets/Button.h>

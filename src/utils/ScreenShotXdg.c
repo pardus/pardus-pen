@@ -160,7 +160,12 @@ char* screenshot_xdg_portal() {
 
     printf("Request path: %s\n", request_path);
 
+    char *request_path_copy = strdup(request_path);
     dbus_message_unref(reply);
 
-    return listen_for_response(conn, request_path);
+    if (!request_path_copy) return NULL;
+
+    char *result = listen_for_response(conn, request_path_copy);
+    free(request_path_copy);
+    return result;
 }
