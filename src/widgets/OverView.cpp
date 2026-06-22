@@ -32,8 +32,8 @@ void OverView::paintEvent(QPaintEvent *event) {
     painter.setBrush(QBrush(board->background));
     painter.setPen(pen);
     painter.drawRoundedRect(rect().adjusted(6*scale, 6*scale, -6*scale, -6*scale), 12*scale, 13*scale);
-    int w = width() - 2*padding ;
-    int h = height() - 2*padding ;
+    int w = width() - 2*PADDING ;
+    int h = height() - 2*PADDING ;
     painter.end();
 
     QColor penColor = drawing->pen.color();
@@ -82,11 +82,11 @@ void OverView::paintEvent(QPaintEvent *event) {
         // Draw the sine wave
         QPainterPath path;
         int xPrev = 0, yPrev = 0;
-        for (int x = padding; x <= w - padding ; x+=scale) {
+        for (int x = PADDING; x <= w - PADDING ; x+=scale) {
             double y = ((h -2*penSize) / 2) * sin(2 * M_PI * x / w) + h  / 2;
-            if (x > padding) {
-                path.moveTo(QPointF(xPrev+padding, yPrev+padding));
-                path.lineTo(QPointF(x+padding, y+padding+(penSize/2)));
+            if (x > PADDING) {
+                path.moveTo(QPointF(xPrev+PADDING, yPrev+PADDING));
+                path.lineTo(QPointF(x+PADDING, y+PADDING+(penSize/2)));
             }
             xPrev = x;
             yPrev = y;

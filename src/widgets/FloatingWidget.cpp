@@ -19,8 +19,8 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     layout = new QGridLayout();
     new_x = get_int("cur-x");
     new_y = get_int("cur-y");
-    layout->setSpacing(padding);
-    layout->setContentsMargins(padding, padding, padding, padding);
+    layout->setSpacing(PADDING);
+    layout->setContentsMargins(PADDING, PADDING, PADDING, PADDING);
     QString style = QString(
     "QWidget {"
         "border-radius: "+QString::number(13*scale)+"px;"
@@ -28,7 +28,7 @@ FloatingWidget::FloatingWidget(QWidget *parent) : QWidget(parent) {
     "}");
     setLayout(layout);
     setStyleSheet(style);
-    cur_height = padding;
+    cur_height = PADDING;
     for(int i=0;i<num_of_rows;i++){
         QLabel *label = new QLabel();
         label->setFixedSize(butsize/2, butsize/2);
@@ -69,8 +69,8 @@ void FloatingWidget::setVertical(bool state) {
     }
     // add items
     int item = 0;
-    int height = (num_of_item / num_of_rows)*(butsize+padding) + 2*padding + butsize / 2;
-    int width = num_of_rows*(butsize+padding) + 2*padding;
+    int height = (num_of_item / num_of_rows)*(butsize+PADDING) + 2*PADDING + butsize / 2;
+    int width = num_of_rows*(butsize+PADDING) + 2*PADDING;
     for (qint64 i=0;i<num_of_item + num_of_rows;i++) {
         int row = (int)item / num_of_rows;
         int column = (int)item % num_of_rows;
@@ -116,9 +116,9 @@ void FloatingWidget::moveAction(){
             move(new_x, new_y);
         }
         if(floatingSettings != NULL){
-            new_xx = new_x+padding+size().width();
+            new_xx = new_x+PADDING+size().width();
             if(new_xx  > max_width - floatingSettings->cur_width){
-                new_xx = new_x - padding - floatingSettings->cur_width;
+                new_xx = new_x - PADDING - floatingSettings->cur_width;
             }
             new_yy = new_y;
             if (new_yy > max_height - floatingSettings->cur_height) {

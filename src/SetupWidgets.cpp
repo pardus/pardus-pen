@@ -32,8 +32,8 @@ void setupWidgets(){
     // Pen Settings Menu
     QWidget *penSettingsWidget = new QWidget();
     penSettingsLayout = new QVBoxLayout(penSettingsWidget);
-    penSettingsLayout->setSpacing(padding);
-    penSettingsLayout->setContentsMargins(padding, padding, padding, padding);
+    penSettingsLayout->setSpacing(PADDING);
+    penSettingsLayout->setContentsMargins(PADDING, PADDING, PADDING, PADDING);
     penSettingsWidget->setStyleSheet(QString("background-color: none;"));
     floatingSettings->addPage(penSettingsWidget);
 
@@ -83,7 +83,7 @@ void setupWidgets(){
     QWidget *pageSettings = new QWidget();
     pageSettings->setStyleSheet(QString("background-color: none;"));
     pageSettingsLayout = new QVBoxLayout(pageSettings);
-    pageSettingsLayout->setSpacing(padding);
+    pageSettingsLayout->setSpacing(PADDING);
     pageSettingsLayout->setContentsMargins(0, 0, 0, 0);
     floatingSettings->addPage(pageSettings);
 
@@ -104,7 +104,7 @@ void setupWidgets(){
     closeMenu = new QWidget();
     closeMenu->setStyleSheet(QString("background-color: #f3232323;"));
     closeMenuLayout = new QVBoxLayout(closeMenu);
-    closeMenuLayout->setSpacing(padding);
+    closeMenuLayout->setSpacing(PADDING);
     closeMenuLayout->setContentsMargins(0, 0, 0, 0);
 
     floatingSettings->addPage(closeMenu);
@@ -182,7 +182,7 @@ void setupWidgets(){
     int rowsize = 7;
     colorDialog = new QWidget();
     colorDialog->setFixedSize( // set height later
-        butsize*rowsize + padding*(rowsize+1),
+        butsize*rowsize + PADDING*(rowsize+1),
         0
     );
 
@@ -222,7 +222,7 @@ void setupWidgets(){
     //);
 
     thicknessSlider->setFixedSize(
-        colorDialog->size().width() - 2*padding,
+        colorDialog->size().width() - 2*PADDING,
         butsize
     );
     penSizeSettingsLayout->addWidget(thicknessSlider, Qt::AlignHCenter | Qt::AlignVCenter);
@@ -347,7 +347,7 @@ void setupWidgets(){
 
     // resize color dialog
     colorDialog->setFixedHeight(
-        butsize*3+ padding*4
+        butsize*3+ PADDING*4
     );
 
 
@@ -467,7 +467,7 @@ void setupWidgets(){
     }
     pageDialog->setFixedSize(
         colorDialog->size().width(),
-        butsize*2+ padding*3
+        butsize*2+ PADDING*3
     );
     bgMenuLayout->addWidget(pageDialog);
 

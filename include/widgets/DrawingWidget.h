@@ -25,8 +25,8 @@
 #define debug printf("[%s:%ld]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
 #endif
 
-#define padding 8*scale
-#define butsize (40*scale + padding)
+#define PADDING 8*scale
+#define butsize (40*scale + PADDING)
 
 #include "../utils/Selection.h"
 #include "../utils/Storage.h"

@@ -134,7 +134,7 @@ void set_icon(const char* name, QPushButton * button) {
     QIcon icon = QIcon(name);
     QPixmap pixmap = icon.pixmap(QSize(butsize, butsize));
     button->setIcon(icon);
-    button->setIconSize(QSize(butsize - padding, butsize - padding));
+    button->setIconSize(QSize(butsize - PADDING, butsize - PADDING));
     button->setFlat(true);
 }
 
@@ -142,7 +142,7 @@ void set_icon_combined(const char* name, const char* subname, QPushButton * butt
     QIcon icon = combineIcons(QIcon(name), QIcon(subname));
     QPixmap pixmap = icon.pixmap(QSize(butsize, butsize));
     button->setIcon(icon);
-    button->setIconSize(QSize(butsize - padding, butsize - padding));
+    button->setIconSize(QSize(butsize - PADDING, butsize - PADDING));
     button->setFlat(true);
 }
 
