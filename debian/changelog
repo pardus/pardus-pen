@@ -1,3 +1,11 @@
+pardus-pen (4.2.1) unstable; urgency=medium
+
+  [ Ali Riza KESKIN ]
+  * change padding macro definition
+  * fix more memory issues
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 23 Jun 2026 13:30:30 +0300
+
 pardus-pen (4.2.0) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
