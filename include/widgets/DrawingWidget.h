@@ -22,7 +22,11 @@
 #else
 #include <cstdio>
 #include "../utils/misc.h"
+#ifdef __LP64__
 #define debug printf("[%s:%ld]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
+#else
+#define debug printf("[%s:%d]:", __func__, get_epoch() - _cur_time); _cur_time = get_epoch(); printf
+#endif
 #endif
 
 #define PADDING 8*scale
