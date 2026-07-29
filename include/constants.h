@@ -19,6 +19,7 @@
 #define MARKER 3
 #define SELECTION 4
 #define PENTEXT 5
+#define SMART_PEN 6
 
 #define LINE 10
 #define CIRCLE 11

@@ -30,6 +30,7 @@ void setPen(int type){
             penButtons[MARKER]->show();
             penButtons[PEN]->show();
             penButtons[PENTEXT]->show();
+            penButtons[SMART_PEN]->show();
             thicknessSlider->setRange(10*scale,200*scale);
             break;
         case MARKER:
@@ -37,6 +38,7 @@ void setPen(int type){
             penButtons[PENTEXT]->show();
             penButtons[ERASER]->show();
             penButtons[PEN]->show();
+            penButtons[SMART_PEN]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
         case PEN:
@@ -44,6 +46,7 @@ void setPen(int type){
             penButtons[PENTEXT]->show();
             penButtons[ERASER]->show();
             penButtons[MARKER]->show();
+            penButtons[SMART_PEN]->show();
             thicknessSlider->setRange(1,50*scale);
             break;
         case PENTEXT:
@@ -51,10 +54,19 @@ void setPen(int type){
             penButtons[PEN]->show();
             penButtons[MARKER]->show();
             penButtons[ERASER]->show();
+            penButtons[SMART_PEN]->show();
             thicknessSlider->setRange(8,200*scale);
             showEtaKeyboard();
             break;
-
+        case SMART_PEN:
+            penButtons[PENTEXT]->show();
+            penButtons[PEN]->show();
+            penButtons[MARKER]->show();
+            penButtons[ERASER]->show();
+            penButtons[SMART_PEN]->hide();
+            setPenStyle(SPLINE);
+            thicknessSlider->setRange(1,50*scale);
+            break;
     }
     drawing->mergeSelection();
     thicknessSlider->setValue(drawing->penSize[type]);
@@ -77,7 +89,7 @@ void setLineStyle(int style){
 }
 
 void setupPenType(){
-    int penTypes[] = {PEN, MARKER, PENTEXT};
+    int penTypes[] = {PEN, MARKER, PENTEXT, SMART_PEN};
     for (int t : penTypes) {
         penButtons[t] = create_button(t, [=](){ setPen(t); });
     }
@@ -131,6 +143,9 @@ void setupPenType(){
         switch(getPen()){
             case PEN:
                 set_int("pen-size",value);
+                break;
+            case SMART_PEN:
+                set_int("smart-pen-size", value);
                 break;
             case MARKER:
                 set_int("marker-size",value);

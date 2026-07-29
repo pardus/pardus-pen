@@ -12,6 +12,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/tool/pen.svg";
         case ERASER:
             return (char*)":images/tool/eraser.svg";
+        case SMART_PEN:
+            return (char*)":images/tool/smartpen.svg";
         case CIRCLE:
             return (char*)":images/shape/circle.svg";
         case SPLINE:

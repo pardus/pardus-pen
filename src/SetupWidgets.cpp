@@ -268,8 +268,9 @@ void setupWidgets(){
     styleLayout->addWidget(penButtons[PEN],           0, 0, Qt::AlignCenter);
     styleLayout->addWidget(penButtons[MARKER],        0, 1, Qt::AlignCenter);
     styleLayout->addWidget(penButtons[PENTEXT],       0, 2, Qt::AlignCenter);
-    styleLayout->addWidget(penButtons[ERASER],        0, 3, Qt::AlignCenter);
-    //styleLayout->addWidget(toolButtons[CLEAR],        0, 4, Qt::AlignCenter);
+    styleLayout->addWidget(penButtons[SMART_PEN],     0, 3, Qt::AlignCenter);
+    styleLayout->addWidget(penButtons[ERASER],        0, 4, Qt::AlignCenter);
+    //styleLayout->addWidget(toolButtons[CLEAR],        0, 5, Qt::AlignCenter);
 
 
     penTypeDialog = new QWidget();

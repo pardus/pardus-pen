@@ -24,6 +24,7 @@ src = [
     'src/utils/misc.c',
     'src/utils/eta-keyboard.cpp',
     'src/utils/Storage.cpp',
+    'src/utils/StrokeRecognition.cpp',
 ]
 
 version = '0.0.0'
