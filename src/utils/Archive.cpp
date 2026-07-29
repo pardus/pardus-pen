@@ -135,7 +135,11 @@ public:
                 while (1) {
                     char buf[4096];
                     long int r = archive_read_data(ar, buf, sizeof(buf));
+#ifdef __LP64__
                     debug("%ld %ld %s\n", r, size, entryName);
+#else
+                    debug("%ld %lld %s\n", r, size, entryName);
+#endif
                     if (r > 0){ // continue read
                         input.append(buf, r);
                     } else if (r == 0) { // done
