@@ -1,13 +1,6 @@
 #include "utils/stroke_recognition.h"
 #include "widgets/DrawingWidget.h"
 
-#include <algorithm>
-
-float FindLength(float x1, float y1, float x2, float y2);
-void FixPointArray(int startPoint, int endPoint, bool addIntersection,
-                   float intersectionX, float intersectionY,
-                   StrokeVariables &variables);
-
 bool resample(const QMap<long long, QPointF> &points,
               StrokeVariables &variables)
 {
@@ -16,10 +9,6 @@ bool resample(const QMap<long long, QPointF> &points,
 
     constexpr float EPSILON = 0.0001f;
 
-    /*
-        Birinci geçiş:
-        Stroke'un toplam yol uzunluğunu hesapla.
-    */
     float totalLength = 0.0f;
 
     auto previousIterator = points.constBegin();
@@ -49,10 +38,6 @@ bool resample(const QMap<long long, QPointF> &points,
         totalLength /
         static_cast<float>(RESAMPLE_POINTS - 1);
 
-    /*
-        İkinci geçiş:
-        Her sampleDistance mesafede yeni bir nokta üret.
-    */
     variables.points[0] = points.constBegin().value();
 
     int outputIndex = 1;
@@ -85,10 +70,6 @@ bool resample(const QMap<long long, QPointF> &points,
             continue;
         }
 
-        /*
-            Segment yönünü bir defa hesaplıyoruz.
-            İçteki döngüde tekrar sqrt() gerekmiyor.
-        */
         const float directionX =
             dx / remainingSegmentLength;
 
@@ -144,7 +125,6 @@ bool resample(const QMap<long long, QPointF> &points,
 
 void CalculateDeltaTheta(StrokeVariables &variables)
 {
-    // it calculates the angle between consecutive segments of the stroke and stores them in DeltaTheta array.
     for (int i = 0; i < variables.pointCount - 1; i++)
     {
         float dx =
@@ -161,7 +141,7 @@ void CalculateDeltaTheta(StrokeVariables &variables)
     for (int i = 0; i < variables.pointCount - 2; i++)
     {
         variables.deltaTheta[i] = variables.theta[i + 1] - variables.theta[i];
-
+        // Normalize the angle difference to [-180°, 180°]
         if (variables.deltaTheta[i] > 180)
             variables.deltaTheta[i] -= 360;
 
@@ -172,9 +152,6 @@ void CalculateDeltaTheta(StrokeVariables &variables)
 
 float TotalTurnDegree(const StrokeVariables &variables)
 {
-    // it calculates the total turn degree of the stroke by summing up the angles in DeltaTheta array.
-    // it stores positive and negative angles so that it can be used to calculate the total turn degree and total absolute turn degree separately.
-    // with help of this we can calculate lines circles and squares which has different turn degree values.
     float totalTurnDegree = 0;
     for (int i = 0; i < variables.pointCount - 2; i++)
     {
@@ -185,8 +162,6 @@ float TotalTurnDegree(const StrokeVariables &variables)
 
 float TotalAbsTurnDegree(const StrokeVariables &variables)
 {
-    // it calculates the total absolute turn degree of the stroke by summing up the absolute values of angles in DeltaTheta array.
-    // with help of this we can see how much noise or zigzag this function has
     float totalAbsTurnDegree = 0;
     for (int i = 0; i < variables.pointCount - 2; i++)
     {
@@ -197,9 +172,6 @@ float TotalAbsTurnDegree(const StrokeVariables &variables)
 
 float TotalPathLength(const StrokeVariables &variables)
 {
-    // it calculates the total path of the stroke by summing up the distances between consecutive points in the point_x and point_y arrays.
-    // we use this function to see how long the stroke is
-    // with the help of this function and the start and end point distance we can calculate the straightness score of the stroke
     float totalLength = 0.0f;
 
     for (int i = 0; i < variables.pointCount - 1; i++)
@@ -215,9 +187,19 @@ float TotalPathLength(const StrokeVariables &variables)
 
 void findTurnRegions(StrokeVariables &variables)
 {
-    // it identifies regions of the stroke where the turn degree exceeds a certain threshold (MIN_CHANGE_DEGREE).
-    // this function stores the start and end of the regions and the sum of the turn degrees in those regions.
-    // if the sum is greater than STRONG_REGION_TURN then we can say that this is a strong turn region
+    /**
+     * @brief Detects continuous turning regions along the stroke.
+     *
+     * Consecutive delta-theta values whose magnitude exceeds the turn threshold
+     * are grouped into the same turn region. Small gaps between turning samples
+     * may be merged to improve robustness against noisy input.
+     *
+     * Each detected region represents a potential corner and is later used during
+     * feature extraction and ideal shape generation.
+     *
+     * @param variables Stroke data containing the delta-theta sequence. The
+     *                  detected turn regions are written back into this structure.
+     */
     variables.turnRegionCount = 0;
     bool inRegion = false;
     int gapCount = 0;
@@ -242,7 +224,6 @@ void findTurnRegions(StrokeVariables &variables)
 
             gapCount = 0;
         }
-        // we forgive the small gaps in the turn regions, if the gap count is more then MAX_GAP(i set it to 1) it ends the turn region
         else if (inRegion)
         {
             gapCount++;
@@ -258,8 +239,6 @@ void findTurnRegions(StrokeVariables &variables)
         }
     }
 
-    // if the stroke ends while still in a turn region, we close that region at the end of the stroke
-    // i might change thet in the next updates
     if (inRegion)
     {
         variables.turnRegionEnd[variables.turnRegionCount] =
@@ -331,14 +310,6 @@ int DirectionChangeCount(const StrokeVariables &variables)
 
 float LineScore(const StrokeFeatures &features)
 {
-
-    /*
-        Turn amount puanı:
-
-        Dönüş 90 derece ise 0 puan.
-        Dönüş 0 derece ise +20 puan.
-        Dönüş 180 derece ise -20 puan.
-    */
     float turnScore =
         20.0f -
         (std::abs(features.totalTurnDegree) / 180.0f) * 40.0f;
@@ -372,10 +343,7 @@ float LineScore(const StrokeFeatures &features)
     float degreePenalty = 0;
     if (features.totalAbsTurnDegree > 180.0f)
         degreePenalty = -20;
-    /*
-        Her yön değişiminde 2 puan ceza.
-        En fazla 60 puan ceza.
-    */
+
     float zigzagPenalty =
         features.directionChangeCount * 2.0f;
 
@@ -448,15 +416,6 @@ float CalculateShapeFitError(
         int start = regionStart[corner];
         int end = regionEnd[corner];
 
-        /*
-            Sanal başlangıç-bitiş region'u:
-
-            start = 0
-            end   = 63
-
-            Bütün stroke köşe değildir.
-            Yalnızca ilk ve son noktayı karşılaştırıyoruz.
-        */
         bool isVirtualClosure =
             (start == 0 && end == variables.pointCount - 1) ||
             (start == variables.pointCount - 1 && end == 0);
@@ -487,10 +446,6 @@ float CalculateShapeFitError(
             continue;
         }
 
-        /*
-            DeltaTheta[i], point[i+1] üzerindeki dönüşü temsil eder.
-            Bu yüzden pointIndex = i + 1.
-        */
         for (int i = start; i <= end; i++)
         {
             int pointIndex = i + 1;
@@ -524,12 +479,6 @@ float CalculateShapeFitError(
     float averageError =
         totalNormalizedError / comparedPointCount;
 
-    /*
-        Ortalama hata, kenar uzunluğunun %30'una ulaşınca
-        skor sıfıra yaklaşır.
-
-        Bu değeri testlerden sonra ayarlarız.
-    */
     const float MAX_ACCEPTABLE_ERROR = 0.30f;
 
     float score =
@@ -552,6 +501,25 @@ bool FindLineIntersection(
     float *cornerX,
     float *cornerY)
 {
+    /**
+     * @brief Computes the intersection point of two lines.
+     *
+     * Each line is represented by a reference point and its orientation angle.
+     * The computed intersection is used to reconstruct the ideal corners of the
+     * detected geometric shape.
+     *
+     * @param x1 Reference point x-coordinate of the first line.
+     * @param y1 Reference point y-coordinate of the first line.
+     * @param theta1 Orientation of the first line in degrees.
+     * @param x2 Reference point x-coordinate of the second line.
+     * @param y2 Reference point y-coordinate of the second line.
+     * @param theta2 Orientation of the second line in degrees.
+     * @param intersectionX Receives the x-coordinate of the intersection point.
+     * @param intersectionY Receives the y-coordinate of the intersection point.
+     *
+     * @return true if the lines intersect, false if they are parallel or nearly parallel.
+     */
+
     if (cornerX == nullptr || cornerY == nullptr)
         return false;
 
@@ -564,25 +532,10 @@ bool FindLineIntersection(
     float directionX2 = std::cos(theta2Radians);
     float directionY2 = std::sin(theta2Radians);
 
-    /*
-        Birinci doğru:
-            P1 + t * D1
-
-        İkinci doğru:
-            P2 + u * D2
-
-        Kesişim için:
-            P1 + t * D1 = P2 + u * D2
-    */
-
     float denominator =
         directionX1 * directionY2 -
         directionY1 * directionX2;
 
-    /*
-        denominator sıfıra yakınsa doğrular paralel
-        veya neredeyse paraleldir.
-    */
     const float PARALLEL_EPSILON = 0.0001f;
 
     if (std::fabs(denominator) < PARALLEL_EPSILON)
@@ -609,6 +562,25 @@ bool FindLineToEdge(
     float *centerY,
     float *averageTheta)
 {
+    /**
+     * @brief Fits a representative line to a stroke edge.
+     *
+     * Estimates a single line that best represents the stroke segment between two
+     * consecutive turn regions. The resulting line is described by a reference
+     * point and its orientation angle.
+     *
+     * The extracted line is later used to construct ideal geometric shapes by
+     * intersecting neighboring edges.
+     *
+     * @param edgeStart Index of the first point belonging to the edge.
+     * @param edgeEnd Index of the last point belonging to the edge.
+     * @param variables Resampled stroke data.
+     * @param averageX Receives the x-coordinate of the fitted line.
+     * @param averageY Receives the y-coordinate of the fitted line.
+     * @param averageTheta Receives the orientation of the fitted line in degrees.
+     *
+     * @return true if a valid line could be estimated, false otherwise.
+     */
     if (variables.pointCount < 2)
         return false;
 
@@ -633,15 +605,6 @@ bool FindLineToEdge(
     int pointCount = 0;
     int thetaCount = 0;
 
-    /*
-        Normal aralık:
-            start = 10, end = 20
-            10, 11, ... 20
-
-        Wrap aralık:
-            start = 55, end = 8
-            55, 56, ... 63, 0, 1, ... 8
-    */
     int numberOfPoints =
         ((endIndex - startIndex + variables.pointCount) % variables.pointCount) + 1;
 
@@ -654,12 +617,6 @@ bool FindLineToEdge(
         sumY += variables.points[pointIndex].y();
         pointCount++;
 
-        /*
-            Theta[i], point[i] -> point[i+1] segmentini temsil ediyor.
-
-            Son noktaya ait Theta yok:
-            Theta dizisi 0 ... POINT_LENGTH-2 aralığında.
-        */
         if (pointIndex < variables.pointCount - 1)
         {
             float radians =
@@ -712,6 +669,18 @@ float AverageParallelAngle(float angle1, float angle2)
 
 bool MakeOppositeEdgesParallel(float edgeTheta[4])
 {
+    /**
+     * @brief Adjusts opposite edges to share the same orientation.
+     *
+     * Opposite edges of a quadrilateral are averaged so that they become parallel
+     * while preserving the overall orientation of the drawn shape. This produces
+     * a cleaner ideal representation before the corner positions are computed.
+     *
+     * @param averageThetaForLine Orientation of each detected edge in degrees.
+     *
+     * @return true if the edge orientations were successfully adjusted,
+     *         false otherwise.
+     */
     const float PARALLEL_TOLERANCE = 20.0f;
 
     if (LineAngleDifference(edgeTheta[0], edgeTheta[2]) > PARALLEL_TOLERANCE)
@@ -746,9 +715,28 @@ bool CreateIdealShape(
     const StrokeVariables &variables,
     StrokeResult &result)
 {
-    float avarageThetaForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
-    float avarageXForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
-    float avarageYForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    /**
+     * @brief Generates an ideal geometric representation of the detected shape.
+     *
+     * A representative line is first estimated for each edge between consecutive
+     * turn regions. For quadrilaterals, opposite edges are adjusted to be parallel
+     * before the intersections of neighboring edges are computed.
+     *
+     * The resulting intersection points form the corners of the idealized shape,
+     * which is later rendered as a clean geometric object.
+     *
+     * @param regionStart Start index of each detected turn region.
+     * @param regionEnd End index of each detected turn region.
+     * @param regionCount Number of detected turn regions.
+     * @param variables Resampled stroke data.
+     * @param result Output structure that receives the ideal corner positions.
+     *
+     * @return true if the ideal shape was successfully generated,
+     *         false otherwise.
+     */
+    float averageThetaForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    float averageXForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    float averageYForLine[4] = {0.0f, 0.0f, 0.0f, 0.0f};
     float cornerX = 0.0f;
     float cornerY = 0.0f;
     float avgTheta = 0.0f;
@@ -775,9 +763,9 @@ bool CreateIdealShape(
         if (!doesEdgeWork)
             return false;
 
-        avarageThetaForLine[i] = avgTheta;
-        avarageXForLine[i] = cornerX;
-        avarageYForLine[i] = cornerY;
+        averageThetaForLine[i] = avgTheta;
+        averageXForLine[i] = cornerX;
+        averageYForLine[i] = cornerY;
     }
 
     int firstLine[4] = {0, 1, 2, 3};
@@ -789,7 +777,7 @@ bool CreateIdealShape(
     if (regionCount == 4)
     {
         bool canCreateParallelShape =
-            MakeOppositeEdgesParallel(avarageThetaForLine);
+            MakeOppositeEdgesParallel(averageThetaForLine);
 
         if (!canCreateParallelShape)
             return false;
@@ -801,12 +789,12 @@ bool CreateIdealShape(
     for (int i = 0; i < regionCount; i++)
     {
         bool intersectionFound = FindLineIntersection(
-            avarageXForLine[firstLine[i]],
-            avarageYForLine[firstLine[i]],
-            avarageThetaForLine[firstLine[i]],
-            avarageXForLine[secondLine[i]],
-            avarageYForLine[secondLine[i]],
-            avarageThetaForLine[secondLine[i]],
+            averageXForLine[firstLine[i]],
+            averageYForLine[firstLine[i]],
+            averageThetaForLine[firstLine[i]],
+            averageXForLine[secondLine[i]],
+            averageYForLine[secondLine[i]],
+            averageThetaForLine[secondLine[i]],
             &idealCornerXValue,
             &idealCornerYValue);
 
@@ -974,6 +962,18 @@ float CalculateCircleScore(
         0.0f,
         1.0f);
 
+    /*
+     * Both kinds of radial consistency are required for a circle.  A weighted
+     * arithmetic mean lets a high local score hide a very low global score
+     * (for example, on spirals or uneven loops).  The harmonic mean still
+     * tolerates small drawing errors, but is pulled down by either weak score.
+     */
+    const float scoreSum = localScore + globalScore;
+    float finalScore = 0.0f;
+    if (scoreSum > 0.0f)
+        finalScore = 2.0f * localScore * globalScore / scoreSum;
+
+#ifdef DEBUG
     printf(
         "circle localError: %.3f globalError: %.3f "
         "localScore: %.3f globalScore: %.3f final: %.3f\n",
@@ -981,14 +981,38 @@ float CalculateCircleScore(
         globalDiffAvg,
         localScore,
         globalScore,
-        localScore * globalScore);
+        finalScore);
+#endif
 
-    return localScore * globalScore;
+    return finalScore;
+}
+
+float FindLength(float x1, float y1, float x2, float y2)
+{
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+
+    return std::sqrt(dx * dx + dy * dy);
 }
 
 float CalculateCircleRadiusDiff(const StrokeVariables &variables,
                                 StrokeResult &result)
 {
+    /**
+     * @brief Evaluates how closely the stroke resembles a circle.
+     *
+     * The stroke center is estimated from the average position of all
+     * resampled points. The radius of each point is then compared against
+     * both its local neighborhood and the global average radius.
+     *
+     * The resulting score measures the radial consistency of the stroke,
+     * where higher scores indicate a shape closer to a perfect circle.
+     *
+     * @param variables Resampled stroke data.
+     * @param result Receives the estimated circle center and radius.
+     *
+     * @return Circle similarity score in the range [0, 100].
+     */
     const int pointLength = variables.pointCount;
     if (pointLength <= 0 || pointLength > RESAMPLE_POINTS)
         return 0.0f;
@@ -1100,10 +1124,6 @@ float ClosureScore(const StrokeFeatures &features, const StrokeVariables &variab
 
     float closureRatio = closureDistance / features.totalLength;
 
-    /*
-        ratio = 0.00  -> 100 puan
-        ratio = 0.20  -> 0 puan
-    */
     const float MAX_CLOSURE_RATIO = 0.20f;
 
     float score =
@@ -1423,12 +1443,47 @@ int calculateClosestPoint(
         return Index;
 }
 
-float FindLength(float x1, float y1, float x2, float y2)
+void FixPointArray(int startPoint,
+                   int endPoint,
+                   bool addIntersection,
+                   float intersectionX,
+                   float intersectionY,
+                   StrokeVariables &variables)
 {
-    float dx = x2 - x1;
-    float dy = y2 - y1;
+    // Copies the selected stroke segment to the beginning
+    // of point_x and point_y and returns the new point count.
+    int pointCount = 0;
+    if (startPoint == 0 && endPoint == RESAMPLE_POINTS - 1)
+    {
+        variables.pointCount = RESAMPLE_POINTS;
+        return;
+    }
 
-    return std::sqrt(dx * dx + dy * dy);
+    float sourceX[RESAMPLE_POINTS];
+    float sourceY[RESAMPLE_POINTS];
+
+    for (int i = 0; i < RESAMPLE_POINTS; ++i)
+    {
+        sourceX[i] = variables.points[i].x();
+        sourceY[i] = variables.points[i].y();
+    }
+
+    if (addIntersection)
+    {
+        variables.points[pointCount] = QPointF(intersectionX, intersectionY);
+        pointCount++;
+    }
+
+    for (int i = startPoint; i <= endPoint; ++i)
+    {
+        if (pointCount >= RESAMPLE_POINTS)
+            break;
+
+        variables.points[pointCount] = QPointF(sourceX[i], sourceY[i]);
+        pointCount++;
+    }
+
+    variables.pointCount = pointCount;
 }
 
 void fixPointsForIntersection(StrokeVariables &variables)
@@ -1557,49 +1612,6 @@ void fixPointsForIntersection(StrokeVariables &variables)
         variables);
 }
 
-void FixPointArray(int startPoint,
-                   int endPoint,
-                   bool addIntersection,
-                   float intersectionX,
-                   float intersectionY,
-                   StrokeVariables &variables)
-{
-    // Copies the selected stroke segment to the beginning
-    // of point_x and point_y and returns the new point count.
-    int pointCount = 0;
-    if (startPoint == 0 && endPoint == RESAMPLE_POINTS - 1)
-    {
-        variables.pointCount = RESAMPLE_POINTS;
-        return;
-    }
-
-    float sourceX[RESAMPLE_POINTS];
-    float sourceY[RESAMPLE_POINTS];
-
-    for (int i = 0; i < RESAMPLE_POINTS; ++i)
-    {
-        sourceX[i] = variables.points[i].x();
-        sourceY[i] = variables.points[i].y();
-    }
-
-    if (addIntersection)
-    {
-        variables.points[pointCount] = QPointF(intersectionX, intersectionY);
-        pointCount++;
-    }
-
-    for (int i = startPoint; i <= endPoint; ++i)
-    {
-        if (pointCount >= RESAMPLE_POINTS)
-            break;
-
-        variables.points[pointCount] = QPointF(sourceX[i], sourceY[i]);
-        pointCount++;
-    }
-
-    variables.pointCount = pointCount;
-}
-
 int CalculateDecision(const StrokeScore &strokeScore)
 {
     float MaxPoint = 0.0;
@@ -1671,15 +1683,14 @@ void calculateScore(StrokeScore &score,
                     const StrokeVariables &variables,
                     StrokeResult &result)
 {
-    score.lineScore = LineScore(features);
-    score.triangleShapeFit = CalculateShapeFitTriangle(features, variables, result);
     score.closureScore = ClosureScore(features, variables);
-    score.triangleScore = TriangleScore(score);
-
+    score.triangleShapeFit = CalculateShapeFitTriangle(features, variables, result);
     score.squareShapeFit = CalculateShapeFitSquare(features, variables, result);
-    score.squareScore = SquareScore(score);
-
     score.circleRadiusScore = CalculateCircleRadiusDiff(variables, result) * 100;
+
+    score.lineScore = LineScore(features);
+    score.triangleScore = TriangleScore(score);
+    score.squareScore = SquareScore(score);
     score.circleScore = CircleScore(score, features);
 
     score.decision = CalculateDecision(score);
@@ -1701,8 +1712,17 @@ int stroke_recognition(const QMap<long long, QPointF> &points,
                        StrokeVariables &variables,
                        StrokeResult &result)
 {
-    // the code fixes the corner points and checks if the lines meet so they can create corners but it doesnt take those intersections as corners
-    // thats because in testing we check the possiblity of first and last points creating a corner so we dont touch the corner side
+    /*
+     * Stroke recognition pipeline:
+     *
+     * 1. Resample the raw stroke to a fixed number of points.
+     * 2. Compute segment directions (theta).
+     * 3. Compute direction changes (delta theta).
+     * 4. Detect turn regions (potential corners).
+     * 5. Extract geometric features.
+     * 6. Classify the stroke.
+     * 7. Generate an ideal representation of the detected shape.
+     */
     StrokeFeatures features;
     variables = StrokeVariables{};
     result = StrokeResult{};
@@ -1710,7 +1730,7 @@ int stroke_recognition(const QMap<long long, QPointF> &points,
 
     bool didsuccess = calculateProcess(points, variables);
 
-    if(!didsuccess)
+    if (!didsuccess)
         return RECOG_UNKNOWN;
 
     calculateFeatures(features, variables);

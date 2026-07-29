@@ -5,6 +5,7 @@
 #include <QMap>
 #include <QPointF>
 #include <QVector>
+#include <algorithm>
 
 namespace StrokeRecognitionConstants
 {
