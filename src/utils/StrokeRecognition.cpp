@@ -811,7 +811,6 @@ float CalculateShapeFitTriangle(const StrokeFeatures &features,
                                 const StrokeVariables &variables,
                                 StrokeResult &result)
 {
-    // i will check that and look for bugs
     float score = 0.0f;
     int newturnRegionCount = features.turnRegionCount;
     int newturnRegionStart[5];
@@ -867,7 +866,6 @@ float CalculateShapeFitSquare(const StrokeFeatures &features,
                               const StrokeVariables &variables,
                               StrokeResult &result)
 {
-    // i will check that and look for bugs
     float score = 0.0f;
     int newturnRegionCount = features.turnRegionCount;
     int newturnRegionStart[5];
@@ -1154,7 +1152,9 @@ float SquareScore(const StrokeScore &strokeScore)
     return score;
 }
 
-float CircleScore(const StrokeScore &strokeScore, const StrokeFeatures &features)
+float CircleScore(const StrokeScore &strokeScore,
+                  const StrokeFeatures &features,
+                  const StrokeVariables &variables)
 {
     float score = 0;
 
@@ -1166,6 +1166,8 @@ float CircleScore(const StrokeScore &strokeScore, const StrokeFeatures &features
         score += 20.0;
     else
         score -= 20.0;
+
+    score -= variables.turnRegionCount;
 
     return score;
 }
@@ -1691,7 +1693,7 @@ void calculateScore(StrokeScore &score,
     score.lineScore = LineScore(features);
     score.triangleScore = TriangleScore(score);
     score.squareScore = SquareScore(score);
-    score.circleScore = CircleScore(score, features);
+    score.circleScore = CircleScore(score, features, variables);
 
     score.decision = CalculateDecision(score);
 }

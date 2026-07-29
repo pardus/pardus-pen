@@ -10,7 +10,7 @@
 namespace StrokeRecognitionConstants
 {
     constexpr int RESAMPLE_POINTS = 64;
-    constexpr float MIN_CHANGE_DEGREE = 10.0f;
+    constexpr float MIN_CHANGE_DEGREE = 12.0f;
     constexpr float STRONG_REGION_TURN = 60.0f;
     constexpr float ANGLE_THRESHOLD = 45.0f;
     constexpr float MIN_SCORE = 75.0f;

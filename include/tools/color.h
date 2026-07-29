@@ -18,7 +18,7 @@ QColor("#808080"),  // Gray
 QColor("#000000"),  // Black
 QColor("#FFFFFF"),  // White
 
-    QColor("#ff0000"),  // Ren
+    QColor("#ff0000"),  // Red
     QColor("#ff7f00"),  // Orange
     QColor("#ffff00"),  // Yellow
     QColor("#00bc3f"),  // Green

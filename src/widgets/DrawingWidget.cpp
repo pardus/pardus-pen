@@ -454,28 +454,28 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 {
                     if (recognitionSuccessful)
                     {
-                        // Kullanıcının serbest çizimini önceki canvas ile birleştir.
+                        // Merge the user's freehand drawing with the previous canvas.
                         QImage freehandImage = background->image.copy();
 
                         QPainter freehandPainter(&freehandImage);
                         freehandPainter.drawImage(QPointF(0, 0), image.toImage());
                         freehandPainter.end();
 
-                        // Serbest çizilmiş hâli history'ye kaydet.
+                        // save the freehandImage to history.
                         addImage(freehandImage);
 
-                        // Serbest stroke katmanını temizle.
+                        // clear the free stroke layer.
                         image.fill(QColor("transparent"));
 
-                        // Yalnızca ideal şekli çiz.
+                        // draw only the ideal shape.
                         drawRecognizedShape(
                             decision,
                             recognitionVariables,
                             recognitionResult);
                     }
 
-                    // Unknown ise mevcut serbest çizim,
-                    // başarılıysa ideal şekil background ile birleşir.
+                    // If recognition returns Unknown, keep the freehand drawing;
+                    // otherwise, merge the ideal shape with the background.
                     background->applyImage(image.toImage());
 
                     image = QPixmap::fromImage(background->image);
@@ -490,9 +490,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 
                 geo.clearAll();
 
-                // Son hâli kaydet:
-                // recognition başarılıysa ideal şekil,
-                // başarısızsa normal serbest çizim.
+                // Save the final result:
+                // use the ideal shape when recognition succeeds,
+                // or the original freehand drawing when it fails.
                 addImage(image.toImage());
             }
 
