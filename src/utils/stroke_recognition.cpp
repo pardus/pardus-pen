@@ -50,14 +50,14 @@ static float distanceAtIndex(int first, int second)
     return std::sqrt(dx * dx + dy * dy);
 }
 
-void resample(const QMap<long long, QPointF> &points)
+bool resample(const QMap<long long, QPointF> &points)
 {
     int totalPoints = points.size();
 
     if (totalPoints < 100)
     {
         Decision = RECOG_LENGTH_ERROR;
-        return;
+        return false;
     }
 
     QVector<QPointF> sampledPoints;
@@ -90,6 +90,7 @@ void resample(const QMap<long long, QPointF> &points)
     }
 
     distanceBetweenPoints = totalDistance / 63.0f;
+    return true;
 }
 
 void print_out()
@@ -421,7 +422,11 @@ float CalculateShapeFitError(
             Bütün stroke köşe değildir.
             Yalnızca ilk ve son noktayı karşılaştırıyoruz.
         */
-        if (start == 0 && end == POINT_LENGTH - 1)
+        bool isVirtualClosure =
+            (start == 0 && end == POINT_LENGTH - 1) ||
+            (start == POINT_LENGTH - 1 && end == 0);
+
+        if (isVirtualClosure)
         {
             float dx1 = point_x[0] - idealCornerX[corner];
             float dy1 = point_y[0] - idealCornerY[corner];
@@ -880,8 +885,8 @@ float noiseScore(float TotalTurnDegree, float totalAbsTurnDegree)
 }
 
 float SquareScore(float shapeFitScore,
-    float closureScore,
-    float noiseScoreValue)
+                  float closureScore,
+                  float noiseScoreValue)
 {
     float score = 0.0f;
 
@@ -1337,14 +1342,48 @@ int FixPointArray(int startPoint,
     return pointCount;
 }
 
+int CalculateDecision(float TrianglePoint, float SquarePoint, float LinePoint, float CirclePoint)
+{
+    float MaxPoint = 0.0;
+    int maxScoredShape;
+    if (TrianglePoint > MaxPoint)
+    {
+        MaxPoint = TrianglePoint;
+        maxScoredShape = RECOG_TRIANGLE;
+    }
+    if (SquarePoint > MaxPoint)
+    {
+        MaxPoint = SquarePoint;
+        maxScoredShape = RECOG_SQUARE;
+    }
+    if (LinePoint > MaxPoint)
+    {
+        MaxPoint = LinePoint;
+        maxScoredShape = RECOG_LINE;
+    }
+    if (CirclePoint > MaxPoint)
+    {
+        MaxPoint = CirclePoint;
+        maxScoredShape = RECOG_CIRCLE;
+    }
+    if (MaxPoint > MIN_SCORE)
+        return maxScoredShape;
+    else
+        return RECOG_UNKNOWN;
+}
+
 void stroke_recognition(const QMap<long long, QPointF> &points)
 {
     // the code fixes the corner points and checks if the lines meet so they can create corners but it doesnt take those intersections as corners
     // thats because in testing we check the possiblity of first and last points creating a corner so we dont touch the corner side
-    Decision = RECOG_UNKNOWN;
     StrokeFeatures features;
 
-    resample(points);
+    bool resampleOutput = resample(points);
+    if (!resampleOutput)
+    {
+        print_out(); // probably will send all the scores 0,0f , 0,0f and such
+        return;
+    }
     int POINT_LENGTH = fixPointsForIntersection();
     CalculateDeltaTheta(POINT_LENGTH);
     findTurnRegions(POINT_LENGTH);
@@ -1366,6 +1405,9 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     float squareShapeFit = CalculateShapeFitSquare(features.turnRegionCount, POINT_LENGTH, features.totalTurnDegree);
     float squareScore = SquareScore(squareShapeFit, closureScore, features.noise);
 
+    float circlescore = 0.0;
+    int decision = CalculateDecision(triangleScore,squareScore, lineScore, circlescore);
+
     printf("lineScore: %f\n", lineScore);
     printf("totalTurnDegree: %f\n", features.totalTurnDegree);
     printf("totalAbsTurnDegree: %f\n", features.totalAbsTurnDegree);
@@ -1379,5 +1421,5 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     printf("new arraylength : %d\n", POINT_LENGTH);
     printf("squareScore: %f\n", squareScore);
     printf("squareShapeFit: %f\n", squareShapeFit);
-
+    printf("shape: %d\n", decision);
 }
