@@ -1,4 +1,4 @@
-#include "utils/stroke_recognition.h"
+#include "utils/StrokeRecognition.h"
 #include "widgets/DrawingWidget.h"
 
 bool resample(const QMap<long long, QPointF> &points,

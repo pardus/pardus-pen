@@ -6,7 +6,7 @@
 #include <utils/Storage.h>
 #include <utils/Settings.h>
 #include <utils/misc.h>
-#include "utils/stroke_recognition.h"
+#include "utils/StrokeRecognition.h"
 
 #ifdef QPRINTER
 #include <QPrinter>

@@ -31,7 +31,7 @@
 #include "../utils/Selection.h"
 #include "../utils/Storage.h"
 #include "FloatingSettings.h"
-#include "../utils/stroke_recognition.h"
+#include "../utils/StrokeRecognition.h"
 
 #define PRESS 0
 #define MOVE 1
