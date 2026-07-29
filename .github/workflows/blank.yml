@@ -1,8 +1,13 @@
 name: CI
 
+permissions:
+  contents: write
+
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - stroke-recognition
 
   workflow_dispatch:
 
