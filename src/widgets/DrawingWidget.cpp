@@ -421,16 +421,13 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             int decision = RECOG_UNKNOWN;
 
             if (penType != ERASER &&
-                penType != SELECTION)
+                penType != SELECTION &&
+                penType != PENTEXT &&
+                penStyle == SPLINE)
             {
                 decision = stroke_recognition(recognitionPoints);
 
                 printf("Recognition decision: %d\n", decision);
-            }
-            if (decision != RECOG_UNKNOWN &&
-                decision != RECOG_LENGTH_ERROR)
-            {
-                drawRecognizedShape(decision);
             }
             curEventButtons = 0;
 
@@ -445,20 +442,50 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     update();
                 }
 
+                bool recognitionSuccessful =
+                decision != RECOG_UNKNOWN &&
+                decision != RECOG_LENGTH_ERROR;
+
                 if (penType != ERASER)
                 {
+                    if (recognitionSuccessful)
+                    {
+                        // Kullanıcının serbest çizimini önceki canvas ile birleştir.
+                        QImage freehandImage = background->image.copy();
+
+                        QPainter freehandPainter(&freehandImage);
+                        freehandPainter.drawImage(QPointF(0, 0), image.toImage());
+                        freehandPainter.end();
+
+                        // Serbest çizilmiş hâli history'ye kaydet.
+                        addImage(freehandImage);
+
+                        // Serbest stroke katmanını temizle.
+                        image.fill(QColor("transparent"));
+
+                        // Yalnızca ideal şekli çiz.
+                        drawRecognizedShape(decision);
+                    }
+
+                    // Unknown ise mevcut serbest çizim,
+                    // başarılıysa ideal şekil background ile birleşir.
                     background->applyImage(image.toImage());
+
                     image = QPixmap::fromImage(background->image);
                     background->image.fill(QColor("transparent"));
                 }
 
                 if (penType == SELECTION)
-                {   
+                {
                     recognitionPoints.clear();
                     break;
                 }
 
                 geo.clearAll();
+
+                // Son hâli kaydet:
+                // recognition başarılıysa ideal şekil,
+                // başarısızsa normal serbest çizim.
                 addImage(image.toImage());
             }
 

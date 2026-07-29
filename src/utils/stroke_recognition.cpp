@@ -287,7 +287,7 @@ int DirectionChangeCount(int POINT_LENGTH)
     return directionChangeCount;
 }
 
-float LineScore(float totalTurnDegree, float straightnessScore, int directionChangeCount, int turnRegionCount)
+float LineScore(float totalTurnDegree, float straightnessScore, int directionChangeCount, int turnRegionCount, int totalAbsTurnDegree)
 {
 
     /*
@@ -327,7 +327,9 @@ float LineScore(float totalTurnDegree, float straightnessScore, int directionCha
     {
         regionScore = -10.0f * turnRegionCount;
     }
-
+    float degreePenalty = 0;
+    if (totalAbsTurnDegree > 180.0f)
+    float degreePenalty = -20;
     /*
         Her yön değişiminde 2 puan ceza.
         En fazla 60 puan ceza.
@@ -336,14 +338,17 @@ float LineScore(float totalTurnDegree, float straightnessScore, int directionCha
         directionChangeCount * 2.0f;
 
     if (zigzagPenalty > 60.0f)
-    {
         zigzagPenalty = 60.0f;
-    }
 
-    float score = straightnessScore * 60.0f;
+    float strScore = 0;
+    if(straightnessScore >= 0.90)
+        strScore = straightnessScore * 60.0f;
+
+    float score = strScore;
     score += turnScore;
     score += regionScore;
     score -= zigzagPenalty;
+    score += degreePenalty;
 
     return score;
 }
@@ -1010,6 +1015,9 @@ float CalculateCircleRadiusDiff(int pointLength)
     float centerX = FindCenter(pointLength, point_x);
     float centerY = FindCenter(pointLength, point_y);
 
+    Center_x = centerX;
+    Center_y = centerY;
+
     float totalRadiusSum = 0.0f;
 
     for (int i = 0; i < pointLength; i++)
@@ -1025,6 +1033,7 @@ float CalculateCircleRadiusDiff(int pointLength)
 
     float totalRadius =
         totalRadiusSum / static_cast<float>(pointLength);
+        Radius_avg = totalRadius;
 
     if (totalRadius <= 0.0001f)
         return 0.0f;
@@ -1137,7 +1146,7 @@ float CircleScore(float circleShapeFit, float TotalTurnDegree)
 
     score += circleShapeFit * 0.80;
 
-    float diff = std::abs(TotalTurnDegree - 360);
+    float diff = std::abs(std::abs(TotalTurnDegree) - 360);
 
     if (diff < CIRCLE_ANGLE_TRESHOLD)
         score += 20.0;
@@ -1647,7 +1656,7 @@ int stroke_recognition(const QMap<long long, QPointF> &points)
     features.noise = noiseScore(features.totalTurnDegree, features.totalAbsTurnDegree);
 
     float lineScore = LineScore(std::abs(features.totalTurnDegree),
-                                features.straightnessScore, features.directionChangeCount, features.turnRegionCount);
+                                features.straightnessScore, features.directionChangeCount, features.turnRegionCount, features.totalAbsTurnDegree);
     float triangleShapeFit = CalculateShapeFitTriangle(features.turnRegionCount, POINT_LENGTH, features.totalTurnDegree);
     float closureScore = ClosureScore(features.totalLength, POINT_LENGTH);
     float triangleScore = TriangleScore(triangleShapeFit, closureScore);
