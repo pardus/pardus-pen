@@ -478,6 +478,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 void DrawingWidget::drawRecognizedShape(int decision)
 {
     painter.begin(&image);
+ 
+    painter.setPen(pen);
+    painter.setBrush(Qt::NoBrush);
 
     switch (decision)
     {
