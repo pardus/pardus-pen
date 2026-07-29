@@ -24,6 +24,9 @@ struct EndpointCandidate
 #define MIN_CHANGE_DEGREE 10.0f
 #define STRONG_REGION_TURN 60.0f
 #define ANGLE_TRESHOLD 45.0f
+#define MIN_SCORE 75
+#define TOTAL_GROUP 8
+#define ERROR_SCALE 3.0f
 
 extern float points[RESAMPLE_POINTS];
 extern float Theta[RESAMPLE_POINTS - 1];
@@ -110,7 +113,7 @@ float LineScore(float totalTurnDegree, float straightnessScore, int directionCha
 
 void stroke_recognition(const QMap<long long, QPointF>& points);
 
-void resample(const QMap<long long, QPointF>& points);
+bool resample(const QMap<long long, QPointF>& points);
 
 void print_out();
 
@@ -124,8 +127,8 @@ void print_out();
 #define RECOG_LINE 1
 #define RECOG_CIRCLE 2
 #define RECOG_TRIANGLE 3
-#define RECOG_SQUARE 10
-#define RECOG_UNKNOWN 5
+#define RECOG_SQUARE 4
+#define RECOG_UNKNOWN 0
 #define RECOG_DISTANCE_ERROR 6
 #define RECOG_LENGTH_ERROR 7
 #define RECOG_RECTANGLE 67

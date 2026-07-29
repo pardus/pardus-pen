@@ -97,10 +97,6 @@ void print_out()
 {
 }
 
-// terminal çıktıs ayarla
-// ----------------------------------------------------------------------------------------------------------
-// yorum satırı eklenicek
-
 float clamp01(float value)
 {
     if (value < 0.0f)
@@ -665,8 +661,8 @@ bool CreateIdealShape(
     for (int i = 0; i < regionCount; i++)
     {
         bool doesEdgeWork = FindLineToEdge(
-            regionStart[i],
-            regionEnd[(i + 1) % regionCount],
+            regionEnd[i],
+            regionStart[(i + 1) % regionCount],
             POINT_LENGTH,
             &cornerX,
             &cornerY,
@@ -706,6 +702,7 @@ bool CreateIdealShape(
 
         idealCornerX[i] = idealCornerXValue;
         idealCornerY[i] = idealCornerYValue;
+        8; // 6
     }
 
     return true;
@@ -846,6 +843,178 @@ int FindRegionCornerPointIndex(int regionStart, int regionEnd, int POINT_LENGTH)
         pointIndex = POINT_LENGTH - 1;
 
     return pointIndex;
+}
+
+void CalculateGroupSize(int pointLength, int *groupSize)
+{
+    int baseSize = pointLength / TOTAL_GROUP;
+    int remainder = pointLength % TOTAL_GROUP;
+
+    for (int i = 0; i < TOTAL_GROUP; i++)
+    {
+        groupSize[i] = baseSize;
+
+        if (remainder > 0)
+        {
+            groupSize[i]++;
+            remainder--;
+        }
+    }
+}
+
+float DistanceBetweenPoints(
+    float x1,
+    float y1,
+    float x2,
+    float y2)
+{
+    float dx = x1 - x2;
+    float dy = y1 - y2;
+
+    return std::sqrt(dx * dx + dy * dy);
+}
+
+float FindCenter(int pointLength, const float *valueArray)
+{
+    if (pointLength <= 0)
+        return 0.0f;
+
+    float sum = 0.0f;
+
+    for (int i = 0; i < pointLength; i++)
+    {
+        sum += valueArray[i];
+    }
+
+    return sum / static_cast<float>(pointLength);
+}
+
+float CalculateCircleScore(
+    const float *radiusDiffPoint,
+    const float *radiusAvgDiffPoint)
+{
+    float localDiffAvg = 0.0f;
+    float globalDiffAvg = 0.0f;
+
+    for (int i = 0; i < TOTAL_GROUP; i++)
+    {
+        localDiffAvg += radiusDiffPoint[i];
+        globalDiffAvg += radiusAvgDiffPoint[i];
+    }
+
+    localDiffAvg /= static_cast<float>(TOTAL_GROUP);
+    globalDiffAvg /= static_cast<float>(TOTAL_GROUP);
+
+    float localScore = std::clamp(
+        1.0f - localDiffAvg * ERROR_SCALE,
+        0.0f,
+        1.0f);
+
+    float globalScore = std::clamp(
+        1.0f - globalDiffAvg * ERROR_SCALE,
+        0.0f,
+        1.0f);
+
+    printf(
+        "circle localError: %.3f globalError: %.3f "
+        "localScore: %.3f globalScore: %.3f final: %.3f\n",
+        localDiffAvg,
+        globalDiffAvg,
+        localScore,
+        globalScore,
+        localScore * globalScore);
+
+    return localScore * globalScore;
+}
+
+float CalculateCircleRadiusDiff(int pointLength)
+{
+    if (pointLength <= 0 || pointLength > RESAMPLE_POINTS)
+        return 0.0f;
+
+    int groupSize[TOTAL_GROUP];
+
+    float radius[RESAMPLE_POINTS];
+    float radiusDiffPoint[TOTAL_GROUP];
+    float radiusAvgDiffPoint[TOTAL_GROUP];
+
+    CalculateGroupSize(pointLength, groupSize);
+
+    float centerX = FindCenter(pointLength, point_x);
+    float centerY = FindCenter(pointLength, point_y);
+
+    float totalRadiusSum = 0.0f;
+
+    for (int i = 0; i < pointLength; i++)
+    {
+        radius[i] = DistanceBetweenPoints(
+            point_x[i],
+            point_y[i],
+            centerX,
+            centerY);
+
+        totalRadiusSum += radius[i];
+    }
+
+    float totalRadius =
+        totalRadiusSum / static_cast<float>(pointLength);
+
+    if (totalRadius <= 0.0001f)
+        return 0.0f;
+
+    int startIndex = 0;
+
+    for (int i = 0; i < TOTAL_GROUP; i++)
+    {
+        if (groupSize[i] <= 0)
+        {
+            radiusDiffPoint[i] = 0.0f;
+            radiusAvgDiffPoint[i] = 0.0f;
+            continue;
+        }
+
+        float groupRadiusSum = 0.0f;
+
+        for (int j = 0; j < groupSize[i]; j++)
+        {
+            groupRadiusSum += radius[startIndex + j];
+        }
+
+        float groupRadiusAvg =
+            groupRadiusSum /
+            static_cast<float>(groupSize[i]);
+
+        float groupRadiusDiff = 0.0f;
+
+        if (groupRadiusAvg > 0.0001f)
+        {
+            for (int j = 0; j < groupSize[i]; j++)
+            {
+                groupRadiusDiff += std::abs(
+                                       groupRadiusAvg -
+                                       radius[startIndex + j]) /
+                                   groupRadiusAvg;
+            }
+
+            radiusDiffPoint[i] =
+                groupRadiusDiff /
+                static_cast<float>(groupSize[i]);
+        }
+        else
+        {
+            radiusDiffPoint[i] = 0.0f;
+        }
+
+        radiusAvgDiffPoint[i] =
+            std::abs(groupRadiusAvg - totalRadius) /
+            totalRadius;
+
+        startIndex += groupSize[i];
+    }
+
+    return CalculateCircleScore(
+        radiusDiffPoint,
+        radiusAvgDiffPoint);
 }
 
 float ClosureScore(float totalPathLength, int POINT_LENGTH)
@@ -1405,8 +1574,8 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     float squareShapeFit = CalculateShapeFitSquare(features.turnRegionCount, POINT_LENGTH, features.totalTurnDegree);
     float squareScore = SquareScore(squareShapeFit, closureScore, features.noise);
 
-    float circlescore = 0.0;
-    int decision = CalculateDecision(triangleScore,squareScore, lineScore, circlescore);
+    float circlescore = CalculateCircleRadiusDiff(POINT_LENGTH) * 100;
+    int decision = CalculateDecision(triangleScore, squareScore, lineScore, circlescore);
 
     printf("lineScore: %f\n", lineScore);
     printf("totalTurnDegree: %f\n", features.totalTurnDegree);
@@ -1422,4 +1591,5 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     printf("squareScore: %f\n", squareScore);
     printf("squareShapeFit: %f\n", squareShapeFit);
     printf("shape: %d\n", decision);
+    printf("circlescore: %f\n", circlescore);
 }
