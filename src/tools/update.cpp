@@ -9,6 +9,8 @@
 static int prev_active[5] = {-1, -1, -1, -1, -1};
 
 void updateGui(){
+    updateRecognitionToggleColor();
+
     int pen = getPen();
     int lineStyle = drawing->getLineStyle();
     int penStyle = drawing->getPenStyle();
@@ -65,6 +67,5 @@ void updateGui(){
     ov->updateImage();
     floatingSettings->reload();
 }
-
 
 

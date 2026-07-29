@@ -43,6 +43,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penType=PEN;
     penStyle=SPLINE;
     lineStyle=NORMAL;
+    recognitionEnabled = get_bool("shape-recognition");
     setMouseTracking(true);
     setAttribute(Qt::WA_AcceptTouchEvents);
     num_of_press = 0;
@@ -419,8 +420,8 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
 
             int decision = RECOG_UNKNOWN;
-
-            if (penType != ERASER &&
+            if (recognitionEnabled &&
+                penType != ERASER &&
                 penType != SELECTION &&
                 penType != PENTEXT &&
                 penStyle == SPLINE)

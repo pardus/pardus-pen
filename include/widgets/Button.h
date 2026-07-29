@@ -10,9 +10,13 @@
 #include "../constants.h"
 
 class QSlider;
+class QCheckBox;
 
 extern QMap<qint64, QPushButton*> penButtons;
 extern QMap<qint64, QPushButton*> toolButtons;
+extern QCheckBox *recognitionToggle;
+
+void updateRecognitionToggleColor();
 extern QSlider *thicknessSlider;
 extern char* get_icon_by_id(int id);
 extern QString get_overlay_by_id(int id);

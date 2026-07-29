@@ -111,6 +111,8 @@ public:
     int getPenStyle();
     void setLineStyle(int type);
     int getLineStyle();
+    void setRecognitionEnabled(bool enabled) { recognitionEnabled = enabled; }
+    bool isRecognitionEnabled() const { return recognitionEnabled; }
     void drawArrow(QPainter& painter, QPointF start, QPointF end);
     void eventHandler(int source, int type, int id, QPointF pos, float pressure);
     void setOverlay(QImage img, int page);
@@ -142,6 +144,7 @@ protected:
     QMap<long long, QPointF> recognitionPoints;
     StrokeVariables recognitionVariables;
     StrokeResult recognitionResult;
+    bool recognitionEnabled = true;
     QPainter painter;
     QPointF textPos;
     QString textBuffer;

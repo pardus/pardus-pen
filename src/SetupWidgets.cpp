@@ -21,12 +21,44 @@ QWidget *penTypeDialog;
 QWidget *modeDialog;
 QVBoxLayout *closeMenuLayout;
 QWidget *bgMenu;
+QCheckBox *recognitionToggle;
 
 
 static QVBoxLayout *penSettingsLayout;
 static QVBoxLayout *pageSettingsLayout;
 
 extern void clearCache();
+
+void updateRecognitionToggleColor()
+{
+    if (recognitionToggle == nullptr)
+    {
+        return;
+    }
+
+    const QString penColor = drawing->pen.color().name();
+    recognitionToggle->setStyleSheet(
+        "#recognitionToggle {"
+            "background: transparent;"
+            "color: #c0c0c0;"
+            "spacing: 8px;"
+        "}"
+        "#recognitionToggle::indicator {"
+            "width: 20px;"
+            "height: 20px;"
+            "border: 2px solid #808080;"
+            "border-radius: 4px;"
+            "background-color: transparent;"
+        "}"
+        "#recognitionToggle::indicator:hover {"
+            "border-color: #c0c0c0;"
+        "}"
+        "#recognitionToggle::indicator:checked {"
+            "background-color: " + penColor + ";"
+            "border-color: " + penColor + ";"
+        "}"
+    );
+}
 
 void setupWidgets(){
     // Pen Settings Menu
@@ -310,7 +342,6 @@ void setupWidgets(){
 
     penSizeSettingsLayout->addWidget(modeDialog, Qt::AlignCenter);
 
-
 /********** Color selection options **********/
     // color selection
 
@@ -473,6 +504,55 @@ void setupWidgets(){
 
     pageSettingsLayout->addWidget(bgMenu);
 
+/********** Shape recognition setting **********/
+
+    QWidget *recognitionSettings = new QWidget();
+    recognitionSettings->setObjectName("recognitionSettings");
+
+    QHBoxLayout *recognitionSettingsLayout =
+        new QHBoxLayout(recognitionSettings);
+
+    recognitionToggle = new QCheckBox(_("Shape Recognition"));
+
+    recognitionToggle->setObjectName("recognitionToggle");
+
+    recognitionSettings->setSizePolicy(
+        QSizePolicy::Expanding,
+        QSizePolicy::Fixed);
+
+    recognitionSettingsLayout->setContentsMargins(
+        PADDING,
+        PADDING / 2,
+        PADDING,
+        PADDING / 2);
+
+    recognitionSettingsLayout->setSpacing(PADDING);
+
+    recognitionSettings->setStyleSheet(
+        "#recognitionSettings {"
+            "background-color: #f3232323;"
+            "border-radius: 8px;"
+        "}"
+    );
+    updateRecognitionToggleColor();
+
+    recognitionToggle->setChecked(
+        drawing->isRecognitionEnabled());
+
+    QObject::connect(
+        recognitionToggle,
+        &QCheckBox::toggled,
+        drawing,
+        [=](bool enabled)
+        {
+            drawing->setRecognitionEnabled(enabled);
+            set_bool("shape-recognition", enabled);
+        });
+
+    recognitionSettingsLayout->addWidget(recognitionToggle);
+    recognitionSettingsLayout->addStretch();
+
+    pageSettingsLayout->addWidget(recognitionSettings);
 
 /********** clear & screenshot **********/
 
