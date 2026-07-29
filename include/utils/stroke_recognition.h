@@ -26,7 +26,8 @@ struct EndpointCandidate
 #define ANGLE_TRESHOLD 45.0f
 #define MIN_SCORE 75
 #define TOTAL_GROUP 8
-#define ERROR_SCALE 3.0f
+#define ERROR_SCALE 2.0f
+#define CIRCLE_ANGLE_TRESHOLD 60.0f
 
 extern float points[RESAMPLE_POINTS];
 extern float Theta[RESAMPLE_POINTS - 1];

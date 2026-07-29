@@ -39,6 +39,7 @@ float edgeSlope;
 float idealCornerX[RESAMPLE_POINTS];
 float idealCornerY[RESAMPLE_POINTS];
 int IdealCornerIndex[RESAMPLE_POINTS];
+
 float angleAtPoint(float x1, float y1,
                    float x2, float y2,
                    float x3, float y3);
@@ -353,14 +354,12 @@ float LineScore(float totalTurnDegree, float straightnessScore, int directionCha
 
 float TriangleScore(
     float shapeFitScore,
-    float closureScore,
-    float noiseScoreValue)
+    float closureScore)
 {
     float score = 0.0f;
 
     score += shapeFitScore * 0.80f;
     score += closureScore * 0.20f;
-    score += noiseScoreValue;
 
     return score;
 }
@@ -1054,14 +1053,28 @@ float noiseScore(float TotalTurnDegree, float totalAbsTurnDegree)
 }
 
 float SquareScore(float shapeFitScore,
-                  float closureScore,
-                  float noiseScoreValue)
+                  float closureScore)
 {
     float score = 0.0f;
 
     score += shapeFitScore * 0.80f;
     score += closureScore * 0.20f;
-    score += noiseScoreValue;
+
+    return score;
+}
+
+float CircleScore(float circleShapeFit, float TotalTurnDegree)
+{
+    float score = 0;
+
+    score += circleShapeFit*0.80;
+
+    float diff = std::abs(TotalTurnDegree - 360);
+
+    if(diff < CIRCLE_ANGLE_TRESHOLD)
+        score += 20.0;
+    else 
+        score -= 20.0;
 
     return score;
 }
@@ -1569,13 +1582,15 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
                                 features.straightnessScore, features.directionChangeCount, features.turnRegionCount);
     float triangleShapeFit = CalculateShapeFitTriangle(features.turnRegionCount, POINT_LENGTH, features.totalTurnDegree);
     float closureScore = ClosureScore(features.totalLength, POINT_LENGTH);
-    float triangleScore = TriangleScore(triangleShapeFit, closureScore, features.noise);
+    float triangleScore = TriangleScore(triangleShapeFit, closureScore);
 
     float squareShapeFit = CalculateShapeFitSquare(features.turnRegionCount, POINT_LENGTH, features.totalTurnDegree);
-    float squareScore = SquareScore(squareShapeFit, closureScore, features.noise);
+    float squareScore = SquareScore(squareShapeFit, closureScore);
 
-    float circlescore = CalculateCircleRadiusDiff(POINT_LENGTH) * 100;
-    int decision = CalculateDecision(triangleScore, squareScore, lineScore, circlescore);
+    float circleRadiousScore = CalculateCircleRadiusDiff(POINT_LENGTH) * 100;
+    float circleScore = CircleScore(circleRadiousScore , features.totalTurnDegree);
+
+    int decision = CalculateDecision(triangleScore, squareScore, lineScore, circleScore);
 
     printf("lineScore: %f\n", lineScore);
     printf("totalTurnDegree: %f\n", features.totalTurnDegree);
@@ -1591,5 +1606,7 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     printf("squareScore: %f\n", squareScore);
     printf("squareShapeFit: %f\n", squareShapeFit);
     printf("shape: %d\n", decision);
-    printf("circlescore: %f\n", circlescore);
+    printf("circleRadiousScore: %f\n", circleRadiousScore);
+    printf("circleScore: %f\n", circleScore);
+
 }
