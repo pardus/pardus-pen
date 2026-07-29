@@ -514,9 +514,22 @@ void DrawingWidget::drawRecognizedShape(
     const StrokeResult &result)
 {
     painter.begin(&image);
- 
+
     painter.setPen(pen);
-    painter.setBrush(Qt::NoBrush);
+
+    const bool isClosedShape =
+        decision == RECOG_CIRCLE ||
+        decision == RECOG_TRIANGLE ||
+        decision == RECOG_SQUARE;
+
+    if (lineStyle == FILLED && isClosedShape)
+    {
+        painter.setBrush(pen.color());
+    }
+    else
+    {
+        painter.setBrush(Qt::NoBrush);
+    }
 
     switch (decision)
     {

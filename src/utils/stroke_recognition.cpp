@@ -1,51 +1,145 @@
 #include "utils/stroke_recognition.h"
 #include "widgets/DrawingWidget.h"
 
+#include <algorithm>
+
 float FindLength(float x1, float y1, float x2, float y2);
 void FixPointArray(int startPoint, int endPoint, bool addIntersection,
                    float intersectionX, float intersectionY,
                    StrokeVariables &variables);
 
-bool resample(const QMap<long long, QPointF> &points, StrokeVariables &variables)
+bool resample(const QMap<long long, QPointF> &points,
+              StrokeVariables &variables)
 {
-    int totalPoints = points.size();
-
-    if (totalPoints < 100)
-    {
+    if (points.size() < 2)
         return false;
-    }
 
-    QVector<QPointF> sampledPoints;
+    constexpr float EPSILON = 0.0001f;
 
-    sampledPoints.reserve(totalPoints);
+    /*
+        Birinci geçiş:
+        Stroke'un toplam yol uzunluğunu hesapla.
+    */
+    float totalLength = 0.0f;
 
-    for (auto it = points.constBegin(); it != points.constEnd(); ++it)
+    auto previousIterator = points.constBegin();
+    auto currentIterator = std::next(previousIterator);
+
+    QPointF previousPoint = previousIterator.value();
+
+    for (; currentIterator != points.constEnd(); ++currentIterator)
     {
-        sampledPoints.append(it.value());
+        const QPointF currentPoint = currentIterator.value();
+
+        const float dx =
+            currentPoint.x() - previousPoint.x();
+
+        const float dy =
+            currentPoint.y() - previousPoint.y();
+
+        totalLength += std::sqrt(dx * dx + dy * dy);
+
+        previousPoint = currentPoint;
     }
 
-    float step = static_cast<float>(totalPoints - 1) / 63.0f;
+    if (totalLength <= EPSILON)
+        return false;
 
-    for (int i = 0; i < RESAMPLE_POINTS; i++)
+    const float sampleDistance =
+        totalLength /
+        static_cast<float>(RESAMPLE_POINTS - 1);
+
+    /*
+        İkinci geçiş:
+        Her sampleDistance mesafede yeni bir nokta üret.
+    */
+    variables.points[0] = points.constBegin().value();
+
+    int outputIndex = 1;
+    float accumulatedDistance = 0.0f;
+
+    previousIterator = points.constBegin();
+    currentIterator = std::next(previousIterator);
+
+    QPointF segmentStart = previousIterator.value();
+
+    for (;
+         currentIterator != points.constEnd() &&
+         outputIndex < RESAMPLE_POINTS;
+         ++currentIterator)
     {
-        int index = static_cast<int>(i * step);
+        const QPointF segmentEnd = currentIterator.value();
 
-        variables.points[i] = sampledPoints[index];
+        const float dx =
+            segmentEnd.x() - segmentStart.x();
+
+        const float dy =
+            segmentEnd.y() - segmentStart.y();
+
+        float remainingSegmentLength =
+            std::sqrt(dx * dx + dy * dy);
+
+        if (remainingSegmentLength <= EPSILON)
+        {
+            segmentStart = segmentEnd;
+            continue;
+        }
+
+        /*
+            Segment yönünü bir defa hesaplıyoruz.
+            İçteki döngüde tekrar sqrt() gerekmiyor.
+        */
+        const float directionX =
+            dx / remainingSegmentLength;
+
+        const float directionY =
+            dy / remainingSegmentLength;
+
+        QPointF currentPosition = segmentStart;
+
+        while (accumulatedDistance + remainingSegmentLength >=
+                   sampleDistance &&
+               outputIndex < RESAMPLE_POINTS)
+        {
+            const float requiredDistance =
+                sampleDistance - accumulatedDistance;
+
+            currentPosition.setX(
+                currentPosition.x() +
+                directionX * requiredDistance);
+
+            currentPosition.setY(
+                currentPosition.y() +
+                directionY * requiredDistance);
+
+            variables.points[outputIndex] = currentPosition;
+            outputIndex++;
+
+            remainingSegmentLength -= requiredDistance;
+            accumulatedDistance = 0.0f;
+        }
+
+        accumulatedDistance += remainingSegmentLength;
+        segmentStart = segmentEnd;
     }
 
+    const QPointF lastPoint =
+        std::prev(points.constEnd()).value();
+
+    /*
+        Floating-point yuvarlaması yüzünden 63 yerine
+        62 nokta üretilirse kalan kısmı güvenli biçimde doldur.
+    */
+    while (outputIndex < RESAMPLE_POINTS)
+    {
+        variables.points[outputIndex] = lastPoint;
+        outputIndex++;
+    }
+
+    variables.points[RESAMPLE_POINTS - 1] = lastPoint;
     variables.pointCount = RESAMPLE_POINTS;
+
     return true;
-}
-
-float clamp01(float value)
-{
-    if (value < 0.0f)
-        return 0.0f;
-
-    if (value > 1.0f)
-        return 1.0f;
-
-    return value;
 }
 
 void CalculateDeltaTheta(StrokeVariables &variables)
@@ -441,7 +535,7 @@ float CalculateShapeFitError(
     float score =
         1.0f - averageError / MAX_ACCEPTABLE_ERROR;
 
-    score = clamp01(score);
+    score = std::clamp(score, 0.0f, 1.0f);
 
     return score * 100.0f;
 }
@@ -854,33 +948,6 @@ void CalculateGroupSize(int pointLength, int *groupSize)
     }
 }
 
-float DistanceBetweenPoints(
-    float x1,
-    float y1,
-    float x2,
-    float y2)
-{
-    float dx = x1 - x2;
-    float dy = y1 - y2;
-
-    return std::sqrt(dx * dx + dy * dy);
-}
-
-float FindCenter(int pointLength, const float *valueArray)
-{
-    if (pointLength <= 0)
-        return 0.0f;
-
-    float sum = 0.0f;
-
-    for (int i = 0; i < pointLength; i++)
-    {
-        sum += valueArray[i];
-    }
-
-    return sum / static_cast<float>(pointLength);
-}
-
 float CalculateCircleScore(
     const float *radiusDiffPoint,
     const float *radiusAvgDiffPoint)
@@ -950,7 +1017,7 @@ float CalculateCircleRadiusDiff(const StrokeVariables &variables,
 
     for (int i = 0; i < pointLength; i++)
     {
-        radius[i] = DistanceBetweenPoints(
+        radius[i] = FindLength(
             variables.points[i].x(),
             variables.points[i].y(),
             centerX,
@@ -1042,7 +1109,7 @@ float ClosureScore(const StrokeFeatures &features, const StrokeVariables &variab
     float score =
         1.0f - closureRatio / MAX_CLOSURE_RATIO;
 
-    return clamp01(score) * 100.0f;
+    return std::clamp(score, 0.0f, 1.0f) * 100.0f;
 }
 
 float noiseScore(const StrokeFeatures &features)
@@ -1071,7 +1138,7 @@ float CircleScore(const StrokeScore &strokeScore, const StrokeFeatures &features
 {
     float score = 0;
 
-    score += strokeScore.circleRadiousScore * 0.80;
+    score += strokeScore.circleRadiusScore * 0.80;
 
     float diff = std::abs(std::abs(features.totalTurnDegree) - 360);
 
@@ -1582,7 +1649,7 @@ void printDebugLine(const StrokeScore &score,
     printf("squareScore: %f\n", score.squareScore);
     printf("squareShapeFit: %f\n", score.squareShapeFit);
     printf("shape: %d\n", score.decision);
-    printf("circleRadiousScore: %f\n", score.circleRadiousScore);
+    printf("circleRadiusScore: %f\n", score.circleRadiusScore);
     printf("circleScore: %f\n", score.circleScore);
 }
 #endif
@@ -1612,7 +1679,7 @@ void calculateScore(StrokeScore &score,
     score.squareShapeFit = CalculateShapeFitSquare(features, variables, result);
     score.squareScore = SquareScore(score);
 
-    score.circleRadiousScore = CalculateCircleRadiusDiff(variables, result) * 100;
+    score.circleRadiusScore = CalculateCircleRadiusDiff(variables, result) * 100;
     score.circleScore = CircleScore(score, features);
 
     score.decision = CalculateDecision(score);
@@ -1629,6 +1696,7 @@ bool calculateProcess(const QMap<long long, QPointF> &points, StrokeVariables &v
     findTurnRegions(variables);
     return true;
 }
+
 int stroke_recognition(const QMap<long long, QPointF> &points,
                        StrokeVariables &variables,
                        StrokeResult &result)

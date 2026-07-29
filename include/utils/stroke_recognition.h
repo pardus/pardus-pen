@@ -66,7 +66,7 @@ struct StrokeScore
     float squareScore = 0.0f;
     float circleScore = 0.0f;
 
-    float circleRadiousScore = 0.0f;
+    float circleRadiusScore = 0.0f;
     float squareShapeFit = 0.0f;
     float triangleShapeFit = 0.0f;
 
