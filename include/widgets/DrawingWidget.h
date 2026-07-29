@@ -112,6 +112,7 @@ public:
     void setOverlay(QImage img, int page);
     QImage getOverlay(int page);
     void commitText();
+    
 #ifdef QPRINTER
     QString pdfPath;
 #endif
@@ -134,6 +135,7 @@ protected:
     int penStyle;
     int lineStyle;
     GeometryStorage geo;
+    QMap<long long, QPointF> recognitionPoints;
     QPainter painter;
     QPointF textPos;
     QString textBuffer;

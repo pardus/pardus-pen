@@ -6,6 +6,7 @@
 #include <utils/Storage.h>
 #include <utils/Settings.h>
 #include <utils/misc.h>
+#include "utils/stroke_recognition.h"
 
 #ifdef QPRINTER
 #include <QPrinter>
@@ -350,6 +351,8 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             geo.clear(id);
             addPoint(id, pos);
+            recognitionPoints.clear();
+            recognitionPoints[0] = pos;
             if(penType == SELECTION) {
                 break;
             }
@@ -372,6 +375,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         curs.setCursor(id, penSize[penType]);
                     }
                     addPoint(id, pos);
+                    recognitionPoints[recognitionPoints.size()] = pos;
+                    printf("MOVE pos x:%f y:%f\n", pos.x(), pos.y());
+                    fflush(stdout);
                     painter.begin(&image);
                     drawFunc(id, pressure);
                     painter.end();
@@ -379,6 +385,8 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
         case RELEASE:
+            recognitionPoints[recognitionPoints.size()] = pos;
+            stroke_recognition(recognitionPoints);
             if (!curs.drawing.contains(id) || !curs.drawing[id]) {
                 break;
             }
@@ -410,7 +418,8 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     image = QPixmap::fromImage(background->image);
                     background->image.fill(QColor("transparent"));
                 }
-                if(penType == SELECTION) {
+
+	        if(penType == SELECTION) {
                     break;
                 }
                 geo.clearAll();
