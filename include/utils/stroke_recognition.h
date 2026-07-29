@@ -8,14 +8,14 @@
 
 namespace StrokeRecognitionConstants
 {
-constexpr int RESAMPLE_POINTS = 64;
-constexpr float MIN_CHANGE_DEGREE = 10.0f;
-constexpr float STRONG_REGION_TURN = 60.0f;
-constexpr float ANGLE_THRESHOLD = 45.0f;
-constexpr float MIN_SCORE = 75.0f;
-constexpr int TOTAL_GROUP = 8;
-constexpr float ERROR_SCALE = 2.0f;
-constexpr float CIRCLE_ANGLE_THRESHOLD = 60.0f;
+    constexpr int RESAMPLE_POINTS = 64;
+    constexpr float MIN_CHANGE_DEGREE = 10.0f;
+    constexpr float STRONG_REGION_TURN = 60.0f;
+    constexpr float ANGLE_THRESHOLD = 45.0f;
+    constexpr float MIN_SCORE = 75.0f;
+    constexpr int TOTAL_GROUP = 8;
+    constexpr float ERROR_SCALE = 2.0f;
+    constexpr float CIRCLE_ANGLE_THRESHOLD = 60.0f;
 }
 
 inline constexpr int RESAMPLE_POINTS = StrokeRecognitionConstants::RESAMPLE_POINTS;
@@ -58,6 +58,21 @@ struct StrokeResult
     float circleRadius = 0.0f;
 };
 
+struct StrokeScore
+{
+    float closureScore = 0.0f;
+    float lineScore = 0.0f;
+    float triangleScore = 0.0f;
+    float squareScore = 0.0f;
+    float circleScore = 0.0f;
+
+    float circleRadiousScore = 0.0f;
+    float squareShapeFit = 0.0f;
+    float triangleShapeFit = 0.0f;
+
+    int decision = 0;
+};
+
 int stroke_recognition(const QMap<long long, QPointF> &points,
                        StrokeVariables &variables,
                        StrokeResult &result);
@@ -69,11 +84,3 @@ int stroke_recognition(const QMap<long long, QPointF> &points,
 #define RECOG_SQUARE 4
 #define RECOG_DISTANCE_ERROR 6
 #define RECOG_LENGTH_ERROR 7
-
-enum ClosureType
-{
-    NO_CLOSURE,
-    DIRECT_CLOSURE,
-    INTERSECTION_CLOSURE,
-    PROJECTION_CLOSURE
-};

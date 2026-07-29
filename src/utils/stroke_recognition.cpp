@@ -301,14 +301,12 @@ float LineScore(const StrokeFeatures &features)
     return score;
 }
 
-float TriangleScore(
-    float shapeFitScore,
-    float closureScore)
+float TriangleScore(const StrokeScore &strokeScore)
 {
     float score = 0.0f;
 
-    score += shapeFitScore * 0.80f;
-    score += closureScore * 0.20f;
+    score += strokeScore.triangleShapeFit * 0.80f;
+    score += strokeScore.closureScore * 0.20f;
 
     return score;
 }
@@ -1059,22 +1057,21 @@ float noiseScore(const StrokeFeatures &features)
         return -20.0f;
 }
 
-float SquareScore(float shapeFitScore,
-                  float closureScore)
+float SquareScore(const StrokeScore &strokeScore)
 {
     float score = 0.0f;
 
-    score += shapeFitScore * 0.80f;
-    score += closureScore * 0.20f;
+    score += strokeScore.squareShapeFit * 0.80f;
+    score += strokeScore.closureScore * 0.20f;
 
     return score;
 }
 
-float CircleScore(float circleShapeFit, const StrokeFeatures &features)
+float CircleScore(const StrokeScore &strokeScore, const StrokeFeatures &features)
 {
     float score = 0;
 
-    score += circleShapeFit * 0.80;
+    score += strokeScore.circleRadiousScore * 0.80;
 
     float diff = std::abs(std::abs(features.totalTurnDegree) - 360);
 
@@ -1494,11 +1491,11 @@ void fixPointsForIntersection(StrokeVariables &variables)
 }
 
 void FixPointArray(int startPoint,
-                  int endPoint,
-                  bool addIntersection,
-                  float intersectionX,
-                  float intersectionY,
-                  StrokeVariables &variables)
+                   int endPoint,
+                   bool addIntersection,
+                   float intersectionX,
+                   float intersectionY,
+                   StrokeVariables &variables)
 {
     // Copies the selected stroke segment to the beginning
     // of point_x and point_y and returns the new point count.
@@ -1536,28 +1533,28 @@ void FixPointArray(int startPoint,
     variables.pointCount = pointCount;
 }
 
-int CalculateDecision(float TrianglePoint, float SquarePoint, float LinePoint, float CirclePoint)
+int CalculateDecision(const StrokeScore &strokeScore)
 {
     float MaxPoint = 0.0;
     int maxScoredShape = RECOG_UNKNOWN;
-    if (TrianglePoint > MaxPoint)
+    if (strokeScore.triangleScore > MaxPoint)
     {
-        MaxPoint = TrianglePoint;
+        MaxPoint = strokeScore.triangleScore;
         maxScoredShape = RECOG_TRIANGLE;
     }
-    if (SquarePoint > MaxPoint)
+    if (strokeScore.squareScore > MaxPoint)
     {
-        MaxPoint = SquarePoint;
+        MaxPoint = strokeScore.squareScore;
         maxScoredShape = RECOG_SQUARE;
     }
-    if (LinePoint > MaxPoint)
+    if (strokeScore.lineScore > MaxPoint)
     {
-        MaxPoint = LinePoint;
+        MaxPoint = strokeScore.lineScore;
         maxScoredShape = RECOG_LINE;
     }
-    if (CirclePoint > MaxPoint)
+    if (strokeScore.circleScore > MaxPoint)
     {
-        MaxPoint = CirclePoint;
+        MaxPoint = strokeScore.circleScore;
         maxScoredShape = RECOG_CIRCLE;
     }
     if (MaxPoint > MIN_SCORE)
@@ -1566,6 +1563,72 @@ int CalculateDecision(float TrianglePoint, float SquarePoint, float LinePoint, f
         return RECOG_UNKNOWN;
 }
 
+#ifdef DEBUG
+void printDebugLine(const StrokeScore &score,
+                    const StrokeFeatures &features,
+                    const StrokeVariables &variables)
+{
+    printf("lineScore: %f\n", score.lineScore);
+    printf("totalTurnDegree: %f\n", features.totalTurnDegree);
+    printf("totalAbsTurnDegree: %f\n", features.totalAbsTurnDegree);
+    printf("straightnessScore: %f\n", features.straightnessScore);
+    printf("directionChangeCount: %d\n", features.directionChangeCount);
+    printf("turnRegionCount: %d\n", variables.turnRegionCount);
+    printf("trianglescore: %f\n", score.triangleScore);
+    printf("closureScore: %f\n", score.closureScore);
+    printf("triangleShapeFit: %f\n", score.triangleShapeFit);
+    printf("noise: %f\n", features.noise);
+    printf("new arraylength : %d\n", variables.pointCount);
+    printf("squareScore: %f\n", score.squareScore);
+    printf("squareShapeFit: %f\n", score.squareShapeFit);
+    printf("shape: %d\n", score.decision);
+    printf("circleRadiousScore: %f\n", score.circleRadiousScore);
+    printf("circleScore: %f\n", score.circleScore);
+}
+#endif
+
+void calculateFeatures(StrokeFeatures &features,
+                       const StrokeVariables &variables)
+{
+    features.totalTurnDegree = TotalTurnDegree(variables);
+    features.totalAbsTurnDegree = TotalAbsTurnDegree(variables);
+    features.totalLength = TotalPathLength(variables);
+    features.straightnessScore = StraightnessScore(features, variables);
+    features.directionChangeCount = DirectionChangeCount(variables);
+    features.turnRegionCount = variables.turnRegionCount;
+    features.noise = noiseScore(features);
+}
+
+void calculateScore(StrokeScore &score,
+                    const StrokeFeatures &features,
+                    const StrokeVariables &variables,
+                    StrokeResult &result)
+{
+    score.lineScore = LineScore(features);
+    score.triangleShapeFit = CalculateShapeFitTriangle(features, variables, result);
+    score.closureScore = ClosureScore(features, variables);
+    score.triangleScore = TriangleScore(score);
+
+    score.squareShapeFit = CalculateShapeFitSquare(features, variables, result);
+    score.squareScore = SquareScore(score);
+
+    score.circleRadiousScore = CalculateCircleRadiusDiff(variables, result) * 100;
+    score.circleScore = CircleScore(score, features);
+
+    score.decision = CalculateDecision(score);
+}
+
+bool calculateProcess(const QMap<long long, QPointF> &points, StrokeVariables &variables)
+{
+    bool resampleOutput = resample(points, variables);
+    if (!resampleOutput)
+        return false;
+
+    fixPointsForIntersection(variables);
+    CalculateDeltaTheta(variables);
+    findTurnRegions(variables);
+    return true;
+}
 int stroke_recognition(const QMap<long long, QPointF> &points,
                        StrokeVariables &variables,
                        StrokeResult &result)
@@ -1575,61 +1638,20 @@ int stroke_recognition(const QMap<long long, QPointF> &points,
     StrokeFeatures features;
     variables = StrokeVariables{};
     result = StrokeResult{};
+    StrokeScore score;
 
-    bool resampleOutput = resample(points, variables);
-    if (!resampleOutput)
-    {
-        int decision = RECOG_UNKNOWN; // probably will send all the scores 0,0f , 0,0f and such
-        return decision;
-    }
-    fixPointsForIntersection(variables);
-    CalculateDeltaTheta(variables);
-    findTurnRegions(variables);
+    bool didsuccess = calculateProcess(points, variables);
 
+    if(!didsuccess)
+        return RECOG_UNKNOWN;
 
-    // bir fonksiyona koy
+    calculateFeatures(features, variables);
 
-    features.totalTurnDegree = TotalTurnDegree(variables);
-    features.totalAbsTurnDegree = TotalAbsTurnDegree(variables);
-    features.totalLength = TotalPathLength(variables);
-    features.straightnessScore = StraightnessScore(features, variables);
-    features.directionChangeCount = DirectionChangeCount(variables);
-    features.turnRegionCount = variables.turnRegionCount;
-    features.noise = noiseScore(features);
+    calculateScore(score, features, variables, result);
 
-    
-    // struct oluştur ve bir fonksiyona koy
-    float lineScore = LineScore(features);
-    float triangleShapeFit = CalculateShapeFitTriangle(features, variables, result);
-    float closureScore = ClosureScore(features, variables);
-    float triangleScore = TriangleScore(triangleShapeFit, closureScore);
+#ifdef DEBUG
+    printDebugLine(score, features, variables);
+#endif
 
-    float squareShapeFit = CalculateShapeFitSquare(features, variables, result);
-    float squareScore = SquareScore(squareShapeFit, closureScore);
-
-    float circleRadiousScore = CalculateCircleRadiusDiff(variables, result) * 100;
-    float circleScore = CircleScore(circleRadiousScore, features);
-
-    int decision = CalculateDecision(triangleScore, squareScore, lineScore, circleScore);
-
-
-    // printouta koy ve daha fazla bilgi eklle
-    printf("lineScore: %f\n", lineScore);
-    printf("totalTurnDegree: %f\n", features.totalTurnDegree);
-    printf("totalAbsTurnDegree: %f\n", features.totalAbsTurnDegree);
-    printf("straightnessScore: %f\n", features.straightnessScore);
-    printf("directionChangeCount: %d\n", features.directionChangeCount);
-    printf("turnRegionCount: %d\n", variables.turnRegionCount);
-    printf("trianglescore: %f\n", triangleScore);
-    printf("closureScore: %f\n", closureScore);
-    printf("triangleShapeFit: %f\n", triangleShapeFit);
-    printf("noise: %f\n", features.noise);
-    printf("new arraylength : %d\n", variables.pointCount);
-    printf("squareScore: %f\n", squareScore);
-    printf("squareShapeFit: %f\n", squareShapeFit);
-    printf("shape: %d\n", decision);
-    printf("circleRadiousScore: %f\n", circleRadiousScore);
-    printf("circleScore: %f\n", circleScore);
-
-    return decision;
+    return score.decision;
 }
