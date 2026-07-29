@@ -89,6 +89,7 @@ public:
     void goNextPage();
     void clear();
     void clearAll();
+    void drawRecognizedShape(int decision);
 #ifdef LIBARCHIVE
     void saveAll(QString filename);
     void loadArchive(const QString& filename);

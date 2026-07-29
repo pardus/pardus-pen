@@ -112,7 +112,7 @@ int FixPointArray(
 
 float LineScore(float totalTurnDegree, float straightnessScore, int directionChangeCount, int turnRegionCount);
 
-void stroke_recognition(const QMap<long long, QPointF>& points);
+int stroke_recognition(const QMap<long long, QPointF>& points);
 
 bool resample(const QMap<long long, QPointF>& points);
 
@@ -132,7 +132,6 @@ void print_out();
 #define RECOG_UNKNOWN 0
 #define RECOG_DISTANCE_ERROR 6
 #define RECOG_LENGTH_ERROR 7
-#define RECOG_RECTANGLE 67
 
 
 

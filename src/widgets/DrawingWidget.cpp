@@ -385,52 +385,153 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             break;
         case RELEASE:
-            recognitionPoints[recognitionPoints.size()] = pos;
-            stroke_recognition(recognitionPoints);
-            if (!curs.drawing.contains(id) || !curs.drawing[id]) {
+            if (!curs.drawing.contains(id) || !curs.drawing[id])
+            {
                 break;
             }
+
+            recognitionPoints[recognitionPoints.size()] = pos;
+
             curs.drawing[id] = false;
             curs.hide(id);
-            if(penType == PENTEXT) {
+
+            if (penType == PENTEXT)
+            {
+                recognitionPoints.clear();
                 break;
             }
-            if(penType != ERASER && geo.size(id) < 2 && penType != SELECTION) {
-                int fpenStype = penStyle;
+
+            if (penType != ERASER &&
+                geo.size(id) < 2 &&
+                penType != SELECTION)
+            {
+                int oldPenStyle = penStyle;
+
                 penStyle = LINE;
-                addPoint(id, pos+QPointF(0,1));
+
+                addPoint(id, pos + QPointF(0, 1));
+
                 painter.begin(&image);
                 drawLineToFunc(id, 1.0);
                 painter.end();
-                penStyle = fpenStype;
+
+                penStyle = oldPenStyle;
+            }
+
+            int decision = RECOG_UNKNOWN;
+
+            if (penType != ERASER &&
+                penType != SELECTION)
+            {
+                decision = stroke_recognition(recognitionPoints);
+
+                printf("Recognition decision: %d\n", decision);
+            }
+            if (decision != RECOG_UNKNOWN &&
+                decision != RECOG_LENGTH_ERROR)
+            {
+                drawRecognizedShape(decision);
             }
             curEventButtons = 0;
 
-            if(num_of_press == 0 || id == -1) {
+            if (num_of_press == 0 || id == -1)
+            {
                 curs.clear();
-                if(penType == SELECTION) {
+
+                if (penType == SELECTION)
+                {
                     addPoint(id, pos);
                     createSelection(id);
                     update();
                 }
-                if(penType != ERASER){
+
+                if (penType != ERASER)
+                {
                     background->applyImage(image.toImage());
                     image = QPixmap::fromImage(background->image);
                     background->image.fill(QColor("transparent"));
                 }
 
-	        if(penType == SELECTION) {
+                if (penType == SELECTION)
+                {   
+                    recognitionPoints.clear();
                     break;
                 }
+
                 geo.clearAll();
                 addImage(image.toImage());
             }
-            if(penType != ERASER && penStyle != SPLINE){
+
+            if (penType != ERASER &&
+            penStyle != SPLINE)
+            {
                 update();
             }
+
+            recognitionPoints.clear();
+
             break;
     }
     setPen(ev_pen);
+}
+
+void DrawingWidget::drawRecognizedShape(int decision)
+{
+    painter.begin(&image);
+
+    switch (decision)
+    {
+    case RECOG_LINE:
+        painter.drawLine(
+            QPointF(point_x[0], point_y[0]),
+            QPointF(
+                point_x[RESAMPLE_POINTS - 1],
+                point_y[RESAMPLE_POINTS - 1]));
+        break;
+
+    case RECOG_CIRCLE:
+        painter.drawEllipse(
+            QPointF(Center_x, Center_y),
+            Radius_avg,
+            Radius_avg);
+        break;
+
+    case RECOG_TRIANGLE:
+    {
+        QPolygonF triangle;
+
+        for (int i = 0; i < 3; i++)
+        {
+            triangle << QPointF(
+                idealCornerX[i],
+                idealCornerY[i]);
+        }
+
+        painter.drawPolygon(triangle);
+        break;
+    }
+
+    case RECOG_SQUARE:
+    {
+        QPolygonF rectangle;
+
+        for (int i = 0; i < 4; i++)
+        {
+            rectangle << QPointF(
+                idealCornerX[i],
+                idealCornerY[i]);
+        }
+
+        painter.drawPolygon(rectangle);
+        break;
+    }
+
+    default:
+        break;
+    }
+
+    painter.end();
+    update();
 }
 
 #define DEV_IDLE 0

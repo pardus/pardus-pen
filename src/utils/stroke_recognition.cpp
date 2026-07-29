@@ -94,10 +94,6 @@ bool resample(const QMap<long long, QPointF> &points)
     return true;
 }
 
-void print_out()
-{
-}
-
 float clamp01(float value)
 {
     if (value < 0.0f)
@@ -377,7 +373,7 @@ float CalculateShapeFitError(
 
     if (shapeType == RECOG_TRIANGLE)
         cornerCount = 3;
-    else if (shapeType == RECOG_RECTANGLE)
+    else if (shapeType == RECOG_SQUARE)
         cornerCount = 4;
     else
         return 0.0f;
@@ -644,6 +640,61 @@ bool FindLineToEdge(
     return true;
 }
 
+float LineAngleDifference(float angle1, float angle2)
+{
+    float difference =
+        std::fmod(std::abs(angle1 - angle2), 180.0f);
+
+    if (difference > 90.0f)
+        difference = 180.0f - difference;
+
+    return difference;
+}
+
+float AverageParallelAngle(float angle1, float angle2)
+{
+    float radians1 =
+        angle1 * 2.0f * M_PI / 180.0f;
+
+    float radians2 =
+        angle2 * 2.0f * M_PI / 180.0f;
+
+    float averageRadians = std::atan2(
+        std::sin(radians1) + std::sin(radians2),
+        std::cos(radians1) + std::cos(radians2));
+
+    return averageRadians * 0.5f * 180.0f / M_PI;
+}
+
+bool MakeOppositeEdgesParallel(float edgeTheta[4])
+{
+    const float PARALLEL_TOLERANCE = 20.0f;
+
+    if (LineAngleDifference(edgeTheta[0], edgeTheta[2]) > PARALLEL_TOLERANCE)
+    {
+        return false;
+    }
+
+    if (LineAngleDifference(edgeTheta[1], edgeTheta[3]) > PARALLEL_TOLERANCE)
+    {
+        return false;
+    }
+
+    float averageTheta02 =
+        AverageParallelAngle(edgeTheta[0], edgeTheta[2]);
+
+    float averageTheta13 =
+        AverageParallelAngle(edgeTheta[1], edgeTheta[3]);
+
+    edgeTheta[0] = averageTheta02;
+    edgeTheta[2] = averageTheta02;
+
+    edgeTheta[1] = averageTheta13;
+    edgeTheta[3] = averageTheta13;
+
+    return true;
+}
+
 bool CreateIdealShape(
     int regionStart[],
     int regionEnd[],
@@ -659,9 +710,18 @@ bool CreateIdealShape(
 
     for (int i = 0; i < regionCount; i++)
     {
+        int nextRegion =
+            (i + 1) % regionCount;
+
+        int edgeStart =
+            (regionEnd[i] + 1) % POINT_LENGTH;
+
+        int edgeEnd =
+            regionStart[nextRegion];
+
         bool doesEdgeWork = FindLineToEdge(
-            regionEnd[i],
-            regionStart[(i + 1) % regionCount],
+            edgeStart,
+            edgeEnd,
             POINT_LENGTH,
             &cornerX,
             &cornerY,
@@ -680,6 +740,15 @@ bool CreateIdealShape(
 
     if (regionCount == 4)
         secondLine[0] = 3;
+
+    if (regionCount == 4)
+    {
+        bool canCreateParallelShape =
+            MakeOppositeEdgesParallel(avarageThetaForLine);
+
+        if (!canCreateParallelShape)
+            return false;
+    }
 
     float idealCornerXValue = 0.0f;
     float idealCornerYValue = 0.0f;
@@ -701,7 +770,6 @@ bool CreateIdealShape(
 
         idealCornerX[i] = idealCornerXValue;
         idealCornerY[i] = idealCornerYValue;
-        8; // 6
     }
 
     return true;
@@ -797,7 +865,7 @@ float CalculateShapeFitSquare(int turnRegionCount, int POINT_LENGTH, float total
         if (!doesfunctionwork)
             return 0;
         score = CalculateShapeFitError(
-            RECOG_RECTANGLE,
+            RECOG_SQUARE,
             idealCornerX,
             idealCornerY,
             newturnRegionStart,
@@ -1067,13 +1135,13 @@ float CircleScore(float circleShapeFit, float TotalTurnDegree)
 {
     float score = 0;
 
-    score += circleShapeFit*0.80;
+    score += circleShapeFit * 0.80;
 
     float diff = std::abs(TotalTurnDegree - 360);
 
-    if(diff < CIRCLE_ANGLE_TRESHOLD)
+    if (diff < CIRCLE_ANGLE_TRESHOLD)
         score += 20.0;
-    else 
+    else
         score -= 20.0;
 
     return score;
@@ -1554,7 +1622,7 @@ int CalculateDecision(float TrianglePoint, float SquarePoint, float LinePoint, f
         return RECOG_UNKNOWN;
 }
 
-void stroke_recognition(const QMap<long long, QPointF> &points)
+int stroke_recognition(const QMap<long long, QPointF> &points)
 {
     // the code fixes the corner points and checks if the lines meet so they can create corners but it doesnt take those intersections as corners
     // thats because in testing we check the possiblity of first and last points creating a corner so we dont touch the corner side
@@ -1563,8 +1631,8 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     bool resampleOutput = resample(points);
     if (!resampleOutput)
     {
-        print_out(); // probably will send all the scores 0,0f , 0,0f and such
-        return;
+        int decision = RECOG_UNKNOWN; // probably will send all the scores 0,0f , 0,0f and such
+        return decision;
     }
     int POINT_LENGTH = fixPointsForIntersection();
     CalculateDeltaTheta(POINT_LENGTH);
@@ -1588,7 +1656,7 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     float squareScore = SquareScore(squareShapeFit, closureScore);
 
     float circleRadiousScore = CalculateCircleRadiusDiff(POINT_LENGTH) * 100;
-    float circleScore = CircleScore(circleRadiousScore , features.totalTurnDegree);
+    float circleScore = CircleScore(circleRadiousScore, features.totalTurnDegree);
 
     int decision = CalculateDecision(triangleScore, squareScore, lineScore, circleScore);
 
@@ -1609,4 +1677,5 @@ void stroke_recognition(const QMap<long long, QPointF> &points)
     printf("circleRadiousScore: %f\n", circleRadiousScore);
     printf("circleScore: %f\n", circleScore);
 
+    return decision;
 }
