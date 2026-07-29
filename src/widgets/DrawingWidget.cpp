@@ -425,7 +425,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                 penType != PENTEXT &&
                 penStyle == SPLINE)
             {
-                decision = stroke_recognition(recognitionPoints);
+                decision = stroke_recognition(
+                    recognitionPoints,
+                    recognitionVariables,
+                    recognitionResult);
 
                 printf("Recognition decision: %d\n", decision);
             }
@@ -464,7 +467,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         image.fill(QColor("transparent"));
 
                         // Yalnızca ideal şekli çiz.
-                        drawRecognizedShape(decision);
+                        drawRecognizedShape(
+                            decision,
+                            recognitionVariables,
+                            recognitionResult);
                     }
 
                     // Unknown ise mevcut serbest çizim,
@@ -502,7 +508,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
     setPen(ev_pen);
 }
 
-void DrawingWidget::drawRecognizedShape(int decision)
+void DrawingWidget::drawRecognizedShape(
+    int decision,
+    const StrokeVariables &variables,
+    const StrokeResult &result)
 {
     painter.begin(&image);
  
@@ -513,17 +522,15 @@ void DrawingWidget::drawRecognizedShape(int decision)
     {
     case RECOG_LINE:
         painter.drawLine(
-            QPointF(point_x[0], point_y[0]),
-            QPointF(
-                point_x[RESAMPLE_POINTS - 1],
-                point_y[RESAMPLE_POINTS - 1]));
+            variables.points[0],
+            variables.points[variables.pointCount - 1]);
         break;
 
     case RECOG_CIRCLE:
         painter.drawEllipse(
-            QPointF(Center_x, Center_y),
-            Radius_avg,
-            Radius_avg);
+            result.circleCenter,
+            result.circleRadius,
+            result.circleRadius);
         break;
 
     case RECOG_TRIANGLE:
@@ -532,9 +539,7 @@ void DrawingWidget::drawRecognizedShape(int decision)
 
         for (int i = 0; i < 3; i++)
         {
-            triangle << QPointF(
-                idealCornerX[i],
-                idealCornerY[i]);
+            triangle << result.idealCorners[i];
         }
 
         painter.drawPolygon(triangle);
@@ -547,9 +552,7 @@ void DrawingWidget::drawRecognizedShape(int decision)
 
         for (int i = 0; i < 4; i++)
         {
-            rectangle << QPointF(
-                idealCornerX[i],
-                idealCornerY[i]);
+            rectangle << result.idealCorners[i];
         }
 
         painter.drawPolygon(rectangle);

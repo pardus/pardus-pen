@@ -31,6 +31,7 @@
 #include "../utils/Selection.h"
 #include "../utils/Storage.h"
 #include "FloatingSettings.h"
+#include "../utils/stroke_recognition.h"
 
 #define PRESS 0
 #define MOVE 1
@@ -89,7 +90,9 @@ public:
     void goNextPage();
     void clear();
     void clearAll();
-    void drawRecognizedShape(int decision);
+    void drawRecognizedShape(int decision,
+                             const StrokeVariables &variables,
+                             const StrokeResult &result);
 #ifdef LIBARCHIVE
     void saveAll(QString filename);
     void loadArchive(const QString& filename);
@@ -137,6 +140,8 @@ protected:
     int lineStyle;
     GeometryStorage geo;
     QMap<long long, QPointF> recognitionPoints;
+    StrokeVariables recognitionVariables;
+    StrokeResult recognitionResult;
     QPainter painter;
     QPointF textPos;
     QString textBuffer;
@@ -149,4 +154,3 @@ void qImageToFile(const QImage& image, const QString& filename);
 QString generateRandomString(int length);
 
 #endif // DRAWINGWIDGET_H
-
