@@ -110,7 +110,7 @@ if get_option('qt') == '5'
         qt_dep += dependency('poppler-qt5')
     endif
 elif get_option('qt') == '6'
-    add_project_arguments('-DQT6', language: 'cpp')
+    add_project_arguments('-DQT6','-Wno-error=sfinae-incomplete', language: 'cpp')
     qt_dep += [
         dependency('Qt6Core'),
         dependency('Qt6Gui'),
