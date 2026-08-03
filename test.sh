@@ -4,7 +4,12 @@ export CFLAGS='-g3'
 export CXXFLAGS='-g3'
 export PATH=/usr/lib/qt6/libexec/:$PATH
 export TEST=1
-rm -rf build || true
-meson setup build --prefix=/usr -Dresources=true -Dbackgrounds=$PWD/data/backgrounds "$@"
-ninja -C build -j`nproc`
+
+if [ ! -d build ]; then
+  meson setup build --prefix=/usr -Dresources=true -Dbackgrounds="$PWD/data/backgrounds" "$@"
+else
+  meson setup build --reconfigure "$@"
+fi
+
+ninja -C build -j"$(nproc)"
 echo -e "run\nbacktrace\n" | gdb ./build/pardus-pen $ARGS
