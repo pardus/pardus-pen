@@ -1,3 +1,5 @@
+#include "qicon.h"
+#include "qnamespace.h"
 #include <constants.h>
 #include <widgets/DrawingWidget.h>
 #include <widgets/WhiteBoard.h>
@@ -583,6 +585,19 @@ void setupWidgets(){
         closeMenuConfirmLayout->addWidget(toolButtons[CLOSE]);
     }
 
+/********* Touchpad    **********/
+    QWidget *touchpad = new QWidget();
+    QVBoxLayout *touchpadLayout = new QVBoxLayout(touchpad);
+
+    QLabel *touchpadIcon = new QLabel();
+    touchpadIcon->setPixmap(QIcon(get_icon_by_id(TOUCHPAD)).pixmap(QSize(butsize, butsize)));
+    touchpadLayout->addWidget(touchpadIcon);
+
+
+    touchpad->setStyleSheet("background: none;");
+
+    floatingWidget->layout->addWidget(touchpad, 999, 0, 1, 2);
+    floatingWidget->layout->setAlignment(touchpad, Qt::AlignCenter);
 /********** Finish him **********/
     updateGui();
     pageLabel->setStyleSheet(

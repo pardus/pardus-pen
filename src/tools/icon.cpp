@@ -102,6 +102,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/page/file-save.svg";
         case OPEN:
             return (char*)":images/page/file-open.svg";
+        case TOUCHPAD:
+            return (char*)":images/touchpad.svg";
     }
     return (char*)"";
 }

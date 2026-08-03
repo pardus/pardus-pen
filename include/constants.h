@@ -71,3 +71,4 @@
 #define SHAPEMENU 75
 #define UNMINIFY 76
 #define SCREENSHOT_CROP 77
+#define TOUCHPAD 78

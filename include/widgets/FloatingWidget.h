@@ -34,6 +34,7 @@ public:
     void setVertical(bool state);
     bool is_vertical = true;
     int num_of_rows = 2;
+    QGridLayout *layout;
 protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
@@ -47,7 +48,6 @@ private:
     QMainWindow *tool;
     FloatingSettings* floatingSettings;
     QPoint dragPosition;
-    QGridLayout *layout;
     QMap<qint64, QWidget*> widgets;
 };
 
