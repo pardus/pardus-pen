@@ -160,3 +160,94 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     last_end = endPoint;
 
 }
+
+void DrawingWidget::drawRecognizedShape(
+    int decision,
+    const StrokeVariables &variables,
+    const StrokeResult &result){
+    painter.begin(&image);
+
+    painter.setPen(pen);
+
+    const bool isClosedShape =
+        decision == RECOG_CIRCLE ||
+        decision == RECOG_TRIANGLE ||
+        decision == RECOG_SQUARE;
+
+    if (lineStyle == FILLED && isClosedShape){
+        painter.setBrush(pen.color());
+    }
+    else {
+        painter.setBrush(Qt::NoBrush);
+    }
+
+    switch (decision) {
+    case RECOG_LINE:
+        painter.drawLine(
+            variables.points[0],
+            variables.points[variables.pointCount - 1]);
+        break;
+
+    case RECOG_CIRCLE:
+        painter.drawEllipse(
+            result.circleCenter,
+            result.circleRadius,
+            result.circleRadius);
+        break;
+
+    case RECOG_TRIANGLE:
+    {
+        QPolygonF triangle;
+
+        for (int i = 0; i < 3; i++) {
+            triangle << result.idealCorners[i];
+        }
+
+        painter.drawPolygon(triangle);
+        break;
+    }
+
+    case RECOG_SQUARE:
+    {
+        QPolygonF rectangle;
+
+        for (int i = 0; i < 4; i++) {
+            rectangle << result.idealCorners[i];
+        }
+
+        painter.drawPolygon(rectangle);
+        break;
+    }
+
+    default:
+        break;
+    }
+
+    painter.end();
+    update();
+}
+
+int DrawingWidget::performStrokeRecognition(){
+    int decision = stroke_recognition(
+            recognitionPoints,
+            recognitionVariables,
+            recognitionResult);
+
+    printf("Recognition decision: %d\n", decision);
+    return decision;
+}
+
+void DrawingWidget::applyRecognitionResult(int decision , QImage &backgroundImage){
+    // Merge the user's freehand drawing with the previous canvas.
+    QImage freehandImage = backgroundImage.copy();
+    QPainter freehandPainter(&freehandImage);
+    freehandPainter.drawImage(QPointF(0, 0), image.toImage());
+    freehandPainter.end();
+    // save the freehandImage to history.
+    addImage(freehandImage);
+    image.fill(QColor("transparent"));
+    drawRecognizedShape(
+    decision,
+    recognitionVariables,
+    recognitionResult);
+}

@@ -26,7 +26,7 @@ void updateGui(){
     toolButtons[PENMENU]->setStyleSheet("background-color: none;");
     toolButtons[ERASERMENU]->setStyleSheet("background-color: none;");
 
-    if(pen == MARKER || pen == PEN || pen == PENTEXT){
+    if(pen == MARKER || pen == PEN || pen == PENTEXT || pen == SMART_PEN){
         set_icon(get_icon_by_id(pen), toolButtons[PENMENU]);
         toolButtons[PENMENU]->setStyleSheet("background-color:"+drawing->pen.color().name()+";");
     } else if (pen == ERASER){

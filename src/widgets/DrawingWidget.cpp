@@ -6,6 +6,7 @@
 #include <utils/Storage.h>
 #include <utils/Settings.h>
 #include <utils/misc.h>
+#include "utils/StrokeRecognition.h"
 
 #ifdef QPRINTER
 #include <QPrinter>
@@ -38,6 +39,7 @@ DrawingWidget::DrawingWidget(QWidget *parent): QWidget(parent) {
     penSize[ERASER] = get_int("eraser-size");
     penSize[MARKER] = get_int("marker-size");
     penSize[PENTEXT] = get_int("pentype-size");
+    penSize[SMART_PEN] = get_int("smart-pen-size");
     if(penSize[PENTEXT] == 0) penSize[PENTEXT] = 24;
     penType=PEN;
     penStyle=SPLINE;
@@ -350,6 +352,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             geo.clear(id);
             addPoint(id, pos);
+            if(penType == SMART_PEN && penStyle == SPLINE){
+                recognitionPoints.clear();
+                recognitionPoints[0] = pos;
+            }
             if(penType == SELECTION) {
                 break;
             }
@@ -372,6 +378,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                         curs.setCursor(id, penSize[penType]);
                     }
                     addPoint(id, pos);
+                    if(penType == SMART_PEN && penStyle == SPLINE){
+                        recognitionPoints[recognitionPoints.size()] = pos;
+                    }
                     painter.begin(&image);
                     drawFunc(id, pressure);
                     painter.end();
@@ -382,9 +391,14 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing.contains(id) || !curs.drawing[id]) {
                 break;
             }
+            if (penType == SMART_PEN && penStyle == SPLINE) {
+                recognitionPoints[recognitionPoints.size()] = pos;
+            }
+
             curs.drawing[id] = false;
             curs.hide(id);
             if(penType == PENTEXT) {
+                recognitionPoints.clear();
                 break;
             }
             if(penType != ERASER && geo.size(id) < 2 && penType != SELECTION) {
@@ -400,6 +414,17 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 
             if(num_of_press == 0 || id == -1) {
                 curs.clear();
+
+            if(penType == SMART_PEN && penStyle == SPLINE){
+                int decision = performStrokeRecognition();
+                bool recognitionSuccessful =
+                    decision != RECOG_UNKNOWN &&
+                    decision != RECOG_LENGTH_ERROR &&
+                    decision != RECOG_START_ERROR;
+                if(recognitionSuccessful){
+                    applyRecognitionResult(decision , background->image);
+                }
+            }
                 if(penType == SELECTION) {
                     addPoint(id, pos);
                     createSelection(id);
@@ -418,6 +443,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             }
             if(penType != ERASER && penStyle != SPLINE){
                 update();
+            }
+            if (penType == SMART_PEN && penStyle == SPLINE){
+            recognitionPoints.clear();
             }
             break;
     }
