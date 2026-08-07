@@ -149,6 +149,7 @@ protected:
     QPointF textPos;
     QString textBuffer;
     QPixmap textSavedState;
+    QImage canvas_backup;
     bool textActive;
 };
 

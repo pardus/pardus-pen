@@ -384,6 +384,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (!curs.drawing.contains(id) || !curs.drawing[id]) {
                 break;
             }
+            if(penType == SMART_PEN && penStyle == SPLINE) {
+                canvas_backup = background->image.copy();
+            }
 
             curs.drawing[id] = false;
             curs.hide(id);
@@ -413,6 +416,9 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                             decision != RECOG_START_ERROR;
                         if(recognitionSuccessful){
                             if(!e){
+                                background->applyImage(image.toImage());
+                                addImage(background->image);
+                                background->image = canvas_backup;
                                 image.fill(QColor("transparent"));
                                 e = true;
                             }
