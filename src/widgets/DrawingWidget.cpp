@@ -404,8 +404,7 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
 
             if(num_of_press == 0 || id == -1) {
                 if(penType == SMART_PEN && penStyle == SPLINE){
-                    background->applyImage(image.toImage());
-                    image.fill(QColor("transparent"));
+                    bool e = false; // for first time clear
                     for (auto it = geo.values.begin(); it != geo.values.end(); ++it) {
                         int decision = performStrokeRecognition(it.key());
                         bool recognitionSuccessful =
@@ -413,6 +412,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                             decision != RECOG_LENGTH_ERROR &&
                             decision != RECOG_START_ERROR;
                         if(recognitionSuccessful){
+                            if(!e){
+                                image.fill(QColor("transparent"));
+                                e = true;
+                            }
                             drawRecognizedShape(
                                 decision,
                                 recognitionVariables,

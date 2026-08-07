@@ -671,11 +671,9 @@ float CalculateCircleScore(const float *radiusDiffPoint, const float *radiusAvgD
     if (scoreSum > 0.0f)
         finalScore = 2.0f * localScore * globalScore / scoreSum;
 
-#ifdef DEBUG
-    printf("circle localError: %.3f globalError: %.3f "
+    debug("circle localError: %.3f globalError: %.3f "
            "localScore: %.3f globalScore: %.3f final: %.3f\n",
            localDiffAvg, globalDiffAvg, localScore, globalScore, finalScore);
-#endif
 
     return finalScore;
 }
@@ -1120,22 +1118,22 @@ int CalculateDecision(const StrokeScore &strokeScore) {
 #ifdef DEBUG
 void printDebugLine(const StrokeScore &score, const StrokeFeatures &features,
                     const StrokeVariables &variables) {
-    printf("lineScore: %f\n", score.lineScore);
-    printf("totalTurnDegree: %f\n", features.totalTurnDegree);
-    printf("totalAbsTurnDegree: %f\n", features.totalAbsTurnDegree);
-    printf("straightnessScore: %f\n", features.straightnessScore);
-    printf("directionChangeCount: %d\n", features.directionChangeCount);
-    printf("turnRegionCount: %d\n", variables.turnRegionCount);
-    printf("trianglescore: %f\n", score.triangleScore);
-    printf("closureScore: %f\n", score.closureScore);
-    printf("triangleShapeFit: %f\n", score.triangleShapeFit);
-    printf("noise: %f\n", features.noise);
-    printf("new arraylength : %d\n", variables.pointCount);
-    printf("squareScore: %f\n", score.squareScore);
-    printf("squareShapeFit: %f\n", score.squareShapeFit);
-    printf("shape: %d\n", score.decision);
-    printf("circleRadiusScore: %f\n", score.circleRadiusScore);
-    printf("circleScore: %f\n", score.circleScore);
+    debug("lineScore: %f\n", score.lineScore);
+    debug("totalTurnDegree: %f\n", features.totalTurnDegree);
+    debug("totalAbsTurnDegree: %f\n", features.totalAbsTurnDegree);
+    debug("straightnessScore: %f\n", features.straightnessScore);
+    debug("directionChangeCount: %d\n", features.directionChangeCount);
+    debug("turnRegionCount: %d\n", variables.turnRegionCount);
+    debug("trianglescore: %f\n", score.triangleScore);
+    debug("closureScore: %f\n", score.closureScore);
+    debug("triangleShapeFit: %f\n", score.triangleShapeFit);
+    debug("noise: %f\n", features.noise);
+    debug("new arraylength : %d\n", variables.pointCount);
+    debug("squareScore: %f\n", score.squareScore);
+    debug("squareShapeFit: %f\n", score.squareShapeFit);
+    debug("shape: %d\n", score.decision);
+    debug("circleRadiusScore: %f\n", score.circleRadiusScore);
+    debug("circleScore: %f\n", score.circleScore);
 }
 #endif
 
