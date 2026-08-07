@@ -97,7 +97,7 @@ public:
     void drawRecognizedShape(int decision,
                              const StrokeVariables &variables,
                              const StrokeResult &result);
-    int performStrokeRecognition();
+    int performStrokeRecognition(qint64 id);
     void applyRecognitionResult(int decision , QImage &backgroundImage);
 #ifdef LIBARCHIVE
     void saveAll(QString filename);
@@ -144,7 +144,6 @@ protected:
     int penStyle;
     int lineStyle;
     GeometryStorage geo;
-    QMap<long long, QPointF> recognitionPoints;
     StrokeVariables recognitionVariables;
     StrokeResult recognitionResult;
     QPainter painter;

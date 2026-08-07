@@ -1173,7 +1173,7 @@ bool calculateProcess(const QMap<long long, QPointF> &points, StrokeVariables &v
     return true;
 }
 
-int stroke_recognition(const QMap<long long, QPointF> &points, StrokeVariables &variables,
+int stroke_recognition(const QMap<qint64, QPointF> &points, StrokeVariables &variables,
                        StrokeResult &result) {
     /*
      * Stroke recognition pipeline:

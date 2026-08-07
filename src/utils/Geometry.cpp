@@ -227,9 +227,11 @@ void DrawingWidget::drawRecognizedShape(
     update();
 }
 
-int DrawingWidget::performStrokeRecognition(){
-    int decision = stroke_recognition(
-            recognitionPoints,
+int DrawingWidget::performStrokeRecognition(qint64 id){
+   QMap<qint64, QPointF> values = geo.load(id).values;
+   printf("SIZE: %lld", values.size());
+   int decision = stroke_recognition(
+            values,
             recognitionVariables,
             recognitionResult);
 
