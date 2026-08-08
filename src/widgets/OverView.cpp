@@ -17,7 +17,7 @@
 
 OverView::OverView(QWidget *parent) : QWidget(parent) {
     setStyleSheet(
-    "background: none;");
+    "background-color: #99232323; border-radius: 16px;");
 }
 
 void OverView::updateImage(){
