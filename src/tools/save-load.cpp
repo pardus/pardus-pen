@@ -1,5 +1,6 @@
 #include <QImage>
 #include <QByteArray>
+#include <QThread>
 #include <QFile>
 #include <QMutex>
 
@@ -52,6 +53,20 @@ void openFile(QString filename){
     }
 }
 
+class SaveThread : public QThread {
+
+public:
+    SaveThread(QString *path){
+        this->save_path = path;
+    }
+private:
+    QString *save_path;
+protected:
+    void run() override {
+        save_all((void*)save_path);
+    }
+};
+
 void setupSaveLoad(){
 #ifdef LIBARCHIVE
     toolButtons[SAVE] = create_button(SAVE, [=](){
@@ -74,15 +89,16 @@ void setupSaveLoad(){
         }
         // save current page using goPage()
         drawing->goPage(drawing->getPageNum());
-        pthread_t ptid;
         // Creating a new thread
         archive_target = file;
         QString* thread_file = new QString(file);
-        pthread_create(&ptid, NULL, &save_all, thread_file);
-        pthread_detach(ptid);
-        floatingWidget->show();
-        setHideMainWindow(false);
-        drawing->setPen(PEN);
+        SaveThread *st = new SaveThread(thread_file);
+        st->start();
+        QObject::connect(st, &SaveThread::finished, [&]{
+           floatingWidget->show();
+           setHideMainWindow(false);
+           drawing->setPen(PEN);
+        });
     });
     set_shortcut(toolButtons[SAVE], Qt::Key_S, Qt::ControlModifier);
 
