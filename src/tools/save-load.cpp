@@ -69,6 +69,10 @@ protected:
 
 void setupSaveLoad(){
 #ifdef LIBARCHIVE
+    QLabel *save_wait = new QLabel(NULL,  Qt::FramelessWindowHint | Qt::WindowSystemMenuHint);
+    save_wait->setText(_("Saving. Please Wait..."));
+    save_wait->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
     toolButtons[SAVE] = create_button(SAVE, [=](){
         QString filter = _("Pen Files (*.pen);;");
         #ifdef QPRINTER
@@ -94,10 +98,12 @@ void setupSaveLoad(){
         QString* thread_file = new QString(file);
         SaveThread *st = new SaveThread(thread_file);
         st->start();
+        save_wait->showFullScreen();
         QObject::connect(st, &SaveThread::finished, [&]{
            floatingWidget->show();
            setHideMainWindow(false);
            drawing->setPen(PEN);
+           save_wait->hide();
         });
     });
     set_shortcut(toolButtons[SAVE], Qt::Key_S, Qt::ControlModifier);
