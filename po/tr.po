@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-17 09:37+0000\n"
+"POT-Creation-Date: 2026-09-25 08:15+0000\n"
 "PO-Revision-Date: 2025-05-30 20:21+0300\n"
 "Last-Translator: Edip Hazuri <edip@medip.dev>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -19,100 +19,103 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#: src/tools/pen.cpp:140 src/tools/update.cpp:42
-msgid "Size:"
-msgstr "Boyutu:"
-
-#: src/tools/pen.cpp:163
-msgid "Select Color"
-msgstr "Renk Seçin"
-
-#: src/tools/background.cpp:60
+#: src/tools/background.cpp:67
 msgid "Images"
 msgstr "Resimler"
 
-#: src/tools/background.cpp:61 src/tools/save-load.cpp:51
-#: src/tools/save-load.cpp:81
+#: src/tools/background.cpp:68 src/tools/save-load.cpp:81
+#: src/tools/save-load.cpp:116
 msgid "All Files (*.*)"
 msgstr "Tüm Dosyalar (*.*)"
 
-#: src/tools/background.cpp:65
+#: src/tools/background.cpp:72
 msgid "Open Image File"
 msgstr "Resim Aç"
 
-#: src/tools/background.cpp:85
+#: src/tools/background.cpp:92
 msgid "Go page"
 msgstr "Sayfaya git"
 
-#: src/tools/background.cpp:86 src/SetupWidgets.cpp:348
+#: src/tools/background.cpp:93 src/SetupWidgets.cpp:375
 msgid "Page:"
 msgstr "Sayfa:"
 
-#: src/tools/save-load.cpp:47 src/tools/save-load.cpp:77
-msgid "Pen Files (*.pen);;"
-msgstr "Kalem Dosyaları (*.pen);;"
-
-#: src/tools/save-load.cpp:49 src/tools/save-load.cpp:79
-msgid "PDF Files (*.pdf);;"
-msgstr "PDF Dosyaları (*.pdf);;"
-
-#: src/tools/save-load.cpp:56
-msgid "Save File"
-msgstr "Dosya Kaydet"
-
-#: src/tools/save-load.cpp:85 src/utils/ScreenShot.cpp:65
-msgid "Open File"
-msgstr "Dosya Aç"
-
-#: src/tools/mainWindow.cpp:66 src/tools/mainWindow.cpp:316 src/main.cpp:76
+#: src/tools/mainWindow.cpp:78 src/tools/mainWindow.cpp:342 src/main.cpp:122
 msgid "Pardus Pen"
 msgstr "Pardus Kalem"
 
-#: src/tools/mainWindow.cpp:67
+#: src/tools/mainWindow.cpp:79
 msgid "Exit"
 msgstr "Çıkış"
 
-#: src/tools/mainWindow.cpp:68
+#: src/tools/mainWindow.cpp:80
 msgid "Are you sure you want to exit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
 
-#: src/utils/ScreenShot.cpp:62
+#: src/tools/save-load.cpp:73
+msgid "Saving. Please Wait..."
+msgstr "Kaydediliyor. Lütfen Bekleyin..."
+
+#: src/tools/save-load.cpp:77 src/tools/save-load.cpp:112
+msgid "Pen Files (*.pen);;"
+msgstr "Kalem Dosyaları (*.pen);;"
+
+#: src/tools/save-load.cpp:79 src/tools/save-load.cpp:114
+msgid "PDF Files (*.pdf);;"
+msgstr "PDF Dosyaları (*.pdf);;"
+
+#: src/tools/save-load.cpp:86
+msgid "Save File"
+msgstr "Dosya Kaydet"
+
+#: src/tools/save-load.cpp:120 src/utils/ScreenShot.cpp:112
+msgid "Open File"
+msgstr "Dosya Aç"
+
+#: src/tools/pen.cpp:137 src/tools/update.cpp:54
+msgid "Size:"
+msgstr "Boyutu:"
+
+#: src/tools/pen.cpp:163 src/widgets/Button.cpp:65
+msgid "Select Color"
+msgstr "Renk Seçin"
+
+#: src/utils/ScreenShot.cpp:109
 msgid "Screenshot Saved"
 msgstr "Ekran görüntüsü kaydedildi"
 
-#: src/utils/ScreenShot.cpp:63
+#: src/utils/ScreenShot.cpp:110
 msgid "Screenshot saved to:"
 msgstr "Ekran görüntüsü şuraya kaydedildi:"
 
-#: src/utils/ScreenShot.cpp:66
+#: src/utils/ScreenShot.cpp:113
 msgid "Open Containing Folder"
 msgstr "İçeren Dizini Aç"
 
-#: src/utils/ScreenShot.cpp:81
+#: src/utils/ScreenShot.cpp:128
 msgid "Error Saving Screenshot"
 msgstr "Ekran görüntüsü kaydedilemedi"
 
-#: src/utils/ScreenShot.cpp:82
+#: src/utils/ScreenShot.cpp:129
 msgid "Failed to save screenshot to:"
 msgstr "Ekran görüntüsü şuraya kaydedilemedi:"
 
-#: src/SetupWidgets.cpp:110
+#: src/SetupWidgets.cpp:118
 msgid "No"
 msgstr "Hayır"
 
-#: src/SetupWidgets.cpp:115
+#: src/SetupWidgets.cpp:123
 msgid "Yes"
 msgstr "Evet"
 
-#: src/SetupWidgets.cpp:193
+#: src/SetupWidgets.cpp:209
 msgid "Size: 10"
 msgstr "Boyut: 10"
 
-#: src/SetupWidgets.cpp:391
+#: src/SetupWidgets.cpp:418
 msgid "Background:"
 msgstr "Arka Plan:"
 
-#: src/SetupWidgets.cpp:513
+#: src/SetupWidgets.cpp:542
 msgid "Are you sure you want to quit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
-
