@@ -1,3 +1,28 @@
+pardus-pen (4.3.0) unstable; urgency=medium
+
+  [ Robert Kirkman ]
+  * Fix compilation on 32-bit x86 GNU/Linux by using correct format specifiers for 32-bit data type sizes conditionally with preprocessor conditions
+
+  [ Mher DeLight ]
+  * increased build speed by adding build directory checks
+  * made the pen size selection background more opaque
+
+  [ Eyyub Güler ]
+  * Add Smart Pen with stroke recognition
+
+  [ Ali Riza KESKIN ]
+  * remove recognitionPoints and use geometry storage
+  * fix multi touch strogeRecognition apply issue
+  * clear image first time bug fix.
+  * thread safe save_all
+  * saving. please wait message added
+  * update translation
+
+  [ the lost ]
+  * Fix smart pen undo history
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 05 Oct 2026 14:38:40 +0300
+
 pardus-pen (4.2.1) unstable; urgency=medium
 
   [ Ali Riza KESKIN ]
