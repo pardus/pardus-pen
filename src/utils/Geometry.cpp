@@ -65,7 +65,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
 
     pen.setWidth(penSize[penType]*pressure);
 
-    if (lineStyle == FILLED && (penStyle == TRIANGLE || penStyle == CIRCLE || penStyle == RECTANGLE)){
+    if (lineStyle == FILLED && (penStyle == TRIANGLE || penStyle == CIRCLE || penStyle == RECTANGLE || penStyle == ELLIPSE)){
         painter.setBrush(QBrush(pen.color()));
         pen.setWidth(0);
     }
@@ -110,6 +110,9 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             rad = QLineF(startPoint, endPoint).length();
             painter.drawEllipse(startPoint, rad, rad);
             break;
+        case ELLIPSE:
+            painter.drawEllipse(QRectF(startPoint, endPoint).normalized());
+            break;
         case RECTANGLE:
             painter.drawRect(QRectF(startPoint,endPoint));
             break;
@@ -138,6 +141,7 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case LINE:
         case TRIANGLE:
         case RECTANGLE:
+        case ELLIPSE:
             rad = penSize[penType];
             update(QRectF(
                 last_begin, last_end

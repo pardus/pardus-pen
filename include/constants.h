@@ -28,6 +28,7 @@
 #define TRIANGLE 14
 #define VECTOR 15
 #define VECTOR2 16
+#define ELLIPSE 17
 
 #define NORMAL 20
 #define DOTLINE 21

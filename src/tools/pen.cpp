@@ -106,7 +106,7 @@ void setupPenType(){
         setPen(ERASER);
     });
 
-    int penStyles[] = {LINE, VECTOR, VECTOR2, CIRCLE, TRIANGLE, RECTANGLE, SPLINE};
+    int penStyles[] = {LINE, VECTOR, VECTOR2, CIRCLE, ELLIPSE, TRIANGLE, RECTANGLE, SPLINE};
     for (int s : penStyles) {
         penButtons[s] = create_button(s, [=](){
            setPenStyle(s);
@@ -115,6 +115,7 @@ void setupPenType(){
     set_shortcut(penButtons[VECTOR],    Qt::Key_V, Qt::AltModifier);
     set_shortcut(penButtons[VECTOR2],   Qt::Key_W, Qt::AltModifier);
     set_shortcut(penButtons[CIRCLE],    Qt::Key_C, Qt::AltModifier);
+    set_shortcut(penButtons[ELLIPSE],   Qt::Key_A, Qt::AltModifier);
     set_shortcut(penButtons[TRIANGLE],  Qt::Key_T, Qt::AltModifier);
     set_shortcut(penButtons[LINE],      Qt::Key_L, Qt::AltModifier);
     set_shortcut(penButtons[RECTANGLE], Qt::Key_R, Qt::AltModifier);

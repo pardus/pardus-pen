@@ -24,6 +24,8 @@ char* get_icon_by_id(int id){
             return (char*)":images/shape/triangle.svg";
         case RECTANGLE:
             return (char*)":images/shape/rectangle.svg";
+        case ELLIPSE:
+            return (char*)":images/shape/ellipse.svg";
         case VECTOR:
             return (char*)":images/shape/vector.svg";
         case VECTOR2:

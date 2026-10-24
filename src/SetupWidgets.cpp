@@ -302,10 +302,11 @@ void setupWidgets(){
     modeLayout->addWidget(penButtons[SPLINE],     0, 0);
     modeLayout->addWidget(penButtons[LINE],       0, 1);
     modeLayout->addWidget(penButtons[CIRCLE],     0, 2);
-    modeLayout->addWidget(penButtons[TRIANGLE],   0, 3);
-    modeLayout->addWidget(penButtons[RECTANGLE],  0, 4);
-    modeLayout->addWidget(penButtons[VECTOR],     0, 5);
-    modeLayout->addWidget(penButtons[VECTOR2],    0, 6);
+    modeLayout->addWidget(penButtons[ELLIPSE],    0, 3);
+    modeLayout->addWidget(penButtons[TRIANGLE],   0, 4);
+    modeLayout->addWidget(penButtons[RECTANGLE],  0, 5);
+    modeLayout->addWidget(penButtons[VECTOR],     0, 6);
+    modeLayout->addWidget(penButtons[VECTOR2],    0, 7);
 
     modeDialog->setStyleSheet("background-color: #f4141414;");
 
