@@ -283,28 +283,29 @@ void PageStorage::saveAll(const QString& filename){
         cfg += "ratio="+QString::number(board->ratios[i])+"\n";
         cfg += "rotate="+QString::number(board->rotates[i])+"\n";
         cfg += "page="+get_overlay_by_id(loadValue(i).pageType)+"\n";
-        archive_add(QString::number(i)+"/background", drawing->getOverlay(i));
-        for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
-            archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
-        }
     }
-    archive_set_config(cfg);
+    archive_create(filename, cfg);
 #ifdef QPRINTER
     if(PDFMODE){
         archive_add_file("overlay.pdf", drawing->pdfPath);
     }
 #endif
-    archive_create(filename);
+    for(int i=0;i<=page_count;i++){
+        archive_add(QString::number(i)+"/background", drawing->getOverlay(i));
+        for(int j=1+loadValue(i).removed;j<=loadValue(i).image_count;j++){
+            archive_add(QString::number(i)+"/"+QString::number(j-1-loadValue(i).removed), values[i].loadValue(j));
+        }
+    }
+    archive_finish();
 }
 
 void PageStorage::loadArchive(const QString& filename){
-    QMap<QString, QImage> archive = archive_load(filename);
-    QString cfg = archive_get_config();
+    QString path;
+    QImage image;
     clear();
-    for (auto it = archive.begin(); it != archive.end(); ++it) {
-        QString path = it.key();
+    archive_load(filename);
+    while (archive_next(path, image)) {
         QStringList parts = path.split("/");
-        QImage image = it.value();
         int page = parts[0].toInt();
         if(path.endsWith("background")){
             drawing->setOverlay(image, page);
@@ -327,7 +328,7 @@ void PageStorage::loadArchive(const QString& filename){
         values[page].image_count++;
         values[page].last_image_num = values[page].image_count;
     }
-    QStringList list = cfg.split("\n");
+    QStringList list = archive_get_config().split("\n");
     QString area = "main";
     int page = 0;
     for (const auto &str : list) {
