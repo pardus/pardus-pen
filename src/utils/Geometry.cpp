@@ -126,10 +126,10 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     }
     switch(penStyle){
         case SPLINE:
+            // addPoint keeps the newest point first, so last_end and endPoint
+            // are one step behind. Repaint what was really drawn.
             rad = penSize[penType]*2;
-            update(QRectF(
-                last_end, endPoint
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
+            update(path.boundingRect().toAlignedRect().adjusted(-rad, -rad, +rad, +rad));
             break;
         case VECTOR:
         case VECTOR2:
