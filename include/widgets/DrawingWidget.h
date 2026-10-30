@@ -73,7 +73,7 @@ void setupSaveLoad();
 #ifdef QPRINTER
 extern bool PDFMODE;
 QImage getPdfImage(int num, float ratio);
-void loadPdf(QString path);
+bool loadPdf(QString path);
 void loadPdfFromData(QByteArray data);
 #endif
 

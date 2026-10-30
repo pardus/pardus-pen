@@ -20,22 +20,30 @@ static std::unique_ptr<Poppler::Document> doc;
 static std::unique_ptr<Poppler::Page> page;
 #endif
 
-static void set_pdf_mode(){
+// Poppler returns null for a broken file and a locked document can't be read
+// without its password. doc is replaced only by a good one, the board can still
+// be using the pdf that was opened before.
+template <typename T>
+static bool set_pdf_mode(T new_doc){
+    if(!new_doc || new_doc->isLocked()){
+        printf("Failed to open pdf\n");
+        return false;
+    }
+    doc = std::move(new_doc);
     PDFMODE = true;
     doc->setRenderHint(Poppler::Document::Antialiasing, true);
     doc->setRenderHint(Poppler::Document::TextAntialiasing, true);
     drawing->max = doc->numPages()-1;
     drawing->goPage(0);
     updateGui();
+    return true;
 }
 
 void loadPdfFromData(QByteArray data){
-    doc = Poppler::Document::loadFromData(data);
-    set_pdf_mode();
+    set_pdf_mode(Poppler::Document::loadFromData(data));
 }
-void loadPdf(QString path){
-    doc = Poppler::Document::load(path);
-    set_pdf_mode();
+bool loadPdf(QString path){
+    return set_pdf_mode(Poppler::Document::load(path));
 }
 
 QImage getPdfImage(int num, float ratio){
@@ -43,6 +51,9 @@ QImage getPdfImage(int num, float ratio){
         return QImage(0,0);
     }
     page = doc->page(num);
+    if(!page){
+        return QImage(0,0);
+    }
     float wrat =  (float) board->geometry().width() / (float) page->pageSize().width();
     float hrat =  (float) board->geometry().height() / (float) page->pageSize().height();
     float rat = MIN(wrat, hrat);

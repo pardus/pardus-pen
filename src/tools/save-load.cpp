@@ -35,11 +35,16 @@ extern "C" {
 
 void openFile(QString filename){
     if(!filename.isEmpty()){
+        #ifdef QPRINTER
+        // Before clearAll: a file that can't be opened must not cost the drawing
+        if(filename.endsWith(".pdf") && !loadPdf(filename)){
+            return;
+        }
+        #endif
         drawing->clearAll();
         bgMenu->show();
         #ifdef QPRINTER
         if(filename.endsWith(".pdf")){
-            loadPdf(filename);
             drawing->goPage(0);
             drawing->pdfPath = filename;
             bgMenu->hide();
