@@ -10,6 +10,9 @@
 #include <QPainter>
 #include <QColor>
 #include <QStandardPaths>
+#include <QRunnable>
+#include <QSemaphore>
+#include <QThreadPool>
 
 #include <constants.h>
 #include <widgets/DrawingWidget.h>
@@ -171,49 +174,80 @@ void CursorStorage::hide(qint64 id){
 
 ImageStorage images;
 
+// Compressing a frame takes longer than drawing a stroke, so it is done out of
+// the event handler. One thread keeps the frames in order and the semaphore
+// limits how many of them can wait in memory.
+class FrameSaver : public QRunnable {
+public:
+    FrameSaver(const QImage &image, const QString &path, const QString &old)
+        : image(image), path(path), old(old) {}
+    void run() override;
+private:
+    QImage image;
+    QString path;
+    QString old;
+};
+
+static QSemaphore frameSlots(4);
+
+static QThreadPool* frameThread(){
+    static QThreadPool *pool = [](){
+        QThreadPool *p = new QThreadPool();
+        p->setMaxThreadCount(1);
+        return p;
+    }();
+    return pool;
+}
+
+void FrameSaver::run(){
+    saveImageToFile(image, path, true);
+    if(!old.isEmpty()){
+        QFile::remove(old);
+    }
+    frameSlots.release();
+}
+
+void waitForFrames(){
+    frameThread()->waitForDone();
+}
+
 ImageStorage::ImageStorage()
     : cache_path(cache + generateRandomString(10) + "/")
 {
 }
 
 void ImageStorage::saveValue(qint64 id, QImage data) {
-    QDir dir;
-    dir.mkpath(cache_path);
-    saveImageToFile(data, cache_path + QString::number(id));
+    QString old;
     if(id > history){
-        remove(id - history);
+        old = cache_path + QString::number(id - history);
         removed++;
     }
+    frameSlots.acquire();
+    frameThread()->start(new FrameSaver(data, cache_path + QString::number(id), old));
 }
 
 void ImageStorage::clear(){
     image_count = 0;
     last_image_num = 1;
     removed = 0;
+    waitForFrames();
     removeDirectory(cache_path);
 }
 
 QImage ImageStorage::loadValue(qint64 id) {
+    waitForFrames();
     if(removed >= id) {
         id =  removed +1;
     }
     QString filePath = cache_path + QString::number(id);
     QFile file(filePath);
     if(file.exists()){
-        return loadImageFromFile(cache_path + QString::number(id));
+        return loadImageFromFile(cache_path + QString::number(id), true);
     } else {
         QPixmap pix = QPixmap(mainWidget->size() * mainWidget->devicePixelRatio());
         pix.fill(QColor("transparent"));
         pix.setDevicePixelRatio(mainWidget->devicePixelRatio());
         return pix.toImage();
-    }
-}
-
-void ImageStorage::remove(qint64 id){
-    QString filePath = cache_path + QString::number(id);
-    QFile file(filePath);
-    if(file.exists()){
-        file.remove();
     }
 }
 

@@ -63,8 +63,10 @@ int getPen();
 void setPenStyle(int style);
 void setLineStyle(int style);
 void openFile(QString filename);
-bool saveImageToFile(const QImage &image, const QString &imageFilePath);
-QImage loadImageFromFile(const QString &imageFilePath);
+// Undo frames are full screen but mostly empty, even the fastest zlib level makes
+// them about 100 times smaller. Overlays can be photos, they stay as they are.
+bool saveImageToFile(const QImage &image, const QString &imageFilePath, bool compress = false);
+QImage loadImageFromFile(const QString &imageFilePath, bool compressed = false);
 void removeDirectory(const QString &path);
 void setupWidgets();
 void setupPenType();

@@ -129,7 +129,7 @@ void setupSaveLoad(){
 
 
 
-bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
+bool saveImageToFile(const QImage &image, const QString &imageFilePath, bool compress) {
     QDir dir;
     char* fname = strdup(imageFilePath.toStdString().c_str());
     char* basedir = dirname(fname);
@@ -144,7 +144,12 @@ bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
         return false;
     }
 
-    QByteArray imageData(reinterpret_cast<const char*>(image.constBits()), image.sizeInBytes());
+    QByteArray imageData;
+    if (compress) {
+        imageData = qCompress(image.constBits(), image.sizeInBytes(), 1);
+    } else {
+        imageData = QByteArray::fromRawData(reinterpret_cast<const char*>(image.constBits()), image.sizeInBytes());
+    }
 
     QDataStream out(&imageFile);
     out << image.width() << image.height() << static_cast<int>(image.format()) << imageData;
@@ -152,7 +157,7 @@ bool saveImageToFile(const QImage &image, const QString &imageFilePath) {
 
     return true;
 }
-QImage loadImageFromFile(const QString &imageFilePath) {
+QImage loadImageFromFile(const QString &imageFilePath, bool compressed) {
     QFile imageFile(imageFilePath);
     if (!imageFile.open(QIODevice::ReadOnly)) {
         return QImage();
@@ -166,7 +171,14 @@ QImage loadImageFromFile(const QString &imageFilePath) {
 
     imageFile.close();
 
+    if (compressed) {
+        loadedData = qUncompress(loadedData);
+    }
     QImage loadedImage(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
+    // A file can be cut short if the disk was full
+    if (loadedData.size() < loadedImage.sizeInBytes()) {
+        return QImage();
+    }
     return loadedImage.copy();
 }
 

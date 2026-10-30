@@ -67,11 +67,12 @@ public:
     void saveValue(qint64 id, QImage data);
     void clear();
     QImage loadValue(qint64 id);
-    void remove(qint64 id);
 
 private:
     QString cache_path;
 };
+
+void waitForFrames();
 
 class PageStorage {
 public:

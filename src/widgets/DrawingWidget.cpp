@@ -679,5 +679,6 @@ void DrawingWidget::keyPressEvent(QKeyEvent *event) {
 
 void clearCache(){
     debug("Clear cache:%s\n", cache_main.toStdString().c_str());
+    waitForFrames();
     removeDirectory(cache_main);
 }
