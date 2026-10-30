@@ -81,7 +81,10 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
     ++nextIt;
     QPainterPath path;
 
-    it = std::next(it, values.size() - values.size() % 100);
+    // Only the last part of a long line is drawn again. The size must not be
+    // used as it is, with 100 points that was the end() of the map, and the
+    // part has to start one point earlier to join the part before it.
+    it = std::next(it, MAX((values.size() - 1) / 100 * 100 - 1, 0));
     nextIt = it;
 
     switch(penStyle){
