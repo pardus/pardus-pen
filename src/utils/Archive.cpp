@@ -17,6 +17,17 @@ extern QWidget* mainWidget;
 
 extern QString cache;
 
+// width, height and format come from the file and QImage reads the buffer
+// without knowing its size, so check that it really holds that many pixels.
+static bool valid_image_data(int width, int height, int format, const QByteArray& data) {
+    if (width <= 0 || height <= 0 || format <= QImage::Format_Invalid || format >= QImage::NImageFormats) {
+        return false;
+    }
+    qint64 depth = QImage::toPixelFormat(static_cast<QImage::Format>(format)).bitsPerPixel();
+    qint64 line = ((width * depth + 31) / 32) * 4;
+    return line > 0 && height <= data.size() / line;
+}
+
 class ArchiveStorage {
 public:
     QString config = "";
@@ -180,6 +191,11 @@ public:
                 QByteArray loadedData;
                 QDataStream inputStream(&input, QIODevice::ReadOnly);
                 inputStream >> width >> height >> format >> loadedData;
+
+                if (!valid_image_data(width, height, format, loadedData)) {
+                    printf("Invalid image data: %s\n", entryName);
+                    continue;
+                }
 
                 QImage image(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
 

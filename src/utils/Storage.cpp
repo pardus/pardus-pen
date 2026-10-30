@@ -311,6 +311,11 @@ void PageStorage::loadArchive(const QString& filename){
             printf("Load: page bg: %d\n", page);
             continue;
         }
+        // entry names come from the file
+        if(parts.size() < 2){
+            printf("Invalid entry: %s\n", path.toStdString().c_str());
+            continue;
+        }
         int frame = parts[1].toInt();
         printf("Load: page: %d frame %d\n", page, frame);
         if(page > page_count){
@@ -337,16 +342,16 @@ void PageStorage::loadArchive(const QString& filename){
                 page = area.mid(4,str.length()-1).toInt();
             }
         } else if(str.startsWith("overlay")){
-            values[page].overlayType = get_id_by_overlay(str.split("=")[1]);
+            values[page].overlayType = get_id_by_overlay(str.section("=", 1));
             debug("Load: page: %d overlay %d\n", page, values[page].overlayType);
         } else if(str.startsWith("page")){
-            values[page].pageType = get_id_by_overlay(str.split("=")[1]);
+            values[page].pageType = get_id_by_overlay(str.section("=", 1));
             debug("Load: page: %d page %d\n", page, values[page].pageType);
         } else if(str.startsWith("ratio")){
-            board->ratios[page] = str.split("=")[1].toInt();
+            board->ratios[page] = str.section("=", 1).toInt();
             debug("Load: page: %d ratio %d\n", page, board->ratios[page]);
         } else if(str.startsWith("rotate")){
-            board->rotates[page] = str.split("=")[1].toInt();
+            board->rotates[page] = str.section("=", 1).toInt();
             debug("Load: page: %d rotates %d\n", page, board->rotates[page]);
         }
     }
