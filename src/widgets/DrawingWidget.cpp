@@ -91,7 +91,7 @@ QImage DrawingWidget::getOverlay(int page){
 void DrawingWidget::addImage(QImage img){
     images.last_image_num++;
     images.image_count = images.last_image_num;
-    images.saveValue(images.last_image_num, img.copy());
+    images.saveValue(images.last_image_num, img);
     updateGui();
 }
 
@@ -342,9 +342,10 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
             if (num_of_press == 1 || id == -1){
                 mergeSelection();
                 if(penType != ERASER){
+                    // Nothing changes on the screen here. The old buffer now
+                    // belongs to the background, fill() would copy it first.
                     background->image = image.toImage();
-                    background->update();
-                    image.fill(QColor("transparent"));
+                    initializeImage(size());
                 }
             }
             if(floatingSettings->isVisible()){
@@ -438,8 +439,12 @@ void DrawingWidget::eventHandler(int source, int type, int id, QPointF pos, floa
                     update();
                 }
                 if(penType != ERASER){
-                    background->applyImage(image.toImage());
+                    // The stroke layer is not needed anymore, use its buffer
+                    // for the background. fill() on the merged one would copy it.
+                    QImage stroke = image.toImage();
+                    background->applyImage(stroke);
                     image = QPixmap::fromImage(background->image);
+                    background->image.swap(stroke);
                     background->image.fill(QColor("transparent"));
                 }
                 if(penType == SELECTION) {
