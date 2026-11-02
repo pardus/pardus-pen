@@ -1,15 +1,14 @@
 # Portuguese translations for tr.org.pardus.pen package.
 # Copyright (C) 2024 tr.org.pardus.pen
 # This file is distributed under the same license as the tr.org.pardus.pen package.
-#
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024, 2025.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2024, 2025, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: tr.org.pardus.pen master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-17 09:37+0000\n"
-"PO-Revision-Date: 2025-09-24 11:06+0100\n"
+"POT-Creation-Date: 2026-09-25 08:15+0000\n"
+"PO-Revision-Date: 2026-10-12 14:38+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <hugokarvalho@hotmail.com>\n"
 "Language: pt\n"
@@ -17,101 +16,105 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Poedit 3.4.2\n"
 
-#: src/tools/pen.cpp:140 src/tools/update.cpp:42
-msgid "Size:"
-msgstr "Tamanho:"
-
-#: src/tools/pen.cpp:163
-msgid "Select Color"
-msgstr "Selecionar cor"
-
-#: src/tools/background.cpp:60
+#: src/tools/background.cpp:67
 msgid "Images"
 msgstr "Imagens"
 
-#: src/tools/background.cpp:61 src/tools/save-load.cpp:51
-#: src/tools/save-load.cpp:81
+#: src/tools/background.cpp:68 src/tools/save-load.cpp:81
+#: src/tools/save-load.cpp:116
 msgid "All Files (*.*)"
 msgstr "Todos os ficheiros (*.*)"
 
-#: src/tools/background.cpp:65
+#: src/tools/background.cpp:72
 msgid "Open Image File"
 msgstr "Abrir imagem"
 
-#: src/tools/background.cpp:85
+#: src/tools/background.cpp:92
 msgid "Go page"
 msgstr "Ir para página"
 
-#: src/tools/background.cpp:86 src/SetupWidgets.cpp:348
+#: src/tools/background.cpp:93 src/SetupWidgets.cpp:375
 msgid "Page:"
 msgstr "Página:"
 
-#: src/tools/save-load.cpp:47 src/tools/save-load.cpp:77
-msgid "Pen Files (*.pen);;"
-msgstr "Ficheiros de caneta (*.pen);;"
-
-#: src/tools/save-load.cpp:49 src/tools/save-load.cpp:79
-msgid "PDF Files (*.pdf);;"
-msgstr "Ficheiros PDF (*.pdf);;"
-
-#: src/tools/save-load.cpp:56
-msgid "Save File"
-msgstr "Guardar ficheiro"
-
-#: src/tools/save-load.cpp:85 src/utils/ScreenShot.cpp:65
-msgid "Open File"
-msgstr "Abrir ficheiro"
-
-#: src/tools/mainWindow.cpp:66 src/tools/mainWindow.cpp:316 src/main.cpp:76
+#: src/tools/mainWindow.cpp:78 src/tools/mainWindow.cpp:342 src/main.cpp:122
 msgid "Pardus Pen"
 msgstr "Caneta Pardus"
 
-#: src/tools/mainWindow.cpp:67
+#: src/tools/mainWindow.cpp:79
 msgid "Exit"
 msgstr "Sair"
 
-#: src/tools/mainWindow.cpp:68
+#: src/tools/mainWindow.cpp:80
 msgid "Are you sure you want to exit?"
 msgstr "Tem a certeza que pretende sair?"
 
-#: src/utils/ScreenShot.cpp:62
+#: src/tools/save-load.cpp:73
+msgid "Saving. Please Wait..."
+msgstr "A guardar. Por favor, aguarde..."
+
+#: src/tools/save-load.cpp:77 src/tools/save-load.cpp:112
+msgid "Pen Files (*.pen);;"
+msgstr "Ficheiros de caneta (*.pen);;"
+
+#: src/tools/save-load.cpp:79 src/tools/save-load.cpp:114
+msgid "PDF Files (*.pdf);;"
+msgstr "Ficheiros PDF (*.pdf);;"
+
+#: src/tools/save-load.cpp:86
+msgid "Save File"
+msgstr "Guardar ficheiro"
+
+#: src/tools/save-load.cpp:120 src/utils/ScreenShot.cpp:112
+msgid "Open File"
+msgstr "Abrir ficheiro"
+
+#: src/tools/pen.cpp:137 src/tools/update.cpp:54
+msgid "Size:"
+msgstr "Tamanho:"
+
+#: src/tools/pen.cpp:163 src/widgets/Button.cpp:65
+msgid "Select Color"
+msgstr "Selecionar cor"
+
+#: src/utils/ScreenShot.cpp:109
 msgid "Screenshot Saved"
 msgstr "Captura de ecrã guardada"
 
-#: src/utils/ScreenShot.cpp:63
+#: src/utils/ScreenShot.cpp:110
 msgid "Screenshot saved to:"
 msgstr "Captura de ecrã guardada em:"
 
-#: src/utils/ScreenShot.cpp:66
+#: src/utils/ScreenShot.cpp:113
 msgid "Open Containing Folder"
 msgstr "Abrir a pasta respetiva"
 
-#: src/utils/ScreenShot.cpp:81
+#: src/utils/ScreenShot.cpp:128
 msgid "Error Saving Screenshot"
 msgstr "Erro ao guardar a captura de ecrã"
 
-#: src/utils/ScreenShot.cpp:82
+#: src/utils/ScreenShot.cpp:129
 msgid "Failed to save screenshot to:"
 msgstr "Falha ao guardar a captura de ecrã em:"
 
-#: src/SetupWidgets.cpp:110
+#: src/SetupWidgets.cpp:118
 msgid "No"
 msgstr "Não"
 
-#: src/SetupWidgets.cpp:115
+#: src/SetupWidgets.cpp:123
 msgid "Yes"
 msgstr "Sim"
 
-#: src/SetupWidgets.cpp:193
+#: src/SetupWidgets.cpp:209
 msgid "Size: 10"
 msgstr "Tamanho: 10"
 
-#: src/SetupWidgets.cpp:391
+#: src/SetupWidgets.cpp:418
 msgid "Background:"
 msgstr "Fundo:"
 
-#: src/SetupWidgets.cpp:513
+#: src/SetupWidgets.cpp:542
 msgid "Are you sure you want to quit?"
 msgstr "Tem a certeza que pretende sair?"
