@@ -111,7 +111,11 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
             painter.drawEllipse(startPoint, rad, rad);
             break;
         case ELLIPSE:
-            painter.drawEllipse(QRectF(startPoint, endPoint).normalized());
+            painter.drawEllipse(
+                startPoint,
+                startPoint.x() - endPoint.x(),
+                startPoint.y() - endPoint.y()
+            );
             break;
         case RECTANGLE:
             painter.drawRect(QRectF(startPoint,endPoint));
@@ -142,14 +146,6 @@ void DrawingWidget::drawLineToFunc(qint64 id, qreal pressure) {
         case TRIANGLE:
         case RECTANGLE:
         case ELLIPSE:
-            rad = penSize[penType];
-            update(QRectF(
-                last_begin, last_end
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            update(QRectF(
-                startPoint, endPoint
-            ).toRect().normalized().adjusted(-rad, -rad, +rad, +rad));
-            break;
         case CIRCLE:
             rad = QLineF(startPoint, endPoint).length();
             #define frad QLineF(last_begin, last_end).length()
