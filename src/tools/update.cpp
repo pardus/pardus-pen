@@ -35,6 +35,8 @@ void updateGui(){
         set_icon(get_icon_by_id(PEN), toolButtons[PENMENU]);
     }
 
+    set_icon(get_icon_by_id(penStyle), toolButtons[SHAPEMENU]);
+
     // clear only previously-active buttons instead of all penButtons
     for (int i = 0; i < 5; i++) {
         if (prev_active[i] >= 0 && penButtons.contains(prev_active[i]) && penButtons[prev_active[i]] != nullptr) {
