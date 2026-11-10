@@ -181,6 +181,17 @@ public:
                 QDataStream inputStream(&input, QIODevice::ReadOnly);
                 inputStream >> width >> height >> format >> loadedData;
 
+		if (format <= 0 || format >= QImage::NImageFormats ||
+                    width <= 0 || height <= 0 || width > 32768 || height > 32768) {
+                    printf("Invalid image parameters: %s\n", entryName);
+                    continue;
+                }
+                qsizetype bytesNeeded = QImage(width, height, static_cast<QImage::Format>(format)).sizeInBytes();
+                if (bytesNeeded <= 0 || loadedData.size() < bytesNeeded) {
+                    printf("Image data size mismatch: %s\n", entryName);
+                    continue;
+                }
+
                 QImage image(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
 
                 if (image.isNull()) {
