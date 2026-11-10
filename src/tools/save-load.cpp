@@ -164,8 +164,17 @@ QImage loadImageFromFile(const QString &imageFilePath) {
 
     in >> width >> height >> format >> loadedData;
 
+
     imageFile.close();
 
+	if (format <= 0 || format >= QImage::NImageFormats ||
+        width <= 0 || height <= 0 || width > 32768 || height > 32768) {
+        return QImage();
+    }
+    qsizetype bytesNeeded = QImage(width, height, static_cast<QImage::Format>(format)).sizeInBytes();
+    if (bytesNeeded <= 0 || loadedData.size() < bytesNeeded) {
+        return QImage();
+    }
     QImage loadedImage(reinterpret_cast<const uchar*>(loadedData.constData()), width, height, static_cast<QImage::Format>(format));
     return loadedImage.copy();
 }
