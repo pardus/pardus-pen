@@ -40,8 +40,8 @@ public:
     MainWindow() {
         screen = QGuiApplication::primaryScreen();
         scale = screen->size().height() / 1080.0;
-        if(scale < 1){
-            scale = 1.0;
+        if(scale < 0.65){
+            scale = 0.65;
         }
         // set attributes
         setAttribute(Qt::WA_TranslucentBackground, true);
