@@ -81,9 +81,9 @@ void OverView::paintEvent(QPaintEvent *event) {
     } else {
         // Draw the sine wave
         QPainterPath path;
-        int xPrev = 0, yPrev = 0;
-        for (int x = PADDING; x <= w - PADDING ; x+=scale) {
-            double y = ((h -2*penSize) / 2) * sin(2 * M_PI * x / w) + h  / 2;
+        qreal xPrev = 0, yPrev = 0;
+        for (qreal x = PADDING; x <= w - PADDING ; x+=scale) {
+            qreal y = ((h -2*penSize) / 2) * sin(2 * M_PI * x / w) + h  / 2;
             if (x > PADDING) {
                 path.moveTo(QPointF(xPrev+PADDING, yPrev+PADDING));
                 path.lineTo(QPointF(x+PADDING, y+PADDING+(penSize/2)));
